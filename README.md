@@ -123,7 +123,7 @@ The only one setting is `rowsPerPage: number`. If not given, no pagination.
 # Rows per page
 ````svelte
 <script lang="ts">
-    import type DataHandler from '$lib/DataHandler'
+    import type DataHandler from 'svelte-simple-datatables'
     export let handler: DataHandler
 
     const rowsPerPage = handler.getRowsPerPage()
@@ -144,7 +144,7 @@ The only one setting is `rowsPerPage: number`. If not given, no pagination.
 # Row count
 ````svelte
 <script lang="ts">
-    import type DataHandler from '$lib/DataHandler'
+    import type DataHandler from 'svelte-simple-datatables'
     export let handler: DataHandler
 
     const rowCount = handler.getRowCount()
@@ -164,7 +164,7 @@ The only one setting is `rowsPerPage: number`. If not given, no pagination.
 # Pagination (with ellipse)
 ````svelte
 <script lang="ts">
-    import type DataHandler from '$lib/DataHandler'
+    import type DataHandler from 'svelte-simple-datatables'
     export let handler: DataHandler
     const pageNumber = handler.getPageNumber()
     const pageCount  = handler.getPageCount()
