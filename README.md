@@ -172,7 +172,6 @@ The only one setting is `rowsPerPage: number`. If not given, no pagination.
 </script>
 
 <button type="button"
-    class="text"
     class:disabled={$pageNumber === 1}
     on:click={() => handler.setPage('previous')}
 >
@@ -190,7 +189,6 @@ The only one setting is `rowsPerPage: number`. If not given, no pagination.
 {/each}
 
 <button type="button"
-    class="text"
     class:disabled={$pageNumber === $pageCount}
     on:click={() => handler.setPage('next')}
 >
