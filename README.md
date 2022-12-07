@@ -82,28 +82,119 @@ The only one setting is `rowsPerPage: number`. If not given, no pagination.
 ````
 # Sorting & filtering
 ````svelte
+<thead>
     <!-- SORTING -->
     <tr>
-        <th on:click={() => handler.sort('id')}>
-            ID
-        </th>
-
+        <th on:click={() => handler.sort('id')}>ID</th>
         <!-- using a callback -->
-        <th on:click={() => handler.sort((row) => row.first_name + row.lastname)}>
+        <th on:click={() => handler.sort(row => row.first_name + row.lastname)}>
             Name
         </th>
     </tr>
+
     <!-- FILTERING -->
     <tr>
         <th>
-            <input type="text" on:input={() => handler.filter('id')}>
+            <input type="text" on:input={() => handler.filter('id')}/>
         </th>
-
         <!-- using a callback -->
         <th>
-            <input type="text" on:input={() => handler.filter((row) => row.first_name + row.lastname)}>
+            <input type="text" on:input={() => handler.filter(row => row.first_name + row.lastname)}/>
         </th>
     </tr>
-
+</thead>
 ````
 
+# Searching
+````svelte
+<script lang="ts">
+    import type DataHandler from 'svelte-simple-datatables'
+    export let handler: DataHandler
+    let value = ''
+</script>
+
+<input
+    bind:value={value} 
+    placeholder="Search..."
+    on:input={() => handler.search(value)}
+/>
+````
+
+# Rows per page
+````svelte
+<script lang="ts">
+    import type DataHandler from '$lib/DataHandler'
+    export let handler: DataHandler
+
+    const rowsPerPage = handler.getRowsPerPage()
+
+    const options = [5, 10, 20, 50, 100]
+</script>
+
+
+<select bind:value={$rowsPerPage}>
+    {#each options as option}
+        <option value={option}>
+            {option}
+        </option>
+    {/each}
+</select>
+````
+
+# Row count
+````svelte
+<script lang="ts">
+    import type DataHandler from '$lib/DataHandler'
+    export let handler: DataHandler
+
+    const rowCount = handler.getRowCount()
+</script>
+
+
+{#if $rowCount.total > 0}
+    Showing {$rowCount.start}
+    to {$rowCount.end}
+    of {$rowCount.total} entries
+{:else}
+    No entries to found
+{/if}
+````
+
+
+# Pagination (with ellipse)
+````svelte
+<script lang="ts">
+    import type DataHandler from '$lib/DataHandler'
+    export let handler: DataHandler
+    const pageNumber = handler.getPageNumber()
+    const pageCount  = handler.getPageCount()
+    const pages      = handler.getSlicedPages() 
+</script>
+
+<button type="button"
+    class="text"
+    class:disabled={$pageNumber === 1}
+    on:click={() => handler.setPage('previous')}
+>
+    Previous
+</button>
+
+{#each $pages as pageValue}
+    <button type="button"
+        class:active={$pageNumber === pageValue}
+        class:ellipse={pageValue === null}
+        on:click={() => handler.setPage(pageValue)}
+    >
+        {pageValue ?? '...'}
+    </button>
+{/each}
+
+<button type="button"
+    class="text"
+    class:disabled={$pageNumber === $pageCount}
+    on:click={() => handler.setPage('next')}
+>
+    Next
+</button>
+
+````
