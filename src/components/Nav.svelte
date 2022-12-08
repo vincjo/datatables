@@ -11,7 +11,7 @@
         <aside transition:fade={{ duration:100 }}>
             <img src="{logo}" alt="logo"/>
             <div>
-                <h1>svelte<br>simple<br>datatable</h1>
+                <h1>svelte<br>simple<br>datatables</h1>
             </div>
         </aside>
         {/if}

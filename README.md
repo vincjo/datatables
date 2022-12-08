@@ -45,8 +45,8 @@ npm i -D svelte-simple-datatables
 
 
 # Sample code
-The DataHandler manage any events on data.
-The only one setting is `rowsPerPage: number`. If not given, no pagination.
+The DataHandler handles all data events.
+The only parametter is `rowsPerPage: number`. If not given, no pagination.
 ````svelte
 <script>
     import { DataHandler } from 'svelte-simple-datatables' 

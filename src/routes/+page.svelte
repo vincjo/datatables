@@ -4,14 +4,14 @@
 </script>
 
 <svelte:head>
-	<title>svelte-simple-datatable</title>
+	<title>svelte-simple-datatables</title>
 </svelte:head>
 
 <aside>
 	<img src="logo.svg" alt="logo"/>
 	<div>
-		<h1>svelte-simple-datatable</h1>
-		<p>A tool to build your own Datatable component with Svelte</p>
+		<h1>svelte-simple-datatables</h1>
+		<p>A toolkit to build your own datatable components with Svelte</p>
 		<div>
 			<img src="https://img.shields.io/npm/dt/svelte-simple-datatables?color=%23b71540" alt="npm downloads"/>
 			<img src="https://img.shields.io/npm/v/svelte-simple-datatables?color=%23b71540" alt="npm version"/>
@@ -21,7 +21,7 @@
 
 <h2>Installation</h2>
 <div class="code">
-	<Highlight {language} code={`npm i -D @vincjo/svelte-data-handler`} />
+	<Highlight {language} code={`npm i -D @vincjo/svelte-simple-datatables`} />
 </div>
 
 <h2>Example</h2>

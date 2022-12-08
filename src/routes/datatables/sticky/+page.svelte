@@ -4,7 +4,7 @@
     export let data
 </script>
 
-<h2>A datatable with sticky header, fixed height and scrollbar</h2>
+<h2>A datatable with a sticky header, fixed height, and vertical scrollbar</h2>
 <Demo components={data.components} dataset={data.dataset}>
     <Main/>
 </Demo>

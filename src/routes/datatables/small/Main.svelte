@@ -1,9 +1,9 @@
 <script>
-    import DataHandler  from '$lib/DataHandler'
     import Datatable    from './Datatable.svelte'
-    import Th           from '../Th.svelte'
-    import ThFilter     from '../ThFilter.svelte'
-    import data         from  '$data/data'
+    import DataHandler  from '$lib/DataHandler'
+    import Th           from '$lib/Th.svelte'
+    import ThFilter     from '$lib/ThFilter.svelte'
+    import data         from '$data/data'
 
     const handler = new DataHandler(data, { rowsPerPage: 50 })
     const rows = handler.getRows()

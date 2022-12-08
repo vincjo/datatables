@@ -1,8 +1,8 @@
 <script>
-    import Search       from '../Search.svelte'
-    import RowsPerpage  from '../RowsPerPage.svelte'
-    import RowCount     from '../RowCount.svelte'
-    import Pagination   from '../Pagination.svelte'
+    import Search       from '$lib/Search.svelte'
+    import RowsPerpage  from '$lib/RowsPerPage.svelte'
+    import RowCount     from '$lib/RowCount.svelte'
+    import Pagination   from '$lib/Pagination.svelte'
     
     export let handler
 </script>
@@ -30,7 +30,7 @@
 <style>
     section, section * {box-sizing: border-box;}
 
-    header{
+    header, footer{
         height:48px;
         padding:0 16px;
         display:flex;
@@ -40,13 +40,5 @@
 
     article{
         border-bottom: 1px solid #e0e0e0;
-    }
-
-    footer{
-        height:48px;
-        padding:0 16px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
     }
 </style>

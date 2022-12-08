@@ -1,8 +1,8 @@
 <script>
-    import Search           from '../Search.svelte'
-    import RowsPerPage      from '../RowsPerPage.svelte'
-    import RowCountSmall    from '../RowCountSmall.svelte'
-    import PaginationSmall  from '../PaginationSmall.svelte'
+    import Search           from '$lib/Search.svelte'
+    import RowsPerPage      from '$lib/RowsPerPage.svelte'
+    import RowCountSmall    from '$lib/RowCountSmall.svelte'
+    import PaginationSmall  from '$lib/PaginationSmall.svelte'
     
     export let handler
     let element
