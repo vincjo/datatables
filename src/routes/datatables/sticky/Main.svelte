@@ -1,6 +1,6 @@
 <script>
-    import Datatable    from './Datatable.svelte'
     import DataHandler  from '$lib/DataHandler'
+    import Datatable    from '$lib/Datatable.svelte'
     import Th           from '$lib/Th.svelte'
     import ThFilter     from '$lib/ThFilter.svelte'
     import data         from '$data/data'
@@ -11,18 +11,18 @@
 
 
 
-<Datatable handler={handler}>
+<Datatable {handler} sticky={true}>
     <table>
         <thead>
             <tr>
-                <Th handler={handler} orderBy={'first_name'}>First Name</Th>
-                <Th handler={handler} orderBy={'last_name'}>Last Name</Th>
-                <Th handler={handler} orderBy={'email'}>Email</Th>
+                <Th {handler} orderBy={'first_name'}>First Name</Th>
+                <Th {handler} orderBy={'last_name'}>Last Name</Th>
+                <Th {handler} orderBy={'email'}>Email</Th>
             </tr>
             <tr>
-                <ThFilter handler={handler} filterBy={'first_name'}/>
-                <ThFilter handler={handler} filterBy={'last_name'}/>
-                <ThFilter handler={handler} filterBy={'email'}/>
+                <ThFilter {handler} filterBy={'first_name'}/>
+                <ThFilter {handler} filterBy={'last_name'}/>
+                <ThFilter {handler} filterBy={'email'}/>
             </tr>
         </thead>
         <tbody>
@@ -40,16 +40,8 @@
 
 
 <style>
-    table{
-        text-align:center;
-        border-collapse:collapse;
-        width:100%;
-    }
     thead{
-        position:sticky;
-        inset-block-start:0;
         background:#fff;
-        z-index:1;
     }
     tbody td{
         padding:4px;

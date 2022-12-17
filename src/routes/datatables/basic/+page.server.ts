@@ -21,7 +21,7 @@ export const load = async () => {
                     },
                     {
                         name: 'Datatable.svelte',
-                        code: fs.readFileSync(`${path}/${page}/Datatable.svelte`).toString('utf-8'),
+                        code: fs.readFileSync(`${lib}/Datatable.svelte`).toString('utf-8'),
                         components: [
                             {
                                 name: 'Search.svelte',

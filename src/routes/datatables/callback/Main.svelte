@@ -1,6 +1,6 @@
 <script>
-    import Datatable    from './Datatable.svelte'
     import DataHandler  from '$lib/DataHandler'
+    import Datatable    from '$lib/Datatable.svelte'
     import Th           from '$lib/Th.svelte'
     import ThFilter     from '$lib/ThFilter.svelte'
     import data         from '$data/data'
@@ -37,11 +37,6 @@
 
 
 <style>
-    table{
-        text-align:center;
-        border-collapse:collapse;
-        width:100%;
-    }
     thead{
         background:#fff;
     }

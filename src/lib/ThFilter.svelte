@@ -23,9 +23,6 @@
 
 
 <style>
-    th {
-        height: 25px;
-    }
     input {
         margin: 0;
         padding: 0;

@@ -1,43 +1,67 @@
 <script lang="ts">
     import type DataHandler from '$lib/DataHandler'
     export let handler: DataHandler
+    export let small = false
     const pageNumber = handler.getPageNumber()
     const pageCount  = handler.getPageCount()
     const pages      = handler.getSlicedPages() 
 </script>
 
 
-
-<section>
-
-    <button type="button"
-        class="text"
-        class:disabled={$pageNumber === 1}
-        on:click={() => handler.setPage('previous')}
-    >
-        Previous
-    </button>
-
-    {#each $pages as pageValue}
+{#if small}
+    <section>
         <button type="button"
-            class:active={$pageNumber === pageValue}
-            class:ellipse={pageValue === null}
-            on:click={() => handler.setPage(pageValue)}
+            class:disabled={$pageNumber === 1} 
+            on:click={() => handler.setPage(1)}
         >
-            {pageValue ?? '...'}
+            &#10092;&#10092;
         </button>
-    {/each}
-
-    <button type="button"
-        class="text"
-        class:disabled={$pageNumber === $pageCount}
-        on:click={() => handler.setPage('next')}
-    >
-        Next
-    </button>
-
-</section>
-
+        <button type="button"
+            class:disabled={$pageNumber === 1} 
+            on:click={() => handler.setPage('previous')}
+        >
+            &#10094;
+        </button>
+        <button 
+            class:disabled={$pageNumber === $pageCount} 
+            on:click={() => handler.setPage('next')}
+        >
+            &#10095;
+        </button>
+        <button 
+            class:disabled={$pageNumber === $pageCount} 
+            on:click={() => handler.setPage($pageCount)}
+        >
+            &#10093;&#10093;
+        </button>
+    </section>
+{:else}
+    <section>
+        <button type="button"
+            class="text"
+            class:disabled={$pageNumber === 1}
+            on:click={() => handler.setPage('previous')}
+        >
+            Previous
+        </button>
+        {#each $pages as pageValue}
+            <button type="button"
+                class:active={$pageNumber === pageValue}
+                class:ellipse={pageValue === null}
+                on:click={() => handler.setPage(pageValue)}
+            >
+                {pageValue ?? '...'}
+            </button>
+        {/each}
+        <button type="button"
+            class="text"
+            class:disabled={$pageNumber === $pageCount}
+            on:click={() => handler.setPage('next')}
+        >
+            Next
+        </button>
+    </section>
+{/if}
 
 
 <style>

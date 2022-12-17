@@ -1,9 +1,9 @@
 <script>
-    import Datatable    from './Datatable.svelte'
     import DataHandler  from '$lib/DataHandler'
+    import Datatable    from '$lib/Datatable.svelte'
     import Th           from '$lib/Th.svelte'
     import ThFilter     from '$lib/ThFilter.svelte'
-    import data         from  '$data/data'
+    import data         from '$data/data'
 
     const handler = new DataHandler(data, { rowsPerPage: 10 })
     const rows = handler.getRows()
@@ -41,9 +41,7 @@
 
 <style>
     table{
-        text-align:center;
-        border-collapse:collapse;
-        width:100%;
+        border-bottom: 1px solid #e0e0e0;
     }
     thead{
         background:#fff;

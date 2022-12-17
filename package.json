@@ -1,6 +1,6 @@
 {
 	"name": "@vincjo/svelte-simple-datatables",
-	"version": "0.9.9",
+	"version": "0.9.92",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "svelte-kit sync && svelte-package",
