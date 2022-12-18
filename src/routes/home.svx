@@ -1,0 +1,36 @@
+
+## Installation
+
+<aside>
+
+````bash
+npm i -D @vincjo/svelte-simple-datatables
+````
+</aside>
+
+
+## Snippet
+<aside class="bis">
+
+````svelte
+<script lang="ts">
+    import { DataHandler, Datatable } from '@vincjo/svelte-simple-datatables'
+    import { someData } from './data'
+
+    const handler = new DataHandler(someData, { rowsPerPage: 50 })
+    const rows = handler.getRows()
+</script>
+
+<Datatable {handler}>
+    <!-- html table -->
+</Datatable>
+
+````
+</aside>
+
+
+<style>
+    aside{max-width:400px;}
+    aside.bis{max-width:680px;}
+    h2{font-size:24px;color:var(--active-dark);font-weight:400;margin:24px 0 8px 0;}
+</style>

@@ -3,20 +3,20 @@
     export let handler: DataHandler
     export let orderBy = null
     let identifier = orderBy ? orderBy.toString() : orderBy
-    
+
     const sorted = handler.getSorted()
 </script>
 
 
-<th 
+<th
     on:click={() => handler.sort(orderBy)}
-    class:sortable={orderBy} 
+    class:sortable={orderBy}
     class:active={$sorted.identifier === identifier}
 >
     <div class="flex">
         <div><slot/></div>
-        <span 
-            class:asc={$sorted.direction === 'asc'} 
+        <span
+            class:asc={$sorted.direction === 'asc'}
             class:desc={$sorted.direction === 'desc'}
         />
     </div>
@@ -25,12 +25,12 @@
 
 <style>
     th {
-        background:#fff;
+        background:inherit;
         margin:0;
         white-space:nowrap;
         padding:0 4px;
         user-select: none;
-        border-bottom:1px solid #eee;
+        border-bottom:1px solid #e0e0e0;
     }
     th.sortable {
         cursor:pointer;

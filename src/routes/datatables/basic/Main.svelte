@@ -1,28 +1,30 @@
-<script>
-    import DataHandler  from '$lib/DataHandler'
-    import Datatable    from '$lib/Datatable.svelte'
-    import Th           from '$lib/Th.svelte'
-    import ThFilter     from '$lib/ThFilter.svelte'
-    import data         from '$data/data'
+<script lang="ts">
+    import myData from '$data/data'
+    import { 
+        DataHandler, 
+        Datatable, 
+        Th, 
+        ThFilter 
+    } from '$lib/core'
 
-    const handler = new DataHandler(data, { rowsPerPage: 10 })
+    const handler = new DataHandler(myData, { rowsPerPage: 10 })
     const rows = handler.getRows()
 </script>
 
 
 
-<Datatable handler={handler}>
+<Datatable {handler}>
     <table>
         <thead>
             <tr>
-                <Th handler={handler} orderBy={'first_name'}>First Name</Th>
-                <Th handler={handler} orderBy={'last_name'}>Last Name</Th>
-                <Th handler={handler} orderBy={'email'}>Email</Th>
+                <Th {handler} orderBy={'first_name'}>First Name</Th>
+                <Th {handler} orderBy={'last_name'}>Last Name</Th>
+                <Th {handler} orderBy={'email'}>Email</Th>
             </tr>
             <tr>
-                <ThFilter handler={handler} filterBy={'first_name'}/>
-                <ThFilter handler={handler} filterBy={'last_name'}/>
-                <ThFilter handler={handler} filterBy={'email'}/>
+                <ThFilter {handler} filterBy={'first_name'}/>
+                <ThFilter {handler} filterBy={'last_name'}/>
+                <ThFilter {handler} filterBy={'email'}/>
             </tr>
         </thead>
         <tbody>
@@ -40,9 +42,6 @@
 
 
 <style>
-    table{
-        border-bottom: 1px solid #e0e0e0;
-    }
     thead{
         background:#fff;
     }

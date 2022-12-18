@@ -25,7 +25,7 @@ export default class DataHandler
         this.filters      = new Filters(this.context)
     }
 
-    public set(data: any[]): void
+    public update(data: any[]): void
     {
         this.context.rawRows.set(data)
     }
@@ -38,6 +38,11 @@ export default class DataHandler
     public getRowCount(): Readable<{ total: number; start: number; end: number; }>
     {
         return this.context.rowCount
+    }
+
+    public getRowsPerPage(): Writable<number | null>
+    {
+        return this.context.rowsPerPage
     }
 
     public sort(orderBy: Function | string): void
@@ -58,7 +63,7 @@ export default class DataHandler
         this.rows.sortDesc(orderBy)
     }
 
-    public getSorted()
+    public getSorted(): Writable<{ identifier: string | null ; direction: 'asc' | 'desc' | null; }>
     {
         return this.context.sorted
     }
@@ -73,14 +78,19 @@ export default class DataHandler
         this.globalSearch.remove()
     }
 
-    public filter(value: string, key: ( (row: any) => string | number | boolean ) | string): void
+    public filter(value: string, filterBy: ( (row: any) => string | number | boolean ) | string): void
     {
-        return this.filters.set(value, key)
+        return this.filters.set(value, filterBy)
     }
 
     public getPages(): Readable<number[]>
     {
         return this.context.pages
+    }
+
+    public getSlicedPages(): Readable<number[]>
+    {
+        return this.context.slicedPages
     }
 
     public getPageCount(): Readable<number>
@@ -93,12 +103,7 @@ export default class DataHandler
         return this.context.pageNumber
     }
 
-    public getRowsPerPage(): Writable<number | null>
-    {
-        return this.context.rowsPerPage
-    }
-
-    public setPage(value: number | string): void
+    public setPage(value: number | 'previous' | 'next'): void
     {
         switch(value) {
             case 'previous': return this.pages.previous()
@@ -107,22 +112,8 @@ export default class DataHandler
         }
     }
 
-    public getSlicedPages(): Readable<number[]>
-    {
-        return this.context.slicedPages
-    }
-
     public getTriggerChange(): Writable<number>
     {
         return this.context.triggerChange
-    }
-
-    public updateParams(params: params): void
-    {
-        this.setPage(1)
-        if (!params) {
-            this.context.rowsPerPage.set(null)
-        }
-        this.context.rowsPerPage.set(params.rowsPerPage)
     }
 }

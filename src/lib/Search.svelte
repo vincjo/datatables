@@ -1,19 +1,20 @@
 <script lang="ts">
     import type DataHandler from '$lib/DataHandler'
     export let handler: DataHandler
-
+    export let i18n = {} as { search: string }
     let value = ''
 </script>
 
 <input
+    class="search"
     bind:value={value} 
-    placeholder="Search..."
+    placeholder="{i18n.search ?? 'Search...'}"
     on:input={() => handler.search(value)}
 />
 
 <style>
     input{
-        border:1px solid #bdbdbd;
+        border:1px solid #e0e0e0;
         border-radius:4px;
         outline:none;
         padding:0 8px;
@@ -24,6 +25,6 @@
         width:176px;
         transition:all, 0.1s;
     }
-    input:focus {outline:1px solid #bdbdbd;}
+    input:focus {border:1px solid #bdbdbd;}
     input::placeholder {color:#9e9e9e;line-height:24px;}
 </style>

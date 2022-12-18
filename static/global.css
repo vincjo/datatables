@@ -1,15 +1,20 @@
+@font-face {font-family: "JetBrains";src: url('./fonts/JetBrainsMono-VariableFont_wght.ttf');}
+
 *{box-sizing:border-box;}
+
 *::selection {
     background: #006990;
     color: #fff;
 }
+pre{border-radius:2px;}
 *{
     --primary:#b71540;
     --color:#444;
     --label:#555;
     --active:#62c8f3;
+    --active-light:#ceffff;
     --active-dark: #006990;
-    --hljs: #333;
+    /* --hljs: #333; */
 }
 
 
@@ -26,7 +31,7 @@
 .thin-scrollbar-dark::-webkit-scrollbar-track-piece:start {top:40px;}
 
 
-.hljs{background:var(--hljs);}
+/* .hljs{background:var(--hljs);} */
 
 body {margin: 0; font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; font-size: 14px; line-height: 1.5;color: #333;}
 body > * {scrollbar-width:thin}
@@ -34,7 +39,7 @@ body > * {scrollbar-width:thin}
 
 a{color:inherit;}
 
-pre{margin:0 !important;}
+/* pre{margin:0 !important;} */
 
 .i18n-form .text-field.i18n{width:256px !important;margin-right:32px !important;}
 .i18n-form .text-field.i18n.small{width:200px  !important;}

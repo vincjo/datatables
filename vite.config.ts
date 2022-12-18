@@ -1,6 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import type { UserConfig } from 'vite'
-import path from 'path'
+import * as path from 'path'
 
 const config: UserConfig = {
 	plugins: [sveltekit()],
@@ -12,9 +12,6 @@ const config: UserConfig = {
             $img: path.resolve('./src/assets'),
             $data: path.resolve('./src/data'),
         }
-    },		
-    optimizeDeps: {
-        include: ["highlight.js", "highlight.js/lib/core"],
     },
 };
 

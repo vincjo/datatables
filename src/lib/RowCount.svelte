@@ -1,26 +1,37 @@
 <script lang="ts">
     import type DataHandler from '$lib/DataHandler'
     export let handler: DataHandler
+    export let i18n = {} as { noRows: string; rowCount: string }
+
+
 
     export let small = false
     const rowCount = handler.getRowCount()
+
+    const rowCountLabel = i18n.rowCount ?? 'Showing {start} to {end} of {total} entries'
+    $: label = rowCountLabel
+		.replace('{start}', `<b>${$rowCount.start}</b>`)
+		.replace('{end}', `<b>${$rowCount.end}</b>`)
+		.replace('{total}', `<b>${$rowCount.total}</b>`)
 </script>
 
 
 {#if small}
-    <aside>
-        <b>{$rowCount.start}</b>-
-        <b>{$rowCount.end}</b>/
-        <b>{$rowCount.total}</b>
-    </aside>
+    {#if $rowCount.total > 0}
+        <aside>
+            <b>{$rowCount.start}</b>-
+            <b>{$rowCount.end}</b>/
+            <b>{$rowCount.total}</b>
+        </aside>
+    {:else}
+        {i18n.noRows ?? 'No entries to found'}
+    {/if}
 {:else}
     <aside>
         {#if $rowCount.total > 0}
-            Showing <b>{$rowCount.start}</b> 
-            to <b>{$rowCount.end}</b> 
-            of <b>{$rowCount.total}</b> entries
+            {@html label}
         {:else}
-            No entries to found
+            {i18n.noRows ?? 'No entries to found'}
         {/if}
     </aside>
 {/if}

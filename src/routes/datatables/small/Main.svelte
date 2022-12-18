@@ -1,11 +1,13 @@
-<script>
-    import DataHandler  from '$lib/DataHandler'
-    import Datatable    from '$lib/Datatable.svelte'
-    import Th           from '$lib/Th.svelte'
-    import ThFilter     from '$lib/ThFilter.svelte'
-    import data         from '$data/data'
+<script lang="ts">
+    import myData from '$data/data'
+    import { 
+        DataHandler, 
+        Datatable, 
+        Th, 
+        ThFilter 
+    } from '$lib/core'
 
-    const handler = new DataHandler(data, { rowsPerPage: 50 })
+    const handler = new DataHandler(myData, { rowsPerPage: 50 })
     const rows = handler.getRows()
 </script>
 
@@ -43,9 +45,6 @@
 
 
 <style>
-    table{
-        border-bottom: 1px solid #e0e0e0;
-    }
     thead{
         background:#fff;
     }

@@ -10,5 +10,5 @@ import Search from './Search.svelte'
 
 export {
     DataHandler,
-    Th, ThFilter, Pagination, RowCount, RowsPerPage, Search
+    Datatable, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search
 }
