@@ -1,0 +1,63 @@
+<script>
+    import Anchor from '$components/Anchor.svelte'
+</script>
+
+
+# Let's build a datatable component
+
+
+<Anchor name="html-table">
+
+## HTML Table + data
+
+We have a bit of data and we want to display it in an HTML table.<br>
+We want to be able to manipulate the data, select rows, remove rows and add rows
+
+Let's build the main component
+
+````svelte
+<script>
+    import { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import { data } from './data'
+
+    const handler = new DataHandler(data, { rowsPerPage: 20 })
+    const rows = handler.getRows()
+</script>
+
+<table>
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {#each $rows as row}
+            <tr>
+                <td>{row.first_name}</td>
+                <td>{row.last_name}</td>
+                <td>{row.email}</td>
+            </tr>
+        {/each}
+    </tbody>
+</table>
+
+````
+</Anchor>
+
+
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+
+
+
+<style>
+    h1{font-size:32px;color:var(--primary);font-family:Arial, Helvetica;font-weight:normal;}
+    h2{font-size:48px;color:var(--active-dark);font-weight:400;margin:80px 0 8px 0;}
+    p{font-size:16px;font-family:Helvetica, Arial, sans-serif;}
+</style>

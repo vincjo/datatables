@@ -1,6 +1,14 @@
 <script>
     import Nav from './Nav.svelte'
     import Github from './Github.svelte'
+    import { afterNavigate } from "$app/navigation";
+  
+    let element
+
+    afterNavigate(() => {
+        if (element) element.scrollTop = 0
+    })
+
 </script>
 
 <Github/>
@@ -8,7 +16,7 @@
 <nav>
     <Nav/>
 </nav>
-<section>
+<section bind:this={element}>
     <article>
         <slot/>
     </article>

@@ -83,14 +83,12 @@ export default class DataHandler
         return this.filters.set(value, filterBy)
     }
 
-    public getPages(): Readable<number[]>
+    public getPages(params = { ellipsis: false }): Readable<number[]>
     {
+        if (params.ellipsis) {
+            return this.context.pagesWithEllipsis
+        }
         return this.context.pages
-    }
-
-    public getSlicedPages(): Readable<number[]>
-    {
-        return this.context.slicedPages
     }
 
     public getPageCount(): Readable<number>

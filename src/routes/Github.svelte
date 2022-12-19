@@ -1,8 +1,11 @@
+<script>
+	import github from '$img/github.svg'
+</script>
 
 <header>
 	<div>
-		<a href="https://github.com/vincjo/datatables#readme">
-			<img alt="github logo" src="github.svg"/><span>Github</span>
+		<a href="https://github.com/vincjo/datatables">
+			<img alt="github logo" src="{github}"/><span>Github</span>
 		</a>
 	</div>
 </header>
@@ -10,8 +13,8 @@
 
 
 <style>
-	header {font-weight:300;padding:0;height:40px;position:fixed;top:0;right:8px;z-index:200;color:#212121;}  
+	header {font-weight:300;padding:0;height:40px;position:fixed;top:4px;right:8px;z-index:200;color:#212121;}  
 	header a {text-decoration: none;padding:0;display: block;font-size:16px;line-height:40px;}
-	div{display:flex;margin-right:16px;float:right;background:#fff;}
+	div{display:flex;margin-right:16px;float:right;text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(255,255,255,.5);background:rgba(255,255,255,0.2);border-radius:8px;}
 	img{float:left;padding:8px 8px;width:40px;}
 </style>

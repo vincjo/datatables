@@ -4,35 +4,35 @@ import type { params } from '../DataHandler'
 
 export default class Context
 {
-    public  rowsPerPage   : Writable<number|null>
-    public  pageNumber    : Writable<number>
-    public  triggerChange : Writable<number>
-    public  globalFilter  : Writable<string|null>
-    public  localFilters  : Writable<any[]>
-    public  rawRows       : Writable<any[]>
-    private filteredRows  : Readable<any[]>
-    public  rows          : Readable<any[]>
-    public  rowCount      : Readable<{ total: number; start: number; end: number; }>
-    public  pages         : Readable<number[]>
-    public  pageCount     : Readable<number>
-    public  slicedPages   : Readable<number[]>
-    public  sorted        : Writable<{ identifier: string | null ; direction: 'asc' | 'desc' | null; }>
+    public  rowsPerPage         : Writable<number|null>
+    public  pageNumber          : Writable<number>
+    public  triggerChange       : Writable<number>
+    public  globalFilter        : Writable<string|null>
+    public  localFilters        : Writable<any[]>
+    public  rawRows             : Writable<any[]>
+    private filteredRows        : Readable<any[]>
+    public  rows                : Readable<any[]>
+    public  rowCount            : Readable<{ total: number; start: number; end: number; }>
+    public  pages               : Readable<number[]>
+    public  pagesWithEllipsis   : Readable<number[]>
+    public  pageCount           : Readable<number>
+    public  sorted              : Writable<{ identifier: string | null ; direction: 'asc' | 'desc' | null; }>
 
     constructor(data: any[], params: params)
     {
-        this.rowsPerPage    = writable(params.rowsPerPage)
-        this.pageNumber     = writable(1)
-        this.triggerChange  = writable(0)
-        this.globalFilter   = writable(null)
-        this.localFilters   = writable([])
-        this.rawRows        = writable(data)
-        this.filteredRows   = this.createFilteredRows()
-        this.rows           = this.createPaginatedRows()
-        this.rowCount       = this.createRowCount()
-        this.pages          = this.createPages()
-        this.pageCount      = this.createPageCount()
-        this.slicedPages    = this.createSlicedPages()
-        this.sorted         = writable({ identifier: null, direction: null })
+        this.rowsPerPage        = writable(params.rowsPerPage)
+        this.pageNumber         = writable(1)
+        this.triggerChange      = writable(0)
+        this.globalFilter       = writable(null)
+        this.localFilters       = writable([])
+        this.rawRows            = writable(data)
+        this.filteredRows       = this.createFilteredRows()
+        this.rows               = this.createPaginatedRows()
+        this.rowCount           = this.createRowCount()
+        this.pages              = this.createPages()
+        this.pagesWithEllipsis  = this.createPagesWithEllipsis()
+        this.pageCount          = this.createPageCount()
+        this.sorted             = writable({ identifier: null, direction: null })
     }
 
     private createFilteredRows(): Readable<any[]>
@@ -119,17 +119,7 @@ export default class Context
         )
     }
 
-    private createPageCount(): Readable<number>
-    {
-        return derived(
-            [this.pages],
-            ([$pages]) => {
-                return $pages.length
-            }
-        )
-    }
-
-    private createSlicedPages(): Readable<number[]>
+    private createPagesWithEllipsis(): Readable<number[]>
     {
         return derived(
             [this.pages, this.pageNumber],
@@ -163,6 +153,16 @@ export default class Context
                         ...$pages.slice($pages.length - 5, $pages.length)
                     ]
                 }
+            }
+        )
+    }
+
+    private createPageCount(): Readable<number>
+    {
+        return derived(
+            [this.pages],
+            ([$pages]) => {
+                return $pages.length
             }
         )
     }

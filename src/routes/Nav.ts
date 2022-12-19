@@ -30,4 +30,17 @@ export default [
             { name: 'update dataset', slug: '#update-dataset' },
         ],
     },
+    {
+        name: 'tutorial',
+        path: '/tutorial',
+        pages: [
+            { name: 'html table', path: '/html-table' },
+            { name: 'sort data', path: '/sort-data' },
+            { name: 'filter data', path: '/filter-data' },
+            { name: 'search', path: '/search' },
+            { name: 'rows per page', path: '/rows-per-page' },
+            { name: 'row count', path: '/row-count' },
+            { name: 'pagination', path: '/pagination' },
+        ],
+    },
 ]

@@ -172,8 +172,7 @@
 
 ## Pagination
 
-> **getPages()**: Readable`<number[]>` <br>
-> **getSlicedPages()**: Readable`<number[]>` <br>
+> **getPages(** *params*: `{ ellipsis: boolean }` **)**: Readable`<number[]>` <br>
 > **getPageCount()**: Readable`<number>` <br>
 > **getPageNumber()**: Readable`<number>` <br>
 > **setPage(** *value*: number | 'previous' | 'next' **)**: void <br>

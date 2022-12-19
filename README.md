@@ -8,28 +8,23 @@
 </div>
 
 
+<br><br>
 
 
+This package provides an API to handle data and related events : rows, filters, pagination, search, sort...
 
-# Presentation
-
-This package provides an API to handle data and related events :
-- rows,
-- filters,
-- pagination,
-- search,
-- sort...
+:unlock: **Headless** by design <br>
+:unlock: **Typescript** support <br>
+:unlock: **SSR** compatibility
 
 Also provides some sample components, which you can grab and customize in your own project.
 <br><br>
-:white_check_mark: Headless by design <br>
-:white_check_mark: **Typescript** support <br>
-:white_check_mark: Full **SSR** compatibility
+
 
 
 <br>
 
-:point_right: **[Live examples](https://vincjo.fr/svelte-simple-datatables/datatables)**
+:globe_with_meridians: **[Live examples](https://vincjo.fr/svelte-simple-datatables/datatables)**
 
 
 <br>
@@ -43,15 +38,28 @@ npm i -D @vincjo/svelte-simple-datatables
 # Sample code
 ````svelte
 <script lang="ts">
-    import { DataHandler, Datatable } from '@vincjo/svelte-simple-datatables'
+    import { DataHandler } from '@vincjo/svelte-simple-datatables'
     import { someData } from './data'
 
     const handler = new DataHandler(someData, { rowsPerPage: 50 })
     const rows = handler.getRows()
 </script>
 
-<Datatable {handler}>
-    <!-- html table -->
-</Datatable>
+<table>
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {#each $rows as row}
+            <tr>
+                <td>{row.first_name}</td>
+                <td>{row.last_name}</td>
+            </tr>
+        {/each}
+    </tbody>
+</table>
 ````
-### [See full documentation here](https://vincjo.fr/svelte-simple-datatables) 
+### :globe_with_meridians: [See full documentation](https://vincjo.fr/svelte-simple-datatables) 

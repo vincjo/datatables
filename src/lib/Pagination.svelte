@@ -5,7 +5,7 @@
     export let i18n = {} as { previous: string; next: string }
     const pageNumber = handler.getPageNumber()
     const pageCount  = handler.getPageCount()
-    const pages      = handler.getSlicedPages() 
+    const pages      = handler.getPages({ ellipsis: true }) 
 </script>
 
 
@@ -39,7 +39,7 @@
 {:else}
     <section class="pagination">
         <button type="button"
-            class="text"
+            class="text-nav"
             class:disabled={$pageNumber === 1}
             on:click={() => handler.setPage('previous')}
         >
@@ -55,7 +55,7 @@
             </button>
         {/each}
         <button type="button"
-            class="text"
+            class="text-nav"
             class:disabled={$pageNumber === $pageCount}
             on:click={() => handler.setPage('next')}
         >
@@ -95,7 +95,7 @@
         background: #eee;
         cursor: pointer;
     }
-    button.text {
+    button.text-nav {
         width: auto;
         min-width: 70px;
         cursor: pointer;
