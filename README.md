@@ -7,20 +7,15 @@
     </p>
 </div>
 
-
-<br><br>
-
+# Presentation
 
 This package provides an API to handle data and related events : rows, filters, pagination, search, sort...
 
-:unlock: **Headless** by design <br>
-:unlock: **Typescript** support <br>
-:unlock: **SSR** compatibility
-
+- **Headless** by design <br>
+- **Typescript** support <br>
+- **SSR** compatibility
+- 
 Also provides some sample components, which you can grab and customize in your own project.
-<br><br>
-
-
 
 <br>
 
