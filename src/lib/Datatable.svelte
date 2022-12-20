@@ -1,23 +1,12 @@
 <script lang="ts">
     import {
-        DataHandler,
-        Search,
-        RowsPerPage,
-        RowCount,
-        Pagination
+        type DataHandler,
+        Search, RowsPerPage,
+        RowCount, Pagination
     } from '$lib/core'
 
     export let handler: DataHandler
     export let sticky = false
-    export let i18n = {
-        search: 'Search...',
-        filter: 'Filter',
-        rowsPerPage: 'Show {rowsPerPage} entries',
-        rowCount: 'Showing {start} to {end} of {total} entries',
-        noRows: 'No entries to found',
-        previous: 'Previous',
-        next: 'Next',
-    }
     let element: HTMLElement | undefined
     let clientWidth = 1000
 
@@ -33,8 +22,8 @@
 
 <section class:sticky={sticky} bind:clientWidth={clientWidth}>
     <header>
-        <Search      {handler} {i18n}/>
-        <RowsPerPage {handler} {i18n}/>
+        <Search      {handler}/>
+        <RowsPerPage {handler}/>
     </header>
 
     <article bind:this={element} class:sticky={sticky}>
@@ -42,8 +31,8 @@
     </article>
 
     <footer>
-        <RowCount   {handler} small={clientWidth < 600} {i18n}/>
-        <Pagination {handler} small={clientWidth < 600} {i18n}/>
+        <RowCount   {handler} small={clientWidth < 600}/>
+        <Pagination {handler} small={clientWidth < 600}/>
     </footer>
 </section>
 
@@ -69,12 +58,15 @@
         align-items:center;
     }
 
+    footer{ 
+        border-top: 1px solid #e0e0e0;
+    }
+
     article {
         position:relative;
         height:calc(100% - 96px);
         overflow:auto;
         scrollbar-width:thin;
-        border-bottom: 1px solid #e0e0e0;
     }
 
     article::-webkit-scrollbar {width: 6px;height: 6px;}

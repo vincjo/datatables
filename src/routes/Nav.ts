@@ -12,7 +12,6 @@ export default [
             { name: 'small', path: '/small' },
             { name: 'callback', path: '/callback' },
             { name: 'i18n', path: '/i18n' },
-            { name: 'themes', path: '/themes' },
         ],
     },
     {

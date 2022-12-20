@@ -1,18 +1,10 @@
 <script lang="ts">
     import type DataHandler from '$lib/DataHandler'
     export let handler: DataHandler
-    export let i18n = {} as { noRows: string; rowCount: string }
-
-
-
+    export let i18n = { noRows: 'No entries to found', rowCount: 'Showing {start} to {end} of {total} entries' }
     export let small = false
-    const rowCount = handler.getRowCount()
 
-    const rowCountLabel = i18n.rowCount ?? 'Showing {start} to {end} of {total} entries'
-    $: label = rowCountLabel
-		.replace('{start}', `<b>${$rowCount.start}</b>`)
-		.replace('{end}', `<b>${$rowCount.end}</b>`)
-		.replace('{total}', `<b>${$rowCount.total}</b>`)
+    const rowCount = handler.getRowCount()
 </script>
 
 
@@ -24,14 +16,18 @@
             <b>{$rowCount.total}</b>
         </aside>
     {:else}
-        {i18n.noRows ?? 'No entries to found'}
+        {i18n.noRows}
     {/if}
 {:else}
     <aside>
         {#if $rowCount.total > 0}
-            {@html label}
+            {@html i18n.rowCount
+                .replace('{start}', `<b>${$rowCount.start}</b>`)
+                .replace('{end}', `<b>${$rowCount.end}</b>`)
+                .replace('{total}', `<b>${$rowCount.total}</b>`)
+            }
         {:else}
-            {i18n.noRows ?? 'No entries to found'}
+            {i18n.noRows}
         {/if}
     </aside>
 {/if}

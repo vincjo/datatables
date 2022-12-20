@@ -1,14 +1,14 @@
 <script lang="ts">
     import type DataHandler from '$lib/DataHandler'
     export let handler: DataHandler
-    export let i18n = {} as { search: string }
+    export let i18n = 'Search...'
     let value = ''
 </script>
 
 <input
     class="search"
     bind:value={value} 
-    placeholder="{i18n.search ?? 'Search...'}"
+    placeholder="{i18n}"
     on:input={() => handler.search(value)}
 />
 
