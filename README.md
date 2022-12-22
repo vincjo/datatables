@@ -19,7 +19,7 @@ Also provides some sample components, which you can grab and customize in your o
 
 <br>
 
-:globe_with_meridians: **[Live examples](https://vincjo.fr/svelte-simple-datatables/datatables)**
+:globe_with_meridians: **[Live examples](https://vincjo.fr/datatables/examples)**
 
 
 <br>
@@ -57,4 +57,4 @@ npm i -D @vincjo/svelte-simple-datatables
     </tbody>
 </table>
 ````
-### :globe_with_meridians: [See full documentation](https://vincjo.fr/svelte-simple-datatables) 
+### :globe_with_meridians: [See full documentation](https://vincjo.fr/datatables) 
