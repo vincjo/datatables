@@ -18,7 +18,7 @@ export const hash = derived(
 export const anchor = writable(null)
 
 export const getPath = (url: string) => {
-    if(base === '/ssd') {
+    if(base === '/datatables') {
         return `${base}${url}`.replace('//', '/').replace(/\/$/, '')
     }
     else {

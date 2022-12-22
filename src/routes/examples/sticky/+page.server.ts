@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 
 export const load = async () => {
-    const path = './src/routes/datatables'
+    const path = './src/routes/examples'
     const lib = './src/lib'
     const page = 'sticky'
     return {

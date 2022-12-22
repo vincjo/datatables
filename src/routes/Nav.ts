@@ -5,7 +5,7 @@ export default [
     },
     {
         name: 'datatables',
-        path: '/datatables',
+        path: '/examples',
         pages: [
             { name: 'basic', path: '/basic' },
             { name: 'sticky', path: '/sticky' },
