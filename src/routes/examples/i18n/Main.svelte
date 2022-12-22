@@ -43,6 +43,7 @@
         {/each}
         </tbody>
     </table>
+
     <footer>
         <RowCount
             {handler}
