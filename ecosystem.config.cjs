@@ -16,7 +16,7 @@ module.exports = {
             ref           : "origin/master",
             repo          : "git@github.com:vincjo/datatables.git",
             path          : "/home/vincjo/www/datatables",
-            "post-deploy" : "npm run build && pm2 startOrRestart ecosystem.config.cjs --env production"
+            "post-deploy" : "npm install && npm run build && pm2 startOrRestart ecosystem.config.cjs --env production"
         },
     }
 }
