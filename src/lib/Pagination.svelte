@@ -10,8 +10,9 @@
 
 
 {#if small}
-    <section class="pagination">
+    <section>
         <button type="button"
+            class="small"
             class:disabled={$pageNumber === 1} 
             on:click={() => handler.setPage(1)}
         >
@@ -30,6 +31,7 @@
             &#10095;
         </button>
         <button 
+            class="small"
             class:disabled={$pageNumber === $pageCount} 
             on:click={() => handler.setPage($pageCount)}
         >
@@ -37,7 +39,7 @@
         </button>
     </section>
 {:else}
-    <section class="pagination">
+    <section>
         <button type="button"
             class:disabled={$pageNumber === 1}
             on:click={() => handler.setPage('previous')}
@@ -84,15 +86,17 @@
     }
     button:first-child {
         border-radius: 4px 0 0 4px;
-        width: auto;
-        min-width: 72px;
     }
     button:last-child {
         border-right: 1px solid #e0e0e0;
         border-radius: 0 4px 4px 0;
-        width: auto;
+    }
+
+    button:first-child:not(.small), 
+    button:last-child:not(.small) {
         min-width: 72px;
     }
+
     button:not(.active):hover {
         background: #eee;
     }
