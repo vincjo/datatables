@@ -13,13 +13,13 @@
     >
         Previous
     </button>
-    {#each $pages as pageValue}
+    {#each $pages as page}
         <button type="button"
-            class:active={$pageNumber === pageValue}
-            class:ellipse={pageValue === null}
-            on:click={() => handler.setPage(pageValue)}
+            class:active={$pageNumber === page}
+            class:ellipse={page === null}
+            on:click={() => handler.setPage(page)}
         >
-            {pageValue ?? '...'}
+            {page ?? '...'}
         </button>
     {/each}
     <button type="button"
