@@ -2,7 +2,7 @@
     export let handler
     export let orderBy = null
 
-    let identifier = orderBy ? orderBy.toString() : orderBy
+    const identifier = orderBy ? orderBy.toString() : orderBy
     const sorted = handler.getSorted()
 </script>
 
@@ -12,7 +12,9 @@
     class:active={$sorted.identifier === identifier}
 >
     <div class="flex">
-        <div><slot/></div>
+        <strong>
+            <slot/>
+        </strong>
         <span
             class:asc={$sorted.direction === 'asc'}
             class:desc={$sorted.direction === 'desc'}

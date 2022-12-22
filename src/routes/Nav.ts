@@ -42,4 +42,11 @@ export default [
             { name: 'pagination', path: '/pagination' },
         ],
     },
+    {
+        name: 'tips',
+        path: '/tips',
+        pages: [
+            { name: 'sticky header', path: '/sticky-header' },
+        ],
+    },
 ]

@@ -8,7 +8,6 @@
 
 <section class="pagination">
     <button type="button"
-        class="text-nav"
         class:disabled={$pageNumber === 1}
         on:click={() => handler.setPage('previous')}
     >
@@ -24,7 +23,6 @@
         </button>
     {/each}
     <button type="button"
-        class="text-nav"
         class:disabled={$pageNumber === $pageCount}
         on:click={() => handler.setPage('next')}
     >
@@ -36,13 +34,13 @@
 <style>
     section {
         display:flex;
-        height:32px;
     }
     button {
         background:inherit;
         height:32px;
         width:32px;
         color:#616161;
+        cursor:pointer;
         font-size:13px;
         margin:0;
         padding:0;
@@ -54,19 +52,17 @@
     }
     button:first-child {
         border-radius: 4px 0 0 4px;
+        width: auto;
+        min-width: 72px;
     }
     button:last-child {
         border-right: 1px solid #e0e0e0;
         border-radius: 0 4px 4px 0;
+        width: auto;
+        min-width: 72px;
     }
     button:not(.active):hover {
         background: #eee;
-        cursor: pointer;
-    }
-    button.text-nav {
-        width: auto;
-        min-width: 70px;
-        cursor: pointer;
     }
     button.ellipse:hover {
         background: inherit;
@@ -75,6 +71,7 @@
     button.active {
         background: #eee;
         font-weight: bold;
+        cursor: default;
     }
     button.disabled:hover {
         background: inherit;

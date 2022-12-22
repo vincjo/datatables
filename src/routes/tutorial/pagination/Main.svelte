@@ -1,11 +1,11 @@
 <script>
     import { DataHandler } from '$lib/core'
-    import Th from './Th.svelte'
-    import ThFilter from './ThFilter.svelte'
-    import Search from './Search.svelte'
-    import RowsPerPage from './RowsPerPage.svelte'
-    import RowCount from './RowCount.svelte'
-    import Pagination from './Pagination.svelte'
+    import Th from '../Th.svelte'
+    import ThFilter from '../ThFilter.svelte'
+    import Search from '../Search.svelte'
+    import RowsPerPage from '../RowsPerPage.svelte'
+    import RowCount from '../RowCount.svelte'
+    import Pagination from '../Pagination.svelte'
     import data from '$data/data'
 
     const handler = new DataHandler(data, { rowsPerPage: 20 })

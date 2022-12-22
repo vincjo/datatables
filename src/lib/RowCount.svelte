@@ -1,7 +1,10 @@
 <script lang="ts">
     import type DataHandler from '$lib/DataHandler'
     export let handler: DataHandler
-    export let i18n = { noRows: 'No entries to found', rowCount: 'Showing {start} to {end} of {total} entries' }
+    export let i18n = { 
+        noRows: 'No entries to found', 
+        rowCount: 'Showing {start} to {end} of {total} entries' 
+    }
     export let small = false
 
     const rowCount = handler.getRowCount()

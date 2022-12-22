@@ -1,6 +1,6 @@
 <script>
     import { DataHandler } from '$lib/core'
-    import Th from './Th.svelte'
+    import Th from '../Th.svelte'
     import data from '$data/data'
 
     const handler = new DataHandler(data, { rowsPerPage: 20 })
