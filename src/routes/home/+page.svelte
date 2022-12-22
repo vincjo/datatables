@@ -5,7 +5,7 @@
 
 
 <svelte:head>
-    <title>svelte-simple-datatables</title>
+    <title>datatables</title>
 </svelte:head>
 
 
@@ -13,11 +13,11 @@
     <aside>
         <img src="{logo}" alt="logo"/>
         <div>
-            <h1>svelte-simple-datatables</h1>
+            <h1>svelte simple datatables</h1>
             <p>A toolkit to build some datatable components with Svelte</p>
             <div>
-                <img src="https://img.shields.io/npm/dt/@vincjo/svelte-simple-datatables?color=%23b71540" alt="npm downloads"/>
-                <img src="https://img.shields.io/npm/v/@vincjo/svelte-simple-datatables?color=%23b71540" alt="npm version"/>
+                <img src="https://img.shields.io/npm/dt/@vincjo/datatables?color=%23b71540" alt="npm downloads"/>
+                <img src="https://img.shields.io/npm/v/@vincjo/datatables?color=%23b71540" alt="npm version"/>
             </div>
         </div>
     </aside>

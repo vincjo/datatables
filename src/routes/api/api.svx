@@ -13,7 +13,7 @@
 
 ````svelte
 <script lang="ts">
-    import { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import { DataHandler } from '@vincjo/datatables'
     import { someData } from './my-data.json'
 
     const handler = new DataHandler(someData, { rowsPerPage: 50 })
@@ -43,7 +43,7 @@
 
 ````svelte
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
     const sorted = handler.getSorted()
 </script>
@@ -109,7 +109,7 @@
 
 ````svelte
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
     let value = ''
 </script>
@@ -134,7 +134,7 @@
 
 ````svelte
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
     const rowsPerPage = handler.getRowsPerPage()
 </script>
@@ -153,7 +153,7 @@
 
 ````svelte
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
     const rowCount = handler.getRowCount()
 </script>
@@ -180,7 +180,7 @@
 
 ````svelte
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
     const pageNumber = handler.getPageNumber()
     const pageCount  = handler.getPageCount()
@@ -216,7 +216,7 @@
 
 ````svelte
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
     let element: HTMLElement | undefined
 
@@ -244,7 +244,7 @@
 
 ````svelte
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import type { DataHandler } from '@vincjo/datatables'
     import { newDataset } from './my-data.json'
 
     export let handler: DataHandler

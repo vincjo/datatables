@@ -17,7 +17,7 @@ Let's build the main component
 
 ````svelte
 <script>
-    import { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import { DataHandler } from '@vincjo/datatables'
     import { data } from './data'
 
     const handler = new DataHandler(data, { rowsPerPage: 20 })

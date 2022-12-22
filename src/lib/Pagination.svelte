@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type DataHandler from '$lib/DataHandler'
+    import type { DataHandler } from '$lib/core'
     export let handler: DataHandler
     export let small = false
     export let i18n = { previous: 'Previous',  next: 'Next' }

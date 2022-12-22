@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type DataHandler from '$lib/DataHandler'
+    import type { DataHandler } from '$lib/core'
     export let handler: DataHandler
     export let i18n = { 
         noRows: 'No entries to found', 

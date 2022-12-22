@@ -4,7 +4,7 @@
 <aside>
 
 ````bash
-npm i -D @vincjo/svelte-simple-datatables
+npm i -D @vincjo/datatables
 ````
 </aside>
 
@@ -14,7 +14,7 @@ npm i -D @vincjo/svelte-simple-datatables
 
 ````svelte
 <script lang="ts">
-    import { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import { DataHandler } from '@vincjo/datatables'
     import { someData } from './data'
 
     const handler = new DataHandler(someData, { rowsPerPage: 50 })
