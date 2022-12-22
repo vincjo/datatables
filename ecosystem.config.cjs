@@ -12,7 +12,7 @@ module.exports = {
     deploy : {
         production : {
             user          : "vincjo",
-            host          : [ "vincjo.fr -p 8422" ],
+            host          : [ "vincjo.fr -p 625" ],
             ref           : "origin/master",
             repo          : "git@github.com:vincjo/datatables.git",
             path          : "/home/vincjo/www/datatables",
