@@ -9,7 +9,10 @@ const config = {
   preprocess: [preprocess(), mdsvex(mdsvexConfig)],
 
   kit: {
-    adapter: adapter()
+		adapter: adapter({ out: 'build' }),
+		paths: {
+			base: process.env.NODE_ENV === 'development' ? '' : '/datatables',
+		},
   }
 };
 

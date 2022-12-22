@@ -18,7 +18,7 @@ export const hash = derived(
 export const anchor = writable(null)
 
 export const getPath = (url: string) => {
-    if(base === '/svelte-simple-datatable') {
+    if(base === '/datatables') {
         return `${base}${url}`.replace('//', '/').replace(/\/$/, '')
     }
     else {
@@ -27,7 +27,7 @@ export const getPath = (url: string) => {
 }
 
 export const goTo = (url: string) => {
-    if(base === '/svelte-simple-datatable') {
+    if(base === '/datatables') {
         goto( `${base}${url}`.replace('//', '/').replace(/\/$/, '') )
     }
     else {
