@@ -4,16 +4,14 @@
     export let name
 </script>
 
-<a 
-    use:viewport 
-    on:enterViewport={() => $anchor = '#' + name} 
-    class="anchor" 
-    name="{name}" 
->
+<section use:viewport on:enterViewport={() => $anchor = '#' + name}>
+    <!-- svelte-ignore a11y-missing-content -->
+    <a class="anchor" name="{name}"></a>
     <slot/>
-</a>
+</section>
 
 
 <style>
-    a{display:block;margin-top:48px;min-height:400px;}
+    section{min-height:400px;margin-top:48px;}
+    a{display:block;}
 </style>
