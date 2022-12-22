@@ -2,7 +2,7 @@
     <img align="center" src="./src/assets/logo.svg" alt="logo" width="172"/>
     <p align="center">
         <h1 align="center" style="font-size:32px;margin:0;border:none;">svelte-simple-datatables</h1>
-        <img src="https://img.shields.io/npm/v/@vincjo/svelte-simple-datatables?color=%23b71540" alt="npm version"/>
+        <img src="https://img.shields.io/npm/v/@vincjo/datatables?color=%23b71540" alt="npm version"/>
         <img src="https://img.shields.io/github/license/vincjo/datatables?color=b71540" alt="last commit"/>
     </p>
 </div>
@@ -26,14 +26,14 @@ Also provides some sample components, which you can grab and customize in your o
 
 # Install
 ````apache
-npm i -D @vincjo/svelte-simple-datatables
+npm i -D @vincjo/datatables
 ````
 
 
 # Sample code
 ````svelte
 <script lang="ts">
-    import { DataHandler } from '@vincjo/svelte-simple-datatables'
+    import { DataHandler } from '@vincjo/datatables'
     import { someData } from './data'
 
     const handler = new DataHandler(someData, { rowsPerPage: 50 })
