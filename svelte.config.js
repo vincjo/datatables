@@ -11,7 +11,7 @@ const config = {
   kit: {
 		adapter: adapter({ out: 'build' }),
 		paths: {
-			base: process.env.NODE_ENV === 'development' ? '' : '/datatables',
+			base: process.env.NODE_ENV === 'development' ? '' : '/ssd',
 		},
   }
 };
