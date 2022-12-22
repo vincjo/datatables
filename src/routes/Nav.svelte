@@ -17,7 +17,7 @@
 
     {#each pages as page}
         <a href="{getPath(page.path)}">
-            <h2 class:active={$url === page.path || (page.path !== '/' && $url.includes(page.path))}>
+            <h2 class:active={$url === getPath(page.path) || (getPath(page.path) !== '/' && $url.includes(getPath(page.path)))}>
                 {page.name}
             </h2>
         </a>
