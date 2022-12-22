@@ -1,5 +1,6 @@
 <script>
     import Home from './home.svx'
+    import logo from '$img/logo.svg'
 </script>
 
 
@@ -10,7 +11,7 @@
 
 <section>
     <aside>
-        <img src="logo.svg" alt="logo"/>
+        <img src="{logo}" alt="logo"/>
         <div>
             <h1>svelte-simple-datatables</h1>
             <p>A toolkit to build some datatable components with Svelte</p>
