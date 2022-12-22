@@ -1,6 +1,20 @@
 {
-  "name": "@vincjo/svelte-simple-datatables",
+  "name": "@vincjo/datatables",
   "version": "0.9.93",
+  "keywords": [
+    "svelte sveltejs table tables datatable datatables"
+  ],
+  "description": "A toolkit to build some datatable components with Svelte",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincjo/datatables.git"
+  },
+  "author": "vincjo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vincjo/datatables/issues"
+  },
+  "homepage": "https://vincjo.fr/datatables",
   "scripts": {
     "dev": "vite dev",
 		"build": "vite build",
