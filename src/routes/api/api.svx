@@ -172,7 +172,7 @@
 
 ## Pagination
 
-> **getPages(** *params*: `{ ellipsis: boolean }` **)**: Readable`<number[]>` <br>
+> **getPages(** *param*: `{ ellipsis: boolean }` **)**: Readable`<number[]>` <br>
 > **getPageCount()**: Readable`<number>` <br>
 > **getPageNumber()**: Readable`<number>` <br>
 > **setPage(** *value*: number | 'previous' | 'next' **)**: void <br>

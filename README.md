@@ -87,7 +87,7 @@ getRowsPerPage(): Writable<number | null>
 getRowCount(): Readable<{ total: number; start: number; end: number; }>
 ````
 ````ts
-getPages( params: { ellipsis: boolean } ): Readable<number[]>
+getPages( param: { ellipsis: boolean } ): Readable<number[]>
 getPageCount(): Readable<number>
 getPageNumber(): Readable<number>
 setPage( value: number | ‘previous’ | ‘next’ ): void
