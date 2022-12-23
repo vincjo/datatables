@@ -66,5 +66,5 @@ npm i -D @vincjo/datatables
 
 |   |  method |
 |---|---|
-| Table rows  | `getRows(): Readable<any[]>`{:.ts}  |
+| Table rows  | `getRows(): Readable<any[]>`{.ts}  |
 | Sort data  | `sort( orderBy: Function | string ): void`{.ts}  |
