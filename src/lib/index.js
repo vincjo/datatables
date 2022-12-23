@@ -1,5 +1,6 @@
 // Reexport your entry components here
 import DataHandler from './DataHandler.js'
+import Datatable from './Datatable.svelte'
 import Th from './Th.svelte'
 import ThFilter from './ThFilter.svelte'
 import Pagination from './Pagination.svelte'
