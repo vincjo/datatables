@@ -1,10 +1,10 @@
 {
   "name": "@vincjo/datatables",
-  "version": "0.9.95",
+  "version": "0.9.96",
   "keywords": [
     "svelte sveltejs table tables datatable datatables"
   ],
-  "description": "A toolkit to build some datatable components with Svelte",
+  "description": "A toolkit for creating datatable components with Svelte",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vincjo/datatables.git"
