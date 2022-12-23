@@ -64,7 +64,37 @@ npm i -D @vincjo/datatables
 
 # DataHandler cheat sheet
 
-|   |  method |
-|---|---|
-| Table rows  | `getRows(): Readable<any[]>`{.ts}  |
-| Sort data  | `sort( orderBy: Function | string ): void`{.ts}  |
+````ts
+getRows(): Readable<any[]>
+````
+````ts
+sort( orderBy: Function | string ): void
+sortAsc( orderBy: Function | string ): void
+sortDesc( orderBy: Function | string ): void
+getSorted(): Writable<{ identifier: string | null; direction: 'asc' | 'desc' | null; }>
+````
+````ts
+filter( value: string, filterBy: Function | string ): void
+````
+````ts
+search( value: string ): void
+clearSearch(): void
+````
+````ts
+getRowsPerPage(): Writable<number | null>
+````
+````ts
+getRowCount(): Readable<{ total: number; start: number; end: number; }>
+````
+````ts
+getPages( params: { ellipsis: boolean } ): Readable<number[]>
+getPageCount(): Readable<number>
+getPageNumber(): Readable<number>
+setPage( value: number | ‘previous’ | ‘next’ ): void
+````
+````ts
+getTriggerChange(): Writable<number>
+````
+````ts
+update( data: any[] ): void
+````
