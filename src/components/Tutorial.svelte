@@ -2,6 +2,7 @@
     import { fade } from 'svelte/transition'
     import TutorialCode from './TutorialCode.svelte'
     import Prism from 'prismjs'
+    import CopyButton from './CopyButton.svelte'
     export let dataset
     export let components
     export let scrollY = true
@@ -26,6 +27,7 @@
                 <TutorialCode {components}/>
             </div>
         {:else}
+            <CopyButton code={dataset}/>
             <div class="code thin-scrollbar">
                 <pre class="language-javascript">
 {@html Prism.highlight(dataset, Prism.languages.javascript)}
