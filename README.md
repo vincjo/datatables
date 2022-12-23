@@ -59,3 +59,12 @@ npm i -D @vincjo/datatables
 </table>
 ````
 ### :globe_with_meridians: [See full documentation](https://vincjo.fr/datatables) 
+
+<br>
+
+# DataHandler cheat sheet
+
+|   |  method |
+|---|---|
+| Table rows  | `getRows(): Readable<any[]>`{:.ts}  |
+| Sort data  | `sort( orderBy: Function | string ): void`{.ts}  |
