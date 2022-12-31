@@ -4,7 +4,8 @@
     let buttonContent = 'Copy'
 
     const copy = () => {
-        navigator.clipboard.writeText(code).then(() => {
+        const content = code.replace('$lib/core', '@vincjo/datatables')
+        navigator.clipboard.writeText(content).then(() => {
             buttonContent = 'Saved !'
             setTimeout( () => {
                 buttonContent = 'Copy'
