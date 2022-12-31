@@ -62,7 +62,7 @@ npm i -D @vincjo/datatables
 
 <br>
 
-# DataHandler cheat sheet
+# DataHandler methods
 
 ````ts
 getRows(): Readable<any[]>
