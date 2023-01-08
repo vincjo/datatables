@@ -40,11 +40,13 @@ export default class Rows
                 store.sort( (a, b) => {
                     if ( typeof(parsed.fn(b) ) === "boolean" ) {
                         return parsed.fn(a) ? -1 : 1
-                    } else {
+                    } 
+                    else if (!parsed.fn(b)) return 1
+                    else if (!parsed.fn(a)) return -1
+                    else {
                         return parsed.fn(a).localeCompare(parsed.fn(b))
                     }
                 })
-
                 return store
             } catch (e) {
                 return store.sort( (a, b) => parseFloat(parsed.fn(a)) - parseFloat(parsed.fn(b)))
@@ -62,7 +64,10 @@ export default class Rows
                 store.sort( (a, b) => {
                     if ( typeof( parsed.fn(b) ) === "boolean" ) {
                         return parsed.fn(a) ? 1 : -1
-                    } else {
+                    }
+                    else if (!parsed.fn(a)) return 1
+                    else if (!parsed.fn(b)) return -1
+                    else {
                         return parsed.fn(b).localeCompare(parsed.fn(a))
                     }
                 })
