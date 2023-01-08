@@ -44,7 +44,18 @@ export default class Context
                 if ($globalFilter) {
                     $rawRows = $rawRows.filter( row => {
                         return Object.keys(row).some( k => {
-                            return row[k].toString().toLowerCase().indexOf($globalFilter.toString().toLowerCase()) > -1
+                            return row[k]
+                                .toString()
+                                .toLowerCase()
+                                .normalize("NFD")
+                                .replace(/[\u0300-\u036f]/g, "")
+                                .indexOf(
+                                    $globalFilter
+                                        .toString()
+                                        .toLowerCase()
+                                        .normalize("NFD")
+                                        .replace(/[\u0300-\u036f]/g, "")
+                                ) > -1
                         })
                     })
                     this.pageNumber.set(1)
@@ -57,7 +68,15 @@ export default class Context
                             .filterBy(row)
                             .toString()
                             .toLowerCase()
-                            .indexOf(localFilter.value.toString().toLowerCase()) > -1)
+                            .normalize("NFD")
+                            .replace(/[\u0300-\u036f]/g, "")
+                            .indexOf(
+                                localFilter.value
+                                    .toString()
+                                    .toLowerCase()
+                                    .normalize("NFD")
+                                    .replace(/[\u0300-\u036f]/g, "")
+                            ) > -1)
                     })
                     this.pageNumber.set(1)
                     this.triggerChange.update( store => { return store + 1 })
