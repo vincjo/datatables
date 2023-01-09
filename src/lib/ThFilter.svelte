@@ -12,6 +12,7 @@
     <input 
         type="text"
         placeholder="{i18n}"
+        spellcheck="false"
         bind:value
         on:input={() => handler.filter(value, filterBy)}
     />

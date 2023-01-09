@@ -10,7 +10,7 @@
 </script>
 
 
-<aside class="rows-per-page">
+<aside>
     <p>{i18n.show}</p>
     <select bind:value={$rowsPerPage}>
         {#each options as option}

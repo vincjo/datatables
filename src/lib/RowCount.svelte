@@ -42,7 +42,6 @@
     aside{
         color:#616161;
         line-height:32px;
-        margin-left:16px;
         font-size:14px;
     }
 </style>

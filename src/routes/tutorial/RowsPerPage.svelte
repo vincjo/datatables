@@ -5,7 +5,7 @@
 </script>
 
 
-<aside class="rows-per-page">
+<aside>
     Show
     <select bind:value={$rowsPerPage}>
         {#each options as option}

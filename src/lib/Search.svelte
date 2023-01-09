@@ -6,9 +6,9 @@
 </script>
 
 <input
-    class="search"
     bind:value={value} 
     placeholder="{i18n}"
+    spellcheck="false"
     on:input={() => handler.search(value)}
 />
 

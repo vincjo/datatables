@@ -6,7 +6,7 @@
 </script>
 
 
-<section class="pagination">
+<section>
     <button type="button"
         class:disabled={$pageNumber === 1}
         on:click={() => handler.setPage('previous')}
