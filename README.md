@@ -1,5 +1,5 @@
 <div align="center">
-    <img align="center" src="./src/assets/logo.svg" alt="logo" width="172"/>
+    <img align="center" src="./static/logo.svg" alt="logo" width="172"/>
     <p align="center">
         <h1 align="center" style="font-size:32px;margin:0;border:none;">svelte simple datatables</h1>
         <p style="color:#eee">A toolkit for creating datatable components with Svelte</p>
