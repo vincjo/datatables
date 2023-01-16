@@ -17,11 +17,11 @@
         <thead>
             <tr>
                 <Th {handler} orderBy={(row) => row.first_name + row.last_name}>First Name + Last Name</Th>
-                <Th {handler} orderBy={'email'}>Email</Th>
+                <Th {handler} orderBy="email">Email</Th>
             </tr>
             <tr>
                 <ThFilter {handler} filterBy={(row) => row.first_name + row.last_name}/>
-                <ThFilter {handler} filterBy={'email'}/>
+                <ThFilter {handler} filterBy="email"/>
             </tr>
         </thead>
         <tbody>

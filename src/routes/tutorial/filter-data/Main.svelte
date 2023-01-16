@@ -11,14 +11,14 @@
 <table>
     <thead>
         <tr>
-            <Th {handler} orderBy={'first_name'}>First name</Th>
-            <Th {handler} orderBy={'last_name'}>Last name</Th>
-            <Th {handler} orderBy={'email'}>Email</Th>
+            <Th {handler} orderBy="first_name">First name</Th>
+            <Th {handler} orderBy="last_name">Last name</Th>
+            <Th {handler} orderBy="email">Email</Th>
         </tr>
         <tr>
-            <ThFilter {handler} filterBy={'first_name'}/>
-            <ThFilter {handler} filterBy={'last_name'}/>
-            <ThFilter {handler} filterBy={'email'}/>
+            <ThFilter {handler} filterBy="first_name"/>
+            <ThFilter {handler} filterBy="last_name"/>
+            <ThFilter {handler} filterBy="email"/>
         </tr>
     </thead>
     <tbody>

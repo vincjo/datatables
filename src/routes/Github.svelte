@@ -1,11 +1,8 @@
-<script>
-	import github from '$img/github.svg'
-</script>
 
 <header>
 	<div>
 		<a href="https://github.com/vincjo/datatables">
-			<img alt="github logo" src="{github}"/><span>Github</span>
+			<img alt="github logo" src="/datatables/github.svg"/><span>Github</span>
 		</a>
 	</div>
 </header>

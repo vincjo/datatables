@@ -2,13 +2,12 @@
     import { slide, fade } from 'svelte/transition'
     import pages from './Nav'
     import { getPath, url, anchor } from '$utils/page'
-    import logo from '$img/logo.svg'
 </script>
 
 <nav class="thin-scrollbar">
     <article>
         <aside transition:fade={{ duration:100 }}>
-            <img src="{logo}" alt="logo"/>
+            <img src="/datatables/logo.svg" alt="logo"/>
             <div>
                 <h1>svelte<br>simple<br>datatables</h1>
             </div>

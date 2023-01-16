@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "./"
+		}
+	],
+	"settings": {
+		"restoreTerminals.terminals": [
+			 {
+				"profile": "Git Bash",
+				"splitTerminals": [{
+					"name": "DEV",
+					"commands": ["npm run dev"],
+				}],
+			}, {
+				"profile": "Git Bash",
+				"splitTerminals": [{
+					"name": "Git bash",
+					"commands": ["cd ./"],
+				}],
+			}
+		],
+		"terminal.integrated.persistentSessionReviveProcess": "never"
+	}
+}

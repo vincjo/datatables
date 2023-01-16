@@ -16,16 +16,16 @@
     <table>
         <thead>
             <tr>
-                <Th {handler} orderBy={'id'}>ID</Th>
-                <Th {handler} orderBy={'first_name'}>First Name</Th>
-                <Th {handler} orderBy={'last_name'}>Last Name</Th>
-                <Th {handler} orderBy={'email'}>Email</Th>
+                <Th {handler} orderBy="id">ID</Th>
+                <Th {handler} orderBy="first_name">First Name</Th>
+                <Th {handler} orderBy="last_name">Last Name</Th>
+                <Th {handler} orderBy="email">Email</Th>
             </tr>
             <tr>
-                <ThFilter {handler} filterBy={'id'}/>
-                <ThFilter {handler} filterBy={'first_name'}/>
-                <ThFilter {handler} filterBy={'last_name'}/>
-                <ThFilter {handler} filterBy={'email'}/>
+                <ThFilter {handler} filterBy="id"/>
+                <ThFilter {handler} filterBy="first_name"/>
+                <ThFilter {handler} filterBy="last_name"/>
+                <ThFilter {handler} filterBy="email"/>
             </tr>
         </thead>
         <tbody>

@@ -16,21 +16,21 @@
 
 <section bind:clientWidth={clientWidth}>
     <header>
-        <Search      {handler} i18n={'კვლევა...'}/>
+        <Search      {handler} i18n="კვლევა..."/>
         <RowsPerPage {handler} i18n={{show: 'შოუ', entries: 'შედეგები'}}/>
     </header>
 
     <table>
         <thead>
             <tr>
-                <Th {handler} orderBy={'first_name'}>First Name</Th>
-                <Th {handler} orderBy={'last_name'}>Last Name</Th>
-                <Th {handler} orderBy={'email'}>Email</Th>
+                <Th {handler} orderBy="first_name">First Name</Th>
+                <Th {handler} orderBy="last_name">Last Name</Th>
+                <Th {handler} orderBy="email">Email</Th>
             </tr>
             <tr>
-                <ThFilter {handler} i18n={'ფილტრი'} filterBy={'first_name'}/>
-                <ThFilter {handler} i18n={'ფილტრი'} filterBy={'last_name'}/>
-                <ThFilter {handler} i18n={'ფილტრი'} filterBy={'email'}/>
+                <ThFilter {handler} i18n="ფილტრი" filterBy="first_name"/>
+                <ThFilter {handler} i18n="ფილტრი" filterBy="last_name"/>
+                <ThFilter {handler} i18n="ფილტრი" filterBy="email"/>
             </tr>
         </thead>
         <tbody>
