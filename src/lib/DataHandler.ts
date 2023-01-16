@@ -25,7 +25,7 @@ export default class DataHandler
         this.filters      = new Filters(this.context)
     }
 
-    public update(data: any[]): void
+    public setRows(data: any[]): void
     {
         this.context.rawRows.set(data)
     }
@@ -113,5 +113,20 @@ export default class DataHandler
     public getTriggerChange(): Writable<number>
     {
         return this.context.triggerChange
+    }
+
+
+    /**
+     * Deprecated
+     * use setRows() instead
+     */
+    public update(data: any[]): void
+    {
+        console.log(
+            '%c%s', 
+            'color:#e65100;background:#fff3e0;font-size:12px;border-radius:4px;padding:4px;text-align:center;',
+            `DataHandler.update(data) method is deprecated. Please use DataHandler.setRows(data) instead`
+        )
+        this.context.rawRows.set(data)
     }
 }

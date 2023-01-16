@@ -240,16 +240,16 @@
 
 ## Update dataset
 
-> **update(** *data*: any[] **)**: void
+> **setRows(** *data*: any[] **)**: void
 
 ````svelte
 <script lang="ts">
     import type { DataHandler } from '@vincjo/datatables'
-    import { newDataset } from './my-data.json'
+    import { newData } from './my-data.json'
 
     export let handler: DataHandler
 
-    handler.update(newDataset)
+    handler.setRows(newData)
 </script>
 ````
 </Anchor>
