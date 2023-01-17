@@ -40,7 +40,7 @@
 
 <style>
     section.sticky {
-        height:inherit;
+        height: 100%;
     }
 
     section :global(table) {
