@@ -66,6 +66,7 @@ npm i -D @vincjo/datatables
 
 ````ts
 getRows(): Readable<any[]>
+setRows( data: any[] ): void
 ````
 ````ts
 sort( orderBy: Function | string ): void
@@ -94,7 +95,4 @@ setPage( value: number | ‘previous’ | ‘next’ ): void
 ````
 ````ts
 getTriggerChange(): Writable<number>
-````
-````ts
-setRows( data: any[] ): void
 ````
