@@ -96,5 +96,5 @@ setPage( value: number | ‘previous’ | ‘next’ ): void
 getTriggerChange(): Writable<number>
 ````
 ````ts
-update( data: any[] ): void
+setRows( data: any[] ): void
 ````
