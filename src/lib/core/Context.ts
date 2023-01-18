@@ -52,10 +52,10 @@ export default class Context
                                 .replace(/[\u0300-\u036f]/g, "")
                                 .indexOf(
                                     $globalFilter
-                                        .toString()
-                                        .toLowerCase()
-                                        .normalize("NFD")
-                                        .replace(/[\u0300-\u036f]/g, "")
+                                    .toString()
+                                    .toLowerCase()
+                                    .normalize("NFD")
+                                    .replace(/[\u0300-\u036f]/g, "")
                                 ) > -1
                             }
                             return ''
