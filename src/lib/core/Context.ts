@@ -44,7 +44,8 @@ export default class Context
                 if ($globalFilter) {
                     $rawRows = $rawRows.filter( row => {
                         return Object.keys(row).some( k => {
-                            return row[k]
+                            if (row[k]) {
+                                return row[k]
                                 .toString()
                                 .toLowerCase()
                                 .normalize("NFD")
@@ -56,6 +57,8 @@ export default class Context
                                         .normalize("NFD")
                                         .replace(/[\u0300-\u036f]/g, "")
                                 ) > -1
+                            }
+                            return ''
                         })
                     })
                     this.pageNumber.set(1)
