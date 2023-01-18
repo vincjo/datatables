@@ -44,7 +44,7 @@
             class:disabled={$pageNumber === 1}
             on:click={() => handler.setPage('previous')}
         >
-            {i18n.previous}
+            {@html i18n.previous}
         </button>
         {#each $pages as page}
             <button type="button"
@@ -59,7 +59,7 @@
             class:disabled={$pageNumber === $pageCount}
             on:click={() => handler.setPage('next')}
         >
-            {i18n.next}
+            {@html i18n.next}
         </button>
     </section>
 {/if}
