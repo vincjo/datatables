@@ -35,11 +35,12 @@
         font-size: 14px;
     }
     input::placeholder {
-        color:#bdbdbd;
-        font-style:italic;
-        font-size:13px;
+        color: #bdbdbd;
+        font-style: italic;
+        font-size: 13px;
     }
     input:focus{
         outline: none;
+        border: none;
     }
 </style>
