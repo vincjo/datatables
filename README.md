@@ -78,7 +78,7 @@ getSorted(): Writable<{ identifier: string | null; direction: 'asc' | 'desc' | n
 filter( value: string, filterBy: Function | string ): void
 ````
 ````ts
-search( value: string ): void
+search( value: string, scope?: string[] ): void
 clearSearch(): void
 ````
 ````ts
