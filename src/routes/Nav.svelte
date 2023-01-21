@@ -5,14 +5,16 @@
 </script>
 
 <nav class="thin-scrollbar">
-    <article>
-        <aside transition:fade={{ duration:100 }}>
-            <img src="/datatables/logo.svg" alt="logo"/>
-            <div>
-                <h1>svelte<br>simple<br>datatables</h1>
-            </div>
-        </aside>
-    </article>
+    <a href="/datatables/home">
+        <article>
+            <aside transition:fade={{ duration:100 }}>
+                <img src="/datatables/logo.svg" alt="logo"/>
+                <div>
+                    <h1>svelte<br>simple<br>datatables</h1>
+                </div>
+            </aside>
+        </article>
+    </a>
 
     {#each pages as page}
         <a href="{getPath(page.path)}">

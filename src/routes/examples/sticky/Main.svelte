@@ -12,7 +12,7 @@
 
 
 
-<Datatable {handler} sticky={true}>
+<Datatable {handler}>
     <table>
         <thead>
             <tr>

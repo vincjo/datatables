@@ -5,8 +5,9 @@ import GlobalSearch      from '$lib/core/Handlers/GlobalSearch'
 import Filters           from '$lib/core/Handlers/Filters'
 
 import type { Readable, Writable } from 'svelte/store'
+import type { Internationalization } from '$lib'
 
-export type params = { rowsPerPage: number | null }
+export type Params = { rowsPerPage?: number, i18n?: Internationalization }
 
 export default class DataHandler
 {
@@ -15,9 +16,11 @@ export default class DataHandler
     private pages        : Pages
     private globalSearch : GlobalSearch
     private filters      : Filters
+    public  i18n         : Internationalization
 
-    constructor(data = [] as any[], params: params = { rowsPerPage: null })
+    constructor(data = [] as any[], params: Params = { rowsPerPage: null })
     {
+        this.i18n         = this.translate(params.i18n)
         this.context      = new Context(data, params)
         this.rows         = new Rows(this.context)
         this.pages        = new Pages(this.context)
@@ -35,7 +38,7 @@ export default class DataHandler
         return this.context.rows
     }
 
-    public getRowCount(): Readable<{ total: number; start: number; end: number; }>
+    public getRowCount(): Readable<{ total: number, start: number, end: number }>
     {
         return this.context.rowCount
     }
@@ -63,14 +66,14 @@ export default class DataHandler
         this.rows.sortDesc(orderBy)
     }
 
-    public getSorted(): Writable<{ identifier: string | null ; direction: 'asc' | 'desc' | null; }>
+    public getSorted(): Writable<{ identifier: string | null, direction: 'asc' | 'desc' | null }>
     {
         return this.context.sorted
     }
 
-    public search(value: string): void
+    public search(value: string, scope: string[] = null): void
     {
-        this.globalSearch.set(value)
+        this.globalSearch.set(value, scope)
     }
 
     public clearSearch(): void
@@ -115,6 +118,19 @@ export default class DataHandler
         return this.context.triggerChange
     }
 
+    public translate(i18n: Internationalization): Internationalization
+    {
+        return { ...{
+            search: 'Search...',
+            show: 'Show', 
+            entries: 'entries',
+            filter: 'Filter',
+            rowCount: 'Showing {start} to {end} of {total} entries',
+            noRows: 'No entries to found', 
+            previous: 'Previous', 
+            next: 'Next' 
+        }, ...i18n }
+    }
 
     /**
      * Deprecated

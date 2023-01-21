@@ -2,8 +2,6 @@
     import type { DataHandler } from '$lib/core'
     export let handler: DataHandler
 
-    export let i18n =  { show: 'Show', entries: 'entries' } 
-
     const rowsPerPage = handler.getRowsPerPage()
 
     const options = [5, 10, 20, 50, 100]
@@ -11,7 +9,7 @@
 
 
 <aside>
-    <p>{i18n.show}</p>
+    <p>{handler.i18n.show}</p>
     <select bind:value={$rowsPerPage}>
         {#each options as option}
             <option value={option}>
@@ -19,7 +17,7 @@
             </option>
         {/each}
     </select>
-    <p>{i18n.entries}</p>
+    <p>{handler.i18n.entries}</p>
 </aside>
 
 

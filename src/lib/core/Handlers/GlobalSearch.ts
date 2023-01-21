@@ -3,23 +3,26 @@ import type { Writable } from 'svelte/store'
 
 export default class Search
 {
-    private globalFilter: Writable<string|null>
+    private globalSearch: Writable<{ value: string|null; scope: string[]|null}>
 
     constructor(context: Context)
     {
-        this.globalFilter = context.globalFilter
+        this.globalSearch = context.globalSearch
     }
 
-    public set(value: string): void
+    public set(value: string, scope: string[] = null): void
     {
-        this.globalFilter.update(store => {
-            store = (value.length > 0) ? value : null
+        this.globalSearch.update(store => {
+            store = {
+                value: value ?? '',
+                scope: scope ?? null
+            }
             return store
         })
     }
 
     public remove(): void
     {
-        this.globalFilter.set(null)
+        this.globalSearch.set({ value: null, scope: null})
     }
 }

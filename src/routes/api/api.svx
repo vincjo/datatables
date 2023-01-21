@@ -5,9 +5,9 @@
 
 # DataHandler Methods
 
-<Anchor name="table-rows">
+<Anchor name="get-rows">
 
-## Table rows
+## Get rows
 
 > **getRows()**: `Readable<any[]>`
 
@@ -31,14 +31,36 @@
 
 
 
-<Anchor name="sort-data">
+
+<Anchor name="set-rows">
+
+## Set rows
+
+> **setRows(** *data*: any[] **)**: void
+
+````svelte
+<script lang="ts">
+    import type { DataHandler } from '@vincjo/datatables'
+
+    export let data
+    export let handler: DataHandler
+
+    $: data, handler.setRows(data)
+</script>
+````
+</Anchor>
+
+
+
+
+<Anchor name="sort">
 
 ## Sort data
 
 > **sort(** *orderBy*: Function | string **)**: void <br>
 > **sortAsc(** *orderBy*: Function | string **)**: void <br>
 > **sortDesc(** *orderBy*: Function | string **)**: void <br>
-> **getSorted()**: `Writable<{ identifier: string | null ; direction: 'asc' | 'desc' | null; }>`  <br>
+> **getSorted()**: Writable`<{` *identifier*: string | null, *direction*: 'asc' | 'desc' | null `}>`  <br>
 
 
 ````svelte
@@ -70,7 +92,7 @@
 
 
 
-<Anchor name="filter-data">
+<Anchor name="filter">
 
 ## Filter data
 
@@ -103,7 +125,7 @@
 
 ## Search
 
-> **search(** *value*: string **)**: void <br>
+> **search(** *value*: string, *scope*?: string[] **)**: void <br>
 > **clearSearch()**: void <br>
 
 
@@ -116,7 +138,7 @@
 
 <input type="text"
     bind:value={value} 
-    on:input={() => handler.search(value)}
+    on:input={() => handler.search(value, ['name', 'email'])}
 />
 <button type="button" on:click={() => handler.clearSearch()}>
     Clear
@@ -149,7 +171,7 @@
 
 ## Row count
 
-> **getRowCount()**: Readable`<{ total: number; start: number; end: number; }>`
+> **getRowCount()**: Readable`<{` *total*: number, *start*: number, *end*: number `}>`
 
 ````svelte
 <script lang="ts">
@@ -208,9 +230,9 @@
 
 
 
-<Anchor name="detect-a-change">
+<Anchor name="trigger-change">
 
-## Detect a change
+## Trigger change
 
 > **getTriggerChange()**: Writable`<number>`
 
@@ -236,23 +258,7 @@
 
 
 
-<Anchor name="update-dataset">
 
-## Update dataset
-
-> **setRows(** *data*: any[] **)**: void
-
-````svelte
-<script lang="ts">
-    import type { DataHandler } from '@vincjo/datatables'
-    import { newData } from './my-data.json'
-
-    export let handler: DataHandler
-
-    handler.setRows(newData)
-</script>
-````
-</Anchor>
 
 <br><br><br><br>
 <br><br><br><br>

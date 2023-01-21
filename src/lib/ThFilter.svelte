@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { DataHandler } from '$lib/core'
     export let handler: DataHandler
-    export let i18n = 'Filter'
     export let filterBy = null
 
     let value = ''
@@ -11,7 +10,7 @@
 <th>
     <input 
         type="text"
-        placeholder="{i18n}"
+        placeholder="{handler.i18n.filter}"
         spellcheck="false"
         bind:value
         on:input={() => handler.filter(value, filterBy)}

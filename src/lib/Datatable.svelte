@@ -6,7 +6,6 @@
     } from '$lib/core'
 
     export let handler: DataHandler
-    export let sticky = false
     let element: HTMLElement | undefined
     let clientWidth = 1000
 
@@ -19,14 +18,13 @@
 </script>
 
 
-
-<section class:sticky={sticky} bind:clientWidth={clientWidth}>
+<section bind:clientWidth={clientWidth}>
     <header>
         <Search      {handler}/>
         <RowsPerPage {handler}/>
     </header>
 
-    <article bind:this={element} class:sticky={sticky}>
+    <article bind:this={element}>
         <slot/>
     </article>
 
@@ -39,7 +37,7 @@
 
 
 <style>
-    section.sticky {
+    section {
         height: 100%;
     }
 
@@ -48,6 +46,11 @@
         border-collapse:separate;
         border-spacing:0;
         width:100%;
+    }
+
+    section :global(thead) {
+        position:sticky;
+        inset-block-start:0;
     }
 
     header, footer {
@@ -73,10 +76,5 @@
     article::-webkit-scrollbar-track {background: #f5f5f5;}
     article::-webkit-scrollbar-thumb {background: #c2c2c2;}
     article::-webkit-scrollbar-thumb:hover {background: #9e9e9e;}
-
-    article.sticky :global(thead) {
-        position:sticky;
-        inset-block-start:0;
-    }
 
 </style>

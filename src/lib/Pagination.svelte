@@ -2,7 +2,6 @@
     import type { DataHandler } from '$lib/core'
     export let handler: DataHandler
     export let small = false
-    export let i18n = { previous: 'Previous',  next: 'Next' }
     const pageNumber = handler.getPageNumber()
     const pageCount  = handler.getPageCount()
     const pages      = handler.getPages({ ellipsis: true }) 
@@ -44,7 +43,7 @@
             class:disabled={$pageNumber === 1}
             on:click={() => handler.setPage('previous')}
         >
-            {@html i18n.previous}
+            {@html handler.i18n.previous}
         </button>
         {#each $pages as page}
             <button type="button"
@@ -59,7 +58,7 @@
             class:disabled={$pageNumber === $pageCount}
             on:click={() => handler.setPage('next')}
         >
-            {@html i18n.next}
+            {@html handler.i18n.next}
         </button>
     </section>
 {/if}

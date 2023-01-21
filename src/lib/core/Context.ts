@@ -1,30 +1,30 @@
 import { writable, derived } from 'svelte/store'
 import type { Writable, Readable } from 'svelte/store'
-import type { params } from '../DataHandler'
+import type { Params } from '../DataHandler'
 
 export default class Context
 {
     public  rowsPerPage         : Writable<number|null>
     public  pageNumber          : Writable<number>
     public  triggerChange       : Writable<number>
-    public  globalFilter        : Writable<string|null>
-    public  localFilters        : Writable<any[]>
+    public  globalSearch        : Writable<{ value: string|null; scope: string[]|null}>
+    public  filters             : Writable<any[]>
     public  rawRows             : Writable<any[]>
     private filteredRows        : Readable<any[]>
     public  rows                : Readable<any[]>
-    public  rowCount            : Readable<{ total: number; start: number; end: number; }>
+    public  rowCount            : Readable<{ total: number; start: number; end: number }>
     public  pages               : Readable<number[]>
     public  pagesWithEllipsis   : Readable<number[]>
     public  pageCount           : Readable<number>
     public  sorted              : Writable<{ identifier: string | null ; direction: 'asc' | 'desc' | null; }>
 
-    constructor(data: any[], params: params)
+    constructor(data: any[], params: Params)
     {
         this.rowsPerPage        = writable(params.rowsPerPage)
         this.pageNumber         = writable(1)
         this.triggerChange      = writable(0)
-        this.globalFilter       = writable(null)
-        this.localFilters       = writable([])
+        this.globalSearch       = writable({ value: null, scope: null})
+        this.filters            = writable([])
         this.rawRows            = writable(data)
         this.filteredRows       = this.createFilteredRows()
         this.rows               = this.createPaginatedRows()
@@ -38,25 +38,15 @@ export default class Context
     private createFilteredRows(): Readable<any[]>
     {
         return derived(
-            [this.rawRows, this.globalFilter, this.localFilters],
-            ([$rawRows, $globalFilter, $localFilters]) => {
+            [this.rawRows, this.globalSearch, this.filters],
+            ([$rawRows, $globalSearch, $filters]) => {
 
-                if ($globalFilter) {
+                if ($globalSearch.value) {
                     $rawRows = $rawRows.filter( row => {
-                        return Object.keys(row).some( k => {
-                            if (row[k]) {
-                                return row[k]
-                                .toString()
-                                .toLowerCase()
-                                .normalize("NFD")
-                                .replace(/[\u0300-\u036f]/g, "")
-                                .indexOf(
-                                    $globalFilter
-                                    .toString()
-                                    .toLowerCase()
-                                    .normalize("NFD")
-                                    .replace(/[\u0300-\u036f]/g, "")
-                                ) > -1
+                        const scope = $globalSearch.scope ?? Object.keys(row)
+                        return scope.some( key => {
+                            if (row[key]) {
+                                return this.stringMatch(row[key], $globalSearch.value)
                             }
                             return ''
                         })
@@ -65,21 +55,12 @@ export default class Context
                     this.triggerChange.update( store => { return store + 1 })
                 }
 
-                if ($localFilters.length > 0) {
-                    $localFilters.forEach(localFilter => {
-                        return $rawRows = $rawRows.filter( row => localFilter
-                            .filterBy(row)
-                            .toString()
-                            .toLowerCase()
-                            .normalize("NFD")
-                            .replace(/[\u0300-\u036f]/g, "")
-                            .indexOf(
-                                localFilter.value
-                                    .toString()
-                                    .toLowerCase()
-                                    .normalize("NFD")
-                                    .replace(/[\u0300-\u036f]/g, "")
-                            ) > -1)
+                if ($filters.length > 0) {
+                    $filters.forEach(localFilter => {
+                        return $rawRows = $rawRows.filter( row => {
+                            const entry = localFilter.filterBy(row)
+                            return this.stringMatch(entry, localFilter.value)
+                        })
                     })
                     this.pageNumber.set(1)
                     this.triggerChange.update( store => { return store + 1 })
@@ -187,5 +168,28 @@ export default class Context
                 return $pages.length
             }
         )
+    }
+
+    private stringMatch(entry:string|Object, value: string) 
+    {
+        if (typeof entry === 'string' || !entry) {
+            return String(entry)
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .indexOf(
+                    value
+                    .toString()
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                ) > -1
+        }
+        else if (typeof entry === 'object') {
+            return Object.keys(entry).some( k => {
+                return this.stringMatch(entry[k], value)
+            })
+        }
+        else return null
     }
 }

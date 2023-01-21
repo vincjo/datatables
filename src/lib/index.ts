@@ -13,3 +13,14 @@ export {
     DataHandler,
     Datatable, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search
 }
+
+export type Internationalization = {
+    search?: string,
+    show?: string, 
+    entries?: string,
+    filter?: string,
+    rowCount?: string,
+    noRows?: string, 
+    previous?: string, 
+    next?: string 
+}

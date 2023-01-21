@@ -6,3 +6,14 @@ export { default as RowsPerPage }   from '../RowsPerPage.svelte'
 export { default as Search }        from '../Search.svelte'
 export { default as Th }            from '../Th.svelte'
 export { default as ThFilter }      from '../ThFilter.svelte'
+
+export type Internationalization = {
+    search?: string,
+    show?: string, 
+    entries?: string,
+    filter?: string,
+    rowCount?: string,
+    noRows?: string, 
+    previous?: string, 
+    next?: string 
+}
