@@ -72,7 +72,7 @@ setRows( data: any[] ): void
 sort( orderBy: Function | string ): void
 sortAsc( orderBy: Function | string ): void
 sortDesc( orderBy: Function | string ): void
-getSorted(): Writable<{ identifier: string | null; direction: 'asc' | 'desc' | null; }>
+getSorted(): Writable<{ identifier?: string; direction?: 'asc' | 'desc'; }>
 ````
 ````ts
 filter( value: string, filterBy: Function | string ): void
