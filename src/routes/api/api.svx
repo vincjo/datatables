@@ -100,7 +100,7 @@
 
 ````svelte
 <script lang="ts">
-    import type DataHandler from '$lib/DataHandler'
+    import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
     
     let value1 = ''

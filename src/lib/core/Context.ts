@@ -190,6 +190,6 @@ export default class Context
                 return this.stringMatch(entry[k], value)
             })
         }
-        else return null
+        return String(entry).indexOf(String(value)) > -1
     }
 }

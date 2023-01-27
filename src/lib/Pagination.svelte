@@ -81,6 +81,7 @@
         line-height:32px;
         border:1px solid #e0e0e0;
         border-right:none;
+        border-radius:0;
         outline:none;
     }
     button:first-child {
