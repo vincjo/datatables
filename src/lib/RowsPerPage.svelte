@@ -10,7 +10,7 @@
 
 <aside>
     <p>{handler.i18n.show}</p>
-    <select bind:value={$rowsPerPage}>
+    <select bind:value={$rowsPerPage} on:change={() => handler.setPage(1)}>
         {#each options as option}
             <option value={option}>
                 {option}
