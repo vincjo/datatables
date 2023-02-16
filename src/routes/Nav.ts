@@ -13,6 +13,7 @@ export default [
             { name: 'callback', path: '/callback' },
             { name: 'i18n', path: '/i18n' },
             { name: 'nested objects', path: '/nested-objects' },
+            { name: 'blocks', path: '/blocks' },
         ],
     },
     {

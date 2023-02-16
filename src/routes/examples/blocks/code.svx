@@ -1,0 +1,17 @@
+
+<div style:max-width="360px">
+
+````svelte
+<Datatable {handler} 
+    search={false} 
+    rowsPerPage={false} 
+    rowCount={false} 
+    pagination={false}
+>
+
+    [...]
+
+</Datatble>
+````
+
+</div>

@@ -6,6 +6,12 @@
     } from '$lib/core'
 
     export let handler: DataHandler
+
+    export let search = true
+    export let rowsPerPage = true
+    export let rowCount = true
+    export let pagination = true
+
     let element: HTMLElement | undefined
     let clientWidth = 1000
 
@@ -19,18 +25,26 @@
 
 
 <section bind:clientWidth={clientWidth}>
-    <header>
-        <Search      {handler}/>
-        <RowsPerPage {handler}/>
+    <header class:container={search || rowsPerPage}>
+        {#if search}
+            <Search {handler}/>
+        {/if}
+        {#if rowsPerPage}
+            <RowsPerPage {handler}/>
+        {/if}
     </header>
 
     <article bind:this={element}>
         <slot/>
     </article>
 
-    <footer>
-        <RowCount   {handler} small={clientWidth < 600}/>
-        <Pagination {handler} small={clientWidth < 600}/>
+    <footer class:container={rowCount || pagination}>
+        {#if rowCount}
+            <RowCount   {handler} small={clientWidth < 600}/>
+        {/if}
+        {#if pagination}
+            <Pagination {handler} small={clientWidth < 600}/>
+        {/if}
     </footer>
 </section>
 
@@ -55,15 +69,21 @@
     }
 
     header, footer {
-        height:48px;
+        min-height:8px;
         padding:0 16px;
         display:flex;
         justify-content:space-between;
         align-items:center;
     }
+    header.container {
+        height: 48px;
+    }
 
     footer{ 
         border-top: 1px solid #e0e0e0;
+    }
+    footer.container {
+        height: 48px;
     }
 
     article {
