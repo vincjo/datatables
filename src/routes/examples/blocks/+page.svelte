@@ -6,7 +6,7 @@
 </script>
 
 <h2>Optional blocks</h2>
-<p>Components in Datatable header and footer are optionals.</p>
+<p>The Datatable header and footer components are optional.</p>
 <Code/>
 
 <Demo components={data.components} dataset={data.dataset} scrollY={false}>
