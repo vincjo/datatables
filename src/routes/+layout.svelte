@@ -1,8 +1,8 @@
 <script>
     import Nav from './Nav.svelte'
     import Github from './Github.svelte'
-    import { afterNavigate } from "$app/navigation";
-  
+    import { ModalContainer } from 'gros/modal'
+    import { afterNavigate } from "$app/navigation"
     let element
 
     afterNavigate(() => {
@@ -13,6 +13,8 @@
 
 <Github/>
 
+<ModalContainer/>
+
 <nav>
     <Nav/>
 </nav>
@@ -21,7 +23,6 @@
         <slot/>
     </article>
 </section>
-
 
 
 <style>

@@ -86,6 +86,11 @@ export default class DataHandler
         return this.filters.set(value, filterBy)
     }
 
+    public clearFilters(): void
+    {
+        this.filters.remove()
+    }
+
     public getPages(params = { ellipsis: false }): Readable<number[]>
     {
         if (params.ellipsis) {

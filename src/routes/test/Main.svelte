@@ -11,6 +11,7 @@
 
 </script>
 
+<button on:click={() => handler.clearFilters()}>Clear Filters</button>
 
 <Datatable {handler}>
     <table>
@@ -61,5 +62,18 @@
         color: #bdbdbd;
         font-family: JetBrains;
         font-size: 11px;
+    }
+    button {
+        position: fixed;
+        top: 16px;
+        left: 800px;
+        height: 60px;
+        width: 120px;
+        background:var(--primary);
+        z-index: 200;
+        border:none;
+        border-radius: 8px;
+        color: #eee;
+        font-weight: bold;
     }
 </style>
