@@ -96,7 +96,8 @@
 
 ## Filter data
 
-> **filter(** *value*: string, *filterBy*: Function | string **)**: void
+> **filter(** *value*: string, *filterBy*: Function | string **)**: void <br>
+> **clearFilters()**: void <br>
 
 ````svelte
 <script lang="ts">
@@ -105,7 +106,15 @@
     
     let value1 = ''
     let value2 = ''
+
+    const clear = () => {
+        handler.clearFilters()
+        value1 = ''
+        value2 = ''
+    }
 </script>
+
+<button on:click={clear}>Clear</button>
 
 <input type="text" 
     bind:value1 

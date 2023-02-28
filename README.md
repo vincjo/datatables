@@ -77,6 +77,7 @@ getSorted(): Writable<{ identifier?: string; direction?: 'asc' | 'desc'; }>
 ````
 ````ts
 filter( value: string, filterBy: Function | string ): void
+clearFilters(): void
 ````
 ````ts
 search( value: string, scope?: string[] ): void
