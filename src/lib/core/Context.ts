@@ -1,6 +1,7 @@
 import { writable, derived } from 'svelte/store'
 import type { Writable, Readable } from 'svelte/store'
 import type { Params } from '../DataHandler'
+import type { Sorted } from './Handlers/Rows'
 
 export default class Context
 {
@@ -16,7 +17,7 @@ export default class Context
     public  pages               : Readable<number[]>
     public  pagesWithEllipsis   : Readable<number[]>
     public  pageCount           : Readable<number>
-    public  sorted              : Writable<{ identifier: string | null ; direction: 'asc' | 'desc' | null; }>
+    public  sorted              : Writable<Sorted>
 
     constructor(data: any[], params: Params)
     {
@@ -32,7 +33,7 @@ export default class Context
         this.pages              = this.createPages()
         this.pagesWithEllipsis  = this.createPagesWithEllipsis()
         this.pageCount          = this.createPageCount()
-        this.sorted             = writable({ identifier: null, direction: null })
+        this.sorted             = writable({ identifier: null, direction: null, fn: null })
     }
 
     private createFilteredRows(): Readable<any[]>

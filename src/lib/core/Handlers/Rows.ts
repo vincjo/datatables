@@ -1,11 +1,21 @@
 import type Context from '../Context'
 import type { Writable } from 'svelte/store'
 
+export type Sorted = { 
+    fn?: Function, 
+    identifier: string | null, 
+    direction: 'asc' | 'desc' | null, 
+    locales?: string, 
+    options?: Object 
+}
+export type SortingParams = { locales?: string, options?: Object }
+
+
 export default class Rows
 {
     private rawRows: Writable<any[]>
     private triggerChange: Writable<number>
-    private  sorted: Writable<{ identifier: string | null ; direction: 'asc' | 'desc' | null; }>
+    private  sorted: Writable<Sorted>
 
     constructor(context: Context)
     {
@@ -34,7 +44,7 @@ export default class Rows
     public sortAsc(orderBy: Function | string): void
     {
         const parsed = this.parse(orderBy)
-        this.sorted.set({ identifier: parsed.identifier, direction: 'asc' })
+        this.sorted.set({ identifier: parsed.identifier, direction: 'asc', fn: parsed.fn })
         this.rawRows.update(store => {
             try {
                 store.sort( (a, b) => {
@@ -58,7 +68,7 @@ export default class Rows
     public sortDesc(orderBy: Function | string): void
     {
         const parsed = this.parse(orderBy)
-        this.sorted.set({ identifier: parsed.identifier, direction: 'desc' })
+        this.sorted.set({ identifier: parsed.identifier, direction: 'desc', fn: parsed.fn })
         this.rawRows.update(store => {
             try {
                 store.sort( (a, b) => {
@@ -79,6 +89,25 @@ export default class Rows
         this.triggerChange.update( store => { return store + 1 })
     }
 
+    public applySorting(params: { orderBy: Function | string, direction?: 'asc' | 'desc' | null } | null = null)
+    {
+        if (params) {
+            switch(params.direction) {
+                case 'asc': return this.sortAsc(params.orderBy )
+                case 'desc': return this.sortDesc(params.orderBy)
+                default: return this.sort(params.orderBy)
+            }
+        }
+        const sorted = this.getSorted()
+        if (sorted.identifier) {
+            return this.applySorting({
+                orderBy: sorted.fn,
+                direction: sorted.direction
+            })
+        }
+        return
+    }
+
     private parse(orderBy: Function | string): { fn: Function, identifier: string }
     {
         if (typeof (orderBy) === 'string') {
@@ -93,9 +122,9 @@ export default class Rows
         }
     }
 
-    private getSorted()
+    private getSorted(): Sorted
     {
-        let $sorted = { identifier: null, direction: null }
+        let $sorted: Sorted
         this.sorted.subscribe( store => $sorted = store )
         return $sorted
     }

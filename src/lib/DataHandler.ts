@@ -1,8 +1,8 @@
-import Context           from '$lib/core/Context'
-import Rows              from '$lib/core/Handlers/Rows'
-import Pages             from '$lib/core/Handlers/Pages'
-import GlobalSearch      from '$lib/core/Handlers/GlobalSearch'
-import Filters           from '$lib/core/Handlers/Filters'
+import Context      from '$lib/core/Context'
+import Rows         from '$lib/core/Handlers/Rows'
+import Pages        from '$lib/core/Handlers/Pages'
+import GlobalSearch from '$lib/core/Handlers/GlobalSearch'
+import Filters      from '$lib/core/Handlers/Filters'
 
 import type { Readable, Writable } from 'svelte/store'
 import type { Internationalization } from '$lib'
@@ -31,6 +31,7 @@ export default class DataHandler
     public setRows(data: any[]): void
     {
         this.context.rawRows.set(data)
+        this.applySorting()
     }
 
     public getRows(): Readable<any[]>
@@ -48,10 +49,15 @@ export default class DataHandler
         return this.context.rowsPerPage
     }
 
-    public sort(orderBy: Function | string): void
+    public sort(orderBy: Function | string ): void
     {
         this.setPage(1)
         this.rows.sort(orderBy)
+    }
+
+    public applySorting(params: { orderBy: Function | string, direction?: 'asc' | 'desc' | null } | null = null): void
+    {
+        this.rows.applySorting(params)
     }
 
     public sortAsc(orderBy: Function | string): void
