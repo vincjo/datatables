@@ -16,10 +16,10 @@ export default [
             { name: 'blocks', path: '/blocks' },
         ],
     },
-    // {
-    //     name: 'reactivity',
-    //     path: '/reactivity',
-    // },
+    {
+        name: 'reactivity',
+        path: '/reactivity',
+    },
     {
         name: 'api',
         path: '/api',

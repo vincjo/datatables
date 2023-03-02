@@ -61,7 +61,7 @@
 > **sortAsc(** *orderBy*: Function | string **)**: void <br>
 > **sortDesc(** *orderBy*: Function | string **)**: void <br>
 > **getSorted()**: Writable`<{` *identifier*: string | null, *direction*: 'asc' | 'desc' | null `}>`  <br>
-
+> **applySorting(** *params*: null | `{` *orderBy*: Function | string, *direction*: 'asc' | 'desc' | null `}` **)**: void <br>
 
 ````svelte
 <script lang="ts">

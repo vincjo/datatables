@@ -5,7 +5,6 @@
     const identifier = orderBy ? orderBy.toString() : orderBy
 
     const sorted = handler.getSorted()
-    $: console.log($sorted)
 </script>
 
 

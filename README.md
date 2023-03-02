@@ -74,6 +74,7 @@ sort( orderBy: Function | string ): void
 sortAsc( orderBy: Function | string ): void
 sortDesc( orderBy: Function | string ): void
 getSorted(): Writable<{ identifier?: string; direction?: 'asc' | 'desc'; }>
+applySorting( params: null | {orderBy: Function | string; direction?: 'asc' | 'desc'} ): void
 ````
 ````ts
 filter( value: string, filterBy: Function | string ): void

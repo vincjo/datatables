@@ -1,5 +1,85 @@
 @font-face {font-family: 'Material Icons';font-style: normal;font-weight: 400;src: url('./fonts/icons.woff2') format('woff2');}
 
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+    border-radius:2px;
+    border: none;
+    background: inherit;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+button:focus,
+input[type='button']:focus,
+input[type='reset']:focus,
+input[type='submit']:focus{
+    outline: 0;
+}
+
+button:hover,
+input[type='button']:hover,
+input[type='reset']:hover,
+input[type='submit']:hover {
+    outline: 0;
+    transition: all, 0.2s;
+}
+
+input[type='color'],
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='url'],
+input[type='week'],
+input:not([type]),
+textarea {
+    transition:all, 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 1px solid #d1d1d1;
+    border-radius: .4rem;
+    box-shadow: none;
+    box-sizing: border-box;
+    height: 38px;
+    padding: .6rem 1.0rem .7rem;
+    width: 100%;
+}
+
+input[type='color']:focus,
+input[type='date']:focus,
+input[type='datetime']:focus,
+input[type='datetime-local']:focus,
+input[type='email']:focus,
+input[type='month']:focus,
+input[type='number']:focus,
+input[type='password']:focus,
+input[type='search']:focus,
+input[type='tel']:focus,
+input[type='text']:focus,
+input[type='url']:focus,
+input[type='week']:focus,
+input:not([type]):focus,
+textarea:focus {
+  border-color: var(--primary-lighten);
+  outline: 0;
+}
+
+
 
 .thin-scrollbar::-webkit-scrollbar {width: 6px;height: 6px;}
 .thin-scrollbar::-webkit-scrollbar-track {background: #fafafa;}
