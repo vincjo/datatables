@@ -9,9 +9,9 @@
 
 <Modal title="Create a user" icon="person_add">
     <aside>
-        <Input icon="person" label="First name" bind:value={form.first_name} required field="first_name"/>
-        <Input icon="person" label="Last name" bind:value={form.last_name} required field="last_name"/>
-        <Input icon="mail" label="Email" bind:value={form.email} required field="email"/>
+        <Input icon="person" label="First name" bind:value={form.first_name} field="first_name"/>
+        <Input icon="person" label="Last name" bind:value={form.last_name} field="last_name"/>
+        <Input icon="mail" label="Email" bind:value={form.email} field="email"/>
     </aside>
 
     <svelte:fragment slot="footer">
