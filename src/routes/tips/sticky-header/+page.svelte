@@ -26,6 +26,10 @@
 </section>
 
 
+<a href="https://svelte.dev/repl/bfc8bfc170bb4e3d9af2070dbffb3677?version=3.56.0">
+    Show code in REPL
+</a>
+
 
 
 
@@ -58,5 +62,12 @@
     }
     th {
         border-bottom:1px solid #e0e0e0;
+    }
+    a {
+        display: block;
+        margin-top: 24px;
+        color: #03A9F4;
+        font-weight: bold;
+        font-size: 16px;
     }
 </style>
