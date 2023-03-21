@@ -43,6 +43,7 @@ export default class Rows
 
     public sortAsc(orderBy: Function | string): void
     {
+        if (!orderBy) return
         const parsed = this.parse(orderBy)
         this.sorted.set({ identifier: parsed.identifier, direction: 'asc', fn: parsed.fn })
         this.rawRows.update(store => {
@@ -67,6 +68,7 @@ export default class Rows
 
     public sortDesc(orderBy: Function | string): void
     {
+        if (!orderBy) return
         const parsed = this.parse(orderBy)
         this.sorted.set({ identifier: parsed.identifier, direction: 'desc', fn: parsed.fn })
         this.rawRows.update(store => {
