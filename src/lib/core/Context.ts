@@ -18,6 +18,9 @@ export default class Context
     public  pagesWithEllipsis   : Readable<number[]>
     public  pageCount           : Readable<number>
     public  sorted              : Writable<Sorted>
+    public  selected            : Writable<any[]>
+    public  selectScope         : Writable<'page' | 'all'>
+    public  isAllSelected       : Readable<boolean>
 
     constructor(data: any[], params: Params)
     {
@@ -34,6 +37,9 @@ export default class Context
         this.pagesWithEllipsis  = this.createPagesWithEllipsis()
         this.pageCount          = this.createPageCount()
         this.sorted             = writable({ identifier: null, direction: null, fn: null })
+        this.selected           = writable([])
+        this.selectScope        = writable('page')
+        this.isAllSelected      = this.createIsAllSelected()
     }
 
     private createFilteredRows(): Readable<any[]>
@@ -53,6 +59,7 @@ export default class Context
                         })
                     })
                     this.pageNumber.set(1)
+                    this.selected.set([])
                     this.triggerChange.update( store => { return store + 1 })
                 }
 
@@ -64,6 +71,7 @@ export default class Context
                         })
                     })
                     this.pageNumber.set(1)
+                    this.selected.set([])
                     this.triggerChange.update( store => { return store + 1 })
                 }
                 return $rawRows
@@ -163,12 +171,9 @@ export default class Context
 
     private createPageCount(): Readable<number>
     {
-        return derived(
-            [this.pages],
-            ([$pages]) => {
-                return $pages.length
-            }
-        )
+        return derived( this.pages, ($pages) => {
+            return $pages.length
+        })
     }
 
     private stringMatch(entry:string|Object, value: string) 
@@ -192,5 +197,19 @@ export default class Context
             })
         }
         return String(entry).indexOf(String(value)) > -1
+    }
+
+    private createIsAllSelected(): Readable<boolean>
+    {
+        return derived(
+            [this.selected, this.rows, this.filteredRows, this.selectScope],
+            ([$selected, $rows, $filteredRows, $selectScope]) => {
+                const rowCount = ($selectScope === 'page') ? $rows.length :  $filteredRows.length
+                if (rowCount === $selected.length) {
+                    return true
+                }
+                return false
+            }
+        )
     }
 }

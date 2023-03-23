@@ -1,13 +1,12 @@
 import { type Writable, type Readable, writable, derived, get } from 'svelte/store'
 import type Context from '../Context'
 
-type Scope = 'page' | 'all'
 
 export default class Selection
 {
     private context : Context
     public selected : Writable<any[]>
-    public scope: Scope
+    public scope: 'page' | 'all'
     public checked: Readable<boolean>
 
     constructor(context: Context)

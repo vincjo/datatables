@@ -1,5 +1,5 @@
 <script lang="ts">
-    import myData from '$data/data'
+    import myData from '$data/data.11000'
     import { Checkbox } from 'gros/form'
     import {
         DataHandler,
@@ -10,7 +10,7 @@
     const handler = new DataHandler(myData, { rowsPerPage: 50 })
     const rows = handler.getRows()
     const selected = handler.getSelected()
-    const checked = handler.isAllSelected()
+    const isAllSelected = handler.isAllSelected()
 </script>
 
 
@@ -21,18 +21,20 @@
                 <th class="selection">
                     <Checkbox 
                         on:click={() => handler.selectAll('id', 'all')}  
-                        checked={$checked}
+                        checked={$isAllSelected}
                     />
                 </th>
                 <Th {handler} orderBy="id">id</Th>
                 <Th {handler} orderBy="first_name">first_name</Th>
                 <Th {handler} orderBy="last_name">last_name</Th>
+                <Th {handler} orderBy="job_title">job_title</Th>
             </tr>
             <tr>
                 <th class="selection"/>
                 <ThFilter {handler} filterBy="id"/>
                 <ThFilter {handler} filterBy="first_name"/>
                 <ThFilter {handler} filterBy="last_name"/>
+                <ThFilter {handler} filterBy="job_title"/>
             </tr>
         </thead>
         <tbody>
@@ -44,9 +46,10 @@
                         checked={$selected.includes(row.id)}
                     />
                 </td>
-                <td>{@html row.id ?? `<b>null</b>`}</td>
-                <td>{@html row.first_name ?? `<b>null</b>`}</td>
-                <td>{@html row.last_name ?? `<b>null</b>`}</td>
+                <td>{@html row.id}</td>
+                <td>{@html row.first_name}</td>
+                <td>{@html row.last_name}</td>
+                <td>{@html row.job_title}</td>
             </tr>
         {/each}
         </tbody>

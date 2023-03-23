@@ -17,7 +17,6 @@ export default class DataHandler
     private pages        : Pages
     private globalSearch : GlobalSearch
     private filters      : Filters
-    private selection    : Selection
     public  i18n         : Internationalization
 
     constructor(data = [] as any[], params: Params = { rowsPerPage: null })
@@ -28,7 +27,6 @@ export default class DataHandler
         this.pages        = new Pages(this.context)
         this.globalSearch = new GlobalSearch(this.context)
         this.filters      = new Filters(this.context)
-        this.selection    = new Selection(this.context)
     }
 
     public setRows(data: any[]): void
@@ -42,25 +40,25 @@ export default class DataHandler
         return this.context.rows
     }
 
-    public getSelected(): Writable<string[] | number[]>
+    public getSelected(): Writable<any[]>
     {
-        return this.selection.get()
+        return this.context.selected
     }
 
     public select(id: any): void
     {
-        this.selection.set(id)
+        this.rows.select(id)
     }
 
     public selectAll(accessor: string, scope: 'page' | 'all' = 'page'): void
     {
-        this.selection.scope = scope
-        this.selection.all(accessor)
+        this.context.selectScope.set(scope)
+        this.rows.selectAll(accessor)
     }
 
-    public isAllSelected()
+    public isAllSelected(): Readable<boolean>
     {
-        return this.selection.checked
+        return this.context.isAllSelected
     }
 
     public getRowCount(): Readable<{ total: number, start: number, end: number }>

@@ -1,5 +1,5 @@
 import type Context from '../Context'
-import type { Writable } from 'svelte/store'
+import { type Writable, type Readable, get } from 'svelte/store'
 
 export type Sorted = { 
     fn?: Function, 
@@ -14,14 +14,24 @@ export type SortingParams = { locales?: string, options?: Object }
 export default class Rows
 {
     private rawRows: Writable<any[]>
+    private filteredRows: Readable<any[]>
+    private rows: Readable<any[]>
     private triggerChange: Writable<number>
     private sorted: Writable<Sorted>
+    private selected: Writable<any[]>
+    private selectScope: Writable<'page' | 'all'>
+    private isAllSelected: Readable<boolean>
 
     constructor(context: Context)
     {
         this.rawRows = context.rawRows
+        this.filteredRows = context.filteredRows
+        this.rows = context.rows
         this.triggerChange = context.triggerChange
         this.sorted = context.sorted
+        this.selected = context.selected
+        this.selectScope = context.selectScope
+        this.isAllSelected = context.isAllSelected
     }
 
     public sort(orderBy: Function | string): void
@@ -131,5 +141,31 @@ export default class Rows
         return $sorted
     }
 
+    public select(id: any)
+    {
+        const selected = get(this.selected)
+        if (selected.includes(id)) {
+            this.selected.set( selected.filter(item => item !== id) )
+        }
+        else {
+            this.selected.set([id, ...selected])
+        }
+    }
 
+    public selectAll(accessor: string)
+    {
+        const isAllSelected = get(this.isAllSelected)
+        const selectScope = get(this.selectScope)
+        if (isAllSelected) {
+            return this.unselectAll()
+        }
+        const rows = (selectScope === 'page') ? get(this.rows) : get(this.filteredRows)
+
+        this.selected.set(rows.map(row => { return row[accessor] }))
+    }
+
+    public unselectAll()
+    {
+        this.selected.set([])
+    }
 }
