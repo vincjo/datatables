@@ -3,6 +3,7 @@ import Rows         from '$lib/core/Handlers/Rows'
 import Pages        from '$lib/core/Handlers/Pages'
 import GlobalSearch from '$lib/core/Handlers/GlobalSearch'
 import Filters      from '$lib/core/Handlers/Filters'
+import Selection    from '$lib/core/Handlers/Selection'
 
 import type { Readable, Writable } from 'svelte/store'
 import type { Internationalization } from '$lib'
@@ -16,6 +17,7 @@ export default class DataHandler
     private pages        : Pages
     private globalSearch : GlobalSearch
     private filters      : Filters
+    private selection    : Selection
     public  i18n         : Internationalization
 
     constructor(data = [] as any[], params: Params = { rowsPerPage: null })
@@ -26,6 +28,7 @@ export default class DataHandler
         this.pages        = new Pages(this.context)
         this.globalSearch = new GlobalSearch(this.context)
         this.filters      = new Filters(this.context)
+        this.selection    = new Selection(this.context)
     }
 
     public setRows(data: any[]): void
@@ -37,6 +40,27 @@ export default class DataHandler
     public getRows(): Readable<any[]>
     {
         return this.context.rows
+    }
+
+    public getSelected(): Writable<string[] | number[]>
+    {
+        return this.selection.get()
+    }
+
+    public select(id: any): void
+    {
+        this.selection.set(id)
+    }
+
+    public selectAll(accessor: string, scope: 'page' | 'all' = 'page'): void
+    {
+        this.selection.scope = scope
+        this.selection.all(accessor)
+    }
+
+    public isAllSelected()
+    {
+        return this.selection.checked
     }
 
     public getRowCount(): Readable<{ total: number, start: number, end: number }>

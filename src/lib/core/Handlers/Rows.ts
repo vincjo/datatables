@@ -15,7 +15,7 @@ export default class Rows
 {
     private rawRows: Writable<any[]>
     private triggerChange: Writable<number>
-    private  sorted: Writable<Sorted>
+    private sorted: Writable<Sorted>
 
     constructor(context: Context)
     {
@@ -130,4 +130,6 @@ export default class Rows
         this.sorted.subscribe( store => $sorted = store )
         return $sorted
     }
+
+
 }

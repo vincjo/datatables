@@ -11,7 +11,7 @@ export default class Context
     public  globalSearch        : Writable<{ value: string|null; scope: string[]|null}>
     public  filters             : Writable<any[]>
     public  rawRows             : Writable<any[]>
-    private filteredRows        : Readable<any[]>
+    public  filteredRows        : Readable<any[]>
     public  rows                : Readable<any[]>
     public  rowCount            : Readable<{ total: number; start: number; end: number }>
     public  pages               : Readable<number[]>

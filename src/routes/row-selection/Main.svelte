@@ -9,24 +9,8 @@
 
     const handler = new DataHandler(myData, { rowsPerPage: 50 })
     const rows = handler.getRows()
-
-    let selected = []
-
-    const setSelected = (id) => {
-        if (selected.includes(id)) {
-            selected = selected.filter(item => item !== id)
-            return
-        }
-        selected = [id, ...selected]
-    }
-
-    const selectAll = () => {
-        if (selected.length === $rows.length) {
-            selected = []
-            return
-        }
-        selected = $rows.map( row => { return row.id })
-    }
+    const selected = handler.getSelected()
+    const checked = handler.isAllSelected()
 </script>
 
 
@@ -35,7 +19,10 @@
         <thead>
             <tr>
                 <th class="selection">
-                    <Checkbox on:click={selectAll}  checked={selected.length === $rows.length}/>
+                    <Checkbox 
+                        on:click={() => handler.selectAll('id', 'all')}  
+                        checked={$checked}
+                    />
                 </th>
                 <Th {handler} orderBy="id">id</Th>
                 <Th {handler} orderBy="first_name">first_name</Th>
@@ -50,9 +37,12 @@
         </thead>
         <tbody>
         {#each $rows as row}
-            <tr class:active={selected.includes(row.id)}>
+            <tr class:active={$selected.includes(row.id)}>
                 <td class="selection">
-                    <Checkbox on:click={() => setSelected(row.id)} checked={selected.includes(row.id)}/>
+                    <Checkbox 
+                        on:click={() => handler.select(row.id)} 
+                        checked={$selected.includes(row.id)}
+                    />
                 </td>
                 <td>{@html row.id ?? `<b>null</b>`}</td>
                 <td>{@html row.first_name ?? `<b>null</b>`}</td>
