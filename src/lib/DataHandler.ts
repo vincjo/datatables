@@ -3,7 +3,6 @@ import Rows         from '$lib/core/Handlers/Rows'
 import Pages        from '$lib/core/Handlers/Pages'
 import GlobalSearch from '$lib/core/Handlers/GlobalSearch'
 import Filters      from '$lib/core/Handlers/Filters'
-import Selection    from '$lib/core/Handlers/Selection'
 
 import type { Readable, Writable } from 'svelte/store'
 import type { Internationalization } from '$lib'
