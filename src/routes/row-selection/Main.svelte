@@ -1,6 +1,5 @@
 <script lang="ts">
     import myData from '$data/data.11000'
-    import { Checkbox } from 'gros/form'
     import {
         DataHandler,
         Datatable,
@@ -19,7 +18,7 @@
         <thead>
             <tr>
                 <th class="selection">
-                    <Checkbox 
+                    <input type="checkbox" 
                         on:click={() => handler.selectAll('id', 'all')}  
                         checked={$isAllSelected}
                     />
@@ -41,7 +40,7 @@
         {#each $rows as row}
             <tr class:active={$selected.includes(row.id)}>
                 <td class="selection">
-                    <Checkbox 
+                    <input type="checkbox" 
                         on:click={() => handler.select(row.id)} 
                         checked={$selected.includes(row.id)}
                     />
