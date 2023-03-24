@@ -205,7 +205,7 @@ export default class Context
             [this.selected, this.rows, this.filteredRows, this.selectScope],
             ([$selected, $rows, $filteredRows, $selectScope]) => {
                 const rowCount = ($selectScope === 'page') ? $rows.length :  $filteredRows.length
-                if (rowCount === $selected.length) {
+                if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }
                 return false
