@@ -158,7 +158,7 @@ export default class DataHandler
             entries: 'entries',
             filter: 'Filter',
             rowCount: 'Showing {start} to {end} of {total} entries',
-            noRows: 'No entries to found', 
+            noRows: 'No entries found', 
             previous: 'Previous', 
             next: 'Next' 
         }, ...i18n }
