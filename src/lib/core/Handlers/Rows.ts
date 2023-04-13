@@ -57,21 +57,39 @@ export default class Rows
         const parsed = this.parse(orderBy)
         this.sorted.set({ identifier: parsed.identifier, direction: 'asc', fn: parsed.fn })
         this.rawRows.update(store => {
-            try {
-                store.sort( (a, b) => {
-                    if ( typeof(parsed.fn(b) ) === "boolean" ) {
-                        return parsed.fn(a) ? -1 : 1
-                    } 
-                    else if (!parsed.fn(b)) return 1
-                    else if (!parsed.fn(a)) return -1
-                    else {
-                        return parsed.fn(a).localeCompare(parsed.fn(b))
-                    }
-                })
-                return store
-            } catch (e) {
-                return store.sort( (a, b) => parseFloat(parsed.fn(a)) - parseFloat(parsed.fn(b)))
-            }
+
+            store.sort( (a, b) => {
+                if ( typeof(parsed.fn(b) ) === "boolean" ) {
+                    return parsed.fn(a) === true ? -1 : 1
+                } 
+                else if (!parsed.fn(b)) return 1
+                else if (!parsed.fn(a)) return -1
+                else if (typeof(parsed.fn(b)) === 'string') {
+                    return parsed.fn(a).localeCompare(parsed.fn(b))
+                }
+                else {
+                    return store.sort( (a, b) => parseFloat(parsed.fn(a)) - parseFloat(parsed.fn(b)))
+                }
+            })
+
+            return store
+            // try {
+            //     store.sort( (a, b) => {
+            //         if ( typeof(parsed.fn(b) ) === "boolean" ) {
+            //             return parsed.fn(a) ? -1 : 1
+            //         } 
+            //         else if (!parsed.fn(b)) return 1
+            //         else if (!parsed.fn(a)) return -1
+            //         else {
+            //             return parsed.fn(a).localeCompare(parsed.fn(b))
+            //         }
+            //     })
+            //     return store
+            // } catch (e) {
+            //     return store.sort( (a, b) => parseFloat(parsed.fn(a)) - parseFloat(parsed.fn(b)))
+            // }
+
+
         })
         this.triggerChange.update( store => { return store + 1 })
     }
@@ -82,21 +100,40 @@ export default class Rows
         const parsed = this.parse(orderBy)
         this.sorted.set({ identifier: parsed.identifier, direction: 'desc', fn: parsed.fn })
         this.rawRows.update(store => {
-            try {
-                store.sort( (a, b) => {
-                    if ( typeof( parsed.fn(b) ) === "boolean" ) {
-                        return parsed.fn(a) ? 1 : -1
-                    }
-                    else if (!parsed.fn(a)) return 1
-                    else if (!parsed.fn(b)) return -1
-                    else {
-                        return parsed.fn(b).localeCompare(parsed.fn(a))
-                    }
-                })
-                return store
-            } catch (e) {
-                return store.sort( (a, b) => parseFloat(parsed.fn(b)) - parseFloat(parsed.fn(a)))
-            }
+
+            store.sort( (a, b) => {
+                if ( typeof( parsed.fn(b) ) === "boolean" ) {
+                    return parsed.fn(a) === true ? 1 : -1
+                }
+                else if (!parsed.fn(a)) return 1
+                else if (!parsed.fn(b)) return -1
+                else if (typeof(parsed.fn(b)) === 'string') {
+                    return parsed.fn(b).localeCompare(parsed.fn(a))
+                }
+                else {
+                    return store.sort( (a, b) => parseFloat(parsed.fn(b)) - parseFloat(parsed.fn(a)))
+                }
+            })
+
+            return store
+
+
+
+            // try {
+            //     store.sort( (a, b) => {
+            //         if ( typeof( parsed.fn(b) ) === "boolean" ) {
+            //             return parsed.fn(a) ? 1 : -1
+            //         }
+            //         else if (!parsed.fn(a)) return 1
+            //         else if (!parsed.fn(b)) return -1
+            //         else {
+            //             return parsed.fn(b).localeCompare(parsed.fn(a))
+            //         }
+            //     })
+            //     return store
+            // } catch (e) {
+            //     return store.sort( (a, b) => parseFloat(parsed.fn(b)) - parseFloat(parsed.fn(a)))
+            // }
         })
         this.triggerChange.update( store => { return store + 1 })
     }
@@ -168,4 +205,5 @@ export default class Rows
     {
         this.selected.set([])
     }
+
 }

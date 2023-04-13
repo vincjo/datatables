@@ -23,8 +23,8 @@
             </tr>
             <tr>
                 <ThFilter {handler} filterBy="id" isEqualTo/>
-                <ThFilter {handler} filterBy="user"/>
-                <ThFilter {handler} filterBy="is_online"/>
+                <ThFilter {handler} filterBy="user" isEqualTo/>
+                <ThFilter {handler} filterBy="is_online" isEqualTo/>
             </tr>
         </thead>
         <tbody>
