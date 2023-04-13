@@ -22,7 +22,7 @@
                 <Th {handler} orderBy="is_online">Bool</Th>
             </tr>
             <tr>
-                <ThFilter {handler} filterBy="id"/>
+                <ThFilter {handler} filterBy="id" isEqualTo/>
                 <ThFilter {handler} filterBy="user"/>
                 <ThFilter {handler} filterBy="is_online"/>
             </tr>

@@ -108,9 +108,9 @@ export default class DataHandler
         this.globalSearch.remove()
     }
 
-    public filter(value: string, filterBy: ( (row: any) => string | number | boolean ) | string): void
+    public filter(value: string, filterBy: ( (row: any) => string | number | boolean ) | string, isEqualTo = false): void
     {
-        return this.filters.set(value, filterBy)
+        return this.filters.set(value, filterBy, isEqualTo)
     }
 
     public clearFilters(): void

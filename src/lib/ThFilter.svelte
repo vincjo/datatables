@@ -2,6 +2,7 @@
     import type { DataHandler } from '$lib/core'
     export let handler: DataHandler
     export let filterBy = null
+    export let isEqualTo = false
 
     let value = ''
 </script>
@@ -13,7 +14,7 @@
         placeholder="{handler.i18n.filter}"
         spellcheck="false"
         bind:value
-        on:input={() => handler.filter(value, filterBy)}
+        on:input={() => handler.filter(value, filterBy, isEqualTo)}
     />
 </th>
 

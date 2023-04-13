@@ -67,6 +67,9 @@ export default class Context
                     $filters.forEach(localFilter => {
                         return $rawRows = $rawRows.filter( row => {
                             const entry = localFilter.filterBy(row)
+                            if (localFilter.isEqualTo && localFilter.value) {
+                                return entry == localFilter.value
+                            }
                             return this.stringMatch(entry, localFilter.value)
                         })
                     })
@@ -176,7 +179,7 @@ export default class Context
         })
     }
 
-    private stringMatch(entry:string|Object, value: string) 
+    private stringMatch(entry:string|Object|number, value: string|number) 
     {
         if (typeof entry === 'string' || !entry) {
             return String(entry)
