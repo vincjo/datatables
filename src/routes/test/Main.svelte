@@ -11,15 +11,14 @@
 
 </script>
 
-<button on:click={() => handler.clearFilters()}>Clear Filters</button>
 
 <Datatable {handler}>
     <table>
         <thead>
             <tr>
-                <Th {handler} orderBy="id">Int</Th>
-                <Th {handler} orderBy="user">Str</Th>
-                <Th {handler} orderBy="is_online">Bool</Th>
+                <Th {handler} orderBy="id">isEqualTo</Th>
+                <Th {handler} orderBy="user">startsWith</Th>
+                <Th {handler} orderBy="is_online">isTrue</Th>
             </tr>
             <tr>
                 <ThFilter {handler} filterBy="id" comparator={Comparator.isEqualTo}/>
@@ -62,18 +61,5 @@
         color: #bdbdbd;
         font-family: JetBrains;
         font-size: 11px;
-    }
-    button {
-        position: fixed;
-        top: 16px;
-        left: 800px;
-        height: 60px;
-        width: 120px;
-        background:var(--primary);
-        z-index: 200;
-        border:none;
-        border-radius: 8px;
-        color: #eee;
-        font-weight: bold;
     }
 </style>
