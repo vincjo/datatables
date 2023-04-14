@@ -67,8 +67,11 @@ export default class Context
                     $filters.forEach(localFilter => {
                         return $rawRows = $rawRows.filter( row => {
                             const entry = localFilter.filterBy(row)
-                            if (localFilter.isEqualTo && localFilter.value) {
-                                return entry == localFilter.value
+                            if (localFilter.compare && localFilter.value) {
+                                // console.log(localFilter.comparator)
+                                // console.log(localFilter.value)
+                                // console.log(entry)
+                                return localFilter.compare(entry, localFilter.value)
                             }
                             return this.stringMatch(entry, localFilter.value)
                         })

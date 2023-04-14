@@ -1,7 +1,7 @@
 <script lang="ts">
     import myData from '$data/int-bool-string'
     import {
-        DataHandler,
+        DataHandler, Comparator,
         Datatable,
         Th, ThFilter
     } from '$lib/core'
@@ -22,9 +22,9 @@
                 <Th {handler} orderBy="is_online">Bool</Th>
             </tr>
             <tr>
-                <ThFilter {handler} filterBy="id" isEqualTo/>
-                <ThFilter {handler} filterBy="user" isEqualTo/>
-                <ThFilter {handler} filterBy="is_online" isEqualTo/>
+                <ThFilter {handler} filterBy="id" comparator={Comparator.isEqualTo}/>
+                <ThFilter {handler} filterBy="user" comparator={Comparator.startsWith}/>
+                <ThFilter {handler} filterBy="is_online" comparator={Comparator.isTrue}/>
             </tr>
         </thead>
         <tbody>

@@ -11,11 +11,11 @@ export default class Filters
         this.filters = context.filters
     }
 
-    public set(value: string|number, filterBy: Function | string, isEqualTo = false): void
+    public set(value: string|number, filterBy: Function | string, comparator: Function = null): void
     {
         const parsed = this.parse(filterBy)
         this.filters.update(store => {
-            const filter = { filterBy: parsed.fn, value: value, identifier: parsed.identifier, isEqualTo: isEqualTo } 
+            const filter = { filterBy: parsed.fn, value: value, identifier: parsed.identifier, compare: comparator } 
             store = store.filter(item => { return item.identifier !== parsed.identifier && item.value.length > 0 })
             store.push(filter)
             return store
