@@ -1,5 +1,5 @@
 <script lang="ts">
-    import myData from '$data/data.11000'
+    import myData from '$data/data'
     import {
         DataHandler,
         Datatable,
@@ -26,14 +26,14 @@
                 <Th {handler} orderBy="id">id</Th>
                 <Th {handler} orderBy="first_name">first_name</Th>
                 <Th {handler} orderBy="last_name">last_name</Th>
-                <Th {handler} orderBy="job_title">job_title</Th>
+                <Th {handler} orderBy="email">email</Th>
             </tr>
             <tr>
                 <th class="selection"/>
                 <ThFilter {handler} filterBy="id"/>
                 <ThFilter {handler} filterBy="first_name"/>
                 <ThFilter {handler} filterBy="last_name"/>
-                <ThFilter {handler} filterBy="job_title"/>
+                <ThFilter {handler} filterBy="email"/>
             </tr>
         </thead>
         <tbody>
@@ -48,7 +48,7 @@
                 <td>{@html row.id}</td>
                 <td>{@html row.first_name}</td>
                 <td>{@html row.last_name}</td>
-                <td>{@html row.job_title}</td>
+                <td>{@html row.email}</td>
             </tr>
         {/each}
         </tbody>
