@@ -4,7 +4,7 @@
     export let data
 </script>
 
-<h2>Select rows</h2>
+<h2>Row selection</h2>
 
 <Demo components={data.components} dataset={data.dataset} scrollY={true}>
     <Main/>

@@ -1,7 +1,7 @@
-import { writable, derived } from 'svelte/store'
-import type { Writable, Readable } from 'svelte/store'
+import { writable, derived, type Writable, type Readable } from 'svelte/store'
 import type { Params } from '../DataHandler'
 import type { Sorted } from './Handlers/Rows'
+import { check } from './Comparator'
 
 export default class Context
 {
@@ -19,7 +19,7 @@ export default class Context
     public  pageCount           : Readable<number>
     public  sorted              : Writable<Sorted>
     public  selected            : Writable<any[]>
-    public  selectScope         : Writable<'page' | 'all'>
+    public  selectScope         : Writable<'all' | 'currentPage'>
     public  isAllSelected       : Readable<boolean>
 
     constructor(data: any[], params: Params)
@@ -38,7 +38,7 @@ export default class Context
         this.pageCount          = this.createPageCount()
         this.sorted             = writable({ identifier: null, direction: null, fn: null })
         this.selected           = writable([])
-        this.selectScope        = writable('page')
+        this.selectScope        = writable('all')
         this.isAllSelected      = this.createIsAllSelected()
     }
 
@@ -53,7 +53,7 @@ export default class Context
                         const scope = $globalSearch.scope ?? Object.keys(row)
                         return scope.some( key => {
                             if (row[key]) {
-                                return this.stringMatch(row[key], $globalSearch.value)
+                                return this.matches(row[key], $globalSearch.value)
                             }
                             return ''
                         })
@@ -67,13 +67,8 @@ export default class Context
                     $filters.forEach(localFilter => {
                         return $rawRows = $rawRows.filter( row => {
                             const entry = localFilter.filterBy(row)
-                            if (localFilter.compare && localFilter.value) {
-                                // console.log(localFilter.comparator)
-                                // console.log(localFilter.value)
-                                // console.log(entry)
-                                return localFilter.compare(entry, localFilter.value)
-                            }
-                            return this.stringMatch(entry, localFilter.value)
+                            if (!localFilter.value) return true
+                            return this.matches(entry, localFilter.value, localFilter.compare)
                         })
                     })
                     this.pageNumber.set(1)
@@ -83,6 +78,20 @@ export default class Context
                 return $rawRows
             }
         )
+    }
+
+    private matches(entry:string|Object|number|null, value: string|number, compare: Function = check.contains) 
+    {
+        if (!entry && compare) {
+            return compare(entry, value)
+        }
+        if (!entry) return check.contains(entry, value)
+        else if (typeof entry === 'object') {
+            return Object.keys(entry).some( k => {
+                return this.matches(entry[k], value, compare)
+            })
+        }
+        return compare(entry, value)
     }
 
     private createPaginatedRows(): Readable<any[]>
@@ -182,35 +191,12 @@ export default class Context
         })
     }
 
-    private stringMatch(entry:string|Object|number, value: string|number) 
-    {
-        if (typeof entry === 'string' || !entry) {
-            return String(entry)
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .indexOf(
-                    value
-                    .toString()
-                    .toLowerCase()
-                    .normalize("NFD")
-                    .replace(/[\u0300-\u036f]/g, "")
-                ) > -1
-        }
-        else if (typeof entry === 'object') {
-            return Object.keys(entry).some( k => {
-                return this.stringMatch(entry[k], value)
-            })
-        }
-        return String(entry).indexOf(String(value)) > -1
-    }
-
     private createIsAllSelected(): Readable<boolean>
     {
         return derived(
             [this.selected, this.rows, this.filteredRows, this.selectScope],
             ([$selected, $rows, $filteredRows, $selectScope]) => {
-                const rowCount = ($selectScope === 'page') ? $rows.length :  $filteredRows.length
+                const rowCount = ($selectScope === 'currentPage') ? $rows.length :  $filteredRows.length
                 if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }

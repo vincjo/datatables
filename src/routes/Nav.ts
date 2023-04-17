@@ -14,6 +14,8 @@ export default [
             { name: 'i18n', path: '/i18n' },
             { name: 'nested objects', path: '/nested-objects' },
             { name: 'blocks', path: '/blocks' },
+            { name: 'row selection', path: '/row-selection' },
+            { name: 'advanced filters', path: '/advanced-filters' },
         ],
     },
     {

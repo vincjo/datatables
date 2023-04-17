@@ -39,20 +39,20 @@ export default class DataHandler
         return this.context.rows
     }
 
+    public select(value: any): void
+    {
+        this.rows.select(value)
+    }
+
     public getSelected(): Writable<any[]>
     {
         return this.context.selected
     }
 
-    public select(id: any): void
+    public selectAll(params: { selectBy?: string, scope?: 'all' | 'currentPage' } = {}): void
     {
-        this.rows.select(id)
-    }
-
-    public selectAll(accessor: string, scope: 'page' | 'all' = 'page'): void
-    {
-        this.context.selectScope.set(scope)
-        this.rows.selectAll(accessor)
+        this.context.selectScope.set(params.scope ?? 'all')
+        this.rows.selectAll(params.selectBy ?? null)
     }
 
     public isAllSelected(): Readable<boolean>

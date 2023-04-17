@@ -1,5 +1,6 @@
 
 import type Context from '../Context'
+import { check } from '../Comparator'
 import type { Writable } from 'svelte/store'
 
 export default class Filters
@@ -15,7 +16,7 @@ export default class Filters
     {
         const parsed = this.parse(filterBy)
         this.filters.update(store => {
-            const filter = { filterBy: parsed.fn, value: value, identifier: parsed.identifier, compare: comparator } 
+            const filter = { filterBy: parsed.fn, value: value, identifier: parsed.identifier, compare: comparator ?? check.contains } 
             store = store.filter(item => { return item.identifier !== parsed.identifier && item.value.length > 0 })
             store.push(filter)
             return store

@@ -19,7 +19,7 @@
             <tr>
                 <th class="selection">
                     <input type="checkbox" 
-                        on:click={() => handler.selectAll('id', 'all')}  
+                        on:click={() => handler.selectAll({ selectBy: 'id' })}
                         checked={$isAllSelected}
                     />
                 </th>

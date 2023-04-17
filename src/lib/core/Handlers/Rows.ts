@@ -1,12 +1,12 @@
 import type Context from '../Context'
 import { type Writable, type Readable, get } from 'svelte/store'
 
-export type Sorted = { 
-    fn?: Function, 
-    identifier: string | null, 
-    direction: 'asc' | 'desc' | null, 
-    locales?: string, 
-    options?: Object 
+export type Sorted = {
+    fn?: Function,
+    identifier: string | null,
+    direction: 'asc' | 'desc' | null,
+    locales?: string,
+    options?: Object
 }
 export type SortingParams = { locales?: string, options?: Object }
 
@@ -19,7 +19,7 @@ export default class Rows
     private triggerChange: Writable<number>
     private sorted: Writable<Sorted>
     private selected: Writable<any[]>
-    private selectScope: Writable<'page' | 'all'>
+    private selectScope: Writable<'currentPage' | 'all'>
     private isAllSelected: Readable<boolean>
 
     constructor(context: Context)
@@ -58,38 +58,17 @@ export default class Rows
         this.sorted.set({ identifier: parsed.identifier, direction: 'asc', fn: parsed.fn })
         this.rawRows.update(store => {
 
-            store.sort( (a, b) => {
-                if ( typeof(parsed.fn(b) ) === "boolean" ) {
-                    return parsed.fn(a) === true ? -1 : 1
-                } 
-                else if (!parsed.fn(b)) return 1
-                else if (!parsed.fn(a)) return -1
-                else if (typeof(parsed.fn(b)) === 'string') {
-                    return parsed.fn(a).localeCompare(parsed.fn(b))
-                }
-                else {
-                    return store.sort( (a, b) => parseFloat(parsed.fn(a)) - parseFloat(parsed.fn(b)))
-                }
+            store.sort( (x, y) => {
+                const [a, b] = [parsed.fn(x), parsed.fn(y)]
+                if (a === b) return 0
+                if (a === null) return 1
+                if (b === null) return -1
+                if (typeof a === 'boolean') return a === false ? 1 : -1
+                if (typeof a === 'string') return a.localeCompare(b)
+                if (typeof a === 'number') return a - b
+                else return String(a).localeCompare(String(b))
             })
-
             return store
-            // try {
-            //     store.sort( (a, b) => {
-            //         if ( typeof(parsed.fn(b) ) === "boolean" ) {
-            //             return parsed.fn(a) ? -1 : 1
-            //         } 
-            //         else if (!parsed.fn(b)) return 1
-            //         else if (!parsed.fn(a)) return -1
-            //         else {
-            //             return parsed.fn(a).localeCompare(parsed.fn(b))
-            //         }
-            //     })
-            //     return store
-            // } catch (e) {
-            //     return store.sort( (a, b) => parseFloat(parsed.fn(a)) - parseFloat(parsed.fn(b)))
-            // }
-
-
         })
         this.triggerChange.update( store => { return store + 1 })
     }
@@ -101,39 +80,18 @@ export default class Rows
         this.sorted.set({ identifier: parsed.identifier, direction: 'desc', fn: parsed.fn })
         this.rawRows.update(store => {
 
-            store.sort( (a, b) => {
-                if ( typeof( parsed.fn(b) ) === "boolean" ) {
-                    return parsed.fn(a) === true ? 1 : -1
-                }
-                else if (!parsed.fn(a)) return 1
-                else if (!parsed.fn(b)) return -1
-                else if (typeof(parsed.fn(b)) === 'string') {
-                    return parsed.fn(b).localeCompare(parsed.fn(a))
-                }
-                else {
-                    return store.sort( (a, b) => parseFloat(parsed.fn(b)) - parseFloat(parsed.fn(a)))
-                }
+            store.sort( (x, y) => {
+                const [a, b] = [parsed.fn(x), parsed.fn(y)]
+                if (a === b) return 0
+                if (a === null) return 1
+                if (b === null) return -1
+                if (typeof b === 'boolean') return b === false ? 1 : -1
+                if (typeof b === 'string') return b.localeCompare(a)
+                if (typeof b === 'number') return b - a
+                else return String(b).localeCompare(String(a))
             })
 
             return store
-
-
-
-            // try {
-            //     store.sort( (a, b) => {
-            //         if ( typeof( parsed.fn(b) ) === "boolean" ) {
-            //             return parsed.fn(a) ? 1 : -1
-            //         }
-            //         else if (!parsed.fn(a)) return 1
-            //         else if (!parsed.fn(b)) return -1
-            //         else {
-            //             return parsed.fn(b).localeCompare(parsed.fn(a))
-            //         }
-            //     })
-            //     return store
-            // } catch (e) {
-            //     return store.sort( (a, b) => parseFloat(parsed.fn(b)) - parseFloat(parsed.fn(a)))
-            // }
         })
         this.triggerChange.update( store => { return store + 1 })
     }
@@ -189,16 +147,21 @@ export default class Rows
         }
     }
 
-    public selectAll(accessor: string)
+    public selectAll(accessor: string = null)
     {
         const isAllSelected = get(this.isAllSelected)
         const selectScope = get(this.selectScope)
         if (isAllSelected) {
             return this.unselectAll()
         }
-        const rows = (selectScope === 'page') ? get(this.rows) : get(this.filteredRows)
+        const rows = (selectScope === 'currentPage') ? get(this.rows) : get(this.filteredRows)
 
-        this.selected.set(rows.map(row => { return row[accessor] }))
+        if (accessor) {
+            this.selected.set(rows.map(row => { return row[accessor] }))
+        }
+        else {
+            this.selected.set(rows)
+        }
     }
 
     public unselectAll()

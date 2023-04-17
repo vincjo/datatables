@@ -6,7 +6,7 @@ export { default as RowsPerPage }   from '../RowsPerPage.svelte'
 export { default as Search }        from '../Search.svelte'
 export { default as Th }            from '../Th.svelte'
 export { default as ThFilter }      from '../ThFilter.svelte'
-export { default as Comparator }    from '../Comparator'
+export { check }                    from './Comparator'
 
 export type Internationalization = {
     search?: string,

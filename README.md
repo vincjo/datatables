@@ -16,6 +16,7 @@ This package provides an API to handle data and related events : rows, filters, 
 - **Headless** by design <br>
 - **Typescript** support <br>
 - **SSR** compatibility
+- no dependencies
 
 Also provides some sample components, which you can grab and customize in your own project.
 
@@ -69,15 +70,16 @@ npm i -D @vincjo/datatables
 getRows(): Readable<any[]>
 setRows( data: any[] ): void
 ````
+
 ````ts
 sort( orderBy: Function | string ): void
 sortAsc( orderBy: Function | string ): void
 sortDesc( orderBy: Function | string ): void
 getSorted(): Writable<{ identifier?: string; direction?: 'asc' | 'desc'; }>
-applySorting( params: null | {orderBy: Function | string; direction?: 'asc' | 'desc'} ): void
+applySorting( params: {orderBy: Function | string; direction?: 'asc' | 'desc'} = null ): void
 ````
 ````ts
-filter( value: string, filterBy: Function | string ): void
+filter( value: string, filterBy: Function | string, comparator: Function = null ): void
 clearFilters(): void
 ````
 ````ts
@@ -95,6 +97,12 @@ getPages( param: { ellipsis: boolean } ): Readable<number[]>
 getPageCount(): Readable<number>
 getPageNumber(): Readable<number>
 setPage( value: number | ‘previous’ | ‘next’ ): void
+````
+````ts
+select(value: any): void
+getSelected(): Writable<any[]>
+selectAll(params: { selectBy?: Function | string, scope?: 'all' | 'currentPage' } = { scope: 'all' }): void
+isAllSelected(): Readable<boolean>
 ````
 ````ts
 getTriggerChange(): Writable<number>
