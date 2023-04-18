@@ -96,12 +96,12 @@
 
 ## Filter data
 
-> **filter(** *value*: string, *filterBy*: Function | string **)**: void <br>
+> **filter(** *value*: string, *filterBy*: Function | string, *comparator*: Function = null **)**: void <br>
 > **clearFilters()**: void <br>
 
 ````svelte
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/datatables'
+    import { type DataHandler, check } from '@vincjo/datatables'
     export let handler: DataHandler
     
     let value1 = ''
@@ -118,7 +118,7 @@
 
 <input type="text" 
     bind:value1 
-    on:input={() => handler.filter(value1, 'email')}
+    on:input={() => handler.filter(value1, 'email', check.endsWith)}
 />
 
 <input type="text" 
@@ -234,6 +234,48 @@
 <button on:click={() => handler.setPage($pageCount)}>
     Last page
 </button>
+````
+</Anchor>
+
+
+
+<Anchor name="row-selection">
+
+## Row selection
+
+> **select(** *value*: any **)**: void <br>
+> **getSelected()**: Writable`<any[]>` <br>
+> **selectAll(** *params*: `{ selectBy?: string, scope?: 'all' | 'currentPage' }` **)**: void <br>
+> **isAllSelected()**: Readable`<boolean>` <br>
+
+
+````svelte
+<script lang="ts">
+    import type { DataHandler } from '@vincjo/datatables'
+    export let handler: DataHandler
+
+    const rows = handler.getRows()
+    const selected = handler.getSelected()
+    const isAllSelected = handler.isAllSelected()
+</script>
+
+<input type="checkbox" 
+    on:click={() => handler.selectAll({ selectBy: 'id' })}
+    checked={$isAllSelected}
+/>
+
+{#each $rows as row}
+    <tr class:active={$selected.includes(row.id)}>
+        <td>
+            <input type="checkbox" 
+                on:click={() => handler.select(row.id)} 
+                checked={$selected.includes(row.id)}
+            />
+        </td>
+        <td>{@html row.first_name}</td>
+        <td>{@html row.email}</td>
+    </tr>
+{/each}
 ````
 </Anchor>
 

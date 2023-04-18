@@ -34,6 +34,7 @@ export default [
             { name: 'rows per page', slug: '#rows-per-page' },
             { name: 'row count', slug: '#row-count' },
             { name: 'pagination', slug: '#pagination' },
+            { name: 'row selection', slug: '#row-selection' },
             { name: 'trigger change', slug: '#trigger-change' },
         ],
     },
