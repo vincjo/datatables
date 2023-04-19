@@ -11,14 +11,6 @@
 
     type Car = { model: string, manufacturer: string }
     type Row = { firstname: string, lastname: string, country: string, car: Car[]}
-
-    const callback = (row: Row) => {
-        if (!row.car) return []
-        const arr = row.car.map( (car: Car) => {
-            return `${car.model} (${car.manufacturer})`
-        })
-        return arr.join(', ')
-    }
 </script>
 
 
