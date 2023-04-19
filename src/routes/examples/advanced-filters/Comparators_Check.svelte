@@ -17,7 +17,7 @@
         handler.setRows(data[comparator.type ?? 'string'])
         if (comparator.bounds) {
             value = comparator.bounds
-        } 
+        }
         else {
             value = ''
             checked = false
@@ -30,7 +30,7 @@
     <h3>{comparator.name} <span>{displayedValue}</span></h3>
     {#if comparator.type === 'number' && !comparator.bounds}
         <input type="number" bind:value/>
-    
+
     {:else if comparator.bounds}
         <div class="range">
             <Range bind:value min={0} max={100} step={1}/>
