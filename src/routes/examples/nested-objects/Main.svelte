@@ -11,6 +11,7 @@
 
     type Car = { model: string, manufacturer: string }
     type Row = { firstname: string, lastname: string, country: string, car: Car[]}
+    
 </script>
 
 
