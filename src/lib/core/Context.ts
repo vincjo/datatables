@@ -67,7 +67,11 @@ export default class Context
                     $filters.forEach(localFilter => {
                         return $rawRows = $rawRows.filter( row => {
                             const entry = localFilter.filterBy(row)
-                            if (!localFilter.value) return true
+                            if (
+                                localFilter.value === null || 
+                                localFilter.value === undefined ||
+                                localFilter.value === ''
+                            ) return true
                             return this.matches(entry, localFilter.value, localFilter.compare)
                         })
                     })
@@ -80,7 +84,7 @@ export default class Context
         )
     }
 
-    private matches(entry:string|Object|number|null, value: string|number, compare: Function = check.contains) 
+    private matches(entry:string|Object|number|null, value: string|number, compare: Function = null) 
     {
         if (!entry && compare) {
             return compare(entry, value)
@@ -91,6 +95,7 @@ export default class Context
                 return this.matches(entry[k], value, compare)
             })
         }
+        if (!compare) return check.contains(entry, value)
         return compare(entry, value)
     }
 

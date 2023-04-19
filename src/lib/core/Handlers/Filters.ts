@@ -16,7 +16,7 @@ export default class Filters
     {
         const parsed = this.parse(filterBy)
         this.filters.update(store => {
-            const filter = { filterBy: parsed.fn, value: value, identifier: parsed.identifier, compare: comparator ?? check.contains } 
+            const filter = { filterBy: parsed.fn, value: value, identifier: parsed.identifier, compare: comparator } 
             store = store.filter(item => { return item.identifier !== parsed.identifier && item.value.length > 0 })
             store.push(filter)
             return store
@@ -25,14 +25,14 @@ export default class Filters
 
     public remove(): void
     {
-        this.filters.update(store => store = [])
+        this.filters.set([])
     }
 
     private parse(filterBy: Function | string): { fn: Function, identifier: string }
     {
         if (typeof (filterBy) === 'string') {
             return {
-                fn: (row:Object) => row[filterBy],
+                fn: (row: Object) => row[filterBy],
                 identifier: filterBy.toString()
             }
         }

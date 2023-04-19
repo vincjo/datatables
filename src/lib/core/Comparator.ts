@@ -4,6 +4,9 @@ const stringify = (value: string | number | boolean = null) => {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
 }
+const isNull = (entry: any) => {
+    if (entry === null || entry === undefined) return true
+}
 
 export const check = {
 
@@ -24,27 +27,33 @@ export const check = {
     },
 
     isGreaterThan: (entry: number, value: number) => {
+        if (isNull(entry)) return false
         return entry > value
     },
 
     isGreaterThanOrEqualTo: (entry: number, value: number) => {
+        if (isNull(entry)) return false
         return entry >= value
     },
 
     isLessThan: (entry: number, value: number) => {
+        if (isNull(entry)) return false
         return entry < value
     },
 
     isLessThanOrEqualTo: (entry: number, value: number) => {
+        if (isNull(entry)) return false
         return entry <= value
     },
 
     isBetween: (entry: number, value: [min: number, max: number]) => {
+        if (isNull(entry)) return false
         const [min, max] = value
         return entry >= min && entry <= max
     },
 
     isStrictlyBetween: (entry: number, value: [min: number, max: number]) => {
+        if (isNull(entry)) return false
         const [min, max] = value
         return entry > min && entry < max
     },
