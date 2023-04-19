@@ -54,7 +54,7 @@ export default [
         "firstname": "Camille",
         "lastname": "Mercier",
         "country": "Malawi",
-        "car": []
+        "car": null
     },
     {
         "firstname": "Séverine",
@@ -92,7 +92,7 @@ export default [
         "firstname": "Émeric",
         "lastname": "Louis",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Absalon",
@@ -142,13 +142,13 @@ export default [
         "firstname": "Bénigne",
         "lastname": "Rey",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Hubert",
         "lastname": "Dufour",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Carine",
@@ -421,7 +421,7 @@ export default [
         "firstname": "Hédelin",
         "lastname": "Olivier",
         "country": "Burundi",
-        "car": []
+        "car": null
     },
     {
         "firstname": "Olympe",
@@ -472,7 +472,7 @@ export default [
         "firstname": "Annette",
         "lastname": "Garcia",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Jonas",
@@ -585,19 +585,19 @@ export default [
         "firstname": "Matthias",
         "lastname": "Fabre",
         "country": "Gambia",
-        "car": []
+        "car": null
     },
     {
         "firstname": "Améliane",
         "lastname": "Richard",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Élzéar",
         "lastname": "Faure",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Priscille",
@@ -730,19 +730,19 @@ export default [
         "firstname": "Vital",
         "lastname": "Pierre",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Violette",
         "lastname": "Lefevre",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Brunehaut",
         "lastname": "Girard",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Bernard",
@@ -792,7 +792,7 @@ export default [
         "firstname": "Guilhemine",
         "lastname": "Lecomte",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Ansbert",
@@ -811,7 +811,7 @@ export default [
         "firstname": "Aurèle",
         "lastname": "Louis",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Mélissandre",
@@ -843,7 +843,7 @@ export default [
         "firstname": "Diane",
         "lastname": "Legrand",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Scholastique",
@@ -969,7 +969,7 @@ export default [
         "firstname": "Guenièvre",
         "lastname": "Poirier",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Innocent",
@@ -1038,13 +1038,13 @@ export default [
         "firstname": "Mélisande",
         "lastname": "Guerin",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Acacie",
         "lastname": "Moulin",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Rachid",
@@ -1069,13 +1069,13 @@ export default [
         "firstname": "Firmin",
         "lastname": "Moulin",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Cléandre",
         "lastname": "Berger",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Alphée",
@@ -1271,7 +1271,7 @@ export default [
         "firstname": "Lydie",
         "lastname": "Marty",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Tristan",
@@ -1416,7 +1416,7 @@ export default [
         "firstname": "Bertrand",
         "lastname": "Hubert",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Japhet",
@@ -1517,13 +1517,13 @@ export default [
         "firstname": "Lydie",
         "lastname": "Dubois",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Arsinoé",
         "lastname": "Rey",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Johan",
@@ -1604,7 +1604,7 @@ export default [
         "firstname": "Raymonde",
         "lastname": "Lemoine",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Ursule",
@@ -1743,7 +1743,7 @@ export default [
         "firstname": "Hermine",
         "lastname": "Petit",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Angeline",
@@ -1787,7 +1787,7 @@ export default [
         "firstname": "Élise",
         "lastname": "Laine",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Aube",
@@ -1869,7 +1869,7 @@ export default [
         "firstname": "Archange",
         "lastname": "Marchal",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Aymonde",
@@ -1988,13 +1988,13 @@ export default [
         "firstname": "Aline",
         "lastname": "Lemaire",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Mayeul",
         "lastname": "Paul",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Aymon",
@@ -2025,7 +2025,7 @@ export default [
         "firstname": "Armand",
         "lastname": "Dupuis",
         "country": "France",
-        "car": []
+        "car": null
     },
     {
         "firstname": "Arnaude",
@@ -2075,7 +2075,7 @@ export default [
         "firstname": "Adrastée",
         "lastname": "Collet",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Achille",
@@ -2175,13 +2175,13 @@ export default [
         "firstname": "Muriel",
         "lastname": "Lacroix",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Hugues",
         "lastname": "Colin",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Béranger",
@@ -2212,7 +2212,7 @@ export default [
         "firstname": "Hélène",
         "lastname": "Rodriguez",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Alexine",
@@ -2231,7 +2231,7 @@ export default [
         "firstname": "Hugues",
         "lastname": "Dupont",
         "country": "Netherlands Antilles",
-        "car": []
+        "car": null
     },
     {
         "firstname": "Hermine",
@@ -2256,7 +2256,7 @@ export default [
         "firstname": "Claudien",
         "lastname": "Pons",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Aimé",
@@ -2319,7 +2319,7 @@ export default [
         "firstname": "Georges",
         "lastname": "Lefevre",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Eva",
@@ -2445,7 +2445,7 @@ export default [
         "firstname": "Éliane",
         "lastname": "Faure",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Léopoldine",
@@ -2602,7 +2602,7 @@ export default [
         "firstname": "Douce",
         "lastname": "Dupuy",
         "country": "Vanuatu",
-        "car": []
+        "car": null
     },
     {
         "firstname": "Aleth",
@@ -2640,7 +2640,7 @@ export default [
         "firstname": "Laure",
         "lastname": "Roger",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Jérémie",
@@ -2741,7 +2741,7 @@ export default [
         "firstname": "Amante",
         "lastname": "Barbier",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Adegrine",
@@ -2760,7 +2760,7 @@ export default [
         "firstname": "Armelle",
         "lastname": "Jacquet",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Ghislain",
@@ -2792,7 +2792,7 @@ export default [
         "firstname": "Yoann",
         "lastname": "Lemaire",
         "country": "Slovakia (Slovak Republic)",
-        "car": []
+        "car": null
     },
     {
         "firstname": "Guérin",
@@ -2836,7 +2836,7 @@ export default [
         "firstname": "Adalric",
         "lastname": "Leroy",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Réjean",
@@ -2861,7 +2861,7 @@ export default [
         "firstname": "Albane",
         "lastname": "Roy",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Bénigne",
@@ -2918,19 +2918,19 @@ export default [
         "firstname": "Marthe",
         "lastname": "Fabre",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Hincmar",
         "lastname": "Brunet",
         "country": "Saint Pierre and Miquelon",
-        "car": []
+        "car": null
     },
     {
         "firstname": "Adalard",
         "lastname": "Durand",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Maxime",
@@ -2974,7 +2974,7 @@ export default [
         "firstname": "Rebecca",
         "lastname": "Breton",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Lambert",
@@ -3075,7 +3075,7 @@ export default [
         "firstname": "Thierry",
         "lastname": "Charpentier",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Aimée",
@@ -3119,7 +3119,7 @@ export default [
         "firstname": "Julie",
         "lastname": "Robert",
         "country": null,
-        "car": []
+        "car": null
     },
     {
         "firstname": "Pépin",

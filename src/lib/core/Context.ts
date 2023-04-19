@@ -52,10 +52,7 @@ export default class Context
                     $rawRows = $rawRows.filter( row => {
                         const scope = $globalSearch.scope ?? Object.keys(row)
                         return scope.some( key => {
-                            if (row[key]) {
-                                return this.matches(row[key], $globalSearch.value)
-                            }
-                            return ''
+                            return this.matches(row[key], $globalSearch.value)
                         })
                     })
                     this.pageNumber.set(1)

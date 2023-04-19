@@ -66,6 +66,7 @@ export default class Rows
                 if (typeof a === 'boolean') return a === false ? 1 : -1
                 if (typeof a === 'string') return a.localeCompare(b)
                 if (typeof a === 'number') return a - b
+                if (typeof a === 'object') return JSON.stringify(a).localeCompare(JSON.stringify(b))
                 else return String(a).localeCompare(String(b))
             })
             return store
@@ -88,6 +89,7 @@ export default class Rows
                 if (typeof b === 'boolean') return b === false ? 1 : -1
                 if (typeof b === 'string') return b.localeCompare(a)
                 if (typeof b === 'number') return b - a
+                if (typeof b === 'object') return JSON.stringify(b).localeCompare(JSON.stringify(a))
                 else return String(b).localeCompare(String(a))
             })
 

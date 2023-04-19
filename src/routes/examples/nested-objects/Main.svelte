@@ -13,6 +13,7 @@
     type Row = { firstname: string, lastname: string, country: string, car: Car[]}
 
     const callback = (row: Row) => {
+        if (!row.car) return []
         const arr = row.car.map( (car: Car) => {
             return `${car.model} (${car.manufacturer})`
         })
@@ -28,7 +29,7 @@
                 <Th {handler} orderBy="firstname">First Name</Th>
                 <Th {handler} orderBy="lastname">Last Name</Th>
                 <Th {handler} orderBy="country">Country</Th>
-                <Th {handler} orderBy={row => callback(row)}>Car</Th>
+                <Th {handler} orderBy="car">Car</Th>
             </tr>
             <tr>
                 <ThFilter {handler} filterBy="firstname"/>
@@ -44,6 +45,9 @@
                 <td>{row.lastname}</td>
                 <td>{@html row.country ?? '<code>null</code>'}</td>
                 <td class="list">
+                    {#if !row.car}
+                        <code>null</code>
+                    {:else}
                     <ul>
                         {#each row.car as car}
                             <li style:color="{car.hex}">
@@ -51,6 +55,7 @@
                             </li>
                         {/each}
                     </ul>
+                    {/if}
                 </td>
             </tr>
         {/each}
