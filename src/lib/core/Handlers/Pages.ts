@@ -1,5 +1,5 @@
 import type Context from '../Context'
-import type { Writable, Readable } from 'svelte/store'
+import { type Writable, type Readable, get } from 'svelte/store'
 
 export default class Pages
 {
@@ -28,8 +28,8 @@ export default class Pages
         this.pageNumber.update( store => {
             const $rowsPerPage = this.getRowsPerPage()
             if ($rowsPerPage) {
-                const $rowsTotal = this.getTotalRowCout()
-                if ( number >= 1 && number <= Math.ceil($rowsTotal / $rowsPerPage) ) {
+                const total = get(this.rowCount).total
+                if ( number >= 1 && number <= Math.ceil(total / $rowsPerPage) ) {
                     store = number
                     this.triggerChange.update( store => { return store + 1 })
                 }
@@ -40,28 +40,14 @@ export default class Pages
 
     public previous(): void
     {
-        const number = this.getPageNumber() - 1
+        const number = get(this.pageNumber) - 1
         this.goTo(number)
     }
 
     public next(): void
     {
-        const number = this.getPageNumber() + 1
+        const number = get(this.pageNumber) + 1
         this.goTo(number)
-    }
-
-    private getPageNumber(): number
-    {
-        let value = 1
-        this.pageNumber.subscribe(store => value = store)
-        return value
-    }
-
-    private getTotalRowCout(): number
-    {
-        let value = 0
-        this.rowCount.subscribe(store => value = store.total)
-        return value
     }
 
     private getRowsPerPage(): number|null

@@ -37,7 +37,7 @@ export default class Rows
     public sort(orderBy: Function | string): void
     {
         if (!orderBy) return
-        const sorted = this.getSorted()
+        const sorted = get(this.sorted)
         const parsed = this.parse(orderBy)
 
         if (sorted.identifier !== parsed.identifier) {
@@ -107,7 +107,7 @@ export default class Rows
                 default: return this.sort(params.orderBy)
             }
         }
-        const sorted = this.getSorted()
+        const sorted = get(this.sorted)
         if (sorted.identifier) {
             return this.applySorting({
                 orderBy: sorted.fn,
@@ -121,7 +121,7 @@ export default class Rows
     {
         if (typeof (orderBy) === 'string') {
             return {
-                fn: (row:any) => row[orderBy],
+                fn: (row: any) => row[orderBy],
                 identifier: orderBy.toString()
             }
         }
@@ -129,13 +129,6 @@ export default class Rows
             fn: orderBy,
             identifier: orderBy.toString()
         }
-    }
-
-    private getSorted(): Sorted
-    {
-        let $sorted: Sorted
-        this.sorted.subscribe( store => $sorted = store )
-        return $sorted
     }
 
     public select(id: any)

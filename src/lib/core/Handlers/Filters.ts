@@ -1,6 +1,5 @@
 
 import type Context from '../Context'
-import { check } from '../Comparator'
 import type { Writable } from 'svelte/store'
 
 export default class Filters
