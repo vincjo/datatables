@@ -8,7 +8,7 @@
 
     const handler = new DataHandler(myData, { rowsPerPage: 20 })
 
-    $: myData, handler.setRows($myData)
+    $: myData, handler.setRows(myData)
 </script>
 ````
 
