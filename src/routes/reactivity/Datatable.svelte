@@ -35,7 +35,7 @@
         <table bind:this={element}>
             <thead>
                 <tr>
-                    <th></th>
+                    <Th {handler}/>
                     <Th {handler} orderBy="id">ID</Th>
                     <Th {handler} orderBy="first_name">First name</Th>
                     <Th {handler} orderBy="last_name">Last name</Th>
@@ -72,20 +72,18 @@
         display: inline-block;
         border: 1px dashed var(--secondary);
         border-radius: 16px;
-        padding: 32px 32px 0 32px;
+        padding: 0;
     }
     section {
-        width: 600px;
+        max-width: 800px;
         height: 400px;
     }
     thead{
         background:#fff;
     }
     tbody td{
-        padding:4px;
-    }
-    tbody tr:nth-child(even){
-        background:#fafafa;
+        padding:4px 20px;
+        border: 1px solid #f5f5f5;
     }
     tbody tr{
         transition:all, 0.2s;
@@ -100,8 +98,12 @@
         cursor:pointer;
         color: var(--primary);
     }
+    button.create {
+        margin: 8px;
+        border-radius: 8px;
+    }
     button.create i {
-        margin: 0 8px 0 0;
+        margin: 0 8px 0 0px;
     }
     button:hover {
         background: #eee;
@@ -109,12 +111,12 @@
     table button {
         width: 32px;
         height: 32px;
-        margin: 0 4px;
+        margin: 0 2px;
         border-radius: 50%;
         background: #f5f5f5;
     }
     button i {
         color: var(--primary);
-        font-size: 20px;
+        font-size: 18px;
     }
 </style>

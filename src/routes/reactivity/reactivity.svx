@@ -4,11 +4,11 @@
 ````svelte
 <script lang="ts">
     import { Datahandler } from '@vincjo/datatables'
-    import { myData } from '$lib/stores'
+    export let myData
 
-    const handler = new DataHandler($myData, { rowsPerPage: 20 })
+    const handler = new DataHandler(myData, { rowsPerPage: 20 })
 
-    $: $myData, handler.setRows($myData)
+    $: myData, handler.setRows($myData)
 </script>
 ````
 
@@ -19,19 +19,19 @@
 ````svelte
 <script lang="ts">
     import { Datahandler } from '@vincjo/datatables'
-    import { myData } from '$lib/stores'
+    export let myData
 
     let tableElement: HTMLElement | undefined
 
-    const handler = new DataHandler($myData, { rowsPerPage: 20 })
+    const handler = new DataHandler(myData, { rowsPerPage: 20 })
 
-    $: $myData, update()
+    $: myData, update()
 
 
     const update = () => {
         if (tableElement) {
             const scrollTop = tableElement.parentNode.scrollTop
-            handler.setRows($myData)
+            handler.setRows(myData)
             setTimeout(() => {
                 tableElement.parentNode.scrollTop = scrollTop
             }, 2)
@@ -47,10 +47,6 @@
 
 ````
 
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
 
 
 <style>
@@ -61,5 +57,8 @@
         letter-spacing: .01em;
         color: var(--primary);
         font-weight: 200;
+    }
+    pre {
+        max-width: 720px;
     }
 </style>

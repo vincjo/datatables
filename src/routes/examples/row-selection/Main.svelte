@@ -1,7 +1,7 @@
 <script lang="ts">
     import myData from '$data/data'
     import {
-        DataHandler,
+        DataHandler, check,
         Datatable,
         Th, ThFilter
     } from '$lib/core'
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <th class="selection"/>
-                <ThFilter {handler} filterBy="id"/>
+                <ThFilter {handler} filterBy="id" comparator={check.isEqualTo}/>
                 <ThFilter {handler} filterBy="first_name"/>
                 <ThFilter {handler} filterBy="last_name"/>
                 <ThFilter {handler} filterBy="email"/>
@@ -63,14 +63,12 @@
     }
     thead th.selection {
         width: 48px;
-        padding-left: 16px;
+        padding-left: 8px;
         border-bottom: 1px solid #e0e0e0;
     }
-    tbody td{
-        padding:4px;
-    }
-    tbody tr:nth-child(even){
-        background:#fafafa;
+    tbody td {
+        border: 1px solid #f5f5f5;
+        padding: 4px 20px;
     }
     tbody tr{
         transition:all, 0.2s;
@@ -81,6 +79,9 @@
     tbody tr.active {
         background: var(--primary-lighten-1)
     }
+    tbody tr.active:hover {
+        background: var(--primary-lighten-2)
+    }
     td :global(b) {
         font-weight: normal;
         color: #bdbdbd;
@@ -88,6 +89,6 @@
         font-size: 11px;
     }
     td.selection {
-        padding-left: 16px;
+        padding-left: 24px;
     }
 </style>

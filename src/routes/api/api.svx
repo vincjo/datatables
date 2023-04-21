@@ -311,26 +311,32 @@
 
 
 
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
-
 
 
 <style>
     .flex{display:flex;justify-content:flex-start;align-items:flex-start;flex-wrap:wrap;}
-    h1{font-size:32px;color:var(--primary);font-family:Arial, Helvetica;font-weight:normal;}
-    h2{font-size:48px;color:var(--active-dark);font-weight:400;margin:80px 0 8px 0;}
+    h1{font-size:48px;color:var(--primary);font-weight:normal;}
+    h2{font-size:48px;color:var(--secondary);font-weight:400;margin:80px 0 8px 0;}
     a.anchor{display:block;margin-top:80px;}
     p{margin-right:24px;}
 
     pre.language-typescript{display:inline;padding:4px 16px;}
 
-    blockquote{display:inline-block;margin:0;background:#eee;border-radius:8px;padding:4px 8px;}
+    blockquote{
+        position:relative;
+        overflow: auto;
+        white-space: nowrap;
+        display:inline-block;
+        margin:0;
+        /* width: 100%; */
+        background:#eee;
+        border-radius:8px;
+        padding:4px 8px;
+    }
     blockquote p{padding:0;margin:0;color:#ad1457;font-family:monospace;}
     blockquote strong{color:#00695c;font-family:JetBrains}
     blockquote em{color:#ef6c00;font-style:normal;font-family:Helvetica;}
+    @media (max-width: 800px) { 
+        blockquote { width: 100%; }
+    }
 </style>

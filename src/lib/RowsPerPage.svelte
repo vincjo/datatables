@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { DataHandler } from '$lib/core'
     export let handler: DataHandler
+    export let small = false
 
     const rowsPerPage = handler.getRowsPerPage()
 
@@ -9,7 +10,9 @@
 
 
 <aside>
-    <span>{handler.i18n.show}</span>
+    {#if !small}
+        <span>{handler.i18n.show}</span>
+    {/if}
     <select bind:value={$rowsPerPage} on:change={() => handler.setPage(1)}>
         {#each options as option}
             <option value={option}>
@@ -17,7 +20,9 @@
             </option>
         {/each}
     </select>
-    <span>{handler.i18n.entries}</span>
+    {#if !small}
+        <span>{handler.i18n.entries}</span>
+    {/if}
 </aside>
 
 
@@ -27,7 +32,7 @@
         justify-content:flex-start;
         align-items: center;
         height:32px;
-        color:#616161;
+        color:#757575;
     }
     select{
         margin:0 4px;

@@ -19,7 +19,7 @@
 <CopyButton code={code} top={'56px'}/>
 
 <section>
-    <nav class="thin-scrollbar">
+    <nav class="thin-scrollbar-darken">
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <ul>
             {#each components as component}

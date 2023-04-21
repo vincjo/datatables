@@ -1,10 +1,10 @@
 <script>
-    import { slide, fade } from 'svelte/transition'
+    import { slide, fade, fly } from 'svelte/transition'
     import pages from './Nav'
     import { getPath, url, anchor } from '$utils/page'
 </script>
 
-<nav class="thin-scrollbar">
+<nav class="thin-scrollbar" transition:fly={{ duration: 200, x: -200 }}>
     <a href="/datatables/home">
         <article>
             <aside transition:fade={{ duration:100 }}>
@@ -20,10 +20,13 @@
         <a href="{getPath(page.path)}">
             <h2 class:active={$url === getPath(page.path) || (getPath(page.path) !== '/' && $url.includes(getPath(page.path)))}>
                 {page.name}
+                {#if page.pages || page.anchors}
+                    <i class="micon">keyboard_arrow_down</i>
+                {/if}
             </h2>
         </a>
         {#if page.pages && $url.includes(page.path)}
-        <ul transition:slide={{ duration:200}}>
+        <ul transition:slide|local={{ duration:200}}>
             {#each page.pages as subpage}
                 <a href="{getPath(page.path + subpage.path)}">
                     <li class:active={$url === getPath(page.path + subpage.path)}>
@@ -56,14 +59,45 @@
 	aside h1 {font-size:16px;line-height:15px; text-align:left; font-weight:400; margin: 0;color:#333 }
 	aside img {width:48px;margin:0 8px;}
 
-    h2{color:#333;font-weight:200;margin:0;font-size:32px;line-height:40px;transition:all,0.1s;}
+    h2{color:#333;font-weight:200;margin:0;font-size:32px;line-height:40px;transition:all,0.1s;white-space: nowrap;}
+    h2 i {
+        font-size: 18px;
+    }
+    h2:not(.active) i {
+        color: #bdbdbd;
+    }
     h2:hover{font-weight:600;color:#676778;}
     h2.active{color:var(--primary);font-weight:600;}
     a{text-decoration:none;}
-    ul{margin:8px 0 0 0;list-style-type:none;background:#fff;padding:0 16px 0 0;}
-    ul li{display:block;margin:0;background:#fff;transition:all,0.2s;padding:4px;font-size:16px;color:#676778;font-weight:400;line-height:24px;border-radius:2px;border:1px solid transparent;border-right:4px solid transparent;}
-    ul li:hover{font-weight:bold;color:var(--label);}
-    ul li.active{color:var(--active-dark);font-weight:bold;background:#f5f5f5;border:1px solid #e0e0e0;border-right:4px solid var(--active-dark)}
+    ul{
+        margin:4px 0 8px 0;
+        list-style-type:none;
+        background:#fff;
+        padding:0 16px 0 0;
+        border-left: 1px dotted #bdbdbd;
+    }
+    ul li{
+        display:block;
+        background:#fff;
+        transition:all,0.2s;
+        padding:4px;
+        font-size:16px;
+        color:#676778;
+        font-weight:400;
+        line-height:24px;
+        border-radius:2px;
+        border:1px solid transparent;
+        border-right:4px solid transparent;
+        border-top: 1px solid #eee;
+    }
+    ul li:hover{font-weight:bold;background: #fafafa;}
+    ul li.active{
+        color:var(--secondary);
+        font-weight:bold;
+        background:#f5f5f5;
+        /* border:1px solid #e0e0e0; */
+        border-right:4px solid var(--secondary)
+    }
     /* ul li.active a {background:#fafafa;} */
     ul a{display:block;text-decoration:none;color:inherit;padding:0px 8px;}
 

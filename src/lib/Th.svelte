@@ -2,6 +2,7 @@
     import type { DataHandler } from '$lib/core'
     export let handler: DataHandler
     export let orderBy = null
+    export let align: 'left' | 'right' | 'center' = 'left'
     const identifier = orderBy ? orderBy.toString() : orderBy
 
     const sorted = handler.getSorted()
@@ -13,7 +14,7 @@
     class:sortable={orderBy}
     class:active={$sorted.identifier === identifier}
 >
-    <div class="flex">
+    <div class="flex" style:justify-content={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'}>
         <strong>
             <slot/>
         </strong>
@@ -30,22 +31,28 @@
         background:inherit;
         margin:0;
         white-space:nowrap;
-        padding:0 4px;
+        padding:8px 4px;
+        font-size:13px;
         user-select: none;
         border-bottom:1px solid #e0e0e0;
     }
     th.sortable {
         cursor:pointer;
     }
+    th strong {
+        white-space: pre-wrap;
+        font-size: 13.5px;
+        line-height: 16px;
+    }
     th.sortable div.flex{
-        padding:8px 0 8px 16px;
+        padding:0 0 0 16px;
         display:flex;
-        justify-content:center;
-        align-items:center;
+        align-items: center;
         height:100%;
     }
     th.sortable span {
         padding-left:8px;
+        padding-right: 16px;
     }
     th.sortable span:before,
     th.sortable span:after {

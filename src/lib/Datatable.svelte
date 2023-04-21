@@ -15,6 +15,8 @@
     let element: HTMLElement | undefined
     let clientWidth = 1000
 
+    const height = (search || rowsPerPage ? 48 : 8) + (rowCount || pagination ? 48 : 8)
+
     const triggerChange = handler.getTriggerChange()
     $: $triggerChange, scrollTop()
 
@@ -30,11 +32,11 @@
             <Search {handler}/>
         {/if}
         {#if rowsPerPage}
-            <RowsPerPage {handler}/>
+            <RowsPerPage {handler} small={clientWidth < 600}/>
         {/if}
     </header>
 
-    <article bind:this={element}>
+    <article bind:this={element}  style="height:calc(100% - {height}px)">
         <slot/>
     </article>
 
@@ -56,7 +58,6 @@
     }
 
     section :global(table) {
-        text-align:center;
         border-collapse:separate;
         border-spacing:0;
         width:100%;
@@ -88,7 +89,7 @@
 
     article {
         position:relative;
-        height:calc(100% - 96px);
+        /* height:calc(100% - 96px); */
         overflow:auto;
         scrollbar-width:thin;
     }

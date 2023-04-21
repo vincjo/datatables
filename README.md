@@ -11,12 +11,13 @@
 
 # Presentation
 
-This package provides an API to handle data and related events : rows, filters, pagination, search, sort...
+This lib provides an API to dynamically interact with iterable data: filtering, paging, sorting, selecting...
 
 - **Headless** by design <br>
 - **Typescript** support <br>
-- **SSR** compatibility
+- **SSR** friendly
 - no dependencies
+
 
 Also provides some sample components, which you can grab and customize in your own project.
 

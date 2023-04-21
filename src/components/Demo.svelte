@@ -17,24 +17,22 @@
         <li class:active={current === 'code'}   on:click={() => current = 'code'  }>Code</li>
         <li class:active={current === 'data'}   on:click={() => current = 'data'  }>Data</li>
     </ul>
-    <section class="thin-scrollbar" class:code={current === 'code' || current === 'data'} class:table={current === 'result'}>
         {#if current === 'result'}
-            <div class="table z-depth-2" in:fade={{ duration:200 }} style="width:{width};" class:scroll-y={scrollY}>
+            <article class="table" in:fade={{ duration:200 }} style="max-width:{width};" class:scroll-y={scrollY}>
                 <slot></slot>
-            </div>
+            </article>
         {:else if current === 'code'}
-            <div class="code">
+            <article class="code">
                 <DemoCode {components}/>
-            </div>
+            </article>
         {:else}
-            <CopyButton code={dataset}/>
-            <div class="code thin-scrollbar">
+        <article class="code thin-scrollbar-darken">
+                <CopyButton code={dataset}/>
                 <pre class="language-javascript">
 {@html Prism.highlight(dataset, Prism.languages.javascript)}
                 </pre>
-            </div>
+            </article>
         {/if}
-    </section>
 </div>
 
 <style>
@@ -42,9 +40,22 @@
     ul{list-style-type:none;padding:0;margin:0;display:flex;margin-bottom:8px;}
     li{display:block;font-size:16px;color:#676778;line-height:32px;padding:8px 0 0 0;margin:0 24px 0 16px;font-weight:bold;border-bottom:2px solid transparent;transition:color, 0.1s;cursor:pointer;}
     li.active{color:#b71540;border-bottom:2px solid #b71540;}
-    section{min-height:480px;height:calc(100vh - 176px);position:relative;overflow:auto;background:var(--hljs);border-radius:8px;}
-    section.table{background:#eee;padding:0 10%;border-radius:8px;}
-    div.table{background:#fff;padding:0;border-radius:8px;margin:24px auto 24px auto;height:auto;}
-    div.table.scroll-y{height:calc(100vh - 224px);min-height:432px;}
-    div.code{padding:0;background:#2f2f2f;position:relative;overflow:auto;}
+
+    article {
+        border-radius:8px;
+        position:relative;
+    }
+
+    article.table {
+        border: 1px solid #e0e0e0;
+        max-width: 800px;
+    }
+    article.table.scroll-y {
+        height: 480px;
+    }
+    article.code {
+        height:480px;
+        background:var(--hljs);
+        overflow:auto;
+    }
 </style>

@@ -15,4 +15,7 @@
 	div{display:flex;margin-right:16px;float:right;text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(255,255,255,.5);background:rgba(255,255,255,0.7);border-radius:8px;}
 	img{float:left;padding:8px 8px;width:40px;}
 	span{padding-right:8px;}
+	@media (max-width: 800px) { 
+        header{display: none;}
+    }
 </style>

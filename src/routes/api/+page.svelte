@@ -9,5 +9,5 @@
 
 
 <style>
-    section{margin-left:32px;max-width:800px}
+    section{max-width:800px}
 </style>

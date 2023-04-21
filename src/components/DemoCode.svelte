@@ -52,7 +52,7 @@
     </nav>
 
 
-    <aside class="thin-scrollbar">
+    <aside class="thin-scrollbar-darken">
         <pre class="language-svelte">
 {@html Prism.highlight(parse(code), Prism.languages.svelte, 'svelte')}
         </pre>
@@ -61,16 +61,40 @@
 
 
 <style>
-    section{position:relative;height:100%;}
-    nav{position:absolute;top:0;left:0;bottom:0;width:216px;background:#212121;border:none;box-shadow:none;padding:32px 0px;}
+    section{position:relative;height:100%;width: 100%;}
+    nav{
+        position:absolute;
+        top:0;left:0;bottom:0;
+        width:200px;
+        background:#212121;
+        border:none;
+        box-shadow:none;
+        padding:32px 0px;
+    }
     ul{color:#9e9e9e;margin:0;padding:0;list-style-type:none;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size:12px;}
     ul ul{padding-left:16px;}
     li{cursor:pointer;padding:4px 8px;transition:all,0.2s;display:flex;justify-content:flex-start;align-items:center;}
     li:hover{background:#000;}
     li.active{color:#e0e0e0;background:#000;}
 
-    aside{position:absolute;top:0;left:216px;bottom:0;right:0;overflow:auto;}
+    aside{
+        position:absolute;
+        left:200px;
+        top:0;
+        bottom:0;
+        right:0;
+        overflow:auto;
+        background: var(--hljs);
+    }
+    pre {
+        margin: 0;
+    }
 
     li i{width:16px;height:16px;margin:0 4px 0 0;color:#9e9e9e;}
     li.active i{color:var(--primary)}
+
+    @media (max-width: 800px) { 
+        nav { display: none; }
+        aside { left: 0; }
+    }
 </style>

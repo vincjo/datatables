@@ -41,11 +41,9 @@
     thead{
         background:#fff;
     }
-    tbody td{
-        padding:4px;
-    }
-    tbody tr:nth-child(even){
-        background:#fafafa;
+    tbody td {
+        border: 1px solid #f5f5f5;
+        padding: 4px 20px;
     }
     tbody tr{
         transition:all, 0.2s;
