@@ -19,7 +19,7 @@ This lib provides an API to dynamically interact with iterable data: filtering, 
 - no dependencies
 
 
-Also provides some sample components, which you can grab and customize in your own project.
+Also provides some demo components, which you can grab and customize in your own project.
 
 
 ## Sample code
