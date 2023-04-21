@@ -3,8 +3,8 @@
     <p align="center">
         <h1 align="center" style="font-size:32px;margin:0;border:none;">svelte simple datatables</h1>
         <p style="color:#eee">A toolkit for creating datatable components with Svelte</p>
-        <img src="https://img.shields.io/npm/v/@vincjo/datatables?color=%23b71540" alt="npm version"/>
-        <img src="https://img.shields.io/github/license/vincjo/datatables?color=b71540" alt="last commit"/>
+        <img src="https://img.shields.io/npm/v/@vincjo/datatables?color=%23c2185b" alt="npm version"/>
+        <img src="https://img.shields.io/github/license/vincjo/datatables?color=c2185b" alt="last commit"/>
     </p>
 </div>
 
