@@ -56,6 +56,7 @@
 <style>
     aside {
         height: 440px;
+        min-width: 240px;
         margin: 16px;
         border: 1px dashed var(--secondary);
         border-radius: 8px;

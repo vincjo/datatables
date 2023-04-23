@@ -16,6 +16,6 @@
 	img{float:left;padding:8px 8px;width:40px;}
 	span{padding-right:8px;}
 	@media (max-width: 800px) { 
-        header{display: none;}
+        header{position: absolute;}
     }
 </style>

@@ -38,7 +38,8 @@
 
 <style>
     section {
-        align-items: flex-start
+        align-items: flex-start;
+        flex-wrap:wrap;
     }
     ul {
         list-style-type: none;

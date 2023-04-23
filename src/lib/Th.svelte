@@ -29,9 +29,8 @@
 <style>
     th {
         background:inherit;
-        margin:0;
+        padding: 8px 20px;
         white-space:nowrap;
-        padding:8px 4px;
         font-size:13px;
         user-select: none;
         border-bottom:1px solid #e0e0e0;
@@ -45,14 +44,13 @@
         line-height: 16px;
     }
     th.sortable div.flex{
-        padding:0 0 0 16px;
+        padding:0;
         display:flex;
         align-items: center;
         height:100%;
     }
     th.sortable span {
         padding-left:8px;
-        padding-right: 16px;
     }
     th.sortable span:before,
     th.sortable span:after {

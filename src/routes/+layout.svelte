@@ -28,6 +28,7 @@
 </nav>
 <section bind:this={element}>
     <article>
+        <header></header>
         <slot/>
         <footer></footer>
     </article>
@@ -48,6 +49,10 @@
     @media (min-width: 800px) { 
         /* section{width:100%;padding:16px 24px;} */
         article{padding:0;width:100%;max-width:1200px;}
+    }
+    header {
+        width: 100%;
+        height: 4vh;
     }
     footer {
         width: 100%;
