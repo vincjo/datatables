@@ -1,37 +1,37 @@
 <script lang="ts">
-    import myData from '$data/int-bool-string'
+    import myData from '$data/data'
     import {
-        DataHandler, check,
+        DataHandler,
         Datatable,
         Th, ThFilter
     } from '$lib/core'
 
-    const handler = new DataHandler(myData, { rowsPerPage: 50 })
+    const handler = new DataHandler(myData, { rowsPerPage: 10 })
     const rows = handler.getRows()
-
 </script>
 
 
-<Datatable {handler}>
+
+<Datatable {handler} class="datatable">
     <table>
         <thead>
             <tr>
-                <Th {handler} orderBy="id">isEqualTo</Th>
-                <Th {handler} orderBy="user">startsWith</Th>
-                <Th {handler} orderBy="is_online">isTrue</Th>
+                <Th {handler} orderBy="first_name">First Name</Th>
+                <Th {handler} orderBy="last_name">Last Name</Th>
+                <Th {handler} orderBy="email">Email</Th>
             </tr>
             <tr>
-                <ThFilter {handler} filterBy="id" comparator={check.isEqualTo}/>
-                <ThFilter {handler} filterBy="user" comparator={check.startsWith}/>
-                <ThFilter {handler} filterBy="is_online" comparator={check.isTrue}/>
+                <ThFilter {handler} filterBy="first_name"/>
+                <ThFilter {handler} filterBy="last_name"/>
+                <ThFilter {handler} filterBy="email"/>
             </tr>
         </thead>
         <tbody>
         {#each $rows as row}
             <tr>
-                <td>{@html row.id ?? `<b>null</b>`}</td>
-                <td>{@html row.user ?? `<b>null</b>`}</td>
-                <td>{@html row.is_online ?? `<b>null</b>`}</td>
+                <td>{row.first_name}</td>
+                <td>{row.last_name}</td>
+                <td>{row.email}</td>
             </tr>
         {/each}
         </tbody>
@@ -41,25 +41,50 @@
 
 
 <style>
-    thead{
-        background:#fff;
+    :global(.datatable footer) {
+        border-radius: 0 0 8px 8px;
     }
-    tbody td{
-        padding:4px;
+    :global(.datatable header) {
+        border-radius: 8px 8px 0 0;
     }
-    tbody tr:nth-child(even){
-        background:#fafafa;
+    :global(.datatable *) {
+        color:#e0e0e0 !important;
+        background: #212121;
+        border-color: #616161 !important;
     }
-    tbody tr{
+    :global(.datatable * button:hover) {
+        background: #424242 !important;
+    }
+    :global(.datatable button.active) {
+        background: #000 !important;
+    }
+    :global(.datatable tbody tr:hover td) {
         transition:all, 0.2s;
+        background:#000;
     }
-    tbody tr:hover{
-        background:#f5f5f5;
-    }
-    td :global(b) {
-        font-weight: normal;
-        color: #bdbdbd;
-        font-family: JetBrains;
-        font-size: 11px;
+    :global(.datatable article::-webkit-scrollbar-track) {background: #616161;}
+    :global(.datatable article::-webkit-scrollbar-thumb) {background: #000;}
+    :global(.datatable article::-webkit-scrollbar-thumb:hover) {background: #424242;}
+    tbody td {
+        border: 1px solid #333;
+        padding: 4px 20px;
     }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

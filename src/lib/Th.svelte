@@ -13,6 +13,7 @@
     on:click={() => handler.sort(orderBy)}
     class:sortable={orderBy}
     class:active={$sorted.identifier === identifier}
+    class="{$$props.class ?? ''}"
 >
     <div class="flex" style:justify-content={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'}>
         <strong>

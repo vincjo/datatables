@@ -8,8 +8,8 @@
 </script>
 
 
-{#if small}
-    <section>
+<section class="{$$props.class ?? ''}">
+    {#if small}
         <button type="button"
             class="small"
             class:disabled={$pageNumber === 1} 
@@ -36,9 +36,7 @@
         >
             &#10093;&#10093;
         </button>
-    </section>
-{:else}
-    <section>
+    {:else}
         <button type="button"
             class:disabled={$pageNumber === 1}
             on:click={() => handler.setPage('previous')}
@@ -60,8 +58,8 @@
         >
             {@html handler.i18n.next}
         </button>
-    </section>
-{/if}
+    {/if}
+</section>
 
 
 <style>

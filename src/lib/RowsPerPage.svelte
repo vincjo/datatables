@@ -2,14 +2,13 @@
     import type { DataHandler } from '$lib/core'
     export let handler: DataHandler
     export let small = false
-
     const rowsPerPage = handler.getRowsPerPage()
 
     const options = [5, 10, 20, 50, 100]
 </script>
 
 
-<aside>
+<aside class="{$$props.class ?? ''}">
     {#if !small}
         <span>{handler.i18n.show}</span>
     {/if}

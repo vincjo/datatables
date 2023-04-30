@@ -26,7 +26,7 @@
 </script>
 
 
-<section bind:clientWidth={clientWidth}>
+<section bind:clientWidth={clientWidth} class="{$$props.class ?? ''}">
     <header class:container={search || rowsPerPage}>
         {#if search}
             <Search {handler}/>
@@ -76,15 +76,11 @@
         justify-content:space-between;
         align-items:center;
     }
-    header.container {
+    header.container, footer.container {
         height: 48px;
     }
-
     footer{ 
         border-top: 1px solid #e0e0e0;
-    }
-    footer.container {
-        height: 48px;
     }
 
     article {

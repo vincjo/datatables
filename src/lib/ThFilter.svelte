@@ -9,7 +9,7 @@
 </script>
 
 
-<th>
+<th class="{$$props.class ?? ''}">
     <input 
         style:text-align={align}
         type="text"

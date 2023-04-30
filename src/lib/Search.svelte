@@ -5,6 +5,7 @@
 </script>
 
 <input
+    class="{$$props.class ?? ''}"
     bind:value={value} 
     placeholder="{handler.i18n.search}"
     spellcheck="false"

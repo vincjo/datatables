@@ -4,7 +4,7 @@
     export let data
 </script>
 
-<h2>Test: comparator</h2>
+<h2>Test - dark table using class prop</h2>
 <Demo components={data.components} dataset={data.dataset} scrollY={true}>
     <Main/>
 </Demo>
