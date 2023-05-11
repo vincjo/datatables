@@ -1,14 +1,10 @@
 <script>
-    import Tutorial from '$components/Tutorial.svelte'
-    import Main from './Main.svelte'
-    export let data
+  import Tutorial from '$components/Tutorial.svelte';
+  import Main from './Main.svelte';
+  export let data;
 </script>
 
-
 <h2>Search</h2>
-
-
-
 
 <p>Above the table, we will now add a search bar.</p>
 
@@ -16,5 +12,5 @@
 <p>Then we place the <code>Search.svelte</code> component in it.</p>
 
 <Tutorial components={data.components} dataset={data.dataset} scrollY={false}>
-    <Main/>
+  <Main />
 </Tutorial>

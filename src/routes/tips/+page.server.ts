@@ -1,6 +1,6 @@
-import { redirect } from '@sveltejs/kit'
-import { getPath } from '$utils/page'
- 
+import { redirect } from '@sveltejs/kit';
+import { getPath } from '$utils/page';
+
 export const load = () => {
-        throw redirect(307, getPath('/tips/sticky-header'))
-}
+  throw redirect(307, getPath('/tips/sticky-header'));
+};
