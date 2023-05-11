@@ -1,9 +1,11 @@
 <script lang="ts">
+  import type { OrderBy } from '$core/Handlers/Rows';
+
   type T = $$Generic<{ [key: string]: unknown }>;
 
   import type { DataHandler } from '$lib/core';
   export let handler: DataHandler<T>;
-  export let orderBy: keyof T | null = null;
+  export let orderBy: OrderBy<T>;
   export let align: 'left' | 'right' | 'center' = 'left';
   const identifier = orderBy ? orderBy.toString() : orderBy;
 

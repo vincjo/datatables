@@ -10,6 +10,8 @@ export type Sorted = {
 };
 export type SortingParams = { locales?: string; options?: Object };
 
+export type OrderBy<T> = keyof T | ((row: T) => T[keyof T]);
+
 export default class Rows<T> {
   private rawRows: Writable<T[]>;
   private filteredRows: Readable<T[]>;
@@ -31,7 +33,7 @@ export default class Rows<T> {
     this.isAllSelected = context.isAllSelected;
   }
 
-  public sort(orderBy: Function | string): void {
+  public sort(orderBy: OrderBy<T>): void {
     if (!orderBy) return;
     const sorted = get(this.sorted);
     const parsed = this.parse(orderBy);
@@ -119,10 +121,8 @@ export default class Rows<T> {
     return;
   }
 
-  private parse(orderBy: (row: T) => T[keyof T]);
-  private parse(orderBy: keyof T);
-  private parse(orderBy: keyof T | ((row: T) => T[keyof T])) {
-    if (typeof orderBy === 'string') {
+  private parse(orderBy: OrderBy<T>) {
+    if (typeof orderBy === 'string' || typeof orderBy === 'number' || typeof orderBy === 'symbol') {
       return {
         fn: (row: T) => row[orderBy],
         identifier: orderBy.toString()

@@ -60,7 +60,7 @@ export default class DataHandler<T extends { [key: string]: unknown } = any> {
     return this.context.rowsPerPage;
   }
 
-  public sort(orderBy: (row: any | string) => any | string): void {
+  public sort(orderBy: Parameters<Rows<T>['sort']>[0]): void {
     this.setPage(1);
     this.rows.sort(orderBy);
   }

@@ -10,7 +10,7 @@
   <table>
     <thead>
       <tr>
-        <Th {handler} orderBy="first_name">First Name</Th>
+        <Th {handler} orderBy={(row) => row.first_name}>First Name</Th>
         <Th {handler} orderBy="last_name">Last Name</Th>
         <Th {handler} orderBy="email">Email</Th>
       </tr>
