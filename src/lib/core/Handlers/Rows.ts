@@ -10,17 +10,17 @@ export type Sorted = {
 };
 export type SortingParams = { locales?: string; options?: Object };
 
-export default class Rows {
-  private rawRows: Writable<any[]>;
-  private filteredRows: Readable<any[]>;
-  private rows: Readable<any[]>;
+export default class Rows<T> {
+  private rawRows: Writable<T[]>;
+  private filteredRows: Readable<T[]>;
+  private rows: Readable<T[]>;
   private triggerChange: Writable<number>;
   private sorted: Writable<Sorted>;
-  private selected: Writable<any[]>;
+  private selected: Writable<T[]>;
   private selectScope: Writable<'currentPage' | 'all'>;
   private isAllSelected: Readable<boolean>;
 
-  constructor(context: Context) {
+  constructor(context: Context<T>) {
     this.rawRows = context.rawRows;
     this.filteredRows = context.filteredRows;
     this.rows = context.rows;
@@ -69,7 +69,7 @@ export default class Rows {
     });
   }
 
-  public sortDesc(orderBy: Function | string): void {
+  public sortDesc(orderBy: ((row: T) => T[keyof T]) | keyof T): void {
     if (!orderBy) return;
     const parsed = this.parse(orderBy);
     this.sorted.set({ identifier: parsed.identifier, direction: 'desc', fn: parsed.fn });
@@ -94,7 +94,10 @@ export default class Rows {
   }
 
   public applySorting(
-    params: { orderBy: Function | string; direction?: 'asc' | 'desc' | null } | null = null
+    params: {
+      orderBy: any;
+      direction?: 'asc' | 'desc' | null;
+    } | null = null
   ) {
     if (params) {
       switch (params.direction) {
@@ -116,10 +119,12 @@ export default class Rows {
     return;
   }
 
-  private parse(orderBy: Function | string): { fn: Function; identifier: string } {
+  private parse(orderBy: (row: T) => T[keyof T]);
+  private parse(orderBy: keyof T);
+  private parse(orderBy: keyof T | ((row: T) => T[keyof T])) {
     if (typeof orderBy === 'string') {
       return {
-        fn: (row: any) => row[orderBy],
+        fn: (row: T) => row[orderBy],
         identifier: orderBy.toString()
       };
     }

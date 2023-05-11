@@ -9,9 +9,9 @@ import type { Internationalization } from '$lib';
 
 export type Params = { rowsPerPage?: number; i18n?: Internationalization };
 
-export default class DataHandler<T extends Record<string, unknown>> {
+export default class DataHandler<T extends { [key: string]: unknown } = any> {
   private context: Context<T>;
-  private rows: Rows;
+  private rows: Rows<T>;
   private pages: Pages;
   private globalSearch: GlobalSearch;
   private filters: Filters;
@@ -60,7 +60,7 @@ export default class DataHandler<T extends Record<string, unknown>> {
     return this.context.rowsPerPage;
   }
 
-  public sort(orderBy: Function | string): void {
+  public sort(orderBy: (row: any | string) => any | string): void {
     this.setPage(1);
     this.rows.sort(orderBy);
   }
@@ -76,7 +76,7 @@ export default class DataHandler<T extends Record<string, unknown>> {
     this.rows.sortAsc(orderBy);
   }
 
-  public sortDesc(orderBy: Function | string): void {
+  public sortDesc(orderBy: ((row: T) => T[keyof T]) | keyof T): void {
     this.setPage(1);
     this.rows.sortDesc(orderBy);
   }
