@@ -11,6 +11,12 @@ export interface Filter<T> {
 	identifier: string;
 }
 
+export interface RowCount {
+	total: number;
+	start: number;
+	end: number;
+}
+
 export default class Context<TRow> {
 	public rowsPerPage: Writable<number | null>;
 	public pageNumber: Writable<number>;
@@ -20,7 +26,7 @@ export default class Context<TRow> {
 	public rawRows: Writable<TRow[]>;
 	public filteredRows: Readable<TRow[]>;
 	public rows: Readable<TRow[]>;
-	public rowCount: Readable<{ total: number; start: number; end: number }>;
+	public rowCount: Readable<RowCount>;
 	public pages: Readable<number[]>;
 	public pagesWithEllipsis: Readable<number[]>;
 	public pageCount: Readable<number>;
@@ -48,7 +54,7 @@ export default class Context<TRow> {
 		this.isAllSelected = this.createIsAllSelected();
 	}
 
-	private createFilteredRows(): Readable<TRow[]> {
+	private createFilteredRows() {
 		return derived(
 			[this.rawRows, this.globalSearch, this.filters],
 			([$rawRows, $globalSearch, $filters]) => {
@@ -108,7 +114,7 @@ export default class Context<TRow> {
 		return compare(entry, value);
 	}
 
-	private createPaginatedRows(): Readable<TRow[]> {
+	private createPaginatedRows() {
 		return derived(
 			[this.filteredRows, this.rowsPerPage, this.pageNumber],
 			([$filteredRows, $rowsPerPage, $pageNumber]) => {
@@ -126,7 +132,7 @@ export default class Context<TRow> {
 		);
 	}
 
-	private createRowCount(): Readable<{ total: number; start: number; end: number }> {
+	private createRowCount() {
 		return derived(
 			[this.filteredRows, this.pageNumber, this.rowsPerPage],
 			([$filteredRows, $pageNumber, $rowsPerPage]) => {
@@ -156,7 +162,7 @@ export default class Context<TRow> {
 		});
 	}
 
-	private createPagesWithEllipsis(): Readable<number[]> {
+	private createPagesWithEllipsis() {
 		return derived([this.pages, this.pageNumber], ([$pages, $pageNumber]) => {
 			if ($pages.length <= 7) {
 				return $pages;
@@ -180,13 +186,13 @@ export default class Context<TRow> {
 		});
 	}
 
-	private createPageCount(): Readable<number> {
+	private createPageCount() {
 		return derived(this.pages, ($pages) => {
 			return $pages.length;
 		});
 	}
 
-	private createIsAllSelected(): Readable<boolean> {
+	private createIsAllSelected() {
 		return derived(
 			[this.selected, this.rows, this.filteredRows, this.selectScope],
 			([$selected, $rows, $filteredRows, $selectScope]) => {
