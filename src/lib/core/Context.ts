@@ -3,12 +3,20 @@ import type { Params } from '../DataHandler';
 import type { Sorted } from './Handlers/Rows';
 import { check } from './Comparator';
 
+export type FilterBy<T> = keyof T | ((row: T) => T[keyof T]);
+export interface Filter<T> {
+	filterBy: (row: T) => T[keyof T];
+	value: any;
+	compare: any;
+	identifier: string;
+}
+
 export default class Context<TRow> {
 	public rowsPerPage: Writable<number | null>;
 	public pageNumber: Writable<number>;
 	public triggerChange: Writable<number>;
 	public globalSearch: Writable<{ value: string | null; scope: string[] | null }>;
-	public filters: Writable<any[]>;
+	public filters: Writable<Filter<TRow>[]>;
 	public rawRows: Writable<TRow[]>;
 	public filteredRows: Readable<TRow[]>;
 	public rows: Readable<TRow[]>;
@@ -85,7 +93,7 @@ export default class Context<TRow> {
 	private matches(
 		entry: string | Record<string, any> | number | null,
 		value: string | number,
-		compare: (...args: any) => number = null
+		compare: ((...args: any) => number) | null = null
 	) {
 		if (!entry && compare) {
 			return compare(entry, value);

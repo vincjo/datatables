@@ -1,10 +1,9 @@
+import type { Filter, FilterBy } from '../Context';
 import type Context from '../Context';
 import type { Writable } from 'svelte/store';
 
-export type FilterBy<T> = keyof T | ((row: T) => T[keyof T]);
-
 export default class Filters<T> {
-	public filters: Writable<any[]>;
+	public filters: Writable<Filter<T>[]>;
 
 	constructor(context: Context<T>) {
 		this.filters = context.filters;
@@ -41,10 +40,13 @@ export default class Filters<T> {
 				fn: (row) => row[filterBy],
 				identifier: filterBy.toString()
 			};
+		} else if (typeof filterBy === 'function') {
+			return {
+				fn: filterBy,
+				identifier: filterBy.toString()
+			};
 		}
-		return {
-			fn: filterBy,
-			identifier: filterBy.toString()
-		};
+
+		throw new Error('Invalid filterBy argument');
 	}
 }
