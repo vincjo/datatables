@@ -1,9 +1,11 @@
 <script lang="ts">
+	type T = $$Generic<{ [key: string]: unknown }>;
+
 	import type { DataHandler } from '$lib/core';
 	export let handler: DataHandler;
 	export let filterBy = null;
 	export let align: 'left' | 'right' | 'center' = 'left';
-	export let comparator: Function = null;
+	export let comparator: ((...args: any) => any) | undefined;
 
 	let value = '';
 </script>

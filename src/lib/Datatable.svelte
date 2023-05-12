@@ -1,7 +1,9 @@
 <script lang="ts">
+	type T = $$Generic<{ [key: string]: unknown }>;
+
 	import { type DataHandler, Search, RowsPerPage, RowCount, Pagination } from '$lib/core';
 
-	export let handler: DataHandler;
+	export let handler: DataHandler<T>;
 
 	export let search = true;
 	export let rowsPerPage = true;
