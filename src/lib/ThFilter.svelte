@@ -5,7 +5,7 @@
 	export let handler: DataHandler;
 	export let filterBy = null;
 	export let align: 'left' | 'right' | 'center' = 'left';
-	export let comparator: ((...args: any) => any) | undefined;
+	export let comparator: ((...args: any) => any) | undefined = undefined;
 
 	let value = '';
 </script>

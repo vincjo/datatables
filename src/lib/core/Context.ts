@@ -4,9 +4,16 @@ import type { Sorted } from './Handlers/Rows';
 import { check } from './Comparator';
 
 export type FilterBy<T> = keyof T | ((row: T) => T[keyof T]);
+export type FilterValue<T, FB extends FilterBy<T>> = FB extends keyof T
+	? T[FB]
+	: FB extends (row: T) => infer V
+	? V
+	: never;
+
+export type Comparator<T> = (...args: any) => any;
 export interface Filter<T> {
 	filterBy: (row: T) => T[keyof T];
-	value: any;
+	value?: string | number;
 	compare: any;
 	identifier: string;
 }

@@ -1,8 +1,8 @@
-import Context from '$lib/core/Context';
+import Context, { type Comparator, type FilterBy, type FilterValue } from '$lib/core/Context';
 import Rows from '$lib/core/Handlers/Rows';
 import Pages from '$lib/core/Handlers/Pages';
 import GlobalSearch from '$lib/core/Handlers/GlobalSearch';
-import Filters, { type FilterBy } from '$lib/core/Handlers/Filters';
+import Filters from '$lib/core/Handlers/Filters';
 
 import type { Readable, Writable } from 'svelte/store';
 import type { Internationalization } from '$lib';
@@ -35,11 +35,11 @@ export default class DataHandler<T extends { [key: string]: unknown } = any> {
 		return this.context.rows;
 	}
 
-	public select(value: any): void {
+	public select(value: T): void {
 		this.rows.select(value);
 	}
 
-	public getSelected(): Writable<any[]> {
+	public getSelected() {
 		return this.context.selected;
 	}
 
@@ -96,12 +96,12 @@ export default class DataHandler<T extends { [key: string]: unknown } = any> {
 		this.globalSearch.remove();
 	}
 
-	public filter(
-		value: string,
+	public filter<FB extends FilterBy<T>, V extends FilterValue<T, FB>>(
+		value: V,
 		filterBy: FilterBy<T>,
-		comparator: (...args: any) => any = null
+		comparator?: Comparator<T>
 	): void {
-		return this.filters.set(value, filterBy, comparator);
+		return this.filters.set(value as string | number, filterBy, comparator);
 	}
 
 	public clearFilters(): void {

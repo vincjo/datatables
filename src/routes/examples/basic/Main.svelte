@@ -11,8 +11,8 @@
 		<thead>
 			<tr>
 				<Th {handler} orderBy="first_name">First Name</Th>
-				<Th {handler} orderBy="wrong_key">Last Name</Th>
-				<Th {handler} orderBy="e">Email</Th>
+				<Th {handler} orderBy="last_name">Last Name</Th>
+				<Th {handler} orderBy="email">Email</Th>
 			</tr>
 			<tr>
 				<ThFilter {handler} filterBy="first_name" />

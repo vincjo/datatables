@@ -23,7 +23,7 @@ export default class Filters<T> {
 				compare: comparator
 			};
 			store = store.filter((item) => {
-				return item.identifier !== parsed.identifier && item.value.length > 0;
+				return item.identifier !== parsed.identifier && item.value;
 			});
 			store.push(filter);
 			return store;
