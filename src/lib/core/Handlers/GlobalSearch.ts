@@ -1,10 +1,10 @@
 import type Context from '../Context';
 import type { Writable } from 'svelte/store';
 
-export default class Search {
+export default class Search<T> {
 	private globalSearch: Writable<{ value: string | null; scope: string[] | null }>;
 
-	constructor(context: Context) {
+	constructor(context: Context<T>) {
 		this.globalSearch = context.globalSearch;
 	}
 

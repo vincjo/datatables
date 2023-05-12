@@ -16,7 +16,7 @@ export default class Context<TRow> {
 	public pages: Readable<number[]>;
 	public pagesWithEllipsis: Readable<number[]>;
 	public pageCount: Readable<number>;
-	public sorted: Writable<Sorted>;
+	public sorted: Writable<Sorted<TRow>>;
 	public selected: Writable<TRow[]>;
 	public selectScope: Writable<'all' | 'currentPage'>;
 	public isAllSelected: Readable<boolean>;
@@ -83,9 +83,9 @@ export default class Context<TRow> {
 	}
 
 	private matches(
-		entry: string | Object | number | null,
+		entry: string | Record<string, any> | number | null,
 		value: string | number,
-		compare: Function = null
+		compare: (...args: any) => number = null
 	) {
 		if (!entry && compare) {
 			return compare(entry, value);
@@ -136,7 +136,7 @@ export default class Context<TRow> {
 		);
 	}
 
-	private createPages(): Readable<number[]> {
+	private createPages() {
 		return derived([this.rowsPerPage, this.filteredRows], ([$rowsPerPage, $filteredRows]) => {
 			if (!$rowsPerPage) {
 				return [1];

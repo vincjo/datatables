@@ -1,14 +1,14 @@
 import type Context from '../Context';
 import { type Writable, type Readable, get } from 'svelte/store';
 
-export default class Pages {
+export default class Pages<T> {
 	public pageNumber: Writable<number>;
 	public rowCount: Readable<{ total: number; start: number; end: number }>;
 	public rowsPerPage: Writable<number | null>;
 	public triggerChange: Writable<number>;
-	public pages: Readable<any[]>;
+	public pages: Readable<number[]>;
 
-	constructor(context: Context) {
+	constructor(context: Context<T>) {
 		this.pageNumber = context.pageNumber;
 		this.rowCount = context.rowCount;
 		this.rowsPerPage = context.rowsPerPage;
@@ -16,7 +16,7 @@ export default class Pages {
 		this.pages = context.pages;
 	}
 
-	public get(): Readable<any[]> {
+	public get() {
 		return this.pages;
 	}
 

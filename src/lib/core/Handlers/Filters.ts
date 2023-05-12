@@ -1,17 +1,19 @@
 import type Context from '../Context';
 import type { Writable } from 'svelte/store';
 
-export default class Filters {
+export type FilterBy<T> = keyof T | ((row: T) => T[keyof T]);
+
+export default class Filters<T> {
 	public filters: Writable<any[]>;
 
-	constructor(context: Context) {
+	constructor(context: Context<T>) {
 		this.filters = context.filters;
 	}
 
 	public set(
 		value: string | number,
-		filterBy: Function | string,
-		comparator: Function = null
+		filterBy: FilterBy<T>,
+		comparator: (args: any) => any = null
 	): void {
 		const parsed = this.parse(filterBy);
 		this.filters.update((store) => {
@@ -33,10 +35,10 @@ export default class Filters {
 		this.filters.set([]);
 	}
 
-	private parse(filterBy: Function | string): { fn: Function; identifier: string } {
+	private parse(filterBy: FilterBy<T>) {
 		if (typeof filterBy === 'string') {
 			return {
-				fn: (row: Object) => row[filterBy],
+				fn: (row) => row[filterBy],
 				identifier: filterBy.toString()
 			};
 		}

@@ -2,7 +2,7 @@ import Context from '$lib/core/Context';
 import Rows from '$lib/core/Handlers/Rows';
 import Pages from '$lib/core/Handlers/Pages';
 import GlobalSearch from '$lib/core/Handlers/GlobalSearch';
-import Filters from '$lib/core/Handlers/Filters';
+import Filters, { type FilterBy } from '$lib/core/Handlers/Filters';
 
 import type { Readable, Writable } from 'svelte/store';
 import type { Internationalization } from '$lib';
@@ -12,9 +12,9 @@ export type Params = { rowsPerPage?: number; i18n?: Internationalization };
 export default class DataHandler<T extends { [key: string]: unknown } = any> {
 	private context: Context<T>;
 	private rows: Rows<T>;
-	private pages: Pages;
-	private globalSearch: GlobalSearch;
-	private filters: Filters;
+	private pages: Pages<T>;
+	private globalSearch: GlobalSearch<T>;
+	private filters: Filters<T>;
 	public i18n: Internationalization;
 
 	constructor(data: T[] = [], params: Params = { rowsPerPage: null }) {
@@ -66,12 +66,15 @@ export default class DataHandler<T extends { [key: string]: unknown } = any> {
 	}
 
 	public applySorting(
-		params: { orderBy: Function | string; direction?: 'asc' | 'desc' | null } | null = null
+		params: {
+			orderBy: (...args: any) => any | string;
+			direction?: 'asc' | 'desc' | null;
+		} | null = null
 	): void {
 		this.rows.applySorting(params);
 	}
 
-	public sortAsc(orderBy: Function | string): void {
+	public sortAsc(orderBy: (...args: any) => any | string): void {
 		this.setPage(1);
 		this.rows.sortAsc(orderBy);
 	}
@@ -95,8 +98,8 @@ export default class DataHandler<T extends { [key: string]: unknown } = any> {
 
 	public filter(
 		value: string,
-		filterBy: ((row: any) => string | number | boolean) | string,
-		comparator: Function = null
+		filterBy: FilterBy<T>,
+		comparator: (...args: any) => any = null
 	): void {
 		return this.filters.set(value, filterBy, comparator);
 	}

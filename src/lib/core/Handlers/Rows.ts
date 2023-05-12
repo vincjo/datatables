@@ -1,14 +1,14 @@
 import type Context from '../Context';
 import { type Writable, type Readable, get } from 'svelte/store';
 
-export type Sorted = {
-	fn?: Function;
+export type Sorted<T> = {
+	fn?: (row: T) => T[keyof T];
 	identifier: string | null;
 	direction: 'asc' | 'desc' | null;
 	locales?: string;
-	options?: Object;
+	options?: Record<string, unknown>;
 };
-export type SortingParams = { locales?: string; options?: Object };
+export type SortingParams = { locales?: string; options?: Record<string, unknown> };
 
 export type OrderBy<T> = keyof T | ((row: T) => T[keyof T]);
 
@@ -17,7 +17,7 @@ export default class Rows<T> {
 	private filteredRows: Readable<T[]>;
 	private rows: Readable<T[]>;
 	private triggerChange: Writable<number>;
-	private sorted: Writable<Sorted>;
+	private sorted: Writable<Sorted<T>>;
 	private selected: Writable<T[]>;
 	private selectScope: Writable<'currentPage' | 'all'>;
 	private isAllSelected: Readable<boolean>;
@@ -48,7 +48,7 @@ export default class Rows<T> {
 		}
 	}
 
-	public sortAsc(orderBy: Function | string): void {
+	public sortAsc(orderBy: OrderBy<T>): void {
 		if (!orderBy) return;
 		const parsed = this.parse(orderBy);
 		this.sorted.set({ identifier: parsed.identifier, direction: 'asc', fn: parsed.fn });
@@ -59,8 +59,8 @@ export default class Rows<T> {
 				if (a === null) return 1;
 				if (b === null) return -1;
 				if (typeof a === 'boolean') return a === false ? 1 : -1;
-				if (typeof a === 'string') return a.localeCompare(b);
-				if (typeof a === 'number') return a - b;
+				if (typeof a === 'string') return a.localeCompare(b as string);
+				if (typeof a === 'number') return a - (b as number);
 				if (typeof a === 'object')
 					return JSON.stringify(a).localeCompare(JSON.stringify(b));
 				else return String(a).localeCompare(String(b));
@@ -83,8 +83,8 @@ export default class Rows<T> {
 				if (a === null) return 1;
 				if (b === null) return -1;
 				if (typeof b === 'boolean') return b === false ? 1 : -1;
-				if (typeof b === 'string') return b.localeCompare(a);
-				if (typeof b === 'number') return b - a;
+				if (typeof b === 'string') return b.localeCompare(a as string);
+				if (typeof b === 'number') return b - (a as number);
 				if (typeof b === 'object')
 					return JSON.stringify(b).localeCompare(JSON.stringify(a));
 				else return String(b).localeCompare(String(a));
@@ -99,7 +99,7 @@ export default class Rows<T> {
 
 	public applySorting(
 		params: {
-			orderBy: any;
+			orderBy: OrderBy<T>;
 			direction?: 'asc' | 'desc' | null;
 		} | null = null
 	) {
@@ -133,14 +133,16 @@ export default class Rows<T> {
 				fn: (row: T) => row[orderBy],
 				identifier: orderBy.toString()
 			};
+		} else if (typeof orderBy === 'function') {
+			return {
+				fn: orderBy,
+				identifier: orderBy.toString()
+			};
 		}
-		return {
-			fn: orderBy,
-			identifier: orderBy.toString()
-		};
+		throw new Error('Invalid orderBy argument');
 	}
 
-	public select(id: any) {
+	public select(id: T) {
 		const selected = get(this.selected);
 		if (selected.includes(id)) {
 			this.selected.set(selected.filter((item) => item !== id));
