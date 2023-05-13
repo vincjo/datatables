@@ -1,21 +1,21 @@
 {
-  "extends": "./.svelte-kit/tsconfig.json",
-  "moduleResolution": "NodeNext",
-  "compilerOptions": {
-    "paths": {
-      "$components/*": ["./src/components/*"],
-      "$core/*": ["./src/lib/core/*"],
-      "$utils/*": ["./src/utils/*"],
-      "$img/*": ["./src/assets/*"],
-      "$data/*": ["./src/data/*"],
-      "$lib": ["./src/lib"],
-      "$lib/*": ["./src/lib/*"]
-    }
-  },
-  "strictNullChecks": false,
-  "noImplicitAny": true
-  // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
-  //
-  // If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
-  // from the referenced tsconfig.json - TypeScript does not merge them in
+    "extends": "./.svelte-kit/tsconfig.json",
+    "moduleResolution": "NodeNext",
+    "compilerOptions": {
+        "paths": {
+            "$components/*": ["./src/components/*"],
+            "$core/*": ["./src/lib/core/*"],
+            "$utils/*": ["./src/utils/*"],
+            "$img/*": ["./src/assets/*"],
+            "$data/*": ["./src/data/*"],
+            "$lib": ["./src/lib"],
+            "$lib/*": ["./src/lib/*"]
+        }
+    },
+    "strictNullChecks": false,
+    "noImplicitAny": true
+    // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
+    //
+    // If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
+    // from the referenced tsconfig.json - TypeScript does not merge them in
 }

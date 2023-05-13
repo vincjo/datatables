@@ -12,10 +12,10 @@
 
 This lib provides an API to dynamically interact with iterable data: filtering, paging, sorting, selecting...
 
-- **Headless** by design <br>
-- **Typescript** support <br>
-- **SSR** friendly
-- no dependencies
+-   **Headless** by design <br>
+-   **Typescript** support <br>
+-   **SSR** friendly
+-   no dependencies
 
 Also provides some demo components, which you can grab and customize in your own project.
 
@@ -35,28 +35,28 @@ npm i -D @vincjo/datatables
 
 ```svelte
 <script lang="ts">
-  import { DataHandler } from '@vincjo/datatables';
-  import { someData } from './data';
+    import { DataHandler } from '@vincjo/datatables';
+    import { someData } from './data';
 
-  const handler = new DataHandler(someData, { rowsPerPage: 50 });
-  const rows = handler.getRows();
+    const handler = new DataHandler(someData, { rowsPerPage: 50 });
+    const rows = handler.getRows();
 </script>
 
 <table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each $rows as row}
-      <tr>
-        <td>{row.first_name}</td>
-        <td>{row.last_name}</td>
-      </tr>
-    {/each}
-  </tbody>
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {#each $rows as row}
+            <tr>
+                <td>{row.first_name}</td>
+                <td>{row.last_name}</td>
+            </tr>
+        {/each}
+    </tbody>
 </table>
 ```
 

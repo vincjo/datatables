@@ -1,13 +1,13 @@
 <script>
-  import Api from './api.svx';
+    import Api from './api.svx';
 </script>
 
 <section>
-  <Api />
+    <Api />
 </section>
 
 <style>
-  section {
-    max-width: 800px;
-  }
+    section {
+        max-width: 800px;
+    }
 </style>

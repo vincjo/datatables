@@ -5,15 +5,15 @@ import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  extensions: ['.svelte', ...mdsvexConfig.extensions],
-  preprocess: [preprocess(), mdsvex(mdsvexConfig)],
+    extensions: ['.svelte', ...mdsvexConfig.extensions],
+    preprocess: [preprocess(), mdsvex(mdsvexConfig)],
 
-  kit: {
-    adapter: adapter({ out: 'build' }),
-    paths: {
-      base: '/datatables'
+    kit: {
+        adapter: adapter({ out: 'build' }),
+        paths: {
+            base: '/datatables'
+        }
     }
-  }
 };
 
 export default config;

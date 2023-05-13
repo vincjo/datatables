@@ -1,29 +1,29 @@
 let intersectionObserver;
 
 function ensureIntersectionObserver() {
-  if (intersectionObserver) return;
+    if (intersectionObserver) return;
 
-  intersectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const eventName = entry.isIntersecting ? 'enterViewport' : 'exitViewport';
-        entry.target.dispatchEvent(new CustomEvent(eventName));
-      });
-    },
-    {
-      threshold: 0.8
-    }
-  );
+    intersectionObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                const eventName = entry.isIntersecting ? 'enterViewport' : 'exitViewport';
+                entry.target.dispatchEvent(new CustomEvent(eventName));
+            });
+        },
+        {
+            threshold: 0.8
+        }
+    );
 }
 
 export default function viewport(element) {
-  ensureIntersectionObserver();
+    ensureIntersectionObserver();
 
-  intersectionObserver.observe(element);
+    intersectionObserver.observe(element);
 
-  return {
-    destroy() {
-      intersectionObserver.unobserve(element);
-    }
-  };
+    return {
+        destroy() {
+            intersectionObserver.unobserve(element);
+        }
+    };
 }
