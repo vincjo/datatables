@@ -15,7 +15,7 @@
 				<Th {handler} orderBy="email">Email</Th>
 			</tr>
 			<tr>
-				<ThFilter {handler} filterBy="first_name" />
+				<ThFilter {handler} filterBy={(row) => row.email} />
 				<ThFilter {handler} filterBy="last_name" />
 				<ThFilter {handler} filterBy="email" />
 			</tr>
