@@ -1,9 +1,10 @@
+import type { RowCount } from '../Context';
 import type Context from '../Context';
 import { type Writable, type Readable, get } from 'svelte/store';
 
 export default class Pages<T> {
 	public pageNumber: Writable<number>;
-	public rowCount: Readable<{ total: number; start: number; end: number }>;
+	public rowCount: Readable<RowCount>;
 	public rowsPerPage: Writable<number | null>;
 	public triggerChange: Writable<number>;
 	public pages: Readable<number[]>;
