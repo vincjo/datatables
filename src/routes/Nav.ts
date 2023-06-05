@@ -1,7 +1,7 @@
 export default [
     {
         name: 'home',
-        path: '/home',
+        path: '/home'
     },
     {
         name: 'datatables',
@@ -15,12 +15,12 @@ export default [
             { name: 'nested objects', path: '/nested-objects' },
             { name: 'blocks', path: '/blocks' },
             { name: 'row selection', path: '/row-selection' },
-            { name: 'advanced filters', path: '/advanced-filters' },
-        ],
+            { name: 'advanced filters', path: '/advanced-filters' }
+        ]
     },
     {
         name: 'reactivity',
-        path: '/reactivity',
+        path: '/reactivity'
     },
     {
         name: 'api',
@@ -35,8 +35,8 @@ export default [
             { name: 'row count', slug: '#row-count' },
             { name: 'pagination', slug: '#pagination' },
             { name: 'row selection', slug: '#row-selection' },
-            { name: 'trigger change', slug: '#trigger-change' },
-        ],
+            { name: 'trigger change', slug: '#trigger-change' }
+        ]
     },
     {
         name: 'tutorial',
@@ -48,14 +48,12 @@ export default [
             { name: 'search', path: '/search' },
             { name: 'rows per page', path: '/rows-per-page' },
             { name: 'row count', path: '/row-count' },
-            { name: 'pagination', path: '/pagination' },
-        ],
+            { name: 'pagination', path: '/pagination' }
+        ]
     },
     {
         name: 'tips',
         path: '/tips',
-        pages: [
-            { name: 'sticky header', path: '/sticky-header' },
-        ],
-    },
-]
+        pages: [{ name: 'sticky header', path: '/sticky-header' }]
+    }
+];

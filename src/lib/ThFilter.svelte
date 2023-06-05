@@ -1,25 +1,27 @@
 <script lang="ts">
-    import type { DataHandler } from '$lib/core'
-    export let handler: DataHandler
-    export let filterBy = null
-    export let align: 'left' | 'right' | 'center' = 'left'
-    export let comparator: Function = null
+    type T = $$Generic<{ [key: string]: unknown }>;
 
-    let value = ''
+    import type { FilterBy } from '$core/Context';
+    import type { DataHandler } from '$lib/core';
+
+    export let handler: DataHandler<T>;
+    export let filterBy: FilterBy<T>;
+    export let align: 'left' | 'right' | 'center' = 'left';
+    export let comparator: ((...args: any) => any) | undefined = undefined;
+
+    let value: any = '';
 </script>
 
-
-<th class="{$$props.class ?? ''}">
-    <input 
+<th class={$$props.class ?? ''}>
+    <input
         style:text-align={align}
         type="text"
-        placeholder="{handler.i18n.filter}"
+        placeholder={handler.i18n.filter}
         spellcheck="false"
         bind:value
         on:input={() => handler.filter(value, filterBy, comparator)}
     />
 </th>
-
 
 <style>
     th {
@@ -30,19 +32,19 @@
         height: 24px;
         border: none;
         text-align: left;
-        padding:0 20px;
-        background:inherit;
+        padding: 0 20px;
+        background: inherit;
         outline: none;
         border-radius: 0;
         font-size: 14px;
-        font-family:Arial, Helvetica, sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
     }
     input::placeholder {
         color: #bdbdbd;
         font-style: italic;
         font-size: 13px;
     }
-    input:focus{
+    input:focus {
         outline: none;
         border: none;
     }

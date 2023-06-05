@@ -1,6 +1,6 @@
 <script>
-    export let handler
-    const rowCount = handler.getRowCount()
+    export let handler;
+    const rowCount = handler.getRowCount();
 </script>
 
 <aside>
@@ -14,9 +14,9 @@
 </aside>
 
 <style>
-    aside{
-        color:#616161;
-        line-height:32px;
-        font-size:14px;
+    aside {
+        color: #616161;
+        line-height: 32px;
+        font-size: 14px;
     }
 </style>

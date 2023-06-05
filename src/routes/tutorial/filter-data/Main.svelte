@@ -1,11 +1,11 @@
 <script>
-    import { DataHandler } from '$lib/core'
-    import Th from '../Th.svelte'
-    import ThFilter from '../ThFilter.svelte'
-    import data from '$data/data'
+    import { DataHandler } from '$lib/core';
+    import Th from '../Th.svelte';
+    import ThFilter from '../ThFilter.svelte';
+    import data from '$data/data';
 
-    const handler = new DataHandler(data, { rowsPerPage: 20 })
-    const rows = handler.getRows()
+    const handler = new DataHandler(data, { rowsPerPage: 20 });
+    const rows = handler.getRows();
 </script>
 
 <table>
@@ -16,9 +16,9 @@
             <Th {handler} orderBy="email">Email</Th>
         </tr>
         <tr>
-            <ThFilter {handler} filterBy="first_name"/>
-            <ThFilter {handler} filterBy="last_name"/>
-            <ThFilter {handler} filterBy="email"/>
+            <ThFilter {handler} filterBy="first_name" />
+            <ThFilter {handler} filterBy="last_name" />
+            <ThFilter {handler} filterBy="email" />
         </tr>
     </thead>
     <tbody>
@@ -33,10 +33,10 @@
 </table>
 
 <style>
-    table{
-        text-align:center;
-        border-collapse:separate;
-        border-spacing:0;
-        width:100%;
+    table {
+        text-align: center;
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
     }
 </style>

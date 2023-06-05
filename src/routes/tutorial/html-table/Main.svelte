@@ -1,9 +1,9 @@
 <script>
-    import { DataHandler } from '$lib/core'
-    import data from '$data/data'
+    import { DataHandler } from '$lib/core';
+    import data from '$data/data';
 
-    const handler = new DataHandler(data, { rowsPerPage: 20 })
-    const rows = handler.getRows()
+    const handler = new DataHandler(data, { rowsPerPage: 20 });
+    const rows = handler.getRows();
 </script>
 
 <table>
@@ -26,10 +26,10 @@
 </table>
 
 <style>
-    table{
-        text-align:center;
-        border-collapse:separate;
-        border-spacing:0;
-        width:100%;
+    table {
+        text-align: center;
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
     }
 </style>

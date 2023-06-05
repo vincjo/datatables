@@ -1,18 +1,17 @@
 <script>
-    export let handler
-    export let filterBy = null
-    let value = ''
+    export let handler;
+    export let filterBy = null;
+    let value = '';
 </script>
 
-
 <th>
-    <input type="text"
+    <input
+        type="text"
         placeholder="Filter"
         bind:value
         on:input={() => handler.filter(value, filterBy)}
     />
 </th>
-
 
 <style>
     input {
@@ -23,17 +22,17 @@
         border: none;
         border-bottom: 1px solid #e0e0e0;
         text-align: center;
-        background:inherit;
+        background: inherit;
         outline: none;
         border-radius: 0;
         font-size: 14px;
     }
     input::placeholder {
-        color:#bdbdbd;
-        font-style:italic;
-        font-size:13px;
+        color: #bdbdbd;
+        font-style: italic;
+        font-size: 13px;
     }
-    input:focus{
+    input:focus {
         outline: 1px solid #bdbdbd;
     }
 </style>

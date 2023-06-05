@@ -1,9 +1,8 @@
 <script>
-    export let handler
-    const rowsPerPage = handler.getRowsPerPage()
-    const options = [5, 10, 20, 50, 100]
+    export let handler;
+    const rowsPerPage = handler.getRowsPerPage();
+    const options = [5, 10, 20, 50, 100];
 </script>
-
 
 <aside>
     Show
@@ -17,16 +16,15 @@
     entries
 </aside>
 
-
 <style>
-    aside{
-        display:flex;
-        justify-content:flex-start;
+    aside {
+        display: flex;
+        justify-content: flex-start;
         align-items: center;
-        height:32px;
-        color:#616161;
+        height: 32px;
+        color: #616161;
     }
-    select{
-        margin:0 2px;
+    select {
+        margin: 0 2px;
     }
 </style>
