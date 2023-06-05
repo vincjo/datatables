@@ -1,13 +1,11 @@
 :root {
-
-    --primary:#c2185b;
+    --primary: #c2185b;
     --primary-lighten: #f48fb1;
-    --primary-lighten-1: rgba(194,24,91,0.1);
-    --primary-lighten-1: rgba(194,24,91,0.1);
-    --primary-lighten-2: rgba(194,24,91,0.2);
-    --primary-lighten-3: rgba(194,24,91,0.3);
+    --primary-lighten-1: rgba(194, 24, 91, 0.1);
+    --primary-lighten-1: rgba(194, 24, 91, 0.1);
+    --primary-lighten-2: rgba(194, 24, 91, 0.2);
+    --primary-lighten-3: rgba(194, 24, 91, 0.3);
     --primary-darken: #880e4f;
-
 
     --secondary: #006990;
     --secondary-lighten: #62c8f3;

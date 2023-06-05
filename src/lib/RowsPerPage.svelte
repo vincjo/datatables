@@ -1,14 +1,16 @@
 <script lang="ts">
-    import type { DataHandler } from '$lib/core'
-    export let handler: DataHandler
-    export let small = false
-    const rowsPerPage = handler.getRowsPerPage()
+    type T = $$Generic<{ [key: string]: unknown }>;
 
-    const options = [5, 10, 20, 50, 100]
+    import type { DataHandler } from '$lib/core';
+
+    export let handler: DataHandler<T>;
+    export let small = false;
+    const rowsPerPage = handler.getRowsPerPage();
+
+    const options = [5, 10, 20, 50, 100];
 </script>
 
-
-<aside class="{$$props.class ?? ''}">
+<aside class={$$props.class ?? ''}>
     {#if !small}
         <span>{handler.i18n.show}</span>
     {/if}
@@ -24,16 +26,15 @@
     {/if}
 </aside>
 
-
 <style>
-    aside{
-        display:flex;
-        justify-content:flex-start;
+    aside {
+        display: flex;
+        justify-content: flex-start;
         align-items: center;
-        height:32px;
-        color:#757575;
+        height: 32px;
+        color: #757575;
     }
-    select{
-        margin:0 4px;
+    select {
+        margin: 0 4px;
     }
 </style>

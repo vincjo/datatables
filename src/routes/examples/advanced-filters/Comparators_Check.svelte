@@ -1,48 +1,50 @@
 <script>
-    import { DataHandler, check } from '$lib/core'
-    import { Range, Checkbox } from 'gros/form'
-    import { data } from './data'
-    export let comparator
+    import { DataHandler, check } from '$lib/core';
+    import { Range, Checkbox } from 'gros/form';
+    import { data } from './data';
+    export let comparator;
 
-    const handler = new DataHandler(data[comparator.type ?? 'string'])
-    const rows = handler.getRows()
-    let value = ''
-    let checked = false
+    const handler = new DataHandler(data[comparator.type ?? 'string']);
+    const rows = handler.getRows();
+    let value = '';
+    let checked = false;
 
-    $: comparator, clear()
-    $: displayedValue = comparator.bounds ? `[${value[0]}, ${value[1]}]` : ''
-    $: value, handler.filter(value, "value", check[comparator.name])
+    $: comparator, clear();
+    $: displayedValue = comparator.bounds ? `[${value[0]}, ${value[1]}]` : '';
+    $: value, handler.filter(value, 'value', check[comparator.name]);
     const clear = () => {
-        handler.clearFilters()
-        handler.setRows(data[comparator.type ?? 'string'])
+        handler.clearFilters();
+        handler.setRows(data[comparator.type ?? 'string']);
         if (comparator.bounds) {
-            value = comparator.bounds
+            value = comparator.bounds;
+        } else {
+            value = '';
+            checked = false;
         }
-        else {
-            value = ''
-            checked = false
-        }
-    }
+    };
 </script>
-
 
 <aside>
     <h3>{comparator.name} <span>{displayedValue}</span></h3>
     {#if comparator.type === 'number' && !comparator.bounds}
-        <input type="number" bind:value/>
-
+        <input type="number" bind:value />
     {:else if comparator.bounds}
         <div class="range">
-            <Range bind:value min={0} max={100} step={1}/>
+            <Range bind:value min={0} max={100} step={1} />
         </div>
     {:else if comparator.type === 'boolean'}
         <div class="range">
-            <Checkbox bind:checked size={20} margin={[0,8,0,0]} on:click={() => checked ? value = 'x' : value = ''}>
+            <Checkbox
+                bind:checked
+                size={20}
+                margin={[0, 8, 0, 0]}
+                on:click={() => (checked ? (value = 'x') : (value = ''))}
+            >
                 {comparator.name}
             </Checkbox>
         </div>
     {:else}
-        <input type="text" spellcheck="false" bind:value/>
+        <input type="text" spellcheck="false" bind:value />
     {/if}
     <ul class="thin-scrollbar">
         {#each $rows as row}
@@ -50,8 +52,6 @@
         {/each}
     </ul>
 </aside>
-
-
 
 <style>
     aside {
@@ -62,7 +62,6 @@
         border-radius: 8px;
         width: 280px;
         padding: 16px;
-
     }
     h3 {
         margin: 0;

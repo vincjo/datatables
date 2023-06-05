@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Check from './Comparators_Check.svelte'
+    import Check from './Comparators_Check.svelte';
     let comparators = [
         { name: 'contains', isDefault: true },
         { name: 'startsWith' },
         { name: 'endsWith' },
         { name: 'isEqualTo' },
-        { name: 'isGreaterThan', type: 'number'},
+        { name: 'isGreaterThan', type: 'number' },
         { name: 'isGreaterThanOrEqualTo', type: 'number' },
         { name: 'isLessThan', type: 'number' },
         { name: 'isLessThanOrEqualTo', type: 'number' },
@@ -14,32 +14,34 @@
         { name: 'isTrue', type: 'boolean' },
         { name: 'isFalse', type: 'boolean' },
         { name: 'isNull', type: 'boolean' },
-        { name: 'isNotNull', type: 'boolean' },
-    ]
-    let current = comparators[0]
+        { name: 'isNotNull', type: 'boolean' }
+    ];
+    let current = comparators[0];
 </script>
 
 <section class="flex">
     <ul>
         {#each comparators as comparator}
-        <li>
-            <button class:active={current === comparator} on:click={() => current = comparator}>
-                {comparator.name}
-                {#if comparator.isDefault}
-                    <span>(default)</span>
-                {/if}
-            </button>
-        </li>
+            <li>
+                <button
+                    class:active={current === comparator}
+                    on:click={() => (current = comparator)}
+                >
+                    {comparator.name}
+                    {#if comparator.isDefault}
+                        <span>(default)</span>
+                    {/if}
+                </button>
+            </li>
         {/each}
     </ul>
-    <Check comparator={current}/>
+    <Check comparator={current} />
 </section>
-
 
 <style>
     section {
         align-items: flex-start;
-        flex-wrap:wrap;
+        flex-wrap: wrap;
     }
     ul {
         list-style-type: none;
@@ -67,6 +69,6 @@
         background: #eee;
     }
     button span {
-        color: var(--ternary)
+        color: var(--ternary);
     }
 </style>

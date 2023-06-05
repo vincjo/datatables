@@ -1,18 +1,18 @@
 <script>
-    import { DataHandler } from '$lib/core'
-    import Th from '../Th.svelte'
-    import ThFilter from '../ThFilter.svelte'
-    import Search from '../Search.svelte'
-    import RowsPerPage from '../RowsPerPage.svelte'
-    import data from '$data/data'
+    import { DataHandler } from '$lib/core';
+    import Th from '../Th.svelte';
+    import ThFilter from '../ThFilter.svelte';
+    import Search from '../Search.svelte';
+    import RowsPerPage from '../RowsPerPage.svelte';
+    import data from '$data/data';
 
-    const handler = new DataHandler(data, { rowsPerPage: 20 })
-    const rows = handler.getRows()
+    const handler = new DataHandler(data, { rowsPerPage: 20 });
+    const rows = handler.getRows();
 </script>
 
 <header>
-    <Search {handler}/>
-    <RowsPerPage {handler}/>
+    <Search {handler} />
+    <RowsPerPage {handler} />
 </header>
 
 <table>
@@ -23,9 +23,9 @@
             <Th {handler} orderBy="email">Email</Th>
         </tr>
         <tr>
-            <ThFilter {handler} filterBy="first_name"/>
-            <ThFilter {handler} filterBy="last_name"/>
-            <ThFilter {handler} filterBy="email"/>
+            <ThFilter {handler} filterBy="first_name" />
+            <ThFilter {handler} filterBy="last_name" />
+            <ThFilter {handler} filterBy="email" />
         </tr>
     </thead>
     <tbody>
@@ -41,16 +41,16 @@
 
 <style>
     header {
-        height:48px;
-        padding:0 16px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
+        height: 48px;
+        padding: 0 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
-    table{
-        text-align:center;
-        border-collapse:separate;
-        border-spacing:0;
-        width:100%;
+    table {
+        text-align: center;
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
     }
 </style>

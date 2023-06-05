@@ -28,11 +28,11 @@ export const data = {
         { value: 'Pépin' },
         { value: 'Willibert' },
         { value: 'Childeric' },
-        { value: 'Blanche' },
+        { value: 'Blanche' }
     ],
     number: [
         { value: 12 },
-        { value: 8  },
+        { value: 8 },
         { value: 19 },
         { value: 95 },
         { value: 27 },
@@ -44,7 +44,7 @@ export const data = {
         { value: undefined },
         { value: 21 },
         { value: 64 },
-        { value: 70 },
+        { value: 70 }
     ],
     boolean: [
         { value: true },
@@ -63,6 +63,6 @@ export const data = {
         { value: undefined },
         { value: true },
         { value: true },
-        { value: null },
+        { value: null }
     ]
-}
+};
