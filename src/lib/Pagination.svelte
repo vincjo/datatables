@@ -1,13 +1,13 @@
 <script lang="ts">
-    type T = $$Generic<{ [key: string]: unknown }>;
+    type T = $$Generic<{ [key: string]: unknown }>
 
-    import type { DataHandler } from '$lib/core';
+    import type { DataHandler } from '$lib/core'
 
-    export let handler: DataHandler<T>;
-    export let small = false;
-    const pageNumber = handler.getPageNumber();
-    const pageCount = handler.getPageCount();
-    const pages = handler.getPages({ ellipsis: true });
+    export let handler: DataHandler<T>
+    export let small = false
+    const pageNumber = handler.getPageNumber()
+    const pageCount = handler.getPageCount()
+    const pages = handler.getPages({ ellipsis: true })
 </script>
 
 <section class={$$props.class ?? ''}>

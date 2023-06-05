@@ -1,10 +1,10 @@
 <script>
-    import { DataHandler } from '$lib/core';
-    import Th from '../Th.svelte';
-    import data from '$data/data';
+    import { DataHandler } from '$lib/core'
+    import Th from '../Th.svelte'
+    import data from '$data/data'
 
-    const handler = new DataHandler(data, { rowsPerPage: 20 });
-    const rows = handler.getRows();
+    const handler = new DataHandler(data, { rowsPerPage: 20 })
+    const rows = handler.getRows()
 </script>
 
 <table>

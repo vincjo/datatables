@@ -1,5 +1,5 @@
 <script>
-    import Code from './code.svx';
+    import Code from './code.svx'
 </script>
 
 <section>

@@ -1,7 +1,7 @@
 <script>
-    export let handler;
-    const rowsPerPage = handler.getRowsPerPage();
-    const options = [5, 10, 20, 50, 100];
+    export let handler
+    const rowsPerPage = handler.getRowsPerPage()
+    const options = [5, 10, 20, 50, 100]
 </script>
 
 <aside>

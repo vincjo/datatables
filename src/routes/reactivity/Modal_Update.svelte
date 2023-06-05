@@ -1,9 +1,9 @@
 <script>
-    import { Modal } from 'gros/modal';
-    import { Input } from 'gros/form';
-    import { update } from './store';
-    export let close;
-    export let props;
+    import { Modal } from 'gros/modal'
+    import { Input } from 'gros/form'
+    import { update } from './store'
+    export let close
+    export let props
 </script>
 
 <Modal title="Update a user" icon="edit">
@@ -16,8 +16,8 @@
     <svelte:fragment slot="footer">
         <button
             on:click={() => {
-                update(props);
-                close();
+                update(props)
+                close()
             }}>Update</button
         >
         <button on:click={close}>Cancel</button>

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import myData from '$data/data';
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core';
+    import myData from '$data/data'
+    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core'
 
-    const handler = new DataHandler(myData, { rowsPerPage: 50 });
-    const rows = handler.getRows();
+    const handler = new DataHandler(myData, { rowsPerPage: 50 })
+    const rows = handler.getRows()
 </script>
 
 <Datatable {handler}>

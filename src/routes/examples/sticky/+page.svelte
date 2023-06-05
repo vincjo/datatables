@@ -1,7 +1,7 @@
 <script>
-    import Demo from '$components/Demo.svelte';
-    import Main from './Main.svelte';
-    export let data;
+    import Demo from '$components/Demo.svelte'
+    import Main from './Main.svelte'
+    export let data
 </script>
 
 <h2>A datatable with a sticky header, fixed height, and vertical scrollbar</h2>

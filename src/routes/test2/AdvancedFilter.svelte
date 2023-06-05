@@ -13,21 +13,21 @@
 
 <th>
     <aside>
-        <input 
-            type="checkbox" 
-            checked={comparator === 'isGreaterThan'} 
-            on:click={() => comparator = 'isGreaterThan'}
-        /> 
+        <input
+            type="checkbox"
+            checked={comparator === 'isGreaterThan'}
+            on:click={() => (comparator = 'isGreaterThan')}
+        />
         isGreaterThan
-        <br>
+        <br />
 
-        <input 
-            type="checkbox" 
-            checked={comparator === 'isLessThan'} 
-            on:click={() => comparator = 'isLessThan'}
+        <input
+            type="checkbox"
+            checked={comparator === 'isLessThan'}
+            on:click={() => (comparator = 'isLessThan')}
         />
         isLessThan
 
-        <input type="number" bind:value on:input={filter}/>
+        <input type="number" bind:value on:input={filter} />
     </aside>
 </th>

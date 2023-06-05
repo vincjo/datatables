@@ -2,17 +2,15 @@ import type Context from '../Context'
 import { type Writable, type Readable, get } from 'svelte/store'
 
 export type Sorted = {
-    fn?: Function,
-    identifier: string | null,
-    direction: 'asc' | 'desc' | null,
-    locales?: string,
+    fn?: Function
+    identifier: string | null
+    direction: 'asc' | 'desc' | null
+    locales?: string
     options?: Object
 }
-export type SortingParams = { locales?: string, options?: Object }
+export type SortingParams = { locales?: string; options?: Object }
 
-
-export default class Rows
-{
+export default class Rows {
     private rawRows: Writable<any[]>
     private filteredRows: Readable<any[]>
     private rows: Readable<any[]>
@@ -22,8 +20,7 @@ export default class Rows
     private selectScope: Writable<'currentPage' | 'all'>
     private isAllSelected: Readable<boolean>
 
-    constructor(context: Context)
-    {
+    constructor(context: Context) {
         this.rawRows = context.rawRows
         this.filteredRows = context.filteredRows
         this.rows = context.rows
@@ -34,31 +31,27 @@ export default class Rows
         this.isAllSelected = context.isAllSelected
     }
 
-    public sort(orderBy: Function | string): void
-    {
+    public sort(orderBy: Function | string): void {
         if (!orderBy) return
         const sorted = get(this.sorted)
         const parsed = this.parse(orderBy)
 
         if (sorted.identifier !== parsed.identifier) {
-            this.sorted.update( store => store.direction = null )
+            this.sorted.update((store) => (store.direction = null))
         }
         if (sorted.direction === null || sorted.direction === 'desc') {
             this.sortAsc(orderBy)
-        }
-        else if (sorted.direction === 'asc') {
+        } else if (sorted.direction === 'asc') {
             this.sortDesc(orderBy)
         }
     }
 
-    public sortAsc(orderBy: Function | string): void
-    {
+    public sortAsc(orderBy: Function | string): void {
         if (!orderBy) return
         const parsed = this.parse(orderBy)
         this.sorted.set({ identifier: parsed.identifier, direction: 'asc', fn: parsed.fn })
-        this.rawRows.update(store => {
-
-            store.sort( (x, y) => {
+        this.rawRows.update((store) => {
+            store.sort((x, y) => {
                 const [a, b] = [parsed.fn(x), parsed.fn(y)]
                 if (a === b) return 0
                 if (a === null) return 1
@@ -71,17 +64,17 @@ export default class Rows
             })
             return store
         })
-        this.triggerChange.update( store => { return store + 1 })
+        this.triggerChange.update((store) => {
+            return store + 1
+        })
     }
 
-    public sortDesc(orderBy: Function | string): void
-    {
+    public sortDesc(orderBy: Function | string): void {
         if (!orderBy) return
         const parsed = this.parse(orderBy)
         this.sorted.set({ identifier: parsed.identifier, direction: 'desc', fn: parsed.fn })
-        this.rawRows.update(store => {
-
-            store.sort( (x, y) => {
+        this.rawRows.update((store) => {
+            store.sort((x, y) => {
                 const [a, b] = [parsed.fn(x), parsed.fn(y)]
                 if (a === b) return 0
                 if (a === null) return 1
@@ -95,16 +88,22 @@ export default class Rows
 
             return store
         })
-        this.triggerChange.update( store => { return store + 1 })
+        this.triggerChange.update((store) => {
+            return store + 1
+        })
     }
 
-    public applySorting(params: { orderBy: Function | string, direction?: 'asc' | 'desc' | null } | null = null)
-    {
+    public applySorting(
+        params: { orderBy: Function | string; direction?: 'asc' | 'desc' | null } | null = null
+    ) {
         if (params) {
-            switch(params.direction) {
-                case 'asc': return this.sortAsc(params.orderBy )
-                case 'desc': return this.sortDesc(params.orderBy)
-                default: return this.sort(params.orderBy)
+            switch (params.direction) {
+                case 'asc':
+                    return this.sortAsc(params.orderBy)
+                case 'desc':
+                    return this.sortDesc(params.orderBy)
+                default:
+                    return this.sort(params.orderBy)
             }
         }
         const sorted = get(this.sorted)
@@ -117,9 +116,8 @@ export default class Rows
         return
     }
 
-    private parse(orderBy: Function | string): { fn: Function, identifier: string }
-    {
-        if (typeof (orderBy) === 'string') {
+    private parse(orderBy: Function | string): { fn: Function; identifier: string } {
+        if (typeof orderBy === 'string') {
             return {
                 fn: (row: any) => row[orderBy],
                 identifier: orderBy.toString()
@@ -131,37 +129,35 @@ export default class Rows
         }
     }
 
-    public select(id: any)
-    {
+    public select(id: any) {
         const selected = get(this.selected)
         if (selected.includes(id)) {
-            this.selected.set( selected.filter(item => item !== id) )
-        }
-        else {
+            this.selected.set(selected.filter((item) => item !== id))
+        } else {
             this.selected.set([id, ...selected])
         }
     }
 
-    public selectAll(accessor: string = null)
-    {
+    public selectAll(accessor: string = null) {
         const isAllSelected = get(this.isAllSelected)
         const selectScope = get(this.selectScope)
         if (isAllSelected) {
             return this.unselectAll()
         }
-        const rows = (selectScope === 'currentPage') ? get(this.rows) : get(this.filteredRows)
+        const rows = selectScope === 'currentPage' ? get(this.rows) : get(this.filteredRows)
 
         if (accessor) {
-            this.selected.set(rows.map(row => { return row[accessor] }))
-        }
-        else {
+            this.selected.set(
+                rows.map((row) => {
+                    return row[accessor]
+                })
+            )
+        } else {
             this.selected.set(rows)
         }
     }
 
-    public unselectAll()
-    {
+    public unselectAll() {
         this.selected.set([])
     }
-
 }

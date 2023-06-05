@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Check from './Comparators_Check.svelte';
+    import Check from './Comparators_Check.svelte'
     let comparators = [
         { name: 'contains', isDefault: true },
         { name: 'startsWith' },
@@ -15,8 +15,8 @@
         { name: 'isFalse', type: 'boolean' },
         { name: 'isNull', type: 'boolean' },
         { name: 'isNotNull', type: 'boolean' }
-    ];
-    let current = comparators[0];
+    ]
+    let current = comparators[0]
 </script>
 
 <section class="flex">

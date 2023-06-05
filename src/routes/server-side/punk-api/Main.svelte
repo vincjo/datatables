@@ -1,10 +1,6 @@
 <script lang="ts">
     import myData from '$data/data'
-    import {
-        DataHandler,
-        Datatable,
-        Th, ThFilter
-    } from '$lib/core'
+    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core'
 
     let rows = []
     const load = async () => {
@@ -15,11 +11,9 @@
 </script>
 
 {#await load()}
-    <span></span>
+    <span />
 {:then}
-    <header>
-
-    </header>
+    <header />
     <table>
         <thead>
             <tr>
@@ -29,38 +23,35 @@
             </tr>
         </thead>
         <tbody>
-        {#each rows as row}
-            <tr>
-                <td>
-                    <aside class="flex">
-                        <img src="{row.image_url}" alt="beer"/>
-                        <b>{row.name}</b>
-                    </aside>
-                </td>
-                <td>{row.description}</td>
-                <td>{row.tagline}</td>
-            </tr>
-        {/each}
+            {#each rows as row}
+                <tr>
+                    <td>
+                        <aside class="flex">
+                            <img src={row.image_url} alt="beer" />
+                            <b>{row.name}</b>
+                        </aside>
+                    </td>
+                    <td>{row.description}</td>
+                    <td>{row.tagline}</td>
+                </tr>
+            {/each}
         </tbody>
     </table>
 {/await}
 
-
-
-
 <style>
-    thead{
-        background:#fff;
+    thead {
+        background: #fff;
     }
     tbody td {
         border: 1px solid #f5f5f5;
         padding: 4px 20px;
     }
-    tbody tr{
-        transition:all, 0.2s;
+    tbody tr {
+        transition: all, 0.2s;
     }
-    tbody tr:hover{
-        background:#f5f5f5;
+    tbody tr:hover {
+        background: #f5f5f5;
     }
     img {
         height: 80px;

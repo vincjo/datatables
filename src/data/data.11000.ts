@@ -98999,4 +98999,4 @@ export default [
         city: 'Zhireken',
         country: 'Russia'
     }
-];
+]

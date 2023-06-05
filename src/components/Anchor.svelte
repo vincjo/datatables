@@ -1,7 +1,7 @@
 <script>
-    import { anchor } from '$utils/page';
-    import viewport from '$utils/viewport';
-    export let name;
+    import { anchor } from '$utils/page'
+    import viewport from '$utils/viewport'
+    export let name
 </script>
 
 <section use:viewport on:enterViewport={() => ($anchor = '#' + name)}>

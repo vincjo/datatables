@@ -1,9 +1,9 @@
 <script>
-    export let handler;
-    export let orderBy = null;
+    export let handler
+    export let orderBy = null
 
-    const identifier = orderBy ? orderBy.toString() : orderBy;
-    const sorted = handler.getSorted();
+    const identifier = orderBy ? orderBy.toString() : orderBy
+    const sorted = handler.getSorted()
 </script>
 
 <th on:click={() => handler.sort(orderBy)} class:active={$sorted.identifier === identifier}>

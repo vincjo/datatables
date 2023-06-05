@@ -1,6 +1,6 @@
 <script>
-    export let handler;
-    const rowCount = handler.getRowCount();
+    export let handler
+    const rowCount = handler.getRowCount()
 </script>
 
 <aside>

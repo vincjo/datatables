@@ -3,5 +3,5 @@
     import Header from './Header.svelte'
 </script>
 
-<Header/>
-<Main/>
+<Header />
+<Main />

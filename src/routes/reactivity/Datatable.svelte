@@ -1,26 +1,26 @@
 <script lang="ts">
-    import { DataHandler, Datatable, Th } from '$lib/core';
-    import { users } from './store';
-    import { modal } from 'gros/modal';
-    import Update from './Modal_Update.svelte';
-    import Destroy from './Modal_Destroy.svelte';
-    import Create from './Modal_Create.svelte';
-    const handler = new DataHandler($users, { rowsPerPage: 20 });
-    const rows = handler.getRows();
+    import { DataHandler, Datatable, Th } from '$lib/core'
+    import { users } from './store'
+    import { modal } from 'gros/modal'
+    import Update from './Modal_Update.svelte'
+    import Destroy from './Modal_Destroy.svelte'
+    import Create from './Modal_Create.svelte'
+    const handler = new DataHandler($users, { rowsPerPage: 20 })
+    const rows = handler.getRows()
 
-    let element;
+    let element
 
-    $: $users, update();
+    $: $users, update()
 
     const update = () => {
         if (element) {
-            const scrollTop = element.parentNode.scrollTop;
-            handler.setRows($users);
+            const scrollTop = element.parentNode.scrollTop
+            handler.setRows($users)
             setTimeout(() => {
-                element.parentNode.scrollTop = scrollTop;
-            }, 2);
+                element.parentNode.scrollTop = scrollTop
+            }, 2)
         }
-    };
+    }
 </script>
 
 <div class="fieldset">

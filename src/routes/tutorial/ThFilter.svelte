@@ -1,7 +1,7 @@
 <script>
-    export let handler;
-    export let filterBy = null;
-    let value = '';
+    export let handler
+    export let filterBy = null
+    let value = ''
 </script>
 
 <th>

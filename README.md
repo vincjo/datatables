@@ -35,11 +35,11 @@ npm i -D @vincjo/datatables
 
 ```svelte
 <script lang="ts">
-    import { DataHandler } from '@vincjo/datatables';
-    import { someData } from './data';
+    import { DataHandler } from '@vincjo/datatables'
+    import { someData } from './data'
 
-    const handler = new DataHandler(someData, { rowsPerPage: 50 });
-    const rows = handler.getRows();
+    const handler = new DataHandler(someData, { rowsPerPage: 50 })
+    const rows = handler.getRows()
 </script>
 
 <table>

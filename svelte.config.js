@@ -1,7 +1,7 @@
-import { mdsvex } from 'mdsvex';
-import mdsvexConfig from './mdsvex.config.js';
-import adapter from '@sveltejs/adapter-node';
-import preprocess from 'svelte-preprocess';
+import { mdsvex } from 'mdsvex'
+import mdsvexConfig from './mdsvex.config.js'
+import adapter from '@sveltejs/adapter-node'
+import preprocess from 'svelte-preprocess'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -14,6 +14,6 @@ const config = {
             base: '/datatables'
         }
     }
-};
+}
 
-export default config;
+export default config

@@ -1,6 +1,6 @@
-import { sveltekit } from '@sveltejs/kit/vite';
-import type { UserConfig } from 'vite';
-import * as path from 'path';
+import { sveltekit } from '@sveltejs/kit/vite'
+import type { UserConfig } from 'vite'
+import * as path from 'path'
 
 const config: UserConfig = {
     plugins: [sveltekit()],
@@ -13,6 +13,6 @@ const config: UserConfig = {
             $data: path.resolve('./src/data')
         }
     }
-};
+}
 
-export default config;
+export default config

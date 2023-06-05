@@ -1,5 +1,5 @@
 <script>
-    import Api from './api.svx';
+    import Api from './api.svx'
 </script>
 
 <section>

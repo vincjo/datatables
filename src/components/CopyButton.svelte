@@ -1,22 +1,22 @@
 <script>
-    export let top = '16px';
-    export let code;
-    let buttonContent = 'Copy';
+    export let top = '16px'
+    export let code
+    let buttonContent = 'Copy'
 
     const copy = () => {
-        const content = code.replace('$lib/core', '@vincjo/datatables');
+        const content = code.replace('$lib/core', '@vincjo/datatables')
         navigator.clipboard.writeText(content).then(
             () => {
-                buttonContent = 'Saved !';
+                buttonContent = 'Saved !'
                 setTimeout(() => {
-                    buttonContent = 'Copy';
-                }, 1000);
+                    buttonContent = 'Copy'
+                }, 1000)
             },
             (err) => {
-                console.error('Async: Could not copy text: ', err);
+                console.error('Async: Could not copy text: ', err)
             }
-        );
-    };
+        )
+    }
 </script>
 
 <button style:top on:click={() => copy()}>{buttonContent}</button>

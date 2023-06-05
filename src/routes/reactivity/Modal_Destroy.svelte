@@ -1,8 +1,8 @@
 <script>
-    import { Modal } from 'gros/modal';
-    import { destroy } from './store';
-    export let close;
-    export let props;
+    import { Modal } from 'gros/modal'
+    import { destroy } from './store'
+    export let close
+    export let props
 </script>
 
 <Modal title="Remove a user" icon="delete_forever">
@@ -15,8 +15,8 @@
     <svelte:fragment slot="footer">
         <button
             on:click={() => {
-                destroy(props);
-                close();
+                destroy(props)
+                close()
             }}>Delete</button
         >
         <button on:click={close}>Cancel</button>

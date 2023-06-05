@@ -1,14 +1,14 @@
 <script>
-    import Nav from './Nav.svelte';
-    import Github from './Github.svelte';
-    import NavButton from './NavButton.svelte';
-    import { ModalContainer } from 'gros/modal';
-    import { afterNavigate } from '$app/navigation';
-    let element;
+    import Nav from './Nav.svelte'
+    import Github from './Github.svelte'
+    import NavButton from './NavButton.svelte'
+    import { ModalContainer } from 'gros/modal'
+    import { afterNavigate } from '$app/navigation'
+    let element
 
     afterNavigate(() => {
-        if (element) element.scrollTop = 0;
-    });
+        if (element) element.scrollTop = 0
+    })
 </script>
 
 <svelte:head>

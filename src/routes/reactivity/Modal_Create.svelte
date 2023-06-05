@@ -1,9 +1,9 @@
 <script>
-    import { Modal } from 'gros/modal';
-    import { Input } from 'gros/form';
-    import { create } from './store';
-    const form = { first_name: null, last_name: null, email: null };
-    export let close;
+    import { Modal } from 'gros/modal'
+    import { Input } from 'gros/form'
+    import { create } from './store'
+    const form = { first_name: null, last_name: null, email: null }
+    export let close
 </script>
 
 <Modal title="Create a user" icon="person_add">
@@ -16,8 +16,8 @@
     <svelte:fragment slot="footer">
         <button
             on:click={() => {
-                create(form);
-                close();
+                create(form)
+                close()
             }}>Create</button
         >
         <button on:click={close}>Cancel</button>

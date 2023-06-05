@@ -1,27 +1,27 @@
 <script>
-    import { DataHandler, check } from '$lib/core';
-    import { Range, Checkbox } from 'gros/form';
-    import { data } from './data';
-    export let comparator;
+    import { DataHandler, check } from '$lib/core'
+    import { Range, Checkbox } from 'gros/form'
+    import { data } from './data'
+    export let comparator
 
-    const handler = new DataHandler(data[comparator.type ?? 'string']);
-    const rows = handler.getRows();
-    let value = '';
-    let checked = false;
+    const handler = new DataHandler(data[comparator.type ?? 'string'])
+    const rows = handler.getRows()
+    let value = ''
+    let checked = false
 
-    $: comparator, clear();
-    $: displayedValue = comparator.bounds ? `[${value[0]}, ${value[1]}]` : '';
-    $: value, handler.filter(value, 'value', check[comparator.name]);
+    $: comparator, clear()
+    $: displayedValue = comparator.bounds ? `[${value[0]}, ${value[1]}]` : ''
+    $: value, handler.filter(value, 'value', check[comparator.name])
     const clear = () => {
-        handler.clearFilters();
-        handler.setRows(data[comparator.type ?? 'string']);
+        handler.clearFilters()
+        handler.setRows(data[comparator.type ?? 'string'])
         if (comparator.bounds) {
-            value = comparator.bounds;
+            value = comparator.bounds
         } else {
-            value = '';
-            checked = false;
+            value = ''
+            checked = false
         }
-    };
+    }
 </script>
 
 <aside>

@@ -1,10 +1,10 @@
 <script>
-    import Datatable from './Datatable.svelte';
-    import data from '$data/data.75';
-    import { users } from './store';
-    import Reactivity from './reactivity.svx';
+    import Datatable from './Datatable.svelte'
+    import data from '$data/data.75'
+    import { users } from './store'
+    import Reactivity from './reactivity.svx'
 
-    $users = data;
+    $users = data
 </script>
 
 <h2>Reactivity example with a simple CRUD</h2>

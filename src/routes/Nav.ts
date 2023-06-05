@@ -64,4 +64,4 @@ export default [
         path: '/tips',
         pages: [{ name: 'sticky header', path: '/sticky-header' }]
     }
-];
+]

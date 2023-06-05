@@ -22,4 +22,4 @@ module.exports = {
                 'npm install && npm run build && pm2 startOrRestart ecosystem.config.cjs --env production'
         }
     }
-};
+}
