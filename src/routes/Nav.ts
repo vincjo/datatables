@@ -51,6 +51,14 @@ export default [
             { name: 'pagination', path: '/pagination' },
         ],
     },
+    // {
+    //     name: 'server-side',
+    //     path: '/server-side',
+    //     pages: [
+    //         { name: 'Punk API', path: '/punk-api' },
+    //         { name: 'Poké API', path: '/poke-api' },
+    //     ]
+    // },
     {
         name: 'tips',
         path: '/tips',
