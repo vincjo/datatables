@@ -1,5 +1,6 @@
 <script>
     import Anchor from '$components/Anchor.svelte'
+    import Type from '$components/TypePopup.svelte'
 </script>
 
 
@@ -9,7 +10,7 @@
 
 ## Get rows
 
-> **getRows()**: `Readable<any[]>`
+> **getRows()**: `Readable<T[]>`
 
 ````svelte
 <script lang="ts">
@@ -36,7 +37,7 @@
 
 ## Set rows
 
-> **setRows(** *data*: any[] **)**: void
+> **setRows(** *data*: T[] **)**: void
 
 ````svelte
 <script lang="ts">
@@ -57,11 +58,11 @@
 
 ## Sort data
 
-> **sort(** *orderBy*: Function | string **)**: void <br>
-> **sortAsc(** *orderBy*: Function | string **)**: void <br>
-> **sortDesc(** *orderBy*: Function | string **)**: void <br>
-> **getSorted()**: Writable`<{` *identifier*: string | null, *direction*: 'asc' | 'desc' | null `}>`  <br>
-> **applySorting(** *params*: null | `{` *orderBy*: Function | string, *direction*: 'asc' | 'desc' | null `}` **)**: void <br>
+> **sort(** *orderBy*: OrderBy`<T>` **)**: void <br>
+> **sortAsc(** *orderBy*: OrderBy`<T>` **)**: void <br>
+> **sortDesc(** *orderBy*: OrderBy`<T>` **)**: void <br>
+> **getSorted()**: Writable`<{` *identifier*?: string, *direction*?: 'asc' | 'desc' `}>`  <br>
+> **applySorting(** *params*?: `{` *orderBy*?: OrderBy`<T>`, *direction*?: 'asc' | 'desc' `}` **)**: void <br>
 
 ````svelte
 <script lang="ts">
@@ -96,7 +97,7 @@
 
 ## Filter data
 
-> **filter(** *value*: string, *filterBy*: Function | string, *comparator*: Function = null **)**: void <br>
+> **filter(** *value*: string, *filterBy*: FilterBy`<T>`, *comparator*?: Comparator`<T>` **)**: void <br>
 > **clearFilters()**: void <br>
 
 ````svelte
@@ -134,7 +135,7 @@
 
 ## Search
 
-> **search(** *value*: string, *scope*?: string[] **)**: void <br>
+> **search(** *value*: string, *scope*?: (keyof T)[] **)**: void <br>
 > **clearSearch()**: void <br>
 
 
@@ -203,7 +204,7 @@
 
 ## Pagination
 
-> **getPages(** *param*: `{ ellipsis: boolean }` **)**: Readable`<number[]>` <br>
+> **getPages(** *param*?: `{` *ellipsis*: boolean `}` **)**: Readable`<number[]>` <br>
 > **getPageCount()**: Readable`<number>` <br>
 > **getPageNumber()**: Readable`<number>` <br>
 > **setPage(** *value*: number | 'previous' | 'next' **)**: void <br>
@@ -243,9 +244,9 @@
 
 ## Row selection
 
-> **select(** *value*: any **)**: void <br>
-> **getSelected()**: Writable`<any[]>` <br>
-> **selectAll(** *params*: `{ selectBy?: string, scope?: 'all' | 'currentPage' }` **)**: void <br>
+> **select(** *value*: T | T[keyof T] **)**: void <br>
+> **getSelected()**: Writable`<T[] | T[keyof T][]>` <br>
+> **selectAll(** *params*: `{` *selectBy*?: keyof T, *scope*?: 'all' | 'currentPage' `}` **)**: void <br>
 > **isAllSelected()**: Readable`<boolean>` <br>
 
 
