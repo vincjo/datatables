@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DataHandler, Datatable, Th } from '$lib/core'
+    import { DataHandler, Datatable, Th } from '$lib'
     import { users } from './store'
     import { modal } from 'gros/modal'
     import Update from './Modal_Update.svelte'

@@ -1,5 +1,5 @@
 <script>
-    import { DataHandler } from '$lib/core'
+    import { DataHandler } from '$lib'
     import Th from '../Th.svelte'
     import ThFilter from '../ThFilter.svelte'
     import Search from '../Search.svelte'

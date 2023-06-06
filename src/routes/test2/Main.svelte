@@ -1,6 +1,6 @@
 <script lang="ts">
     import myData from '$data/data'
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core'
+    import { DataHandler, Datatable, Th, ThFilter } from '$lib'
     import AdvancedFilter from './AdvancedFilter.svelte'
 
     const handler = new DataHandler(myData, { rowsPerPage: 10 })

@@ -1,6 +1,6 @@
 <script lang="ts">
     import myData from '$data/data'
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core'
+    import { DataHandler, Datatable, Th, ThFilter } from '$lib'
 
     const handler = new DataHandler(myData, { rowsPerPage: 10 })
     const rows = handler.getRows()
@@ -10,13 +10,13 @@
     <table>
         <thead>
             <tr>
-                <Th {handler} orderBy={(row) => row.first_name + row.last_name}
-                    >First Name + Last Name</Th
-                >
+                <Th {handler} orderBy={(row) => row.first_name + row.last_name}>
+                    First Name + Last Name
+                </Th>
                 <Th {handler} orderBy="email">Email</Th>
             </tr>
             <tr>
-                <ThFilter {handler} filterBy={(row) => row.first_name + row.last_name} />
+                <ThFilter {handler} filterBy={(row) => row.first_name + row.last_name}/>
                 <ThFilter {handler} filterBy="email" />
             </tr>
         </thead>

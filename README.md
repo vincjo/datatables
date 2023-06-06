@@ -67,25 +67,25 @@ npm i -D @vincjo/datatables
 # DataHandler methods
 
 ```ts
-getRows(): Readable<any[]>
-setRows( data: any[] ): void
+getRows(): Readable<T[]>
+setRows( data: T[] ): void
 ```
 
 ```ts
-sort( orderBy: Function | string ): void
-sortAsc( orderBy: Function | string ): void
-sortDesc( orderBy: Function | string ): void
-getSorted(): Writable<{ identifier?: string; direction?: 'asc' | 'desc'; }>
-applySorting( params: {orderBy: Function | string; direction?: 'asc' | 'desc'} = null ): void
+sort( orderBy: OrderBy<T> ): void
+sortAsc( orderBy: OrderBy<T> ): void
+sortDesc( orderBy: OrderBy<T> ): void
+getSorted(): Writable<(Order<T>)>
+applySorting( params: { orderBy?: OrderBy<T>, direction?: 'asc' | 'desc'} = null ): void
 ```
 
 ```ts
-filter( value: string, filterBy: Function | string, comparator: Function = null ): void
+filter( value: string, filterBy: FilterBy<T>, comparator: Comparator<T> ): void
 clearFilters(): void
 ```
 
 ```ts
-search( value: string, scope?: string[] ): void
+search( value: string, scope?: (keyof T)[] ): void
 clearSearch(): void
 ```
 
@@ -105,9 +105,9 @@ setPage( value: number | ‘previous’ | ‘next’ ): void
 ```
 
 ```ts
-select(value: any): void
-getSelected(): Writable<any[]>
-selectAll(params: { selectBy?: Function | string, scope?: 'all' | 'currentPage' } = { scope: 'all' }): void
+select(value: T[] | (T[keyof T])[]): void
+getSelected(): Writable<T[] | (T[keyof T])[]>
+selectAll(params: { selectBy?: keyof T, scope?: 'all' | 'currentPage' } = { scope: 'all' }): void
 isAllSelected(): Readable<boolean>
 ```
 

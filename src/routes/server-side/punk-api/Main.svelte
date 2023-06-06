@@ -1,6 +1,6 @@
 <script lang="ts">
     import myData from '$data/data'
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core'
+    import { DataHandler, Datatable, Th, ThFilter } from '$lib'
 
     let rows = []
     const load = async () => {

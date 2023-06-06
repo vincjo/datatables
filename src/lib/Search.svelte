@@ -1,7 +1,8 @@
 <script lang="ts">
+    import type { DataHandler } from '$lib'
+
     type T = $$Generic<{ [key: string]: unknown }>
 
-    import type { DataHandler } from '$lib/core'
     export let handler: DataHandler<T>
     let value = ''
 </script>

@@ -1,13 +1,13 @@
 <script lang="ts">
+    import type { DataHandler, OrderBy } from '$lib'
+
     type T = $$Generic<{ [key: string]: unknown }>
 
-    import type { OrderBy } from '$core/Handlers/Rows'
-    import type { DataHandler } from '$lib/core'
     export let handler: DataHandler<T>
     export let orderBy: OrderBy<T>
     export let align: 'left' | 'right' | 'center' = 'left'
-    const identifier = orderBy ? orderBy.toString() : orderBy
 
+    const identifier = orderBy?.toString()
     const sorted = handler.getSorted()
 </script>
 
@@ -19,11 +19,7 @@
 >
     <div
         class="flex"
-        style:justify-content={align === 'left'
-            ? 'flex-start'
-            : align === 'right'
-            ? 'flex-end'
-            : 'center'}
+        style:justify-content={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'}
     >
         <strong>
             <slot />

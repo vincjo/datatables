@@ -1,9 +1,10 @@
 <script lang="ts">
+    import type { DataHandler } from '$lib'
+
     type T = $$Generic<{ [key: string]: unknown }>
 
-    import type { DataHandler } from '$lib/core'
-
     export let handler: DataHandler<T>
+
     export let small = false
     const pageNumber = handler.getPageNumber()
     const pageCount = handler.getPageCount()

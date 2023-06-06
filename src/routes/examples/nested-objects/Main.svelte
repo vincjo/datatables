@@ -1,12 +1,13 @@
 <script lang="ts">
     import myData from '$data/test'
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core'
+    import { DataHandler, Datatable, Th, ThFilter } from '$lib'
 
     const handler = new DataHandler(myData, { rowsPerPage: 50 })
     const rows = handler.getRows()
 
     type Car = { model: string; manufacturer: string }
     type Row = { firstname: string; lastname: string; country: string; car: Car[] }
+
 </script>
 
 <Datatable {handler}>
@@ -19,10 +20,10 @@
                 <Th {handler} orderBy="car">Car</Th>
             </tr>
             <tr>
-                <ThFilter {handler} filterBy="firstname" />
-                <ThFilter {handler} filterBy="lastname" />
-                <ThFilter {handler} filterBy="country" />
-                <ThFilter {handler} filterBy="car" />
+                <ThFilter {handler} filterBy="firstname"/>
+                <ThFilter {handler} filterBy="lastname"/>
+                <ThFilter {handler} filterBy="country"/>
+                <ThFilter {handler} filterBy="car"/>
             </tr>
         </thead>
         <tbody>

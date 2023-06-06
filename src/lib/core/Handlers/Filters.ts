@@ -1,26 +1,25 @@
-import type { Filter, FilterBy } from '../Context'
+import type { Filter, FilterBy, Comparator } from '$lib'
 import type Context from '../Context'
 import type { Writable } from 'svelte/store'
 
-export default class Filters<T> {
+export default class Filters<T>
+{
     public filters: Writable<Filter<T>[]>
 
-    constructor(context: Context<T>) {
+    constructor(context: Context<T>) 
+    {
         this.filters = context.filters
     }
 
-    public set(
-        value: string | number,
-        filterBy: FilterBy<T>,
-        comparator: (args: any) => any = null
-    ): void {
+    public set(value: string | number, filterBy: FilterBy<T>, comparator: Comparator<T> = null )
+    {
         const parsed = this.parse(filterBy)
         this.filters.update((store) => {
             const filter = {
                 filterBy: parsed.fn,
                 value: value,
                 identifier: parsed.identifier,
-                compare: comparator
+                check: comparator
             }
             store = store.filter((item) => {
                 return item.identifier !== parsed.identifier && item.value
@@ -30,14 +29,16 @@ export default class Filters<T> {
         })
     }
 
-    public remove(): void {
+    public remove()
+    {
         this.filters.set([])
     }
 
-    private parse(filterBy: FilterBy<T>) {
+    private parse(filterBy: FilterBy<T>) 
+    {
         if (typeof filterBy === 'string') {
             return {
-                fn: (row) => row[filterBy],
+                fn: (row: T) => row[filterBy],
                 identifier: filterBy.toString()
             }
         } else if (typeof filterBy === 'function') {
@@ -46,7 +47,6 @@ export default class Filters<T> {
                 identifier: filterBy.toString()
             }
         }
-
-        throw new Error('Invalid filterBy argument')
+        throw new Error(`Invalid filterBy argument: ${String(filterBy)}`)
     }
 }

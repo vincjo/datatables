@@ -1,5 +1,5 @@
 <script>
-    import { check } from '$lib/core'
+    import { check } from '$lib'
     export let handler
     export let filterBy
     let value = null
