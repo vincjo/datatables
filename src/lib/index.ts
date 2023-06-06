@@ -22,25 +22,25 @@ export type Internationalization = {
     next?: string
 }
 
-export type FilterBy<T> = keyof T | ((row: T) => T[keyof T])
+export type Row = { [key: string]: unknown  }
 
-export type Comparator<T> = (entry: T[keyof T], value: any) => boolean
+export type FilterBy<Row> = keyof Row | ((row: Row) => Row[keyof Row])
 
-export type Filter<T> = {
-    filterBy: (row: T) => T[keyof T]
+export type Comparator<Row> = (entry: Row[keyof Row], value: any) => boolean
+
+export type Filter<Row> = {
+    filterBy: (row: Row) => Row[keyof Row]
     identifier: string
     value?: string | number | boolean | symbol
-    check?: Comparator<T>
+    check?: Comparator<Row>
 }
 
-export type OrderBy<T>  = keyof T | ((row: T) => T[keyof T])
+export type OrderBy<Row>  = keyof Row | ((row: Row) => Row[keyof Row])
 
-export type Order<T> = {
-    orderBy?: (row: T) => T[keyof T]
+export type Order<Row> = {
+    orderBy?: (row: Row) => Row[keyof Row]
     identifier?: string
     direction?: 'asc' | 'desc'
 }
 
-export type Selectable<T> = T[keyof T] | T
-
-export type RowCountState = { total: number, start: number, end: number }
+export type Selectable<Row> = Row[keyof Row] | Row

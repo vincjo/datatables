@@ -13,7 +13,17 @@ const config = {
         paths: {
             base: '/datatables'
         }
-    }
+    },
+	vitePlugin: {
+		experimental: {
+			inspector: {
+				toggleKeyCombo: 'meta-shift',
+				holdMode: true,
+				showToggleButton: 'always',
+                toggleButtonPos: 'bottom-right',
+			}
+		}
+	}
 }
 
 export default config

@@ -2,7 +2,7 @@ import { writable, derived, type Writable, type Readable } from 'svelte/store'
 import type { Params } from '../DataHandler'
 import { check } from './Comparator'
 
-import type { Filter, RowCountState, Order, Selectable, Comparator } from '$lib'
+import type { Filter, Order, Selectable, Comparator } from '$lib'
 
 export default class Context<T> 
 {
@@ -14,7 +14,7 @@ export default class Context<T>
     public rawRows              : Writable<T[]>
     public filteredRows         : Readable<T[]>
     public rows                 : Readable<T[]>
-    public rowCount             : Readable<RowCountState>
+    public rowCount             : Readable<{ total: number, start: number, end: number }>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>

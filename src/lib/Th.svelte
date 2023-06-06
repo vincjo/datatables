@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { DataHandler, OrderBy } from '$lib'
+    import type { DataHandler, OrderBy, Row } from '$lib'
 
-    type T = $$Generic<{ [key: string]: unknown }>
+    type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
     export let orderBy: OrderBy<T>

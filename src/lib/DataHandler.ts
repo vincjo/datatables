@@ -5,12 +5,11 @@ import GlobalSearch from '$lib/core/Handlers/GlobalSearch'
 import Filters from '$lib/core/Handlers/Filters'
 
 import type { Readable, Writable } from 'svelte/store'
-import type { Internationalization } from '$lib'
-import type { Comparator, FilterBy, Selectable, RowCountState, OrderBy } from '$lib'
+import type { Internationalization, Row, Comparator, FilterBy, Selectable, OrderBy } from '$lib'
 
 export type Params = { rowsPerPage?: number, i18n?: Internationalization }
 
-export default class DataHandler<T extends { [key: string]: unknown } = any> 
+export default class DataHandler<T extends Row = any> 
 {
     private context     : Context<T>
     private rows        : Rows<T>
@@ -61,7 +60,7 @@ export default class DataHandler<T extends { [key: string]: unknown } = any>
         return this.context.isAllSelected
     }
 
-    public getRowCount(): Readable<RowCountState> 
+    public getRowCount(): Readable<{ total: number, start: number, end: number }> 
     {
         return this.context.rowCount
     }

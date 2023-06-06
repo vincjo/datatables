@@ -4,6 +4,7 @@
 
     const handler = new DataHandler(myData, { rowsPerPage: 10 })
     const rows = handler.getRows()
+
 </script>
 
 <Datatable {handler}>
