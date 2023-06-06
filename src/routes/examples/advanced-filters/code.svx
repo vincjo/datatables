@@ -26,7 +26,7 @@
 ````svelte
 <script lang="ts">
     import type {  Datahandler } from '@vincjo/datatables'
-    export let handler
+    export let handler: DataHandler
 
     const customCheck = (entry, value): boolean => {
         return entry != value

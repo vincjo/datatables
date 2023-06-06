@@ -10,7 +10,7 @@ import type { Comparator, FilterBy, Selectable, RowCountState, OrderBy } from '$
 
 export type Params = { rowsPerPage?: number, i18n?: Internationalization }
 
-export default class DataHandler<T> 
+export default class DataHandler<T extends { [key: string]: unknown } = any> 
 {
     private context     : Context<T>
     private rows        : Rows<T>
