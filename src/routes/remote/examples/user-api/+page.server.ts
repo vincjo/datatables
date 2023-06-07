@@ -16,6 +16,11 @@ export const load = async () => {
                 language: 'typescript'
             },
             {
+                name: 'api_helper.ts',
+                code: fs.readFileSync(`${path}/${page}/user_api_helper.ts`).toString('utf-8'),
+                language: 'typescript'
+            },
+            {
                 name: 'Main.svelte',
                 code: fs.readFileSync(`${path}/${page}/Main.svelte`).toString('utf-8'),
                 components: [

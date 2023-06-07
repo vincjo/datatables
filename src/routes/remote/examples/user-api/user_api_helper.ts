@@ -9,7 +9,6 @@ export const get = async (handler: DataHandler, skip: number, limit: number) => 
 
 export const search = async (handler: DataHandler) => {
     const { search, rowsPerPage } = handler.getState()
-    console.log(search)
     if (!search) {
         const result = await get(handler, 0, rowsPerPage)
         handler.setRows(result)
