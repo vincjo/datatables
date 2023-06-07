@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { type DataHandler, type Row, Search, RowsPerPage, Pagination } from '$lib/remote'
+    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, Pagination } from '$lib/remote'
 
     type T = $$Generic<Row>
 
@@ -27,6 +27,8 @@
     <header class:container={search || rowsPerPage}>
         {#if search}
             <Search {handler} />
+        {:else}
+            <div/>
         {/if}
         {#if rowsPerPage}
             <RowsPerPage {handler} small={clientWidth < 600} />
@@ -38,10 +40,9 @@
     </article>
 
     <footer class:container={rowCount || pagination}>
-        <!-- {#if rowCount}
+        {#if rowCount}
             <RowCount {handler} small={clientWidth < 600} />
-        {/if} -->
-        <div/>
+        {/if}
         {#if pagination}
             <Pagination {handler} small={clientWidth < 600} />
         {/if}

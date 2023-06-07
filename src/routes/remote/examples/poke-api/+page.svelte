@@ -1,3 +1,19 @@
+<script>
+    import Demo from '$components/Demo.svelte'
+    import Main from './Main.svelte'
+    export let data
+</script>
 
+<h2>Poké API</h2>
+<Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={false}>
+    <Main data={data.dataset}/>
+</Demo>
 
-<h1>W.I.P</h1>
+<style>
+    h2 {
+        font-size: 24px;
+        color: var(--r-primary);
+        font-weight: 400;
+        margin: 16px 0 8px 0;
+    }
+</style>

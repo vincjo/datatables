@@ -5,7 +5,7 @@
 
     export let handler: DataHandler<T>
     export let small = false
-    export let options = [5, 10, 20, 50, 100]
+    export let options = [5, 10, 20]
 
     const rowsPerPage = handler.getRowsPerPage()
 

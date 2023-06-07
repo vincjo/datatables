@@ -7,8 +7,8 @@ export default [
         name: 'datatables',
         path: '/remote/examples',
         pages: [
-            { name: 'punk-api', path: '/punk-api' },
             { name: 'poke-api', path: '/poke-api' },
+            { name: 'punk-api', path: '/punk-api' },
         ]
     },
 ]

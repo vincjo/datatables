@@ -4,24 +4,86 @@
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
+    export let small = false
 
     const pageNumber = handler.getPageNumber()
+    const pageCount = handler.getPageCount()
+    const pages = handler.getPages({ ellipsis: true })
 </script>
 
 <section class={$$props.class ?? ''}>
-    <button
-        type="button"
-        class:disabled={$pageNumber === 1}
-        on:click={() => handler.setPage('previous')}
-    >
-        &#10094;
-    </button>
-    <button class="disabled page">page <b>{$pageNumber}</b></button>
-    <button
-        on:click={() => handler.setPage('next')}
-    >
-        &#10095;
-    </button>
+    {#if $pages === undefined}
+        <button
+            type="button" class="small"
+            class:disabled={$pageNumber === 1}
+            on:click={() => handler.setPage('previous')}
+        >
+            &#10094;
+        </button>
+        <button class="disabled page">page <b>{$pageNumber}</b></button>
+        <button
+            type="button" class="small"
+            on:click={() => handler.setPage('next')}
+        >
+            &#10095;
+        </button>
+    {:else}
+        {#if small}
+            <button
+                type="button"
+                class="small"
+                class:disabled={$pageNumber === 1}
+                on:click={() => handler.setPage(1)}
+            >
+                &#10092;&#10092;
+            </button>
+            <button
+                type="button"
+                class:disabled={$pageNumber === 1}
+                on:click={() => handler.setPage('previous')}
+            >
+                &#10094;
+            </button>
+            <button
+                class:disabled={$pageNumber === $pageCount}
+                on:click={() => handler.setPage('next')}
+            >
+                &#10095;
+            </button>
+            <button
+                class="small"
+                class:disabled={$pageNumber === $pageCount}
+                on:click={() => handler.setPage($pageCount)}
+            >
+                &#10093;&#10093;
+            </button>
+        {:else}
+            <button
+                type="button"
+                class:disabled={$pageNumber === 1}
+                on:click={() => handler.setPage('previous')}
+            >
+                {@html handler.i18n.previous}
+            </button>
+            {#each $pages as page}
+                <button
+                    type="button"
+                    class:active={$pageNumber === page}
+                    class:ellipse={page === null}
+                    on:click={() => handler.setPage(page)}
+                >
+                    {page ?? '...'}
+                </button>
+            {/each}
+            <button
+                type="button"
+                class:disabled={$pageNumber === $pageCount}
+                on:click={() => handler.setPage('next')}
+            >
+                {@html handler.i18n.next}
+            </button>
+        {/if}
+    {/if}
 </section>
 
 <style>
@@ -30,7 +92,8 @@
     }
     button {
         background: inherit;
-
+        height: 32px;
+        width: 32px;
         color: #616161;
         cursor: pointer;
         font-size: 13px;
@@ -53,7 +116,7 @@
 
     button:first-child:not(.small),
     button:last-child:not(.small) {
-        min-width: 40px;
+        min-width: 72px;
     }
 
     button:not(.active):hover {
@@ -66,5 +129,18 @@
     button.page {
         width: 72px;
         background: #fafafa;
+    }
+    button.ellipse:hover {
+        background: inherit;
+        cursor: default;
+    }
+    button.active {
+        background: #eee;
+        font-weight: bold;
+        cursor: default;
+    }
+    button.disabled:hover {
+        background: inherit;
+        cursor: default;
     }
 </style>

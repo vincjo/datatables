@@ -3,9 +3,10 @@ import DataHandler from './DataHandler'
 import Datatable from './Datatable.svelte'
 import Search from './Search.svelte'
 import RowsPerPage from './RowsPerPage.svelte'
+import RowCount from './RowCount.svelte'
 import Pagination from './Pagination.svelte'
 
-export { DataHandler, Datatable, Search, RowsPerPage, Pagination }
+export { DataHandler, Datatable, Search, RowsPerPage, RowCount, Pagination }
 
 export type Internationalization = {
     search?: string
@@ -29,5 +30,6 @@ export type Actions = {
 export type State = {
     pageNumber: number,
     rowsPerPage: number,
-    search: string
+    search: string,
+    totalRows: number | undefined
 }

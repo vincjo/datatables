@@ -1,10 +1,10 @@
 import Context from './Context'
 import Trigger from './Trigger'
 
-import { type Writable, get } from 'svelte/store'
+import { type Writable, type Readable, get } from 'svelte/store'
 import type { Internationalization, Row, Event } from '$lib/remote'
 
-export type Params = { rowsPerPage?: number, i18n?: Internationalization }
+export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization }
 
 export default class DataHandler<T extends Row = any> 
 {
@@ -64,9 +64,27 @@ export default class DataHandler<T extends Row = any>
         return this.context.rowsPerPage
     }
 
+    public getRowCount(): Readable<{ total: number, start: number, end: number }> 
+    {
+        return this.context.rowCount
+    }
+
     public getPageNumber(): Writable<number> 
     {
         return this.context.pageNumber
+    }
+
+    public getPages(params = { ellipsis: false }): Readable<number[]> 
+    {
+        if (params.ellipsis) {
+            return this.context.pagesWithEllipsis
+        }
+        return this.context.pages
+    }
+
+    public getPageCount(): Readable<number> 
+    {
+        return this.context.pageCount
     }
 
     public getTriggerChange(): Writable<number>

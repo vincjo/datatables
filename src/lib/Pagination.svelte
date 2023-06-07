@@ -4,8 +4,8 @@
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
-
     export let small = false
+
     const pageNumber = handler.getPageNumber()
     const pageCount = handler.getPageCount()
     const pages = handler.getPages({ ellipsis: true })
