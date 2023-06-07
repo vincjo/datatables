@@ -1,0 +1,32 @@
+<script>
+    import ClientLink from './ClientLink.svelte'
+</script>
+
+
+## Server-side data processing
+
+**Under developpement**<br>
+Code : [/lib/remote](https://github.com/vincjo/datatables/tree/master/src/lib/remote)
+
+## Back to main site :
+
+<ClientLink/>
+
+<style>
+    h1 {
+        color: var(--secondary);
+        font-size: 64px;
+        font-weight:400;
+        letter-spacing: 2px;
+    }
+    aside{max-width:400px;}
+    aside.bis{max-width:680px;}
+    h2{font-size:24px;color:var(--secondary);font-weight:400;margin:24px 0 8px 0;}
+    p, li {
+        color: #676778;
+        font-size: 15px;
+        font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        max-width: 680px;
+        line-height: 20px;
+    }
+</style>

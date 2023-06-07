@@ -77,9 +77,9 @@ export default class Context<Row>
         )
     }
 
-    private matches(entry: Row[keyof Row], value: string | number | boolean | symbol, compare: Comparator<Row> = null) 
+    private matches(entry: Row[keyof Row], value: string|number|boolean|symbol, compare: Comparator<Row> = null) 
     {
-        if (!entry && check) {
+        if (!entry && compare) {
             return compare(entry, value)
         }
         if (!entry) return check.contains(entry, value)
