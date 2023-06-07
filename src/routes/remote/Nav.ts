@@ -8,7 +8,8 @@ export default [
         path: '/remote/examples',
         pages: [
             { name: 'poke-api', path: '/poke-api' },
-            { name: 'punk-api', path: '/punk-api' },
+            { name: 'user-api', path: '/user-api' },
+            { name: 'beer-api', path: '/beer-api' },
         ]
     },
 ]

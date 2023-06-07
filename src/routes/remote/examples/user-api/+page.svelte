@@ -4,8 +4,8 @@
     export let data
 </script>
 
-<h2>Poké API <a href="https://pokeapi.co/docs/v2#pokemon-section" rel="external"> DOC &rarr;</a></h2>
-<Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={false}>
+<h2>User API <a href="https://dummyjson.com/docs/users" rel="external"> DOC &rarr;</a></h2>
+<Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={true}>
     <Main data={data.dataset}/>
 </Demo>
 

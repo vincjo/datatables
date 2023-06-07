@@ -2,11 +2,11 @@ import * as fs from 'fs'
 
 export const load = async () => {
     
-    const response = await fetch('https://api.punkapi.com/v2/beers?page=1&per_page=5')
+    const response = await fetch('https://dummyjson.com/users?limit=10&skip=0')
 
     const path = './src/routes/remote/examples'
     const lib = './src/lib/remote'
-    const page = 'punk-api'
+    const page = 'user-api'
     return {
         dataset: response.json(),
         components: [

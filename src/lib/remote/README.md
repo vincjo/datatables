@@ -24,3 +24,8 @@
 ## :x: Refactoring
 
 ## :x: Documentation
+
+
+<br><br>
+
+**&rarr; [Examples](https://vincjo.fr/datatables/remote/examples)**

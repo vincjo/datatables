@@ -4,7 +4,7 @@
     export let data
 </script>
 
-<h2>Punk API</h2>
+<h2>Beer API <a href="https://punkapi.com/documentation/v2" rel="external"> DOC &rarr;</a></h2>
 <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={true}>
     <Main data={data.dataset}/>
 </Demo>
@@ -15,5 +15,11 @@
         color: var(--r-primary);
         font-weight: 400;
         margin: 16px 0 8px 0;
+    }
+    a {
+        font-family: JetBrains;
+        color: var(--primary-lighten);
+        text-decoration: none;
+        font-size: 13px;
     }
 </style>

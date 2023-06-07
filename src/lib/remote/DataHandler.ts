@@ -2,7 +2,7 @@ import Context from './Context'
 import Trigger from './Trigger'
 
 import { type Writable, type Readable, get } from 'svelte/store'
-import type { Internationalization, Row, Event } from '$lib/remote'
+import type { Internationalization, Row, Event, State } from '$lib/remote'
 
 export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization }
 
@@ -24,6 +24,11 @@ export default class DataHandler<T extends Row = any>
     public setRows(data: T[])
     {
         this.context.rows.set(data)
+    }
+
+    public setTotalRows(value: number)
+    {
+        this.context.totalRows.set(value)
     }
 
     public getRows(): Writable<T[]> 
@@ -95,6 +100,11 @@ export default class DataHandler<T extends Row = any>
     public on(event: Event, fn: Function) 
     {
         this.trigger.setAction(event, fn)
+    }
+
+    public getState(): State
+    {
+        return this.context.getState()
     }
 
     public translate(i18n: Internationalization): Internationalization 

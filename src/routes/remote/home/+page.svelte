@@ -7,7 +7,7 @@
         <img src="/datatables/logo-remote.svg" alt="logo" />
         <div>
             <h1>svelte simple datatables</h1>
-            <p>When data processing applies on the server side</p>
+            <p>For server-side data processing</p>
             <div>
                 <img
                     src="https://img.shields.io/npm/dt/@vincjo/datatables?color=%23006990"
