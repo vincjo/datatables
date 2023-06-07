@@ -3,12 +3,13 @@
 </script>
 
 
-## Server-side data processing
+## Work in progress
 
-**Under developpement**<br>
-Code : [/lib/remote](https://github.com/vincjo/datatables/tree/master/src/lib/remote)
+**Code:** [$lib/remote](https://github.com/vincjo/datatables/tree/master/src/lib/remote)
 
-## Back to main site :
+<br><br>
+
+## Back to main site
 
 <ClientLink/>
 
@@ -28,5 +29,8 @@ Code : [/lib/remote](https://github.com/vincjo/datatables/tree/master/src/lib/re
         font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
         max-width: 680px;
         line-height: 20px;
+    }
+    a {
+        color: var(--primary);
     }
 </style>
