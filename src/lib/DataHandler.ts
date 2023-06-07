@@ -39,7 +39,7 @@ export default class DataHandler<T extends Row = any>
         return this.context.rows
     }
 
-    public getRowsOverPagination(): Readable<T[]>
+    public getRowsAcrossPages(): Readable<T[]>
     {
         return this.context.filteredRows
     }

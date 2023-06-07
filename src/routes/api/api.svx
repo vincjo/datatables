@@ -10,7 +10,7 @@
 
 ## Get rows
 
-> **getRows()**: `Readable<T[]>`
+> **getRows()**: `Readable<Row[]>`
 
 ````svelte
 <script lang="ts">
@@ -37,7 +37,7 @@
 
 ## Set rows
 
-> **setRows(** *data*: T[] **)**: void
+> **setRows(** *data*: Row[] **)**: void
 
 ````svelte
 <script lang="ts">
@@ -58,11 +58,11 @@
 
 ## Sort data
 
-> **sort(** *orderBy*: OrderBy`<T>` **)**: void <br>
-> **sortAsc(** *orderBy*: OrderBy`<T>` **)**: void <br>
-> **sortDesc(** *orderBy*: OrderBy`<T>` **)**: void <br>
+> **sort(** *orderBy*: OrderBy`<Row>` **)**: void <br>
+> **sortAsc(** *orderBy*: OrderBy`<Row>` **)**: void <br>
+> **sortDesc(** *orderBy*: OrderBy`<Row>` **)**: void <br>
 > **getSorted()**: Writable`<{` *identifier*?: string, *direction*?: 'asc' | 'desc' `}>`  <br>
-> **applySorting(** *params*?: `{` *orderBy*?: OrderBy`<T>`, *direction*?: 'asc' | 'desc' `}` **)**: void <br>
+> **applySorting(** *params*?: `{` *orderBy*?: OrderBy`<Row>`, *direction*?: 'asc' | 'desc' `}` **)**: void <br>
 
 ````svelte
 <script lang="ts">
@@ -97,7 +97,7 @@
 
 ## Filter data
 
-> **filter(** *value*: string, *filterBy*: FilterBy`<T>`, *comparator*?: Comparator`<T>` **)**: void <br>
+> **filter(** *value*: string, *filterBy*: FilterBy`<Row>`, *comparator*?: Comparator`<Row>` **)**: void <br>
 > **clearFilters()**: void <br>
 
 ````svelte
@@ -135,7 +135,7 @@
 
 ## Search
 
-> **search(** *value*: string, *scope*?: (keyof T)[] **)**: void <br>
+> **search(** *value*: string, *scope*?: (keyof Row)[] **)**: void <br>
 > **clearSearch()**: void <br>
 
 
@@ -244,9 +244,9 @@
 
 ## Row selection
 
-> **select(** *value*: T | T[keyof T] **)**: void <br>
-> **getSelected()**: Writable`<T[] | T[keyof T][]>` <br>
-> **selectAll(** *params*: `{` *selectBy*?: keyof T, *scope*?: 'all' | 'currentPage' `}` **)**: void <br>
+> **select(** *value*: Row | Row[keyof Row] **)**: void <br>
+> **getSelected()**: Writable`<Row[] | Row[keyof Row][]>` <br>
+> **selectAll(** *params*: `{` *selectBy*?: keyof Row, *scope*?: 'all' | 'currentPage' `}` **)**: void <br>
 > **isAllSelected()**: Readable`<boolean>` <br>
 
 

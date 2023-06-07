@@ -67,25 +67,25 @@ npm i -D @vincjo/datatables
 # DataHandler methods
 
 ```ts
-getRows(): Readable<T[]>
-setRows( data: T[] ): void
+getRows(): Readable<Row[]>
+setRows( data: Row[] ): void
 ```
 
 ```ts
-sort( orderBy: OrderBy<T> ): void
-sortAsc( orderBy: OrderBy<T> ): void
-sortDesc( orderBy: OrderBy<T> ): void
-getSorted(): Writable<(Order<T>)>
-applySorting( params: { orderBy?: OrderBy<T>, direction?: 'asc' | 'desc'} = null ): void
+sort( orderBy: OrderBy<Row> ): void
+sortAsc( orderBy: OrderBy<Row> ): void
+sortDesc( orderBy: OrderBy<Row> ): void
+getSorted(): Writable<(Order<Row>)>
+applySorting( params: { orderBy?: OrderBy<Row>, direction?: 'asc' | 'desc'} = null ): void
 ```
 
 ```ts
-filter( value: string, filterBy: FilterBy<T>, comparator: Comparator<T> ): void
+filter( value: string, filterBy: FilterBy<Row>, comparator: Comparator<Row> ): void
 clearFilters(): void
 ```
 
 ```ts
-search( value: string, scope?: (keyof T)[] ): void
+search( value: string, scope?: (keyof Row)[] ): void
 clearSearch(): void
 ```
 
@@ -105,9 +105,9 @@ setPage( value: number | ‘previous’ | ‘next’ ): void
 ```
 
 ```ts
-select(value: T[] | (T[keyof T])[]): void
-getSelected(): Writable<T[] | (T[keyof T])[]>
-selectAll(params: { selectBy?: keyof T, scope?: 'all' | 'currentPage' } = { scope: 'all' }): void
+select(value: Row[] | (Row[keyof Row])[]): void
+getSelected(): Writable<Row[] | (Row[keyof Row])[]>
+selectAll(params: { selectBy?: keyof Row, scope?: 'all' | 'currentPage' } = { scope: 'all' }): void
 isAllSelected(): Readable<boolean>
 ```
 
