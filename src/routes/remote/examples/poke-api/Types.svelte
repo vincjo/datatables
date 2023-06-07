@@ -1,6 +1,6 @@
 <script>
     export let types
-    const [typ1, typ2] = types
+    $: [typ1, typ2] = types
 </script>
 
 <b>{typ1.type.name}</b>

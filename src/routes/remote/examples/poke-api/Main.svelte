@@ -42,7 +42,9 @@
                         <td>{row.id}</td>
                         <td>
                             <aside class="flex">
-                                <img src="{row.sprite}" alt="sprite" />
+                                {#if row.sprite}
+                                    <img src="{row.sprite}" alt="sprite" />
+                                {/if}
                                 <b>{row.name}</b>
                             </aside>
                         </td>
@@ -73,7 +75,7 @@
     }
     tbody td {
         border: 1px solid #f5f5f5;
-        padding: 0 16px;
+        padding: 2px 16px;
     }
     tbody tr {
         transition: all, 0.2s;
@@ -82,8 +84,8 @@
         background: #f5f5f5;
     }
     img {
-        height: 80px;
-        min-width: 80px;
+        height: 72px;
+        width: 72px;
         object-fit: cover;
         border-radius: 50%;
         margin-right: 16px;
@@ -92,5 +94,6 @@
         color: var(--r-primary);
         font-weight: normal;
         line-height: 16px;
+        white-space:break-spaces;
     }
 </style>

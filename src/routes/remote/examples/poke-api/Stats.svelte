@@ -28,7 +28,7 @@
     section {
         font-size: 11px;
         flex-wrap: wrap;
-        max-width: 160px;
+        max-width: 160px !important;
     }
     aside {
         width: 80px;

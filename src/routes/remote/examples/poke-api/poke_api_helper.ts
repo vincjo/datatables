@@ -10,7 +10,7 @@ export const get = async (offset = 0, limit = 10) => {
         const stat = stats.map(item => {
             return { name : item.stat.name, value: item.base_stat }
         })
-        data.push({ id, name: result.name, height, order, stat, sprite: sprites.front_default, types, weight }) 
+        data.push({ id, name: result.name, height, order, stat, sprite: sprites.other['official-artwork'].front_default, types, weight }) 
     }
     json.results = data
     return json
