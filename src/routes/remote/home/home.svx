@@ -15,14 +15,14 @@
 
 <style>
     h1 {
-        color: var(--secondary);
+        color: var(--r-secondary);
         font-size: 64px;
         font-weight:400;
         letter-spacing: 2px;
     }
     aside{max-width:400px;}
     aside.bis{max-width:680px;}
-    h2{font-size:24px;color:var(--secondary);font-weight:400;margin:24px 0 8px 0;}
+    h2{font-size:24px;color:var(--r-secondary);font-weight:400;margin:24px 0 8px 0;}
     p, li {
         color: #676778;
         font-size: 15px;
@@ -31,6 +31,6 @@
         line-height: 20px;
     }
     a {
-        color: var(--primary);
+        color: var(--r-primary);
     }
 </style>

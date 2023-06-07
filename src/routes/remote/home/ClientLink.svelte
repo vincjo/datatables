@@ -22,9 +22,9 @@
     }
     @keyframes change {  
         0% { fill: #2f2f2f }
-        20% { fill:var(--secondary-darken) }
+        20% { fill:var(--r-secondary-darken) }
         50% { fill:var(--ternary) }
-        80% { fill:var(--secondary-darken) }
+        80% { fill:var(--r-secondary-darken) }
         100% { fill: #2f2f2f }
     }
 
@@ -48,7 +48,7 @@
         transition: border, 0.2s;
     }
     section:hover {
-        border: 2px dashed var(--secondary);
+        border: 2px dashed var(--r-secondary);
     }
     section p {
         font-family: JetBrains;
@@ -56,7 +56,7 @@
     }
     section p b {
         font-size: 16px;
-        color: var(--secondary);
+        color: var(--r-secondary);
     }
     a {
         text-decoration: none;
@@ -65,8 +65,8 @@
     .st0{fill:#e0e0e0;}
     .st1{fill:#2f2f2f;}
     .st2{fill:#FFFFFF;}
-    .st4{fill:var(--secondary);}
-    .st6{fill:var(--secondary);}
-    .st7{fill:var(--secondary);}
+    .st4{fill:var(--r-secondary);}
+    .st6{fill:var(--r-secondary);}
+    .st7{fill:var(--r-secondary);}
     .st11{fill:#2f2f2f;}
 </style>

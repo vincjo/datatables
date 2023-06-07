@@ -4,8 +4,6 @@
 </script>
 
 
-
-
 <Github/>
 <ModalContainer/>
 <slot/>

@@ -12,7 +12,7 @@
 <style>
     h2 {
         font-size: 24px;
-        color: var(--secondary);
+        color: var(--r-primary);
         font-weight: 400;
         margin: 16px 0 8px 0;
     }

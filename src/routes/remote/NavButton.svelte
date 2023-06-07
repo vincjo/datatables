@@ -29,8 +29,8 @@
         z-index: 21;
         top: 8px;
         left: 8px;
-        color: var(--primary);
-        background: var(--primary-lighten-1);
+        color: var(--r-primary);
+        background: var(--r-primary-lighten-1);
         padding: 2px;
         border-radius: 50%;
         width: 40px;

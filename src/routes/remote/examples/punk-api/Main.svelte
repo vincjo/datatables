@@ -79,11 +79,11 @@
         min-width: 40px;
         object-fit: cover;
         border-radius: 50%;
-        border: 1px solid var(--secondary);
+        border: 1px solid var(--r-secondary);
         margin-right: 16px;
     }
     b {
-        color: var(--primary);
+        color: var(--r-primary);
         font-weight: normal;
         line-height: 16px;
     }

@@ -12,6 +12,20 @@
     --secondary-darken: #004058;
 
     --ternary: #fbc02d;
+
+
+    /* remote part - reverse colors */
+    --r-primary: #006990;
+    --r-primary-lighten: #62c8f3;
+    --r-primary-lighten-1: rgba(0, 105, 144, 0.1);
+    --r-primary-lighten-1: rgba(0, 105, 144, 0.1);
+    --r-primary-lighten-2: rgba(0, 105, 144, 0.2);
+    --r-primary-lighten-3: rgba(0, 105, 144, 0.3);
+    --r-primary-darken: #004058;
+
+    --r-secondary: #c2185b;
+    --r-secondary-lighten: #f48fb1;
+    --r-secondary-darken: #880e4f;
 }
 
 ::selection {

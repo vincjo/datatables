@@ -107,7 +107,7 @@
         color: #676778;
     }
     h2.active {
-        color: var(--primary);
+        color: var(--r-primary);
         font-weight: 600;
     }
     a {
@@ -139,11 +139,11 @@
         background: #fafafa;
     }
     ul li.active {
-        color: var(--secondary);
+        color: var(--r-secondary);
         font-weight: bold;
         background: #f5f5f5;
         /* border:1px solid #e0e0e0; */
-        border-right: 4px solid var(--secondary);
+        border-right: 4px solid var(--r-secondary);
     }
     /* ul li.active a {background:#fafafa;} */
     ul a {
