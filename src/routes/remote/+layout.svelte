@@ -12,7 +12,7 @@
 <svelte:head>
     <title>Remote Datatables</title>
     <link rel="stylesheet" href="/gros-theme-server.css" />
-    <link rel="icon" href="/favicon-remote.png" />
+    <link rel="icon" href="/favicon-remote.png?2" />
 </svelte:head>
 
 <NavButton />
