@@ -1,7 +1,7 @@
 import type Context from '../Context'
 import { type Writable, type Readable, get } from 'svelte/store'
 
-export default class Pages<T> 
+export default class Pages<Row> 
 {
     public pageNumber   : Writable<number>
     public rowCount     : Readable<{ total: number, start: number, end: number }>
@@ -9,7 +9,7 @@ export default class Pages<T>
     public triggerChange: Writable<number>
     public pages        : Readable<number[]>
 
-    constructor(context: Context<T>) 
+    constructor(context: Context<Row>) 
     {
         this.pageNumber     = context.pageNumber
         this.rowCount       = context.rowCount

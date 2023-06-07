@@ -41,4 +41,7 @@
         border: 1px solid #eee;
         padding: 4px 20px;
     }
+    thead tr{
+        background:#fff;
+    }
 </style>

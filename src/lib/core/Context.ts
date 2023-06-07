@@ -1,29 +1,29 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store'
-import type { Params } from '../DataHandler'
+import type { Filter, Order, Selectable, Comparator } from '$lib'
+import type { Params }  from '../DataHandler'
 import { check } from './Comparator'
 
-import type { Filter, Order, Selectable, Comparator } from '$lib'
 
-export default class Context<T> 
+export default class Context<Row> 
 {
     public rowsPerPage          : Writable<number | null>
     public pageNumber           : Writable<number>
     public triggerChange        : Writable<number>
-    public globalSearch         : Writable<{ value?: string, scope?: (keyof T)[] }>
-    public filters              : Writable<Filter<T>[]>
-    public rawRows              : Writable<T[]>
-    public filteredRows         : Readable<T[]>
-    public rows                 : Readable<T[]>
+    public globalSearch         : Writable<{ value?: string, scope?: (keyof Row)[] }>
+    public filters              : Writable<Filter<Row>[]>
+    public rawRows              : Writable<Row[]>
+    public filteredRows         : Readable<Row[]>
+    public rows                 : Readable<Row[]>
     public rowCount             : Readable<{ total: number, start: number, end: number }>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
-    public sorted               : Writable<(Order<T>)>
-    public selected             : Writable<Selectable<T>[]>
+    public sorted               : Writable<(Order<Row>)>
+    public selected             : Writable<Selectable<Row>[]>
     public selectScope          : Writable<'all' | 'currentPage'>
     public isAllSelected        : Readable<boolean>
 
-    constructor(data: T[], params: Params) 
+    constructor(data: Row[], params: Params) 
     {
         this.rowsPerPage        = writable(params.rowsPerPage)
         this.pageNumber         = writable(1)
@@ -77,7 +77,7 @@ export default class Context<T>
         )
     }
 
-    private matches(entry: T[keyof T], value: string | number | boolean | symbol, compare: Comparator<T> = null) 
+    private matches(entry: Row[keyof Row], value: string | number | boolean | symbol, compare: Comparator<Row> = null) 
     {
         if (!entry && check) {
             return compare(entry, value)

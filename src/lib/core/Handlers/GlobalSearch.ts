@@ -1,15 +1,15 @@
 import type Context from '../Context'
 import type { Writable } from 'svelte/store'
 
-export default class Search<T> 
+export default class Search<Row> 
 {
-    private globalSearch: Writable<{ value?: string, scope?: (keyof T)[] }>
+    private globalSearch: Writable<{ value?: string, scope?: (keyof Row)[] }>
 
-    constructor(context: Context<T>) {
+    constructor(context: Context<Row>) {
         this.globalSearch = context.globalSearch
     }
 
-    public set(value: string, scope: (keyof T)[] = null)
+    public set(value: string, scope: (keyof Row)[] = null)
     {
         this.globalSearch.update((store) => {
             store = {

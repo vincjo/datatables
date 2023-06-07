@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { DataHandler, FilterBy, Comparator } from '$lib'
+    import type { DataHandler, FilterBy, Comparator, Row } from '$lib'
 
-    type T = $$Generic<{ [key: string]: unknown }>
+    type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
     export let filterBy: FilterBy<T>

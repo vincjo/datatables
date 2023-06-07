@@ -4,18 +4,18 @@ import { type Writable, type Readable, get } from 'svelte/store'
 
 
 
-export default class Rows<T> 
+export default class Rows<Row> 
 {
-    private rawRows         : Writable<T[]>
-    private filteredRows    : Readable<T[]>
-    private rows            : Readable<T[]>
+    private rawRows         : Writable<Row[]>
+    private filteredRows    : Readable<Row[]>
+    private rows            : Readable<Row[]>
     private triggerChange   : Writable<number>
-    private sorted          : Writable<(Order<T>)>
-    private selected        : Writable<Selectable<T>[]>
+    private sorted          : Writable<(Order<Row>)>
+    private selected        : Writable<Selectable<Row>[]>
     private selectScope     : Writable<'currentPage' | 'all'>
     private isAllSelected   : Readable<boolean>
 
-    constructor(context: Context<T>) 
+    constructor(context: Context<Row>) 
     {
         this.rawRows        = context.rawRows
         this.filteredRows   = context.filteredRows
@@ -27,7 +27,7 @@ export default class Rows<T>
         this.isAllSelected  = context.isAllSelected
     }
 
-    public sort(orderBy: OrderBy<T> = null)
+    public sort(orderBy: OrderBy<Row> = null)
     {
         if (!orderBy) return
         const sorted = get(this.sorted)
@@ -44,7 +44,7 @@ export default class Rows<T>
         }
     }
 
-    public sortAsc(orderBy: OrderBy<T>)
+    public sortAsc(orderBy: OrderBy<Row>)
     {
         if (!orderBy) return
         const parsed = this.parse(orderBy)
@@ -66,7 +66,7 @@ export default class Rows<T>
         this.triggerChange.update((store) => { return store + 1 })
     }
 
-    public sortDesc(orderBy: OrderBy<T>)
+    public sortDesc(orderBy: OrderBy<Row>)
     {
         if (!orderBy) return
         const parsed = this.parse(orderBy)
@@ -89,7 +89,7 @@ export default class Rows<T>
         this.triggerChange.update((store) => { return store + 1 })
     }
 
-    public applySorting(params: { orderBy: OrderBy<T>, direction?: 'asc' | 'desc' } = null) 
+    public applySorting(params: { orderBy: OrderBy<Row>, direction?: 'asc' | 'desc' } = null) 
     {
         if (params) {
             switch (params.direction) {
@@ -108,11 +108,11 @@ export default class Rows<T>
         return
     }
 
-    private parse(orderBy: OrderBy<T>) 
+    private parse(orderBy: OrderBy<Row>) 
     {
         if (typeof orderBy === 'string') {
             return {
-                fn: (row: T) => row[orderBy],
+                fn: (row: Row) => row[orderBy],
                 identifier: orderBy.toString()
             }
         } else if (typeof orderBy === 'function') {
@@ -124,7 +124,7 @@ export default class Rows<T>
         throw new Error(`Invalid orderBy argument: ${String(orderBy)}`)
     }
 
-    public select(value: Selectable<T>) 
+    public select(value: Selectable<Row>) 
     {
         const selected = get(this.selected)
         if (selected.includes(value)) {
@@ -134,7 +134,7 @@ export default class Rows<T>
         }
     }
 
-    public selectAll(selectBy: keyof T = null) 
+    public selectAll(selectBy: keyof Row = null) 
     {
         const isAllSelected = get(this.isAllSelected)
         const selectScope = get(this.selectScope)

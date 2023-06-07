@@ -1,8 +1,8 @@
-import Context from '$lib/core/Context'
-import Rows from '$lib/core/Handlers/Rows'
-import Pages from '$lib/core/Handlers/Pages'
+import Context      from '$lib/core/Context'
+import Rows         from '$lib/core/Handlers/Rows'
+import Pages        from '$lib/core/Handlers/Pages'
 import GlobalSearch from '$lib/core/Handlers/GlobalSearch'
-import Filters from '$lib/core/Handlers/Filters'
+import Filters      from '$lib/core/Handlers/Filters'
 
 import type { Readable, Writable } from 'svelte/store'
 import type { Internationalization, Row, Comparator, FilterBy, Selectable, OrderBy } from '$lib'
@@ -37,6 +37,11 @@ export default class DataHandler<T extends Row = any>
     public getRows(): Readable<T[]> 
     {
         return this.context.rows
+    }
+
+    public getRowsOverPagination(): Readable<T[]>
+    {
+        return this.context.filteredRows
     }
 
     public select(value: Selectable<T>) 

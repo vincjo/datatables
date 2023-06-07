@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { type DataHandler, Search, RowsPerPage, RowCount, Pagination } from '$lib'
+    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, Pagination } from '$lib'
 
-    type T = $$Generic<{ [key: string]: unknown }>
+    type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
 

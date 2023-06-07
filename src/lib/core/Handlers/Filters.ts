@@ -2,16 +2,16 @@ import type { Filter, FilterBy, Comparator } from '$lib'
 import type Context from '../Context'
 import type { Writable } from 'svelte/store'
 
-export default class Filters<T>
+export default class Filters<Row>
 {
-    public filters: Writable<Filter<T>[]>
+    public filters: Writable<Filter<Row>[]>
 
-    constructor(context: Context<T>) 
+    constructor(context: Context<Row>) 
     {
         this.filters = context.filters
     }
 
-    public set(value: string | number, filterBy: FilterBy<T>, comparator: Comparator<T> = null )
+    public set(value: string | number, filterBy: FilterBy<Row>, comparator: Comparator<Row> = null )
     {
         const parsed = this.parse(filterBy)
         this.filters.update((store) => {
@@ -34,11 +34,11 @@ export default class Filters<T>
         this.filters.set([])
     }
 
-    private parse(filterBy: FilterBy<T>) 
+    private parse(filterBy: FilterBy<Row>) 
     {
         if (typeof filterBy === 'string') {
             return {
-                fn: (row: T) => row[filterBy],
+                fn: (row: Row) => row[filterBy],
                 identifier: filterBy.toString()
             }
         } else if (typeof filterBy === 'function') {

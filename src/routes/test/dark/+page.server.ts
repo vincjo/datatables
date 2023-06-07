@@ -1,9 +1,9 @@
 import * as fs from 'fs'
 
 export const load = async () => {
-    const path = './src/routes'
+    const path = './src/routes/test'
     const lib = './src/lib'
-    const page = 'test'
+    const page = 'dark'
     return {
         dataset: fs.readFileSync(`./src/data/test.ts`).toString('utf-8'),
         components: [
