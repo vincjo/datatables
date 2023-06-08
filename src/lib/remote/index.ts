@@ -21,6 +21,17 @@ export type Internationalization = {
 
 export type Row = { [key: string]: unknown  }
 
+
+export type Filter<Row> = {
+    filterBy: keyof Row
+    value?: string | number | boolean | symbol
+}
+
+export type Order<Row> = {
+    orderBy?: keyof Row
+    direction?: 'asc' | 'desc'
+}
+
 export type Event = 'setPage' | 'setRowsPerPage' | 'search' | 'sort' | 'filter'
 
 export type Actions = {
@@ -38,9 +49,4 @@ export type State = {
     totalRows: number | undefined
 }
 
-export type OrderBy<Row>  = keyof Row
-
-export type Order<Row> = {
-    orderBy?: keyof Row
-    direction?: 'asc' | 'desc'
-}
+export type Selectable<Row> = Row[keyof Row] | Row

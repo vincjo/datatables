@@ -17,7 +17,7 @@ export const load = async () => {
             },
             {
                 name: 'api_helper.ts',
-                code: fs.readFileSync(`${path}/${page}/user_api_helper.ts`).toString('utf-8'),
+                code: fs.readFileSync(`${path}/${page}/api_helper.ts`).toString('utf-8'),
                 language: 'typescript'
             },
             {

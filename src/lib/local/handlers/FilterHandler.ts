@@ -6,7 +6,7 @@ export default class FilterHandler<Row>
 {
     public filters: Writable<Filter<Row>[]>
 
-    constructor(context: Context<Row>) 
+    constructor(context: Context<Row>)
     {
         this.filters = context.filters
     }
@@ -34,7 +34,7 @@ export default class FilterHandler<Row>
         this.filters.set([])
     }
 
-    private parse(filterBy: FilterBy<Row>) 
+    private parse(filterBy: FilterBy<Row>)
     {
         if (typeof filterBy === 'string') {
             return {

@@ -6,8 +6,7 @@
     const handler = new DataHandler(data, { rowsPerPage: 5 })
     const rows = handler.getRows()
 
-    // setPage event
-    handler.on('navigate', async (state: State) => {
+    handler.on('setPage', async (state: State) => {
 
         const { pageNumber, rowsPerPage, search } = state
 
@@ -21,10 +20,10 @@
         return response.json()
     })
 
-    // setRowsPerPage event, triggers "navigate"
-    handler.on('display', () => { handler.setPage(1) })
+    // triggers setPage 1
+    handler.on('setRowsPerPage', () => { handler.setPage(1) })
 
-    // search event, triggers "navigate"
+    // triggers setPage 1
     handler.on('search', () => { handler.setPage(1) })
 </script>
 

@@ -9,7 +9,7 @@
     const rows = handler.getRows()
 
     // setPage event
-    handler.on('navigate', async (state: State) => {
+    handler.on('setPage', async (state: State) => {
 
         const { pageNumber, rowsPerPage } = state
 
@@ -21,7 +21,7 @@
     })
 
     // setRowsPerPage event, triggers "navigate"
-    handler.on('display', () => { handler.setPage(1) })
+    handler.on('setRowsPerPage', () => { handler.setPage(1) })
 
 </script>
 

@@ -1,22 +1,37 @@
-import Context from './Context'
-import Trigger from './Trigger'
+import Context          from './Context'
+import TriggerHandler   from './handlers/TriggerHandler'
+import SortHandler      from './handlers/SortHandler'
+import SelectHandler    from './handlers/SelectHandler'
+import PageHandler      from './handlers/PageHandler'
+import SearchHandler    from './handlers/SearchHandler'
+import FilterHandler    from './handlers/FilterHandler'
 
 import { type Writable, type Readable, get } from 'svelte/store'
-import type { Internationalization, Row, Event, State } from '$lib/remote'
+import type { Internationalization, Row, Event, State, Selectable } from '$lib/remote'
 
 export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization }
 
 export default class DataHandler<T extends Row = any> 
 {
-    private context: Context<T>
-    public trigger: Trigger<T>
-    public pageNumber: Writable<number>
-    public i18n: Internationalization
+    private context         : Context<T>
+    private triggerHandler  : TriggerHandler<T>
+    private sortHandler     : SortHandler<T>
+    private selectHandler   : SelectHandler<T>
+    private pageHandler     : PageHandler<T>
+    private searchHandler   : SearchHandler<T>
+    private filterHandler   : FilterHandler<T>
+    public pageNumber       : Writable<number>
+    public i18n             : Internationalization
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: 5 }) 
     {
-        this.context = new Context(data, params)
-        this.trigger = new Trigger(this.context)
+        this.context        = new Context(data, params)
+        this.triggerHandler = new TriggerHandler(this.context)
+        this.sortHandler    = new SortHandler(this.context)
+        this.selectHandler  = new SelectHandler(this.context)
+        this.pageHandler    = new PageHandler(this.context)
+        this.searchHandler  = new SearchHandler(this.context)
+        this.filterHandler  = new FilterHandler(this.context)
         this.pageNumber = this.context.pageNumber
         this.i18n = this.translate(params.i18n)
     }
@@ -36,47 +51,83 @@ export default class DataHandler<T extends Row = any>
         return this.context.rows
     }
 
-    public setPage(value: number | 'previous' | 'next'): void 
+    public select(value: Selectable<T>)
     {
-        const pageNumber = get(this.pageNumber)
+        this.selectHandler.select(value)
+    }
 
-        if (value === 'previous') {
-            if (pageNumber === 1) return
-            this.pageNumber.set(pageNumber - 1)
-        }
-        else if (value === 'next') {
-            this.pageNumber.set(pageNumber + 1)
-        }
-        else {
-            this.pageNumber.set(value as number)
-        }
-        this.trigger.run('setPage')
+    public getSelected()
+    {
+        return this.context.selected
+    }
+
+    public selectAll(selectBy: keyof T = null): void
+    {
+        this.selectHandler.selectAll(selectBy)
+    }
+
+    public isAllSelected(): Readable<boolean>
+    {
+        return this.context.isAllSelected
+    }
+
+    public getRowsPerPage(): Writable<number | null>
+    {
+        return this.context.rowsPerPage
     }
 
     public setRowsPerPage(): void 
     {
-        this.trigger.run('setRowsPerPage')
+        this.triggerHandler.run('setRowsPerPage')
+    }
+
+    public sort(orderBy: keyof T)
+    {
+        this.setPage(1)
+        this.sortHandler.sort(orderBy)
+    }
+
+    public applySorting( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
+    {
+        this.sortHandler.applySorting(params)
+    }
+
+    public sortAsc(orderBy: keyof T)
+    {
+        this.setPage(1)
+        this.sortHandler.sortAsc(orderBy)
+    }
+
+    public sortDesc(orderBy: keyof T)
+    {
+        this.setPage(1)
+        this.sortHandler.sortDesc(orderBy)
+    }
+
+    public getSorted(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
+    {
+        return this.context.sorted
     }
 
     public search(value: string): void 
     {
         this.context.globalSearch.set(value)
-        this.trigger.run('search')
+        this.triggerHandler.run('search')
     }
 
-    public getRowsPerPage(): Writable<number | null> 
+    public clearSearch()
     {
-        return this.context.rowsPerPage
+        this.searchHandler.remove()
     }
 
-    public getRowCount(): Readable<{ total: number, start: number, end: number }> 
+    public filter(value: string, filterBy: keyof T)
     {
-        return this.context.rowCount
+        return this.filterHandler.set(value as string | number, filterBy)
     }
 
-    public getPageNumber(): Writable<number> 
+    public clearFilters(): void
     {
-        return this.context.pageNumber
+        this.filterHandler.remove()
     }
 
     public getPages(params = { ellipsis: false }): Readable<number[]> 
@@ -92,6 +143,33 @@ export default class DataHandler<T extends Row = any>
         return this.context.pageCount
     }
 
+    public getPageNumber(): Writable<number> 
+    {
+        return this.context.pageNumber
+    }
+
+    public setPage(value: number | 'previous' | 'next'): void 
+    {
+        const pageNumber = get(this.pageNumber)
+
+        if (value === 'previous') {
+            if (pageNumber === 1) return
+            this.pageNumber.set(pageNumber - 1)
+        }
+        else if (value === 'next') {
+            this.pageNumber.set(pageNumber + 1)
+        }
+        else {
+            this.pageNumber.set(value as number)
+        }
+        this.triggerHandler.run('setPage')
+    }
+
+    public getRowCount(): Readable<{ total: number, start: number, end: number }> 
+    {
+        return this.context.rowCount
+    }
+
     public getTriggerChange(): Writable<number>
     {
         return this.context.triggerChange
@@ -99,7 +177,7 @@ export default class DataHandler<T extends Row = any>
 
     public on(event: Event, fn: Function) 
     {
-        this.trigger.setAction(event, fn)
+        this.triggerHandler.setAction(event, fn)
     }
 
     public getState(): State

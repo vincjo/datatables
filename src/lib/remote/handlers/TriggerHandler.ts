@@ -1,8 +1,8 @@
 import type { Event, Actions } from '$lib/remote'
-import type Context from './Context'
+import type Context from '$lib/remote/Context'
 
 
-export default class Trigger<Row>
+export default class TriggerHandler<Row>
 {
     public actions: Actions
     public context: Context<Row>

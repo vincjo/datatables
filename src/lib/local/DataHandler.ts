@@ -51,7 +51,7 @@ export default class DataHandler<T extends Row = any>
     {
         this.selectHandler.select(value)
     }
-d
+
     public getSelected()
     {
         return this.context.selected
@@ -147,12 +147,9 @@ d
     public setPage(value: number | 'previous' | 'next'): void
     {
         switch (value) {
-            case 'previous':
-                return this.pageHandler.previous()
-            case 'next':
-                return this.pageHandler.next()
-            default:
-                return this.pageHandler.goto(value as number)
+            case 'previous' : return this.pageHandler.previous()
+            case 'next'     : return this.pageHandler.next()
+            default         : return this.pageHandler.goto(value as number)
         }
     }
 

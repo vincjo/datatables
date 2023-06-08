@@ -1,35 +1,41 @@
 import { type Writable, writable, get, derived, type Readable } from 'svelte/store'
-import type { State, Order } from '$lib/remote'
+import type { State, Order, Filter, Selectable } from '$lib/remote'
 import type { Params }  from './DataHandler'
 
 export default class Context<Row>
 {
-    public rows                 : Writable<Row[]>
-    public pageNumber           : Writable<number>
+    public totalRows            : Writable<number | undefined>
     public rowsPerPage          : Writable<number>
+    public pageNumber           : Writable<number>
     public triggerChange        : Writable<number>
     public globalSearch         : Writable<string>
-    public totalRows            : Writable<number | undefined>
+    public filters              : Writable<Filter<Row>[]>
+    public rows                 : Writable<Row[]>
     public rowCount             : Readable<{ total: number, start: number, end: number }>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
     public sorted               : Writable<(Order<Row>)>
+    public selected             : Writable<Selectable<Row>[]>
+    public isAllSelected        : Readable<boolean>
 
 
     constructor(data: Row[], params: Params)
     {
-        this.rows               = writable(data)
-        this.pageNumber         = writable(1)
+        this.totalRows          = writable(params.totalRows)
         this.rowsPerPage        = writable(params.rowsPerPage)
+        this.pageNumber         = writable(1)
         this.triggerChange      = writable(0)
         this.globalSearch       = writable('')
-        this.totalRows          = writable(params.totalRows)
+        this.filters            = writable([])
+        this.rows               = writable(data)
         this.rowCount           = this.createRowCount()
         this.pages              = this.createPages()
         this.pagesWithEllipsis  = this.createPagesWithEllipsis()
         this.pageCount          = this.createPageCount()
         this.sorted             = writable({})
+        this.selected           = writable([])
+        this.isAllSelected      = this.createIsAllSelected()
     }
 
     public getState(): State
@@ -114,6 +120,20 @@ export default class Context<Row>
                     start: $pageNumber * $rowsPerPage - $rowsPerPage + 1,
                     end: Math.min($pageNumber * $rowsPerPage, $totalRows)
                 }
+            }
+        )
+    }
+
+    private createIsAllSelected()
+    {
+        return derived(
+            [this.selected, this.rows],
+            ([$selected, $rows]) => {
+                const rowCount = $rows.length
+                if (rowCount === $selected.length && rowCount !== 0) {
+                    return true
+                }
+                return false
             }
         )
     }

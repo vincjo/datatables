@@ -6,16 +6,12 @@
     const handler = new DataHandler(data, { rowsPerPage: 10, totalRows: 500 })
     const rows = handler.getRows()
 
-    // setPage event
-    handler.on('navigate', async (state: State) => {
+    handler.on('setPage', async (state: State) => {
         return get(handler, state)
     })
 
-    // setRowsPerPage event, triggers "navigate"
-    handler.on('display', () => { handler.setPage(1) })
+    handler.on('setRowsPerPage', () => { handler.setPage(1) })
 
-    // search event, triggers "navigate"
-    // handler.on('search', () => { search(handler) })
 
 </script>
 
