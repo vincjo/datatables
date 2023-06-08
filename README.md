@@ -19,17 +19,16 @@ This lib provides an API to dynamically interact with iterable data: filtering, 
 
 Also provides some demo components, which you can grab and customize in your own project.
 
-<br>
 
 :globe_with_meridians: **[Live examples](https://vincjo.fr/datatables/examples)**
 
-<br>
 
 ### Server-side data processing
 
 Support for remote interactions is **[under development](https://vincjo.fr/datatables/remote)**.
 
 
+<br>
 
 # Install
 
