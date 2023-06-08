@@ -47,7 +47,7 @@
         display: flex;
         justify-content: flex-start;
         overflow-y: auto;
-        padding: 2%;
+        padding: 0 2%;
     }
     article {
         padding: 32px;

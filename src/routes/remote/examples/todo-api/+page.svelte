@@ -5,8 +5,9 @@
     export let data
 </script>
 
+<h1>Column filtering</h1>
 <h2>
-    Comment API
+    Todos API
     <a href="https://jsonplaceholder.typicode.com/" rel="external"> DOC</a> 
     <a href="https://github.com/typicode/json-server" rel="external"> | SOURCE &rarr;</a>
 </h2>
@@ -16,6 +17,11 @@
 </Demo>
 
 <style>
+    h1 {
+        color: var(--primary);
+        font-weight: normal;
+        font-size: 16px;
+    }
     h2 {
         font-size: 24px;
         color: var(--r-primary);

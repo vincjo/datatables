@@ -11,7 +11,7 @@ export default [
             { name: 'Search', path: '/user-api' },
             { name: 'Column filters', path: '/todo-api' },
             { name: 'Pokédex', path: '/poke-api' },
-            { name: 'No row count', path: '/beer-api' },
+            { name: 'Unknown row count', path: '/beer-api' },
         ]
     },
 ]

@@ -5,13 +5,19 @@
     export let data
 </script>
 
-<h2>Beer API <a href="https://punkapi.com/documentation/v2" rel="external"> DOC &rarr;</a></h2>
+<h1>Unknown row count</h1>
+<h2>Beers API <a href="https://punkapi.com/documentation/v2" rel="external"> DOC &rarr;</a></h2>
 <Features rowsPerPage={true} search={true}/>
 <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={true}>
     <Main data={data.dataset}/>
 </Demo>
 
 <style>
+    h1 {
+        color: var(--primary);
+        font-weight: normal;
+        font-size: 16px;
+    }
     h2 {
         font-size: 24px;
         color: var(--r-primary);
