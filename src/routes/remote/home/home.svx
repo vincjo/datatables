@@ -8,14 +8,14 @@
 **Code:** [$lib/remote](https://github.com/vincjo/datatables/tree/master/src/lib/remote)
 
 
-### ❌ features
+### ✅ features
 - ✅ pagination
 - ✅ sorting
-- ❌ filtering
+- ✅ filtering
 - ✅ searching
 - ✅ rows per page
 - ✅ row count
-- ❌ row selection
+- ✅ row selection
 
 
 ### ❌ Refactoring

@@ -12,13 +12,13 @@ import type { Internationalization, Row, FilterBy, Comparator, Filter, OrderBy, 
 
 export { DataHandler, check, Datatable, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search }
 
-export type  { 
-    Internationalization, 
-    Row, 
-    FilterBy, 
-    Comparator, 
-    Filter, 
-    OrderBy, 
-    Order, 
-    Selectable 
+export type  {
+    Internationalization,
+    Row,
+    FilterBy,
+    Comparator,
+    Filter,
+    OrderBy,
+    Order,
+    Selectable
 }
