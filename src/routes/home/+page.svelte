@@ -1,5 +1,5 @@
 <script>
-    import Home from './home.svx';
+    import Home from './home.svx'
 </script>
 
 <section>

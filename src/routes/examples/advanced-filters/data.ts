@@ -65,4 +65,4 @@ export const data = {
         { value: true },
         { value: null }
     ]
-};
+}

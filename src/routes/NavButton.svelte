@@ -1,7 +1,7 @@
 <script>
-    import Nav from './Nav.svelte';
-    import { fade } from 'svelte/transition';
-    let active = false;
+    import Nav from './Nav.svelte'
+    import { fade } from 'svelte/transition'
+    let active = false
 </script>
 
 <button on:click={() => (active = !active)} class:active>

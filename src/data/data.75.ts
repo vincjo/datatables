@@ -89,4 +89,4 @@ export default [
     { id: 73, first_name: 'Chic', last_name: 'Beinisch', email: 'cbeinisch20@rambler.ru' },
     { id: 74, first_name: 'Titos', last_name: 'Grieg', email: 'tgrieg21@baidu.com' },
     { id: 75, first_name: 'Brook', last_name: 'Malletratt', email: 'bmalletratt22@elpais.com' }
-];
+]

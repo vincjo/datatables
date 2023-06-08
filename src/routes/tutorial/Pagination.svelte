@@ -1,8 +1,8 @@
 <script>
-    export let handler;
-    const pageNumber = handler.getPageNumber();
-    const pageCount = handler.getPageCount();
-    const pages = handler.getPages({ ellipsis: true });
+    export let handler
+    const pageNumber = handler.getPageNumber()
+    const pageCount = handler.getPageCount()
+    const pages = handler.getPages({ ellipsis: true })
 </script>
 
 <section>

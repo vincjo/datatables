@@ -1,7 +1,7 @@
-import * as fs from 'fs';
+import * as fs from 'fs'
 
 export const load = async () => {
-    const path = './src/routes/tutorial';
+    const path = './src/routes/tutorial'
     return {
         dataset: fs.readFileSync(`./src/data/data.ts`).toString('utf-8'),
         components: [
@@ -26,5 +26,5 @@ export const load = async () => {
                 code: fs.readFileSync(`${path}/Th.svelte`).toString('utf-8')
             }
         ]
-    };
-};
+    }
+}

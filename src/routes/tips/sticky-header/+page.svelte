@@ -1,5 +1,5 @@
 <script>
-    import Doc from './doc.svx';
+    import Doc from './doc.svx'
 </script>
 
 <h2>Sticky table header</h2>

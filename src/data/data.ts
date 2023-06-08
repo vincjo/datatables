@@ -224,4 +224,4 @@ export default [
     { id: 173, first_name: 'Zack', last_name: 'Ketteman', email: 'zketteman4s@reverbnation.com' },
     { id: 174, first_name: 'Clemence', last_name: 'Philpots', email: 'cphilpots4t@about.com' },
     { id: 175, first_name: 'Yehudi', last_name: 'Bater', email: 'ybater4u@themeforest.net' }
-];
+]

@@ -1,7 +1,7 @@
 <script>
-    import Tutorial from '$components/Tutorial.svelte';
-    import Main from './Main.svelte';
-    export let data;
+    import Tutorial from '$components/Tutorial.svelte'
+    import Main from './Main.svelte'
+    export let data
 </script>
 
 <h2>Search</h2>

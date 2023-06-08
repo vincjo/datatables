@@ -1,13 +1,13 @@
 <script>
-    import { fade } from 'svelte/transition';
-    import TutorialCode from './TutorialCode.svelte';
-    import Prism from 'prismjs';
-    import CopyButton from './CopyButton.svelte';
-    export let dataset;
-    export let components;
-    export let scrollY = true;
-    export let width = 'auto';
-    let current = 'code';
+    import { fade } from 'svelte/transition'
+    import TutorialCode from './TutorialCode.svelte'
+    import Prism from 'prismjs'
+    import CopyButton from './CopyButton.svelte'
+    export let dataset
+    export let components
+    export let scrollY = true
+    export let width = 'auto'
+    let current = 'code'
 </script>
 
 <div in:fade>

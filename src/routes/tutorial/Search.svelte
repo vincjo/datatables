@@ -1,6 +1,6 @@
 <script>
-    export let handler;
-    let value = '';
+    export let handler
+    let value = ''
 </script>
 
 <input placeholder="Search..." bind:value on:input={() => handler.search(value)} />

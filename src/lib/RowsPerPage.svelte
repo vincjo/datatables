@@ -1,13 +1,13 @@
 <script lang="ts">
-    type T = $$Generic<{ [key: string]: unknown }>;
+    type T = $$Generic<{ [key: string]: unknown }>
 
-    import type { DataHandler } from '$lib/core';
+    import type { DataHandler } from '$lib/core'
 
-    export let handler: DataHandler<T>;
-    export let small = false;
-    const rowsPerPage = handler.getRowsPerPage();
+    export let handler: DataHandler<T>
+    export let small = false
+    const rowsPerPage = handler.getRowsPerPage()
 
-    const options = [5, 10, 20, 50, 100];
+    const options = [5, 10, 20, 50, 100]
 </script>
 
 <aside class={$$props.class ?? ''}>

@@ -389,4 +389,4 @@ export default [
         is_online: true,
         id: 319
     }
-];
+]

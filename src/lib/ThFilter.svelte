@@ -1,15 +1,15 @@
 <script lang="ts">
-    type T = $$Generic<{ [key: string]: unknown }>;
+    type T = $$Generic<{ [key: string]: unknown }>
 
-    import type { FilterBy } from '$core/Context';
-    import type { DataHandler } from '$lib/core';
+    import type { FilterBy } from '$core/Context'
+    import type { DataHandler } from '$lib/core'
 
-    export let handler: DataHandler<T>;
-    export let filterBy: FilterBy<T>;
-    export let align: 'left' | 'right' | 'center' = 'left';
-    export let comparator: ((...args: any) => any) | undefined = undefined;
+    export let handler: DataHandler<T>
+    export let filterBy: FilterBy<T>
+    export let align: 'left' | 'right' | 'center' = 'left'
+    export let comparator: ((...args: any) => any) | undefined = undefined
 
-    let value: any = '';
+    let value: any = ''
 </script>
 
 <th class={$$props.class ?? ''}>

@@ -1,12 +1,12 @@
 <script lang="ts">
-    import myData from '$data/test';
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core';
+    import myData from '$data/test'
+    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core'
 
-    const handler = new DataHandler(myData, { rowsPerPage: 50 });
-    const rows = handler.getRows();
+    const handler = new DataHandler(myData, { rowsPerPage: 50 })
+    const rows = handler.getRows()
 
-    type Car = { model: string; manufacturer: string };
-    type Row = { firstname: string; lastname: string; country: string; car: Car[] };
+    type Car = { model: string; manufacturer: string }
+    type Row = { firstname: string; lastname: string; country: string; car: Car[] }
 </script>
 
 <Datatable {handler}>

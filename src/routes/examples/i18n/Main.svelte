@@ -1,6 +1,6 @@
 <script lang="ts">
-    import myData from '$data/data';
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core';
+    import myData from '$data/data'
+    import { DataHandler, Datatable, Th, ThFilter } from '$lib/core'
 
     const handler = new DataHandler(myData, {
         rowsPerPage: 10,
@@ -14,8 +14,8 @@
             previous: 'Précédent',
             next: 'Suivant'
         }
-    });
-    const rows = handler.getRows();
+    })
+    const rows = handler.getRows()
 </script>
 
 <Datatable {handler}>

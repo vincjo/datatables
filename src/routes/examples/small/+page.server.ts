@@ -1,9 +1,9 @@
-import * as fs from 'fs';
+import * as fs from 'fs'
 
 export const load = async () => {
-    const path = './src/routes/examples';
-    const lib = './src/lib';
-    const page = 'small';
+    const path = './src/routes/examples'
+    const lib = './src/lib'
+    const page = 'small'
     return {
         dataset: fs.readFileSync(`./src/data/data.ts`).toString('utf-8'),
         components: [
@@ -44,5 +44,5 @@ export const load = async () => {
                 ]
             }
         ]
-    };
-};
+    }
+}

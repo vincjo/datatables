@@ -1,26 +1,26 @@
 <script lang="ts">
-    type T = $$Generic<{ [key: string]: unknown }>;
+    type T = $$Generic<{ [key: string]: unknown }>
 
-    import { type DataHandler, Search, RowsPerPage, RowCount, Pagination } from '$lib/core';
+    import { type DataHandler, Search, RowsPerPage, RowCount, Pagination } from '$lib/core'
 
-    export let handler: DataHandler<T>;
+    export let handler: DataHandler<T>
 
-    export let search = true;
-    export let rowsPerPage = true;
-    export let rowCount = true;
-    export let pagination = true;
+    export let search = true
+    export let rowsPerPage = true
+    export let rowCount = true
+    export let pagination = true
 
-    let element: HTMLElement | undefined;
-    let clientWidth = 1000;
+    let element: HTMLElement | undefined
+    let clientWidth = 1000
 
-    const height = (search || rowsPerPage ? 48 : 8) + (rowCount || pagination ? 48 : 8);
+    const height = (search || rowsPerPage ? 48 : 8) + (rowCount || pagination ? 48 : 8)
 
-    const triggerChange = handler.getTriggerChange();
-    $: $triggerChange, scrollTop();
+    const triggerChange = handler.getTriggerChange()
+    $: $triggerChange, scrollTop()
 
     const scrollTop = () => {
-        if (element) element.scrollTop = 0;
-    };
+        if (element) element.scrollTop = 0
+    }
 </script>
 
 <section bind:clientWidth class={$$props.class ?? ''}>
