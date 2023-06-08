@@ -11,6 +11,7 @@
     background: #006990;
     color: #fff;
 }
+#svelte-inspector-toggle{z-index:999999 !important;}
 pre {
     border-radius: 2px;
 }

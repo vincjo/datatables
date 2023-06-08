@@ -1,4 +1,5 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store'
+<<<<<<< HEAD
 import type { Params } from '../DataHandler'
 import type { Sorted } from './Handlers/Rows'
 import { check } from './Comparator'
@@ -59,9 +60,54 @@ export default class Context<TRow> {
         this.selected = writable([])
         this.selectScope = writable('all')
         this.isAllSelected = this.createIsAllSelected()
+=======
+import type { Filter, Order, Selectable, Comparator } from '$lib/core'
+import type { Params }  from '$lib/DataHandler'
+import { check } from './Comparator'
+
+
+export default class Context<Row> 
+{
+    public rowsPerPage          : Writable<number | null>
+    public pageNumber           : Writable<number>
+    public triggerChange        : Writable<number>
+    public globalSearch         : Writable<{ value?: string, scope?: (keyof Row)[] }>
+    public filters              : Writable<Filter<Row>[]>
+    public rawRows              : Writable<Row[]>
+    public filteredRows         : Readable<Row[]>
+    public rows                 : Readable<Row[]>
+    public rowCount             : Readable<{ total: number, start: number, end: number }>
+    public pages                : Readable<number[]>
+    public pagesWithEllipsis    : Readable<number[]>
+    public pageCount            : Readable<number>
+    public sorted               : Writable<(Order<Row>)>
+    public selected             : Writable<Selectable<Row>[]>
+    public selectScope          : Writable<'all' | 'currentPage'>
+    public isAllSelected        : Readable<boolean>
+
+    constructor(data: Row[], params: Params) 
+    {
+        this.rowsPerPage        = writable(params.rowsPerPage)
+        this.pageNumber         = writable(1)
+        this.triggerChange      = writable(0)
+        this.globalSearch       = writable({})
+        this.filters            = writable([])
+        this.rawRows            = writable(data)
+        this.filteredRows       = this.createFilteredRows()
+        this.rows               = this.createPaginatedRows()
+        this.rowCount           = this.createRowCount()
+        this.pages              = this.createPages()
+        this.pagesWithEllipsis  = this.createPagesWithEllipsis()
+        this.pageCount          = this.createPageCount()
+        this.sorted             = writable({})
+        this.selected           = writable([])
+        this.selectScope        = writable('all')
+        this.isAllSelected      = this.createIsAllSelected()
+>>>>>>> upstream/master
     }
 
-    private createFilteredRows() {
+    private createFilteredRows() 
+    {
         return derived(
             [this.rawRows, this.globalSearch, this.filters],
             ([$rawRows, $globalSearch, $filters]) => {
@@ -74,14 +120,19 @@ export default class Context<TRow> {
                     })
                     this.pageNumber.set(1)
                     this.selected.set([])
+<<<<<<< HEAD
                     this.triggerChange.update((store) => {
                         return store + 1
                     })
+=======
+                    this.triggerChange.update((store) => { return store + 1 })
+>>>>>>> upstream/master
                 }
 
                 if ($filters.length > 0) {
-                    $filters.forEach((localFilter) => {
+                    $filters.forEach((filter) => {
                         return ($rawRows = $rawRows.filter((row) => {
+<<<<<<< HEAD
                             const entry = localFilter.filterBy(row)
                             if (
                                 localFilter.value === null ||
@@ -90,24 +141,30 @@ export default class Context<TRow> {
                             )
                                 return true
                             return this.matches(entry, localFilter.value, localFilter.compare)
+=======
+                            const entry = filter.filterBy(row)
+                            if (!filter.value) return true
+                            return this.matches(entry, filter.value, filter.check)
+>>>>>>> upstream/master
                         }))
                     })
                     this.pageNumber.set(1)
                     this.selected.set([])
+<<<<<<< HEAD
                     this.triggerChange.update((store) => {
                         return store + 1
                     })
+=======
+                    this.triggerChange.update((store) => { return store + 1 })
+>>>>>>> upstream/master
                 }
                 return $rawRows
             }
         )
     }
 
-    private matches(
-        entry: string | Record<string, any> | number | null,
-        value: string | number,
-        compare: ((...args: any) => number) | null = null
-    ) {
+    private matches(entry: Row[keyof Row], value: string|number|boolean|symbol, compare: Comparator<Row> = null) 
+    {
         if (!entry && compare) {
             return compare(entry, value)
         }
@@ -121,7 +178,8 @@ export default class Context<TRow> {
         return compare(entry, value)
     }
 
-    private createPaginatedRows() {
+    private createPaginatedRows()
+    {
         return derived(
             [this.filteredRows, this.rowsPerPage, this.pageNumber],
             ([$filteredRows, $rowsPerPage, $pageNumber]) => {
@@ -139,7 +197,8 @@ export default class Context<TRow> {
         )
     }
 
-    private createRowCount() {
+    private createRowCount()
+    {
         return derived(
             [this.filteredRows, this.pageNumber, this.rowsPerPage],
             ([$filteredRows, $pageNumber, $rowsPerPage]) => {
@@ -157,19 +216,25 @@ export default class Context<TRow> {
         )
     }
 
-    private createPages() {
+    private createPages()
+    {
         return derived([this.rowsPerPage, this.filteredRows], ([$rowsPerPage, $filteredRows]) => {
             if (!$rowsPerPage) {
                 return [1]
             }
             const pages = Array.from(Array(Math.ceil($filteredRows.length / $rowsPerPage)))
+<<<<<<< HEAD
             return pages.map((row, i) => {
+=======
+            return pages.map((_, i) => {
+>>>>>>> upstream/master
                 return i + 1
             })
         })
     }
 
-    private createPagesWithEllipsis() {
+    private createPagesWithEllipsis()
+    {
         return derived([this.pages, this.pageNumber], ([$pages, $pageNumber]) => {
             if ($pages.length <= 7) {
                 return $pages
@@ -178,7 +243,15 @@ export default class Context<TRow> {
             const firstPage = 1
             const lastPage = $pages.length
             if ($pageNumber <= 4) {
+<<<<<<< HEAD
                 return [...$pages.slice(0, 5), ellipse, lastPage]
+=======
+                return [
+                    ...$pages.slice(0, 5),
+                    ellipse,
+                    lastPage
+                ]
+>>>>>>> upstream/master
             } else if ($pageNumber < $pages.length - 3) {
                 return [
                     firstPage,
@@ -188,23 +261,38 @@ export default class Context<TRow> {
                     lastPage
                 ]
             } else {
+<<<<<<< HEAD
                 return [firstPage, ellipse, ...$pages.slice($pages.length - 5, $pages.length)]
+=======
+                return [
+                    firstPage,
+                    ellipse,
+                    ...$pages.slice($pages.length - 5,
+                    $pages.length)
+                ]
+>>>>>>> upstream/master
             }
         })
     }
 
-    private createPageCount() {
+    private createPageCount()
+    {
         return derived(this.pages, ($pages) => {
             return $pages.length
         })
     }
 
-    private createIsAllSelected() {
+    private createIsAllSelected()
+    {
         return derived(
             [this.selected, this.rows, this.filteredRows, this.selectScope],
             ([$selected, $rows, $filteredRows, $selectScope]) => {
+<<<<<<< HEAD
                 const rowCount =
                     $selectScope === 'currentPage' ? $rows.length : $filteredRows.length
+=======
+                const rowCount = $selectScope === 'currentPage' ? $rows.length : $filteredRows.length
+>>>>>>> upstream/master
                 if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }

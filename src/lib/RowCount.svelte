@@ -1,7 +1,13 @@
 <script lang="ts">
+<<<<<<< HEAD
     type T = $$Generic<{ [key: string]: unknown }>
 
     import type { DataHandler } from '$lib/core'
+=======
+    import type { DataHandler, Row } from '$lib/core'
+
+    type T = $$Generic<Row>
+>>>>>>> upstream/master
 
     export let handler: DataHandler<T>
     export let small = false

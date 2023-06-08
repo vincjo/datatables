@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import type Context from '../Context'
 import { type Writable, type Readable, get } from 'svelte/store'
 
@@ -34,6 +35,39 @@ export default class Rows<T> {
     }
 
     public sort(orderBy: OrderBy<T>): void {
+=======
+import type Context from '$lib/core/Context'
+import type { Order, OrderBy, Selectable } from '$lib/core'
+import { type Writable, type Readable, get } from 'svelte/store'
+
+
+
+export default class Rows<Row> 
+{
+    private rawRows         : Writable<Row[]>
+    private filteredRows    : Readable<Row[]>
+    private rows            : Readable<Row[]>
+    private triggerChange   : Writable<number>
+    private sorted          : Writable<(Order<Row>)>
+    private selected        : Writable<Selectable<Row>[]>
+    private selectScope     : Writable<'currentPage' | 'all'>
+    private isAllSelected   : Readable<boolean>
+
+    constructor(context: Context<Row>) 
+    {
+        this.rawRows        = context.rawRows
+        this.filteredRows   = context.filteredRows
+        this.rows           = context.rows
+        this.triggerChange  = context.triggerChange
+        this.sorted         = context.sorted
+        this.selected       = context.selected
+        this.selectScope    = context.selectScope
+        this.isAllSelected  = context.isAllSelected
+    }
+
+    public sort(orderBy: OrderBy<Row> = null)
+    {
+>>>>>>> upstream/master
         if (!orderBy) return
         const sorted = get(this.sorted)
         const parsed = this.parse(orderBy)
@@ -43,15 +77,28 @@ export default class Rows<T> {
         }
         if (sorted.direction === null || sorted.direction === 'desc') {
             this.sortAsc(orderBy)
+<<<<<<< HEAD
         } else if (sorted.direction === 'asc') {
+=======
+        } 
+        else if (sorted.direction === 'asc') {
+>>>>>>> upstream/master
             this.sortDesc(orderBy)
         }
     }
 
+<<<<<<< HEAD
     public sortAsc(orderBy: OrderBy<T>): void {
         if (!orderBy) return
         const parsed = this.parse(orderBy)
         this.sorted.set({ identifier: parsed.identifier, direction: 'asc', fn: parsed.fn })
+=======
+    public sortAsc(orderBy: OrderBy<Row>)
+    {
+        if (!orderBy) return
+        const parsed = this.parse(orderBy)
+        this.sorted.set({ identifier: parsed.identifier, direction: 'asc', orderBy: parsed.fn })
+>>>>>>> upstream/master
         this.rawRows.update((store) => {
             store.sort((x, y) => {
                 const [a, b] = [parsed.fn(x), parsed.fn(y)]
@@ -66,6 +113,7 @@ export default class Rows<T> {
             })
             return store
         })
+<<<<<<< HEAD
         this.triggerChange.update((store) => {
             return store + 1
         })
@@ -75,6 +123,16 @@ export default class Rows<T> {
         if (!orderBy) return
         const parsed = this.parse(orderBy)
         this.sorted.set({ identifier: parsed.identifier, direction: 'desc', fn: parsed.fn })
+=======
+        this.triggerChange.update((store) => { return store + 1 })
+    }
+
+    public sortDesc(orderBy: OrderBy<Row>)
+    {
+        if (!orderBy) return
+        const parsed = this.parse(orderBy)
+        this.sorted.set({ identifier: parsed.identifier, direction: 'desc', orderBy: parsed.fn })
+>>>>>>> upstream/master
         this.rawRows.update((store) => {
             store.sort((x, y) => {
                 const [a, b] = [parsed.fn(x), parsed.fn(y)]
@@ -90,6 +148,7 @@ export default class Rows<T> {
 
             return store
         })
+<<<<<<< HEAD
         this.triggerChange.update((store) => {
             return store + 1
         })
@@ -109,26 +168,35 @@ export default class Rows<T> {
                     return this.sortDesc(params.orderBy)
                 default:
                     return this.sort(params.orderBy)
+=======
+        this.triggerChange.update((store) => { return store + 1 })
+    }
+
+    public applySorting(params: { orderBy: OrderBy<Row>, direction?: 'asc' | 'desc' } = null) 
+    {
+        if (params) {
+            switch (params.direction) {
+                case 'asc' : return this.sortAsc(params.orderBy)
+                case 'desc': return this.sortDesc(params.orderBy)
+                default    : return this.sort(params.orderBy)
+>>>>>>> upstream/master
             }
         }
         const sorted = get(this.sorted)
         if (sorted.identifier) {
             return this.applySorting({
-                orderBy: sorted.fn,
+                orderBy: sorted.orderBy,
                 direction: sorted.direction
             })
         }
         return
     }
 
-    private parse(orderBy: OrderBy<T>) {
-        if (
-            typeof orderBy === 'string' ||
-            typeof orderBy === 'number' ||
-            typeof orderBy === 'symbol'
-        ) {
+    private parse(orderBy: OrderBy<Row>) 
+    {
+        if (typeof orderBy === 'string') {
             return {
-                fn: (row: T) => row[orderBy],
+                fn: (row: Row) => row[orderBy],
                 identifier: orderBy.toString()
             }
         } else if (typeof orderBy === 'function') {
@@ -137,6 +205,7 @@ export default class Rows<T> {
                 identifier: orderBy.toString()
             }
         }
+<<<<<<< HEAD
         throw new Error('Invalid orderBy argument')
     }
 
@@ -150,6 +219,23 @@ export default class Rows<T> {
     }
 
     public selectAll(accessor: string = null) {
+=======
+        throw new Error(`Invalid orderBy argument: ${String(orderBy)}`)
+    }
+
+    public select(value: Selectable<Row>) 
+    {
+        const selected = get(this.selected)
+        if (selected.includes(value)) {
+            this.selected.set(selected.filter((item) => item !== value))
+        } else {
+            this.selected.set([value, ...selected])
+        }
+    }
+
+    public selectAll(selectBy: keyof Row = null) 
+    {
+>>>>>>> upstream/master
         const isAllSelected = get(this.isAllSelected)
         const selectScope = get(this.selectScope)
         if (isAllSelected) {
@@ -157,10 +243,14 @@ export default class Rows<T> {
         }
         const rows = selectScope === 'currentPage' ? get(this.rows) : get(this.filteredRows)
 
-        if (accessor) {
+        if (selectBy) {
             this.selected.set(
                 rows.map((row) => {
+<<<<<<< HEAD
                     return row[accessor]
+=======
+                    return row[selectBy]
+>>>>>>> upstream/master
                 })
             )
         } else {
@@ -168,7 +258,12 @@ export default class Rows<T> {
         }
     }
 
+<<<<<<< HEAD
     public unselectAll() {
+=======
+    public unselectAll() 
+    {
+>>>>>>> upstream/master
         this.selected.set([])
     }
 }

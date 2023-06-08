@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const stringify = (value: string | number | boolean = null) => {
     return String(value)
         .toLowerCase()
@@ -22,6 +23,22 @@ export const check = {
     },
 
     isEqualTo: (entry: any, value: string | number | boolean) => {
+=======
+export const check = {
+    contains: (entry: any, value: any) => {
+        return stringify(entry).indexOf(stringify(value)) > -1
+    },
+
+    startsWith: (entry: any, value: any) => {
+        return stringify(entry).startsWith(stringify(value))
+    },
+
+    endsWith: (entry: any, value: any) => {
+        return stringify(entry).endsWith(stringify(value))
+    },
+
+    isEqualTo: (entry: any, value: any) => {
+>>>>>>> upstream/master
         return stringify(entry) === stringify(value)
     },
 
@@ -57,6 +74,7 @@ export const check = {
         return entry > min && entry < max
     },
 
+<<<<<<< HEAD
     isTrue: (entry: any, value = 'boolean') => {
         return entry === true
     },
@@ -66,6 +84,17 @@ export const check = {
     },
 
     isNull: (entry: any, value = 'null') => {
+=======
+    isTrue: (entry: boolean, value = 'boolean') => {
+        return entry === true
+    },
+
+    isFalse: (entry: boolean, value = 'boolean') => {
+        return entry === false
+    },
+
+    isNull: (entry: null, value = 'null') => {
+>>>>>>> upstream/master
         return entry === null || entry === undefined
     },
 
@@ -73,3 +102,20 @@ export const check = {
         return entry === null || entry === undefined ? false : true
     }
 }
+<<<<<<< HEAD
+=======
+
+
+/* utils */
+
+function stringify(value: string | number | boolean = null) {
+    return String(value)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+}
+
+function isNull(entry: any) {
+    if (entry === null || entry === undefined) return true
+}
+>>>>>>> upstream/master

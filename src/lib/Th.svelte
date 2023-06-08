@@ -1,4 +1,5 @@
 <script lang="ts">
+<<<<<<< HEAD
     type T = $$Generic<{ [key: string]: unknown }>
 
     import type { OrderBy } from '$core/Handlers/Rows'
@@ -8,6 +9,17 @@
     export let align: 'left' | 'right' | 'center' = 'left'
     const identifier = orderBy ? orderBy.toString() : orderBy
 
+=======
+    import type { DataHandler, OrderBy, Row } from '$lib/core'
+
+    type T = $$Generic<Row>
+
+    export let handler: DataHandler<T>
+    export let orderBy: OrderBy<T>
+    export let align: 'left' | 'right' | 'center' = 'left'
+
+    const identifier = orderBy?.toString()
+>>>>>>> upstream/master
     const sorted = handler.getSorted()
 </script>
 
@@ -19,11 +31,7 @@
 >
     <div
         class="flex"
-        style:justify-content={align === 'left'
-            ? 'flex-start'
-            : align === 'right'
-            ? 'flex-end'
-            : 'center'}
+        style:justify-content={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'}
     >
         <strong>
             <slot />

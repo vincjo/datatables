@@ -1,10 +1,20 @@
 <script lang="ts">
+<<<<<<< HEAD
     type T = $$Generic<{ [key: string]: unknown }>
 
     import type { DataHandler } from '$lib/core'
 
     export let handler: DataHandler<T>
     export let small = false
+=======
+    import type { DataHandler, Row } from '$lib/core'
+
+    type T = $$Generic<Row>
+
+    export let handler: DataHandler<T>
+    export let small = false
+
+>>>>>>> upstream/master
     const pageNumber = handler.getPageNumber()
     const pageCount = handler.getPageCount()
     const pages = handler.getPages({ ellipsis: true })

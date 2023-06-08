@@ -1,4 +1,5 @@
 <script lang="ts">
+<<<<<<< HEAD
     type T = $$Generic<{ [key: string]: unknown }>
 
     import type { DataHandler } from '$lib/core'
@@ -7,6 +8,17 @@
     export let small = false
     const rowsPerPage = handler.getRowsPerPage()
 
+=======
+    import type { DataHandler, Row } from '$lib/core'
+
+    type T = $$Generic<Row>
+
+    export let handler: DataHandler<T>
+    export let small = false
+
+    const rowsPerPage = handler.getRowsPerPage()
+
+>>>>>>> upstream/master
     const options = [5, 10, 20, 50, 100]
 </script>
 

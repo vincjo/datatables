@@ -21,3 +21,29 @@ export type Internationalization = {
     previous?: string
     next?: string
 }
+<<<<<<< HEAD
+=======
+
+export type Row = { [key: string]: unknown  }
+
+export type FilterBy<Row> = keyof Row | ((row: Row) => Row[keyof Row])
+
+export type Comparator<Row> = (entry: Row[keyof Row], value: any) => boolean
+
+export type Filter<Row> = {
+    filterBy: (row: Row) => Row[keyof Row]
+    identifier: string
+    value?: string | number | boolean | symbol
+    check?: Comparator<Row>
+}
+
+export type OrderBy<Row>  = keyof Row | ((row: Row) => Row[keyof Row])
+
+export type Order<Row> = {
+    orderBy?: (row: Row) => Row[keyof Row]
+    identifier?: string
+    direction?: 'asc' | 'desc'
+}
+
+export type Selectable<Row> = Row[keyof Row] | Row
+>>>>>>> upstream/master
