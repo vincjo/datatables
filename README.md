@@ -25,11 +25,11 @@ Also provides some demo components, which you can grab and customize in your own
 
 <br>
 
-## Server-side data processing:
+### Server-side data processing
 
-Support for remote interactions is under development.
+Support for remote interactions is **[under development](https://vincjo.fr/datatables/remote)**.
 
-:globe_with_meridians: **[Some examples are available here](https://vincjo.fr/datatables/remote)**
+
 
 # Install
 
