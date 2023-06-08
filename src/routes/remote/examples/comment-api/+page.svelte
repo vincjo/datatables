@@ -1,0 +1,29 @@
+<script>
+    import Demo from '$components/Demo.svelte'
+    import Main from './Main.svelte'
+    export let data
+</script>
+
+<h2>
+    Comment API 
+    <a href="https://jsonplaceholder.typicode.com/" rel="external"> DOC</a> 
+    <a href="https://github.com/typicode/json-serve" rel="external"> | SOURCE &rarr;</a>
+</h2>
+<Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={true}>
+    <Main data={data.dataset}/>
+</Demo>
+
+<style>
+    h2 {
+        font-size: 24px;
+        color: var(--r-primary);
+        font-weight: 400;
+        margin: 16px 0 8px 0;
+    }
+    a {
+        font-family: JetBrains;
+        color: var(--primary-lighten);
+        text-decoration: none;
+        font-size: 13px;
+    }
+</style>

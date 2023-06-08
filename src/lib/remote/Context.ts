@@ -1,5 +1,5 @@
 import { type Writable, writable, get, derived, type Readable } from 'svelte/store'
-import type { State } from '$lib/remote'
+import type { State, Order } from '$lib/remote'
 import type { Params }  from './DataHandler'
 
 export default class Context<Row>
@@ -14,6 +14,7 @@ export default class Context<Row>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
+    public sorted               : Writable<(Order<Row>)>
 
 
     constructor(data: Row[], params: Params)
@@ -28,6 +29,7 @@ export default class Context<Row>
         this.pages              = this.createPages()
         this.pagesWithEllipsis  = this.createPagesWithEllipsis()
         this.pageCount          = this.createPageCount()
+        this.sorted             = writable({})
     }
 
     public getState(): State

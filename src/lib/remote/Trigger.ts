@@ -4,7 +4,6 @@ import type Context from './Context'
 
 export default class Trigger<Row>
 {
-
     public actions: Actions
     public context: Context<Row>
 
@@ -12,9 +11,11 @@ export default class Trigger<Row>
     {
         this.context = context
         this.actions = {
-            navigate: undefined,
-            display: undefined,
-            search: undefined,
+            setPage         : undefined,
+            setRowsPerPage  : undefined,
+            search          : undefined,
+            sort            : undefined,
+            filter          : undefined
         }
     }
 

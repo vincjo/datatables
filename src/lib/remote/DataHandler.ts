@@ -50,12 +50,12 @@ export default class DataHandler<T extends Row = any>
         else {
             this.pageNumber.set(value as number)
         }
-        this.trigger.run('navigate')
+        this.trigger.run('setPage')
     }
 
     public setRowsPerPage(): void 
     {
-        this.trigger.run('display')
+        this.trigger.run('setRowsPerPage')
     }
 
     public search(value: string): void 

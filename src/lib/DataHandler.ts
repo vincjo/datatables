@@ -9,7 +9,7 @@ import type { Internationalization, Row, Comparator, FilterBy, Selectable, Order
 
 export type Params = { rowsPerPage?: number, i18n?: Internationalization }
 
-export default class DataHandler<T extends Row = any> 
+export default class DataHandler<T extends Row = any>
 {
     private context     : Context<T>
     private rows        : Rows<T>
@@ -18,7 +18,7 @@ export default class DataHandler<T extends Row = any>
     private filters     : Filters<T>
     public i18n         : Internationalization
 
-    constructor(data: T[] = [], params: Params = { rowsPerPage: null }) 
+    constructor(data: T[] = [], params: Params = { rowsPerPage: null })
     {
         this.i18n           = this.translate(params.i18n)
         this.context        = new Context(data, params)
@@ -34,7 +34,7 @@ export default class DataHandler<T extends Row = any>
         this.applySorting()
     }
 
-    public getRows(): Readable<T[]> 
+    public getRows(): Readable<T[]>
     {
         return this.context.rows
     }
@@ -44,33 +44,33 @@ export default class DataHandler<T extends Row = any>
         return this.context.filteredRows
     }
 
-    public select(value: Selectable<T>) 
+    public select(value: Selectable<T>)
     {
         this.rows.select(value)
     }
 
-    public getSelected() 
+    public getSelected()
     {
         return this.context.selected
     }
 
-    public selectAll(params: { selectBy?: keyof T; scope?: 'all' | 'currentPage' } = {}): void 
+    public selectAll(params: { selectBy?: keyof T; scope?: 'all' | 'currentPage' } = {}): void
     {
         this.context.selectScope.set(params.scope ?? 'all')
         this.rows.selectAll(params.selectBy ?? null)
     }
 
-    public isAllSelected(): Readable<boolean> 
+    public isAllSelected(): Readable<boolean>
     {
         return this.context.isAllSelected
     }
 
-    public getRowCount(): Readable<{ total: number, start: number, end: number }> 
+    public getRowCount(): Readable<{ total: number, start: number, end: number }>
     {
         return this.context.rowCount
     }
 
-    public getRowsPerPage(): Writable<number | null> 
+    public getRowsPerPage(): Writable<number | null>
     {
         return this.context.rowsPerPage
     }
@@ -98,7 +98,7 @@ export default class DataHandler<T extends Row = any>
         this.rows.sortDesc(orderBy)
     }
 
-    public getSorted(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }> 
+    public getSorted(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
     {
         return this.context.sorted
     }
@@ -118,12 +118,12 @@ export default class DataHandler<T extends Row = any>
         return this.filters.set(value as string | number, filterBy, comparator)
     }
 
-    public clearFilters(): void 
+    public clearFilters(): void
     {
         this.filters.remove()
     }
 
-    public getPages(params = { ellipsis: false }): Readable<number[]> 
+    public getPages(params = { ellipsis: false }): Readable<number[]>
     {
         if (params.ellipsis) {
             return this.context.pagesWithEllipsis
@@ -131,17 +131,17 @@ export default class DataHandler<T extends Row = any>
         return this.context.pages
     }
 
-    public getPageCount(): Readable<number> 
+    public getPageCount(): Readable<number>
     {
         return this.context.pageCount
     }
 
-    public getPageNumber(): Readable<number> 
+    public getPageNumber(): Readable<number>
     {
         return this.context.pageNumber
     }
 
-    public setPage(value: number | 'previous' | 'next'): void 
+    public setPage(value: number | 'previous' | 'next'): void
     {
         switch (value) {
             case 'previous':
@@ -153,12 +153,12 @@ export default class DataHandler<T extends Row = any>
         }
     }
 
-    public getTriggerChange(): Writable<number> 
+    public getTriggerChange(): Writable<number>
     {
         return this.context.triggerChange
     }
 
-    public translate(i18n: Internationalization): Internationalization 
+    public translate(i18n: Internationalization): Internationalization
     {
         return {
             ...{
@@ -179,7 +179,7 @@ export default class DataHandler<T extends Row = any>
      * Deprecated
      * use setRows() instead
      */
-    public update(data: any[]): void 
+    public update(data: any[]): void
     {
         console.log(
             '%c%s',

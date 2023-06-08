@@ -21,15 +21,26 @@ export type Internationalization = {
 
 export type Row = { [key: string]: unknown  }
 
-export type Event = 'navigate' | 'search' | 'display'
+export type Event = 'setPage' | 'setRowsPerPage' | 'search' | 'sort' | 'filter'
+
 export type Actions = {
-    navigate: Function | undefined,
-    display: Function | undefined,
-    search: Function | undefined
+    setPage:        Function | undefined,
+    setRowsPerPage: Function | undefined,
+    search:         Function | undefined,
+    sort:           Function | undefined,
+    filter:         Function | undefined,
 }
+
 export type State = {
     pageNumber: number,
     rowsPerPage: number,
     search: string,
     totalRows: number | undefined
+}
+
+export type OrderBy<Row>  = keyof Row
+
+export type Order<Row> = {
+    orderBy?: keyof Row
+    direction?: 'asc' | 'desc'
 }
