@@ -1,8 +1,8 @@
 import * as fs from 'fs'
 
 export const load = async () => {
-    const path = './src/routes/test'
-    const lib = './src/lib'
+    const path = './src/routes/(local)/test'
+    const lib = './src/lib/local'
     const page = 'filter'
     return {
         dataset: fs.readFileSync(`./src/data/test.ts`).toString('utf-8'),
