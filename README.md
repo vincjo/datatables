@@ -25,11 +25,18 @@ Also provides some demo components, which you can grab and customize in your own
 
 <br>
 
+## Server-side data processing:
+
+Support for remote interactions is under development.
+
+:globe_with_meridians: **[Some examples are available here](https://vincjo.fr/datatables/remote)**
+
 # Install
 
 ```apache
 npm i -D @vincjo/datatables
 ```
+
 
 # Sample code
 
