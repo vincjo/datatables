@@ -1,5 +1,5 @@
-import type Context from '../Context'
-import type { Order, OrderBy, Selectable } from '$lib'
+import type Context from '$lib/core/Context'
+import type { Order, OrderBy, Selectable } from '$lib/core'
 import { type Writable, type Readable, get } from 'svelte/store'
 
 

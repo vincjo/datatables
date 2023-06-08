@@ -5,7 +5,7 @@ import GlobalSearch from '$lib/core/Handlers/GlobalSearch'
 import Filters      from '$lib/core/Handlers/Filters'
 
 import type { Readable, Writable } from 'svelte/store'
-import type { Internationalization, Row, Comparator, FilterBy, Selectable, OrderBy } from '$lib'
+import type { Internationalization, Row, Comparator, FilterBy, Selectable, OrderBy } from './'
 
 export type Params = { rowsPerPage?: number, i18n?: Internationalization }
 

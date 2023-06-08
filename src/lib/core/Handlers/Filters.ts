@@ -1,5 +1,5 @@
-import type { Filter, FilterBy, Comparator } from '$lib'
-import type Context from '../Context'
+import type { Filter, FilterBy, Comparator } from '$lib/core'
+import type Context from '$lib/core/Context'
 import type { Writable } from 'svelte/store'
 
 export default class Filters<Row>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { DataHandler, OrderBy, Row } from '$lib'
+    import type { DataHandler, OrderBy, Row } from '$lib/core'
 
     type T = $$Generic<Row>
 

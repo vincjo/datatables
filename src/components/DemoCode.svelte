@@ -14,7 +14,7 @@
         language = component.language ?? 'svelte'
     }
     const parse = (code) => {
-        return code.replace('$lib', '@vincjo/datatables')
+        return code.replace('$lib/core', '@vincjo/datatables')
     }
 
 

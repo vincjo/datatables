@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, Pagination } from '$lib'
+    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, Pagination } from '$lib/core'
 
     type T = $$Generic<Row>
 

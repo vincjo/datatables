@@ -1,5 +1,5 @@
 <script>
-    import { DataHandler } from '$lib'
+    import { DataHandler } from '$lib/core'
     import data from '$data/data'
 
     const handler = new DataHandler(data, { rowsPerPage: 20 })

@@ -1,6 +1,6 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store'
-import type { Filter, Order, Selectable, Comparator } from '$lib'
-import type { Params }  from '../DataHandler'
+import type { Filter, Order, Selectable, Comparator } from '$lib/core'
+import type { Params }  from '$lib/DataHandler'
 import { check } from './Comparator'
 
 
