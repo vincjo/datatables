@@ -10,7 +10,7 @@
     <a href="https://jsonplaceholder.typicode.com/" rel="external"> DOC</a> 
     <a href="https://github.com/typicode/json-server" rel="external"> | SOURCE &rarr;</a>
 </h2>
-<Features sort={true} rowsPerPage={true} totalRows={true}/>
+<Features search={true} rowsPerPage={true} filters={true}/>
 <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={true}>
     <Main data={data.dataset}/>
 </Demo>

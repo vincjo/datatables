@@ -1,10 +1,12 @@
 <script>
     import Demo from '$components/Demo.svelte'
     import Main from './Main.svelte'
+    import Features from '../Features.svelte'
     export let data
 </script>
 
 <h2>Poké API <a href="https://pokeapi.co/docs/v2#pokemon-section" rel="external"> DOC &rarr;</a></h2>
+<Features rowsPerPage={true} totalRows={true}/>
 <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={false}>
     <Main data={data.dataset}/>
 </Demo>

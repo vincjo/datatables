@@ -1,20 +1,24 @@
 <script lang="ts">
-    import type { DataHandler, OrderBy, Row } from '$lib/remote'
+    import type { DataHandler, Row } from '$lib/remote'
 
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
-    export let orderBy: OrderBy<T>
+    export let orderBy: keyof T
     export let align: 'left' | 'right' | 'center' = 'left'
 
-    const identifier = orderBy?.toString()
     const sorted = handler.getSorted()
+
+    const sort = () => {
+        handler.sort(orderBy)
+        handler.run('sort')
+    }
 </script>
 
 <th
-    on:click={() => handler.sort(orderBy)}
+    on:click={sort}
     class:sortable={orderBy}
-    class:active={$sorted.identifier === identifier}
+    class:active={$sorted.orderBy === orderBy}
     class={$$props.class ?? ''}
 >
     <div

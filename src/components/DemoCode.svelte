@@ -7,11 +7,11 @@
     export let components
     let active = components[0].name
     let code = components[0].code
-    let language = components[0].language ?? 'svelte'
+    let language = components[0].language ? 'typescript' : 'svelte'
     const setActive = (component) => {
         active = component.name
         code = component.code
-        language = component.language ?? 'svelte'
+        language = component.language ? 'typescript' : 'svelte'
     }
     const parse = (code) => {
         return code

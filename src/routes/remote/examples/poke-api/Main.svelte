@@ -1,27 +1,26 @@
 <script lang="ts">
     import { DataHandler, Datatable, type State } from '$lib/remote'
-    import { get } from './poke_api_helper'
+    import { reload } from './api'
     import Stats from './Stats.svelte'
     import Types from './Types.svelte'
     export let data: { results: any[], count: number }
 
-    const handler = new DataHandler(data.results, { rowsPerPage: 10, totalRows: data.count })
+    const handler = new DataHandler(data.results, { 
+        rowsPerPage: 10, 
+        totalRows: data.count 
+    })
     const rows = handler.getRows()
 
-    // setPage event
-    handler.on('setPage', async (state: State) => {
+    handler.on(['setPage', 'setRowsPerPage'], async (state: State) => {
 
         const { pageNumber, rowsPerPage } = state
 
         const offset = rowsPerPage * (pageNumber - 1)
         const limit = rowsPerPage
 
-        const json = await get(offset, limit)
+        const json = await reload(offset, limit)
         return json.results
     })
-
-    // setRowsPerPage event, triggers "navigate"
-    handler.on('setRowsPerPage', () => { handler.setPage(1) })
 
 </script>
 
@@ -52,7 +51,7 @@
                             <Types types={row.types}/>
                         </td>
                         <td>
-                            <Stats stats={row.stat}/>
+                            <Stats stats={row.stats}/>
                         </td>
                         <td>
                             {(row.height / 10)}m / {row.weight}kg

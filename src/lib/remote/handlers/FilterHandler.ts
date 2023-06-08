@@ -14,12 +14,13 @@ export default class FilterHandler<Row>
     public set(value: string | number, filterBy: keyof Row )
     {
         const filter = { filterBy, value }
-
         this.filters.update((store) => {
             store = store.filter((item) => {
-                return item.filterBy !== filterBy && item.value
+                return (item.filterBy !== filterBy) && item.value
             })
-            store.push(filter)
+            if (value) {
+                store.push(filter)
+            }
             return store
         })
     }

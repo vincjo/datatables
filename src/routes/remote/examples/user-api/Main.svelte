@@ -1,24 +1,24 @@
 <script lang="ts">
     import { DataHandler, Datatable, type State } from '$lib/remote'
-    import { get, search } from './api_helper'
+    import { reload, search } from './api'
     export let data: { users: any[], total: number }
 
     const handler = new DataHandler(data.users, { rowsPerPage: 10, totalRows: data.total })
     const rows = handler.getRows()
 
-    handler.on('setPage', async (state: State) => {
+    handler.on(['setPage', 'setRowsPerPage'], async (state: State) => {
 
         const { pageNumber, rowsPerPage } = state
-
         const skip = rowsPerPage * (pageNumber - 1)
         const limit = rowsPerPage
 
-        return get(handler, skip, limit)
+        return reload(handler, skip, limit)
     })
 
-    handler.on('setRowsPerPage', () => { handler.setPage(1) })
 
-    handler.on('search', () => { search(handler) })
+    handler.on('search', () => { 
+        return search(handler)
+     })
 
 </script>
 

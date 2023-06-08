@@ -1,12 +1,12 @@
 import * as fs from 'fs'
 
 export const load = async () => {
-    
-    const response = await fetch('https://jsonplaceholder.typicode.com/comments?_page=1&_limit=10')
+
+    const response = await fetch('https://jsonplaceholder.typicode.com/comments?_page=1&_limit=20')
 
     const path = './src/routes/remote/examples'
     const lib = './src/lib/remote'
-    const page = 'user-api'
+    const page = 'comment-api'
     return {
         dataset: response.json(),
         components: [
@@ -16,8 +16,8 @@ export const load = async () => {
                 language: 'typescript'
             },
             {
-                name: 'api_helper.ts',
-                code: fs.readFileSync(`${path}/${page}/api_helper.ts`).toString('utf-8'),
+                name: 'api.ts',
+                code: fs.readFileSync(`${path}/${page}/api.ts`).toString('utf-8'),
                 language: 'typescript'
             },
             {

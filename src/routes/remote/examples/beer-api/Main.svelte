@@ -1,30 +1,15 @@
 <script lang="ts">
     import { DataHandler, Datatable, type State } from '$lib/remote'
-
+    import { reload } from './api'
     export let data: any[]
 
     const handler = new DataHandler(data, { rowsPerPage: 5 })
     const rows = handler.getRows()
 
-    handler.on('setPage', async (state: State) => {
-
-        const { pageNumber, rowsPerPage, search } = state
-
-        const searchParam = search ? `&beer_name=${search}` : ''
-        const response = await fetch(
-            'https://api.punkapi.com/v2/beers' +
-                `?page=${pageNumber}` +
-                `&per_page=${rowsPerPage}` +
-                `${searchParam}`
-        )
-        return response.json()
+    handler.on(['setPage', 'setRowsPerPage', 'search'], async (state: State) => {
+        return reload(state)
     })
 
-    // triggers setPage 1
-    handler.on('setRowsPerPage', () => { handler.setPage(1) })
-
-    // triggers setPage 1
-    handler.on('search', () => { handler.setPage(1) })
 </script>
 
     <Datatable {handler}>

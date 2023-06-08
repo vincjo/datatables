@@ -1,8 +1,8 @@
 import * as fs from 'fs'
-import { get } from './poke_api_helper'
+import { reload } from './api'
 
 export const load = async () => {
-    const result = await get()
+    const result = await reload()
 
     const path = './src/routes/remote/examples'
     const lib = './src/lib/remote'
@@ -13,6 +13,11 @@ export const load = async () => {
             {
                 name: '+page.server.ts',
                 code: fs.readFileSync(`${path}/${page}/example.server.ts`).toString('utf-8'),
+                language: 'typescript'
+            },
+            {
+                name: 'api.ts',
+                code: fs.readFileSync(`${path}/${page}/api.ts`).toString('utf-8'),
                 language: 'typescript'
             },
             {

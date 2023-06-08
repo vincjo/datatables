@@ -1,12 +1,12 @@
 import * as fs from 'fs'
 
 export const load = async () => {
-    
-    const response = await fetch('https://dummyjson.com/users?limit=10&skip=0')
+
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos?_page=1&_limit=20')
 
     const path = './src/routes/remote/examples'
     const lib = './src/lib/remote'
-    const page = 'user-api'
+    const page = 'comment-api'
     return {
         dataset: response.json(),
         components: [

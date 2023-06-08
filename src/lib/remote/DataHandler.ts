@@ -6,8 +6,8 @@ import PageHandler      from './handlers/PageHandler'
 import SearchHandler    from './handlers/SearchHandler'
 import FilterHandler    from './handlers/FilterHandler'
 
-import { type Writable, type Readable, get } from 'svelte/store'
-import type { Internationalization, Row, Event, State, Selectable } from '$lib/remote'
+import type { Writable, Readable } from 'svelte/store'
+import type { Internationalization, Row, Event, State, Selectable, Order } from '$lib/remote'
 
 export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization }
 
@@ -76,11 +76,6 @@ export default class DataHandler<T extends Row = any>
         return this.context.rowsPerPage
     }
 
-    public setRowsPerPage(): void 
-    {
-        this.triggerHandler.run('setRowsPerPage')
-    }
-
     public sort(orderBy: keyof T)
     {
         this.setPage(1)
@@ -104,15 +99,15 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.sortDesc(orderBy)
     }
 
-    public getSorted(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
+    public getSorted(): Writable<Order<T>>
     {
         return this.context.sorted
     }
 
     public search(value: string): void 
     {
+        this.setPage(1)
         this.context.globalSearch.set(value)
-        this.triggerHandler.run('search')
     }
 
     public clearSearch()
@@ -122,6 +117,7 @@ export default class DataHandler<T extends Row = any>
 
     public filter(value: string, filterBy: keyof T)
     {
+        this.setPage(1)
         return this.filterHandler.set(value as string | number, filterBy)
     }
 
@@ -150,19 +146,11 @@ export default class DataHandler<T extends Row = any>
 
     public setPage(value: number | 'previous' | 'next'): void 
     {
-        const pageNumber = get(this.pageNumber)
-
-        if (value === 'previous') {
-            if (pageNumber === 1) return
-            this.pageNumber.set(pageNumber - 1)
+        switch (value) {
+            case 'previous' : return this.pageHandler.previous()
+            case 'next'     : return this.pageHandler.next()
+            default         : return this.pageHandler.goto(value as number)
         }
-        else if (value === 'next') {
-            this.pageNumber.set(pageNumber + 1)
-        }
-        else {
-            this.pageNumber.set(value as number)
-        }
-        this.triggerHandler.run('setPage')
     }
 
     public getRowCount(): Readable<{ total: number, start: number, end: number }> 
@@ -175,9 +163,20 @@ export default class DataHandler<T extends Row = any>
         return this.context.triggerChange
     }
 
-    public on(event: Event, fn: Function) 
+    public on(event: Event | Event[], fn: Function) 
     {
+        if (Array.isArray(event)) {
+            for (const e of event) {
+                this.triggerHandler.setAction(e, fn)
+            }
+            return
+        }
         this.triggerHandler.setAction(event, fn)
+    }
+
+    public run(event: Event)
+    {
+        this.triggerHandler.run(event)
     }
 
     public getState(): State

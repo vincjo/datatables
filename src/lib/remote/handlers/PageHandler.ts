@@ -1,16 +1,18 @@
 import type Context from '$lib/remote/Context'
 import { type Writable, type Readable, get } from 'svelte/store'
 
-export default class PageHandler<Row> 
+export default class PageHandler<Row>
 {
+    public totalRows    : Writable<number>
     public pageNumber   : Writable<number>
     public rowCount     : Readable<{ total: number, start: number, end: number }>
     public rowsPerPage  : Writable<number | null>
     public triggerChange: Writable<number>
     public pages        : Readable<number[]>
 
-    constructor(context: Context<Row>) 
+    constructor(context: Context<Row>)
     {
+        this.totalRows      = context.totalRows
         this.pageNumber     = context.pageNumber
         this.rowCount       = context.rowCount
         this.rowsPerPage    = context.rowsPerPage
@@ -18,23 +20,31 @@ export default class PageHandler<Row>
         this.pages          = context.pages
     }
 
-    public get() 
+    public get()
     {
         return this.pages
     }
 
     public goto(number: number)
     {
+        const rowsPerPage = get(this.rowsPerPage)
+        const totalRows = get(this.totalRows)
+
         this.pageNumber.update((store) => {
-            const rowsPerPage = get(this.rowsPerPage)
-            if (rowsPerPage) {
-                const total = get(this.rowCount).total
-                if (number >= 1 && number <= Math.ceil(total / rowsPerPage)) {
+            if (rowsPerPage && totalRows) {
+                if (number >= 1 && number <= Math.ceil(totalRows / rowsPerPage)) {
                     store = number
                     this.triggerChange.update((store) => { return store + 1 })
                 }
+                return store
             }
-            return store
+            else {
+                if (number >= 1) {
+                    store = number
+                    this.triggerChange.update((store) => { return store + 1 })
+                }
+                return store
+            }
         })
     }
 

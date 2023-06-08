@@ -9,13 +9,17 @@
 
     const rowsPerPage = handler.getRowsPerPage()
 
+    const setRowsPerPage = () => {
+        handler.setPage(1)
+        handler.run('setRowsPerPage')
+    }
 </script>
 
 <aside class={$$props.class ?? ''}>
     {#if !small}
         <span>{handler.i18n.show}</span>
     {/if}
-    <select bind:value={$rowsPerPage} on:change={() => handler.setRowsPerPage()}>
+    <select bind:value={$rowsPerPage} on:change={setRowsPerPage}>
         {#each options as option}
             <option value={option}>
                 {option}

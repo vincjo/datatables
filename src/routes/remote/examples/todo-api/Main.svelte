@@ -1,34 +1,37 @@
 <script lang="ts">
-    import { DataHandler, Datatable, Th, type State } from '$lib/remote'
+    import { DataHandler, Datatable, Th, ThFilter, type State } from '$lib/remote'
     import { reload } from './api'
     export let data: any[]
 
-    const handler = new DataHandler(data, { rowsPerPage: 20, totalRows: 500 })
+    const handler = new DataHandler(data, { rowsPerPage: 20 })
     const rows = handler.getRows()
 
-    handler.on(['setPage', 'setRowsPerPage', 'sort'], (state: State) => {
+    handler.on(['setPage', 'setRowsPerPage', 'sort', 'filter', 'search'], (state: State) => {
         return reload(state)
     })
 
 </script>
 
-    <Datatable {handler} search={false}>
+    <Datatable {handler}>
         <table>
             <thead>
                 <tr>
                     <Th {handler} orderBy="id">ID</Th>
-                    <Th {handler} orderBy="name">Name</Th>
-                    <Th {handler} orderBy="email">Email</Th>
-                    <Th {handler} orderBy="body">Comment</Th>
+                    <Th {handler} orderBy="title">Title</Th>
+                    <Th {handler} orderBy="completed">Completed</Th>
+                </tr>
+                <tr>
+                    <ThFilter {handler} filterBy="id"/>
+                    <ThFilter {handler} filterBy="title"/>
+                    <ThFilter {handler} filterBy="completed"/>
                 </tr>
             </thead>
             <tbody>
                 {#each $rows as row}
                     <tr>
                         <td>{row.id}</td>
-                        <td><b>{row.name}</b></td>
-                        <td>{row.email}</td>
-                        <td><p>{row.body}</p></td>
+                        <td><b>{row.title}</b></td>
+                        <td><span>{row.completed  ? '✅' : '❌'}</span></td>
                     </tr>
                 {/each}
             </tbody>
@@ -55,7 +58,7 @@
         line-height: 16px;
         white-space:break-spaces;
     }
-    p {
-        font-size: 12px;
+    span {
+        padding-left: 8px;
     }
 </style>

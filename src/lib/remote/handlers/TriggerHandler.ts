@@ -4,8 +4,8 @@ import type Context from '$lib/remote/Context'
 
 export default class TriggerHandler<Row>
 {
-    public actions: Actions
-    public context: Context<Row>
+    private actions: Actions
+    private context: Context<Row>
 
     constructor(context: Context<Row>)
     {

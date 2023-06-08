@@ -44,7 +44,8 @@ export default class Context<Row>
             pageNumber: get(this.pageNumber),
             rowsPerPage: get(this.rowsPerPage),
             search: get(this.globalSearch),
-            totalRows: get(this.totalRows)
+            sort: get(this.sorted) as any,
+            filters: get(this.filters) as any,
         }
     }
 

@@ -1,10 +1,12 @@
 <script>
     import Demo from '$components/Demo.svelte'
     import Main from './Main.svelte'
+    import Features from '../Features.svelte'
     export let data
 </script>
 
 <h2>Beer API <a href="https://punkapi.com/documentation/v2" rel="external"> DOC &rarr;</a></h2>
+<Features rowsPerPage={true} search={true}/>
 <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={true}>
     <Main data={data.dataset}/>
 </Demo>
