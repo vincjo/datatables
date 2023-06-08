@@ -9,7 +9,7 @@
         to <b>{$rowCount.end}</b>
         of <b>{$rowCount.total}</b>
     {:else}
-        No entries to found
+        No entries found
     {/if}
 </aside>
 
