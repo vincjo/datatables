@@ -1,11 +1,11 @@
 <script>
-    import { DataHandler } from '$lib/core'
-    import Th from '../Th.svelte'
-    import ThFilter from '../ThFilter.svelte'
-    import Search from '../Search.svelte'
-    import data from '$data/data'
+    import { DataHandler }  from '$lib/core'
+    import Th               from '../Th.svelte'
+    import ThFilter         from '../ThFilter.svelte'
+    import Search           from '../Search.svelte'
+    import data             from '$data/data'
 
-    const handler = new DataHandler(data, { rowsPerPage: 20 })
+    const handler = new DataHandler(data, { rowsPerPage: 10 })
     const rows = handler.getRows()
 </script>
 
@@ -46,9 +46,13 @@
         align-items: center;
     }
     table {
-        text-align: center;
+        text-align: left;
         border-collapse: separate;
         border-spacing: 0;
         width: 100%;
+    }
+    td {
+        padding: 4px 20px;
+        border-bottom: 1px solid #eee;
     }
 </style>

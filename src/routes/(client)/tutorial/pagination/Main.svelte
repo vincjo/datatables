@@ -1,14 +1,14 @@
 <script>
-    import { DataHandler } from '$lib/core'
-    import Th from '../Th.svelte'
-    import ThFilter from '../ThFilter.svelte'
-    import Search from '../Search.svelte'
-    import RowsPerPage from '../RowsPerPage.svelte'
-    import RowCount from '../RowCount.svelte'
-    import Pagination from '../Pagination.svelte'
-    import data from '$data/data'
+    import { DataHandler }  from '$lib/core'
+    import Th               from '../Th.svelte'
+    import ThFilter         from '../ThFilter.svelte'
+    import Search           from '../Search.svelte'
+    import RowsPerPage      from '../RowsPerPage.svelte'
+    import RowCount         from '../RowCount.svelte'
+    import Pagination       from '../Pagination.svelte'
+    import data             from '$data/data'
 
-    const handler = new DataHandler(data, { rowsPerPage: 20 })
+    const handler = new DataHandler(data, { rowsPerPage: 10 })
     const rows = handler.getRows()
 </script>
 
@@ -59,9 +59,17 @@
         border-top: 1px solid #e0e0e0;
     }
     table {
-        text-align: center;
+        text-align: left;
         border-collapse: separate;
         border-spacing: 0;
         width: 100%;
+    }
+    tbody tr:hover {
+        background: #f5f5f5;
+        transition: background, 0.2s;
+    }
+    td {
+        padding: 4px 20px;
+        border-bottom: 1px solid #eee;
     }
 </style>

@@ -8,22 +8,9 @@
     </p>
 </div>
 
-# TODO 
+# WIP 
 
-## :x: Support
-- :white_check_mark: pagination
-- :x: sorting
-- :x: filtering
-- :white_check_mark: searching
-- :white_check_mark: rows per page
-- :white_check_mark: row count
-
-
-
-
-## :x: Refactoring
-
-## :x: Documentation
+**&rarr; [Home](https://vincjo.fr/datatables/remote/home)**
 
 
 <br><br>

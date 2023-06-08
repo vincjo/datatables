@@ -19,16 +19,17 @@
     th {
         background: inherit;
         margin: 0;
-        padding: 0 4px;
+        padding: 8px 20px;
         border-bottom: 1px solid #e0e0e0;
+        user-select: none;
     }
     th {
         cursor: pointer;
     }
     th div.flex {
-        padding: 8px 0 8px 16px;
+        padding: 0;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         height: 100%;
     }
