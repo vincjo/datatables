@@ -2,7 +2,7 @@
     export let handler
     export let orderBy = null
 
-    const identifier = orderBy ? orderBy.toString() : orderBy
+    const identifier = orderBy?.toString()
     const sorted = handler.getSorted()
 </script>
 
