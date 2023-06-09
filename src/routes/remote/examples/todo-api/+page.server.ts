@@ -6,7 +6,7 @@ export const load = async () => {
 
     const path = './src/routes/remote/examples'
     const lib = './src/lib/remote'
-    const page = 'comment-api'
+    const page = 'todo-api'
     return {
         dataset: response.json(),
         components: [

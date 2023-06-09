@@ -9,7 +9,7 @@ import FilterHandler    from './handlers/FilterHandler'
 import type { Writable, Readable } from 'svelte/store'
 import type { Internationalization, Row, Event, State, Selectable, Order } from '$lib/remote'
 
-export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization }
+export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization, hasMultipleSort?: boolean }
 
 export default class DataHandler<T extends Row = any> 
 {
@@ -99,7 +99,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.sortDesc(orderBy)
     }
 
-    public getSorted(): Writable<Order<T>>
+    public getSorted(): Writable<Order<T>[]>
     {
         return this.context.sorted
     }

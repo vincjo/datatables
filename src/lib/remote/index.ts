@@ -34,7 +34,7 @@ export type Order<Row> = {
     direction?: 'asc' | 'desc'
 }
 
-export type Event = 'setPage' | 'setRowsPerPage' | 'search' | 'sort' | 'filter'
+export type Event = 'change' | 'setPage' | 'setRowsPerPage' | 'search' | 'sort' | 'filter'
 
 export type Actions = {
     setPage:        Function | undefined,
@@ -47,9 +47,10 @@ export type Actions = {
 export type State = {
     pageNumber: number,
     rowsPerPage: number,
-    search: string,
-    sort: Order<Row>,
-    filters: Filter<Row>[]
+    offset: number,
+    search: string | undefined,
+    sorted: Order<Row>[] | Order<Row> | undefined
+    filters: Filter<Row>[] | undefined
 }
 
 export type Selectable<Row> = Row[keyof Row] | Row

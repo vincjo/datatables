@@ -14,4 +14,8 @@ export default [
             { name: 'Unknown row count', path: '/beer-api' },
         ]
     },
+    {
+        name: 'How to use',
+        path: '/remote/how-to-use'
+    },
 ]

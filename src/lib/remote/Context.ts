@@ -15,7 +15,8 @@ export default class Context<Row>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
-    public sorted               : Writable<(Order<Row>)>
+    public hasMultipleSort      : boolean
+    public sorted               : Writable<Order<Row>[]>
     public selected             : Writable<Selectable<Row>[]>
     public isAllSelected        : Readable<boolean>
 
@@ -33,19 +34,25 @@ export default class Context<Row>
         this.pages              = this.createPages()
         this.pagesWithEllipsis  = this.createPagesWithEllipsis()
         this.pageCount          = this.createPageCount()
-        this.sorted             = writable({})
+        this.hasMultipleSort    = params.hasMultipleSort ?? false
+        this.sorted             = writable([])
         this.selected           = writable([])
         this.isAllSelected      = this.createIsAllSelected()
     }
 
     public getState(): State
     {
+        const pageNumber    = get(this.pageNumber)
+        const rowsPerPage   = get(this.rowsPerPage)
+        const sorted        = get(this.sorted)
+        const filters       = get(this.filters)
         return {
-            pageNumber: get(this.pageNumber),
-            rowsPerPage: get(this.rowsPerPage),
+            pageNumber,
+            rowsPerPage,
+            offset: rowsPerPage * (pageNumber - 1),
             search: get(this.globalSearch),
-            sort: get(this.sorted) as any,
-            filters: get(this.filters) as any,
+            sorted: sorted.length   > 0 ? this.hasMultipleSort ? sorted : sorted[0] : undefined as any,
+            filters: filters.length > 0 ? filters : undefined as any,
         }
     }
 

@@ -10,15 +10,15 @@ export const reload = async (state: State) => {
 }
 
 const getParams = (state: State) => {
-    const { pageNumber, rowsPerPage, sort } = state
+    const { pageNumber, rowsPerPage, sorted } = state
 
     let params = `_page=${pageNumber}`
 
     if (rowsPerPage) {
         params += `&_limit=${rowsPerPage}`
     }
-    if (sort.orderBy) {
-        params += `&_sort=${sort.orderBy}&_order=${sort.direction}`
+    if (sorted) {
+        params += `&_sort=${sorted.orderBy}&_order=${sorted.direction}`
     }
 
     return params

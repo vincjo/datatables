@@ -24,7 +24,7 @@ This lib provides an API to dynamically interact with iterable data: filtering, 
 Also provides some demo components, which you can grab and customize in your own project.
 
 
-## Server-side data processing
+## Server-side pagination
 <RemoteLink/>
 
 

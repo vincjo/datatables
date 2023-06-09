@@ -15,7 +15,7 @@ export default class TriggerHandler<Row>
             setRowsPerPage  : undefined,
             search          : undefined,
             sort            : undefined,
-            filter          : undefined
+            filter          : undefined,
         }
     }
 
