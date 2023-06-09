@@ -11,14 +11,8 @@
     })
     const rows = handler.getRows()
 
-    handler.on(['setPage', 'setRowsPerPage'], async (state: State) => {
-
-        const { pageNumber, rowsPerPage } = state
-
-        const offset = rowsPerPage * (pageNumber - 1)
-        const limit = rowsPerPage
-
-        const json = await reload(offset, limit)
+    handler.on(['setPage', 'setRowsPerPage'], async ({ offset, rowsPerPage }: State) => {
+        const json = await reload(offset, rowsPerPage)
         return json.results
     })
 

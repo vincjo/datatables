@@ -1,16 +1,16 @@
 
 # How to use (W.I.P)
 
-## Query params example
+## API request example
 
-````batch
+````bash
     https://api.mysite.com/users?
         offset=20               # offset (page number 3)
         &limit=10               # rows per page
         &q=john                 # full text search
         &name=doe               # column filter: name = 'doe'
         &sort=name,created_at
-        &order=asc,desc         # sort columns: name=asc, created=desc
+        &order=asc,desc         # sort columns: name=asc, created_at=desc
 ````
 
 ## Bind a reload function to datatable events
@@ -18,12 +18,12 @@
     type Event = 'setPage' | 'setRowsPerPage' | 'search' | 'sort' | 'filter'
 
     handler.on(['setPage', 'setRowsPerPage'], (state: State) => {
-        return reload(state)
+        return myReloadFunc(state)
     })
-    // getData must return an iterable dataset
+    // myReloadFunc() must return an iterable dataset
 ````
 
-## State = Datatable client side state
+## State = client-side datatable state
 ````ts
 type State = {
     pageNumber: number,
@@ -35,9 +35,9 @@ type State = {
 }
 ````
 
-## Data reload function
+## reload data function
 ````ts
-export const reload = async ({ offset, rowsPerPage }: State) => {
+export const myReloadFunc = async ({ offset, rowsPerPage }: State) => {
 
     const response = await fetch(
         `https://api.mysite.com/users?` +
@@ -51,6 +51,8 @@ export const reload = async ({ offset, rowsPerPage }: State) => {
 ## Trigger event
 ````ts
 handler.run('setPage') // will reload and set data
+// or
+handler.run('setRowsPerPage')
 
 ````
 

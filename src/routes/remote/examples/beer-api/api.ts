@@ -1,8 +1,6 @@
 import type { State } from '$lib/remote'
 
-export const reload = async (state: State) => {
-
-    const { pageNumber, rowsPerPage, search } = state
+export const reload = async ({ pageNumber, rowsPerPage, search }: State) => {
 
     const searchParam = search ? `&beer_name=${search}` : ''
 

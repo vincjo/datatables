@@ -10,17 +10,17 @@ export const reload = async (state: State) => {
 }
 
 const getParams = (state: State) => {
-    const { pageNumber, rowsPerPage, sort, filters, search } = state
+    const { pageNumber, rowsPerPage, sorted, filters, search } = state
 
     let params = `_page=${pageNumber}`
 
     if (rowsPerPage) {
         params += `&_limit=${rowsPerPage}`
     }
-    if (sort.orderBy) {
-        params += `&_sort=${sort.orderBy}&_order=${sort.direction}`
+    if (sorted) {
+        params += `&_sort=${sorted.orderBy}&_order=${sorted.direction}`
     }
-    if (filters.length > 0) {
+    if (filters) {
         params += filters.map(({ filterBy, value }) => `&${filterBy}=${value}`).join()
     }
     if (search) {
