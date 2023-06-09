@@ -15,12 +15,14 @@
 
 ## Bind a reload function to datatable events
 ````ts
-    type Event = 'setPage' | 'setRowsPerPage' | 'search' | 'sort' | 'filter'
 
     handler.on(['setPage', 'setRowsPerPage'], (state: State) => {
         return myReloadFunc(state)
     })
     // myReloadFunc() must return an iterable dataset
+
+
+    type Event = 'setPage' | 'setRowsPerPage' | 'search' | 'sort' | 'filter'
 ````
 
 ## State = client-side datatable state
