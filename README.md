@@ -24,7 +24,14 @@ Also provides some showcase components, which you can grab and customize in your
 
 <br>
 
-### <img src="./static/logo-remote.svg" alt="logo" style="float:left;padding-right:8px" width="48"/> <span style="line-height:48px">Server-side data processing</span>
+<table>
+  <tr style="border:none">
+    <td valign="center" style="border:none;padding:0;"><img src="./static/logo-remote.svg" alt="logo" style="float:left;padding-right:8px" width="48"/></td>
+    <td valign="center" style="border:none;padding:0;font-size:24px;">
+        Server-side data processing
+    </td>
+  </tr>
+</table>
 
 Support for server-side pagination, sort, filters is located in `@vincjo/datatables/remote` namespace.
 
