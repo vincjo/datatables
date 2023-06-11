@@ -1,5 +1,6 @@
 <script>
     import ClientLink from './ClientLink.svelte'
+    import { getPath } from 'gros/page'
 </script>
 
 ## Installation
@@ -20,7 +21,7 @@ This part of the lib provides 2 additional functions
 
 ⚠️ In this case `DataHandler` and showcase components are located in <span class="import">@vincjo/datatables**/remote**</span>
 
-
+<a href="{getPath('/remote/basic-usage')}">&rarr; basic usage</a>
 
 ## Sample code
 <aside class="bis">
@@ -33,7 +34,7 @@ This part of the lib provides 2 additional functions
     const handler = new DataHandler([], { rowsPerPage: 10 })
     const rows = handler.getRows()
 
-    handler.onChange((state: State) => myLoadFunction(state): Promise<any[]>)
+    handler.onChange( (state: State) => myLoadFunction(state) )
 
     handler.invalidate()
 </script>
@@ -110,5 +111,10 @@ This part of the lib provides 2 additional functions
     }
     span.import strong {
         background: #fbc02d;
+    }
+    a {
+        font-size: 16px;
+        color: var(--secondary-darken);
+        font-weight: bold;
     }
 </style>

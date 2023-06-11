@@ -35,7 +35,7 @@ type State = {
 
 ## Load function
 ````ts
-import { State } from '@vincjo/datatables/remote'
+import type { State } from '@vincjo/datatables/remote'
 
 export const myLoadFunction = async (state: State) => {
 
