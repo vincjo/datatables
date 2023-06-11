@@ -8,9 +8,9 @@ https://api.mysite.com/users?
     limit=10            # rows per page
     &offset=20          # offset (20 = page number 3)
     &q=michel           # full text search
-    &city=limoge        # column filter: city = 'limoge'
+    &city=limoge        # column filter: where "city" = 'limoge'
     &sort=age
-    &order=desc         # sort "age" descending
+    &order=desc         # order by "age" descending
 ````
 
 ## Bind a load function to datatable events
