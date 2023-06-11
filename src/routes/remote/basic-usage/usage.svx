@@ -7,15 +7,14 @@
 https://api.mysite.com/users?
     limit=10            # rows per page
     &offset=20          # offset (20 = page number 3)
-    &q=john             # full text search
-    &name=doe           # column filter: name = 'doe'
-    &sort=name
-    &order=desc         # sort "name" descending
+    &q=michel           # full text search
+    &city=limoge        # column filter: city = 'limoge'
+    &sort=age
+    &order=desc         # sort "age" descending
 ````
 
 ## Bind a load function to datatable events
 ````ts
-
 handler.onChange( (state: State) => myLoadFunction(state): Promise<Row[]> )
 // myLoadFunction() must return an iterable dataset
 ````
@@ -40,10 +39,7 @@ import type { State } from '@vincjo/datatables/remote'
 export const myLoadFunction = async (state: State) => {
 
     const response = await fetch(
-        `https://api.mysite.com/users?` +
-            `offset=${offset}`          +
-            `&limit=${rowsPerPage}`     +
-            getParams()
+        `https://api.mysite.com/users?${getParams(state)}`
     )
     const json = await response.json()
 
@@ -53,8 +49,9 @@ export const myLoadFunction = async (state: State) => {
 }
 
 
-const getParams = ({ search, sorted, filters }: State) => {
-    let params = ''
+const getParams = ({ offset, rowsPerPage, search, sorted, filters }: State) => {
+
+    let params = `offset=${offset}&limit=${rowsPerPage}`
 
     if (search) {
         params += `&q=${search}`

@@ -65,7 +65,7 @@
 
     <aside class="thin-scrollbar-darken">
         {#if language === 'typescript'}
-        <pre class="language-svelte">
+        <pre class="language-typescript">
 {@html Prism.highlight(parse(code), Prism.languages.typescript)}
         </pre>
         {:else}
