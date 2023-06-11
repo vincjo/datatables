@@ -23,9 +23,9 @@ Also provides some demo components, which you can grab and customize in your own
 :globe_with_meridians: **[Live examples](https://vincjo.fr/datatables/examples)**
 
 
-### Server-side data processing
+### :satellite: Server-side data processing
 
-Support for remote interactions is **[under development](https://vincjo.fr/datatables/remote)**.
+[Support for **server-side** pagination, sort, filters...](https://vincjo.fr/datatables/remote)
 
 
 <br>
