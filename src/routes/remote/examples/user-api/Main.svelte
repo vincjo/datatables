@@ -9,7 +9,7 @@
     handler.onChange( (state: State) => reload(state) )
 </script>
 
-<Datatable {handler} search={false}>
+<Datatable {handler}>
     <table>
         <thead>
             <tr>
