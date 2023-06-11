@@ -1,9 +1,9 @@
 <script>
-    import How from './how.svx'
+    import Usage from './usage.svx'
 </script>
 
 <section>
-    <How/>
+    <Usage/>
 </section>
 
 <style>

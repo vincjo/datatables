@@ -12,7 +12,7 @@
 
     const setPage = (value: 'previous' | 'next' | number) => {
         handler.setPage(value)
-        handler.run('setPage')
+        handler.invalidate()
     }
 </script>
 

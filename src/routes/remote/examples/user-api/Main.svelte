@@ -1,61 +1,46 @@
 <script lang="ts">
     import { DataHandler, Datatable, type State } from '$lib/remote'
-    import { reload, search } from './api'
+    import { reload } from './api'
     export let data: { users: any[], total: number }
 
     const handler = new DataHandler(data.users, { rowsPerPage: 10, totalRows: data.total })
     const rows = handler.getRows()
 
-    handler.on(['setPage', 'setRowsPerPage'], async (state: State) => {
-
-        const { pageNumber, rowsPerPage } = state
-        const skip = rowsPerPage * (pageNumber - 1)
-        const limit = rowsPerPage
-
-        return reload(handler, skip, limit)
-    })
-
-
-    handler.on('search', () => { 
-        return search(handler)
-     })
-
+    handler.onChange( (state: State) => reload(state) )
 </script>
 
-    <Datatable {handler}>
-        <table>
-            <thead>
+<Datatable {handler} search={false}>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Avatar</th>
+                <th>Fristname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Height / Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each $rows as row}
                 <tr>
-                    <th>ID</th>
-                    <th>Avatar</th>
-                    <th>Fristname</th>
-                    <th>Lastname</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Height / Weight</th>
+                    <td>{row.id}</td>
+                    <td>
+                        <img src="{row.image}" alt="avatar" />
+                    </td>
+                    <td>{row.firstName}</td>
+                    <td>{row.lastName}</td>
+                    <td>{row.age}</td>
+                    <td>{row.gender}</td>
+                    <td>
+                        {(row.height / 100)}m / {row.weight}kg
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                {#each $rows as row}
-                    <tr>
-                        <td>{row.id}</td>
-                        <td>
-                            {#if row.image}
-                                <img src="{row.image}" alt="sprite" />
-                            {/if}
-                        </td>
-                        <td>{row.firstName}</td>
-                        <td>{row.lastName}</td>
-                        <td>{row.age}</td>
-                        <td>{row.gender}</td>
-                        <td>
-                            {(row.height / 100)}m / {row.weight}kg
-                        </td>
-                    </tr>
-                {/each}
-            </tbody>
-        </table>
-    </Datatable>
+            {/each}
+        </tbody>
+    </table>
+</Datatable>
 
 <style>
     thead {

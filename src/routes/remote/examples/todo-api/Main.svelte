@@ -6,37 +6,35 @@
     const handler = new DataHandler(data, { rowsPerPage: 20 })
     const rows = handler.getRows()
 
-    handler.on(['setPage', 'setRowsPerPage', 'sort', 'filter', 'search'], (state: State) => {
-        return reload(state)
-    })
+    handler.onChange((state: State) => reload(state))
 
 </script>
 
-    <Datatable {handler}>
-        <table>
-            <thead>
+<Datatable {handler}>
+    <table>
+        <thead>
+            <tr>
+                <Th {handler} orderBy="id">ID</Th>
+                <Th {handler} orderBy="title">Title</Th>
+                <Th {handler} orderBy="completed">Completed</Th>
+            </tr>
+            <tr>
+                <ThFilter {handler} filterBy="id"/>
+                <ThFilter {handler} filterBy="title"/>
+                <ThFilter {handler} filterBy="completed"/>
+            </tr>
+        </thead>
+        <tbody>
+            {#each $rows as row}
                 <tr>
-                    <Th {handler} orderBy="id">ID</Th>
-                    <Th {handler} orderBy="title">Title</Th>
-                    <Th {handler} orderBy="completed">Completed</Th>
+                    <td>{row.id}</td>
+                    <td><b>{row.title}</b></td>
+                    <td><span>{row.completed  ? '✅' : '❌'}</span></td>
                 </tr>
-                <tr>
-                    <ThFilter {handler} filterBy="id"/>
-                    <ThFilter {handler} filterBy="title"/>
-                    <ThFilter {handler} filterBy="completed"/>
-                </tr>
-            </thead>
-            <tbody>
-                {#each $rows as row}
-                    <tr>
-                        <td>{row.id}</td>
-                        <td><b>{row.title}</b></td>
-                        <td><span>{row.completed  ? '✅' : '❌'}</span></td>
-                    </tr>
-                {/each}
-            </tbody>
-        </table>
-    </Datatable>
+            {/each}
+        </tbody>
+    </table>
+</Datatable>
 
 <style>
     thead {

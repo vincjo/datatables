@@ -7,15 +7,15 @@ export default [
         name: 'datatables',
         path: '/remote/examples',
         pages: [
-            { name: 'Sort', path: '/comment-api' },
-            { name: 'Search', path: '/user-api' },
-            { name: 'Column filters', path: '/todo-api' },
-            { name: 'Pokédex', path: '/poke-api' },
-            { name: 'Unknown row count', path: '/beer-api' },
+            { name: 'Comments API', path: '/comment-api' },
+            { name: 'Users API', path: '/user-api' },
+            { name: 'Todos API', path: '/todo-api' },
+            { name: 'Pokédex API', path: '/poke-api' },
+            { name: 'Beers API', path: '/beer-api' },
         ]
     },
     {
-        name: 'How to use',
-        path: '/remote/how-to-use'
+        name: 'Basic usage',
+        path: '/remote/basic-usage'
     },
 ]

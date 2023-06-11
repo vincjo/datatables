@@ -1,4 +1,4 @@
-import type { Event, Actions } from '$lib/remote'
+import type { Event, Actions, State } from '$lib/remote'
 import type Context from '$lib/remote/Context'
 
 
@@ -6,6 +6,7 @@ export default class TriggerHandler<Row>
 {
     private actions: Actions
     private context: Context<Row>
+    private reload: (state: State) => Promise<Row[]>
 
     constructor(context: Context<Row>)
     {
@@ -16,6 +17,22 @@ export default class TriggerHandler<Row>
             search          : undefined,
             sort            : undefined,
             filter          : undefined,
+        }
+
+    }
+
+    public set(fn: (state: State) => Promise<Row[]>)
+    {
+        this.reload = fn
+    }
+
+    public async invalidate()
+    {
+        if (!this.reload) return
+        const state = this.context.getState()
+        const data = await this.reload(state)
+        if (data) {
+            this.context.rows.set(data)
         }
     }
 

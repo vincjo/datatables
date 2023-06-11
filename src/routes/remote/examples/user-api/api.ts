@@ -1,19 +1,25 @@
-import type { DataHandler } from '$lib/remote'
+import type { State } from '$lib/remote'
 
-export const reload = async (handler: DataHandler, skip: number, limit: number) => {
-    const response = await fetch(`https://dummyjson.com/users?limit=${limit}&skip=${skip}`)
+export const reload = async ({ offset, rowsPerPage, setTotalRows }: State) => {
+    const response = await fetch(
+        `https://dummyjson.com/users?limit=${rowsPerPage}&skip=${offset}`
+    )
     const json = await response.json()
-    handler.setTotalRows(json.total)
-    return json.users 
-}
-
-export const search = async (handler: DataHandler) => {
-    const { search, rowsPerPage } = handler.getState()
-    if (!search) {
-        return reload(handler, 0, rowsPerPage)
-    }
-    const response = await fetch(`https://dummyjson.com/users/search?q=${search}`)
-    const json = await response.json()
-    handler.setTotalRows(json.total)
+    setTotalRows(json.total)
     return json.users
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

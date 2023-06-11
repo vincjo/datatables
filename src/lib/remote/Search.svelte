@@ -12,7 +12,7 @@
 		clearTimeout(timeout)
 		timeout = setTimeout( () => {
 			handler.search(value)
-            handler.run('search')
+            handler.invalidate()
 		}, 400)
 	}
 </script>

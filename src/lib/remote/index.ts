@@ -49,8 +49,9 @@ export type State = {
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
-    sorted: Order<Row>[] | Order<Row> | undefined
+    sorted: Order<Row> | undefined
     filters: Filter<Row>[] | undefined
+    setTotalRows: (value: number) => void
 }
 
 export type Selectable<Row> = Row[keyof Row] | Row

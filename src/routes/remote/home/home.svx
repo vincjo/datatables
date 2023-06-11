@@ -2,25 +2,44 @@
     import ClientLink from './ClientLink.svelte'
 </script>
 
+## Installation
 
-## Work in progress
+<aside>
 
-**Code:** [$lib/remote](https://github.com/vincjo/datatables/tree/master/src/lib/remote)
+````bash
+npm i -D @vincjo/datatables
+````
+</aside>
+
+## Server-side pagination
+
+This part of the lib provides 2 additional functions
+
+> **onChange**: (state: State) => Promise`<Row>` <br>
+> **invalidate**: () => void
+
+⚠️ In this case `DataHandler` and showcase components are located in <span class="import">@vincjo/datatables**/remote**</span>
 
 
-### ✅ features
-- ✅ pagination
-- ✅ sorting
-- ✅ filtering
-- ✅ searching
-- ✅ rows per page
-- ✅ row count
-- ✅ row selection
 
+## Sample code
+<aside class="bis">
 
-### ❌ Refactoring
+````svelte
+<script lang="ts">
+    import { DataHandler, type State } from '@vincjo/datatables/remote'
+    import { myLoadFunction } from './my-api-helper'
 
-### ❌ Documentation
+    const handler = new DataHandler([], { rowsPerPage: 10 })
+    const rows = handler.getRows()
+
+    handler.onChange((state: State) => myLoadFunction(state): Promise<any[]>)
+
+    handler.invalidate()
+</script>
+````
+</aside>
+
 
 <br>
 
@@ -28,6 +47,9 @@
 
 <ClientLink/>
 
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
 
 <style>
     h1 {
@@ -50,5 +72,43 @@
     }
     a {
         color: var(--primary-lighten);
+    }
+    li {
+        margin: 8px 0;
+    }
+    blockquote {
+        position:relative;
+        overflow: auto;
+        white-space: nowrap;
+        display:inline-block;
+        margin:0;
+        /* width: 100%; */
+        background:#fafafa;
+        border-radius:8px;
+        padding:2px 8px;
+        margin: 2px 0;
+        border: 1px solid #eee;
+    }
+    blockquote p{
+        padding:0;
+        margin:0;
+        color:#ad1457;
+        font-family:JetBrains;
+    }
+    blockquote strong{
+        color:#00695c;
+        font-family:JetBrains;
+    }
+    blockquote em{
+        color:#ef6c00;
+        font-style:normal;
+        font-family:Helvetica;
+    }
+    span.import {
+        color: #212121;
+        font-family: JetBrains;
+    }
+    span.import strong {
+        background: #fbc02d;
     }
 </style>

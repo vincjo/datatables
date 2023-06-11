@@ -14,7 +14,7 @@
         handler.filter(value, filterBy)
 		clearTimeout(timeout)
 		timeout = setTimeout( () => {
-            handler.run('filter')
+            handler.invalidate()
 		}, 400)
 	}
 </script>

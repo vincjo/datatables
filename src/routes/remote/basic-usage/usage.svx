@@ -1,0 +1,121 @@
+
+# Basic usage
+
+## API request example
+
+````bash
+https://api.mysite.com/users?
+    limit=10            # rows per page
+    &offset=20          # offset (20 = page number 3)
+    &q=john             # full text search
+    &name=doe           # column filter: name = 'doe'
+    &sort=name
+    &order=desc         # sort "name" descending
+````
+
+## Bind a load function to datatable events
+````ts
+
+handler.onChange( (state: State) => myLoadFunction(state): Promise<Row[]> )
+// myLoadFunction() must return an iterable dataset
+````
+
+## State = client-side datatable state
+````ts
+type State = {
+    pageNumber: number,
+    rowsPerPage: number,
+    offset: number,
+    search: string | undefined,
+    sorted: Order<Row> | undefined,
+    filters: Filter<Row>[] | undefined,
+    setTotalRows: (value: number) => void
+}
+````
+
+## Load function
+````ts
+import { State } from '@vincjo/datatables/remote'
+
+export const myLoadFunction = async (state: State) => {
+
+    const response = await fetch(
+        `https://api.mysite.com/users?` +
+            `offset=${offset}`          +
+            `&limit=${rowsPerPage}`     +
+            getParams()
+    )
+    const json = await response.json()
+
+    state.setTotalRows(json.count)
+
+    return json.results
+}
+
+
+const getParams = ({ search, sorted, filters }: State) => {
+    let params = ''
+
+    if (search) {
+        params += `&q=${search}`
+    }
+    if (sorted) {
+        params += `&sort=${sorted.orderBy}&order=${sorted.direction}`
+    }
+    if (filters) {
+        params += filters.map(({ filterBy, value }) => `&${filterBy}=${value}`).join()
+    }
+    return params
+}
+````
+
+## Trigger reload
+````ts
+handler.invalidate() // will reload and update data
+````
+
+<style>
+   h1{
+        font-size:32px;
+        color:var(--secondary);
+        font-weight:normal;
+    }
+    h2{
+        font-size:18px;
+        color:var(--primary);
+        font-weight:400;
+        margin:80px 0 8px 0;
+    }
+    p{
+        margin-right:24px;
+    }
+    blockquote{
+        position:relative;
+        overflow: auto;
+        white-space: nowrap;
+        display:inline-block;
+        margin:0;
+        /* width: 100%; */
+        background:#eee;
+        border-radius:8px;
+        padding:4px 8px;
+    }
+    blockquote p{
+        padding:0;
+        margin:0;
+        color:#ad1457;
+        font-family:monospace;
+    }
+    blockquote strong{
+        color:#00695c;
+        font-family:JetBrains;
+    }
+    blockquote em{
+        color:#ef6c00;
+        font-style:normal;
+        font-family:Helvetica;
+    }
+    @media (max-width: 800px) {
+        blockquote { width: 100%; }
+    }
+</style>

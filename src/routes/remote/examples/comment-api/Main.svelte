@@ -6,34 +6,31 @@
     const handler = new DataHandler(data, { rowsPerPage: 20, totalRows: 500 })
     const rows = handler.getRows()
 
-    handler.on(['setPage', 'setRowsPerPage', 'sort'], (state: State) => {
-        return reload(state)
-    })
-
+    handler.onChange((state: State) => reload(state) )
 </script>
 
-    <Datatable {handler} search={false}>
-        <table>
-            <thead>
+<Datatable {handler} search={false}>
+    <table>
+        <thead>
+            <tr>
+                <Th {handler} orderBy="id">ID</Th>
+                <Th {handler} orderBy="name">Name</Th>
+                <Th {handler} orderBy="email">Email</Th>
+                <Th {handler} orderBy="body">Comment</Th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each $rows as row}
                 <tr>
-                    <Th {handler} orderBy="id">ID</Th>
-                    <Th {handler} orderBy="name">Name</Th>
-                    <Th {handler} orderBy="email">Email</Th>
-                    <Th {handler} orderBy="body">Comment</Th>
+                    <td>{row.id}</td>
+                    <td><b>{row.name}</b></td>
+                    <td>{row.email}</td>
+                    <td><p>{row.body}</p></td>
                 </tr>
-            </thead>
-            <tbody>
-                {#each $rows as row}
-                    <tr>
-                        <td>{row.id}</td>
-                        <td><b>{row.name}</b></td>
-                        <td>{row.email}</td>
-                        <td><p>{row.body}</p></td>
-                    </tr>
-                {/each}
-            </tbody>
-        </table>
-    </Datatable>
+            {/each}
+        </tbody>
+    </table>
+</Datatable>
 
 <style>
     thead {

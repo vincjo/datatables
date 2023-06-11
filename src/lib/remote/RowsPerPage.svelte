@@ -11,7 +11,7 @@
 
     const setRowsPerPage = () => {
         handler.setPage(1)
-        handler.run('setRowsPerPage')
+        handler.invalidate()
     }
 </script>
 

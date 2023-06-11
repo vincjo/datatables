@@ -8,17 +8,16 @@
     export let align: 'left' | 'right' | 'center' = 'left'
 
     const sorted = handler.getSorted()
-    $: active = $sorted.find(order => order.orderBy === orderBy)
     const sort = () => {
         handler.sort(orderBy)
-        handler.run('sort')
+        handler.invalidate()
     }
 </script>
 
 <th
     on:click={sort}
     class:sortable={orderBy}
-    class:active={active?.orderBy === orderBy}
+    class:active={$sorted?.orderBy === orderBy}
     class={$$props.class ?? ''}
 >
     <div
@@ -28,7 +27,7 @@
         <strong>
             <slot />
         </strong>
-        <span class:asc={active?.direction === 'asc'} class:desc={active?.direction === 'desc'} />
+        <span class:asc={$sorted?.direction === 'asc'} class:desc={$sorted?.direction === 'desc'} />
     </div>
 </th>
 

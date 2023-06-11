@@ -1,4 +1,4 @@
-import type { State, Order, Row } from '$lib/remote'
+import type { State } from '$lib/remote'
 
 
 export const reload = async (state: State) => {
@@ -17,8 +17,7 @@ const getParams = ({ pageNumber, rowsPerPage, sorted }: State) => {
         params += `&_limit=${rowsPerPage}`
     }
     if (sorted) {
-        const value = sorted as Order<Row>
-        params += `&_sort=${value.orderBy}&_order=${value.direction}`
+        params += `&_sort=${sorted.orderBy}&_order=${sorted.direction}`
     }
 
     return params

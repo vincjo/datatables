@@ -1,45 +1,38 @@
 import * as fs from 'fs'
-import { reload } from './api'
 
 export const load = async () => {
-    const result = await reload()
 
     const path = './src/routes/remote/examples'
     const lib = './src/lib/remote'
     const page = 'poke-api'
     return {
-        dataset: result,
+        dataset: [],
         components: [
-            {
-                name: '+page.server.ts',
-                code: fs.readFileSync(`${path}/${page}/example.server.ts`).toString('utf-8'),
-                language: 'typescript'
-            },
-            {
-                name: 'api.ts',
-                code: fs.readFileSync(`${path}/${page}/api.ts`).toString('utf-8'),
-                language: 'typescript'
-            },
             {
                 name: 'Main.svelte',
                 code: fs.readFileSync(`${path}/${page}/Main.svelte`).toString('utf-8'),
                 components: [
-                    // {
-                    //     name: 'Th.svelte',
-                    //     code: fs.readFileSync(`${lib}/Th.svelte`).toString('utf-8')
-                    // },
-                    // {
-                    //     name: 'ThFilter.svelte',
-                    //     code: fs.readFileSync(`${lib}/ThFilter.svelte`).toString('utf-8')
-                    // },
+                    {
+                        name: 'api.ts',
+                        code: fs.readFileSync(`${path}/${page}/api.ts`).toString('utf-8'),
+                        language: 'typescript'
+                    },
+                    {
+                        name: 'PokemonStats.svelte',
+                        code: fs.readFileSync(`${path}/${page}/PokemonStats.svelte`).toString('utf-8')
+                    },
+                    {
+                        name: 'PokemonTypes.svelte',
+                        code: fs.readFileSync(`${path}/${page}/PokemonTypes.svelte`).toString('utf-8')
+                    },
                     {
                         name: 'Datatable.svelte',
                         code: fs.readFileSync(`${lib}/Datatable.svelte`).toString('utf-8'),
                         components: [
-                            {
-                                name: 'Search.svelte',
-                                code: fs.readFileSync(`${lib}/Search.svelte`).toString('utf-8')
-                            },
+                            // {
+                            //     name: 'Search.svelte',
+                            //     code: fs.readFileSync(`${lib}/Search.svelte`).toString('utf-8')
+                            // },
                             {
                                 name: 'RowsPerPage.svelte',
                                 code: fs.readFileSync(`${lib}/RowsPerPage.svelte`).toString('utf-8')

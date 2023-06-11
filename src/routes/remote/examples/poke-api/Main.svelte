@@ -1,60 +1,55 @@
 <script lang="ts">
     import { DataHandler, Datatable, type State } from '$lib/remote'
     import { reload } from './api'
-    import Stats from './Stats.svelte'
-    import Types from './Types.svelte'
-    export let data: { results: any[], count: number }
+    import PokemonStats from './PokemonStats.svelte'
+    import PokemonTypes from './PokemonTypes.svelte'
 
-    const handler = new DataHandler(data.results, { 
-        rowsPerPage: 10, 
-        totalRows: data.count 
-    })
+    const handler = new DataHandler([], { rowsPerPage: 10 })
     const rows = handler.getRows()
 
-    handler.on(['setPage', 'setRowsPerPage'], async ({ offset, rowsPerPage }: State) => {
-        const json = await reload(offset, rowsPerPage)
-        return json.results
-    })
+    handler.onChange( (state: State) => reload(state) )
 
+    handler.invalidate()
 </script>
 
-    <Datatable {handler} search={false}>
-        <table>
-            <thead>
+<Datatable {handler} search={false}>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Base stats</th>
+                <th>Height / Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each $rows as row}
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Base stats</th>
-                    <th>Height / Weight</th>
+                    <td>{row.id}</td>
+                    <td>
+                        <aside class="flex">
+                            {#if row.sprite}
+                                <img src="{row.sprite}" alt="sprite" />
+                            {/if}
+                            <b>{row.name}</b>
+                        </aside>
+                    </td>
+                    <td>
+                        <PokemonTypes types={row.types}/>
+                    </td>
+                    <td>
+                        <PokemonStats stats={row.stats}/>
+                    </td>
+                    <td>
+                        {(row.height / 10)}m / {row.weight}kg
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                {#each $rows as row}
-                    <tr>
-                        <td>{row.id}</td>
-                        <td>
-                            <aside class="flex">
-                                {#if row.sprite}
-                                    <img src="{row.sprite}" alt="sprite" />
-                                {/if}
-                                <b>{row.name}</b>
-                            </aside>
-                        </td>
-                        <td>
-                            <Types types={row.types}/>
-                        </td>
-                        <td>
-                            <Stats stats={row.stats}/>
-                        </td>
-                        <td>
-                            {(row.height / 10)}m / {row.weight}kg
-                        </td>
-                    </tr>
-                {/each}
-            </tbody>
-        </table>
-    </Datatable>
+            {/each}
+        </tbody>
+    </table>
+</Datatable>
+
 
 <style>
     thead {

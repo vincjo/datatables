@@ -6,37 +6,35 @@
     const handler = new DataHandler(data, { rowsPerPage: 5 })
     const rows = handler.getRows()
 
-    handler.on(['setPage', 'setRowsPerPage', 'search'], async (state: State) => {
-        return reload(state)
-    })
+    handler.onChange((state: State) => reload(state))
 
 </script>
 
-    <Datatable {handler}>
-        <table>
-            <thead>
+<Datatable {handler}>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Tagline</th>
+                <th>Brewers tips</th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each $rows as row}
                 <tr>
-                    <th>Name</th>
-                    <th>Tagline</th>
-                    <th>Brewers tips</th>
+                    <td>
+                        <aside class="flex">
+                            <img src={row.image_url} alt="beer" />
+                            <b>{row.name}</b>
+                        </aside>
+                    </td>
+                    <td>{row.tagline}</td>
+                    <td style:font-size="12px">{row.brewers_tips}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {#each $rows as row}
-                    <tr>
-                        <td>
-                            <aside class="flex">
-                                <img src={row.image_url} alt="beer" />
-                                <b>{row.name}</b>
-                            </aside>
-                        </td>
-                        <td>{row.tagline}</td>
-                        <td style:font-size="12px">{row.brewers_tips}</td>
-                    </tr>
-                {/each}
-            </tbody>
-        </table>
-    </Datatable>
+            {/each}
+        </tbody>
+    </table>
+</Datatable>
 
 <style>
     thead {

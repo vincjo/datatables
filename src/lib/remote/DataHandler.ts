@@ -9,7 +9,7 @@ import FilterHandler    from './handlers/FilterHandler'
 import type { Writable, Readable } from 'svelte/store'
 import type { Internationalization, Row, Event, State, Selectable, Order } from '$lib/remote'
 
-export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization, hasMultipleSort?: boolean }
+export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization }
 
 export default class DataHandler<T extends Row = any> 
 {
@@ -20,11 +20,11 @@ export default class DataHandler<T extends Row = any>
     private pageHandler     : PageHandler<T>
     private searchHandler   : SearchHandler<T>
     private filterHandler   : FilterHandler<T>
-    public pageNumber       : Writable<number>
     public i18n             : Internationalization
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: 5 }) 
     {
+        this.i18n           = this.translate(params.i18n)
         this.context        = new Context(data, params)
         this.triggerHandler = new TriggerHandler(this.context)
         this.sortHandler    = new SortHandler(this.context)
@@ -32,8 +32,16 @@ export default class DataHandler<T extends Row = any>
         this.pageHandler    = new PageHandler(this.context)
         this.searchHandler  = new SearchHandler(this.context)
         this.filterHandler  = new FilterHandler(this.context)
-        this.pageNumber = this.context.pageNumber
-        this.i18n = this.translate(params.i18n)
+    }
+
+    public onChange(fn: (state: State) => Promise<T[]>) 
+    {
+        this.triggerHandler.set(fn)
+    }
+
+    public invalidate()
+    {
+        this.triggerHandler.invalidate()
     }
 
     public setRows(data: T[])
@@ -99,7 +107,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.sortDesc(orderBy)
     }
 
-    public getSorted(): Writable<Order<T>[]>
+    public getSorted(): Writable<Order<T>>
     {
         return this.context.sorted
     }
@@ -161,22 +169,6 @@ export default class DataHandler<T extends Row = any>
     public getTriggerChange(): Writable<number>
     {
         return this.context.triggerChange
-    }
-
-    public on(event: Event | Event[], fn: Function) 
-    {
-        if (Array.isArray(event)) {
-            for (const e of event) {
-                this.triggerHandler.setAction(e, fn)
-            }
-            return
-        }
-        this.triggerHandler.setAction(event, fn)
-    }
-
-    public run(event: Event)
-    {
-        this.triggerHandler.run(event)
     }
 
     public getState(): State

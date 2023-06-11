@@ -100,9 +100,7 @@ export default class Context<Row>
                 if (!$rowsPerPage) {
                     return $filteredRows
                 }
-                this.triggerChange.update((store) => {
-                    return store + 1
-                })
+                this.triggerChange.update((store) => { return store + 1 })
                 return $filteredRows.slice(
                     ($pageNumber - 1) * $rowsPerPage,
                     $pageNumber * $rowsPerPage
@@ -137,9 +135,7 @@ export default class Context<Row>
                 return [1]
             }
             const pages = Array.from(Array(Math.ceil($filteredRows.length / $rowsPerPage)))
-            return pages.map((_, i) => {
-                return i + 1
-            })
+            return pages.map((_, i) =>  i + 1 )
         })
     }
 
