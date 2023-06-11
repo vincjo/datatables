@@ -5,10 +5,10 @@
     export let data
 </script>
 
-<h1>Unknown row count</h1>
+<h1>Row selection</h1>
 <h2>Beers API <a href="https://punkapi.com/documentation/v2" rel="external"> DOC &rarr;</a></h2>
 <Features rowsPerPage={true} search={true}/>
-<Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={true}>
+<Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={false}>
     <Main data={data.dataset}/>
 </Demo>
 

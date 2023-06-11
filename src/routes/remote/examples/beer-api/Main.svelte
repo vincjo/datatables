@@ -3,17 +3,26 @@
     import { reload } from './api'
     export let data: any[]
 
-    const handler = new DataHandler(data, { rowsPerPage: 5 })
+    const handler = new DataHandler(data, { rowsPerPage: 10 })
     const rows = handler.getRows()
 
     handler.onChange((state: State) => reload(state))
 
+    const selected = handler.getSelected()
+    const isAllSelected = handler.isAllSelected()
 </script>
 
 <Datatable {handler}>
     <table>
         <thead>
             <tr>
+                <th class="selection">
+                    <input
+                        type="checkbox"
+                        on:click={() => handler.selectAll('id')}
+                        checked={$isAllSelected}
+                    />
+                </th>
                 <th>Name</th>
                 <th>Tagline</th>
                 <th>Brewers tips</th>
@@ -21,7 +30,14 @@
         </thead>
         <tbody>
             {#each $rows as row}
-                <tr>
+                <tr class:active={$selected.includes(row.id)}>
+                    <td class="selection">
+                        <input
+                            type="checkbox"
+                            on:click={() => handler.select(row.id)}
+                            checked={$selected.includes(row.id)}
+                        />
+                    </td>
                     <td>
                         <aside class="flex">
                             <img src={row.image_url} alt="beer" />
@@ -69,4 +85,11 @@
         font-weight: normal;
         line-height: 16px;
     }
+    tbody tr.active {
+        background: var(--primary-lighten-1);
+    }
+    tbody tr.active:hover {
+        background: var(--primary-lighten-2);
+    }
+
 </style>

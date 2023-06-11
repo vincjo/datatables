@@ -2,7 +2,7 @@ import * as fs from 'fs'
 
 export const load = async () => {
     
-    const response = await fetch('https://api.punkapi.com/v2/beers?page=1&per_page=5')
+    const response = await fetch('https://api.punkapi.com/v2/beers?page=1&per_page=10')
 
     const path = './src/routes/remote/examples'
     const lib = './src/lib/remote'

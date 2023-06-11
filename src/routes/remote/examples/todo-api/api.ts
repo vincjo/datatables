@@ -2,9 +2,8 @@ import type { State } from '$lib/remote'
 
 
 export const reload = async (state: State) => {
-    const qs = getParams(state)
     const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos?${qs}`
+        `https://jsonplaceholder.typicode.com/todos?${getParams(state)}`
     )
     return response.json()
 }

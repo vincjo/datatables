@@ -25,7 +25,7 @@
         >
             &#10094;
         </button>
-        <button class="disabled page">page <b>{$pageNumber}</b></button>
+        <button class="page">page <b>{$pageNumber}</b></button>
         <button
             type="button" class="small"
             on:click={() => setPage('next')}
@@ -135,6 +135,10 @@
         width: 72px;
         background: #fafafa;
     }
+    button.page:hover {
+        background: #fafafa;
+        cursor: default;
+    }
     button.ellipse:hover {
         background: inherit;
         cursor: default;
@@ -143,6 +147,9 @@
         background: #eee;
         font-weight: bold;
         cursor: default;
+    }
+    button.disabled {
+        color: #bdbdbd;
     }
     button.disabled:hover {
         background: inherit;
