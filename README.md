@@ -10,22 +10,28 @@
 
 # Presentation
 
-This lib provides an API to dynamically interact with iterable data: filtering, paging, sorting, selecting...
+This lib provides an API to dynamically interact with iterable data on the client-side: filtering, paging, sorting, selecting...
 
 -   **Headless** by design <br>
 -   **Typescript** support <br>
 -   **SSR** friendly
 -   no dependencies
 
-Also provides some demo components, which you can grab and customize in your own project.
+Also provides some showcase components, which you can grab and customize in your own project.
 
 
 :globe_with_meridians: **[Live examples](https://vincjo.fr/datatables/examples)**
 
+<br>
 
-### :satellite: Server-side data processing
+### <img src="./static/logo-remote.svg" alt="logo" style="float:left;padding-right:8px" width="48"/> <span style="line-height:48px">Server-side data processing</span>
 
-[Support for **server-side** pagination, sort, filters...](https://vincjo.fr/datatables/remote)
+Support for server-side pagination, sort, filters is located in `@vincjo/datatables/remote` namespace.
+
+:globe_with_meridians: **[Basic usage](https://vincjo.fr/datatables/remote/basic-usage)**
+
+
+
 
 
 <br>
