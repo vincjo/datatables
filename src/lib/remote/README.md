@@ -8,11 +8,7 @@
     </p>
 </div>
 
-# WIP 
 
 **&rarr; [Home](https://vincjo.fr/datatables/remote/home)**
-
-
-<br><br>
 
 **&rarr; [Examples](https://vincjo.fr/datatables/remote/examples)**
