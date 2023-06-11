@@ -26,7 +26,7 @@ Also provides some showcase components, which you can grab and customize in your
 
 ###  :satellite: Server-side data processing
 
-<img src="./static/logo-remote.svg" alt="logo" align="left" width="96"/>
+<img src="./static/logo-remote.svg" alt="logo" align="left" width="72"/>
 
 Support for server-side pagination, sort, filters is located in `@vincjo/datatables/remote` namespace.
 
