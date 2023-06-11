@@ -24,11 +24,13 @@ Also provides some showcase components, which you can grab and customize in your
 
 <br>
 
-<img src="./static/logo-remote.svg" alt="logo" align="left" width="48"/> <span style="line-height:48px">Server-side data processing</span>
+###  :satellite: Server-side data processing
+
+<img src="./static/logo-remote.svg" alt="logo" align="left" width="96"/>
 
 Support for server-side pagination, sort, filters is located in `@vincjo/datatables/remote` namespace.
 
-:globe_with_meridians: **[Basic usage](https://vincjo.fr/datatables/remote/basic-usage)**
+**[Basic usage](https://vincjo.fr/datatables/remote/basic-usage)** | **[Examples](https://vincjo.fr/datatables/remote/basic-usage)**
 
 
 
