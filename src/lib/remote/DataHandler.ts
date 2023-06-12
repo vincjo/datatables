@@ -7,7 +7,7 @@ import SearchHandler    from './handlers/SearchHandler'
 import FilterHandler    from './handlers/FilterHandler'
 
 import type { Writable, Readable } from 'svelte/store'
-import type { Internationalization, Row, Event, State, Selectable, Order } from '$lib/remote'
+import type { Internationalization, Row, State, Selectable, Order } from '$lib/remote'
 
 export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization }
 
@@ -169,11 +169,6 @@ export default class DataHandler<T extends Row = any>
     public getTriggerChange(): Writable<number>
     {
         return this.context.triggerChange
-    }
-
-    public getState(): State
-    {
-        return this.context.getState()
     }
 
     public translate(i18n: Internationalization): Internationalization 

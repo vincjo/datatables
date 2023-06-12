@@ -38,4 +38,10 @@
     button:hover {
         background: rgba(255, 255, 255, 0.2);
     }
+
+    @media (max-width: 800px) {
+        button {
+            display: none;
+        }
+    }
 </style>

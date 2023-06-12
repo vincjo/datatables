@@ -34,16 +34,6 @@ export type Order<Row> = {
     direction?: 'asc' | 'desc'
 }
 
-export type Event = 'change' | 'setPage' | 'setRowsPerPage' | 'search' | 'sort' | 'filter'
-
-export type Actions = {
-    setPage:        Function | undefined,
-    setRowsPerPage: Function | undefined,
-    search:         Function | undefined,
-    sort:           Function | undefined,
-    filter:         Function | undefined,
-}
-
 export type State = {
     pageNumber: number,
     rowsPerPage: number,

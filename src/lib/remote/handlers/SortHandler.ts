@@ -21,7 +21,7 @@ export default class SortHandler<Row>
         if (!orderBy) return
         const sorted = get(this.sorted)
 
-        if(!sorted) {
+        if(!sorted || sorted.orderBy !== orderBy) {
             this.sortAsc(orderBy)
         }
         else if (sorted.direction === 'asc') {
