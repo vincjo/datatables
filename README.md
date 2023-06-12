@@ -30,7 +30,7 @@ Also provides some showcase components, which you can grab and customize in your
 
 Support for server-side pagination, sort, filters is located in `@vincjo/datatables/remote` namespace.
 
-**[Basic usage](https://vincjo.fr/datatables/remote/basic-usage)** | **[Examples](https://vincjo.fr/datatables/remote/basic-usage)**
+**[Basic usage](https://vincjo.fr/datatables/remote/basic-usage)** | **[Examples](https://vincjo.fr/datatables/remote/examples)**
 
 
 
