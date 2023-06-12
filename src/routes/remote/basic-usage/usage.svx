@@ -14,9 +14,17 @@ https://api.mysite.com/users?
 ````
 
 ## Bind a load function to datatable events
-````ts
-handler.onChange( (state: State) => myLoadFunction(state): Promise<Row[]> )
-// myLoadFunction() must return an iterable dataset
+````svelte
+<script lang="ts">
+    import { DataHandler } from '@vincjo/datatables/remote'
+    import { myLoadFunction } from './my-api-helper'
+
+    const handler = new DataHandler([], { rowsPerPage: 10 })
+
+    handler.onChange( (state: State) => myLoadFunction(state): Promise<Row[]> )
+    // myLoadFunction() must return an iterable dataset
+</script>
+
 ````
 
 ## State = client-side datatable state
