@@ -93,12 +93,7 @@ export default class SortHandler<Row>
             if (identifier.includes('=>')) {
                 return this.applySorting({ orderBy, direction })
             }
-            else {
-                return this.applySorting({ 
-                    orderBy: identifier as OrderBy<Row>, 
-                    direction 
-                })
-            }
+            return this.applySorting({ orderBy: identifier as keyof Row, direction })
         }
         return
     }
