@@ -88,12 +88,17 @@ export default class SortHandler<Row>
                 default    : return this.sort(params.orderBy)
             }
         }
-        const sorted = get(this.sorted)
-        if (sorted.identifier) {
-            return this.applySorting({
-                orderBy: sorted.orderBy,
-                direction: sorted.direction
-            })
+        const { identifier, orderBy, direction } = get(this.sorted)
+        if (identifier) {
+            if (identifier.includes('=>')) {
+                return this.applySorting({ orderBy, direction })
+            }
+            else {
+                return this.applySorting({ 
+                    orderBy: identifier as OrderBy<Row>, 
+                    direction 
+                })
+            }
         }
         return
     }

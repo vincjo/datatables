@@ -35,7 +35,7 @@
             <table bind:this={element}>
                 <thead>
                     <tr>
-                        <Th {handler} />
+                        <th/>
                         <Th {handler} orderBy="id">ID</Th>
                         <Th {handler} orderBy="first_name">First name</Th>
                         <Th {handler} orderBy="last_name">Last name</Th>
@@ -80,6 +80,9 @@
     }
     thead {
         background: #fff;
+    }
+    th {
+        border-bottom: 1px solid #e0e0e0;
     }
     tbody td {
         padding: 4px 20px;

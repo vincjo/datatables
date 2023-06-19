@@ -12,7 +12,7 @@
 </script>
 
 <th
-    on:click={() => handler.sort(orderBy)}
+    on:click={() =>{ handler.sort(orderBy); console.log($sorted)}}
     class:sortable={orderBy}
     class:active={$sorted.identifier === identifier}
     class={$$props.class ?? ''}
