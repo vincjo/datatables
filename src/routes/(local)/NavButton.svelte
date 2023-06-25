@@ -9,6 +9,7 @@
 </button>
 
 {#if active}
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <section transition:fade|global={{ duration: 200 }} on:click|self={() => (active = false)} on:keyup>
         <Nav />
     </section>
