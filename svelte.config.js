@@ -7,7 +7,7 @@ import preprocess from 'svelte-preprocess'
 const config = {
     extensions: ['.svelte', ...mdsvexConfig.extensions],
     preprocess: [
-        mdsvex(mdsvexConfig)
+        mdsvex(mdsvexConfig),
         preprocess(), 
     ],
     kit: {
