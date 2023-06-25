@@ -6,8 +6,10 @@ import preprocess from 'svelte-preprocess'
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
     extensions: ['.svelte', ...mdsvexConfig.extensions],
-    preprocess: [preprocess(), mdsvex(mdsvexConfig)],
-
+    preprocess: [
+        mdsvex(mdsvexConfig)
+        preprocess(), 
+    ],
     kit: {
         adapter: adapter({ out: 'build' }),
         paths: {
@@ -15,14 +17,12 @@ const config = {
         }
     },
 	vitePlugin: {
-		experimental: {
-			inspector: {
-				toggleKeyCombo: 'meta-shift',
-				holdMode: true,
-				showToggleButton: 'always',
-                toggleButtonPos: 'bottom-right',
-			}
-		}
+        inspector: {
+            toggleKeyCombo: 'meta-shift',
+            holdMode: true,
+            showToggleButton: 'always',
+            toggleButtonPos: 'bottom-right',
+        }
 	}
 }
 

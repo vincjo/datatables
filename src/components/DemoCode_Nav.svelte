@@ -62,7 +62,7 @@
 </nav>
 
 {#if show}
-    <div on:click={() => show = false} on:keypress in:fade|local={{ duration: 200 }}/>
+    <div on:click={() => show = false} on:keypress in:fade={{ duration: 200 }}/>
 {/if}
 
 <style>

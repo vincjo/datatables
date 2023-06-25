@@ -10,7 +10,7 @@
     let current = 'result'
 </script>
 
-<div in:fade>
+<div in:fade|global>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <ul>
         <li class:active={current === 'result'} on:click={() => (current = 'result')}>Result</li>
@@ -20,7 +20,7 @@
     {#if current === 'result'}
         <article
             class="table"
-            in:fade={{ duration: 200 }}
+            in:fade|global={{ duration: 200 }}
             style="max-width:{width};"
             class:scroll-y={scrollY}
         >

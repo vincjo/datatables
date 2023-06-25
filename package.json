@@ -28,28 +28,27 @@
     },
     "devDependencies": {
         "@sveltejs/adapter-node": "^1.0.0-next.100",
-        "@sveltejs/kit": "next",
-        "@sveltejs/package": "next",
+        "@sveltejs/kit": "^1.20.4",
+        "@sveltejs/package": "^2.1.0",
         "@types/node": "^18.15.11",
         "@typescript-eslint/eslint-plugin": "^5.27.0",
         "@typescript-eslint/parser": "^5.27.0",
         "eslint": "^8.16.0",
         "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-svelte3": "^4.0.0",
-        "gros": "^0.16.1",
-        "mdsvex": "^0.10.6",
+        "eslint-plugin-svelte": "^2.30.0",
+        "gros": "^0.19.0",
+        "mdsvex": "^0.11.0",
         "prettier": "^2.6.2",
-        "prettier-plugin-svelte": "^2.7.0",
+        "prettier-plugin-svelte": "^2.10.1",
         "prism-svelte": "^0.5.0",
-        "svelte": "^3.44.0",
-        "svelte-check": "^2.7.1",
-        "svelte-preprocess": "^4.10.6",
+        "svelte": "^4.0.0",
+        "svelte-check": "^3.4.3",
+        "svelte-preprocess": "^5.0.3",
         "tslib": "^2.3.1",
-        "typescript": "^4.7.4",
-        "vite": "^4.0.0"
+        "typescript": "^5.0.0",
+        "vite": "^4.2.2",
+        "prismjs": "^1.29.0"
     },
     "type": "module",
-    "dependencies": {
-        "prismjs": "^1.29.0"
-    }
+    "dependencies": {}
 }

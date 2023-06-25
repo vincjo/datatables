@@ -4,10 +4,10 @@
     import { getPath, url, anchor } from '$utils/page'
 </script>
 
-<nav class="thin-scrollbar" transition:fly={{ duration: 200, x: -200 }}>
+<nav class="thin-scrollbar" transition:fly|global={{ duration: 200, x: -200 }}>
     <a href="/datatables/home">
         <article>
-            <aside transition:fade={{ duration: 100 }}>
+            <aside transition:fade|global={{ duration: 100 }}>
                 <img src="/datatables/logo.svg" alt="logo" />
                 <div>
                     <h1>svelte<br />simple<br />datatables</h1>
@@ -29,7 +29,7 @@
             </h2>
         </a>
         {#if page.pages && $url.includes(page.path)}
-            <ul transition:slide|local={{ duration: 200 }}>
+            <ul transition:slide={{ duration: 200 }}>
                 {#each page.pages as subpage}
                     <a href={getPath(page.path + subpage.path)}>
                         <li class:active={$url === getPath(page.path + subpage.path)}>
@@ -40,7 +40,7 @@
             </ul>
         {/if}
         {#if page.anchors && $url.includes(page.path)}
-            <ul transition:slide={{ duration: 200 }}>
+            <ul transition:slide|global={{ duration: 200 }}>
                 {#each page.anchors as hash}
                     <a href={hash.slug} on:click={() => ($anchor = hash.slug)}>
                         <li class:active={$anchor === hash.slug}>

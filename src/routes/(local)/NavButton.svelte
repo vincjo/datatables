@@ -9,7 +9,7 @@
 </button>
 
 {#if active}
-    <section transition:fade={{ duration: 200 }} on:click|self={() => (active = false)} on:keyup>
+    <section transition:fade|global={{ duration: 200 }} on:click|self={() => (active = false)} on:keyup>
         <Nav />
     </section>
 {/if}
