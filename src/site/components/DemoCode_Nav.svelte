@@ -25,6 +25,7 @@
 <nav class:show={show}>
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
     <ul>
         {#each components as component}
             <li class:active={component.name === active} on:click={() => setActive(component)}>
@@ -62,6 +63,7 @@
 </nav>
 
 {#if show}
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div on:click={() => show = false} on:keypress in:fade={{ duration: 200 }}/>
 {/if}
 

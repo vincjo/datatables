@@ -1,6 +1,6 @@
 <script>
-    import { anchor } from '$utils/page'
-    import viewport from '$utils/viewport'
+    import { anchor } from '$site/utils/page'
+    import viewport from '$site/utils/viewport'
     export let name
 </script>
 

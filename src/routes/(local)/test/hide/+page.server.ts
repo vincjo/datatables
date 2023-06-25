@@ -5,7 +5,7 @@ export const load = async () => {
     const lib = './src/lib/local'
     const page = 'hide'
     return {
-        dataset: fs.readFileSync(`./src/data/test.ts`).toString('utf-8'),
+        dataset: fs.readFileSync(`./src/site/data/test.ts`).toString('utf-8'),
         components: [
             {
                 name: 'Main.svelte',

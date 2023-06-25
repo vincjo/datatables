@@ -1,7 +1,7 @@
 <script>
     import { DataHandler }  from '$lib/local'
     import Th               from '../Th.svelte'
-    import data             from '$data/data'
+    import data             from '$site/data/data'
 
     const handler = new DataHandler(data, { rowsPerPage: 10 })
     const rows = handler.getRows()

@@ -1,7 +1,7 @@
 <script>
     import { slide, fade, fly } from 'svelte/transition'
     import pages from './Nav'
-    import { getPath, url, anchor } from '$utils/page'
+    import { getPath, url, anchor } from '$site/utils/page'
 </script>
 
 <nav class="thin-scrollbar" transition:fly|global={{ duration: 200, x: -200 }}>

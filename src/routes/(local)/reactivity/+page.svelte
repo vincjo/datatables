@@ -1,6 +1,6 @@
 <script>
     import Datatable from './Datatable.svelte'
-    import data from '$data/data.75'
+    import data from '$site/data/data.75'
     import { users } from './store'
     import Reactivity from './reactivity.svx'
 

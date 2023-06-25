@@ -1,5 +1,5 @@
 <script>
-    import Demo from '$components/Demo.svelte'
+    import Demo from '$site/components/Demo.svelte'
     import Main from './Main.svelte'
     export let data
 </script>

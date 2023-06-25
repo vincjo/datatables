@@ -1,6 +1,6 @@
 <script>
-    import Anchor from '$components/Anchor.svelte'
-    import Type from '$components/TypePopup.svelte'
+    import Anchor from '$site/components/Anchor.svelte'
+    import Type from '$site/components/TypePopup.svelte'
 </script>
 
 

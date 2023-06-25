@@ -3,7 +3,7 @@ import * as fs from 'fs'
 export const load = async () => {
     const path = './src/routes/(local)/tutorial'
     return {
-        dataset: fs.readFileSync(`./src/data/data.ts`).toString('utf-8'),
+        dataset: fs.readFileSync(`./src/site/data/data.ts`).toString('utf-8'),
         components: [
             {
                 name: 'Main.svelte',
