@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "1.10.5",
+    "version": "1.10.6",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],
@@ -19,7 +19,6 @@
         "dev": "vite dev",
         "build": "vite build",
         "package": "svelte-kit sync && svelte-package",
-        "prepublishOnly": "echo 'Did you mean to publish `./dist/`, instead of `./`?' && exit 1",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
         "lint": "prettier --plugin-search-dir . --check . && eslint .",
@@ -29,7 +28,7 @@
     "devDependencies": {
         "@sveltejs/adapter-node": "^1.0.0-next.100",
         "@sveltejs/kit": "^1.20.4",
-        "@sveltejs/package": "^2.0.0",
+        "@sveltejs/package": "^2.1.0",
         "@types/node": "^18.15.11",
         "@typescript-eslint/eslint-plugin": "^5.27.0",
         "@typescript-eslint/parser": "^5.27.0",
@@ -54,9 +53,8 @@
         "svelte": ">=3.0.0"
     },
     "type": "module",
-    "files": [ "dist" ],
+    "files": ["dist"],
     "exports": {
-        "./package.json": "./package.json",
         ".": {
             "types": "./dist/index.d.ts",
             "svelte": "./dist/index.js",
