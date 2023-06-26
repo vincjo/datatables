@@ -21,10 +21,10 @@ export default class FilterHandler<Row>
                 identifier: parsed.identifier,
                 check: comparator
             }
-            store = store.filter((item) => {
-                return item.identifier !== parsed.identifier && item.value
-            })
-            store.push(filter)
+            store = store.filter((item) => item.identifier !== parsed.identifier && item.value )
+            if (value) {
+                store.push(filter)
+            }
             return store
         })
     }

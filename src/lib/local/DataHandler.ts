@@ -121,6 +121,11 @@ export default class DataHandler<T extends Row = any>
         return this.filterHandler.set(value as string | number, filterBy, comparator)
     }
 
+    public getFilterCount()
+    {
+        return this.context.filterCount
+    }
+
     public clearFilters(): void
     {
         this.filterHandler.remove()

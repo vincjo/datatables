@@ -11,6 +11,7 @@ export default class Context<Row>
     public triggerChange        : Writable<number>
     public globalSearch         : Writable<{ value?: string, scope?: (keyof Row)[] }>
     public filters              : Writable<Filter<Row>[]>
+    public filterCount          : Readable<number>
     public rawRows              : Writable<Row[]>
     public filteredRows         : Readable<Row[]>
     public rows                 : Readable<Row[]>
@@ -30,6 +31,7 @@ export default class Context<Row>
         this.triggerChange      = writable(0)
         this.globalSearch       = writable({})
         this.filters            = writable([])
+        this.filterCount        = this.createFilterCount()
         this.rawRows            = writable(data)
         this.filteredRows       = this.createFilteredRows()
         this.rows               = this.createPaginatedRows()
@@ -41,6 +43,11 @@ export default class Context<Row>
         this.selected           = writable([])
         this.selectScope        = writable('all')
         this.isAllSelected      = this.createIsAllSelected()
+    }
+
+    private createFilterCount()
+    {
+        return derived(this.filters, ($filters) => $filters.length)
     }
 
     private createFilteredRows() 
