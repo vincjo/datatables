@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "1.10.6",
+    "version": "1.10.7",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],
@@ -50,10 +50,12 @@
     },
     "dependencies": {},
     "peerDependencies": {
-        "svelte": ">=3.0.0"
+        "svelte": ">=3.54.0"
     },
     "type": "module",
     "files": ["dist"],
+    "svelte": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
@@ -210,7 +212,6 @@
             "default": "./dist/remote/ThFilter.svelte"
         }
     },
-    "svelte": "./dist/index.js",
     "typesVersions": {
         ">4.0": {
             "index.d.ts": [
