@@ -6,19 +6,16 @@
             name: 'eee3',
             value: 2,
             rest: 3,
-            rdm: 'abc'
         },
         {
             name: 'eee2',
             value: 2,
             rest: 2,
-            rdm: 'bcd'
         },
         {
             name: 'eee1',
             value: 2,
             rest: 1,
-            rdm: 'cde'
         }
     ]
     const handler = new DataHandler(data)
@@ -40,7 +37,6 @@
             <Th {handler} orderBy="name">name</Th>
             <Th {handler} orderBy="value">value</Th>
             <Th {handler} orderBy="rest">rest</Th>
-            <Th {handler} orderBy="rdm">rdm</Th>
         </tr>
     </thead>
     <tbody>
@@ -49,7 +45,6 @@
                 <td>{row.name}</td>
                 <td>{row.value}</td>
                 <td>{row.rest}</td>
-                <td>{row.rdm}</td>
             </tr>
         {/each}
     </tbody>
