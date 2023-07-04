@@ -27,7 +27,9 @@ input[type='reset']:focus,
 input[type='submit']:focus {
     outline: 0;
 }
-
+button:active {
+    transform: translateY(0.8px);
+}
 button:hover,
 input[type='button']:hover,
 input[type='reset']:hover,
