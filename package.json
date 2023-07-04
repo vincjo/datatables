@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "1.10.8",
+    "version": "1.10.9",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],

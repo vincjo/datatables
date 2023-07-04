@@ -141,6 +141,8 @@ export default class SortHandler<Row>
             const [_, slot2, slot3] = this.history
             this.history = [slot2, slot3, sorted]
         }
-        this.history = [...this.history, sorted]
+        else {
+            this.history = [...this.history, sorted]
+        }
     }
 }
