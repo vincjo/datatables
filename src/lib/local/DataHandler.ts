@@ -81,29 +81,39 @@ export default class DataHandler<T extends Row = any>
     public sort(orderBy: OrderBy<T>)
     {
         this.setPage(1)
-        this.sortHandler.sort(orderBy)
+        this.sortHandler.set(orderBy)
     }
 
     public applySorting( params: { orderBy: OrderBy<T>, direction?: 'asc' | 'desc' } = null )
     {
-        this.sortHandler.applySorting(params)
+        this.sortHandler.apply(params)
     }
 
     public sortAsc(orderBy: OrderBy<T>)
     {
         this.setPage(1)
-        this.sortHandler.sortAsc(orderBy)
+        this.sortHandler.asc(orderBy)
     }
 
     public sortDesc(orderBy: OrderBy<T>)
     {
         this.setPage(1)
-        this.sortHandler.sortDesc(orderBy)
+        this.sortHandler.desc(orderBy)
     }
 
     public getSorted(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
     {
         return this.context.sorted
+    }
+
+    public clearSort()
+    {
+        this.sortHandler.remove()
+    }
+
+    public defineSort(orderBy: OrderBy<T>, direction?: 'asc' | 'desc')
+    {
+        this.sortHandler.define(orderBy, direction)
     }
 
     public search(value: string, scope: (keyof T)[] = null)

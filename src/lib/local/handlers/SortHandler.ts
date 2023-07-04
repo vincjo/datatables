@@ -9,15 +9,17 @@ export default class SortHandler<Row>
     private rawRows         : Writable<Row[]>
     private triggerChange   : Writable<number>
     private sorted          : Writable<(Order<Row>)>
+    private history         : Order<Row>[]
 
     constructor(context: Context<Row>) 
     {
         this.rawRows        = context.rawRows
         this.triggerChange  = context.triggerChange
         this.sorted         = context.sorted
+        this.history        = []
     }
 
-    public sort(orderBy: OrderBy<Row> = null)
+    public set(orderBy: OrderBy<Row> = null)
     {
         if (!orderBy) return
         const sorted = get(this.sorted)
@@ -27,21 +29,22 @@ export default class SortHandler<Row>
             this.sorted.update((store) => (store.direction = null))
         }
         if (sorted.direction === null || sorted.direction === 'desc') {
-            this.sortAsc(orderBy)
+            this.asc(orderBy)
         } 
         else if (sorted.direction === 'asc') {
-            this.sortDesc(orderBy)
+            this.desc(orderBy)
         }
     }
 
-    public sortAsc(orderBy: OrderBy<Row>)
+    public asc(orderBy: OrderBy<Row>)
     {
         if (!orderBy) return
-        const parsed = this.parse(orderBy)
-        this.sorted.set({ identifier: parsed.identifier, direction: 'asc', orderBy: parsed.fn })
+        const { identifier, fn } = this.parse(orderBy)
+        this.sorted.set({ identifier, direction: 'asc', orderBy: fn })
+        this.log({ identifier, direction: 'asc', orderBy: fn })
         this.rawRows.update((store) => {
             store.sort((x, y) => {
-                const [a, b] = [parsed.fn(x), parsed.fn(y)]
+                const [a, b] = [fn(x), fn(y)]
                 if (a === b) return 0
                 if (a === null) return 1
                 if (b === null) return -1
@@ -56,14 +59,15 @@ export default class SortHandler<Row>
         this.triggerChange.update((store) => { return store + 1 })
     }
 
-    public sortDesc(orderBy: OrderBy<Row>)
+    public desc(orderBy: OrderBy<Row>)
     {
         if (!orderBy) return
-        const parsed = this.parse(orderBy)
-        this.sorted.set({ identifier: parsed.identifier, direction: 'desc', orderBy: parsed.fn })
+        const { identifier, fn } = this.parse(orderBy)
+        this.sorted.set({ identifier, direction: 'desc', orderBy: fn })
+        this.log({ identifier, direction: 'desc', orderBy: fn })
         this.rawRows.update((store) => {
             store.sort((x, y) => {
-                const [a, b] = [parsed.fn(x), parsed.fn(y)]
+                const [a, b] = [fn(x), fn(y)]
                 if (a === b) return 0
                 if (a === null) return 1
                 if (b === null) return -1
@@ -73,32 +77,39 @@ export default class SortHandler<Row>
                 if (typeof b === 'object') return JSON.stringify(b).localeCompare(JSON.stringify(a))
                 else return String(b).localeCompare(String(a))
             })
-
             return store
         })
         this.triggerChange.update((store) => { return store + 1 })
     }
 
-    public applySorting(params: { orderBy: OrderBy<Row>, direction?: 'asc' | 'desc' } = null) 
+    public apply(params: { orderBy: OrderBy<Row>, direction?: 'asc' | 'desc' } = null) 
     {
         if (params) {
             switch (params.direction) {
-                case 'asc' : return this.sortAsc(params.orderBy)
-                case 'desc': return this.sortDesc(params.orderBy)
-                default    : return this.sort(params.orderBy)
+                case 'asc' : return this.asc(params.orderBy)
+                case 'desc': return this.desc(params.orderBy)
+                default    : return this.set(params.orderBy)
             }
         }
-        const { identifier, orderBy, direction } = get(this.sorted)
-        if (identifier) {
-            if (identifier.includes('=>')) {
-                return this.applySorting({ orderBy, direction })
-            }
-            return this.applySorting({ orderBy: identifier as keyof Row, direction })
+        else {
+            this.replay()
         }
-        return
     }
 
-    private parse(orderBy: OrderBy<Row>) 
+    public remove()
+    {
+        this.history = []
+        this.sorted.set({})
+    }
+
+    public define(orderBy: OrderBy<Row>, direction: 'asc' | 'desc' = 'asc')
+    {
+        if (!orderBy) return
+        const { identifier, fn } = this.parse(orderBy)
+        this.sorted.set({ identifier, direction, orderBy: fn })
+    }
+
+    private parse(orderBy: OrderBy<Row>)
     {
         if (typeof orderBy === 'string') {
             return {
@@ -112,5 +123,24 @@ export default class SortHandler<Row>
             }
         }
         throw new Error(`Invalid orderBy argument: ${String(orderBy)}`)
+    }
+
+    private replay()
+    {
+        for (const sorted of this.history) {
+            const { identifier, orderBy, direction } = sorted
+            const param = identifier.includes('=>') ? orderBy : identifier as OrderBy<Row>
+            this[direction](param)
+        }
+    }
+
+    private log(sorted: Order<Row>)
+    {
+        this.history = this.history.filter(item => item.identifier !== sorted.identifier )
+        if (this.history.length >= 3) {
+            const [_, slot2, slot3] = this.history
+            this.history = [slot2, slot3, sorted]
+        }
+        this.history = [...this.history, sorted]
     }
 }
