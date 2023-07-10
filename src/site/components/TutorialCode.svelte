@@ -23,6 +23,7 @@
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <ul>
             {#each components as component}
+                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                 <li class:active={component.name === active} on:click={() => setActive(component)}>
                     <i>{@html icon}</i>
                     <span>{component.name}</span>

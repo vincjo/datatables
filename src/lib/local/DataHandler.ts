@@ -128,7 +128,7 @@ export default class DataHandler<T extends Row = any>
 
     public filter( value: string, filterBy: FilterBy<T>, comparator: Comparator<T> = null )
     {
-        return this.filterHandler.set(value as string | number, filterBy, comparator)
+        this.filterHandler.set(value as string | number, filterBy, comparator)
     }
 
     public getFilterCount()

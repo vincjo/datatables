@@ -3,8 +3,9 @@
     export let code
     let buttonContent = 'Copy'
 
+
     const copy = () => {
-        const content = code.replace('$lib/core', '@vincjo/datatables')
+        const content = parse(code)
         navigator.clipboard.writeText(content).then(
             () => {
                 buttonContent = 'Saved !'
@@ -16,6 +17,12 @@
                 console.error('Async: Could not copy text: ', err)
             }
         )
+    }
+
+    const parse = (code) => {
+        return code
+            .replace('$lib/local', '@vincjo/datatables')
+            .replace('$lib/remote', '@vincjo/datatables/remote')
     }
 </script>
 
