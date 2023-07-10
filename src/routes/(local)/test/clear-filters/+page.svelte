@@ -4,7 +4,7 @@
     export let data
 </script>
 
-<h2>Test - filter count</h2>
+<h2>Test - clear filters</h2>
 <div class="qmsldk">
     <Demo components={data.components} dataset={data.dataset} scrollY={false}>
         <Main />
