@@ -1,9 +1,10 @@
-<script>
-    export let handler
+<script lang="ts">
+    import type { DataHandler } from '$lib/local'
+    export let handler: DataHandler
     export let orderBy = null
 
     const identifier = orderBy?.toString()
-    const sorted = handler.getSorted()
+    const sorted = handler.getSort()
 </script>
 
 <th on:click={() => handler.sort(orderBy)} class:active={$sorted.identifier === identifier}>

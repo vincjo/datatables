@@ -1,5 +1,6 @@
-<script>
-    export let handler
+<script lang="ts">
+    import type { DataHandler } from '$lib/local'
+    export let handler: DataHandler
     const pageNumber = handler.getPageNumber()
     const pageCount = handler.getPageCount()
     const pages = handler.getPages({ ellipsis: true })

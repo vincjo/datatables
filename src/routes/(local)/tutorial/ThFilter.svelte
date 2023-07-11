@@ -1,5 +1,6 @@
-<script>
-    export let handler
+<script lang="ts">
+    import type { DataHandler } from '$lib/local'
+    export let handler: DataHandler
     export let filterBy = null
     let value = ''
 </script>

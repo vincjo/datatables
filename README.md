@@ -89,13 +89,16 @@ setRows( data: Row[] ): void
 sort( orderBy: OrderBy<Row> ): void
 sortAsc( orderBy: OrderBy<Row> ): void
 sortDesc( orderBy: OrderBy<Row> ): void
-getSorted(): Writable<(Order<Row>)>
-applySorting( params: { orderBy?: OrderBy<Row>, direction?: 'asc' | 'desc'} = null ): void
+getSort(): Writable<(Order<Row>)>
+applySort( params: { orderBy?: OrderBy<Row>, direction?: 'asc' | 'desc'} = null ): void
+defineSort( params: { orderBy?: OrderBy<Row>, direction?: 'asc' | 'desc'} = null ): void
+clearSort(): void
 ```
 
 ```ts
 filter( value: string, filterBy: FilterBy<Row>, comparator: Comparator<Row> ): void
 clearFilters(): void
+getFilterCount(): Readable<number>
 ```
 
 ```ts
@@ -126,5 +129,5 @@ isAllSelected(): Readable<boolean>
 ```
 
 ```ts
-getTriggerChange(): Writable<number>
+on(event: 'change' | 'clearFilters' | 'clearSearch', callback: Function): void
 ```

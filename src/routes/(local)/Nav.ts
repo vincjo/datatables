@@ -35,7 +35,7 @@ export default [
             { name: 'row count', slug: '#row-count' },
             { name: 'pagination', slug: '#pagination' },
             { name: 'row selection', slug: '#row-selection' },
-            { name: 'trigger change', slug: '#trigger-change' }
+            { name: 'event', slug: '#event' }
         ]
     },
     {
@@ -51,14 +51,6 @@ export default [
             { name: 'pagination', path: '/pagination' }
         ]
     },
-    // {
-    //     name: 'server-side',
-    //     path: '/server-side',
-    //     pages: [
-    //         { name: 'Punk API', path: '/punk-api' },
-    //         { name: 'Poké API', path: '/poke-api' },
-    //     ]
-    // },
     {
         name: 'tips',
         path: '/tips',

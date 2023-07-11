@@ -131,7 +131,7 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler.set(value as string | number, filterBy, comparator)
     }
 
-    public getFilterCount()
+    public getFilterCount(): Readable<number>
     {
         return this.context.filterCount
     }
@@ -203,7 +203,8 @@ export default class DataHandler<T extends Row = any>
      */
 
     /**
-     * use setRows() instead
+     * @deprecated use setRows() instead
+     * @since 1.0.0 2023/02/12
      */
     public update(data: any[]): void
     {
@@ -216,18 +217,19 @@ export default class DataHandler<T extends Row = any>
     }
 
     /**
-     * use applySort() instead
+     * @deprecated use applySort() instead
+     * @since 1.11.0 2023/07/11
      */
     public applySorting( params: { orderBy: OrderBy<T>, direction?: 'asc' | 'desc' } = null )
     {
         this.applySort(params)
     }
 
-
     /**
-     * use getSort() instead
+     * @deprecated use getSort() instead
+     * @since 1.11.0 2023/07/11
      */
-    public getSorted(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
+    public getSorted()
     {
         return this.getSort()
     }

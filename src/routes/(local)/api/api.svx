@@ -61,30 +61,31 @@
 > **sort(** *orderBy*: OrderBy`<Row>` **)**: void <br>
 > **sortAsc(** *orderBy*: OrderBy`<Row>` **)**: void <br>
 > **sortDesc(** *orderBy*: OrderBy`<Row>` **)**: void <br>
-> **getSorted()**: Writable`<{` *identifier*?: string, *direction*?: 'asc' | 'desc' `}>`  <br>
-> **applySorting(** *params*?: `{` *orderBy*?: OrderBy`<Row>`, *direction*?: 'asc' | 'desc' `}` **)**: void <br>
+> **getSort()**: Writable`<{` *identifier*?: string, *direction*?: 'asc' | 'desc' `}>`  <br>
+> **applySort(** *params*?: `{` *orderBy*?: OrderBy`<Row>`, *direction*?: 'asc' | 'desc' `}` **)**: void <br>
+> **clearSort()**: void <br>
 
 ````svelte
 <script lang="ts">
     import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
-    const sorted = handler.getSorted()
+    const sort = handler.getSort()
 </script>
 
 <button type="button"
     on:click={() => handler.sort('email')}
-    class:active={$sorted.identifier === 'email'}
-    class:asc={$sorted.direction === 'asc'}
-    class:desc={$sorted.direction === 'desc'}
+    class:active={$sort.identifier === 'email'}
+    class:asc={$sort.direction === 'asc'}
+    class:desc={$sort.direction === 'desc'}
 >
     Sort by email
 </button>
 
 <button type="button"
     on:click={() => handler.sort( row => row.first_name + row.last_name)}
-    class:active={$sorted.identifier === 'row => row.first_name + row.last_name'}
-    class:asc={$sorted.direction === 'asc'}
-    class:desc={$sorted.direction === 'desc'}
+    class:active={$sort.identifier === 'row => row.first_name + row.last_name'}
+    class:asc={$sort.direction === 'asc'}
+    class:desc={$sort.direction === 'desc'}
 >
     Sort by first_name + last_name
 </button>
@@ -99,6 +100,7 @@
 
 > **filter(** *value*: string, *filterBy*: FilterBy`<Row>`, *comparator*?: Comparator`<Row>` **)**: void <br>
 > **clearFilters()**: void <br>
+> **getFilterCount()**: void <br>
 
 ````svelte
 <script lang="ts">
@@ -110,9 +112,11 @@
 
     const clear = () => {
         handler.clearFilters()
+    }
+    handler.on('clearFilters', () => {
         value1 = ''
         value2 = ''
-    }
+    })
 </script>
 
 <button on:click={clear}>Clear</button>
@@ -144,6 +148,8 @@
     import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
     let value = ''
+
+    handler.on('clearSearch', () => value = '')
 </script>
 
 <input type="text"
@@ -282,24 +288,21 @@
 
 
 
-<Anchor name="trigger-change">
+<Anchor name="event">
 
-## Trigger change
+## Event
 
-> **getTriggerChange()**: Writable`<number>`
+> **on(** *event*: 'change' | 'clearFilters' | 'clearSearch', *callback*: Function **)**: Writable`<number>`
 
 ````svelte
 <script lang="ts">
     import type { DataHandler } from '@vincjo/datatables'
     export let handler: DataHandler
-    let element: HTMLElement | undefined
+    let element: HTMLElement
 
-    const triggerChange = handler.getTriggerChange()
-    $: $triggerChange, scrollTop()
-
-    const scrollTop = () => {
-        if (element) element.scrollTop = 0
-    }
+    handler.on('change', () => {
+        element.scrollTop = 0
+    })
 </script>
 
 <ul bind:this={element}>

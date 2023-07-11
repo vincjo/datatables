@@ -8,13 +8,13 @@
     export let align: 'left' | 'right' | 'center' = 'left'
 
     const identifier = orderBy?.toString()
-    const sorted = handler.getSorted()
+    const sort = handler.getSort()
 </script>
 
 <th
     on:click={() => handler.sort(orderBy)}
     class:sortable={orderBy}
-    class:active={$sorted.identifier === identifier}
+    class:active={$sort.identifier === identifier}
     class={$$props.class ?? ''}
 >
     <div
@@ -24,7 +24,7 @@
         <strong>
             <slot />
         </strong>
-        <span class:asc={$sorted.direction === 'asc'} class:desc={$sorted.direction === 'desc'} />
+        <span class:asc={$sort.direction === 'asc'} class:desc={$sort.direction === 'desc'} />
     </div>
 </th>
 
