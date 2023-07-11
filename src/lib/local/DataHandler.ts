@@ -34,7 +34,7 @@ export default class DataHandler<T extends Row = any>
     public setRows(data: T[])
     {
         this.context.rawRows.set(data)
-        this.applySorting()
+        this.applySort()
     }
 
     public getRows(): Readable<T[]>
@@ -103,7 +103,7 @@ export default class DataHandler<T extends Row = any>
 
     public getSort(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
     {
-        return this.context.sorted
+        return this.context.sort
     }
 
     public clearSort()
@@ -141,9 +141,9 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler.remove()
     }
 
-    public getPages(params = { ellipsis: false }): Readable<number[]>
+    public getPages(param = { ellipsis: false }): Readable<number[]>
     {
-        if (params.ellipsis) {
+        if (param.ellipsis) {
             return this.context.pagesWithEllipsis
         }
         return this.context.pages
@@ -170,7 +170,12 @@ export default class DataHandler<T extends Row = any>
 
     public getTriggerChange(): Writable<number>
     {
-        return this.context.triggerChange
+        return this.context.events.triggerChange
+    }
+
+    public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: Function)
+    {
+        this.context.events.add(event, callback)
     }
 
     public translate(i18n: Internationalization): Internationalization
@@ -190,11 +195,12 @@ export default class DataHandler<T extends Row = any>
         }
     }
 
+
+
+
     /**
      * Deprecated
-     * use setRows() instead
      */
-
 
     /**
      * use setRows() instead

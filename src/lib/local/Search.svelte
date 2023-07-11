@@ -5,6 +5,8 @@
 
     export let handler: DataHandler<T>
     let value = ''
+
+    handler.on('clearSearch', () => value = '')
 </script>
 
 <input

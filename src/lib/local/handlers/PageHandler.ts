@@ -1,26 +1,20 @@
 import type Context from '$lib/local/Context'
 import { type Writable, type Readable, get } from 'svelte/store'
+import type EventHandler from './EventHandler'
 
 export default class PageHandler<Row> 
 {
-    public pageNumber   : Writable<number>
-    public rowCount     : Readable<{ total: number, start: number, end: number }>
-    public rowsPerPage  : Writable<number | null>
-    public triggerChange: Writable<number>
-    public pages        : Readable<number[]>
+    private pageNumber  : Writable<number>
+    private rowCount    : Readable<{ total: number, start: number, end: number }>
+    private rowsPerPage : Writable<number | null>
+    private events      : EventHandler
 
     constructor(context: Context<Row>) 
     {
         this.pageNumber     = context.pageNumber
         this.rowCount       = context.rowCount
         this.rowsPerPage    = context.rowsPerPage
-        this.triggerChange  = context.triggerChange
-        this.pages          = context.pages
-    }
-
-    public get() 
-    {
-        return this.pages
+        this.events         = context.events
     }
 
     public goto(number: number)
@@ -31,7 +25,7 @@ export default class PageHandler<Row>
                 const total = get(this.rowCount).total
                 if (number >= 1 && number <= Math.ceil(total / rowsPerPage)) {
                     store = number
-                    this.triggerChange.update((store) => { return store + 1 })
+                    this.events.trigger('change')
                 }
             }
             return store

@@ -1,16 +1,17 @@
 import type { Filter, FilterBy, Comparator } from '$lib/local'
 import type Context from '$lib/local/Context'
+import type EventHandler from './EventHandler'
 import type { Writable } from 'svelte/store'
 
 export default class FilterHandler<Row>
 {
     private filters: Writable<Filter<Row>[]>
-    private triggerClearFilters: Writable<number>
+    private events: EventHandler
 
     constructor(context: Context<Row>)
     {
-        this.filters             = context.filters
-        this.triggerClearFilters = context.triggerClearFilters
+        this.filters    = context.filters
+        this.events     = context.events
     }
 
     public set(value: string | number, filterBy: FilterBy<Row>, comparator: Comparator<Row> = null )
@@ -34,7 +35,8 @@ export default class FilterHandler<Row>
     public remove()
     {
         this.filters.set([])
-        this.triggerClearFilters.update((store) => { return store + 1 })
+        this.events.trigger('change')
+        this.events.trigger('clearFilters')
     }
 
     private parse(filterBy: FilterBy<Row>)

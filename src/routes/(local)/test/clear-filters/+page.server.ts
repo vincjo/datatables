@@ -17,7 +17,7 @@ export const load = async () => {
                     },
                     {
                         name: 'ThFilter.svelte',
-                        code: fs.readFileSync(`${path}/${page}/ThFilter.svelte`).toString('utf-8')
+                        code: fs.readFileSync(`${lib}/ThFilter.svelte`).toString('utf-8')
                     },
                     {
                         name: 'Datatable.svelte',

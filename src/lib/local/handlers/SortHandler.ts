@@ -1,37 +1,37 @@
 import type Context from '$lib/local/Context'
 import type { Order, OrderBy } from '$lib/local'
 import { type Writable, get } from 'svelte/store'
-
+import type EventHandler from './EventHandler'
 
 
 export default class SortHandler<Row> 
 {
     private rawRows         : Writable<Row[]>
-    private triggerChange   : Writable<number>
-    private sorted          : Writable<(Order<Row>)>
+    private events          : EventHandler
+    private sort            : Writable<(Order<Row>)>
     private history         : Order<Row>[]
 
     constructor(context: Context<Row>) 
     {
         this.rawRows        = context.rawRows
-        this.triggerChange  = context.triggerChange
-        this.sorted         = context.sorted
+        this.events         = context.events
+        this.sort           = context.sort
         this.history        = []
     }
 
     public set(orderBy: OrderBy<Row> = null)
     {
         if (!orderBy) return
-        const sorted = get(this.sorted)
+        const sort = get(this.sort)
         const parsed = this.parse(orderBy)
 
-        if (sorted.identifier !== parsed.identifier) {
-            this.sorted.update((store) => (store.direction = null))
+        if (sort.identifier !== parsed.identifier) {
+            this.sort.update((store) => (store.direction = null))
         }
-        if (sorted.direction === null || sorted.direction === 'desc') {
+        if (sort.direction === null || sort.direction === 'desc') {
             this.asc(orderBy)
         } 
-        else if (sorted.direction === 'asc') {
+        else if (sort.direction === 'asc') {
             this.desc(orderBy)
         }
     }
@@ -40,7 +40,7 @@ export default class SortHandler<Row>
     {
         if (!orderBy) return
         const { identifier, fn } = this.parse(orderBy)
-        this.sorted.set({ identifier, direction: 'asc', orderBy: fn })
+        this.sort.set({ identifier, direction: 'asc', orderBy: fn })
         this.log({ identifier, direction: 'asc', orderBy: fn })
         this.rawRows.update((store) => {
             store.sort((x, y) => {
@@ -56,14 +56,14 @@ export default class SortHandler<Row>
             })
             return store
         })
-        this.triggerChange.update((store) => { return store + 1 })
+        this.events.trigger('change')
     }
 
     public desc(orderBy: OrderBy<Row>)
     {
         if (!orderBy) return
         const { identifier, fn } = this.parse(orderBy)
-        this.sorted.set({ identifier, direction: 'desc', orderBy: fn })
+        this.sort.set({ identifier, direction: 'desc', orderBy: fn })
         this.log({ identifier, direction: 'desc', orderBy: fn })
         this.rawRows.update((store) => {
             store.sort((x, y) => {
@@ -79,7 +79,7 @@ export default class SortHandler<Row>
             })
             return store
         })
-        this.triggerChange.update((store) => { return store + 1 })
+        this.events.trigger('change')
     }
 
     public apply(params: { orderBy: OrderBy<Row>, direction?: 'asc' | 'desc' } = null) 
@@ -99,14 +99,14 @@ export default class SortHandler<Row>
     public remove()
     {
         this.history = []
-        this.sorted.set({})
+        this.sort.set({})
     }
 
     public define(orderBy: OrderBy<Row>, direction: 'asc' | 'desc' = 'asc')
     {
         if (!orderBy) return
         const { identifier, fn } = this.parse(orderBy)
-        this.sorted.set({ identifier, direction, orderBy: fn })
+        this.sort.set({ identifier, direction, orderBy: fn })
     }
 
     private parse(orderBy: OrderBy<Row>)

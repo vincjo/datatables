@@ -2,15 +2,14 @@ import { writable, derived, type Writable, type Readable } from 'svelte/store'
 import type { Filter, Order, Selectable, Comparator } from '$lib/local'
 import type { Params }  from '$lib/local/DataHandler'
 import { check } from './Comparator'
+import EventHandler from './handlers/EventHandler'
 
 
 export default class Context<Row> 
 {
+    public events               : EventHandler
     public rowsPerPage          : Writable<number | null>
     public pageNumber           : Writable<number>
-    public triggerChange        : Writable<number>
-    public triggerClearFilters  : Writable<number>
-    public triggerClearSearch   : Writable<number>
     public search               : Writable<{ value?: string, scope?: (keyof Row)[] }>
     public filters              : Writable<Filter<Row>[]>
     public filterCount          : Readable<number>
@@ -21,18 +20,16 @@ export default class Context<Row>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
-    public sorted               : Writable<(Order<Row>)>
+    public sort                 : Writable<(Order<Row>)>
     public selected             : Writable<Selectable<Row>[]>
     public selectScope          : 'all' | 'currentPage'
     public isAllSelected        : Readable<boolean>
 
     constructor(data: Row[], params: Params) 
     {
+        this.events              = new EventHandler()
         this.rowsPerPage         = writable(params.rowsPerPage)
         this.pageNumber          = writable(1)
-        this.triggerChange       = writable(0)
-        this.triggerClearFilters = writable(0)
-        this.triggerClearSearch  = writable(0)
         this.search              = writable({})
         this.filters             = writable([])
         this.filterCount         = this.createFilterCount()
@@ -43,7 +40,7 @@ export default class Context<Row>
         this.pages               = this.createPages()
         this.pagesWithEllipsis   = this.createPagesWithEllipsis()
         this.pageCount           = this.createPageCount()
-        this.sorted              = writable({})
+        this.sort                = writable({})
         this.selected            = writable([])
         this.selectScope         = 'all'
         this.isAllSelected       = this.createIsAllSelected()
@@ -68,7 +65,7 @@ export default class Context<Row>
                     })
                     this.pageNumber.set(1)
                     this.selected.set([])
-                    this.triggerChange.update((store) => { return store + 1 })
+                    this.events.trigger('change')
                 }
 
                 if ($filters.length > 0) {
@@ -81,7 +78,7 @@ export default class Context<Row>
                     })
                     this.pageNumber.set(1)
                     this.selected.set([])
-                    this.triggerChange.update((store) => { return store + 1 })
+                    this.events.trigger('change')
                 }
                 return $rawRows
             }
@@ -111,7 +108,7 @@ export default class Context<Row>
                 if (!$rowsPerPage) {
                     return $filteredRows
                 }
-                this.triggerChange.update((store) => { return store + 1 })
+                this.events.trigger('change')
                 return $filteredRows.slice(
                     ($pageNumber - 1) * $rowsPerPage,
                     $pageNumber * $rowsPerPage

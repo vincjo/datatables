@@ -9,6 +9,8 @@
     export let comparator: Comparator<T> = null
 
     let value: string = ''
+
+    handler.on('clearFilters', () => value = '')
 </script>
 
 <th class={$$props.class ?? ''}>
