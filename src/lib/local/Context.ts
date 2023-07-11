@@ -9,7 +9,9 @@ export default class Context<Row>
     public rowsPerPage          : Writable<number | null>
     public pageNumber           : Writable<number>
     public triggerChange        : Writable<number>
-    public globalSearch         : Writable<{ value?: string, scope?: (keyof Row)[] }>
+    public triggerClearFilters  : Writable<number>
+    public triggerClearSearch   : Writable<number>
+    public search               : Writable<{ value?: string, scope?: (keyof Row)[] }>
     public filters              : Writable<Filter<Row>[]>
     public filterCount          : Readable<number>
     public rawRows              : Writable<Row[]>
@@ -21,28 +23,30 @@ export default class Context<Row>
     public pageCount            : Readable<number>
     public sorted               : Writable<(Order<Row>)>
     public selected             : Writable<Selectable<Row>[]>
-    public selectScope          : Writable<'all' | 'currentPage'>
+    public selectScope          : 'all' | 'currentPage'
     public isAllSelected        : Readable<boolean>
 
     constructor(data: Row[], params: Params) 
     {
-        this.rowsPerPage        = writable(params.rowsPerPage)
-        this.pageNumber         = writable(1)
-        this.triggerChange      = writable(0)
-        this.globalSearch       = writable({})
-        this.filters            = writable([])
-        this.filterCount        = this.createFilterCount()
-        this.rawRows            = writable(data)
-        this.filteredRows       = this.createFilteredRows()
-        this.rows               = this.createPaginatedRows()
-        this.rowCount           = this.createRowCount()
-        this.pages              = this.createPages()
-        this.pagesWithEllipsis  = this.createPagesWithEllipsis()
-        this.pageCount          = this.createPageCount()
-        this.sorted             = writable({})
-        this.selected           = writable([])
-        this.selectScope        = writable('all')
-        this.isAllSelected      = this.createIsAllSelected()
+        this.rowsPerPage         = writable(params.rowsPerPage)
+        this.pageNumber          = writable(1)
+        this.triggerChange       = writable(0)
+        this.triggerClearFilters = writable(0)
+        this.triggerClearSearch  = writable(0)
+        this.search              = writable({})
+        this.filters             = writable([])
+        this.filterCount         = this.createFilterCount()
+        this.rawRows             = writable(data)
+        this.filteredRows        = this.createFilteredRows()
+        this.rows                = this.createPaginatedRows()
+        this.rowCount            = this.createRowCount()
+        this.pages               = this.createPages()
+        this.pagesWithEllipsis   = this.createPagesWithEllipsis()
+        this.pageCount           = this.createPageCount()
+        this.sorted              = writable({})
+        this.selected            = writable([])
+        this.selectScope         = 'all'
+        this.isAllSelected       = this.createIsAllSelected()
     }
 
     private createFilterCount()
@@ -53,13 +57,13 @@ export default class Context<Row>
     private createFilteredRows() 
     {
         return derived(
-            [this.rawRows, this.globalSearch, this.filters],
-            ([$rawRows, $globalSearch, $filters]) => {
-                if ($globalSearch.value) {
+            [this.rawRows, this.search, this.filters],
+            ([$rawRows, $search, $filters]) => {
+                if ($search.value) {
                     $rawRows = $rawRows.filter((row) => {
-                        const scope = $globalSearch.scope ?? Object.keys(row)
+                        const scope = $search.scope ?? Object.keys(row)
                         return scope.some((key) => {
-                            return this.matches(row[key], $globalSearch.value)
+                            return this.matches(row[key], $search.value)
                         })
                     })
                     this.pageNumber.set(1)
@@ -190,9 +194,9 @@ export default class Context<Row>
     private createIsAllSelected()
     {
         return derived(
-            [this.selected, this.rows, this.filteredRows, this.selectScope],
-            ([$selected, $rows, $filteredRows, $selectScope]) => {
-                const rowCount = $selectScope === 'currentPage' ? $rows.length : $filteredRows.length
+            [this.selected, this.rows, this.filteredRows],
+            ([$selected, $rows, $filteredRows]) => {
+                const rowCount = this.selectScope === 'currentPage' ? $rows.length : $filteredRows.length
                 if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }

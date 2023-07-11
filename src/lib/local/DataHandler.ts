@@ -42,7 +42,7 @@ export default class DataHandler<T extends Row = any>
         return this.context.rows
     }
 
-    public getRowsAcrossPages(): Readable<T[]>
+    public getAllRows(): Readable<T[]>
     {
         return this.context.filteredRows
     }
@@ -59,7 +59,7 @@ export default class DataHandler<T extends Row = any>
 
     public selectAll(params: { selectBy?: keyof T; scope?: 'all' | 'currentPage' } = {}): void
     {
-        this.context.selectScope.set(params.scope ?? 'all')
+        this.context.selectScope = params.scope ?? 'all'
         this.selectHandler.selectAll(params.selectBy ?? null)
     }
 
@@ -84,7 +84,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.set(orderBy)
     }
 
-    public applySorting( params: { orderBy: OrderBy<T>, direction?: 'asc' | 'desc' } = null )
+    public applySort( params: { orderBy: OrderBy<T>, direction?: 'asc' | 'desc' } = null )
     {
         this.sortHandler.apply(params)
     }
@@ -101,7 +101,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.desc(orderBy)
     }
 
-    public getSorted(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
+    public getSort(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
     {
         return this.context.sorted
     }
@@ -194,6 +194,11 @@ export default class DataHandler<T extends Row = any>
      * Deprecated
      * use setRows() instead
      */
+
+
+    /**
+     * use setRows() instead
+     */
     public update(data: any[]): void
     {
         console.log(
@@ -202,5 +207,22 @@ export default class DataHandler<T extends Row = any>
             `DataHandler.update(data) method is deprecated. Please use DataHandler.setRows(data) instead`
         )
         this.context.rawRows.set(data)
+    }
+
+    /**
+     * use applySort() instead
+     */
+    public applySorting( params: { orderBy: OrderBy<T>, direction?: 'asc' | 'desc' } = null )
+    {
+        this.applySort(params)
+    }
+
+
+    /**
+     * use getSort() instead
+     */
+    public getSorted(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
+    {
+        return this.getSort()
     }
 }

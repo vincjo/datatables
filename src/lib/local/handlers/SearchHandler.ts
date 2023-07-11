@@ -3,15 +3,18 @@ import type { Writable } from 'svelte/store'
 
 export default class SearchHandler<Row> 
 {
-    private globalSearch: Writable<{ value?: string, scope?: (keyof Row)[] }>
+    private search: Writable<{ value?: string, scope?: (keyof Row)[] }>
+    private triggerClearSearch: Writable<number>
 
-    constructor(context: Context<Row>) {
-        this.globalSearch = context.globalSearch
+    constructor(context: Context<Row>) 
+    {
+        this.search             = context.search
+        this.triggerClearSearch = context.triggerClearSearch
     }
 
     public set(value: string, scope: (keyof Row)[] = null)
     {
-        this.globalSearch.update((store) => {
+        this.search.update((store) => {
             store = {
                 value: value ?? '',
                 scope: scope ?? null
@@ -22,6 +25,7 @@ export default class SearchHandler<Row>
 
     public remove()
     {
-        this.globalSearch.set({ value: null, scope: null })
+        this.search.set({ value: null, scope: null })
+        this.triggerClearSearch.update((store) => { return store + 1 })
     }
 }

@@ -4,11 +4,13 @@ import type { Writable } from 'svelte/store'
 
 export default class FilterHandler<Row>
 {
-    public filters: Writable<Filter<Row>[]>
+    private filters: Writable<Filter<Row>[]>
+    private triggerClearFilters: Writable<number>
 
     constructor(context: Context<Row>)
     {
-        this.filters = context.filters
+        this.filters             = context.filters
+        this.triggerClearFilters = context.triggerClearFilters
     }
 
     public set(value: string | number, filterBy: FilterBy<Row>, comparator: Comparator<Row> = null )
@@ -32,6 +34,7 @@ export default class FilterHandler<Row>
     public remove()
     {
         this.filters.set([])
+        this.triggerClearFilters.update((store) => { return store + 1 })
     }
 
     private parse(filterBy: FilterBy<Row>)
