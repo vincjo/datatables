@@ -168,7 +168,7 @@ export default class DataHandler<T extends Row = any>
 
     public on(event: 'change', callback: () => void)
     {
-        this.context.events.add(event, callback)
+        this.context.event.add(event, callback)
     }
 
     public translate(i18n: Internationalization): Internationalization 
@@ -196,7 +196,7 @@ export default class DataHandler<T extends Row = any>
      */
     public getTriggerChange(): Writable<number>
     {
-        return this.context.events.triggerChange
+        return this.context.event.triggerChange
     }
 
     /**

@@ -5,13 +5,13 @@ import type EventHandler from './EventHandler'
 
 export default class SortHandler<Row>
 {
-    private events          : EventHandler
+    private event           : EventHandler
     private hasMultipleSort : boolean
     private sorted          : Writable<Order<Row>>
 
     constructor(context: Context<Row>)
     {
-        this.events             = context.events
+        this.event              = context.event
         this.hasMultipleSort    = false
         this.sorted             = context.sorted
     }
@@ -36,14 +36,14 @@ export default class SortHandler<Row>
     {
         if (!orderBy) return
         this.sorted.set({ orderBy, direction: 'asc' })
-        this.events.trigger('change')
+        this.event.trigger('change')
     }
 
     public sortDesc(orderBy: keyof Row)
     {
         if (!orderBy) return
         this.sorted.set({ orderBy, direction: 'desc' })
-        this.events.trigger('change')
+        this.event.trigger('change')
     }
 
     public applySorting(params: { orderBy: keyof Row, direction?: 'asc' | 'desc' } = null)

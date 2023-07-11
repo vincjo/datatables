@@ -8,7 +8,7 @@ export default class Context<Row>
     public totalRows            : Writable<number | undefined>
     public rowsPerPage          : Writable<number>
     public pageNumber           : Writable<number>
-    public events               : EventHandler
+    public event                : EventHandler
     public search               : Writable<string>
     public filters              : Writable<Filter<Row>[]>
     public rows                 : Writable<Row[]>
@@ -26,7 +26,7 @@ export default class Context<Row>
         this.totalRows          = writable(params.totalRows)
         this.rowsPerPage        = writable(params.rowsPerPage)
         this.pageNumber         = writable(1)
-        this.events             = new EventHandler()
+        this.event              = new EventHandler()
         this.search             = writable('')
         this.filters            = writable([])
         this.rows               = writable(data)

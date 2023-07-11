@@ -9,7 +9,7 @@ export default class PageHandler<Row>
     public pageNumber   : Writable<number>
     public rowCount     : Readable<{ total: number, start: number, end: number }>
     public rowsPerPage  : Writable<number | null>
-    public events       : EventHandler
+    public event        : EventHandler
     public pages        : Readable<number[]>
     public selected     : Writable<Selectable<Row>[]>
 
@@ -19,7 +19,7 @@ export default class PageHandler<Row>
         this.pageNumber     = context.pageNumber
         this.rowCount       = context.rowCount
         this.rowsPerPage    = context.rowsPerPage
-        this.events         = context.events
+        this.event          = context.event
         this.pages          = context.pages
         this.selected       = context.selected
     }
@@ -38,14 +38,14 @@ export default class PageHandler<Row>
             if (rowsPerPage && totalRows) {
                 if (number >= 1 && number <= Math.ceil(totalRows / rowsPerPage)) {
                     store = number
-                    this.events.trigger('change')
+                    this.event.trigger('change')
                 }
                 return store
             }
             else {
                 if (number >= 1) {
                     store = number
-                    this.events.trigger('change')
+                    this.event.trigger('change')
                 }
                 return store
             }

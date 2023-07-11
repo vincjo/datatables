@@ -7,14 +7,14 @@ import type EventHandler from './EventHandler'
 export default class SortHandler<Row> 
 {
     private rawRows         : Writable<Row[]>
-    private events          : EventHandler
+    private event           : EventHandler
     private sort            : Writable<(Order<Row>)>
     private history         : Order<Row>[]
 
     constructor(context: Context<Row>) 
     {
         this.rawRows        = context.rawRows
-        this.events         = context.events
+        this.event          = context.event
         this.sort           = context.sort
         this.history        = []
     }
@@ -56,7 +56,7 @@ export default class SortHandler<Row>
             })
             return store
         })
-        this.events.trigger('change')
+        this.event.trigger('change')
     }
 
     public desc(orderBy: OrderBy<Row>)
@@ -79,7 +79,7 @@ export default class SortHandler<Row>
             })
             return store
         })
-        this.events.trigger('change')
+        this.event.trigger('change')
     }
 
     public apply(params: { orderBy: OrderBy<Row>, direction?: 'asc' | 'desc' } = null) 

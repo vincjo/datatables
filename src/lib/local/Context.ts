@@ -7,7 +7,7 @@ import EventHandler from './handlers/EventHandler'
 
 export default class Context<Row> 
 {
-    public events               : EventHandler
+    public event                : EventHandler
     public rowsPerPage          : Writable<number | null>
     public pageNumber           : Writable<number>
     public search               : Writable<{ value?: string, scope?: (keyof Row)[] }>
@@ -27,7 +27,7 @@ export default class Context<Row>
 
     constructor(data: Row[], params: Params) 
     {
-        this.events              = new EventHandler()
+        this.event               = new EventHandler()
         this.rowsPerPage         = writable(params.rowsPerPage)
         this.pageNumber          = writable(1)
         this.search              = writable({})
@@ -65,7 +65,7 @@ export default class Context<Row>
                     })
                     this.pageNumber.set(1)
                     this.selected.set([])
-                    this.events.trigger('change')
+                    this.event.trigger('change')
                 }
 
                 if ($filters.length > 0) {
@@ -78,7 +78,7 @@ export default class Context<Row>
                     })
                     this.pageNumber.set(1)
                     this.selected.set([])
-                    this.events.trigger('change')
+                    this.event.trigger('change')
                 }
                 return $rawRows
             }
@@ -108,7 +108,7 @@ export default class Context<Row>
                 if (!$rowsPerPage) {
                     return $filteredRows
                 }
-                this.events.trigger('change')
+                this.event.trigger('change')
                 return $filteredRows.slice(
                     ($pageNumber - 1) * $rowsPerPage,
                     $pageNumber * $rowsPerPage

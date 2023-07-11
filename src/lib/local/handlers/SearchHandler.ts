@@ -5,12 +5,12 @@ import type EventHandler from './EventHandler'
 export default class SearchHandler<Row> 
 {
     private search  : Writable<{ value?: string, scope?: (keyof Row)[] }>
-    private events  : EventHandler
+    private event   : EventHandler
 
     constructor(context: Context<Row>) 
     {
         this.search = context.search
-        this.events = context.events
+        this.event  = context.event
     }
 
     public set(value: string, scope: (keyof Row)[] = null)
@@ -27,7 +27,7 @@ export default class SearchHandler<Row>
     public remove()
     {
         this.search.set({ value: null, scope: null })
-        this.events.trigger('change')
-        this.events.trigger('clearSearch')
+        this.event.trigger('change')
+        this.event.trigger('clearSearch')
     }
 }

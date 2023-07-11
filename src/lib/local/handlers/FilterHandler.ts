@@ -6,12 +6,12 @@ import type { Writable } from 'svelte/store'
 export default class FilterHandler<Row>
 {
     private filters: Writable<Filter<Row>[]>
-    private events: EventHandler
+    private event: EventHandler
 
     constructor(context: Context<Row>)
     {
         this.filters    = context.filters
-        this.events     = context.events
+        this.event      = context.event
     }
 
     public set(value: string | number, filterBy: FilterBy<Row>, comparator: Comparator<Row> = null )
@@ -35,8 +35,8 @@ export default class FilterHandler<Row>
     public remove()
     {
         this.filters.set([])
-        this.events.trigger('change')
-        this.events.trigger('clearFilters')
+        this.event.trigger('change')
+        this.event.trigger('clearFilters')
     }
 
     private parse(filterBy: FilterBy<Row>)

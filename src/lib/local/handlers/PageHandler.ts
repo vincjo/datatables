@@ -7,14 +7,14 @@ export default class PageHandler<Row>
     private pageNumber  : Writable<number>
     private rowCount    : Readable<{ total: number, start: number, end: number }>
     private rowsPerPage : Writable<number | null>
-    private events      : EventHandler
+    private event       : EventHandler
 
     constructor(context: Context<Row>) 
     {
         this.pageNumber     = context.pageNumber
         this.rowCount       = context.rowCount
         this.rowsPerPage    = context.rowsPerPage
-        this.events         = context.events
+        this.event          = context.event
     }
 
     public goto(number: number)
@@ -25,7 +25,7 @@ export default class PageHandler<Row>
                 const total = get(this.rowCount).total
                 if (number >= 1 && number <= Math.ceil(total / rowsPerPage)) {
                     store = number
-                    this.events.trigger('change')
+                    this.event.trigger('change')
                 }
             }
             return store
