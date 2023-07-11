@@ -34,9 +34,9 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler  = new FilterHandler(this.context)
     }
 
-    public onChange(fn: (state: State) => Promise<T[]>) 
+    public onChange(callback: (state: State) => Promise<T[]>) 
     {
-        this.triggerHandler.set(fn)
+        this.triggerHandler.set(callback)
     }
 
     public invalidate()
@@ -90,7 +90,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.sort(orderBy)
     }
 
-    public applySorting( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
+    public applySort( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
     {
         this.sortHandler.applySorting(params)
     }
@@ -115,7 +115,7 @@ export default class DataHandler<T extends Row = any>
     public search(value: string): void 
     {
         this.setPage(1)
-        this.context.globalSearch.set(value)
+        this.context.search.set(value)
     }
 
     public clearSearch()
@@ -166,9 +166,9 @@ export default class DataHandler<T extends Row = any>
         return this.context.rowCount
     }
 
-    public getTriggerChange(): Writable<number>
+    public on(event: 'change', callback: () => void)
     {
-        return this.context.triggerChange
+        this.context.events.add(event, callback)
     }
 
     public translate(i18n: Internationalization): Internationalization 
@@ -186,5 +186,25 @@ export default class DataHandler<T extends Row = any>
             },
             ...i18n
         }
+    }
+
+
+
+    /**
+     * 
+     * depracted
+     */
+    public getTriggerChange(): Writable<number>
+    {
+        return this.context.events.triggerChange
+    }
+
+    /**
+     * 
+     * @deprecated use applySort() instead 
+     */
+    public applySorting( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
+    {
+        this.applySort(params)
     }
 }

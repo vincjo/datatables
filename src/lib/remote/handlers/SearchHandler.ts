@@ -3,19 +3,19 @@ import type { Writable } from 'svelte/store'
 
 export default class SearchHandler<Row> 
 {
-    private globalSearch: Writable<string>
+    private search: Writable<string>
 
     constructor(context: Context<Row>) {
-        this.globalSearch = context.globalSearch
+        this.search = context.search
     }
 
     public set(value: string)
     {
-        this.globalSearch.set(value ?? null)
+        this.search.set(value ?? null)
     }
 
     public remove()
     {
-        this.globalSearch.set(null)
+        this.search.set(null)
     }
 }

@@ -1,14 +1,15 @@
 import { type Writable, writable, get, derived, type Readable } from 'svelte/store'
 import type { State, Order, Filter, Selectable } from '$lib/remote'
 import type { Params }  from './DataHandler'
+import EventHandler from './handlers/EventHandler'
 
 export default class Context<Row>
 {
     public totalRows            : Writable<number | undefined>
     public rowsPerPage          : Writable<number>
     public pageNumber           : Writable<number>
-    public triggerChange        : Writable<number>
-    public globalSearch         : Writable<string>
+    public events               : EventHandler
+    public search               : Writable<string>
     public filters              : Writable<Filter<Row>[]>
     public rows                 : Writable<Row[]>
     public rowCount             : Readable<{ total: number, start: number, end: number }>
@@ -25,8 +26,8 @@ export default class Context<Row>
         this.totalRows          = writable(params.totalRows)
         this.rowsPerPage        = writable(params.rowsPerPage)
         this.pageNumber         = writable(1)
-        this.triggerChange      = writable(0)
-        this.globalSearch       = writable('')
+        this.events             = new EventHandler()
+        this.search             = writable('')
         this.filters            = writable([])
         this.rows               = writable(data)
         this.rowCount           = this.createRowCount()
@@ -48,7 +49,7 @@ export default class Context<Row>
             pageNumber,
             rowsPerPage,
             offset: rowsPerPage * (pageNumber - 1),
-            search: get(this.globalSearch),
+            search: get(this.search),
             sorted: sorted ?? undefined as any,
             filters: filters.length > 0 ? filters : undefined as any,
             setTotalRows: (value: number) => this.totalRows.set(value)

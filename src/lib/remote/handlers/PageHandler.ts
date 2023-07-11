@@ -1,6 +1,7 @@
 import type Context from '$lib/remote/Context'
 import { type Writable, type Readable, get } from 'svelte/store'
 import type { Selectable } from '$lib/remote'
+import type EventHandler from './EventHandler'
 
 export default class PageHandler<Row>
 {
@@ -8,7 +9,7 @@ export default class PageHandler<Row>
     public pageNumber   : Writable<number>
     public rowCount     : Readable<{ total: number, start: number, end: number }>
     public rowsPerPage  : Writable<number | null>
-    public triggerChange: Writable<number>
+    public events       : EventHandler
     public pages        : Readable<number[]>
     public selected     : Writable<Selectable<Row>[]>
 
@@ -18,7 +19,7 @@ export default class PageHandler<Row>
         this.pageNumber     = context.pageNumber
         this.rowCount       = context.rowCount
         this.rowsPerPage    = context.rowsPerPage
-        this.triggerChange  = context.triggerChange
+        this.events         = context.events
         this.pages          = context.pages
         this.selected       = context.selected
     }
@@ -37,14 +38,14 @@ export default class PageHandler<Row>
             if (rowsPerPage && totalRows) {
                 if (number >= 1 && number <= Math.ceil(totalRows / rowsPerPage)) {
                     store = number
-                    this.triggerChange.update((store) => { return store + 1 })
+                    this.events.trigger('change')
                 }
                 return store
             }
             else {
                 if (number >= 1) {
                     store = number
-                    this.triggerChange.update((store) => { return store + 1 })
+                    this.events.trigger('change')
                 }
                 return store
             }

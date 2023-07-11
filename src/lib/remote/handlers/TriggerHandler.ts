@@ -12,9 +12,9 @@ export default class TriggerHandler<Row>
         this.context = context
     }
 
-    public set(fn: (state: State) => Promise<Row[]>)
+    public set(callback: (state: State) => Promise<Row[]>)
     {
-        this.reload = fn
+        this.reload = callback
     }
 
     public async invalidate()
