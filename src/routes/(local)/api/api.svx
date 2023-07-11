@@ -292,7 +292,7 @@
 
 ## Event
 
-> **on(** *event*: 'change' | 'clearFilters' | 'clearSearch', *callback*: Function **)**: Writable`<number>`
+> **on(** *event*: 'change' | 'clearFilters' | 'clearSearch', *callback*: Function **)**: void
 
 ````svelte
 <script lang="ts">
