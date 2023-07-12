@@ -16,7 +16,7 @@ export default class Context<Row>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
-    public sorted               : Writable<Order<Row>>
+    public sort                 : Writable<Order<Row>>
     public selected             : Writable<Selectable<Row>[]>
     public isAllSelected        : Readable<boolean>
 
@@ -34,7 +34,7 @@ export default class Context<Row>
         this.pages              = this.createPages()
         this.pagesWithEllipsis  = this.createPagesWithEllipsis()
         this.pageCount          = this.createPageCount()
-        this.sorted             = writable(undefined)
+        this.sort               = writable(undefined)
         this.selected           = writable([])
         this.isAllSelected      = this.createIsAllSelected()
     }
@@ -43,14 +43,15 @@ export default class Context<Row>
     {
         const pageNumber    = get(this.pageNumber)
         const rowsPerPage   = get(this.rowsPerPage)
-        const sorted        = get(this.sorted)
+        const sort          = get(this.sort)
         const filters       = get(this.filters)
         return {
             pageNumber,
             rowsPerPage,
             offset: rowsPerPage * (pageNumber - 1),
             search: get(this.search),
-            sorted: sorted ?? undefined as any,
+            sorted: sort ?? undefined as any, // deprecated
+            sort: sort ?? undefined as any,
             filters: filters.length > 0 ? filters : undefined as any,
             setTotalRows: (value: number) => this.totalRows.set(value)
         }

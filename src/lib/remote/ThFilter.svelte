@@ -8,7 +8,7 @@
     export let align: 'left' | 'right' | 'center' = 'left'
 
     let value: string = ''
-	let timeout: any
+	let timeout: any 
 
     const filter = () => {
         handler.filter(value, filterBy)

@@ -7,57 +7,57 @@ export default class SortHandler<Row>
 {
     private event           : EventHandler
     private hasMultipleSort : boolean
-    private sorted          : Writable<Order<Row>>
+    private sort            : Writable<Order<Row>>
 
     constructor(context: Context<Row>)
     {
         this.event              = context.event
         this.hasMultipleSort    = false
-        this.sorted             = context.sorted
+        this.sort               = context.sort
     }
 
-    public sort(orderBy: keyof Row = null)
+    public set(orderBy: keyof Row = null)
     {
         if (!orderBy) return
-        const sorted = get(this.sorted)
+        const sort = get(this.sort)
 
-        if(!sorted || sorted.orderBy !== orderBy) {
-            this.sortAsc(orderBy)
+        if(!sort || sort.orderBy !== orderBy) {
+            this.asc(orderBy)
         }
-        else if (sorted.direction === 'asc') {
-            this.sortDesc(sorted.orderBy)
+        else if (sort.direction === 'asc') {
+            this.desc(sort.orderBy)
         }
-        else if (sorted.direction === 'desc') {
-            this.sortAsc(orderBy)
+        else if (sort.direction === 'desc') {
+            this.asc(orderBy)
         } 
     }
 
-    public sortAsc(orderBy: keyof Row)
+    public asc(orderBy: keyof Row)
     {
         if (!orderBy) return
-        this.sorted.set({ orderBy, direction: 'asc' })
+        this.sort.set({ orderBy, direction: 'asc' })
         this.event.trigger('change')
     }
 
-    public sortDesc(orderBy: keyof Row)
+    public desc(orderBy: keyof Row)
     {
         if (!orderBy) return
-        this.sorted.set({ orderBy, direction: 'desc' })
+        this.sort.set({ orderBy, direction: 'desc' })
         this.event.trigger('change')
     }
 
-    public applySorting(params: { orderBy: keyof Row, direction?: 'asc' | 'desc' } = null)
+    public apply(params: { orderBy: keyof Row, direction?: 'asc' | 'desc' } = null)
     {
         if (params) {
             switch (params.direction) {
-                case 'asc' : return this.sortAsc(params.orderBy)
-                case 'desc': return this.sortDesc(params.orderBy)
-                default    : return this.sort(params.orderBy)
+                case 'asc' : return this.asc(params.orderBy)
+                case 'desc': return this.desc(params.orderBy)
+                default    : return this.set(params.orderBy)
             }
         }
-        const sorted = get(this.sorted)
-        if (sorted) {
-            return this.applySorting({ orderBy: sorted.orderBy, direction: sorted.direction })
+        const sort = get(this.sort)
+        if (sort) {
+            return this.apply({ orderBy: sort.orderBy, direction: sort.direction })
         }
         return
     }
@@ -67,10 +67,10 @@ export default class SortHandler<Row>
     // {
     //     const sort = { orderBy, direction }
     //     if (this.hasMultipleSort === false) {
-    //         this.sorted.set([ sort ])
+    //         this.sort.set([ sort ])
     //         return
     //     }
-    //     this.sorted.update((store) => {
+    //     this.sort.update((store) => {
     //         store = store.filter((item) => {
     //             return (item.orderBy !== orderBy) && item.direction
     //         })
@@ -84,8 +84,8 @@ export default class SortHandler<Row>
     // public sort(orderBy: keyof Row = null)
     // {
     //     if (!orderBy) return
-    //     const sorted = get(this.sorted)
-    //     const exists = sorted.find(sort => sort.orderBy === orderBy)
+    //     const sort = get(this.sort)
+    //     const exists = sort.find(sort => sort.orderBy === orderBy)
 
     //     if(!exists) {
     //         this.sortAsc(orderBy)
@@ -121,9 +121,9 @@ export default class SortHandler<Row>
     //             default    : return this.sort(params.orderBy)
     //         }
     //     }
-    //     const sorted = get(this.sorted)
-    //     if (sorted.length > 0) {
-    //         for (const order of sorted) {
+    //     const sort = get(this.sort)
+    //     if (sort.length > 0) {
+    //         for (const order of sort) {
     //             return this.applySorting({ orderBy: order.orderBy, direction: order.direction })
     //         }
     //     }

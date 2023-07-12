@@ -9,9 +9,9 @@
 	let timeout: any
 
 	const search = () => {
+		handler.search(value)
 		clearTimeout(timeout)
 		timeout = setTimeout( () => {
-			handler.search(value)
             handler.invalidate()
 		}, 400)
 	}

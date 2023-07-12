@@ -39,9 +39,11 @@ export type State = {
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
-    sorted: Order<Row> | undefined
+    sort: Order<Row> | undefined
     filters: Filter<Row>[] | undefined
     setTotalRows: (value: number) => void
+    /* @deprecated 'sorted' use 'sort' instead */
+    sorted: Order<Row> | undefined
 }
 
 export type Selectable<Row> = Row[keyof Row] | Row

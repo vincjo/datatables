@@ -87,29 +87,29 @@ export default class DataHandler<T extends Row = any>
     public sort(orderBy: keyof T)
     {
         this.setPage(1)
-        this.sortHandler.sort(orderBy)
+        this.sortHandler.set(orderBy)
     }
 
     public applySort( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
     {
-        this.sortHandler.applySorting(params)
+        this.sortHandler.apply(params)
     }
 
     public sortAsc(orderBy: keyof T)
     {
         this.setPage(1)
-        this.sortHandler.sortAsc(orderBy)
+        this.sortHandler.asc(orderBy)
     }
 
     public sortDesc(orderBy: keyof T)
     {
         this.setPage(1)
-        this.sortHandler.sortDesc(orderBy)
+        this.sortHandler.desc(orderBy)
     }
 
-    public getSorted(): Writable<Order<T>>
+    public getSort(): Writable<Order<T>>
     {
-        return this.context.sorted
+        return this.context.sort
     }
 
     public search(value: string): void 
@@ -192,7 +192,7 @@ export default class DataHandler<T extends Row = any>
 
     /**
      * 
-     * depracted
+     * @depracted use on('change', callback) instead
      */
     public getTriggerChange(): Writable<number>
     {
@@ -206,5 +206,15 @@ export default class DataHandler<T extends Row = any>
     public applySorting( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
     {
         this.applySort(params)
+    }
+
+
+    /**
+     * 
+     * @deprecated use getSort() instead 
+     */
+    public getSorted()
+    {
+        return this.getSort()
     }
 }

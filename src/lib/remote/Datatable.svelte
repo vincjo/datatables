@@ -15,12 +15,9 @@
 
     const height = (search || rowsPerPage ? 48 : 8) + (rowCount || pagination ? 48 : 8)
 
-    const triggerChange = handler.getTriggerChange()
-    $: $triggerChange, scrollTop()
-
-    const scrollTop = () => {
+    handler.on('change', () => {
         if (element) element.scrollTop = 0
-    }
+    })
 </script>
 
 <section bind:clientWidth class={$$props.class ?? ''}>
