@@ -129,5 +129,5 @@ isAllSelected(): Readable<boolean>
 ```
 
 ```ts
-on(event: 'change' | 'clearFilters' | 'clearSearch', callback: Function): void
+on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
 ```
