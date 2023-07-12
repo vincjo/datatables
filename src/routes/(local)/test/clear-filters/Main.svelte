@@ -5,17 +5,9 @@
     const handler = new DataHandler(myData, { rowsPerPage: 10 })
     const rows = handler.getRows()
     const filterCount = handler.getFilterCount()
-
-    
-    let triggerClearFilters = 0
-
-    const clearFilters = () => {
-        handler.clearFilters()
-        triggerClearFilters = triggerClearFilters + 1
-    }
 </script>
 
-<button on:click={clearFilters}>Remove Filters : {$filterCount}</button>
+<button on:click={() => handler.clearFilters()}>Clear filters ({$filterCount})</button>
 
 <section>
     <Datatable {handler}>
@@ -28,9 +20,9 @@
 
                 </tr>
                 <tr>
-                    <ThFilter {handler} {triggerClearFilters} filterBy="first_name"/>
-                    <ThFilter {handler} {triggerClearFilters} filterBy="last_name" />
-                    <ThFilter {handler} {triggerClearFilters} filterBy="email"/>
+                    <ThFilter {handler} filterBy="first_name"/>
+                    <ThFilter {handler} filterBy="last_name" />
+                    <ThFilter {handler} filterBy="email"/>
                 </tr>
             </thead>
             <tbody>
