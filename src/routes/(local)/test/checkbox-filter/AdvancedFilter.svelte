@@ -1,12 +1,10 @@
 <script lang="ts">
     import type { DataHandler } from '$lib/local'
-    import { check } from '$lib'
     export let handler: DataHandler
     export let filterBy: string
     let filter_0 = false
     let filter_1 = false
 
-    // console.log(handler.getDistinctValues())
     const setFilter = () => {
         if (filter_0 && filter_1 === false) {
             return handler.filter(0, filterBy)
