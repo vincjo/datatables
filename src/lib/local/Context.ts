@@ -1,5 +1,6 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store'
 import type { Filter, Order, Selectable, Comparator } from '$lib/local'
+import { isNull } from './utils'
 import type { Params }  from '$lib/local/DataHandler'
 import { check } from './Comparator'
 import EventHandler from './handlers/EventHandler'
@@ -15,7 +16,7 @@ export default class Context<Row>
     public filterCount          : Readable<number>
     public rawRows              : Writable<Row[]>
     public filteredRows         : Readable<Row[]>
-    public rows                 : Readable<Row[]>
+    public pagedRows            : Readable<Row[]>
     public rowCount             : Readable<{ total: number, start: number, end: number }>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
@@ -35,7 +36,7 @@ export default class Context<Row>
         this.filterCount         = this.createFilterCount()
         this.rawRows             = writable(data)
         this.filteredRows        = this.createFilteredRows()
-        this.rows                = this.createPaginatedRows()
+        this.pagedRows           = this.createPagedRows()
         this.rowCount            = this.createRowCount()
         this.pages               = this.createPages()
         this.pagesWithEllipsis   = this.createPagesWithEllipsis()
@@ -72,7 +73,6 @@ export default class Context<Row>
                     $filters.forEach((filter) => {
                         return ($rawRows = $rawRows.filter((row) => {
                             const entry = filter.filterBy(row)
-                            if (!filter.value) return true
                             return this.matches(entry, filter.value, filter.check)
                         }))
                     })
@@ -87,6 +87,9 @@ export default class Context<Row>
 
     private matches(entry: Row[keyof Row], value: string|number|boolean|symbol, compare: Comparator<Row> = null) 
     {
+        if (isNull(value)) {
+            return true
+        }
         if (!entry && compare) {
             return compare(entry, value)
         }
@@ -100,7 +103,7 @@ export default class Context<Row>
         return compare(entry, value)
     }
 
-    private createPaginatedRows()
+    private createPagedRows()
     {
         return derived(
             [this.filteredRows, this.rowsPerPage, this.pageNumber],
@@ -123,7 +126,6 @@ export default class Context<Row>
             [this.filteredRows, this.pageNumber, this.rowsPerPage],
             ([$filteredRows, $pageNumber, $rowsPerPage]) => {
                 const total = $filteredRows.length
-
                 if (!$rowsPerPage) {
                     return { total: total, start: 1, end: total }
                 }
@@ -191,9 +193,9 @@ export default class Context<Row>
     private createIsAllSelected()
     {
         return derived(
-            [this.selected, this.rows, this.filteredRows],
-            ([$selected, $rows, $filteredRows]) => {
-                const rowCount = this.selectScope === 'currentPage' ? $rows.length : $filteredRows.length
+            [this.selected, this.pagedRows, this.filteredRows],
+            ([$selected, $pagedRows, $filteredRows]) => {
+                const rowCount = this.selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
                 if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }

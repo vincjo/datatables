@@ -3,9 +3,9 @@ import * as fs from 'fs'
 export const load = async () => {
     const path = './src/routes/(local)/test'
     const lib = './src/lib/local'
-    const page = 'filter'
+    const page = 'checkbox-filter'
     return {
-        dataset: fs.readFileSync(`./src/site/data/pokedex.ts`).toString('utf-8'),
+        dataset: fs.readFileSync(`./src/site/data/test.ts`).toString('utf-8'),
         components: [
             {
                 name: 'Main.svelte',

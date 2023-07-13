@@ -39,7 +39,7 @@ export default class DataHandler<T extends Row = any>
 
     public getRows(): Readable<T[]>
     {
-        return this.context.rows
+        return this.context.pagedRows
     }
 
     public getAllRows(): Readable<T[]>
@@ -49,7 +49,7 @@ export default class DataHandler<T extends Row = any>
 
     public select(value: Selectable<T>)
     {
-        this.selectHandler.select(value)
+        this.selectHandler.set(value)
     }
 
     public getSelected()
@@ -60,7 +60,7 @@ export default class DataHandler<T extends Row = any>
     public selectAll(params: { selectBy?: keyof T; scope?: 'all' | 'currentPage' } = {}): void
     {
         this.context.selectScope = params.scope ?? 'all'
-        this.selectHandler.selectAll(params.selectBy ?? null)
+        this.selectHandler.all(params.selectBy ?? null)
     }
 
     public isAllSelected(): Readable<boolean>
@@ -126,9 +126,14 @@ export default class DataHandler<T extends Row = any>
         this.searchHandler.remove()
     }
 
-    public filter( value: string, filterBy: FilterBy<T>, comparator: Comparator<T> = null )
+    public filter( value: string | number | null | undefined | boolean, filterBy: FilterBy<T>, comparator: Comparator<T> = null )
     {
-        this.filterHandler.set(value as string | number, filterBy, comparator)
+        this.filterHandler.set(value, filterBy, comparator)
+    }
+
+    public getDistinctValues(filterBy: string )
+    {
+        return this.filterHandler.distinct(filterBy)
     }
 
     public getFilterCount(): Readable<number>

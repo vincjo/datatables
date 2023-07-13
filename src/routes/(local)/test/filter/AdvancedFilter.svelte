@@ -4,7 +4,6 @@
     export let filterBy
     let value = null
     const filter = () => {
-        console.log('compare')
         handler.filter(value, filterBy, check[comparator])
     }
     let comparator = 'isGreaterThan'

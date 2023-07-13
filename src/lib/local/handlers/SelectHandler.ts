@@ -7,7 +7,7 @@ import { type Writable, type Readable, get } from 'svelte/store'
 export default class SelectHandler<Row> 
 {
     private filteredRows    : Readable<Row[]>
-    private rows            : Readable<Row[]>
+    private pagedRows       : Readable<Row[]>
     private selected        : Writable<Selectable<Row>[]>
     private scope           : 'currentPage' | 'all'
     private isAllSelected   : Readable<boolean>
@@ -15,13 +15,13 @@ export default class SelectHandler<Row>
     constructor(context: Context<Row>) 
     {
         this.filteredRows   = context.filteredRows
-        this.rows           = context.rows
+        this.pagedRows      = context.pagedRows
         this.selected       = context.selected
         this.scope          = context.selectScope
         this.isAllSelected  = context.isAllSelected
     }
 
-    public select(value: Selectable<Row>) 
+    public set(value: Selectable<Row>) 
     {
         const selected = get(this.selected)
         if (selected.includes(value)) {
@@ -31,13 +31,13 @@ export default class SelectHandler<Row>
         }
     }
 
-    public selectAll(selectBy: keyof Row = null) 
+    public all(selectBy: keyof Row = null) 
     {
         const isAllSelected = get(this.isAllSelected)
         if (isAllSelected) {
-            return this.unselectAll()
+            return this.remove()
         }
-        const rows = this.scope === 'currentPage' ? get(this.rows) : get(this.filteredRows)
+        const rows = this.scope === 'currentPage' ? get(this.pagedRows) : get(this.filteredRows)
 
         if (selectBy) {
             this.selected.set(
@@ -50,7 +50,7 @@ export default class SelectHandler<Row>
         }
     }
 
-    public unselectAll() 
+    public remove() 
     {
         this.selected.set([])
     }
