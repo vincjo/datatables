@@ -1,7 +1,7 @@
 <script lang="ts">
     import myData from '$site/data/data'
     import { DataHandler, Datatable, Th, ThFilter } from '$lib'
-    import AdvancedFilter from './AdvancedFilter.svelte'
+    import CheckboxFilter from './CheckboxFilter.svelte'
 
     const handler = new DataHandler(myData, { rowsPerPage: 10 })
     const rows = handler.getRows()
@@ -20,7 +20,7 @@
                 <ThFilter {handler} filterBy="first_name" />
                 <ThFilter {handler} filterBy="last_name" />
                 <ThFilter {handler} filterBy="email" />
-                <AdvancedFilter {handler} filterBy="id" />
+                <CheckboxFilter {handler} filterBy="id" />
             </tr>
         </thead>
         <tbody>

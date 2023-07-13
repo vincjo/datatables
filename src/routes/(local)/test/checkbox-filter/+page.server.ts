@@ -20,8 +20,8 @@ export const load = async () => {
                         code: fs.readFileSync(`${lib}/ThFilter.svelte`).toString('utf-8')
                     },
                     {
-                        name: 'AdvancedFilter.svelte',
-                        code: fs.readFileSync(`${path}/${page}/AdvancedFilter.svelte`).toString('utf-8')
+                        name: 'CheckboxFilter.svelte',
+                        code: fs.readFileSync(`${path}/${page}/CheckboxFilter.svelte`).toString('utf-8')
                     },
                     {
                         name: 'Datatable.svelte',
