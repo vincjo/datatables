@@ -39,11 +39,7 @@ export default class SelectHandler<Row>
         const rows = this.scope === 'currentPage' ? get(this.pagedRows) : get(this.filteredRows)
 
         if (selectBy) {
-            this.selected.set(
-                rows.map((row) => {
-                    return row[selectBy]
-                })
-            )
+            this.selected.set( rows.map((row) => row[selectBy]) )
         } else {
             this.selected.set(rows)
         }

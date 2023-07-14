@@ -4,6 +4,8 @@ import type Context from '$lib/local/Context'
 import type { Writable } from 'svelte/store'
 import { parseField } from '$lib/local/utils'
 
+type Value = string | number | null | undefined | boolean
+
 export default class FilterHandler<Row>
 {
     protected filters: Writable<Filter<Row>[]>
@@ -15,7 +17,7 @@ export default class FilterHandler<Row>
         this.event   = context.event
     }
 
-    public set(value: string | number | null | undefined | boolean, filterBy: Field<Row>, comparator: Comparator<Row> = null )
+    public set(value: Value, filterBy: Field<Row>, comparator: Comparator<Row> = null )
     {
         const { callback, identifier } = parseField(filterBy)
         const filter = { value, identifier, callback, comparator }

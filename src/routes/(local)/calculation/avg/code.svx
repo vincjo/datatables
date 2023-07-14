@@ -1,0 +1,43 @@
+
+
+### Basic usage
+
+````svelte
+<script lang="ts">
+    import type { Datahandler } from '@vincjo/datatables'
+    export let handler: DataHandler
+
+    const avg = handler.createCalculation(columnName).avg()
+</script>
+
+<h1>Average: {$avg}</h1>
+````
+
+
+### Avanced
+
+````svelte
+<script lang="ts">
+    import type { Datahandler } from '@vincjo/datatables'
+    export let handler: DataHandler
+
+    // calc area from 'width' and 'height' properties
+    const calc = handler.createCalculation((row) => row.width * row.height)
+
+    // set the number of decimal (default = 2)
+    calc.setPrecision(4)
+
+    // unit pre-conversion 
+    const avg = calc.avg((values) => values / 100)
+</script>
+
+<h1>Average area: {$avg}</h1>
+````
+
+# examples coming soon
+
+<style>
+    pre {
+        max-width: 800px;
+    }
+</style>    

@@ -1,11 +1,10 @@
 import type { Field } from '$lib/local'
 import type Context from '$lib/local/Context'
 import { type Writable, type Readable, get, derived } from 'svelte/store'
-
+import { parseField } from '$lib/local/utils' 
 
 export default class CalcultationHandler<Row>
 {
-    private field: Field<Row>
     private rawRows: Writable<Row[]>
     private filteredRows: Readable<Row[]>
     private callback: (row: Row) => Row[keyof Row]
@@ -13,10 +12,9 @@ export default class CalcultationHandler<Row>
 
     constructor(context: Context<Row>, field: Field<Row>)
     {
-        this.field          = field
         this.rawRows        = context.rawRows
         this.filteredRows   = context.filteredRows
-        this.callback       = this.parse().callback
+        this.callback       = parseField(field).callback
         this.precision      = 2
     }
 
@@ -53,24 +51,16 @@ export default class CalcultationHandler<Row>
         })
     }
 
-    private parse()
+    public setPrecistion(value: number)
     {
-        if (typeof this.field === 'string') {
-            return {
-                callback: (row: Row) => row[this.field as keyof Row],
-                identifier: this.field.toString()
-            }
-        } else if (typeof this.field === 'function') {
-            return {
-                callback: this.field,
-                identifier: this.field.toString()
-            }
-        }
-        throw new Error(`Invalid filterBy argument: ${String(this.field)}`)
+        this.precision = value
     }
 
-    public round(value: number)
+    private round(value: number)
     {
+        if (this.precision === 0) {
+            return Math.round(value)
+        }
         const denominator = Math.pow(10, this.precision)
         return Math.round( (value + Number.EPSILON) * denominator ) / denominator
     }

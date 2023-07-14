@@ -5,13 +5,15 @@ import { type Writable, writable } from 'svelte/store'
 import { check } from '$lib/local/Comparator'
 import { parseField } from '$lib/local/utils'
 
+type Value = string | number | [min: number, max: number]
+
 export default class AdvancedFilterHandler<Row>
 {
     private filters: Writable<Filter<Row>[]>
     private event: EventHandler
     private criteria: Criterion[]
     private filterBy: Field<Row>
-    private selected: Writable<(string | number | [min: number, max: number])[]>
+    private selected: Writable<Value[]>
 
     constructor(context: Context<Row>, filterBy: Field<Row>)
     {
@@ -22,7 +24,7 @@ export default class AdvancedFilterHandler<Row>
         this.event      = context.event
     }
 
-    public set(value: string | number | [min: number, max: number], comparator: Comparator<any> = check.contains)
+    public set(value: Value, comparator: Comparator<any> = check.contains)
     {
         if (this.criteria.find(criterion => criterion.value === value)) {
             this.criteria = this.criteria.filter(criterion => criterion.value !== value)

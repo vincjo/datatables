@@ -15,12 +15,28 @@ export default [
             { name: 'nested objects', path: '/nested-objects' },
             { name: 'blocks', path: '/blocks' },
             { name: 'row selection', path: '/row-selection' },
-            { name: 'advanced filters', path: '/advanced-filters' }
         ]
     },
     {
         name: 'reactivity',
         path: '/reactivity'
+    },
+    {
+        name: 'filters',
+        path: '/advanced-filters',
+        pages: [
+            { name: 'comparators', path: '/comparators' },
+            { name: 'multiple criteria', path: '/multiple-criteria' }
+        ]
+    },
+    {
+        name: 'calculation',
+        path: '/calculation',
+        pages: [
+            { name: 'sum', path: '/sum' },
+            { name: 'average', path: '/avg' },
+            { name: 'distinct', path: '/distinct' },
+        ]
     },
     {
         name: 'api',

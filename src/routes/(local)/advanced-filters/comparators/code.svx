@@ -17,11 +17,11 @@
 
 <br><br>
 
-## Available comparison functions in `'check'` object: 
+### Available comparison functions in `'check'` object: 
 <Comparators/>
 
 
-## Custom comparison
+### Custom comparison
 
 ````svelte
 <script lang="ts">

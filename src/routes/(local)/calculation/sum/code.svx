@@ -1,0 +1,43 @@
+
+
+### Basic usage
+
+````svelte
+<script lang="ts">
+    import type { Datahandler } from '@vincjo/datatables'
+    export let handler: DataHandler
+
+    const sum = handler.createCalculation(columnName).sum()
+</script>
+
+<h1>Total: {$sum}</h1>
+````
+
+
+### Avanced
+
+````svelte
+<script lang="ts">
+    import type { Datahandler } from '@vincjo/datatables'
+    export let handler: DataHandler
+
+    // calc area from width and height properties
+    const calc = handler.createCalculation((row) => row.width * row.height)
+
+    // set the number of decimal
+    calc.setPrecision(4)
+
+    // unit pre-conversion 
+    const sum = calc.sum((values) => values / 100)
+</script>
+
+<h1>Total area: {$sum}</h1>
+````
+
+# examples coming soon
+
+<style>
+    pre {
+        max-width: 800px;
+    }
+</style>    

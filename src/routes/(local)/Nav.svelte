@@ -63,6 +63,7 @@
         z-index: 1;
         padding: 24px 0 0 24px;
         overflow-y: auto;
+        padding-bottom: 40px;
     }
 
     article {
