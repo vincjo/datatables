@@ -1,7 +1,7 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store'
-import type { Filter, Order, Selectable, Comparator } from '$lib/local'
-import { isNull } from './utils'
+import type { Filter, Sort, Comparator, Criterion } from '$lib/local'
 import type { Params }  from '$lib/local/DataHandler'
+import { isNull } from './utils'
 import { check } from './Comparator'
 import EventHandler from './handlers/EventHandler'
 
@@ -21,8 +21,8 @@ export default class Context<Row>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
-    public sort                 : Writable<(Order<Row>)>
-    public selected             : Writable<Selectable<Row>[]>
+    public sort                 : Writable<(Sort<Row>)>
+    public selected             : Writable<(Row | Row[keyof Row])[]>
     public selectScope          : 'all' | 'currentPage'
     public isAllSelected        : Readable<boolean>
 
@@ -61,7 +61,7 @@ export default class Context<Row>
                     $rawRows = $rawRows.filter((row) => {
                         const scope = $search.scope ?? Object.keys(row)
                         return scope.some((key) => {
-                            return this.matches(row[key], $search.value)
+                            return this.match(row[key], $search.value)
                         })
                     })
                     this.pageNumber.set(1)
@@ -72,8 +72,8 @@ export default class Context<Row>
                 if ($filters.length > 0) {
                     $filters.forEach((filter) => {
                         return ($rawRows = $rawRows.filter((row) => {
-                            const entry = filter.filterBy(row)
-                            return this.matches(entry, filter.value, filter.check)
+                            const entry = filter.callback(row)
+                            return this.match(entry, filter.value, filter.comparator)
                         }))
                     })
                     this.pageNumber.set(1)
@@ -85,7 +85,7 @@ export default class Context<Row>
         )
     }
 
-    private matches(entry: Row[keyof Row], value: string|number|boolean|symbol, compare: Comparator<Row> = null) 
+    private match(entry: Row[keyof Row], value: string|number|boolean|symbol|Criterion[], compare: Comparator<Row> = null) 
     {
         if (isNull(value)) {
             return true
@@ -96,7 +96,7 @@ export default class Context<Row>
         if (!entry) return check.contains(entry, value)
         else if (typeof entry === 'object') {
             return Object.keys(entry).some((k) => {
-                return this.matches(entry[k], value, compare)
+                return this.match(entry[k], value, compare)
             })
         }
         if (!compare) return check.contains(entry, value)

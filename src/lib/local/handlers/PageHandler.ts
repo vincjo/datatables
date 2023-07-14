@@ -1,6 +1,6 @@
 import type Context from '$lib/local/Context'
 import { type Writable, type Readable, get } from 'svelte/store'
-import type EventHandler from './EventHandler'
+import type { EventHandler } from '$lib/local'
 
 export default class PageHandler<Row> 
 {

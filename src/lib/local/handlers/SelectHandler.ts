@@ -1,5 +1,4 @@
 import type Context from '$lib/local/Context'
-import type { Selectable } from '$lib/local'
 import { type Writable, type Readable, get } from 'svelte/store'
 
 
@@ -8,7 +7,7 @@ export default class SelectHandler<Row>
 {
     private filteredRows    : Readable<Row[]>
     private pagedRows       : Readable<Row[]>
-    private selected        : Writable<Selectable<Row>[]>
+    private selected        : Writable<(Row | Row[keyof Row])[]>
     private scope           : 'currentPage' | 'all'
     private isAllSelected   : Readable<boolean>
 
@@ -21,7 +20,7 @@ export default class SelectHandler<Row>
         this.isAllSelected  = context.isAllSelected
     }
 
-    public set(value: Selectable<Row>) 
+    public set(value: Row[keyof Row] | Row) 
     {
         const selected = get(this.selected)
         if (selected.includes(value)) {

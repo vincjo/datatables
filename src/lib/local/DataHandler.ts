@@ -1,12 +1,15 @@
-import Context          from './Context'
-import SortHandler      from './handlers/SortHandler'
-import SelectHandler    from './handlers/SelectHandler'
-import PageHandler      from './handlers/PageHandler'
-import SearchHandler    from './handlers/SearchHandler'
-import FilterHandler    from './handlers/FilterHandler'
+import Context                  from './Context'
+import SortHandler              from './handlers/SortHandler'
+import SelectHandler            from './handlers/SelectHandler'
+import PageHandler              from './handlers/PageHandler'
+import SearchHandler            from './handlers/SearchHandler'
+import FilterHandler            from './handlers/FilterHandler'
+
+import AdvancedFilterHelper     from './helpers/AdvancedFilterHelper'
+import CalculationHelper        from './helpers/CalculationHelper'
 
 import type { Readable, Writable } from 'svelte/store'
-import type { Internationalization, Row, Comparator, FilterBy, Selectable, OrderBy } from '$lib/local'
+import type { Internationalization, Row, Field, Comparator } from '$lib/local'
 
 export type Params = { rowsPerPage?: number, i18n?: Internationalization }
 
@@ -47,7 +50,7 @@ export default class DataHandler<T extends Row = any>
         return this.context.filteredRows
     }
 
-    public select(value: Selectable<T>)
+    public select(value: T | T[keyof T])
     {
         this.selectHandler.set(value)
     }
@@ -78,24 +81,24 @@ export default class DataHandler<T extends Row = any>
         return this.context.rowsPerPage
     }
 
-    public sort(orderBy: OrderBy<T>)
+    public sort(orderBy: Field<T>)
     {
         this.setPage(1)
         this.sortHandler.set(orderBy)
     }
 
-    public applySort( params: { orderBy: OrderBy<T>, direction?: 'asc' | 'desc' } = null )
+    public applySort( params: { orderBy: Field<T>, direction?: 'asc' | 'desc' } = null )
     {
         this.sortHandler.apply(params)
     }
 
-    public sortAsc(orderBy: OrderBy<T>)
+    public sortAsc(orderBy: Field<T>)
     {
         this.setPage(1)
         this.sortHandler.asc(orderBy)
     }
 
-    public sortDesc(orderBy: OrderBy<T>)
+    public sortDesc(orderBy: Field<T>)
     {
         this.setPage(1)
         this.sortHandler.desc(orderBy)
@@ -111,7 +114,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.remove()
     }
 
-    public defineSort(orderBy: OrderBy<T>, direction?: 'asc' | 'desc')
+    public defineSort(orderBy: Field<T>, direction?: 'asc' | 'desc')
     {
         this.sortHandler.define(orderBy, direction)
     }
@@ -126,14 +129,14 @@ export default class DataHandler<T extends Row = any>
         this.searchHandler.remove()
     }
 
-    public filter( value: string | number | null | undefined | boolean, filterBy: FilterBy<T>, comparator: Comparator<T> = null )
+    public filter( value: string | number | null | undefined | boolean, filterBy: Field<T>, comparator: Comparator<T> = null )
     {
         this.filterHandler.set(value, filterBy, comparator)
     }
 
-    public getDistinctValues(filterBy: string )
+    public createAdvancedFilter(filterBy: Field<T>)
     {
-        return this.filterHandler.distinct(filterBy)
+        return new AdvancedFilterHelper(this.context, filterBy)
     }
 
     public getFilterCount(): Readable<number>
@@ -183,6 +186,11 @@ export default class DataHandler<T extends Row = any>
         this.context.event.add(event, callback)
     }
 
+    public createCalculation(field: Field<T> )
+    {
+        return new CalculationHelper(this.context, field)
+    }
+
     public translate(i18n: Internationalization): Internationalization
     {
         return {
@@ -225,7 +233,7 @@ export default class DataHandler<T extends Row = any>
      * @deprecated use applySort() instead
      * @since 1.11.0 2023/07/11
      */
-    public applySorting( params: { orderBy: OrderBy<T>, direction?: 'asc' | 'desc' } = null )
+    public applySorting( params: { orderBy: Field<T>, direction?: 'asc' | 'desc' } = null )
     {
         this.applySort(params)
     }

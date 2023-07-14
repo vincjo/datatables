@@ -1,10 +1,10 @@
 <script lang="ts">
-    import type { DataHandler, OrderBy, Row } from '$lib/local'
+    import type { DataHandler, Field, Row } from '$lib/local'
 
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
-    export let orderBy: OrderBy<T>
+    export let orderBy: Field<T>
     export let align: 'left' | 'right' | 'center' = 'left'
 
     const identifier = orderBy?.toString()

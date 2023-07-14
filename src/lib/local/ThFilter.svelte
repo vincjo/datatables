@@ -1,10 +1,10 @@
 <script lang="ts">
-    import type { DataHandler, FilterBy, Comparator, Row } from '$lib/local'
+    import type { DataHandler, Field, Comparator, Row } from '$lib/local'
 
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
-    export let filterBy: FilterBy<T>
+    export let filterBy: Field<T>
     export let align: 'left' | 'right' | 'center' = 'left'
     export let comparator: Comparator<T> = null
 

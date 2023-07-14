@@ -8,17 +8,21 @@ import RowCount     from './local/RowCount.svelte'
 import RowsPerPage  from './local/RowsPerPage.svelte'
 import Search       from './local/Search.svelte'
 import { check }    from './local/Comparator'
-import type { Internationalization, Row, FilterBy, Comparator, Filter, OrderBy, Order, Selectable } from './local'
+import type { Internationalization, Row, Field, Comparator, Filter, Sort, Selectable, Order, FilterBy, OrderBy  } from './local'
 
 export { DataHandler, check, Datatable, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search }
 
 export type  {
     Internationalization,
     Row,
-    FilterBy,
+    Field,
     Comparator,
     Filter,
-    OrderBy,
+    Sort,
+
+    // deprecated
+    Selectable,
     Order,
-    Selectable
+    OrderBy,
+    FilterBy,
 }

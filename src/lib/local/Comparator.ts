@@ -1,3 +1,5 @@
+import type { Comparator, Row } from '$lib/local'
+
 export const check = {
     contains: (entry: any, value: any) => {
         return stringify(entry).indexOf(stringify(value)) > -1
@@ -47,20 +49,31 @@ export const check = {
         return entry > min && entry < max
     },
 
-    isTrue: (entry: boolean, value = 'boolean') => {
+    isTrue: (entry: boolean, _: any) => {
         return entry === true
     },
 
-    isFalse: (entry: boolean, value = 'boolean') => {
+    isFalse: (entry: boolean, _: any) => {
         return entry === false
     },
 
-    isNull: (entry: null, value = 'null') => {
+    isNull: (entry: null, _: any) => {
         return entry === null || entry === undefined
     },
 
-    isNotNull: (entry: any, value = 'null') => {
+    isNotNull: (entry: any, _: any) => {
         return entry === null || entry === undefined ? false : true
+    },
+
+    whereIn: (entry: any, values: { value: any, comparator: Comparator<Row> }[] = []) => {
+        if (isNull(entry)) return false
+        if (values.length === 0) return false
+        for(const { value, comparator } of values) {
+            if (comparator(entry, value)) {
+                return true
+            }
+        }
+        return false
     }
 }
 

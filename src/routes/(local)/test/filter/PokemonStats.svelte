@@ -4,21 +4,22 @@
 
 <section class="flex">
     {#each stats as stat}
+        {@const [name, value] = stat}
         <aside class="flex">
             <span 
                 class="value" 
-                class:good={stat.value >= 100} 
-                class:bad={stat.value <= 50}
+                class:good={value >= 100} 
+                class:bad={value <= 65}
             >
-                {stat.value}
+                {value}
             </span>
 
             <span 
                 class="name" 
-                class:good={stat.value >= 100} 
-                class:bad={stat.value <= 50}
+                class:good={value >= 100} 
+                class:bad={value <= 65}
             >
-                {stat.name.replace('special-attack', 'attspe').replace('special-defense', 'defspe')}
+                {name}
             </span>
         </aside>
     {/each}

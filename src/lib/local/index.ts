@@ -11,6 +11,8 @@ import { check }    from './Comparator'
 
 export { DataHandler, check, Datatable, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search }
 
+export type { default as EventHandler } from './handlers/EventHandler'
+
 export type Internationalization = {
     search?: string
     show?: string
@@ -23,24 +25,53 @@ export type Internationalization = {
 }
 
 export type Row = { [key: string]: unknown  }
+export type Field<Row> = keyof Row | ((row: Row) => Row[keyof Row])
 
-export type FilterBy<Row> = keyof Row | ((row: Row) => Row[keyof Row])
 
 export type Comparator<Row> = (entry: Row[keyof Row], value: any) => boolean
 
+export type Criterion = { value: string | number | [min: number, max: number], comparator: Comparator<Row> }
+
 export type Filter<Row> = {
-    filterBy: (row: Row) => Row[keyof Row]
+    callback: (row: Row) => Row[keyof Row]
     identifier: string
-    value?: string | number | boolean | symbol
-    check?: Comparator<Row>
+    value?: string | number | boolean | symbol | Criterion[]
+    comparator?: Comparator<Row>
 }
 
-export type OrderBy<Row>  = keyof Row | ((row: Row) => Row[keyof Row])
-
-export type Order<Row> = {
-    orderBy?: (row: Row) => Row[keyof Row]
+export type Sort<Row> = {
+    callback?: (row: Row) => Row[keyof Row]
     identifier?: string
     direction?: 'asc' | 'desc'
 }
 
+
+
+
+/**
+ * @deprecated use (Row[keyof Row] | Row) instead
+ * 
+ * import type { Row } from '@vincjo/datatables'
+ */
 export type Selectable<Row> = Row[keyof Row] | Row
+
+/**
+ * @deprecated use type Field<Row> instead
+ * 
+ * import type { Field } from '@vincjo/datatables'
+ */
+export type FilterBy<Row> = Field<Row>
+
+/**
+ * @deprecated use type Field<Row> instead
+ * 
+ * import type { Field } from '@vincjo/datatables'
+ */
+export type OrderBy<Row>  = Field<Row>
+
+/**
+ * @deprecated use type Sort<Row> instead
+ * 
+ * import type { Sort } from '@vincjo/datatables'
+ */
+export type Order<Row>  = Sort<Row>
