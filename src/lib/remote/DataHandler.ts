@@ -61,7 +61,7 @@ export default class DataHandler<T extends Row = any>
 
     public select(value: Selectable<T>)
     {
-        this.selectHandler.select(value)
+        this.selectHandler.set(value)
     }
 
     public getSelected()
@@ -71,7 +71,7 @@ export default class DataHandler<T extends Row = any>
 
     public selectAll(selectBy: keyof T = null): void
     {
-        this.selectHandler.selectAll(selectBy)
+        this.selectHandler.all(selectBy)
     }
 
     public isAllSelected(): Readable<boolean>
@@ -123,10 +123,10 @@ export default class DataHandler<T extends Row = any>
         this.searchHandler.remove()
     }
 
-    public filter(value: string, filterBy: keyof T)
+    public filter(value: string | number, filterBy: keyof T)
     {
         this.setPage(1)
-        return this.filterHandler.set(value as string | number, filterBy)
+        return this.filterHandler.set(value, filterBy)
     }
 
     public clearFilters(): void

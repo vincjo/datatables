@@ -17,7 +17,7 @@ export default class SelectHandler<Row>
         this.isAllSelected  = context.isAllSelected
     }
 
-    public select(value: Selectable<Row>) 
+    public set(value: Selectable<Row>) 
     {
         const selected = get(this.selected)
         if (selected.includes(value)) {
@@ -27,11 +27,11 @@ export default class SelectHandler<Row>
         }
     }
 
-    public selectAll(selectBy: keyof Row = null) 
+    public all(selectBy: keyof Row = null) 
     {
         const isAllSelected = get(this.isAllSelected)
         if (isAllSelected) {
-            return this.unselectAll()
+            return this.remove()
         }
         const rows = get(this.rows)
 
@@ -46,7 +46,7 @@ export default class SelectHandler<Row>
         }
     }
 
-    public unselectAll() 
+    public remove() 
     {
         this.selected.set([])
     }
