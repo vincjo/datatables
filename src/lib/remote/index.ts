@@ -42,7 +42,11 @@ export type State = {
     sort: Order<Row> | undefined
     filters: Filter<Row>[] | undefined
     setTotalRows: (value: number) => void
-    /* @deprecated 'sorted': use 'sort' instead */
+
+
+    /**
+     * @deprecated use 'sort' instead
+     */
     sorted: Order<Row> | undefined
 }
 

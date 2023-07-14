@@ -8,15 +8,15 @@ export const reload = async (state: State) => {
     return response.json()
 }
 
-const getParams = ({ pageNumber, rowsPerPage, sorted }: State) => {
+const getParams = ({ pageNumber, rowsPerPage, sort }: State) => {
 
     let params = `_page=${pageNumber}`
 
     if (rowsPerPage) {
         params += `&_limit=${rowsPerPage}`
     }
-    if (sorted) {
-        params += `&_sort=${sorted.orderBy}&_order=${sorted.direction}`
+    if (sort) {
+        params += `&_sort=${sort.orderBy}&_order=${sort.direction}`
     }
 
     return params
