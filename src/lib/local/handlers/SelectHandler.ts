@@ -34,7 +34,7 @@ export default class SelectHandler<Row>
     {
         const isAllSelected = get(this.isAllSelected)
         if (isAllSelected) {
-            return this.remove()
+            return this.clear()
         }
         const rows = this.scope === 'currentPage' ? get(this.pagedRows) : get(this.filteredRows)
 
@@ -45,7 +45,7 @@ export default class SelectHandler<Row>
         }
     }
 
-    public remove() 
+    public clear() 
     {
         this.selected.set([])
     }

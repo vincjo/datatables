@@ -10,12 +10,12 @@ export default class CalcultationHandler<Row>
     private callback: (row: Row) => Row[keyof Row]
     private precision: number
 
-    constructor(context: Context<Row>, field: Field<Row>)
+    constructor(context: Context<Row>, field: Field<Row>, param: { precision: number })
     {
         this.rawRows        = context.rawRows
         this.filteredRows   = context.filteredRows
         this.callback       = parseField(field).callback
-        this.precision      = 2
+        this.precision      = param.precision
     }
 
     public distinct(callback: (values: any[]) => any[] = null)
@@ -51,7 +51,7 @@ export default class CalcultationHandler<Row>
         })
     }
 
-    public setPrecistion(value: number)
+    public setPrecision(value: number)
     {
         this.precision = value
     }

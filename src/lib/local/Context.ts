@@ -1,7 +1,7 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store'
-import type { Filter, Sort, Comparator, Criterion } from '$lib/local'
+import type { Filter, Sort, Comparator, Criterion, Field } from '$lib/local'
 import type { Params }  from '$lib/local/DataHandler'
-import { isNull } from './utils'
+import { isNull, parseField } from './utils'
 import { check } from './Comparator'
 import EventHandler from './handlers/EventHandler'
 
@@ -59,9 +59,13 @@ export default class Context<Row>
             ([$rawRows, $search, $filters]) => {
                 if ($search.value) {
                     $rawRows = $rawRows.filter((row) => {
-                        const scope = $search.scope ?? Object.keys(row)
-                        return scope.some((key) => {
-                            return this.match(row[key], $search.value)
+                        const fields = $search.scope ?? Object.keys(row) as Field<Row>[]
+                        const scope = fields.map((field: Field<Row>) => {
+                            const { callback } = parseField(field)
+                            return callback
+                        })
+                        return scope.some((callback) => {
+                            return this.match(callback(row), $search.value)
                         })
                     })
                     this.pageNumber.set(1)

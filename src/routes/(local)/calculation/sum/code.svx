@@ -1,4 +1,7 @@
-
+<script>
+    import Basic from './Basic.svelte'
+    import Advanced from './Advanced.svelte'
+</script>
 
 ### Basic usage
 
@@ -7,11 +10,13 @@
     import type { Datahandler } from '@vincjo/datatables'
     export let handler: DataHandler
 
-    const sum = handler.createCalculation(columnName).sum()
+    const sum = handler.createCalculation('columnName').sum()
 </script>
 
 <h1>Total: {$sum}</h1>
 ````
+
+<Basic/>
 
 
 ### Avanced
@@ -21,20 +26,20 @@
     import type { Datahandler } from '@vincjo/datatables'
     export let handler: DataHandler
 
-    // calc area from width and height properties
-    const calc = handler.createCalculation((row) => row.width * row.height)
+    // calc area from 'width' and 'length' properties
+    const calc = handler.createCalculation((row) => row.width * row['length'])
 
-    // set the number of decimal
-    calc.setPrecision(4)
+    // set the number of decimal (default = 2)
+    calc.setPrecision(3)
 
-    // unit pre-conversion 
-    const sum = calc.sum((values) => values / 100)
+    // conversion to yd²
+    const sum = calc.sum((values) => values.map((value: number) => value *  1.196))
 </script>
 
-<h1>Total area: {$sum}</h1>
+<h1>Total area: {$sum} yd²</h1>
 ````
 
-# examples coming soon
+<Advanced/>
 
 <style>
     pre {

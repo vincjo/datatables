@@ -27,7 +27,7 @@
         {@const { value, count } = type}
         <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
             <i class="micon">
-                {$selected.includes(value) ? 'check' : 'check_box_outline_blank'}
+                {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
             </i>
             <span>{value}</span>
             <code>{count}</code>

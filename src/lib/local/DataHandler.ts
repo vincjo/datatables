@@ -21,7 +21,7 @@ export default class DataHandler<T extends Row = any>
     private pageHandler     : PageHandler<T>
     private searchHandler   : SearchHandler<T>
     private filterHandler   : FilterHandler<T>
-    public i18n             : Internationalization
+    public  i18n            : Internationalization
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: null })
     {
@@ -43,11 +43,6 @@ export default class DataHandler<T extends Row = any>
     public getRows(): Readable<T[]>
     {
         return this.context.pagedRows
-    }
-
-    public getAllRows(): Readable<T[]>
-    {
-        return this.context.filteredRows
     }
 
     public select(value: T | T[keyof T])
@@ -111,7 +106,7 @@ export default class DataHandler<T extends Row = any>
 
     public clearSort()
     {
-        this.sortHandler.remove()
+        this.sortHandler.clear()
     }
 
     public defineSort(orderBy: Field<T>, direction?: 'asc' | 'desc')
@@ -119,7 +114,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.define(orderBy, direction)
     }
 
-    public search(value: string, scope: (keyof T)[] = null)
+    public search(value: string, scope: Field<T>[] = null)
     {
         this.searchHandler.set(value, scope)
     }
@@ -146,7 +141,7 @@ export default class DataHandler<T extends Row = any>
 
     public clearFilters(): void
     {
-        this.filterHandler.remove()
+        this.filterHandler.clear()
     }
 
     public getPages(param = { ellipsis: false }): Readable<number[]>
@@ -186,9 +181,9 @@ export default class DataHandler<T extends Row = any>
         this.context.event.add(event, callback)
     }
 
-    public createCalculation(field: Field<T> )
+    public createCalculation(field: Field<T>, param: { precision: number } = null)
     {
-        return new CalculationHelper(this.context, field)
+        return new CalculationHelper(this.context, field, { precision: param?.precision ?? 2 })
     }
 
     public translate(i18n: Internationalization): Internationalization
@@ -212,12 +207,8 @@ export default class DataHandler<T extends Row = any>
 
 
     /**
-     * Deprecated
-     */
-
-    /**
      * @deprecated use setRows() instead
-     * @since 1.0.0 2023/02/12
+     * @since v0.9.99 2023-01-16
      */
     public update(data: any[]): void
     {
@@ -231,7 +222,7 @@ export default class DataHandler<T extends Row = any>
 
     /**
      * @deprecated use applySort() instead
-     * @since 1.11.0 2023/07/11
+     * @since v1.11.0 2023-07-11
      */
     public applySorting( params: { orderBy: Field<T>, direction?: 'asc' | 'desc' } = null )
     {
@@ -240,7 +231,7 @@ export default class DataHandler<T extends Row = any>
 
     /**
      * @deprecated use getSort() instead
-     * @since 1.11.0 2023/07/11
+     * @since v1.11.0 2023-07-11
      */
     public getSorted()
     {

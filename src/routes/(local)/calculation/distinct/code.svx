@@ -1,4 +1,6 @@
-
+<script>
+    import Basic from './Basic.svelte'
+</script>
 
 ### Basic usage
 
@@ -17,6 +19,7 @@
     {/each}
 </ul>
 ````
+<Basic/>
 
 
 ### Avanced
@@ -44,8 +47,6 @@
     {/each}
 </ul>
 ````
-
-# examples coming soon
 
 <style>
     pre {

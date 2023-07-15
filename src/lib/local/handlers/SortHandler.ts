@@ -5,17 +5,17 @@ import { parseField } from '$lib/local/utils'
 
 export default class SortHandler<Row> 
 {
-    private rawRows         : Writable<Row[]>
-    private event           : EventHandler
-    private sort            : Writable<(Sort<Row>)>
-    private backup          : Sort<Row>[]
+    private rawRows     : Writable<Row[]>
+    private event       : EventHandler
+    private sort        : Writable<(Sort<Row>)>
+    private backup      : Sort<Row>[]
 
     constructor(context: Context<Row>) 
     {
-        this.rawRows        = context.rawRows
-        this.event          = context.event
-        this.sort           = context.sort
-        this.backup         = []
+        this.rawRows    = context.rawRows
+        this.event      = context.event
+        this.sort       = context.sort
+        this.backup     = []
     }
 
     public set(orderBy: Field<Row> = null)
@@ -95,7 +95,7 @@ export default class SortHandler<Row>
         }
     }
 
-    public remove()
+    public clear()
     {
         this.backup = []
         this.sort.set({})

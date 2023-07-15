@@ -11,19 +11,32 @@
 {#if active}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <section transition:fade|global={{ duration: 200 }} on:click|self={() => (active = false)} on:keyup>
-        <Nav />
+        <nav class="thin-scrollbar">
+            <Nav />
+        </nav>
     </section>
 {/if}
 
 <style>
     section {
         position: fixed;
+        overflow-y: auto;
         z-index: 20;
         width: 100%;
         top: 0;
         left: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.6);
+    }
+    nav {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: flex-end;
+        border-right: 1px solid #e0e0e0;
+        overflow-y: auto;
     }
     button {
         position: fixed;

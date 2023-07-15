@@ -30,7 +30,7 @@ export default class FilterHandler<Row>
         })
     }
 
-    public remove()
+    public clear()
     {
         this.filters.set([])
         this.event.trigger('change')
