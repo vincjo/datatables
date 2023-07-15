@@ -18,14 +18,14 @@
             {#each $rows as row}
                 <li class="flex">
                     <span>{row.product}</span>
-                    <code>&#129689; {row.price}</code>
+                    <code>🪙 {row.price}</code>
                 </li>
             {/each}
         </ul>
     </article>
     <aside class="z-depth-2">
         <p>Total</p>
-        <code>&#129689; {$sum}</code>
+        <code>🪙 {$sum}</code>
     </aside>
 </section>  
 

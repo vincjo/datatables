@@ -18,14 +18,14 @@
             {#each $rows as row}
                 <li class="flex">
                     <span>{row.make} - {row.model} ({row.model_year ?? 'N/A'})</span>
-                    <code>&#129689; {new Intl.NumberFormat('en-US').format(row.price)}</code>
+                    <code>🪙 {new Intl.NumberFormat('en-US').format(row.price)}</code>
                 </li>
             {/each}
         </ul>
     </article>
     <aside class="z-depth-2">
         <p>Average price</p>
-        <code>&#129689; {new Intl.NumberFormat('en-US').format($avg)}</code>
+        <code>🪙 {new Intl.NumberFormat('en-US').format($avg)}</code>
     </aside>
 </section>  
 
