@@ -86,23 +86,23 @@ setRows( data: Row[] ): void
 ```
 
 ```ts
-sort( orderBy: OrderBy<Row> ): void
-sortAsc( orderBy: OrderBy<Row> ): void
-sortDesc( orderBy: OrderBy<Row> ): void
-getSort(): Writable<(Order<Row>)>
-applySort( params: { orderBy?: OrderBy<Row>, direction?: 'asc' | 'desc'} = null ): void
-defineSort( params: { orderBy?: OrderBy<Row>, direction?: 'asc' | 'desc'} = null ): void
+sort( orderBy: Field<Row> ): void
+sortAsc( orderBy: Field<Row> ): void
+sortDesc( orderBy: Field<Row> ): void
+getSort(): Writable<(Sort<Row>)>
+applySort( params: { orderBy?: Field<Row>, direction?: 'asc' | 'desc'} = null ): void
+defineSort( params: { orderBy?: Field<Row>, direction?: 'asc' | 'desc'} = null ): void
 clearSort(): void
 ```
 
 ```ts
-filter( value: string, filterBy: FilterBy<Row>, comparator: Comparator<Row> ): void
+filter( value: string, filterBy: Field<Row>, comparator: Comparator<Row> ): void
 clearFilters(): void
 getFilterCount(): Readable<number>
 ```
 
 ```ts
-search( value: string, scope?: (keyof Row)[] ): void
+search( value: string, scope?: Field<Row>[] ): void
 clearSearch(): void
 ```
 
