@@ -5,7 +5,8 @@
 
     export let handler: DataHandler<T>
     export let filterBy: Field<T>
-    export let align: 'left' | 'right' | 'center' = 'left'
+    export let numeric = false
+    export let align: 'left' | 'right' | 'center' = numeric ? 'right' : 'left'
     export let comparator: Comparator<T> = null
 
     let value: string = ''

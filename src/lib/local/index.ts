@@ -27,11 +27,6 @@ export type Internationalization = {
 export type Row = { [key: string]: unknown  }
 export type Field<Row> = keyof Row | ((row: Row) => Row[keyof Row])
 
-
-export type Comparator<Row> = (entry: Row[keyof Row], value: any) => boolean
-
-export type Criterion = { value: string | number | [min: number, max: number], comparator: Comparator<Row> }
-
 export type Filter<Row> = {
     callback: (row: Row) => Row[keyof Row]
     identifier: string
@@ -44,6 +39,10 @@ export type Sort<Row> = {
     identifier?: string
     direction?: 'asc' | 'desc'
 }
+
+export type Comparator<Row> = (entry: Row[keyof Row], value: any) => boolean
+
+export type Criterion = { value: string | number | [min: number, max: number], comparator: Comparator<Row> }
 
 
 

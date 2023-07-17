@@ -25,7 +25,7 @@ export default class DataHandler<T extends Row = any>
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: null })
     {
-        this.i18n           = this.translate(params.i18n)
+        this.translate(params.i18n)
         this.context        = new Context(data, params)
         this.sortHandler    = new SortHandler(this.context)
         this.selectHandler  = new SelectHandler(this.context)
@@ -50,7 +50,7 @@ export default class DataHandler<T extends Row = any>
         this.selectHandler.set(value)
     }
 
-    public getSelected()
+    public getSelected(): Writable<(T | T[keyof T])[]>
     {
         return this.context.selected
     }
@@ -82,11 +82,6 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.set(orderBy)
     }
 
-    public applySort( params: { orderBy: Field<T>, direction?: 'asc' | 'desc' } = null )
-    {
-        this.sortHandler.apply(params)
-    }
-
     public sortAsc(orderBy: Field<T>)
     {
         this.setPage(1)
@@ -104,9 +99,9 @@ export default class DataHandler<T extends Row = any>
         return this.context.sort
     }
 
-    public clearSort()
+    public applySort( params: { orderBy: Field<T>, direction?: 'asc' | 'desc' } = null )
     {
-        this.sortHandler.clear()
+        this.sortHandler.apply(params)
     }
 
     public defineSort(orderBy: Field<T>, direction?: 'asc' | 'desc')
@@ -114,7 +109,12 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.define(orderBy, direction)
     }
 
-    public search(value: string, scope: Field<T>[] = null)
+    public clearSort()
+    {
+        this.sortHandler.clear()
+    }
+
+    public search(value: any, scope: Field<T>[] = null)
     {
         this.searchHandler.set(value, scope)
     }
@@ -124,14 +124,9 @@ export default class DataHandler<T extends Row = any>
         this.searchHandler.remove()
     }
 
-    public filter( value: string | number | null | undefined | boolean, filterBy: Field<T>, comparator: Comparator<T> = null )
+    public filter( value: any, filterBy: Field<T>, comparator?: Comparator<T> )
     {
         this.filterHandler.set(value, filterBy, comparator)
-    }
-
-    public createAdvancedFilter(filterBy: Field<T>)
-    {
-        return new AdvancedFilterHelper(this.context, filterBy)
     }
 
     public getFilterCount(): Readable<number>
@@ -139,14 +134,19 @@ export default class DataHandler<T extends Row = any>
         return this.context.filterCount
     }
 
+    public createAdvancedFilter(filterBy: Field<T>): AdvancedFilterHelper<T>
+    {
+        return new AdvancedFilterHelper(this.context, filterBy)
+    }
+
     public clearFilters(): void
     {
         this.filterHandler.clear()
     }
 
-    public getPages(param = { ellipsis: false }): Readable<number[]>
+    public getPages(param?: { ellipsis: boolean }): Readable<number[]>
     {
-        if (param.ellipsis) {
+        if (param?.ellipsis) {
             return this.context.pagesWithEllipsis
         }
         return this.context.pages
@@ -171,24 +171,19 @@ export default class DataHandler<T extends Row = any>
         }
     }
 
-    public getTriggerChange(): Writable<number>
-    {
-        return this.context.event.triggerChange
-    }
-
     public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
     {
         this.context.event.add(event, callback)
     }
 
-    public createCalculation(field: Field<T>, param: { precision: number } = null)
+    public createCalculation(field: Field<T>, param?: { precision: number }): CalculationHelper<T>
     {
         return new CalculationHelper(this.context, field, { precision: param?.precision ?? 2 })
     }
 
-    public translate(i18n: Internationalization): Internationalization
+    public translate(i18n: Internationalization)
     {
-        return {
+        this.i18n = {
             ...{
                 search: 'Search...',
                 show: 'Show',
@@ -236,5 +231,14 @@ export default class DataHandler<T extends Row = any>
     public getSorted()
     {
         return this.getSort()
+    }
+
+    /**
+     * @deprecated use on('cahnge', callback) instead
+     * @since v1.12.0 2023-07-14
+     */
+    public getTriggerChange(): Writable<number>
+    {
+        return this.context.event.triggerChange
     }
 }
