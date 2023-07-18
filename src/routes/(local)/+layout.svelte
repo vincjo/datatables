@@ -1,4 +1,5 @@
 <script>
+    import Header from '$site/components/Header.svelte'
     import Nav from './Nav.svelte'
     import NavButton from './NavButton.svelte'
     import { afterNavigate } from '$app/navigation'
@@ -14,16 +15,16 @@
     <link rel="icon" href="/favicon.png" />
 </svelte:head>
 
+
 <NavButton />
 
 <nav>
     <Nav />
 </nav>
 <section bind:this={element}>
+    <Header/>
     <article>
-        <header />
         <slot />
-        <footer />
     </article>
 </section>
 
@@ -44,13 +45,10 @@
         bottom: 0;
         right: 0;
         width: 77vw;
-        display: flex;
-        justify-content: flex-start;
         overflow-y: auto;
-        padding: 2%;
     }
     article {
-        padding: 32px;
+        padding: 32px 24px 40px 2%;
         width: auto;
         min-height: 100vh;
         background: #fff;
@@ -78,14 +76,5 @@
             width: 100%;
             max-width: 1200px;
         }
-    }
-    header {
-        width: 100%;
-        height: 4vh;
-    }
-    footer {
-        width: 100%;
-        height: 4vh;
-        margin-top: 40px;
     }
 </style>

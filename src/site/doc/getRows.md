@@ -20,3 +20,13 @@ Returns paginated and filtered rows as a derived store
     {/each}
 </ul>
 ```
+
+## Return
+
+```ts
+$rows = [
+    { id: 1, frist_name: 'Jane', last_name: 'Doe' },
+    ...
+    { id: 150, first_name: 'John', last_name: 'Doe' }
+]
+```

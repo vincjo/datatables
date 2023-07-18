@@ -24,6 +24,9 @@
         {name}
     </h1>
     <Highlight code={declaration} fontSize="18px"/>
+
+    <br><br>
+
     {#if def.md}
         {#if def.isDeprecated}
             <span>@deprecated</span>
@@ -43,14 +46,15 @@
         text-decoration: solid line-through #e57373;
     }
     section :global(p) {
-        margin: 40px 0;
+        margin: 0;
         font-size: 18px;
         font-family: JetBrains;
         color: #424242;
     }
     section :global(h2) {
-        font-size: 24px;
+        font-size: 18px;
         font-family: JetBrains;
+        margin-top: 40px;
         color: var(--secondary);
     }
     span {

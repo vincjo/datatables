@@ -9,3 +9,8 @@
 
 <p>Show {$rowsPerPage} entries</p>
 ```
+
+## Return
+```ts
+$rowsPerPage = 10
+```

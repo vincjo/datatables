@@ -14,12 +14,12 @@
 }
 #svelte-inspector-toggle{z-index:999999 !important;}
 pre {
-    border-radius: 2px;
+    border-radius: 4px;
 }
 * {
     --color: #444;
     --label: #555;
-    --hljs: #2f2f2f;
+    --hljs: #212121;
 }
 
 .thin-scrollbar::-webkit-scrollbar {

@@ -84,10 +84,11 @@ export default class SortHandler<Row>
     public apply(params: { orderBy: Field<Row>, direction?: 'asc' | 'desc' } = null) 
     {
         if (params) {
-            switch (params.direction) {
-                case 'asc' : return this.asc(params.orderBy)
-                case 'desc': return this.desc(params.orderBy)
-                default    : return this.set(params.orderBy)
+            const { orderBy, direction } = params
+            switch (direction) {
+                case 'asc' : return this.asc(orderBy)
+                case 'desc': return this.desc(orderBy)
+                default    : return this.set(orderBy)
             }
         }
         else {
@@ -101,9 +102,10 @@ export default class SortHandler<Row>
         this.sort.set({})
     }
 
-    public define(orderBy: Field<Row>, direction: 'asc' | 'desc' = 'asc')
+    public define(params: { orderBy: Field<Row>, direction: 'asc' | 'desc' })
     {
-        if (!orderBy) return
+        const { orderBy, direction } = params
+        if (!orderBy || !direction) return
         const { identifier, callback } = parseField(orderBy)
         this.sort.set({ identifier, callback, direction })
     }

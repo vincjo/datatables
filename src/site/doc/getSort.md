@@ -2,7 +2,6 @@
 
 ## Usage
 
-
 ```svelte
 <script>
     const sort = handler.getSort()
@@ -16,4 +15,22 @@
 >
     Sort emails
 </button>
+```
+
+## Return
+
+```ts
+const $sort = {
+    identifier: 'email',
+    direction: 'desc'
+}
+
+// In case 'orderBy' is a callback, 'identifier' becomes callback.toString()
+const $sort = {
+    identifier: '(row) => row.firstname + row.lastname',
+    direction: 'asc'
+}
+
+// 'identifier' value is predictable
+const identifier = orderBy?.toString()
 ```

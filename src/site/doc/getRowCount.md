@@ -13,3 +13,14 @@
     of <b>{$rowCount.total}</b> entries
 </p>
 ```
+
+## Return
+
+```ts
+const $rowCount = {
+    start: 1,
+    end: 10,
+    total: 150
+}
+// rowsPerPage = 10, dataset has 150 rows, no filter applied
+```
