@@ -30,7 +30,7 @@
 
 <style>
     nav {
-        position: absolute;
+        position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
@@ -40,19 +40,20 @@
         border-right: 1px solid #e0e0e0;
     }
     section {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        width: 77vw;
+        width: auto;
+        min-width: 960px;
+        max-width: 1200px;
+        margin-left: 23vw;
         overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 24px 40px 2%;
     }
     article {
-        padding: 32px 24px 40px 2%;
         width: auto;
         min-height: 100vh;
         background: #fff;
         width: 100%;
+        margin: 0 40px;
     }
 
     @media (max-width: 800px) {
