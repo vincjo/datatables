@@ -8,6 +8,8 @@ export default class PageHandler<Row>
     private rowCount    : Readable<{ total: number, start: number, end: number }>
     private rowsPerPage : Writable<number | null>
     private event       : EventHandler
+    private selected    : Writable<(Row | Row[keyof Row])[]>
+    private selectScope : Writable<'all' | 'currentPage'>
 
     constructor(context: Context<Row>) 
     {
@@ -15,6 +17,8 @@ export default class PageHandler<Row>
         this.rowCount       = context.rowCount
         this.rowsPerPage    = context.rowsPerPage
         this.event          = context.event
+        this.selectScope    = context.selectScope
+        this.selected       = context.selected
     }
 
     public goto(number: number)
@@ -30,6 +34,7 @@ export default class PageHandler<Row>
             }
             return store
         })
+        this.deselect()
     }
 
     public previous()
@@ -42,5 +47,13 @@ export default class PageHandler<Row>
     {
         const number = get(this.pageNumber) + 1
         this.goto(number)
+    }
+
+    public deselect()
+    {
+        const scope = get(this.selectScope)
+        if (scope === 'currentPage') {
+            this.selected.set([])
+        }
     }
 }

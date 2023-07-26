@@ -57,7 +57,7 @@ export default class DataHandler<T extends Row = any>
 
     public selectAll(params: { selectBy?: keyof T; scope?: 'all' | 'currentPage' } = {}): void
     {
-        this.context.selectScope = params.scope ?? 'all'
+        this.context.selectScope.set(params.scope === 'currentPage' ? 'currentPage' : 'all')
         this.selectHandler.all(params.selectBy ?? null)
     }
 

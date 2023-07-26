@@ -23,7 +23,7 @@ export default class Context<Row>
     public pageCount            : Readable<number>
     public sort                 : Writable<(Sort<Row>)>
     public selected             : Writable<(Row | Row[keyof Row])[]>
-    public selectScope          : 'all' | 'currentPage'
+    public selectScope          : Writable<'all' | 'currentPage'>
     public isAllSelected        : Readable<boolean>
 
     constructor(data: Row[], params: Params) 
@@ -43,7 +43,7 @@ export default class Context<Row>
         this.pageCount           = this.createPageCount()
         this.sort                = writable({})
         this.selected            = writable([])
-        this.selectScope         = 'all'
+        this.selectScope         = writable('all')
         this.isAllSelected       = this.createIsAllSelected()
     }
 
@@ -197,9 +197,9 @@ export default class Context<Row>
     private createIsAllSelected()
     {
         return derived(
-            [this.selected, this.pagedRows, this.filteredRows],
-            ([$selected, $pagedRows, $filteredRows]) => {
-                const rowCount = this.selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
+            [this.selected, this.pagedRows, this.filteredRows, this.selectScope],
+            ([$selected, $pagedRows, $filteredRows, $selectScope]) => {
+                const rowCount = $selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
                 if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }
