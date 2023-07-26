@@ -8,7 +8,7 @@ export default class SelectHandler<Row>
     private filteredRows    : Readable<Row[]>
     private pagedRows       : Readable<Row[]>
     private selected        : Writable<(Row | Row[keyof Row])[]>
-    private scope           : 'currentPage' | 'all'
+    private scope           : Writable<'currentPage' | 'all'>
     private isAllSelected   : Readable<boolean>
 
     constructor(context: Context<Row>) 
@@ -36,7 +36,8 @@ export default class SelectHandler<Row>
         if (isAllSelected) {
             return this.clear()
         }
-        const rows = this.scope === 'currentPage' ? get(this.pagedRows) : get(this.filteredRows)
+        const scope = get(this.scope)
+        const rows = scope === 'currentPage' ? get(this.pagedRows) : get(this.filteredRows)
 
         if (selectBy) {
             this.selected.set( rows.map((row) => row[selectBy]) )

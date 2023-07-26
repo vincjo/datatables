@@ -1,4 +1,4 @@
-import { writable, derived, type Writable, type Readable } from 'svelte/store'
+import { writable, derived, type Writable, type Readable, get } from 'svelte/store'
 import type { Filter, Sort, Comparator, Criterion, Field } from '$lib/local'
 import type { Params }  from '$lib/local/DataHandler'
 import { isNull, parseField } from './utils'
@@ -23,7 +23,7 @@ export default class Context<Row>
     public pageCount            : Readable<number>
     public sort                 : Writable<(Sort<Row>)>
     public selected             : Writable<(Row | Row[keyof Row])[]>
-    public selectScope          : 'all' | 'currentPage'
+    public selectScope          : Writable<'all' | 'currentPage'>
     public isAllSelected        : Readable<boolean>
 
     constructor(data: Row[], params: Params) 
@@ -43,7 +43,7 @@ export default class Context<Row>
         this.pageCount           = this.createPageCount()
         this.sort                = writable({})
         this.selected            = writable([])
-        this.selectScope         = 'all'
+        this.selectScope         = writable('all')
         this.isAllSelected       = this.createIsAllSelected()
     }
 
@@ -196,10 +196,11 @@ export default class Context<Row>
 
     private createIsAllSelected()
     {
+        const selectScope = get(this.selectScope)
         return derived(
             [this.selected, this.pagedRows, this.filteredRows],
             ([$selected, $pagedRows, $filteredRows]) => {
-                const rowCount = this.selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
+                const rowCount = selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
                 if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }
