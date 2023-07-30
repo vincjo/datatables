@@ -1,5 +1,6 @@
 import type Context from '$lib/local/Context'
 import { type Writable, type Readable, get } from 'svelte/store'
+import type EventHandler from './EventHandler'
 
 
 
@@ -10,6 +11,7 @@ export default class SelectHandler<Row>
     private selected        : Writable<(Row | Row[keyof Row])[]>
     private scope           : Writable<'currentPage' | 'all'>
     private isAllSelected   : Readable<boolean>
+    private event           : EventHandler
 
     constructor(context: Context<Row>) 
     {
@@ -18,6 +20,7 @@ export default class SelectHandler<Row>
         this.selected       = context.selected
         this.scope          = context.selectScope
         this.isAllSelected  = context.isAllSelected
+        this.event          = context.event
     }
 
     public set(value: Row[keyof Row] | Row) 
@@ -38,6 +41,10 @@ export default class SelectHandler<Row>
         }
         const scope = get(this.scope)
         const rows = scope === 'currentPage' ? get(this.pagedRows) : get(this.filteredRows)
+
+        if (scope === 'currentPage') {
+            this.event.add('change', () => this.clear())
+        }
 
         if (selectBy) {
             this.selected.set( rows.map((row) => row[selectBy]) )

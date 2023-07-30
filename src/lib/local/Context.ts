@@ -115,7 +115,6 @@ export default class Context<Row>
                 if (!$rowsPerPage) {
                     return $filteredRows
                 }
-                this.event.trigger('change')
                 return $filteredRows.slice(
                     ($pageNumber - 1) * $rowsPerPage,
                     $pageNumber * $rowsPerPage
@@ -189,18 +188,15 @@ export default class Context<Row>
 
     private createPageCount()
     {
-        return derived(this.pages, ($pages) => {
-            return $pages.length
-        })
+        return derived(this.pages, ($pages) => $pages.length)
     }
 
     private createIsAllSelected()
     {
-        const selectScope = get(this.selectScope)
         return derived(
-            [this.selected, this.pagedRows, this.filteredRows],
-            ([$selected, $pagedRows, $filteredRows]) => {
-                const rowCount = selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
+            [this.selected, this.pagedRows, this.filteredRows, this.selectScope],
+            ([$selected, $pagedRows, $filteredRows, $selectScope]) => {
+                const rowCount = $selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
                 if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }
