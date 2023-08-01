@@ -115,7 +115,6 @@ export default class Context<Row>
                 if (!$rowsPerPage) {
                     return $filteredRows
                 }
-                this.event.trigger('change')
                 return $filteredRows.slice(
                     ($pageNumber - 1) * $rowsPerPage,
                     $pageNumber * $rowsPerPage

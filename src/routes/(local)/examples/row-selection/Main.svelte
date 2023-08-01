@@ -15,7 +15,7 @@
                 <th class="selection">
                     <input
                         type="checkbox"
-                        on:click={() => handler.selectAll({ selectBy: 'id', scope: 'currentPage' })}
+                        on:click={() => handler.selectAll({ selectBy: 'id' })}
                         checked={$isAllSelected}
                     />
                 </th>
