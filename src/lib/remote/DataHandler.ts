@@ -134,9 +134,9 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler.remove()
     }
 
-    public getPages(params = { ellipsis: false }): Readable<number[]> 
+    public getPages(param = { ellipsis: false }): Readable<number[]> 
     {
-        if (params.ellipsis) {
+        if (param.ellipsis) {
             return this.context.pagesWithEllipsis
         }
         return this.context.pages
