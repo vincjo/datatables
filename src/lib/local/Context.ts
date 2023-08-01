@@ -179,8 +179,7 @@ export default class Context<Row>
                 return [
                     firstPage,
                     ellipse,
-                    ...$pages.slice($pages.length - 5,
-                    $pages.length)
+                    ...$pages.slice($pages.length - 5, $pages.length)
                 ]
             }
         })
