@@ -116,4 +116,8 @@
     article::-webkit-scrollbar-thumb:hover {
         background: #9e9e9e;
     }
+
+    article :global(.hidden) {
+        display: none;
+    }
 </style>

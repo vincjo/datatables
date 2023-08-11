@@ -7,6 +7,8 @@ import FilterHandler            from './handlers/FilterHandler'
 
 import AdvancedFilterHelper     from './helpers/AdvancedFilterHelper'
 import CalculationHelper        from './helpers/CalculationHelper'
+import ColumnVisibilityHelper   from './helpers/ColumnVisibilityHelper'
+
 
 import type { Readable, Writable } from 'svelte/store'
 import type { Internationalization, Row, Field, Comparator } from '$lib/local'
@@ -181,6 +183,11 @@ export default class DataHandler<T extends Row = any>
         return new CalculationHelper(this.context, field, { precision: param?.precision ?? 2 })
     }
 
+    public createColumnVisibility(columns: { name: string, index: number, isVisible?: boolean }[])
+    {
+        return new ColumnVisibilityHelper(columns)
+    }
+
     public translate(i18n: Internationalization)
     {
         this.i18n = {
@@ -197,9 +204,6 @@ export default class DataHandler<T extends Row = any>
             ...i18n
         }
     }
-
-
-
 
     /**
      * @deprecated use setRows() instead
