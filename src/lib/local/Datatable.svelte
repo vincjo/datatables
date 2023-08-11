@@ -10,8 +10,8 @@
     export let rowsPerPage  = true
     export let rowCount     = true
     export let pagination   = true
-    export let header: ComponentType[] = [search ? Search : null, rowsPerPage ? RowsPerPage : null]
-    export let footer: ComponentType[] = [rowCount ? RowCount : null, pagination ? Pagination : null]
+    export let header: ComponentType[] = [search   ? Search   : null, rowsPerPage ? RowsPerPage : null]
+    export let footer: ComponentType[] = [rowCount ? RowCount : null, pagination  ? Pagination  : null]
     const hasHeader = header.filter(Boolean).length > 0
     const hasFooter = footer.filter(Boolean).length > 0
 
@@ -28,7 +28,7 @@
 
     <header class:container={hasHeader}>
         {#each header as component}
-            <svelte:component this={component} {handler} {small}/>
+            <svelte:component this={component} {handler} {small} {element}/>
         {/each}
     </header>
 
@@ -38,7 +38,7 @@
 
     <footer class:container={hasFooter}>
         {#each footer as component}
-            <svelte:component this={component} {handler} {small}/>
+            <svelte:component this={component} {handler} {small} {element}/>
         {/each}
     </footer>
 

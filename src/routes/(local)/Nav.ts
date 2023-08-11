@@ -15,6 +15,7 @@ export default [
             { name: 'nested objects', path: '/nested-objects' },
             { name: 'blocks', path: '/blocks' },
             { name: 'row selection', path: '/row-selection' },
+            { name: 'column visibility', path: '/column-visibility' },
         ]
     },
     {

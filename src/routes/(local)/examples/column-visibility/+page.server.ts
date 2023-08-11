@@ -3,7 +3,7 @@ import * as fs from 'fs'
 export const load = async () => {
     const path = './src/routes/(local)/examples'
     const lib = './src/lib/local'
-    const page = 'hide-columns'
+    const page = 'column-visibility'
     return {
         dataset: fs.readFileSync(`./src/site/data/data.ts`).toString('utf-8'),
         components: [
@@ -11,6 +11,10 @@ export const load = async () => {
                 name: 'Main.svelte',
                 code: fs.readFileSync(`${path}/${page}/Main.svelte`).toString('utf-8'),
                 components: [
+                    {
+                        name: 'ColumnVisibility.svelte',
+                        code: fs.readFileSync(`${path}/${page}/ColumnVisibility.svelte`).toString('utf-8')
+                    },
                     {
                         name: 'Th.svelte',
                         code: fs.readFileSync(`${lib}/Th.svelte`).toString('utf-8')

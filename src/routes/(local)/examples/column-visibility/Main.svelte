@@ -1,23 +1,14 @@
 <script lang="ts">
     import myData from '$site/data/data'
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/local'
-    import { onMount } from 'svelte'
+    import { DataHandler, Datatable, Th, ThFilter, Search } from '$lib/local'
+    import ColumnVisibility from './ColumnVisibility.svelte'
     const handler = new DataHandler(myData, { rowsPerPage: 10 })
     const rows = handler.getRows()
-
-    let element: HTMLElement
-
-    const columns = handler.createColumnVisibility([
-        { name: 'First Name', index: 0 },
-        { name: 'Last Name' , index: 1 }
-    ])
-    onMount(() => columns.bind(element))
 </script>
 
-<button on:click={() => columns.toggle('Last Name')}>Click me</button>
 
-<Datatable {handler}>
-    <table bind:this={element}>
+<Datatable {handler} header={[ Search, ColumnVisibility ]}>
+    <table>
         <thead>
             <tr>
                 <Th {handler} orderBy="first_name">First Name</Th>

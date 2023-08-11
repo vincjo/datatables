@@ -2,7 +2,7 @@
 import { type Writable, writable, get } from 'svelte/store'
 
 
-export default class HideableColumnHelper
+export default class ColumnVisibilityHelper
 {
     private element: HTMLElement
     private columns: Writable<{ name: string, index: number, isVisible?: boolean }[]>
@@ -21,9 +21,10 @@ export default class HideableColumnHelper
     {
         if (!this.element) return
         this.columns.update(store => {
-            let { isVisible, index } = store.find(item => item.name === name)
-            isVisible = !isVisible
-            this.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach(element => {
+            const column = store.find(item => item.name === name)
+            if (!column) return store
+            column.isVisible = !column.isVisible
+            this.element.querySelectorAll(`tr > *:nth-child(${column.index + 1})`).forEach(element => {
                 element.classList.toggle('hidden')
             })
 
