@@ -6,6 +6,8 @@ import PageHandler      from './handlers/PageHandler'
 import SearchHandler    from './handlers/SearchHandler'
 import FilterHandler    from './handlers/FilterHandler'
 
+import ColumnVisibilityHelper from './helpers/ColumnVisibilityHelper'
+
 import type { Writable, Readable } from 'svelte/store'
 import type { Internationalization, Row, State, Selectable, Order } from '$lib/remote'
 
@@ -166,9 +168,14 @@ export default class DataHandler<T extends Row = any>
         return this.context.rowCount
     }
 
-    public on(event: 'change', callback: () => void)
+    public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
     {
         this.context.event.add(event, callback)
+    }
+
+    public createColumnVisibility(columns: { name: string, index: number, isVisible?: boolean }[])
+    {
+        return new ColumnVisibilityHelper(columns)
     }
 
     public translate(i18n: Internationalization): Internationalization 

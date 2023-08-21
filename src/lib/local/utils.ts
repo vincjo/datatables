@@ -6,6 +6,13 @@ export const isNull = (value: any) => {
 }
 export const isNotNull = (value: any) => { return !isNull(value) }
 
+export const stringify = (value: any = null) => {
+    return String(value)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+}
+
 export const parseField = (field: Field<any>) => {
     const identifier = field.toString()
     if (typeof field === 'string') {

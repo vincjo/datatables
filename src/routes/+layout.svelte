@@ -1,8 +1,12 @@
 <script>
+    import Header from './Header.svelte'
     import { ModalContainer } from 'gros/modal'
 </script>
 
 
 <ModalContainer/>
-<slot/>
 
+<Header/>
+<main>
+    <slot/>
+</main>

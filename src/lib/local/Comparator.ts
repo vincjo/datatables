@@ -1,4 +1,5 @@
 import type { Comparator, Row } from '$lib/local'
+import { isNull, stringify } from './utils'
 
 export const check = {
     contains: (entry: any, value: any) => {
@@ -75,18 +76,4 @@ export const check = {
         }
         return false
     }
-}
-
-
-/* utils */
-
-function stringify(value: string | number | boolean = null) {
-    return String(value)
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-}
-
-function isNull(entry: any) {
-    if (entry === null || entry === undefined) return true
 }

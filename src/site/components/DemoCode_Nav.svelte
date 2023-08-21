@@ -86,7 +86,7 @@
         left: 0;
         bottom: 0;
         width: 200px;
-        background: #212121;
+        background: #1e1e1e;
         border: none;
         box-shadow: none;
         padding: 32px 0px;

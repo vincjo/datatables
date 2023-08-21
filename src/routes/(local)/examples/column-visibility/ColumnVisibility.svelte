@@ -4,25 +4,25 @@
     export let element: HTMLElement
     export let handler: DataHandler
 
-    const helper = handler.createColumnVisibility([
+    const visibility = handler.createColumnVisibility([
         { name: 'First Name', index: 0 },
         { name: 'Last Name', index: 1 },
-        { name: 'Email', index: 2 },
+        { name: 'Email', index: 2, isVisible: false },
     ])
-    const columns = helper.get()
+    const columns = visibility.getColumns()
 
-    $: if (element) helper.bind(element)
+    $: if (element) visibility.bind(element)
 </script>
 
 
-<Dropdown position="bottom-end">
+<Dropdown position="bottom-end" preventClosing>
     <button class="btn dd">
         <i class="micon">view_column</i>
         View
      </button>
     <aside slot="content">
         {#each $columns as column}
-            <button on:click={() => helper.toggle(column.name)} class="btn">
+            <button on:click={() => visibility.toggle(column.name)} class="btn">
                 <i class="micon">{column.isVisible ? 'check_box' : 'check_box_outline_blank'}</i>
                 {column.name}
             </button>
@@ -63,5 +63,8 @@
 
     aside button:hover {
         background: #eee;
+    }
+    aside button i {
+        color: var(--primary);
     }
 </style>
