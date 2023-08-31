@@ -90,7 +90,7 @@ export default class DataHandler<T extends Row = any>
 
     public clearSearch()
     {
-        this.searchHandler.remove()
+        this.searchHandler.clear()
     }
 
     public sort(orderBy: Field<T>)

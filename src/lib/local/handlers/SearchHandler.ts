@@ -25,7 +25,7 @@ export default class SearchHandler<Row>
         })
     }
 
-    public remove()
+    public clear()
     {
         this.search.set({ value: null, scope: null })
         this.event.trigger('change')
