@@ -5,6 +5,7 @@ import PageHandler              from './handlers/PageHandler'
 import SearchHandler            from './handlers/SearchHandler'
 import FilterHandler            from './handlers/FilterHandler'
 
+import FilterHelper             from './helpers/FilterHelper'
 import AdvancedFilterHelper     from './helpers/AdvancedFilterHelper'
 import CalculationHelper        from './helpers/CalculationHelper'
 
@@ -127,6 +128,16 @@ export default class DataHandler<T extends Row = any>
     public filter( value: string | number | null | undefined | boolean, filterBy: Field<T>, comparator: Comparator<T> = null )
     {
         this.filterHandler.set(value, filterBy, comparator)
+    }
+
+    public getFilters()
+    {
+        return this.context.filters
+    }
+
+    public createFilter( filterBy: Field<T> )
+    {
+        return new FilterHelper( this.filterHandler, filterBy )
     }
 
     public createAdvancedFilter(filterBy: Field<T>)
