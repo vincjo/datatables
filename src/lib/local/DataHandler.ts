@@ -46,27 +46,6 @@ export default class DataHandler<T extends Row = any>
         return this.context.pagedRows
     }
 
-    public select(value: T | T[keyof T])
-    {
-        this.selectHandler.set(value)
-    }
-
-    public getSelected()
-    {
-        return this.context.selected
-    }
-
-    public selectAll(params: { selectBy?: keyof T; scope?: 'all' | 'currentPage' } = {}): void
-    {
-        this.context.selectScope.set(params.scope === 'currentPage' ? 'currentPage' : 'all')
-        this.selectHandler.all(params.selectBy ?? null)
-    }
-
-    public isAllSelected(): Readable<boolean>
-    {
-        return this.context.isAllSelected
-    }
-
     public getRowCount(): Readable<{ total: number, start: number, end: number }>
     {
         return this.context.rowCount
@@ -77,15 +56,47 @@ export default class DataHandler<T extends Row = any>
         return this.context.rowsPerPage
     }
 
+    public getPages(param = { ellipsis: false }): Readable<number[]>
+    {
+        if (param.ellipsis) {
+            return this.context.pagesWithEllipsis
+        }
+        return this.context.pages
+    }
+
+    public getPageCount(): Readable<number>
+    {
+        return this.context.pageCount
+    }
+
+    public getPageNumber(): Readable<number>
+    {
+        return this.context.pageNumber
+    }
+
+    public setPage(value: number | 'previous' | 'next'): void
+    {
+        switch (value) {
+            case 'previous' : return this.pageHandler.previous()
+            case 'next'     : return this.pageHandler.next()
+            default         : return this.pageHandler.goto(value as number)
+        }
+    }
+
+    public search(value: string, scope: Field<T>[] = null)
+    {
+        this.searchHandler.set(value, scope)
+    }
+
+    public clearSearch()
+    {
+        this.searchHandler.remove()
+    }
+
     public sort(orderBy: Field<T>)
     {
         this.setPage(1)
         this.sortHandler.set(orderBy)
-    }
-
-    public applySort( params: { orderBy: Field<T>, direction?: 'asc' | 'desc' } = null )
-    {
-        this.sortHandler.apply(params)
     }
 
     public sortAsc(orderBy: Field<T>)
@@ -105,9 +116,9 @@ export default class DataHandler<T extends Row = any>
         return this.context.sort
     }
 
-    public clearSort()
+    public applySort( params: { orderBy: Field<T>, direction?: 'asc' | 'desc' } = null )
     {
-        this.sortHandler.clear()
+        this.sortHandler.apply(params)
     }
 
     public defineSort(orderBy: Field<T>, direction?: 'asc' | 'desc')
@@ -115,14 +126,9 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.define(orderBy, direction)
     }
 
-    public search(value: string, scope: Field<T>[] = null)
+    public clearSort()
     {
-        this.searchHandler.set(value, scope)
-    }
-
-    public clearSearch()
-    {
-        this.searchHandler.remove()
+        this.sortHandler.clear()
     }
 
     public filter( value: string | number | null | undefined | boolean, filterBy: Field<T>, comparator: Comparator<T> = null )
@@ -155,36 +161,25 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler.clear()
     }
 
-    public getPages(param = { ellipsis: false }): Readable<number[]>
+    public select(value: T | T[keyof T])
     {
-        if (param.ellipsis) {
-            return this.context.pagesWithEllipsis
-        }
-        return this.context.pages
+        this.selectHandler.set(value)
     }
 
-    public getPageCount(): Readable<number>
+    public getSelected()
     {
-        return this.context.pageCount
+        return this.context.selected
     }
 
-    public getPageNumber(): Readable<number>
+    public selectAll(params: { selectBy?: keyof T; scope?: 'all' | 'currentPage' } = {}): void
     {
-        return this.context.pageNumber
+        this.context.selectScope.set(params.scope === 'currentPage' ? 'currentPage' : 'all')
+        this.selectHandler.all(params.selectBy ?? null)
     }
 
-    public setPage(value: number | 'previous' | 'next'): void
+    public isAllSelected(): Readable<boolean>
     {
-        switch (value) {
-            case 'previous' : return this.pageHandler.previous()
-            case 'next'     : return this.pageHandler.next()
-            default         : return this.pageHandler.goto(value as number)
-        }
-    }
-
-    public getTriggerChange(): Writable<number>
-    {
-        return this.context.event.triggerChange
+        return this.context.isAllSelected
     }
 
     public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
@@ -247,5 +242,11 @@ export default class DataHandler<T extends Row = any>
     public getSorted()
     {
         return this.getSort()
+    }
+
+
+    public getTriggerChange(): Writable<number>
+    {
+        return this.context.event.triggerChange
     }
 }
