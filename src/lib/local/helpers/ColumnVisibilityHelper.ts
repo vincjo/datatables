@@ -24,8 +24,9 @@ export default class ColumnVisibilityHelper
             const column = store.find(item => item.name === name)
             if (!column) return store
             column.isVisible = !column.isVisible
-            this.element.querySelectorAll(`tr > *:nth-child(${column.index + 1})`).forEach(element => {
+            this.element.querySelectorAll(`tr > *:nth-child(${column.index + 1})`).forEach((element: HTMLElement) => {
                 element.classList.toggle('hidden')
+                // this.handleDisplay(element)
             })
             return store
         })
@@ -52,10 +53,16 @@ export default class ColumnVisibilityHelper
         if (!this.element) return
         for (const { isVisible, index } of get(this.columns)) {
             if (isVisible === false) {
-                this.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element) => {
+                this.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
                     element.classList.add('hidden')
+                    // this.handleDisplay(element)
                 })
             }
         }
     }
+
+    // private handleDisplay(element: HTMLElement)
+    // {
+    //     element.style.display = element.style.display === 'none' ? '' : 'none'
+    // }
 }
