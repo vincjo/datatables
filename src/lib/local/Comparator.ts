@@ -1,4 +1,4 @@
-import type { Comparator, Row } from '$lib/local'
+import type { Comparator, Row, Criterion } from '$lib/local'
 
 export const check = {
     contains: (entry: any, value: any) => {
@@ -65,7 +65,7 @@ export const check = {
         return entry === null || entry === undefined ? false : true
     },
 
-    whereIn: (entry: any, values: { value: any, comparator: Comparator<Row> }[] = []) => {
+    whereIn: (entry: any, values: Criterion[] = []) => {
         if (isNull(entry)) return false
         if (values.length === 0) return false
         for(const { value, comparator } of values) {

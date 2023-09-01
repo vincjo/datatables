@@ -1,10 +1,10 @@
-import type { Filter, Field, Comparator, EventHandler } from '$lib/local'
+import type { Filter, Field, Comparator, EventHandler, Criterion } from '$lib/local'
 import { isNotNull } from '../utils'
 import type Context from '$lib/local/Context'
 import { type Writable, derived } from 'svelte/store'
 import { parseField } from '$lib/local/utils'
 
-type Value = string | number | null | undefined | boolean
+type Value = string | number | null | undefined | boolean | Criterion[]
 
 export default class FilterHandler<Row>
 {

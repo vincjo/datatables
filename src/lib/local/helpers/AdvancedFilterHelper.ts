@@ -1,27 +1,23 @@
-import type { Filter, Field, Comparator, Criterion } from '$lib/local'
-import type Context from '$lib/local/Context'
-import type EventHandler from '$lib/local/handlers/EventHandler'
+import type { Field, Comparator, Criterion } from '$lib/local'
+import type FilterHandler from '$lib/local/handlers/FilterHandler'
 import { type Writable, writable } from 'svelte/store'
 import { check } from '$lib/local/Comparator'
-import { parseField } from '$lib/local/utils'
 
 type Value = string | number | [min: number, max: number]
 
 export default class AdvancedFilterHandler<Row>
 {
-    private filters: Writable<Filter<Row>[]>
-    private event: EventHandler
-    private criteria: Criterion[]
-    private filterBy: Field<Row>
-    private selected: Writable<Value[]>
+    private filterHandler   : FilterHandler<Row>
+    private criteria        : Criterion[]
+    private filterBy        : Field<Row>
+    private selected        : Writable<Value[]>
 
-    constructor(context: Context<Row>, filterBy: Field<Row>)
+    constructor(filterHandler: FilterHandler<Row>, filterBy: Field<Row>)
     {
-        this.filterBy   = filterBy
-        this.criteria   = []
-        this.selected   = writable([])
-        this.filters    = context.filters
-        this.event      = context.event
+        this.filterHandler  = filterHandler
+        this.filterBy       = filterBy
+        this.criteria       = []
+        this.selected       = writable([])
     }
 
     public set(value: Value, comparator: Comparator<any> = check.contains)
@@ -32,27 +28,11 @@ export default class AdvancedFilterHandler<Row>
         else {
             this.criteria = [ { value, comparator }, ...this.criteria ]
         }
-        this.update()
-        this.event.trigger('change')
-        this.selected.set(this.criteria.map(criterion => criterion.value))
-    }
-
-    private update()
-    {
-        const { callback, identifier } = parseField(this.filterBy)
-        const filter = {
-            value: this.criteria, 
-            comparator: check.whereIn,
-            identifier,
-            callback,
+        if (this.criteria.length === 0) {
+            return this.clear()
         }
-        this.filters.update((store) => {
-            store = store.filter((item) => item.identifier !== identifier && this.criteria.length > 0 )
-            if (this.criteria.length > 0) {
-                store.push(filter)
-            }
-            return store
-        })
+        this.filterHandler.set(this.criteria, this.filterBy, check.whereIn)
+        this.selected.set(this.criteria.map(criterion => criterion.value))
     }
 
     public getSelected()
@@ -64,7 +44,6 @@ export default class AdvancedFilterHandler<Row>
     {
         this.criteria = []
         this.selected.set([])
-        this.update()
-        this.event.trigger('change')
+        this.filterHandler.set(undefined, this.filterBy, check.whereIn)
     }
 }

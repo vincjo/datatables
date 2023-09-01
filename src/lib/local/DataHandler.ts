@@ -148,7 +148,7 @@ export default class DataHandler<T extends Row = any>
 
     public createAdvancedFilter(filterBy: Field<T>)
     {
-        return new AdvancedFilterHelper(this.context, filterBy)
+        return new AdvancedFilterHelper(this.filterHandler, filterBy)
     }
 
     public getFilterCount(): Readable<number>
