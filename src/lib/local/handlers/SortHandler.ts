@@ -38,8 +38,8 @@ export default class SortHandler<Row>
     public asc(orderBy: Field<Row>, direction: 'asc' = 'asc')
     {
         if (!orderBy) return
-        const { identifier, callback } = parseField(orderBy)
-        this.sort.set({ identifier, callback, direction })
+        const { identifier, callback, key } = parseField(orderBy)
+        this.sort.set({ identifier, callback, direction, key })
         this.rawRows.update((store) => {
             store.sort((x, y) => {
                 const [a, b] = [callback(x), callback(y)]
@@ -61,8 +61,8 @@ export default class SortHandler<Row>
     public desc(orderBy: Field<Row>, direction: 'desc' = 'desc')
     {
         if (!orderBy) return
-        const { identifier, callback } = parseField(orderBy)
-        this.sort.set({ identifier, callback, direction })
+        const { identifier, callback, key } = parseField(orderBy)
+        this.sort.set({ identifier, callback, direction, key })
         this.rawRows.update((store) => {
             store.sort((x, y) => {
                 const [a, b] = [callback(x), callback(y)]
@@ -104,15 +104,15 @@ export default class SortHandler<Row>
     public define(orderBy: Field<Row>, direction: 'asc' | 'desc' = 'asc')
     {
         if (!orderBy) return
-        const { identifier, callback } = parseField(orderBy)
-        this.sort.set({ identifier, callback, direction })
+        const { identifier, callback, key } = parseField(orderBy)
+        this.sort.set({ identifier, callback, direction, key })
     }
 
     private restore()
     {
         for (const sort of this.backup) {
-            const { identifier, callback, direction } = sort
-            const param = identifier.includes('=>') ? callback : identifier as Field<Row>
+            const { key, callback, direction } = sort
+            const param = key as Field<Row> ?? callback
             this[direction](param)
         }
     }

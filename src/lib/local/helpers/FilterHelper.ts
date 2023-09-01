@@ -8,20 +8,33 @@ export default class FilterHelper<Row>
 {
     private filterHandler   : FilterHandler<Row>
     private filterBy        : Field<Row>
+    private comparator      : Comparator<Row>
+    private callback        : () => void
 
-    constructor(filterHandler: FilterHandler<Row>, filterBy: Field<Row>)
+    constructor(filterHandler: FilterHandler<Row>, filterBy: Field<Row>, comparator?: Comparator<Row>)
     {
         this.filterHandler  = filterHandler
         this.filterBy       = filterBy
+        this.comparator     = comparator ?? check.contains
+        this.callback       = () => null
     }
 
-    public set(value: Value, comparator: Comparator<any> = check.contains)
+    public set(value: Value, comparator?: Comparator<any>)
     {
-        this.filterHandler.set(value, this.filterBy, comparator)
+        if (comparator) {
+            this.comparator = comparator
+        }
+        this.filterHandler.set(value, this.filterBy, this.comparator)
     }
 
     public clear()
     {
+        this.callback()
         this.filterHandler.set(undefined, this.filterBy)
+    }
+
+    public on(event: 'clear', callback: () => void)
+    {
+        this.callback = callback
     }
 }

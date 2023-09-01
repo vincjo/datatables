@@ -11,12 +11,14 @@ export const parseField = (field: Field<any>) => {
     if (typeof field === 'string') {
         return {
             callback: (row: Row) => row[field],
-            identifier
+            identifier,
+            key: field as string
         }
     } else if (typeof field === 'function') {
         return {
             callback: field,
-            identifier
+            identifier,
+            key: undefined
         }
     }
     throw new Error(`Invalid field argument: ${String(field)}`)

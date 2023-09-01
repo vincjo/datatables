@@ -138,12 +138,12 @@ export default class DataHandler<T extends Row = any>
 
     public getFilters()
     {
-        return this.context.filters
+        return this.filterHandler.get()
     }
 
-    public createFilter( filterBy: Field<T> )
+    public createFilter( filterBy: Field<T>, comparator?: Comparator<T> )
     {
-        return new FilterHelper( this.filterHandler, filterBy )
+        return new FilterHelper( this.filterHandler, filterBy, comparator )
     }
 
     public createAdvancedFilter(filterBy: Field<T>)
