@@ -3,7 +3,7 @@ import * as fs from 'fs'
 export const load = async () => {
     const path = './src/routes/(local)/test'
     const lib = './src/lib/local'
-    const page = 'list-filters'
+    const page = 'filter-list'
     return {
         dataset: fs.readFileSync(`./src/site/data/test.ts`).toString('utf-8'),
         components: [
