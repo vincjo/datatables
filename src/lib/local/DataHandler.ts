@@ -5,6 +5,7 @@ import PageHandler              from './handlers/PageHandler'
 import SearchHandler            from './handlers/SearchHandler'
 import FilterHandler            from './handlers/FilterHandler'
 
+import FilterHelper             from './helpers/FilterHelper'
 import AdvancedFilterHelper     from './helpers/AdvancedFilterHelper'
 import CalculationHelper        from './helpers/CalculationHelper'
 import ColumnVisibilityHelper   from './helpers/ColumnVisibilityHelper'
@@ -91,7 +92,7 @@ export default class DataHandler<T extends Row = any>
 
     public clearSearch()
     {
-        this.searchHandler.remove()
+        this.searchHandler.clear()
     }
 
     public sort(orderBy: Field<T>)
@@ -137,14 +138,19 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler.set(value, filterBy, comparator)
     }
 
-    public getFilterCount(): Readable<number>
+    public getFilters()
     {
-        return this.context.filterCount
+        return this.filterHandler.get()
+    }
+
+    public createFilter( filterBy: Field<T>, comparator?: Comparator<T> )
+    {
+        return new FilterHelper( this.filterHandler, filterBy, comparator )
     }
 
     public createAdvancedFilter(filterBy: Field<T>): AdvancedFilterHelper<T>
     {
-        return new AdvancedFilterHelper(this.context, filterBy)
+        return new AdvancedFilterHelper(this.filterHandler, filterBy)
     }
 
     public clearFilters(): void

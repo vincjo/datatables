@@ -1,15 +1,24 @@
-import type { Filter, Field, Comparator, EventHandler } from '$lib/local'
+import type { Filter, Field, Comparator, EventHandler, Criterion } from '$lib/local'
 import { isNotNull } from '../utils'
 import type Context from '$lib/local/Context'
-import { type Writable, derived } from 'svelte/store'
+import { type Writable, type Readable, derived } from 'svelte/store'
 import { parseField } from '$lib/local/utils'
+// import { check } from '$lib/local/Comparator'
 
-type Value = string | number | null | undefined | boolean
+type Value = string | number | null | undefined | boolean | Criterion[]
+// type Collection<Row> = {
+//     value: unknown
+//     filterBy: Field<Row>
+//     set: (value: unknown, comparator: Comparator<Row>) => void,
+//     clear: () => void
+// }
+
 
 export default class FilterHandler<Row>
 {
     protected filters: Writable<Filter<Row>[]>
     protected event: EventHandler
+    private collection: Readable<{ value: unknown, filterBy: Field<Row>, check: string }[]>
 
     constructor(context: Context<Row>)
     {
@@ -19,10 +28,10 @@ export default class FilterHandler<Row>
 
     public set(value: Value, filterBy: Field<Row>, comparator: Comparator<Row> = null )
     {
-        const { callback, identifier } = parseField(filterBy)
-        const filter = { value, identifier, callback, comparator }
+        const { callback, identifier, key } = parseField(filterBy)
+        const filter = { value, identifier, callback, comparator, key }
         this.filters.update((store) => {
-            store = store.filter((item) => item.identifier !== identifier && (isNotNull(value)) )
+            store = store.filter((item) => item.identifier !== identifier)
             if (isNotNull(value)) {
                 store.push(filter)
             }
@@ -39,22 +48,31 @@ export default class FilterHandler<Row>
 
     public get()
     {
+        if (this.collection) {
+            return this.collection
+        }
+        this.collection = this.createCollection()
+        return this.collection
+    }
+
+    private createCollection()
+    {
         return derived(this.filters, ($filters) => {
-            return $filters.map( ({ value, identifier, callback }) => {
-                const field = identifier.includes('=>') ? callback : identifier as Field<Row>
+            return $filters.map( ({ value, callback, key, comparator }) => {
+                const filterBy = key as Field<Row> ?? callback
                 return { 
                     value, 
-                    identifier,
-                    set: (value: Value) => {
-                        this.set(value, field)
-                    },
-                    clear: () => {
-                        this.set(undefined, field)
-                    }
+                    filterBy,
+                    check: comparator ? comparator.name : 'contains'
+                    // set: (value: Value, comparator: Comparator<Row> = check.contains) => {
+                    //     this.set(value, filterBy, comparator)
+                    // },
+                    // clear: () => {
+                    //     this.set(undefined, filterBy)
+                    // }
                 }
             })
         })
     }
-
 
 }
