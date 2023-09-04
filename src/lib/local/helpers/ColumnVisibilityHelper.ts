@@ -26,7 +26,7 @@ export default class ColumnVisibilityHelper
             column.isVisible = !column.isVisible
             this.element.querySelectorAll(`tr > *:nth-child(${column.index + 1})`).forEach((element: HTMLElement) => {
                 element.classList.toggle('hidden')
-                // this.handleDisplay(element)
+                this.handleDisplay(element)
             })
             return store
         })
@@ -55,14 +55,14 @@ export default class ColumnVisibilityHelper
             if (isVisible === false) {
                 this.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
                     element.classList.add('hidden')
-                    // this.handleDisplay(element)
+                    this.handleDisplay(element)
                 })
             }
         }
     }
 
-    // private handleDisplay(element: HTMLElement)
-    // {
-    //     element.style.display = element.style.display === 'none' ? '' : 'none'
-    // }
+    private handleDisplay(element: HTMLElement)
+    {
+        element.style.display = element.style.display === 'none' ? '' : 'none'
+    }
 }
