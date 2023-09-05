@@ -1,5 +1,5 @@
 import type { Criterion } from '$lib/local'
-import { isNull, stringify } from './utils'
+import { isNull, isNotNull, stringify } from './utils'
 
 export const check = {
     contains: (entry: any, value: any) => {
@@ -59,11 +59,11 @@ export const check = {
     },
 
     isNull: (entry: null, _: any) => {
-        return entry === null || entry === undefined
+        return isNull(entry)
     },
 
     isNotNull: (entry: any, _: any) => {
-        return entry === null || entry === undefined ? false : true
+        return isNotNull(entry)
     },
 
     whereIn: (entry: any, values: Criterion[] = []) => {

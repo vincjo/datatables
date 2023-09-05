@@ -52,7 +52,7 @@ export default class Context<Row>
         return derived(this.filters, ($filters) => $filters.length)
     }
 
-    private createFilteredRows() 
+    private createFilteredRows()
     {
         return derived(
             [this.rawRows, this.search, this.filters],
@@ -89,15 +89,12 @@ export default class Context<Row>
         )
     }
 
-    private match(entry: Row[keyof Row], value: string|number|boolean|symbol|Criterion[], compare: Comparator<Row> = null) 
+    private match(entry: Row[keyof Row], value: string|number|boolean|symbol|Criterion[], compare: Comparator<Row> = check.contains) 
     {
         if (isNull(value)) {
             return true
         }
-        if (!entry && compare) {
-            return compare(entry, value)
-        }
-        if (!entry) return check.contains(entry, value)
+        if (!entry) return compare(entry, value)
         else if (typeof entry === 'object') {
             return Object.keys(entry).some((k) => {
                 return this.match(entry[k], value, compare)
