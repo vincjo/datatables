@@ -1,11 +1,11 @@
 
 import { type Writable, writable, get } from 'svelte/store'
 
-
 export default class ColumnVisibilityHelper
 {
     private element: HTMLElement
     private columns: Writable<{ name: string, index: number, isVisible?: boolean }[]>
+    private mutation: MutationObserver
 
     constructor(columns: { name: string, index: number, isVisible?: boolean }[])
     {
@@ -26,7 +26,6 @@ export default class ColumnVisibilityHelper
             column.isVisible = !column.isVisible
             this.element.querySelectorAll(`tr > *:nth-child(${column.index + 1})`).forEach((element: HTMLElement) => {
                 element.classList.toggle('hidden')
-                this.handleDisplay(element)
             })
             return store
         })
@@ -37,6 +36,12 @@ export default class ColumnVisibilityHelper
     {
         this.element = element
         this.preset()
+        this.mutation = new MutationObserver(() => {
+            setTimeout(() => {
+                this.preset()
+            }, 2)
+        })
+        this.mutation.observe(this.element, { childList: true, subtree: true })
     }
 
     private set(columns: { name: string, index: number, isVisible?: boolean }[])
@@ -55,14 +60,8 @@ export default class ColumnVisibilityHelper
             if (isVisible === false) {
                 this.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
                     element.classList.add('hidden')
-                    this.handleDisplay(element)
                 })
             }
         }
-    }
-
-    private handleDisplay(element: HTMLElement)
-    {
-        element.style.display = element.style.display === 'none' ? '' : 'none'
     }
 }
