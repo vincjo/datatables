@@ -1,5 +1,5 @@
 <script>
-
+    import { url, getPath } from 'gros/page'
 </script>
 
 
@@ -12,10 +12,16 @@
             </div>
         </aside>
     </a>
-
-    <a href="https://github.com/vincjo/datatables" class="flex">
-        <img alt="github logo" src="/datatables/github.svg" /><span>Github</span>
-    </a>
+    <article class="flex">
+        <nav class="flex">
+            <a class:active={$url.includes('docs')} href="{getPath('/home')}">Docs</a>
+            <a class:active={$url.includes('examples')} href="{getPath('/examples')}">Examples</a>
+            <a class:active={$url.includes('api')} href="{getPath('/api-reference')}">API</a>
+        </nav>
+        <a href="https://github.com/vincjo/datatables" class="flex">
+            <img alt="github logo" src="/datatables/github.svg" /><span>Github</span>
+        </a>
+    </article>
 </header>
 
 
@@ -32,10 +38,6 @@
     }
     header a {
         text-decoration: none;
-        padding: 0 24px;
-        font-size: 16px;
-        height: 56px;
-        float: right;
     }
     a.flex img {
         float: left;
@@ -67,5 +69,22 @@
     aside img {
         width: 48px;
         margin: 0 4px;
+    }
+    nav {
+        margin-right: 40px;
+    }
+    nav a {
+        display: inline-block;
+        margin: 0 4px;
+        font-weight: 400;
+        padding: 8px 16px;
+        border-radius: 4px;
+    }
+    nav a:hover {
+        color: var(--primary); 
+    }
+    nav a.active {
+        background: var(--primary-lighten-1);
+        color: var(--primary-darken); 
     }
 </style>
