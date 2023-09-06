@@ -15,6 +15,7 @@
     section {
         position: absolute;
         top: 0;
+        padding-top: 56px;
         bottom: 0;
         left: 24vw;
         right: 0;

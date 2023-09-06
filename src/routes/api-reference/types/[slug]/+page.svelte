@@ -37,7 +37,7 @@
     h1 {
         font-size: 24px;
         font-family: JetBrains;
-        color: var(--primary-darken);
+        color: var(--secondary-darken);
     }
     h1.deprecated {
         text-decoration: solid line-through #e57373;
@@ -51,7 +51,7 @@
     h2 {
         font-size: 24px;
         font-family: JetBrains;
-        color: var(--primary);
+        color: var(--secondary);
     }
     .nodoc {
         color: var(--ternary);

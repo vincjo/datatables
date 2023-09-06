@@ -4,11 +4,11 @@ export default [
         path: '/home'
     },
     {
-        name: 'datatables',
+        name: 'examples',
         path: '/examples',
         pages: [
             { name: 'basic', path: '/basic' },
-            { name: 'sticky', path: '/sticky' },
+            { name: 'scroll y', path: '/scroll-y' },
             { name: 'small', path: '/small' },
             { name: 'callback', path: '/callback' },
             { name: 'i18n', path: '/i18n' },

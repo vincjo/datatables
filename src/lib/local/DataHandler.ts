@@ -71,9 +71,9 @@ export default class DataHandler<T extends Row = any>
         return this.context.pageCount
     }
 
-    public getPageNumber(): Readable<number>
+    public getCurrentPage(): Readable<number>
     {
-        return this.context.pageNumber
+        return this.context.currentPage
     }
 
     public setPage(value: number | 'previous' | 'next'): void
@@ -138,12 +138,12 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler.set(value, filterBy, comparator)
     }
 
-    public getFilters()
+    public getFilters(): Readable<{ filterBy: Field<T>, check: string, value: unknown }[]>
     {
         return this.filterHandler.get()
     }
 
-    public createFilter( filterBy: Field<T>, comparator?: Comparator<T> )
+    public createFilter( filterBy: Field<T>, comparator?: Comparator<T> ): FilterHelper<T>
     {
         return new FilterHelper( this.filterHandler, filterBy, comparator )
     }
@@ -189,7 +189,7 @@ export default class DataHandler<T extends Row = any>
         return new CalculationHelper(this.context, field, { precision: param?.precision ?? 2 })
     }
 
-    public createColumnVisibility(columns: { name: string, index: number, isVisible?: boolean }[])
+    public createColumnVisibility(columns: { name: string, index: number, isVisible?: boolean }[]): ColumnVisibilityHelper
     {
         return new ColumnVisibilityHelper(columns)
     }
@@ -244,11 +244,21 @@ export default class DataHandler<T extends Row = any>
     }
 
     /**
-     * @deprecated use on('cahnge', callback) instead
+     * @deprecated use on('change', callback) instead
      * @since v1.12.0 2023-07-14
      */
     public getTriggerChange(): Writable<number>
     {
         return this.context.event.triggerChange
+    }
+
+
+    /**
+     * @deprecated use getCurrentPage() instead
+     * @since v2.0.0 2023-10-31
+     */
+    public getPageNumber(): Readable<number>
+    {
+        return this.getCurrentPage()
     }
 }

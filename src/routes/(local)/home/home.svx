@@ -68,10 +68,8 @@ Also provides some demo components, which you can grab and customize in your own
     aside.bis{max-width:680px;}
     h2{font-size:24px;color:var(--secondary);font-weight:400;margin:24px 0 8px 0;}
     p, li {
-        color: #676778;
-        font-size: 15px;
+        font-size: 16px;
         font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
         max-width: 680px;
-        line-height: 20px;
     }
 </style>

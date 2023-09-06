@@ -15,7 +15,6 @@ export default class SearchHandler<Row>
 
     public set(value: string, scope: Field<Row>[] = null)
     {
-
         this.search.update((store) => {
             store = {
                 value: value ?? '',

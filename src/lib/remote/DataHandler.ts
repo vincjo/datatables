@@ -149,9 +149,9 @@ export default class DataHandler<T extends Row = any>
         return this.context.pageCount
     }
 
-    public getPageNumber(): Writable<number> 
+    public getCurrentPage(): Writable<number> 
     {
-        return this.context.pageNumber
+        return this.context.currentPage
     }
 
     public setPage(value: number | 'previous' | 'next'): void 
@@ -223,5 +223,15 @@ export default class DataHandler<T extends Row = any>
     public getSorted()
     {
         return this.getSort()
+    }
+
+
+    /**
+     * @deprecated use getCurrentPage() instead
+     * @since v2.0.0 2023-10-31
+     */
+    public getPageNumber(): Writable<number> 
+    {
+        return this.getCurrentPage()
     }
 }

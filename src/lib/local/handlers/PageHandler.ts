@@ -4,14 +4,14 @@ import type { EventHandler } from '$lib/local'
 
 export default class PageHandler<Row> 
 {
-    private pageNumber  : Writable<number>
+    private currentPage  : Writable<number>
     private rowCount    : Readable<{ total: number, start: number, end: number }>
     private rowsPerPage : Writable<number | null>
     private event       : EventHandler
 
     constructor(context: Context<Row>) 
     {
-        this.pageNumber     = context.pageNumber
+        this.currentPage    = context.currentPage
         this.rowCount       = context.rowCount
         this.rowsPerPage    = context.rowsPerPage
         this.event          = context.event
@@ -19,7 +19,7 @@ export default class PageHandler<Row>
 
     public goto(number: number)
     {
-        this.pageNumber.update((store) => {
+        this.currentPage.update((store) => {
             const rowsPerPage = get(this.rowsPerPage)
             if (rowsPerPage) {
                 const total = get(this.rowCount).total
@@ -34,13 +34,13 @@ export default class PageHandler<Row>
 
     public previous()
     {
-        const number = get(this.pageNumber) - 1
+        const number = get(this.currentPage) - 1
         this.goto(number)
     }
 
     public next()
     {
-        const number = get(this.pageNumber) + 1
+        const number = get(this.currentPage) + 1
         this.goto(number)
     }
 }

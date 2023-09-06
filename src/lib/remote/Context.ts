@@ -7,7 +7,7 @@ export default class Context<Row>
 {
     public totalRows            : Writable<number | undefined>
     public rowsPerPage          : Writable<number>
-    public pageNumber           : Writable<number>
+    public currentPage          : Writable<number>
     public event                : EventHandler
     public search               : Writable<string>
     public filters              : Writable<Filter<Row>[]>
@@ -25,7 +25,7 @@ export default class Context<Row>
     {
         this.totalRows          = writable(params.totalRows)
         this.rowsPerPage        = writable(params.rowsPerPage)
-        this.pageNumber         = writable(1)
+        this.currentPage        = writable(1)
         this.event              = new EventHandler()
         this.search             = writable('')
         this.filters            = writable([])
@@ -41,19 +41,20 @@ export default class Context<Row>
 
     public getState(): State
     {
-        const pageNumber    = get(this.pageNumber)
+        const currentPage   = get(this.currentPage)
         const rowsPerPage   = get(this.rowsPerPage)
         const sort          = get(this.sort)
         const filters       = get(this.filters)
         return {
-            pageNumber,
+            currentPage,
             rowsPerPage,
-            offset: rowsPerPage * (pageNumber - 1),
+            offset: rowsPerPage * (currentPage - 1),
             search: get(this.search),
             sorted: sort ?? undefined as any, // deprecated
             sort: sort ?? undefined as any,
             filters: filters.length > 0 ? filters : undefined as any,
-            setTotalRows: (value: number) => this.totalRows.set(value)
+            setTotalRows: (value: number) => this.totalRows.set(value),
+            pageNumber: currentPage
         }
     }
 
@@ -72,7 +73,7 @@ export default class Context<Row>
 
     private createPagesWithEllipsis()
     {
-        return derived([this.pages, this.pageNumber], ([$pages, $pageNumber]) => {
+        return derived([this.pages, this.currentPage], ([$pages, $currentPage]) => {
             if (!$pages) {
                 return undefined
             }
@@ -82,17 +83,17 @@ export default class Context<Row>
             const ellipse = null
             const firstPage = 1
             const lastPage = $pages.length
-            if ($pageNumber <= 4) {
+            if ($currentPage <= 4) {
                 return [
                     ...$pages.slice(0, 5),
                     ellipse,
                     lastPage
                 ]
-            } else if ($pageNumber < $pages.length - 3) {
+            } else if ($currentPage < $pages.length - 3) {
                 return [
                     firstPage,
                     ellipse,
-                    ...$pages.slice($pageNumber - 2, $pageNumber + 1),
+                    ...$pages.slice($currentPage - 2, $currentPage + 1),
                     ellipse,
                     lastPage
                 ]
@@ -118,16 +119,16 @@ export default class Context<Row>
     private createRowCount()
     {
         return derived(
-            [this.totalRows, this.pageNumber, this.rowsPerPage],
-            ([$totalRows, $pageNumber, $rowsPerPage]) => {
+            [this.totalRows, this.currentPage, this.rowsPerPage],
+            ([$totalRows, $currentPage, $rowsPerPage]) => {
 
                 if (!$rowsPerPage || !$totalRows) {
                     return undefined
                 }
                 return {
                     total: $totalRows,
-                    start: $pageNumber * $rowsPerPage - $rowsPerPage + 1,
-                    end: Math.min($pageNumber * $rowsPerPage, $totalRows)
+                    start: $currentPage * $rowsPerPage - $rowsPerPage + 1,
+                    end: Math.min($currentPage * $rowsPerPage, $totalRows)
                 }
             }
         )

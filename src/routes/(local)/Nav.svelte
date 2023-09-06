@@ -5,16 +5,6 @@
 </script>
 
 <nav class="thin-scrollbar" transition:fly|global={{ duration: 200, x: -200 }}>
-    <a href="/datatables/home">
-        <article>
-            <aside transition:fade|global={{ duration: 100 }}>
-                <img src="/datatables/logo.svg" alt="logo" />
-                <div>
-                    <h1>svelte<br />simple<br />datatables</h1>
-                </div>
-            </aside>
-        </article>
-    </a>
 
     {#each pages as page}
         <a href={getPath(page.path)}>
@@ -64,36 +54,15 @@
         padding: 24px 0 0 24px;
         overflow-y: auto;
         padding-bottom: 40px;
-    }
-
-    article {
-        height: 88px;
-    }
-    aside {
-        display: flex;
-        justify-content: start;
-        margin: 0;
-        height: 48px;
-    }
-    aside h1 {
-        font-size: 16px;
-        line-height: 15px;
-        text-align: left;
-        font-weight: 400;
-        margin: 0;
-        color: #333;
-    }
-    aside img {
-        width: 48px;
-        margin: 0 8px;
+        margin-top: 56px;
     }
 
     h2 {
         color: #333;
         font-weight: 200;
         margin: 0;
-        font-size: 32px;
-        line-height: 40px;
+        font-size: 28px;
+        line-height: 32px;
         transition: all, 0.1s;
         white-space: nowrap;
     }
@@ -115,43 +84,39 @@
         text-decoration: none;
     }
     ul {
-        margin: 4px 0 8px 0;
+        margin: 4px 0 0 8px;
         list-style-type: none;
         background: #fff;
         padding: 0 16px 0 0;
-        border-left: 1px dotted #bdbdbd;
+        border-left: 1px solid #fafafa;
     }
     ul li {
         display: block;
         background: #fff;
-        transition: all, 0.2s;
-        padding: 4px;
+        padding: 2px 24px;
         font-size: 16px;
         color: #676778;
         font-weight: 400;
-        line-height: 24px;
         border-radius: 2px;
         border: 1px solid transparent;
-        border-right: 4px solid transparent;
-        border-top: 1px solid #eee;
+        border-left: 1px solid #e0e0e0;
+        height: 32px;
+        margin: 0;
     }
     ul li:hover {
-        font-weight: bold;
         background: #fafafa;
+        border-left: 1px solid var(--secondary-lighten);
     }
     ul li.active {
         color: var(--secondary);
         font-weight: bold;
-        background: #f5f5f5;
-        /* border:1px solid #e0e0e0; */
-        border-right: 4px solid var(--secondary);
+        border-left: 2px solid var(--secondary);
     }
     /* ul li.active a {background:#fafafa;} */
     ul a {
         display: block;
         text-decoration: none;
         color: inherit;
-        padding: 0px 8px;
     }
 
     /* ul li{clip-path:polygon(4% 3%, 100% 0, 86% 86%, 0 100%);} */

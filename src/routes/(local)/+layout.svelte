@@ -22,7 +22,6 @@
     <Nav />
 </nav>
 <section bind:this={element}>
-    <Header/>
     <article>
         <slot />
     </article>
@@ -38,6 +37,7 @@
         display: flex;
         justify-content: flex-end;
         border-right: 1px solid #e0e0e0;
+        overflow-y: none;
     }
     section {
         width: auto;

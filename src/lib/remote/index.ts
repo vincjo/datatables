@@ -35,7 +35,7 @@ export type Order<Row> = {
 }
 
 export type State = {
-    pageNumber: number,
+    currentPage: number,
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
@@ -47,7 +47,11 @@ export type State = {
     /**
      * @deprecated use 'sort' instead
      */
-    sorted: Order<Row> | undefined
+    sorted: Order<Row> | undefined,
+    /**
+     * @deprecated use 'currentPage' instead
+     */
+    pageNumber: number,
 }
 
 export type Selectable<Row> = Row[keyof Row] | Row

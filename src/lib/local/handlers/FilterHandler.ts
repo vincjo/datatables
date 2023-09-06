@@ -6,12 +6,6 @@ import { parseField } from '$lib/local/utils'
 // import { check } from '$lib/local/Comparator'
 
 type Value = string | number | null | undefined | boolean | Criterion[]
-// type Collection<Row> = {
-//     value: unknown
-//     filterBy: Field<Row>
-//     set: (value: unknown, comparator: Comparator<Row>) => void,
-//     clear: () => void
-// }
 
 
 export default class FilterHandler<Row>

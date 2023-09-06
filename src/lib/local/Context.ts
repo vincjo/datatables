@@ -10,7 +10,7 @@ export default class Context<Row>
 {
     public event                : EventHandler
     public rowsPerPage          : Writable<number | null>
-    public pageNumber           : Writable<number>
+    public currentPage          : Writable<number>
     public search               : Writable<{ value?: string, scope?: (keyof Row)[] }>
     public filters              : Writable<Filter<Row>[]>
     public filterCount          : Readable<number>
@@ -30,7 +30,7 @@ export default class Context<Row>
     {
         this.event               = new EventHandler()
         this.rowsPerPage         = writable(params.rowsPerPage)
-        this.pageNumber          = writable(1)
+        this.currentPage         = writable(1)
         this.search              = writable({})
         this.filters             = writable([])
         this.filterCount         = this.createFilterCount()
@@ -68,7 +68,7 @@ export default class Context<Row>
                             return this.match(callback(row), $search.value)
                         })
                     })
-                    this.pageNumber.set(1)
+                    this.currentPage.set(1)
                     this.selected.set([])
                     this.event.trigger('change')
                 }
@@ -80,7 +80,7 @@ export default class Context<Row>
                             return this.match(entry, filter.value, filter.comparator)
                         }))
                     })
-                    this.pageNumber.set(1)
+                    this.currentPage.set(1)
                     this.selected.set([])
                     this.event.trigger('change')
                 }
@@ -107,14 +107,14 @@ export default class Context<Row>
     private createPagedRows()
     {
         return derived(
-            [this.filteredRows, this.rowsPerPage, this.pageNumber],
-            ([$filteredRows, $rowsPerPage, $pageNumber]) => {
+            [this.filteredRows, this.rowsPerPage, this.currentPage],
+            ([$filteredRows, $rowsPerPage, $currentPage]) => {
                 if (!$rowsPerPage) {
                     return $filteredRows
                 }
                 return $filteredRows.slice(
-                    ($pageNumber - 1) * $rowsPerPage,
-                    $pageNumber * $rowsPerPage
+                    ($currentPage - 1) * $rowsPerPage,
+                    $currentPage * $rowsPerPage
                 )
             }
         )
@@ -123,16 +123,16 @@ export default class Context<Row>
     private createRowCount()
     {
         return derived(
-            [this.filteredRows, this.pageNumber, this.rowsPerPage],
-            ([$filteredRows, $pageNumber, $rowsPerPage]) => {
+            [this.filteredRows, this.currentPage, this.rowsPerPage],
+            ([$filteredRows, $currentPage, $rowsPerPage]) => {
                 const total = $filteredRows.length
                 if (!$rowsPerPage) {
                     return { total: total, start: 1, end: total }
                 }
                 return {
                     total: total,
-                    start: $pageNumber * $rowsPerPage - $rowsPerPage + 1,
-                    end: Math.min($pageNumber * $rowsPerPage, $filteredRows.length)
+                    start: $currentPage * $rowsPerPage - $rowsPerPage + 1,
+                    end: Math.min($currentPage * $rowsPerPage, $filteredRows.length)
                 }
             }
         )
@@ -151,24 +151,24 @@ export default class Context<Row>
 
     private createPagesWithEllipsis()
     {
-        return derived([this.pages, this.pageNumber], ([$pages, $pageNumber]) => {
+        return derived([this.pages, this.currentPage], ([$pages, $currentPage]) => {
             if ($pages.length <= 7) {
                 return $pages
             }
             const ellipse = null
             const firstPage = 1
             const lastPage = $pages.length
-            if ($pageNumber <= 4) {
+            if ($currentPage <= 4) {
                 return [
                     ...$pages.slice(0, 5),
                     ellipse,
                     lastPage
                 ]
-            } else if ($pageNumber < $pages.length - 3) {
+            } else if ($currentPage < $pages.length - 3) {
                 return [
                     firstPage,
                     ellipse,
-                    ...$pages.slice($pageNumber - 2, $pageNumber + 1),
+                    ...$pages.slice($currentPage - 2, $currentPage + 1),
                     ellipse,
                     lastPage
                 ]

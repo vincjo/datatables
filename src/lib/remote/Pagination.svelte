@@ -6,7 +6,7 @@
     export let handler: DataHandler<T>
     export let small = false
 
-    const pageNumber = handler.getPageNumber()
+    const currentPage = handler.getCurrentPage()
     const pageCount = handler.getPageCount()
     const pages = handler.getPages({ ellipsis: true })
 
@@ -20,12 +20,12 @@
     {#if $pages === undefined}
         <button
             type="button" class="small"
-            class:disabled={$pageNumber === 1}
+            class:disabled={$currentPage === 1}
             on:click={() => setPage('previous')}
         >
             &#10094;
         </button>
-        <button class="page">page <b>{$pageNumber}</b></button>
+        <button class="page">page <b>{$currentPage}</b></button>
         <button
             type="button" class="small"
             on:click={() => setPage('next')}
@@ -37,27 +37,27 @@
             <button
                 type="button"
                 class="small"
-                class:disabled={$pageNumber === 1}
+                class:disabled={$currentPage === 1}
                 on:click={() => setPage(1)}
             >
                 &#10092;&#10092;
             </button>
             <button
                 type="button"
-                class:disabled={$pageNumber === 1}
+                class:disabled={$currentPage === 1}
                 on:click={() => setPage('previous')}
             >
                 &#10094;
             </button>
             <button
-                class:disabled={$pageNumber === $pageCount}
+                class:disabled={$currentPage === $pageCount}
                 on:click={() => setPage('next')}
             >
                 &#10095;
             </button>
             <button
                 class="small"
-                class:disabled={$pageNumber === $pageCount}
+                class:disabled={$currentPage === $pageCount}
                 on:click={() => setPage($pageCount)}
             >
                 &#10093;&#10093;
@@ -65,7 +65,7 @@
         {:else}
             <button
                 type="button"
-                class:disabled={$pageNumber === 1}
+                class:disabled={$currentPage === 1}
                 on:click={() => setPage('previous')}
             >
                 {@html handler.i18n.previous}
@@ -73,7 +73,7 @@
             {#each $pages as page}
                 <button
                     type="button"
-                    class:active={$pageNumber === page}
+                    class:active={$currentPage === page}
                     class:ellipse={page === null}
                     on:click={() => setPage(page)}
                 >
@@ -82,7 +82,7 @@
             {/each}
             <button
                 type="button"
-                class:disabled={$pageNumber === $pageCount}
+                class:disabled={$currentPage === $pageCount}
                 on:click={() => setPage('next')}
             >
                 {@html handler.i18n.next}

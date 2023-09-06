@@ -3,7 +3,7 @@ import * as fs from 'fs'
 export const load = async () => {
     const path = './src/routes/(local)/examples'
     const lib = './src/lib/local'
-    const page = 'sticky'
+    const page = 'scroll-y'
     return {
         dataset: fs.readFileSync(`./src/site/data/data.ts`).toString('utf-8'),
         components: [

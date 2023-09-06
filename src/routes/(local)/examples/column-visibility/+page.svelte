@@ -4,7 +4,7 @@
     export let data
 </script>
 
-<h2>Basic, with all the features</h2>
+<h2>Column visibility</h2>
 <Demo components={data.components} dataset={data.dataset} scrollY={false}>
     <Main />
 </Demo>

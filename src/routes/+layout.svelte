@@ -10,3 +10,10 @@
 <main>
     <slot/>
 </main>
+
+
+<style>
+    main {
+        margin-top: 56px;
+    }
+</style>

@@ -23,14 +23,14 @@
     <h1 class:deprecated={def?.isDeprecated}>
         {name}
     </h1>
+    {#if def.isDeprecated}
+        <span>@deprecated</span>
+    {/if}
     <Highlight code={declaration} fontSize="18px"/>
 
     <br><br>
 
     {#if def.md}
-        {#if def.isDeprecated}
-            <span>@deprecated</span>
-        {/if}
         {@html def.md}
     {/if}
 </section>
@@ -40,7 +40,7 @@
     h1 {
         font-size: 24px;
         font-family: JetBrains;
-        color: var(--secondary-darken);
+        color: var(--primary-darken);
     }
     h1.deprecated {
         text-decoration: solid line-through #e57373;
@@ -55,10 +55,10 @@
         font-size: 18px;
         font-family: JetBrains;
         margin-top: 40px;
-        color: var(--secondary);
+        color: var(--primary);
     }
     span {
-        color: var(--secondary);
+        color: var(--primary);
         font-size: 18px;
         font-family: JetBrains;
     }

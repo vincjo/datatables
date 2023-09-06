@@ -33,7 +33,7 @@
                     <td>{row.lastname}</td>
                     <td>{@html row.country ?? '<code>null</code>'}</td>
                     <td class="list">
-                        {#if !row.car}
+                        {#if !row?.car}
                             <code>null</code>
                         {:else}
                             <ul>
@@ -41,6 +41,8 @@
                                     <li style:color={car.hex}>
                                         {car.model} ({car.manufacturer})
                                     </li>
+                                {:else}
+                                    <code>null</code>
                                 {/each}
                             </ul>
                         {/if}
@@ -54,16 +56,6 @@
 <style>
     thead {
         background: #fff;
-    }
-    tbody td {
-        border: 1px solid #f5f5f5;
-        padding: 4px 20px;
-    }
-    tbody tr {
-        transition: all, 0.2s;
-    }
-    tbody tr:hover {
-        background: #f5f5f5;
     }
     td.list {
         text-align: left;

@@ -20,7 +20,7 @@
     }
     nav {
         position: absolute;
-        top:0;
+        top:56px;
         bottom: 0;
         left: 0;
         width: 24vw;

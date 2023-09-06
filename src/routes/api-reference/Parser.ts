@@ -33,7 +33,10 @@ export default class Parser
             }
         }
         return parsed.map(method => {
-            return { ...method }
+            const isDeprecated = [
+                'update', 'applySorting', 'getSorted', 'getTriggerChange', 'getPageNumber'
+            ].includes(method.name)
+            return { ...method, isDeprecated }
         })
     }
 
