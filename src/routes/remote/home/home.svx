@@ -28,7 +28,7 @@ This part of the lib provides 2 additional functions
 
 ````svelte
 <script lang="ts">
-    import { DataHandler, type State, 
+    import { DataHandler, type State,
              Datatable, Th, ThFilter } from '@vincjo/datatables/remote'
     import { myLoadFunction } from './my-api-helper'
 
