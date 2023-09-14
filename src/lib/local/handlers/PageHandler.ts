@@ -4,7 +4,7 @@ import type { EventHandler } from '$lib/local'
 
 export default class PageHandler<Row> 
 {
-    private currentPage  : Writable<number>
+    private currentPage : Writable<number>
     private rowCount    : Readable<{ total: number, start: number, end: number }>
     private rowsPerPage : Writable<number | null>
     private event       : EventHandler
@@ -17,14 +17,14 @@ export default class PageHandler<Row>
         this.event          = context.event
     }
 
-    public goto(number: number)
+    public goto(page: number)
     {
         this.currentPage.update((store) => {
             const rowsPerPage = get(this.rowsPerPage)
             if (rowsPerPage) {
                 const total = get(this.rowCount).total
-                if (number >= 1 && number <= Math.ceil(total / rowsPerPage)) {
-                    store = number
+                if (page >= 1 && page <= Math.ceil(total / rowsPerPage)) {
+                    store = page
                     this.event.trigger('change')
                 }
             }
@@ -34,13 +34,13 @@ export default class PageHandler<Row>
 
     public previous()
     {
-        const number = get(this.currentPage) - 1
-        this.goto(number)
+        const page = get(this.currentPage) - 1
+        this.goto(page)
     }
 
     public next()
     {
-        const number = get(this.currentPage) + 1
-        this.goto(number)
+        const page = get(this.currentPage) + 1
+        this.goto(page)
     }
 }
