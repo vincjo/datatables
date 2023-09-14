@@ -48,6 +48,11 @@ export default class DataHandler<T extends Row = any>
         return this.context.pagedRows
     }
 
+    public getAllRows(): Readable<T[]>
+    {
+        return this.context.filteredRows
+    }
+
     public getRowCount(): Readable<{ total: number, start: number, end: number }>
     {
         return this.context.rowCount
