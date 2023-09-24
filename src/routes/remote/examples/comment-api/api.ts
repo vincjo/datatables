@@ -8,9 +8,9 @@ export const reload = async (state: State) => {
     return response.json()
 }
 
-const getParams = ({ pageNumber, rowsPerPage, sort }: State) => {
+const getParams = ({ currentPage, rowsPerPage, sort }: State) => {
 
-    let params = `_page=${pageNumber}`
+    let params = `_page=${currentPage}`
 
     if (rowsPerPage) {
         params += `&_limit=${rowsPerPage}`

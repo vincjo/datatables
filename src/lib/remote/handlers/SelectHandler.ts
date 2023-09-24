@@ -1,5 +1,4 @@
 import type Context from '$lib/remote/Context'
-import type { Selectable } from '$lib/remote'
 import { type Writable, type Readable, get } from 'svelte/store'
 
 
@@ -7,7 +6,7 @@ import { type Writable, type Readable, get } from 'svelte/store'
 export default class SelectHandler<Row> 
 {
     private rows            : Readable<Row[]>
-    private selected        : Writable<Selectable<Row>[]>
+    private selected        : Writable<(Row | Row[keyof Row])[]>
     private isAllSelected   : Readable<boolean>
 
     constructor(context: Context<Row>) 
@@ -17,7 +16,7 @@ export default class SelectHandler<Row>
         this.isAllSelected  = context.isAllSelected
     }
 
-    public set(value: Selectable<Row>) 
+    public set(value: Row[keyof Row] | Row) 
     {
         const selected = get(this.selected)
         if (selected.includes(value)) {
@@ -31,7 +30,7 @@ export default class SelectHandler<Row>
     {
         const isAllSelected = get(this.isAllSelected)
         if (isAllSelected) {
-            return this.remove()
+            return this.clear()
         }
         const rows = get(this.rows)
 
@@ -46,7 +45,7 @@ export default class SelectHandler<Row>
         }
     }
 
-    public remove() 
+    public clear() 
     {
         this.selected.set([])
     }

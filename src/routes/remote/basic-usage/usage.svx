@@ -30,15 +30,24 @@ https://api.mysite.com/users?
 ## State = client-side datatable state
 ````ts
 type State = {
-    pageNumber: number,
+    currentPage: number,
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
-    sort: Order<Row> | undefined,
+    sort: Sort<Row> | undefined,
     filters: Filter<Row>[] | undefined,
     setTotalRows: (value: number) => void
 }
 ````
+
+<!-- const qs = new URLSearchParams()
+
+qs.set('limit', rowsPerPge      )
+qs.set('sort' , sort.orderBy    )
+qs.set('order', sort.direction  )
+qs.set('skip' , offset          )
+
+const url = `/api_endpoint?${qs}` -->
 
 ## Load function
 ````ts

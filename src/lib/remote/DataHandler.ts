@@ -9,7 +9,7 @@ import FilterHandler    from './handlers/FilterHandler'
 import ColumnVisibilityHelper from './helpers/ColumnVisibilityHelper'
 
 import type { Writable, Readable } from 'svelte/store'
-import type { Internationalization, Row, State, Selectable, Order } from '$lib/remote'
+import type { Internationalization, Row, State, Order } from '$lib/remote'
 
 export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization }
 
@@ -61,79 +61,14 @@ export default class DataHandler<T extends Row = any>
         return this.context.rows
     }
 
-    public select(value: Selectable<T>)
+    public getRowCount(): Readable<{ total: number, start: number, end: number }> 
     {
-        this.selectHandler.set(value)
-    }
-
-    public getSelected()
-    {
-        return this.context.selected
-    }
-
-    public selectAll(selectBy: keyof T = null): void
-    {
-        this.selectHandler.all(selectBy)
-    }
-
-    public isAllSelected(): Readable<boolean>
-    {
-        return this.context.isAllSelected
+        return this.context.rowCount
     }
 
     public getRowsPerPage(): Writable<number | null>
     {
         return this.context.rowsPerPage
-    }
-
-    public sort(orderBy: keyof T)
-    {
-        this.setPage(1)
-        this.sortHandler.set(orderBy)
-    }
-
-    public applySort( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
-    {
-        this.sortHandler.apply(params)
-    }
-
-    public sortAsc(orderBy: keyof T)
-    {
-        this.setPage(1)
-        this.sortHandler.asc(orderBy)
-    }
-
-    public sortDesc(orderBy: keyof T)
-    {
-        this.setPage(1)
-        this.sortHandler.desc(orderBy)
-    }
-
-    public getSort(): Writable<Order<T>>
-    {
-        return this.context.sort
-    }
-
-    public search(value: string): void 
-    {
-        this.setPage(1)
-        this.context.search.set(value)
-    }
-
-    public clearSearch()
-    {
-        this.searchHandler.remove()
-    }
-
-    public filter(value: string | number, filterBy: keyof T)
-    {
-        this.setPage(1)
-        return this.filterHandler.set(value, filterBy)
-    }
-
-    public clearFilters(): void
-    {
-        this.filterHandler.remove()
     }
 
     public getPages(param = { ellipsis: false }): Readable<number[]> 
@@ -163,9 +98,84 @@ export default class DataHandler<T extends Row = any>
         }
     }
 
-    public getRowCount(): Readable<{ total: number, start: number, end: number }> 
+    public search(value: string): void 
     {
-        return this.context.rowCount
+        this.setPage(1)
+        this.context.search.set(value)
+    }
+
+    public clearSearch()
+    {
+        this.searchHandler.remove()
+    }
+
+    public sort(orderBy: keyof T)
+    {
+        this.setPage(1)
+        this.sortHandler.set(orderBy)
+    }
+
+    public sortAsc(orderBy: keyof T)
+    {
+        this.setPage(1)
+        this.sortHandler.asc(orderBy)
+    }
+
+    public sortDesc(orderBy: keyof T)
+    {
+        this.setPage(1)
+        this.sortHandler.desc(orderBy)
+    }
+
+    public getSort(): Writable<Order<T>>
+    {
+        return this.context.sort
+    }
+
+    public applySort( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
+    {
+        this.sortHandler.apply(params)
+    }
+
+    public defineSort( params: { orderBy: keyof T, direction: 'asc' | 'desc' })
+    {
+        this.sortHandler.define(params)
+    }
+
+    public clearSort()
+    {
+        this.sortHandler.clear()
+    }
+
+    public filter(value: string | number, filterBy: keyof T)
+    {
+        this.setPage(1)
+        return this.filterHandler.set(value, filterBy)
+    }
+
+    public clearFilters(): void
+    {
+        this.filterHandler.remove()
+    }
+
+    public select(value: T[keyof T] | T)
+    {
+        this.selectHandler.set(value)
+    }
+
+    public getSelected()
+    {
+        return this.context.selected
+    }
+
+    public selectAll(selectBy: keyof T = null): void
+    {
+        this.selectHandler.all(selectBy)
+    }
+
+    public isAllSelected(): Readable<boolean>
+    {
+        return this.context.isAllSelected
     }
 
     public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
@@ -198,7 +208,6 @@ export default class DataHandler<T extends Row = any>
 
 
     /**
-     * 
      * @depracted use on('change', callback) instead
      */
     public getTriggerChange(): Writable<number>
@@ -207,7 +216,6 @@ export default class DataHandler<T extends Row = any>
     }
 
     /**
-     * 
      * @deprecated use applySort() instead 
      */
     public applySorting( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
@@ -217,7 +225,6 @@ export default class DataHandler<T extends Row = any>
 
 
     /**
-     * 
      * @deprecated use getSort() instead 
      */
     public getSorted()

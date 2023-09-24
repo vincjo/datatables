@@ -9,9 +9,9 @@ export const reload = async (state: State) => {
 }
 
 const getParams = (state: State) => {
-    const { pageNumber, rowsPerPage, sort, filters, search } = state
+    const { currentPage, rowsPerPage, sort, filters, search } = state
 
-    let params = `_page=${pageNumber}`
+    let params = `_page=${currentPage}`
 
     if (rowsPerPage) {
         params += `&_limit=${rowsPerPage}`

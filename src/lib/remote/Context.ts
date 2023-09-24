@@ -1,5 +1,5 @@
 import { type Writable, writable, get, derived, type Readable } from 'svelte/store'
-import type { State, Order, Filter, Selectable } from '$lib/remote'
+import type { State, Sort, Filter } from '$lib/remote'
 import type { Params }  from './DataHandler'
 import EventHandler from './handlers/EventHandler'
 
@@ -16,8 +16,8 @@ export default class Context<Row>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
-    public sort                 : Writable<Order<Row>>
-    public selected             : Writable<Selectable<Row>[]>
+    public sort                 : Writable<Sort<Row>>
+    public selected             : Writable<(Row | Row[keyof Row])[]>
     public isAllSelected        : Readable<boolean>
 
 
@@ -46,15 +46,23 @@ export default class Context<Row>
         const sort          = get(this.sort)
         const filters       = get(this.filters)
         return {
-            currentPage,
-            rowsPerPage,
-            offset: rowsPerPage * (currentPage - 1),
+            currentPage: String(currentPage),
+            rowsPerPage: String(rowsPerPage),
+            offset: String(rowsPerPage * (currentPage - 1)),
             search: get(this.search),
-            sorted: sort ?? undefined as any, // deprecated
-            sort: sort ?? undefined as any,
+            sort: sort ? undefined : { orderBy: String(sort.orderBy), direction: sort.direction } as any,
             filters: filters.length > 0 ? filters : undefined as any,
             setTotalRows: (value: number) => this.totalRows.set(value),
-            pageNumber: currentPage
+
+
+            /**
+             * @deprecated use 'currentPage' instead
+             */
+            pageNumber: currentPage,
+            /**
+             * @deprecated use 'sort' instead
+             */
+            sorted: sort ?? undefined as any,
         }
     }
 

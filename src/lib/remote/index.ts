@@ -29,17 +29,17 @@ export type Filter<Row> = {
     value?: string | number | boolean
 }
 
-export type Order<Row> = {
+export type Sort<Row> = {
     orderBy?: keyof Row
     direction?: 'asc' | 'desc'
 }
 
 export type State = {
-    currentPage: number,
-    rowsPerPage: number,
-    offset: number,
+    currentPage: string,
+    rowsPerPage: string,
+    offset: string,
     search: string | undefined,
-    sort: Order<Row> | undefined
+    sort: Sort<Row> | undefined
     filters: Filter<Row>[] | undefined
     setTotalRows: (value: number) => void
 
@@ -47,11 +47,24 @@ export type State = {
     /**
      * @deprecated use 'sort' instead
      */
-    sorted: Order<Row> | undefined,
+    sorted: Sort<Row> | undefined,
     /**
      * @deprecated use 'currentPage' instead
      */
     pageNumber: number,
 }
 
+
+/**
+ * @deprecated use (Row[keyof Row] | Row) instead
+ * 
+ * import type { Row } from '@vincjo/datatables/remote'
+ */
 export type Selectable<Row> = Row[keyof Row] | Row
+
+/**
+ * @deprecated use type Sort<Row> instead
+ * 
+ * import type { Sort } from '@vincjo/datatables/remote'
+ */
+export type Order<Row> = Sort<Row>
