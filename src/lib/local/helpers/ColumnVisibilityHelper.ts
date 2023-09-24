@@ -3,8 +3,8 @@ import { type Writable, writable, get } from 'svelte/store'
 
 export default class ColumnVisibilityHelper
 {
-    private element: HTMLElement
-    private columns: Writable<{ name: string, index: number, isVisible?: boolean }[]>
+    private element : HTMLElement
+    private columns : Writable<{ name: string, index: number, isVisible?: boolean }[]>
     private mutation: MutationObserver
 
     constructor(columns: { name: string, index: number, isVisible?: boolean }[])

@@ -10,9 +10,9 @@ type Value = string | number | null | undefined | boolean | Criterion[]
 
 export default class FilterHandler<Row>
 {
-    protected filters: Writable<Filter<Row>[]>
-    protected event: EventHandler
-    private collection: Readable<{ value: unknown, filterBy: Field<Row>, check: string }[]>
+    private filters     : Writable<Filter<Row>[]>
+    private event       : EventHandler
+    private collection  : Readable<{ value: unknown, filterBy: Field<Row>, check: string }[]>
 
     constructor(context: Context<Row>)
     {

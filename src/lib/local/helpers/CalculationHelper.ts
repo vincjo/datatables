@@ -5,10 +5,10 @@ import { parseField } from '$lib/local/utils'
 
 export default class CalcultationHandler<Row>
 {
-    private rawRows: Writable<Row[]>
+    private rawRows     : Writable<Row[]>
     private filteredRows: Readable<Row[]>
-    private callback: (row: Row) => Row[keyof Row]
-    private precision: number
+    private callback    : (row: Row) => Row[keyof Row]
+    private precision   : number
 
     constructor(context: Context<Row>, field: Field<Row>, param: { precision: number })
     {
