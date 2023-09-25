@@ -11,7 +11,7 @@
 
     [...]
 
-</Datatble>
+</Datatable>
 ````
 
 </div>
