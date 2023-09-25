@@ -40,6 +40,7 @@ export default class DataHandler<T extends Row = any>
     public setRows(data: T[])
     {
         this.context.rawRows.set(data)
+        this.context.event.trigger('change')
         this.applySort()
     }
 
