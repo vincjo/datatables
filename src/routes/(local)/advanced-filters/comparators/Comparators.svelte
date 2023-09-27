@@ -1,10 +1,12 @@
 <script lang="ts">
     import Check from './Comparators_Check.svelte'
     let comparators = [
-        { name: 'contains', isDefault: true },
+        { name: 'isLike', isDefault: true },
+        { name: 'isNotLike' },
         { name: 'startsWith' },
         { name: 'endsWith' },
         { name: 'isEqualTo' },
+        { name: 'isNotEqualTo' },
         { name: 'isGreaterThan', type: 'number' },
         { name: 'isGreaterThanOrEqualTo', type: 'number' },
         { name: 'isLessThan', type: 'number' },

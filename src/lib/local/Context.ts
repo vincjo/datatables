@@ -100,7 +100,7 @@ export default class Context<Row>
                 return this.match(entry[k], value, compare)
             })
         }
-        if (!compare) return check.contains(entry, value)
+        if (!compare) return check.isLike(entry, value)
         return compare(entry, value)
     }
 
