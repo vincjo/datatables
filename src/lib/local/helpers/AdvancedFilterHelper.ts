@@ -20,7 +20,7 @@ export default class AdvancedFilterHandler<Row>
         this.selected       = writable([])
     }
 
-    public set(value: Value, comparator: Comparator<any> = check.contains)
+    public set(value: Value, comparator: Comparator<any> = check.isLike)
     {
         if (this.criteria.find(criterion => criterion.value === value)) {
             this.criteria = this.criteria.filter(criterion => criterion.value !== value)

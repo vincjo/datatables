@@ -15,7 +15,7 @@ export default class FilterHelper<Row>
     {
         this.filterHandler  = filterHandler
         this.filterBy       = filterBy
-        this.comparator     = comparator ?? check.contains
+        this.comparator     = comparator ?? check.isLike
         this.callback       = () => null
     }
 

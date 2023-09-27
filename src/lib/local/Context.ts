@@ -97,13 +97,13 @@ export default class Context<Row>
         if (!entry && compare) {
             return compare(entry, value)
         }
-        if (!entry) return check.contains(entry, value)
+        if (!entry) return check.isLike(entry, value)
         else if (typeof entry === 'object') {
             return Object.keys(entry).some((k) => {
                 return this.match(entry[k], value, compare)
             })
         }
-        if (!compare) return check.contains(entry, value)
+        if (!compare) return check.isLike(entry, value)
         return compare(entry, value)
     }
 

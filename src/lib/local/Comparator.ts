@@ -1,8 +1,13 @@
-import type { Comparator, Row, Criterion } from '$lib/local'
+import type { Criterion } from '$lib/local'
 
 export const check = {
-    contains: (entry: any, value: any) => {
+
+    isLike: (entry: any, value: any) => {
         return stringify(entry).indexOf(stringify(value)) > -1
+    },
+
+    isNotLike: (entry: any, value: any) => {
+        return stringify(entry).indexOf(stringify(value)) === -1
     },
 
     startsWith: (entry: any, value: any) => {
@@ -15,6 +20,10 @@ export const check = {
 
     isEqualTo: (entry: any, value: any) => {
         return stringify(entry) === stringify(value)
+    },
+
+    isNotEqualTo: (entry: any, value: any) => {
+        return stringify(entry) !== stringify(value)
     },
 
     isGreaterThan: (entry: number, value: number) => {
@@ -74,7 +83,15 @@ export const check = {
             }
         }
         return false
-    }
+    },
+
+    /**
+     * @deprecated use "isLike" instead 
+     * @since 1.12.7 2023-09-27
+     */
+    contains: (entry: any, value: any) => {
+        return check.isLike(entry, value)
+    },
 }
 
 

@@ -63,8 +63,8 @@ export default class FilterHandler<Row>
                 return { 
                     value, 
                     filterBy,
-                    check: comparator ? comparator.name : 'contains'
-                    // set: (value: Value, comparator: Comparator<Row> = check.contains) => {
+                    check: comparator ? comparator.name : 'isLike'
+                    // set: (value: Value, comparator: Comparator<Row> = check.isLike) => {
                     //     this.set(value, filterBy, comparator)
                     // },
                     // clear: () => {
