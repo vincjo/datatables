@@ -51,6 +51,19 @@ export default class CalcultationHandler<Row>
         })
     }
 
+    public bounds(callback: (values: number[]) => any[] = null): [min: number, max: number]
+    {
+        const rawRows = get(this.rawRows)
+        const values = rawRows.map(row => this.callback(row))
+ 
+        const numbers = callback ? callback(values as number[]) : values
+
+        return [
+            Math.min(...numbers.filter(Boolean)),
+            Math.max(...numbers.filter(Boolean))
+        ]
+    }
+
     public setPrecision(value: number)
     {
         this.precision = value
