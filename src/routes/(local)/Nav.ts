@@ -36,6 +36,7 @@ export default [
             { name: 'sum', path: '/sum' },
             { name: 'average', path: '/avg' },
             { name: 'distinct', path: '/distinct' },
+            { name: 'bounds', path: '/bounds' },
         ]
     },
     {

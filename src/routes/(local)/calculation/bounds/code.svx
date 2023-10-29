@@ -9,19 +9,17 @@
     import type { Datahandler } from '@vincjo/datatables'
     export let handler: DataHandler
 
-    const distinct = handler.createCalculation('columnName').distinct()
+    const [min, max] = handler.createCalculation('columnName').bounds()
 </script>
 
 <ul>
-    {#each distinct as item}
-        {@const { value, count } = item}
-        <li>{value} has {count} occurrences</li>
-    {/each}
+    <li>Minimum value: {min}</li>
+    <li>Maximum value: {max}</li>
 </ul>
 ````
 <Basic/>
 
-
+<!-- 
 ### Avanced
 
 ````svelte
@@ -52,4 +50,4 @@
     pre {
         max-width: 800px;
     }
-</style>    
+</style>     -->
