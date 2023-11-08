@@ -26,6 +26,7 @@
         "deploy": "pm2 deploy ecosystem.config.cjs production"
     },
     "devDependencies": {
+        "@iconify-json/material-symbols-light": "^1.1.0",
         "@sveltejs/adapter-node": "^1.0.0-next.100",
         "@sveltejs/kit": "^1.20.4",
         "@sveltejs/package": "^2.1.0",
@@ -47,6 +48,7 @@
         "tslib": "^2.3.1",
         "typescript": "^5.0.0",
         "typescript-parser": "^2.6.1",
+        "unplugin-icons": "^0.17.1",
         "vite": "^4.2.2"
     },
     "peerDependencies": {
@@ -64,77 +66,77 @@
             "svelte": "./dist/index.js",
             "default": "./dist/index.js"
         },
-        "./local/Comparator": {
-            "types": "./dist/local/Comparator.d.ts",
-            "default": "./dist/local/Comparator.js"
+        "./client/Comparator": {
+            "types": "./dist/client/Comparator.d.ts",
+            "default": "./dist/client/Comparator.js"
         },
-        "./local/Context": {
-            "types": "./dist/local/Context.d.ts",
-            "default": "./dist/local/Context.js"
+        "./client/Context": {
+            "types": "./dist/client/Context.d.ts",
+            "default": "./dist/client/Context.js"
         },
-        "./local/DataHandler": {
-            "types": "./dist/local/DataHandler.d.ts",
-            "default": "./dist/local/DataHandler.js"
+        "./client/DataHandler": {
+            "types": "./dist/client/DataHandler.d.ts",
+            "default": "./dist/client/DataHandler.js"
         },
-        "./local/Datatable.svelte": {
-            "types": "./dist/local/Datatable.svelte.d.ts",
-            "svelte": "./dist/local/Datatable.svelte",
-            "default": "./dist/local/Datatable.svelte"
+        "./client/Datatable.svelte": {
+            "types": "./dist/client/Datatable.svelte.d.ts",
+            "svelte": "./dist/client/Datatable.svelte",
+            "default": "./dist/client/Datatable.svelte"
         },
-        "./local/handlers/FilterHandler": {
-            "types": "./dist/local/handlers/FilterHandler.d.ts",
-            "default": "./dist/local/handlers/FilterHandler.js"
+        "./client/handlers/FilterHandler": {
+            "types": "./dist/client/handlers/FilterHandler.d.ts",
+            "default": "./dist/client/handlers/FilterHandler.js"
         },
-        "./local/handlers/PageHandler": {
-            "types": "./dist/local/handlers/PageHandler.d.ts",
-            "default": "./dist/local/handlers/PageHandler.js"
+        "./client/handlers/PageHandler": {
+            "types": "./dist/client/handlers/PageHandler.d.ts",
+            "default": "./dist/client/handlers/PageHandler.js"
         },
-        "./local/handlers/SearchHandler": {
-            "types": "./dist/local/handlers/SearchHandler.d.ts",
-            "default": "./dist/local/handlers/SearchHandler.js"
+        "./client/handlers/SearchHandler": {
+            "types": "./dist/client/handlers/SearchHandler.d.ts",
+            "default": "./dist/client/handlers/SearchHandler.js"
         },
-        "./local/handlers/SelectHandler": {
-            "types": "./dist/local/handlers/SelectHandler.d.ts",
-            "default": "./dist/local/handlers/SelectHandler.js"
+        "./client/handlers/SelectHandler": {
+            "types": "./dist/client/handlers/SelectHandler.d.ts",
+            "default": "./dist/client/handlers/SelectHandler.js"
         },
-        "./local/handlers/SortHandler": {
-            "types": "./dist/local/handlers/SortHandler.d.ts",
-            "default": "./dist/local/handlers/SortHandler.js"
+        "./client/handlers/SortHandler": {
+            "types": "./dist/client/handlers/SortHandler.d.ts",
+            "default": "./dist/client/handlers/SortHandler.js"
         },
         "./local": {
-            "types": "./dist/local/index.d.ts",
-            "svelte": "./dist/local/index.js",
-            "default": "./dist/local/index.js"
+            "types": "./dist/client/index.d.ts",
+            "svelte": "./dist/client/index.js",
+            "default": "./dist/client/index.js"
         },
-        "./local/Pagination.svelte": {
-            "types": "./dist/local/Pagination.svelte.d.ts",
-            "svelte": "./dist/local/Pagination.svelte",
-            "default": "./dist/local/Pagination.svelte"
+        "./client/Pagination.svelte": {
+            "types": "./dist/client/Pagination.svelte.d.ts",
+            "svelte": "./dist/client/Pagination.svelte",
+            "default": "./dist/client/Pagination.svelte"
         },
-        "./local/RowCount.svelte": {
-            "types": "./dist/local/RowCount.svelte.d.ts",
-            "svelte": "./dist/local/RowCount.svelte",
-            "default": "./dist/local/RowCount.svelte"
+        "./client/RowCount.svelte": {
+            "types": "./dist/client/RowCount.svelte.d.ts",
+            "svelte": "./dist/client/RowCount.svelte",
+            "default": "./dist/client/RowCount.svelte"
         },
-        "./local/RowsPerPage.svelte": {
-            "types": "./dist/local/RowsPerPage.svelte.d.ts",
-            "svelte": "./dist/local/RowsPerPage.svelte",
-            "default": "./dist/local/RowsPerPage.svelte"
+        "./client/RowsPerPage.svelte": {
+            "types": "./dist/client/RowsPerPage.svelte.d.ts",
+            "svelte": "./dist/client/RowsPerPage.svelte",
+            "default": "./dist/client/RowsPerPage.svelte"
         },
-        "./local/Search.svelte": {
-            "types": "./dist/local/Search.svelte.d.ts",
-            "svelte": "./dist/local/Search.svelte",
-            "default": "./dist/local/Search.svelte"
+        "./client/Search.svelte": {
+            "types": "./dist/client/Search.svelte.d.ts",
+            "svelte": "./dist/client/Search.svelte",
+            "default": "./dist/client/Search.svelte"
         },
-        "./local/Th.svelte": {
-            "types": "./dist/local/Th.svelte.d.ts",
-            "svelte": "./dist/local/Th.svelte",
-            "default": "./dist/local/Th.svelte"
+        "./client/Th.svelte": {
+            "types": "./dist/client/Th.svelte.d.ts",
+            "svelte": "./dist/client/Th.svelte",
+            "default": "./dist/client/Th.svelte"
         },
-        "./local/ThFilter.svelte": {
-            "types": "./dist/local/ThFilter.svelte.d.ts",
-            "svelte": "./dist/local/ThFilter.svelte",
-            "default": "./dist/local/ThFilter.svelte"
+        "./client/ThFilter.svelte": {
+            "types": "./dist/client/ThFilter.svelte.d.ts",
+            "svelte": "./dist/client/ThFilter.svelte",
+            "default": "./dist/client/ThFilter.svelte"
         },
         "./remote/Context": {
             "types": "./dist/remote/Context.d.ts",
@@ -220,52 +222,52 @@
                 "./dist/index.d.ts"
             ],
             "local/Comparator": [
-                "./dist/local/Comparator.d.ts"
+                "./dist/client/Comparator.d.ts"
             ],
             "local/Context": [
-                "./dist/local/Context.d.ts"
+                "./dist/client/Context.d.ts"
             ],
             "local/DataHandler": [
-                "./dist/local/DataHandler.d.ts"
+                "./dist/client/DataHandler.d.ts"
             ],
             "local/Datatable.svelte": [
-                "./dist/local/Datatable.svelte.d.ts"
+                "./dist/client/Datatable.svelte.d.ts"
             ],
             "local/handlers/FilterHandler": [
-                "./dist/local/handlers/FilterHandler.d.ts"
+                "./dist/client/handlers/FilterHandler.d.ts"
             ],
             "local/handlers/PageHandler": [
-                "./dist/local/handlers/PageHandler.d.ts"
+                "./dist/client/handlers/PageHandler.d.ts"
             ],
             "local/handlers/SearchHandler": [
-                "./dist/local/handlers/SearchHandler.d.ts"
+                "./dist/client/handlers/SearchHandler.d.ts"
             ],
             "local/handlers/SelectHandler": [
-                "./dist/local/handlers/SelectHandler.d.ts"
+                "./dist/client/handlers/SelectHandler.d.ts"
             ],
             "local/handlers/SortHandler": [
-                "./dist/local/handlers/SortHandler.d.ts"
+                "./dist/client/handlers/SortHandler.d.ts"
             ],
             "local": [
-                "./dist/local/index.d.ts"
+                "./dist/client/index.d.ts"
             ],
             "local/Pagination.svelte": [
-                "./dist/local/Pagination.svelte.d.ts"
+                "./dist/client/Pagination.svelte.d.ts"
             ],
             "local/RowCount.svelte": [
-                "./dist/local/RowCount.svelte.d.ts"
+                "./dist/client/RowCount.svelte.d.ts"
             ],
             "local/RowsPerPage.svelte": [
-                "./dist/local/RowsPerPage.svelte.d.ts"
+                "./dist/client/RowsPerPage.svelte.d.ts"
             ],
             "local/Search.svelte": [
-                "./dist/local/Search.svelte.d.ts"
+                "./dist/client/Search.svelte.d.ts"
             ],
             "local/Th.svelte": [
-                "./dist/local/Th.svelte.d.ts"
+                "./dist/client/Th.svelte.d.ts"
             ],
             "local/ThFilter.svelte": [
-                "./dist/local/ThFilter.svelte.d.ts"
+                "./dist/client/ThFilter.svelte.d.ts"
             ],
             "remote/Context": [
                 "./dist/remote/Context.d.ts"

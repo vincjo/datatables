@@ -1,90 +1,95 @@
 <script>
-    import { url, getPath } from 'gros/page'
+    import { darkMode } from '$site/utils'
+    import Sun from '~icons/material-symbols-light/sunny-outline-rounded'
+    import Moon from '~icons/material-symbols-light/dark-mode-outline-rounded'
+    import Github from './Header_Github.svelte'
+    import Logo from '$site/Logo.svelte'
+    import { getPath, url } from 'gros/page'
 </script>
 
 
-<header class="flex z-depth-2">
-    <a href="/datatables/home">
-        <aside>
-            <img src="/datatables/logo.svg" alt="logo" />
-            <div class="alt-font">
-                svelte<br />simple<br />datatables
-            </div>
-        </aside>
-    </a>
-    <article class="flex">
-        <nav class="flex">
-            <a class:active={$url.includes('docs')} href="{getPath('/home')}">Docs</a>
-            <a class:active={$url.includes('examples')} href="{getPath('/examples')}">Examples</a>
-            <a class:active={$url.includes('api')} href="{getPath('/api-reference')}">API</a>
-        </nav>
-        <a href="https://github.com/vincjo/datatables" class="flex">
-            <img alt="github logo" src="/datatables/github.svg" /><span>Github</span>
+
+
+<header class="flex">
+    <nav class="flex">
+        <a class="flex logo" href="{getPath('/')}">
+            <Logo height="28px"/>
+            <span class="alt-font">svelte simple datatables</span>
         </a>
-    </article>
+        <a class="menu" class:active={$url.indexOf('docs') > -1} href="{getPath('/docs')}">Documentation</a>
+        <a class="menu" class:active={$url.indexOf('api') > -1} href="{getPath('/api')}">API</a>
+    </nav>
+
+    <div/>
+
+    <aside class="flex">
+        <Github/>
+        <button on:click={() => $darkMode = !$darkMode} class="btn">
+            {#if $darkMode}
+                <Moon/>
+            {:else}
+                <Sun/>
+            {/if}
+        </button>
+    </aside>
 </header>
 
 
 <style>
     header {
-        position: fixed;
-        justify-content: space-between;
-        top: 0; left: 0; right: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
         height: 56px;
-        background: rgba(255,255,255,0.6);
+        border-bottom: 1px solid var(--grey);
+        background: var(--bg);
+        color: var(--font);
+        justify-content: space-between;
+        padding: 0 32px;
         backdrop-filter: blur(4px);
-        z-index: 2;
-        padding: 0 24px;
     }
-    header a {
+    a {
         text-decoration: none;
     }
-    a.flex img {
-        float: left;
-        padding: 8px 8px;
-        width: 44px;
+    a.logo span {
+        font-size: 18px;
+        margin-left: 8px;
+        letter-spacing: -0.4px;
     }
-    span {
-        padding-right: 8px;
+    a.menu {
+        margin-left: 32px;
+        color: var(--font-grey);
+        font-size: 16px;
+        transition: color, 0.2s;
+    }
+    a.menu:hover {
+        margin-left: 32px;
+        color: var(--primary-lighten);
+        font-size: 16px;
+        transition: color, 0.2s;
+    }
+    a.menu.active {
+        color: var(--primary);
+    }
+    button {
+        border-radius: 4px;
+        padding: 0;
+        width: 40px;
+        height: 32px;
+    }
+    button:hover {
+        background: var(--grey);
     }
 
-    aside {
-        display: flex;
-        justify-content: flex-start;
-        margin: 0;
-        height: 40px;
-        width: 23vw;
-        margin-top: 8px;
-        padding: 0 24px;
+    @media (min-width: 1200px) {
+        header {
+            padding: 0 96px;
+        }
     }
-    aside div {
-        font-size: 12.5px;
-        line-height: 12.5px;
-        text-align: left;
-        font-weight: 400;
-        margin: 0;
-        color: #333;
-        height: 40px;
-    }
-    aside img {
-        width: 48px;
-        margin: 0 4px;
-    }
-    nav {
-        margin-right: 40px;
-    }
-    nav a {
-        display: inline-block;
-        margin: 0 4px;
-        font-weight: 400;
-        padding: 8px 16px;
-        border-radius: 4px;
-    }
-    nav a:hover {
-        color: var(--primary); 
-    }
-    nav a.active {
-        background: var(--primary-lighten-1);
-        color: var(--primary-darken); 
+    @media (max-width: 640px) {
+        nav {
+            display: none;
+        }
     }
 </style>
