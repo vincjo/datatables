@@ -40,7 +40,7 @@ export default class DataHandler<T extends Row = any>
     public setRows(data: T[])
     {
         this.context.rawRows.set(data)
-        this.context.event.trigger('change')
+        this.context.events.trigger('change')
         this.applySort()
     }
 
@@ -54,7 +54,7 @@ export default class DataHandler<T extends Row = any>
         return this.context.filteredRows
     }
 
-    public getRowCount(): Readable<{ total: number, start: number, end: number }>
+    public getRowCount(): Readable<{ start: number, end: number, total: number }>
     {
         return this.context.rowCount
     }
@@ -185,9 +185,14 @@ export default class DataHandler<T extends Row = any>
         return this.context.isAllSelected
     }
 
+    public getSelectedCount(): Readable<{ count: number, total: number}>
+    {
+        return this.context.selectedCount
+    }
+
     public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
     {
-        this.context.event.add(event, callback)
+        this.context.events.add(event, callback)
     }
 
     public createCalculation(field: Field<T>, param?: { precision: number }): CalculationHelper<T>
@@ -255,7 +260,7 @@ export default class DataHandler<T extends Row = any>
      */
     public getTriggerChange(): Writable<number>
     {
-        return this.context.event.triggerChange
+        return this.context.events.triggerChange
     }
 
 

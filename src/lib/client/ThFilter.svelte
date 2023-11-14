@@ -39,11 +39,11 @@
         outline: none;
         border-radius: 0;
         font-size: 14px;
+        color: var(--font-grey, #757575);
         font-family: Arial, Helvetica, sans-serif;
     }
     input::placeholder {
-        color: #bdbdbd;
-        font-style: italic;
+        color: var(--grey, #bdbdbd);
         font-size: 13px;
     }
     input:focus {

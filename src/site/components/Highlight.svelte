@@ -24,15 +24,15 @@
 <style>
     aside {
         overflow: auto;
-        background: #212121;
+        background: var(--bg-code);
         border-radius: 4px;
     }
     pre {
         margin: 0;
-        background: #212121;
+        background: var(--bg-code);
         padding: 32px;
     }
     code {
-        background: #212121;
+        background: var(--bg-code);
     }
 </style>

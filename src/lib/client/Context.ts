@@ -3,12 +3,12 @@ import type { Filter, Sort, Comparator, Criterion, Field } from '$lib/client'
 import type { Params }  from '$lib/client/DataHandler'
 import { isNull, parseField } from './utils'
 import { check } from './Comparator'
-import EventHandler from './handlers/EventHandler'
+import EventsHandler from './handlers/EventsHandler'
 
 
 export default class Context<Row> 
 {
-    public event                : EventHandler
+    public events               : EventsHandler
     public rowsPerPage          : Writable<number | null>
     public currentPage          : Writable<number>
     public search               : Writable<{ value?: string, scope?: (keyof Row)[] }>
@@ -17,7 +17,7 @@ export default class Context<Row>
     public rawRows              : Writable<Row[]>
     public filteredRows         : Readable<Row[]>
     public pagedRows            : Readable<Row[]>
-    public rowCount             : Readable<{ total: number, start: number, end: number }>
+    public rowCount             : Readable<{ start: number, end: number, total: number }>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
@@ -25,26 +25,28 @@ export default class Context<Row>
     public selected             : Writable<(Row | Row[keyof Row])[]>
     public selectScope          : Writable<'all' | 'currentPage'>
     public isAllSelected        : Readable<boolean>
+    public selectedCount        : Readable<{ count: number, total: number }>
 
     constructor(data: Row[], params: Params) 
     {
-        this.event               = new EventHandler()
-        this.rowsPerPage         = writable(params.rowsPerPage)
-        this.currentPage         = writable(1)
-        this.search              = writable({})
-        this.filters             = writable([])
-        this.filterCount         = this.createFilterCount()
-        this.rawRows             = writable(data)
-        this.filteredRows        = this.createFilteredRows()
-        this.pagedRows           = this.createPagedRows()
-        this.rowCount            = this.createRowCount()
-        this.pages               = this.createPages()
-        this.pagesWithEllipsis   = this.createPagesWithEllipsis()
-        this.pageCount           = this.createPageCount()
-        this.sort                = writable({})
-        this.selected            = writable([])
-        this.selectScope         = writable('all')
-        this.isAllSelected       = this.createIsAllSelected()
+        this.events             = new EventsHandler()
+        this.rowsPerPage        = writable(params.rowsPerPage)
+        this.currentPage        = writable(1)
+        this.search             = writable({})
+        this.filters            = writable([])
+        this.filterCount        = this.createFilterCount()
+        this.rawRows            = writable(data)
+        this.filteredRows       = this.createFilteredRows()
+        this.pagedRows          = this.createPagedRows()
+        this.rowCount           = this.createRowCount()
+        this.pages              = this.createPages()
+        this.pagesWithEllipsis  = this.createPagesWithEllipsis()
+        this.pageCount          = this.createPageCount()
+        this.sort               = writable({})
+        this.selected           = writable([])
+        this.selectScope        = writable('all')
+        this.isAllSelected      = this.createIsAllSelected()
+        this.selectedCount      = this.createSelectedCount()
     }
 
     private createFilterCount()
@@ -70,7 +72,7 @@ export default class Context<Row>
                     })
                     this.currentPage.set(1)
                     this.selected.set([])
-                    this.event.trigger('change')
+                    this.events.trigger('change')
                 }
 
                 if ($filters.length > 0) {
@@ -82,7 +84,7 @@ export default class Context<Row>
                     })
                     this.currentPage.set(1)
                     this.selected.set([])
-                    this.event.trigger('change')
+                    this.events.trigger('change')
                 }
                 return $rawRows
             }
@@ -197,6 +199,19 @@ export default class Context<Row>
                     return true
                 }
                 return false
+            }
+        )
+    }
+
+    private createSelectedCount()
+    {
+        return derived(
+            [this.selected, this.rowCount],
+            ([$selected, $rowCount]) => {
+                return {
+                    count: $selected.length,
+                    total: $rowCount.total
+                }
             }
         )
     }

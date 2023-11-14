@@ -20,9 +20,9 @@
         left: 0;
         bottom: 0;
         width: 240px;
-        padding-right: 32px;
         overflow-y: scroll;
         padding: 16px 0 24px 36px;
+        border-left: 1px solid var(--grey);
     }
     h1 {
         font-weight: bold;
@@ -35,14 +35,25 @@
         display: block;
         text-decoration: none;
         color: var(--font-grey);
-        margin-top: 12px;
+        margin-top: 4px;
+        margin-right: 8px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: background, 0.2s;
     }
     a:hover {
-        text-decoration: underline;
+        background: var(--primary-lighten-1);
     }
     a.active {
         text-decoration: none;
         color: var(--primary);
         font-weight: bold;
+        background: var(--primary-lighten-1)
+    }
+
+    @media (max-width: 800px) {
+        nav {
+            display: none;
+        }
     }
 </style>

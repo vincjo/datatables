@@ -1,15 +1,15 @@
 <script>
     import Header from './Header.svelte'
     import { ModalContainer } from 'gros/modal'
-    import { darkMode } from '$site/utils'
+
 </script>
 
 
 <ModalContainer/>
 
-<main class:dark={$darkMode}>
+<main>
     <Header/>
-    <section class="thin-scrollbar">
+    <section>
         <slot/>
     </section>
 </main>
@@ -27,7 +27,6 @@
         left: 32px;
         bottom: 0;
         right: 0;
-        overflow-y: auto;
         padding: 0 32px;
     }
     @media (min-width: 1200px) {

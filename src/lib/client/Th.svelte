@@ -36,7 +36,7 @@
         white-space: nowrap;
         font-size: 13px;
         user-select: none;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--grey, #e0e0e0);
     }
     th.sortable {
         cursor: pointer;
@@ -64,18 +64,18 @@
         width: 0;
     }
     th.sortable span:before {
-        border-bottom-color: #e0e0e0;
+        border-bottom-color: var(--grey, #e0e0e0);
         margin-top: 2px;
     }
     th.sortable span:after {
-        border-top-color: #e0e0e0;
+        border-top-color: var(--grey, #e0e0e0);
         margin-top: 2px;
     }
     th.active.sortable span.asc:before {
-        border-bottom-color: #9e9e9e;
+        border-bottom-color: var(--font-grey, #9e9e9e);
     }
     th.active.sortable span.desc:after {
-        border-top-color: #9e9e9e;
+        border-top-color: var(--font-grey, #9e9e9e);
     }
     th:not(.sortable) span {
         visibility: hidden;

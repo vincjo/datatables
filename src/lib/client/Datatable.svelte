@@ -64,18 +64,18 @@
         padding: 8px 20px;
     }
     section :global(thead tr th) {
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--grey, #e0e0e0);
     }
     section :global(tbody tr) {
         transition: background, 0.2s;
     }
     section :global(tbody tr:hover) {
-        background: #fafafa;
+        background: var(--grey-lighten-3, #fafafa);
     }
     section :global(tbody td) {
         padding: 4px 20px;
-        border-right: 1px solid #eee;
-        border-bottom: 1px solid #eee;
+        border-right: 1px solid var(--grey-lighten, #eee);
+        border-bottom: 1px solid var(--grey-lighten, #eee)
     }
     section :global(tbody td.numeric) {
         text-align: right;
@@ -90,7 +90,7 @@
         align-items: center;
     }
     footer {
-        border-top: 1px solid #e0e0e0;
+        border-top: 1px solid var(--grey, #e0e0e0);
     }
     header.container,
     footer.container {

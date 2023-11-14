@@ -1,4 +1,4 @@
-import type { Filter, Field, Comparator, EventHandler, Criterion } from '$lib/client'
+import type { Filter, Field, Comparator, EventsHandler, Criterion } from '$lib/client'
 import { isNotNull } from '../utils'
 import type Context from '$lib/client/Context'
 import { type Writable, type Readable, derived } from 'svelte/store'
@@ -10,13 +10,13 @@ type Value = string | number | null | undefined | boolean | Criterion[]
 export default class FilterHandler<Row>
 {
     private filters     : Writable<Filter<Row>[]>
-    private event       : EventHandler
+    private events      : EventsHandler
     private collection  : Readable<{ value: unknown, filterBy: Field<Row>, check: string }[]>
 
     constructor(context: Context<Row>)
     {
         this.filters = context.filters
-        this.event   = context.event
+        this.events  = context.events
     }
 
     public set(value: Value, filterBy: Field<Row>, comparator: Comparator<Row> = null )
@@ -35,8 +35,8 @@ export default class FilterHandler<Row>
     public clear()
     {
         this.filters.set([])
-        this.event.trigger('change')
-        this.event.trigger('clearFilters')
+        this.events.trigger('change')
+        this.events.trigger('clearFilters')
     }
 
     public get()

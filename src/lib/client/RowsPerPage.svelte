@@ -37,5 +37,13 @@
     }
     select {
         margin: 0 4px;
+        background: var(--bg, #fff);
+        color: var(--font-grey, #757575);
+        border-radius: 4px;
+        border: 1px solid var(--grey, #9e9e9e);
+        padding: 2px 4px;
+    }
+    select:focus {
+        outline: 2px solid var(--grey, #e0e0e0);
     }
 </style>

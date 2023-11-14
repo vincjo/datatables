@@ -4,7 +4,7 @@
     font-weight: 400;
     src: url('./fonts/icons.woff2') format('woff2');
 }
-
+@font-face{font-family:Roboto;src:url('./fonts/Roboto/Roboto-Regular.ttf')}
 button,
 input[type='button'],
 input[type='reset'],
@@ -53,7 +53,6 @@ input[type='url'],
 input[type='week'],
 input:not([type]),
 textarea {
-    transition: all, 0.2s;
     appearance: none;
     -webkit-appearance: none;
     background-color: transparent;
@@ -64,6 +63,7 @@ textarea {
     height: 38px;
     padding: 0.6rem 1rem 0.7rem;
     width: 100%;
+    /* transition: border, 0.2s; */
 }
 
 input[type='color']:focus,

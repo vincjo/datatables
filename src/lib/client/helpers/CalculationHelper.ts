@@ -3,7 +3,7 @@ import type Context from '$lib/client/Context'
 import { type Writable, type Readable, get, derived } from 'svelte/store'
 import { parseField } from '$lib/client/utils'
 
-export default class CalcultationHandler<Row>
+export default class CalcultationHelper<Row>
 {
     private rawRows     : Writable<Row[]>
     private filteredRows: Readable<Row[]>

@@ -5,7 +5,7 @@ import { check } from '$lib/client/Comparator'
 
 type Value = string | number | [min: number, max: number]
 
-export default class AdvancedFilterHandler<Row>
+export default class AdvancedFilterHelper<Row>
 {
     private filterHandler   : FilterHandler<Row>
     private criteria        : Criterion[]

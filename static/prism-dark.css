@@ -1,0 +1,216 @@
+[data-theme="dark"] code[class*='language-'],
+[data-theme="dark"] pre[class*='language-'] {
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    color: #eee;
+    background: #212121;
+    font-family: JetBrains, Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+    font-size: 1em;
+    line-height: 1.5em;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+[data-theme="dark"] span.token.language-javascript {
+    color: #D7AF7D;
+}
+/* code[class*="language-"]::-moz-selection,
+pre[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection,
+pre[class*="language-"] ::-moz-selection {
+	background: #363636;
+}
+
+code[class*="language-"]::selection,
+pre[class*="language-"]::selection,
+code[class*="language-"] ::selection,
+pre[class*="language-"] ::selection {
+	background: #363636;
+} */
+
+[data-theme="dark"] :not(pre) > code[class*='language-'] {
+    white-space: normal;
+    border-radius: 0.2em;
+    padding: 0.1em;
+}
+
+[data-theme="dark"] pre[class*='language-'] {
+    overflow: auto;
+    position: relative;
+    margin: 0.5em 0;
+    padding: 1.25em 1em;
+}
+
+[data-theme="dark"] .language-css > code,
+[data-theme="dark"] .language-sass > code,
+[data-theme="dark"] .language-scss > code {
+    color: #fd9170;
+}
+
+[data-theme="dark"] [class*='language-'] .namespace {
+    font-weight: bold;
+    color: #f48fb1;
+}
+
+[data-theme="dark"] .token.atrule {
+    color: #c792ea;
+}
+
+[data-theme="dark"] .token.attr-name {
+    color: #ffcb6b;
+}
+
+[data-theme="dark"] .token.attr-value {
+    color: #a5e844;
+}
+
+[data-theme="dark"] .token.attribute {
+    color: #a5e844;
+}
+
+[data-theme="dark"] .token.boolean {
+    color: #c792ea;
+}
+
+[data-theme="dark"] .token.builtin {
+    color: #ffcb6b;
+}
+
+[data-theme="dark"] .token.cdata {
+    color: #80cbc4;
+}
+
+[data-theme="dark"] .token.char {
+    color: #80cbc4;
+}
+
+[data-theme="dark"] .token.class {
+    color: #ffcb6b;
+}
+
+[data-theme="dark"] .token.class-name {
+    color: #e1efff;
+    font-weight: bold;
+    text-shadow:
+    0 0 8px rgba(202,228,225,0.34),
+    0 0 3px rgba(30,132,242,0.52),
+    0 0 8px rgba(30,132,242,0.78),
+    0 0 14px rgba(30,132,242,0.92);
+}
+
+[data-theme="dark"] .token.comment {
+    color: #757575;
+}
+
+[data-theme="dark"] .token.constant {
+    color: #c792ea;
+}
+
+[data-theme="dark"] .token.deleted {
+    color: #ff6666;
+}
+
+[data-theme="dark"] .token.doctype {
+    color: #616161;
+}
+
+[data-theme="dark"] .token.entity {
+    color: #ff6666;
+}
+
+[data-theme="dark"] .token.function {
+    /* color: #c792ea; */
+    color: #b39ddb;
+}
+
+[data-theme="dark"] .token.hexcode {
+    color: #f2ff00;
+}
+
+[data-theme="dark"] .token.id {
+    color: #c792ea;
+    font-weight: bold;
+}
+
+[data-theme="dark"] .token.important {
+    color: #c792ea;
+    font-weight: bold;
+}
+
+[data-theme="dark"] .token.inserted {
+    color: #80cbc4;
+}
+
+[data-theme="dark"] .token.keyword {
+    color: #f48fb1;
+    /* color: #c792ea; */
+}
+
+[data-theme="dark"] .token.number {
+    color: #fd9170;
+}
+
+[data-theme="dark"] .token.operator {
+    color: #89ddff;
+}
+
+[data-theme="dark"] .token.prolog {
+    color: #616161;
+}
+
+[data-theme="dark"] .token.property {
+    color: #80cbc4;
+}
+
+[data-theme="dark"] .token.pseudo-class {
+    color: #a5e844;
+}
+
+[data-theme="dark"] .token.pseudo-element {
+    color: #a5e844;
+}
+
+[data-theme="dark"] .token.punctuation {
+    color: #89ddff;
+}
+
+[data-theme="dark"] .token.regex {
+    color: #f2ff00;
+}
+
+[data-theme="dark"] .token.selector {
+    color: #ffca28;
+}
+
+[data-theme="dark"] .token.string {
+    color: #a5e844;
+}
+
+[data-theme="dark"] .token.symbol {
+    color: #c792ea;
+}
+
+[data-theme="dark"] .token.tag {
+    color: #ff6666;
+}
+
+[data-theme="dark"] .token.unit {
+    color: #fd9170;
+}
+
+[data-theme="dark"] .token.url {
+    color: #ff6666;
+}
+
+[data-theme="dark"] .token.variable {
+    color: #ff6666;
+}

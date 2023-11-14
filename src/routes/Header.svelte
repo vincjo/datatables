@@ -1,14 +1,10 @@
 <script>
-    import { darkMode } from '$site/utils'
-    import Sun from '~icons/material-symbols-light/sunny-outline-rounded'
-    import Moon from '~icons/material-symbols-light/dark-mode-outline-rounded'
     import Github from './Header_Github.svelte'
+    import Theme from './Header_Theme.svelte'
+    import Mode from './Header_Mode.svelte'
     import Logo from '$site/Logo.svelte'
     import { getPath, url } from 'gros/page'
 </script>
-
-
-
 
 <header class="flex">
     <nav class="flex">
@@ -19,18 +15,11 @@
         <a class="menu" class:active={$url.indexOf('docs') > -1} href="{getPath('/docs')}">Documentation</a>
         <a class="menu" class:active={$url.indexOf('api') > -1} href="{getPath('/api')}">API</a>
     </nav>
-
     <div/>
-
     <aside class="flex">
+        <Mode/>
+        <Theme/>
         <Github/>
-        <button on:click={() => $darkMode = !$darkMode} class="btn">
-            {#if $darkMode}
-                <Moon/>
-            {:else}
-                <Sun/>
-            {/if}
-        </button>
     </aside>
 </header>
 
@@ -57,29 +46,23 @@
         margin-left: 8px;
         letter-spacing: -0.4px;
     }
+    a.logo {
+        margin-right: 16px;
+    }
     a.menu {
-        margin-left: 32px;
+        margin-left: 16px;
         color: var(--font-grey);
         font-size: 16px;
         transition: color, 0.2s;
+        padding: 6px 16px;
+        border-radius: 4px;
     }
     a.menu:hover {
-        margin-left: 32px;
-        color: var(--primary-lighten);
         font-size: 16px;
-        transition: color, 0.2s;
     }
     a.menu.active {
         color: var(--primary);
-    }
-    button {
-        border-radius: 4px;
-        padding: 0;
-        width: 40px;
-        height: 32px;
-    }
-    button:hover {
-        background: var(--grey);
+        background: var(--primary-lighten-1);
     }
 
     @media (min-width: 1200px) {

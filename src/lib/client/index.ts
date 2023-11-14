@@ -11,7 +11,7 @@ import { check }    from './Comparator'
 
 export { DataHandler, check, Datatable, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search }
 
-export type { default as EventHandler } from './handlers/EventHandler'
+export type { default as EventsHandler } from './handlers/EventsHandler'
 
 export type Internationalization = {
     search?: string

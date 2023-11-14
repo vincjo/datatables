@@ -76,7 +76,7 @@
     }
 
     article.table {
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--grey);
         max-width: 800px;
     }
     article.table.scroll-y {
