@@ -1,4 +1,4 @@
-import { type Writable, writable, readable, get, derived, type Readable } from 'svelte/store'
+import { type Writable, writable, get, derived, type Readable } from 'svelte/store'
 import type { State, Sort, Filter } from '$lib/remote'
 import type { Params }  from './DataHandler'
 import EventHandler from './handlers/EventHandler'
@@ -154,7 +154,6 @@ export default class Context<Row>
             [this.selected, this.rows],
             ([$selected, $rows]) => {
                 const rowCount = $rows.length
-                console.log(rowCount, $selected.length)
                 if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }

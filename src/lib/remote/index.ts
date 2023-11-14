@@ -21,8 +21,7 @@ export type Internationalization = {
     next    ?: string
 }
 
-export type Row = { [key: string]: unknown  }
-
+export type Row = { [key: string]: unknown }
 
 export type Filter<Row> = {
     filterBy: keyof Row
@@ -34,7 +33,6 @@ export type Sort<Row> = {
     direction?: 'asc' | 'desc'
 }
 
-export type Order<Row> = Sort<Row>
 
 export type State = {
     pageNumber: number,
@@ -44,12 +42,26 @@ export type State = {
     sort: Sort<Row> | undefined
     filters: Filter<Row>[] | undefined
     setTotalRows: (value: number) => void
-
-
     /**
      * @deprecated use 'sort' instead
      */
     sorted: Sort<Row> | undefined
 }
 
+
+/**
+ * @deprecated use (Row[keyof Row] | Row) instead
+ * @since v1.13.0 2023-11-14
+ *
+ * import type { Row } from '@vincjo/datatables'
+ */
 export type Selectable<Row> = Row[keyof Row] | Row
+
+
+/**
+ * @deprecated use type Sort<Row> instead
+ * @since v1.13.0 2023-11-14
+ *
+ * import type { Sort } from '@vincjo/datatables'
+ */
+export type Order<Row>  = Sort<Row>
