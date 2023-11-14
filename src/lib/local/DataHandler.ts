@@ -137,7 +137,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.clear()
     }
 
-    public filter( value: string | number | null | undefined | boolean, filterBy: Field<T>, comparator: Comparator<T> = null )
+    public filter( value: string | number | null | undefined | boolean | number[], filterBy: Field<T>, comparator: Comparator<T> = null )
     {
         this.filterHandler.set(value, filterBy, comparator)
     }
