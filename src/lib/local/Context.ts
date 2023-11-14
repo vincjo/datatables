@@ -89,7 +89,7 @@ export default class Context<Row>
         )
     }
 
-    private match(entry: Row[keyof Row], value: string|number|boolean|symbol|Criterion[], compare: Comparator<Row> = null) 
+    private match(entry: Row[keyof Row], value: string|number|boolean|symbol|number[]|Criterion[], compare: Comparator<Row> = null) 
     {
         if (isNull(value)) {
             return true

@@ -35,7 +35,7 @@ export type Criterion = { value: string | number | [min: number, max: number], c
 export type Filter<Row> = {
     callback: (row: Row) => Row[keyof Row]
     identifier: string
-    value?: string | number | boolean | symbol | Criterion[]
+    value?: string | number | boolean | symbol | Criterion[] | number[]
     comparator?: Comparator<Row>
     key?: string
 }

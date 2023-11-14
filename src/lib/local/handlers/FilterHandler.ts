@@ -5,7 +5,7 @@ import { type Writable, type Readable, derived } from 'svelte/store'
 import { parseField } from '$lib/local/utils'
 // import { check } from '$lib/local/Comparator'
 
-type Value = string | number | null | undefined | boolean | Criterion[]
+type Value = string | number | null | undefined | boolean | number[] | Criterion[]
 // type Collection<Row> = {
 //     value: unknown
 //     filterBy: Field<Row>
