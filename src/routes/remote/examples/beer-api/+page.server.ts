@@ -44,10 +44,10 @@ export const load = async () => {
                                 name: 'RowsPerPage.svelte',
                                 code: fs.readFileSync(`${lib}/RowsPerPage.svelte`).toString('utf-8')
                             },
-                            // {
-                            //     name: 'RowCount.svelte',
-                            //     code: fs.readFileSync(`${lib}/RowCount.svelte`).toString('utf-8')
-                            // },
+                            {
+                                name: 'SelectedCount.svelte',
+                                code: fs.readFileSync(`${lib}/SelectedCount.svelte`).toString('utf-8')
+                            },
                             {
                                 name: 'Pagination.svelte',
                                 code: fs.readFileSync(`${lib}/Pagination.svelte`).toString('utf-8')

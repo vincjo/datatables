@@ -21,6 +21,8 @@ export default class Context<Row>
     public selection            : Writable<{ [ page: number ]: (Row | Row[keyof Row])[] }>
     public selected             : Readable<(Row | Row[keyof Row])[]>
     public isAllSelected        : Readable<boolean>
+    public fullSelection        : Readable<(Row | Row[keyof Row])[]>
+    public selectedCount        : Readable<{ count: number, total: number }>
 
 
     constructor(data: Row[], params: Params)
@@ -41,6 +43,8 @@ export default class Context<Row>
         this.selection          = writable({ 0: [] })
         this.selected           = this.createSelected()
         this.isAllSelected      = this.createIsAllSelected()
+        this.fullSelection      = this.createFullSelection()
+        this.selectedCount      = this.createSelectedCount()
     }
 
     public getState(): State
@@ -158,6 +162,26 @@ export default class Context<Row>
                     return true
                 }
                 return false
+            }
+        )
+    }
+
+    private createFullSelection()
+    {
+        return derived(this.selection, ($selection) => {
+            return Object.values($selection).flat()
+        })
+    }
+
+    private createSelectedCount()
+    {
+        return derived(
+            [this.fullSelection, this.totalRows],
+            ([$fullSelection, $totalRows]) => {
+                return {
+                    count: $fullSelection.length,
+                    total: $totalRows
+                }
             }
         )
     }

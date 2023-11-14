@@ -1,19 +1,20 @@
 <script lang="ts">
-    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, Pagination } from '$lib/remote'
+    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, SelectedCount, Pagination } from '$lib/remote'
 
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
 
-    export let search       = true
-    export let rowsPerPage  = true
-    export let rowCount     = true
-    export let pagination   = true
+    export let search         = true
+    export let rowsPerPage    = true
+    export let rowCount       = true
+    export let selectedCount  = false
+    export let pagination     = true
 
     let element: HTMLElement
     let clientWidth = 1000
 
-    const height = (search || rowsPerPage ? 48 : 8) + (rowCount || pagination ? 48 : 8)
+    const height = (search || rowsPerPage ? 48 : 8) + (rowCount || selectedCount || pagination ? 48 : 8)
 
     handler.on('change', () => {
         if (element) element.scrollTop = 0
@@ -37,7 +38,9 @@
     </article>
 
     <footer class:container={rowCount || pagination}>
-        {#if rowCount}
+        {#if selectedCount}
+            <SelectedCount {handler}/>
+        {:else if rowCount}
             <RowCount {handler} small={clientWidth < 600} />
         {/if}
         {#if pagination}

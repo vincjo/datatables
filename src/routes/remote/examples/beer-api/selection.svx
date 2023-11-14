@@ -1,0 +1,85 @@
+
+
+# Selection
+
+There are 2 possibilities about the row selection behaviour:
+
+## Selection scope: current page
+
+By default, the `DataHandler` instance will limit the selection to the current page. 
+This means that the selection is cleared each time you change pages. No settings are required.
+
+
+## Selection scope: accross pages
+
+If you want to keep the selection after navigating, you need to add a parameter when you instantiate the `DataHandler` class:
+
+```ts
+const handler = new DataHandler(data, { rowsPerPage: 10, selectionScope: 'accrossPages'})
+```
+
+# Methods
+
+Work for both selection scopes.
+
+### select
+```ts
+public select(value: Row | Row[keyof Row])
+```
+Select or unselect 1 row by id or by complete row.
+
+### getSelected
+```ts
+const selected = handler.getSelected(): Readable<[]>
+// or
+const selected = handler.getSelected({ accrossPages: true }): Readable<[]>
+```
+The first call returns your selected rows (or ids) inside the *current page* as a `readable store (array)`. 
+
+The second call returns your selected rows (or ids) *accross pages* as a `readable store (array)`. 
+
+
+
+### selectAll
+```ts
+handler.selectAll(selectBy: keyof Row = null): void
+```
+Select or unselect all rows in the current page.
+
+The `selectBy` setting allows you to define an object key. Example: `selectAll('id')`. 
+
+If set, the selection will be an array of ids, otherwise an array of rows.
+
+
+### isAllSelected
+
+```ts
+const isAllSelected = handler.isAllSelected(): Readable<boolean>
+```
+
+### getSelectedCount
+```ts
+getSelectedCount(): Readable<{ count: number, total: number }>
+```
+
+### clearSelection
+```ts
+handler.clearSelection(): void
+```
+
+<style>
+    h1 {
+        font-size: 40px;
+    }
+    p {
+        font-size: 16px;
+    }
+    h2 {
+        color: var(--primary);
+    }
+    h3 {
+        color: var(--secondary);
+        font-size: 24px;
+        font-family: Jetbrains;
+    }
+</style>

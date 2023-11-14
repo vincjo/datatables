@@ -7,7 +7,7 @@ import SearchHandler    from './handlers/SearchHandler'
 import FilterHandler    from './handlers/FilterHandler'
 
 import type { Writable, Readable } from 'svelte/store'
-import type { Internationalization, Row, State, Selectable, Order } from '$lib/remote'
+import type { Internationalization, Row, State, Sort } from '$lib/remote'
 
 export type Params = { 
     rowsPerPage     ?: number, 
@@ -64,13 +64,16 @@ export default class DataHandler<T extends Row = any>
         return this.context.rows
     }
 
-    public select(value: Selectable<T>)
+    public select(value: T[keyof T] | T)
     {
         this.selectHandler.set(value)
     }
 
-    public getSelected()
+    public getSelected(param?: { accrossPages: boolean })
     {
+        if (param?.accrossPages === true) {
+            return this.context.fullSelection
+        }
         return this.context.selected
     }
 
@@ -82,6 +85,16 @@ export default class DataHandler<T extends Row = any>
     public isAllSelected(): Readable<boolean>
     {
         return this.context.isAllSelected
+    }
+
+    public getSelectedCount(): Readable<{ count: number, total: number }>
+    {
+        return this.context.selectedCount
+    }
+
+    public clearSelection()
+    {
+        this.selectHandler.clear()
     }
 
     public getRowsPerPage(): Writable<number | null>
@@ -112,7 +125,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.desc(orderBy)
     }
 
-    public getSort(): Writable<Order<T>>
+    public getSort(): Writable<Sort<T>>
     {
         return this.context.sort
     }
@@ -187,7 +200,8 @@ export default class DataHandler<T extends Row = any>
                 rowCount: 'Showing {start} to {end} of {total} entries',
                 noRows: 'No entries found',
                 previous: 'Previous',
-                next: 'Next'
+                next: 'Next',
+                selectedCount: '{count} of {total} row(s).'
             },
             ...i18n
         }

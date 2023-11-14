@@ -12,7 +12,7 @@
     const isAllSelected = handler.isAllSelected()
 </script>
 
-<Datatable {handler}>
+<Datatable {handler} selectedCount={true}>
     <table>
         <thead>
             <tr>

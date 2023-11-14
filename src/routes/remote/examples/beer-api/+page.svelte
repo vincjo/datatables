@@ -2,6 +2,7 @@
     import Demo from '$site/components/Demo.svelte'
     import Main from './Main.svelte'
     import Features from '../Features.svelte'
+    import Selection from './selection.svx'
     export let data
 </script>
 
@@ -11,6 +12,11 @@
 <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={false}>
     <Main data={data.dataset}/>
 </Demo>
+
+<article>
+    <Selection/>
+</article>
+
 
 <style>
     h1 {
@@ -29,5 +35,10 @@
         color: var(--primary-lighten);
         text-decoration: none;
         font-size: 13px;
+    }
+    article {
+        max-width: 800px;
+        margin-top: 40px;
+        color: #424242;
     }
 </style>

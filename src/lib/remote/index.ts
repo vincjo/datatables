@@ -6,19 +6,21 @@ import RowsPerPage      from './RowsPerPage.svelte'
 import Th               from './Th.svelte'
 import ThFilter         from './ThFilter.svelte'
 import RowCount         from './RowCount.svelte'
+import SelectedCount    from './SelectedCount.svelte'
 import Pagination       from './Pagination.svelte'
 
-export { DataHandler, Datatable, Search, RowsPerPage, Th, ThFilter, RowCount, Pagination }
+export { DataHandler, Datatable, Search, RowsPerPage, Th, ThFilter, RowCount, SelectedCount, Pagination }
 
 export type Internationalization = {
-    search  ?: string
-    show    ?: string
-    entries ?: string
-    filter  ?: string
-    rowCount?: string
-    noRows  ?: string
-    previous?: string
-    next    ?: string
+    search          ?: string
+    show            ?: string
+    entries         ?: string
+    filter          ?: string
+    rowCount        ?: string
+    noRows          ?: string
+    previous        ?: string
+    next            ?: string
+    selectedCount   ?: string
 }
 
 export type Row = { [key: string]: unknown }
