@@ -10,12 +10,12 @@ By default, the `DataHandler` instance will limit the selection to the current p
 This means that the selection is cleared each time you change pages. No settings are required.
 
 
-## Selection scope: accross pages
+## Selection scope: across pages
 
 If you want to keep the selection after navigating, you need to add a parameter when you instantiate the `DataHandler` class:
 
 ```ts
-const handler = new DataHandler(data, { rowsPerPage: 10, selectionScope: 'accrossPages'})
+const handler = new DataHandler(data, { rowsPerPage: 10, selectionScope: 'acrossPages'})
 ```
 
 # Methods
@@ -32,11 +32,11 @@ Select or unselect 1 row by id or by complete row.
 ```ts
 const selected = handler.getSelected(): Readable<[]>
 // or
-const selected = handler.getSelected({ accrossPages: true }): Readable<[]>
+const selected = handler.getSelected({ acrossPages: true }): Readable<[]>
 ```
 The first call returns your selected rows (or ids) inside the *current page* as a `readable store (array)`. 
 
-The second call returns your selected rows (or ids) *accross pages* as a `readable store (array)`. 
+The second call returns your selected rows (or ids) *across pages* as a `readable store (array)`. 
 
 
 

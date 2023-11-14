@@ -8,7 +8,7 @@ export default class SelectHandler<Row>
     private rows            : Readable<Row[]>
     private selection       : Writable<{ [page: number]: (Row | Row[keyof Row])[] }>
     private isAllSelected   : Readable<boolean>
-    private selectionScope  : 'currentPage' | 'accrossPages'
+    private selectionScope  : 'currentPage' | 'acrossPages'
     private pageNumber      : Writable<number>
 
     constructor(context: Context<Row>)

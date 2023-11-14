@@ -11,7 +11,7 @@ export default class PageHandler<Row>
     public event            : EventHandler
     public pages            : Readable<number[]>
     public selection        : Writable<{ [page: number]: (Row | Row[keyof Row])[] }>
-    public selectionScope   : 'currentPage' | 'accrossPages'
+    public selectionScope   : 'currentPage' | 'acrossPages'
 
     constructor(context: Context<Row>)
     {

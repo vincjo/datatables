@@ -17,7 +17,7 @@ export default class Context<Row>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
     public sort                 : Writable<Sort<Row>>
-    public selectionScope       : 'currentPage' | 'accrossPages'
+    public selectionScope       : 'currentPage' | 'acrossPages'
     public selection            : Writable<{ [ page: number ]: (Row | Row[keyof Row])[] }>
     public selected             : Readable<(Row | Row[keyof Row])[]>
     public isAllSelected        : Readable<boolean>

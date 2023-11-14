@@ -12,7 +12,7 @@ import type { Internationalization, Row, State, Sort } from '$lib/remote'
 export type Params = { 
     rowsPerPage     ?: number, 
     totalRows       ?: number, 
-    selectionScope  ?: 'currentPage' | 'accrossPages',
+    selectionScope  ?: 'currentPage' | 'acrossPages',
     i18n            ?: Internationalization 
 }
 
@@ -69,9 +69,9 @@ export default class DataHandler<T extends Row = any>
         this.selectHandler.set(value)
     }
 
-    public getSelected(param?: { accrossPages: boolean })
+    public getSelected(param?: { acrossPages: boolean })
     {
-        if (param?.accrossPages === true) {
+        if (param?.acrossPages === true) {
             return this.context.fullSelection
         }
         return this.context.selected

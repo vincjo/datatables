@@ -3,7 +3,7 @@
     import { reload } from './api'
     export let data: any[]
 
-    const handler = new DataHandler(data, { rowsPerPage: 10, selectionScope: 'accrossPages' })
+    const handler = new DataHandler(data, { rowsPerPage: 10, selectionScope: 'acrossPages' })
     const rows = handler.getRows()
 
     handler.onChange((state: State) => reload(state))
