@@ -1,5 +1,5 @@
-import { type Writable, writable, get, derived, type Readable } from 'svelte/store'
-import type { State, Order, Filter, Selectable } from '$lib/remote'
+import { type Writable, writable, readable, get, derived, type Readable } from 'svelte/store'
+import type { State, Sort, Filter } from '$lib/remote'
 import type { Params }  from './DataHandler'
 import EventHandler from './handlers/EventHandler'
 
@@ -16,8 +16,10 @@ export default class Context<Row>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
-    public sort                 : Writable<Order<Row>>
-    public selected             : Writable<Selectable<Row>[]>
+    public sort                 : Writable<Sort<Row>>
+    public selectionScope       : 'currentPage' | 'accrossPages'
+    public selection            : Writable<{ [ page: number ]: (Row | Row[keyof Row])[] }>
+    public selected             : Readable<(Row | Row[keyof Row])[]>
     public isAllSelected        : Readable<boolean>
 
 
@@ -35,7 +37,9 @@ export default class Context<Row>
         this.pagesWithEllipsis  = this.createPagesWithEllipsis()
         this.pageCount          = this.createPageCount()
         this.sort               = writable(undefined)
-        this.selected           = writable([])
+        this.selectionScope     = params.selectionScope ?? 'currentPage'
+        this.selection          = writable({ 0: [] })
+        this.selected           = this.createSelected()
         this.isAllSelected      = this.createIsAllSelected()
     }
 
@@ -133,12 +137,24 @@ export default class Context<Row>
         )
     }
 
+    private createSelected()
+    {
+        return derived(
+            [this.selection, this.pageNumber],
+            ([$selection, $currentPage]) => {
+                const currentPage = this.selectionScope === 'currentPage' ? 0 : $currentPage
+                return $selection[currentPage] ?? []
+            }
+        )
+    }
+
     private createIsAllSelected()
     {
         return derived(
             [this.selected, this.rows],
             ([$selected, $rows]) => {
                 const rowCount = $rows.length
+                console.log(rowCount, $selected.length)
                 if (rowCount === $selected.length && rowCount !== 0) {
                     return true
                 }

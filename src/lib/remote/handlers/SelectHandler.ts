@@ -1,53 +1,88 @@
 import type Context from '$lib/remote/Context'
-import type { Selectable } from '$lib/remote'
 import { type Writable, type Readable, get } from 'svelte/store'
 
 
 
-export default class SelectHandler<Row> 
+export default class SelectHandler<Row>
 {
     private rows            : Readable<Row[]>
-    private selected        : Writable<Selectable<Row>[]>
+    private selection       : Writable<{ [page: number]: (Row | Row[keyof Row])[] }>
     private isAllSelected   : Readable<boolean>
+    private selectionScope  : 'currentPage' | 'accrossPages'
+    private pageNumber      : Writable<number>
 
-    constructor(context: Context<Row>) 
+    constructor(context: Context<Row>)
     {
-        this.rows           = context.rows
-        this.selected       = context.selected
-        this.isAllSelected  = context.isAllSelected
+        this.rows               = context.rows
+        this.selection          = context.selection
+        this.isAllSelected      = context.isAllSelected
+        this.selectionScope     = context.selectionScope
+        this.pageNumber         = context.pageNumber
     }
 
-    public set(value: Selectable<Row>) 
+    public set(value: Row | Row[keyof Row])
     {
-        const selected = get(this.selected)
-        if (selected.includes(value)) {
-            this.selected.set(selected.filter((item) => item !== value))
+        const { selection, currentPage } = this.parse()
+
+        if (selection[currentPage].includes(value)) {
+            this.selection.update(store => {
+                store[currentPage] = store[currentPage].filter((item) => item !== value)
+                return store
+            })
         } else {
-            this.selected.set([value, ...selected])
+            this.selection.update(store => {
+                store[currentPage] = [value, ...store[currentPage]]
+                return store
+            })
         }
+        return
     }
 
-    public all(selectBy: keyof Row = null) 
+    public all(selectBy: keyof Row = null)
     {
         const isAllSelected = get(this.isAllSelected)
+        const { currentPage } = this.parse()
         if (isAllSelected) {
-            return this.remove()
+            this.selection.update(store => {
+                store[currentPage] = []
+                return store
+            })
+            return
         }
+
+        const selection = this.getSelection(selectBy)
+
+        this.selection.update(store => {
+            store[currentPage] = selection
+            return store
+        })
+    }
+
+    public clear()
+    {
+        this.selection.set({ 0: [] })
+    }
+
+    private parse()
+    {
+        const selection = get(this.selection)
+        const currentPage = this.selectionScope === 'currentPage' ? 0 : get(this.pageNumber)
+        if (selection[currentPage] === undefined) {
+            this.selection.update(store => {
+                store[currentPage] = []
+                return store
+            })
+        }
+        return { selection, currentPage }
+    }
+
+    private getSelection(selectBy: keyof Row = null)
+    {
         const rows = get(this.rows)
 
         if (selectBy) {
-            this.selected.set(
-                rows.map((row) => {
-                    return row[selectBy]
-                })
-            )
-        } else {
-            this.selected.set(rows)
+            return rows.map(row => row[selectBy])
         }
-    }
-
-    public remove() 
-    {
-        this.selected.set([])
+        return rows
     }
 }

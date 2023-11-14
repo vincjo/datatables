@@ -29,17 +29,19 @@ export type Filter<Row> = {
     value?: string | number | boolean
 }
 
-export type Order<Row> = {
+export type Sort<Row> = {
     orderBy?: keyof Row
     direction?: 'asc' | 'desc'
 }
+
+export type Order<Row> = Sort<Row>
 
 export type State = {
     pageNumber: number,
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
-    sort: Order<Row> | undefined
+    sort: Sort<Row> | undefined
     filters: Filter<Row>[] | undefined
     setTotalRows: (value: number) => void
 
@@ -47,7 +49,7 @@ export type State = {
     /**
      * @deprecated use 'sort' instead
      */
-    sorted: Order<Row> | undefined
+    sorted: Sort<Row> | undefined
 }
 
 export type Selectable<Row> = Row[keyof Row] | Row
