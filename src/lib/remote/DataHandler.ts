@@ -1,5 +1,5 @@
 import Context          from './Context'
-import TriggerHandler   from './handlers/TriggerHandler'
+import FetchHandler     from './handlers/FetchHandler'
 import SortHandler      from './handlers/SortHandler'
 import SelectHandler    from './handlers/SelectHandler'
 import PageHandler      from './handlers/PageHandler'
@@ -9,14 +9,19 @@ import FilterHandler    from './handlers/FilterHandler'
 import ColumnVisibilityHelper from './helpers/ColumnVisibilityHelper'
 
 import type { Writable, Readable } from 'svelte/store'
-import type { Internationalization, Row, State, Order } from '$lib/remote'
+import type { Internationalization, Row, State, Sort } from '$lib/remote'
 
-export type Params = { rowsPerPage?: number, totalRows?: number, i18n?: Internationalization }
+export type Params = {
+    rowsPerPage     ?: number,
+    totalRows       ?: number,
+    selectionScope  ?: 'currentPage' | 'acrossPages',
+    i18n            ?: Internationalization
+}
 
-export default class DataHandler<T extends Row = any> 
+export default class DataHandler<T extends Row = any>
 {
     private context         : Context<T>
-    private triggerHandler  : TriggerHandler<T>
+    private fetchHandler    : FetchHandler<T>
     private sortHandler     : SortHandler<T>
     private selectHandler   : SelectHandler<T>
     private pageHandler     : PageHandler<T>
@@ -24,11 +29,11 @@ export default class DataHandler<T extends Row = any>
     private filterHandler   : FilterHandler<T>
     public i18n             : Internationalization
 
-    constructor(data: T[] = [], params: Params = { rowsPerPage: 5 }) 
+    constructor(data: T[] = [], params: Params = { rowsPerPage: 5 })
     {
         this.i18n           = this.translate(params.i18n)
         this.context        = new Context(data, params)
-        this.triggerHandler = new TriggerHandler(this.context)
+        this.fetchHandler   = new FetchHandler(this.context)
         this.sortHandler    = new SortHandler(this.context)
         this.selectHandler  = new SelectHandler(this.context)
         this.pageHandler    = new PageHandler(this.context)
@@ -36,32 +41,32 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler  = new FilterHandler(this.context)
     }
 
-    public onChange(callback: (state: State) => Promise<T[]>) 
+    public setRemoteControl(callback: (state: State) => Promise<T[]>): void
     {
-        this.triggerHandler.set(callback)
+        this.fetchHandler.set(callback)
     }
 
-    public invalidate()
+    public invalidate(): void
     {
-        this.triggerHandler.invalidate()
+        this.fetchHandler.invalidate()
     }
 
-    public setRows(data: T[])
+    public setRows(data: T[]): void
     {
         this.context.rows.set(data)
     }
 
-    public setTotalRows(value: number)
+    public setTotalRows(value: number): void
     {
         this.context.totalRows.set(value)
     }
 
-    public getRows(): Writable<T[]> 
+    public getRows(): Writable<T[]>
     {
         return this.context.rows
     }
 
-    public getRowCount(): Readable<{ total: number, start: number, end: number }> 
+    public getRowCount(): Readable<{ total: number, start: number, end: number }>
     {
         return this.context.rowCount
     }
@@ -71,25 +76,25 @@ export default class DataHandler<T extends Row = any>
         return this.context.rowsPerPage
     }
 
-    public getPages(param = { ellipsis: false }): Readable<number[]> 
+    public getPages(params = { ellipsis: false }): Readable<number[]>
     {
-        if (param.ellipsis) {
+        if (params.ellipsis) {
             return this.context.pagesWithEllipsis
         }
         return this.context.pages
     }
 
-    public getPageCount(): Readable<number> 
+    public getPageCount(): Readable<number>
     {
         return this.context.pageCount
     }
 
-    public getCurrentPage(): Writable<number> 
+    public getCurrentPage(): Writable<number>
     {
         return this.context.currentPage
     }
 
-    public setPage(value: number | 'previous' | 'next'): void 
+    public setPage(value: number | 'previous' | 'next'): void
     {
         switch (value) {
             case 'previous' : return this.pageHandler.previous()
@@ -98,7 +103,7 @@ export default class DataHandler<T extends Row = any>
         }
     }
 
-    public search(value: string): void 
+    public search(value: string): void
     {
         this.setPage(1)
         this.context.search.set(value)
@@ -115,19 +120,7 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.set(orderBy)
     }
 
-    public sortAsc(orderBy: keyof T)
-    {
-        this.setPage(1)
-        this.sortHandler.asc(orderBy)
-    }
-
-    public sortDesc(orderBy: keyof T)
-    {
-        this.setPage(1)
-        this.sortHandler.desc(orderBy)
-    }
-
-    public getSort(): Writable<Order<T>>
+    public getSort(): Writable<Sort<T>>
     {
         return this.context.sort
     }
@@ -142,9 +135,16 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.define(params)
     }
 
-    public clearSort()
+    public sortAsc(orderBy: keyof T)
     {
-        this.sortHandler.clear()
+        this.setPage(1)
+        this.sortHandler.asc(orderBy)
+    }
+
+    public sortDesc(orderBy: keyof T)
+    {
+        this.setPage(1)
+        this.sortHandler.desc(orderBy)
     }
 
     public filter(value: string | number, filterBy: keyof T)
@@ -163,8 +163,11 @@ export default class DataHandler<T extends Row = any>
         this.selectHandler.set(value)
     }
 
-    public getSelected()
+    public getSelected(param?: { acrossPages: boolean })
     {
+        if (param?.acrossPages === true) {
+            return this.context.fullSelection
+        }
         return this.context.selected
     }
 
@@ -178,9 +181,19 @@ export default class DataHandler<T extends Row = any>
         return this.context.isAllSelected
     }
 
-    public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
+    public getSelectedCount(): Readable<{ count: number, total: number }>
     {
-        this.context.event.add(event, callback)
+        return this.context.selectedCount
+    }
+
+    public clearSelection()
+    {
+        this.selectHandler.clear()
+    }
+
+    public on(event: 'change', callback: () => void)
+    {
+        this.context.events.add(event, callback)
     }
 
     public createColumnVisibility(columns: { name: string, index: number, isVisible?: boolean }[])
@@ -188,7 +201,7 @@ export default class DataHandler<T extends Row = any>
         return new ColumnVisibilityHelper(columns)
     }
 
-    public translate(i18n: Internationalization): Internationalization 
+    public translate(i18n: Internationalization): Internationalization
     {
         return {
             ...{
@@ -199,46 +212,52 @@ export default class DataHandler<T extends Row = any>
                 rowCount: 'Showing {start} to {end} of {total} entries',
                 noRows: 'No entries found',
                 previous: 'Previous',
-                next: 'Next'
+                next: 'Next',
+                selectedCount: '{count} of {total} row(s).'
             },
             ...i18n
         }
     }
 
-
-
     /**
+     *
      * @depracted use on('change', callback) instead
      */
     public getTriggerChange(): Writable<number>
     {
-        return this.context.event.triggerChange
+        return this.context.events.triggerChange
     }
 
     /**
-     * @deprecated use applySort() instead 
+     * @deprecated use applySort() instead
      */
     public applySorting( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
     {
         this.applySort(params)
     }
 
-
     /**
-     * @deprecated use getSort() instead 
+     * @deprecated use getSort() instead
      */
     public getSorted()
     {
         return this.getSort()
     }
 
-
     /**
      * @deprecated use getCurrentPage() instead
-     * @since v2.0.0 2023-10-31
      */
-    public getPageNumber(): Writable<number> 
+    public getPageNumber()
     {
         return this.getCurrentPage()
     }
+
+    /**
+     * @deprecated use setRemoteControl instead
+     */
+    public onChange(callback: (state: State) => Promise<T[]>)
+    {
+        this.fetchHandler.set(callback)
+    }
+
 }

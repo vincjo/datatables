@@ -6,23 +6,24 @@ import RowsPerPage      from './RowsPerPage.svelte'
 import Th               from './Th.svelte'
 import ThFilter         from './ThFilter.svelte'
 import RowCount         from './RowCount.svelte'
+import SelectedCount    from './SelectedCount.svelte'
 import Pagination       from './Pagination.svelte'
 
-export { DataHandler, Datatable, Search, RowsPerPage, Th, ThFilter, RowCount, Pagination }
+export { DataHandler, Datatable, Search, RowsPerPage, Th, ThFilter, RowCount, SelectedCount, Pagination }
 
 export type Internationalization = {
-    search  ?: string
-    show    ?: string
-    entries ?: string
-    filter  ?: string
-    rowCount?: string
-    noRows  ?: string
-    previous?: string
-    next    ?: string
+    search          ?: string
+    show            ?: string
+    entries         ?: string
+    filter          ?: string
+    rowCount        ?: string
+    noRows          ?: string
+    previous        ?: string
+    next            ?: string
+    selectedCount   ?: string
 }
 
-export type Row = { [key: string]: unknown  }
-
+export type Row = { [key: string]: unknown }
 
 export type Filter<Row> = {
     filterBy: keyof Row
@@ -34,37 +35,39 @@ export type Sort<Row> = {
     direction?: 'asc' | 'desc'
 }
 
+
 export type State = {
-    currentPage: string,
-    rowsPerPage: string,
-    offset: string,
+    currentPage: number,
+    rowsPerPage: number,
+    offset: number,
     search: string | undefined,
     sort: Sort<Row> | undefined
     filters: Filter<Row>[] | undefined
     setTotalRows: (value: number) => void
-
-
     /**
      * @deprecated use 'sort' instead
      */
-    sorted: Sort<Row> | undefined,
+    sorted?: Sort<Row>
     /**
      * @deprecated use 'currentPage' instead
      */
-    pageNumber: number,
+    pageNumber?: number
 }
 
 
 /**
  * @deprecated use (Row[keyof Row] | Row) instead
- * 
- * import type { Row } from '@vincjo/datatables/remote'
+ * @since v1.13.0 2023-11-14
+ *
+ * import type { Row } from '@vincjo/datatables'
  */
 export type Selectable<Row> = Row[keyof Row] | Row
 
+
 /**
  * @deprecated use type Sort<Row> instead
- * 
- * import type { Sort } from '@vincjo/datatables/remote'
+ * @since v1.13.0 2023-11-14
+ *
+ * import type { Sort } from '@vincjo/datatables'
  */
-export type Order<Row> = Sort<Row>
+export type Order<Row>  = Sort<Row>

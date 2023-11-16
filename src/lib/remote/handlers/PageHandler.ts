@@ -1,26 +1,28 @@
 import type Context from '$lib/remote/Context'
 import { type Writable, type Readable, get } from 'svelte/store'
-import type EventHandler from './EventHandler'
+import type EventsHandler from './EventsHandler'
 
 export default class PageHandler<Row>
 {
-    public totalRows    : Writable<number>
-    public currentPage  : Writable<number>
-    public rowCount     : Readable<{ total: number, start: number, end: number }>
-    public rowsPerPage  : Writable<number | null>
-    public event        : EventHandler
-    public pages        : Readable<number[]>
-    public selected     : Writable<(Row | Row[keyof Row])[]>
+    public totalRows        : Writable<number>
+    public currentPage      : Writable<number>
+    public rowCount         : Readable<{ total: number, start: number, end: number }>
+    public rowsPerPage      : Writable<number | null>
+    public events           : EventsHandler
+    public pages            : Readable<number[]>
+    public selection        : Writable<{ [page: number]: (Row | Row[keyof Row])[] }>
+    public selectionScope   : 'currentPage' | 'acrossPages'
 
     constructor(context: Context<Row>)
     {
-        this.totalRows      = context.totalRows
-        this.currentPage    = context.currentPage
-        this.rowCount       = context.rowCount
-        this.rowsPerPage    = context.rowsPerPage
-        this.event          = context.event
-        this.pages          = context.pages
-        this.selected       = context.selected
+        this.totalRows          = context.totalRows
+        this.currentPage        = context.currentPage
+        this.rowCount           = context.rowCount
+        this.rowsPerPage        = context.rowsPerPage
+        this.events             = context.events
+        this.pages              = context.pages
+        this.selection          = context.selection
+        this.selectionScope     = context.selectionScope
     }
 
     public get()
@@ -28,39 +30,41 @@ export default class PageHandler<Row>
         return this.pages
     }
 
-    public goto(page: number)
+    public goto(number: number)
     {
         const rowsPerPage = get(this.rowsPerPage)
         const totalRows = get(this.totalRows)
 
         this.currentPage.update((store) => {
             if (rowsPerPage && totalRows) {
-                if (page >= 1 && page <= Math.ceil(totalRows / rowsPerPage)) {
-                    store = page
-                    this.event.trigger('change')
+                if (number >= 1 && number <= Math.ceil(totalRows / rowsPerPage)) {
+                    store = number
+                    this.events.trigger('change')
                 }
                 return store
             }
             else {
-                if (page >= 1) {
-                    store = page
-                    this.event.trigger('change')
+                if (number >= 1) {
+                    store = number
+                    this.events.trigger('change')
                 }
                 return store
             }
         })
-        this.selected.set([])
+        if (this.selectionScope === 'currentPage') {
+            this.selection.set({ 0: [] })
+        }
     }
 
     public previous()
     {
-        const page = get(this.currentPage) - 1
-        this.goto(page)
+        const number = get(this.currentPage) - 1
+        this.goto(number)
     }
 
     public next()
     {
-        const page = get(this.currentPage) + 1
-        this.goto(page)
+        const number = get(this.currentPage) + 1
+        this.goto(number)
     }
 }
