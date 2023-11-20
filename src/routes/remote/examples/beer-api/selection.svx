@@ -2,53 +2,37 @@
 
 # Selection
 
-There are 2 possibilities about the row selection behaviour:
 
-## Selection scope: current page
+Selection adds a new optionnal parameter at the instantiation level:  `selectBy: keyof Row`
 
-By default, the `DataHandler` instance will limit the selection to the current page. 
-This means that the selection is cleared each time you change pages. No settings are required.
-
-
-## Selection scope: across pages
-
-If you want to keep the selection after navigating, you need to add a parameter when you instantiate the `DataHandler` class:
-
+If set, the selection array will contain the ID values, otherwise it will contain full row objects.
 ```ts
-const handler = new DataHandler(data, { rowsPerPage: 10, selectionScope: 'acrossPages'})
+const handler = new DataHandler(data, { rowsPerPage: 10, selectBy: 'id' })
 ```
+
 
 # Methods
 
-Work for both selection scopes.
 
 ### select
+Select or unselect 1 entry.
 ```ts
-public select(value: Row | Row[keyof Row])
+public select(value: Row | Row[keyof Row]): void
 ```
-Select or unselect 1 row by id or by complete row.
 
 ### getSelected
+Returns your selected rows (or ids). 
 ```ts
-const selected = handler.getSelected(): Readable<[]>
-// or
-const selected = handler.getSelected({ acrossPages: true }): Readable<[]>
+const selected = handler.getSelected(): Writable<Row | Row[keyof Row]>
 ```
-The first call returns your selected rows (or ids) inside the *current page* as a `readable store (array)`. 
-
-The second call returns your selected rows (or ids) *across pages* as a `readable store (array)`. 
 
 
 
 ### selectAll
+Select or unselect all rows *in the current page*.
 ```ts
-handler.selectAll(selectBy: keyof Row = null): void
+handler.selectAll(): void
 ```
-Select or unselect all rows in the current page.
-
-The `selectBy` setting allows you to define an object key. Example: `selectAll('id')`. 
-
-If set, the selection will be an array of ids, otherwise an array of rows.
 
 
 ### isAllSelected
@@ -81,5 +65,14 @@ handler.clearSelection(): void
         color: var(--secondary);
         font-size: 24px;
         font-family: Jetbrains;
+    }
+    p {
+        margin: 0;
+    }
+    code {
+        background: var(--primary-lighten-1);
+        padding: 2px 4px;
+        border-radius: 4px;
+        border: 1px solid var(--primary-lighten-3);
     }
 </style>

@@ -3,11 +3,10 @@
     import { reload } from './api'
     export let data: any[]
 
-    const handler = new DataHandler(data, { rowsPerPage: 10, selectionScope: 'acrossPages' })
+    const handler = new DataHandler(data, { rowsPerPage: 10, selectBy: 'id' })
     const rows = handler.getRows()
 
     handler.onChange((state: State) => reload(state))
-
     const selected = handler.getSelected()
     const isAllSelected = handler.isAllSelected()
 </script>
@@ -19,7 +18,7 @@
                 <th class="selection">
                     <input
                         type="checkbox"
-                        on:click={() => handler.selectAll('id')}
+                        on:click={() => handler.selectAll()}
                         checked={$isAllSelected}
                     />
                 </th>

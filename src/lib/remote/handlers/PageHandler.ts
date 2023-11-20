@@ -10,8 +10,7 @@ export default class PageHandler<Row>
     public rowsPerPage      : Writable<number | null>
     public event            : EventHandler
     public pages            : Readable<number[]>
-    public selection        : Writable<{ [page: number]: (Row | Row[keyof Row])[] }>
-    public selectionScope   : 'currentPage' | 'acrossPages'
+    public selected         : Writable<(Row | Row[keyof Row])[]>
 
     constructor(context: Context<Row>)
     {
@@ -21,8 +20,7 @@ export default class PageHandler<Row>
         this.rowsPerPage        = context.rowsPerPage
         this.event              = context.event
         this.pages              = context.pages
-        this.selection          = context.selection
-        this.selectionScope     = context.selectionScope
+        this.selected           = context.selected
     }
 
     public get()
@@ -51,9 +49,6 @@ export default class PageHandler<Row>
                 return store
             }
         })
-        if (this.selectionScope === 'currentPage') {
-            this.selection.set({ 0: [] })
-        }
     }
 
     public previous()

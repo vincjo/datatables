@@ -9,14 +9,14 @@ import FilterHandler    from './handlers/FilterHandler'
 import type { Writable, Readable } from 'svelte/store'
 import type { Internationalization, Row, State, Sort } from '$lib/remote'
 
-export type Params = { 
-    rowsPerPage     ?: number, 
-    totalRows       ?: number, 
-    selectionScope  ?: 'currentPage' | 'acrossPages',
-    i18n            ?: Internationalization 
+export type Params = {
+    rowsPerPage     ?: number,
+    totalRows       ?: number,
+    selectBy        ?: keyof Row,
+    i18n            ?: Internationalization
 }
 
-export default class DataHandler<T extends Row = any> 
+export default class DataHandler<T extends Row = any>
 {
     private context         : Context<T>
     private triggerHandler  : TriggerHandler<T>
@@ -27,7 +27,7 @@ export default class DataHandler<T extends Row = any>
     private filterHandler   : FilterHandler<T>
     public i18n             : Internationalization
 
-    constructor(data: T[] = [], params: Params = { rowsPerPage: 5 }) 
+    constructor(data: T[] = [], params: Params = { rowsPerPage: 5 })
     {
         this.i18n           = this.translate(params.i18n)
         this.context        = new Context(data, params)
@@ -39,7 +39,7 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler  = new FilterHandler(this.context)
     }
 
-    public onChange(callback: (state: State) => Promise<T[]>) 
+    public onChange(callback: (state: State) => Promise<T[]>)
     {
         this.triggerHandler.set(callback)
     }
@@ -59,7 +59,7 @@ export default class DataHandler<T extends Row = any>
         this.context.totalRows.set(value)
     }
 
-    public getRows(): Writable<T[]> 
+    public getRows(): Writable<T[]>
     {
         return this.context.rows
     }
@@ -69,17 +69,14 @@ export default class DataHandler<T extends Row = any>
         this.selectHandler.set(value)
     }
 
-    public getSelected(param?: { acrossPages: boolean })
+    public getSelected()
     {
-        if (param?.acrossPages === true) {
-            return this.context.fullSelection
-        }
         return this.context.selected
     }
 
-    public selectAll(selectBy: keyof T = null): void
+    public selectAll(): void
     {
-        this.selectHandler.all(selectBy)
+        this.selectHandler.all()
     }
 
     public isAllSelected(): Readable<boolean>
@@ -130,7 +127,7 @@ export default class DataHandler<T extends Row = any>
         return this.context.sort
     }
 
-    public search(value: string): void 
+    public search(value: string): void
     {
         this.setPage(1)
         this.context.search.set(value)
@@ -152,7 +149,7 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler.remove()
     }
 
-    public getPages(params = { ellipsis: false }): Readable<number[]> 
+    public getPages(params = { ellipsis: false }): Readable<number[]>
     {
         if (params.ellipsis) {
             return this.context.pagesWithEllipsis
@@ -160,17 +157,17 @@ export default class DataHandler<T extends Row = any>
         return this.context.pages
     }
 
-    public getPageCount(): Readable<number> 
+    public getPageCount(): Readable<number>
     {
         return this.context.pageCount
     }
 
-    public getPageNumber(): Writable<number> 
+    public getPageNumber(): Writable<number>
     {
         return this.context.pageNumber
     }
 
-    public setPage(value: number | 'previous' | 'next'): void 
+    public setPage(value: number | 'previous' | 'next'): void
     {
         switch (value) {
             case 'previous' : return this.pageHandler.previous()
@@ -179,7 +176,7 @@ export default class DataHandler<T extends Row = any>
         }
     }
 
-    public getRowCount(): Readable<{ total: number, start: number, end: number }> 
+    public getRowCount(): Readable<{ total: number, start: number, end: number }>
     {
         return this.context.rowCount
     }
@@ -189,7 +186,7 @@ export default class DataHandler<T extends Row = any>
         this.context.event.add(event, callback)
     }
 
-    public translate(i18n: Internationalization): Internationalization 
+    public translate(i18n: Internationalization): Internationalization
     {
         return {
             ...{
@@ -210,7 +207,7 @@ export default class DataHandler<T extends Row = any>
 
 
     /**
-     * 
+     *
      * @depracted use on('change', callback) instead
      */
     public getTriggerChange(): Writable<number>
@@ -219,8 +216,8 @@ export default class DataHandler<T extends Row = any>
     }
 
     /**
-     * 
-     * @deprecated use applySort() instead 
+     *
+     * @deprecated use applySort() instead
      */
     public applySorting( params: { orderBy:  keyof T, direction?: 'asc' | 'desc' } = null )
     {
@@ -229,8 +226,8 @@ export default class DataHandler<T extends Row = any>
 
 
     /**
-     * 
-     * @deprecated use getSort() instead 
+     *
+     * @deprecated use getSort() instead
      */
     public getSorted()
     {
