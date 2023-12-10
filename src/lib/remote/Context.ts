@@ -17,12 +17,10 @@ export default class Context<Row>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
     public sort                 : Writable<Sort<Row>>
-    public selectionScope       : 'currentPage' | 'acrossPages'
-    public selection            : Writable<{ [ page: number ]: (Row | Row[keyof Row])[] }>
-    public selected             : Readable<(Row | Row[keyof Row])[]>
+    public selected             : Writable<(Row | Row[keyof Row])[]>
     public isAllSelected        : Readable<boolean>
-    public fullSelection        : Readable<(Row | Row[keyof Row])[]>
     public selectedCount        : Readable<{ count: number, total: number }>
+    public selectBy             : keyof Row | undefined
 
 
     constructor(data: Row[], params: Params)
@@ -39,12 +37,10 @@ export default class Context<Row>
         this.pagesWithEllipsis  = this.createPagesWithEllipsis()
         this.pageCount          = this.createPageCount()
         this.sort               = writable(undefined)
-        this.selectionScope     = params.selectionScope ?? 'currentPage'
-        this.selection          = writable({ 0: [] })
-        this.selected           = this.createSelected()
+        this.selected           = writable([])
         this.isAllSelected      = this.createIsAllSelected()
-        this.fullSelection      = this.createFullSelection()
         this.selectedCount      = this.createSelectedCount()
+        this.selectBy           = params.selectBy as keyof Row ?? undefined
     }
 
     public getState(): State
@@ -58,17 +54,10 @@ export default class Context<Row>
             rowsPerPage,
             offset: rowsPerPage * (currentPage - 1),
             search: get(this.search),
+            sorted: sort ?? undefined as any, // deprecated
             sort: sort ?? undefined as any,
             filters: filters.length > 0 ? filters : undefined as any,
-            setTotalRows: (value: number) => this.totalRows.set(value),
-            /**
-             * @deprecaded use 'sort' instead
-             */
-            sorted: sort ?? undefined as any,
-            /**
-             * @deprecaded use 'currentPage' instead
-             */
-            pageNumber: currentPage,
+            setTotalRows: (value: number) => this.totalRows.set(value)
         }
     }
 
@@ -79,9 +68,7 @@ export default class Context<Row>
                 return undefined
             }
             const pages = Array.from(Array(Math.ceil($totalRows / $rowsPerPage)))
-            return pages.map((_, i) => {
-                return i + 1
-            })
+            return pages.map((_, i) => i + 1)
         })
     }
 
@@ -148,45 +135,24 @@ export default class Context<Row>
         )
     }
 
-    private createSelected()
-    {
-        return derived(
-            [this.selection, this.currentPage],
-            ([$selection, $currentPage]) => {
-                const currentPage = this.selectionScope === 'currentPage' ? 0 : $currentPage
-                return $selection[currentPage] ?? []
-            }
-        )
-    }
-
     private createIsAllSelected()
     {
-        return derived(
-            [this.selected, this.rows],
-            ([$selected, $rows]) => {
-                const rowCount = $rows.length
-                if (rowCount === $selected.length && rowCount !== 0) {
-                    return true
-                }
-                return false
+        return derived([this.selected, this.rows], ([$selected, $rows]) => {
+            if (this.selectBy) {
+                const ids = $rows.map(row => row[this.selectBy])
+                return ids.every(id => $selected.includes(id))
             }
-        )
-    }
-
-    private createFullSelection()
-    {
-        return derived(this.selection, ($selection) => {
-            return Object.values($selection).flat()
+            return $rows.every(row => $selected.includes(row as Row))
         })
     }
 
     private createSelectedCount()
     {
         return derived(
-            [this.fullSelection, this.totalRows],
-            ([$fullSelection, $totalRows]) => {
+            [this.selected, this.totalRows],
+            ([$selected, $totalRows]) => {
                 return {
-                    count: $fullSelection.length,
+                    count: $selected.length,
                     total: $totalRows
                 }
             }

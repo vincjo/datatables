@@ -14,7 +14,7 @@ import type { Internationalization, Row, State, Sort } from '$lib/remote'
 export type Params = {
     rowsPerPage     ?: number,
     totalRows       ?: number,
-    selectionScope  ?: 'currentPage' | 'acrossPages',
+    selectBy        ?: keyof Row,
     i18n            ?: Internationalization
 }
 
@@ -27,7 +27,7 @@ export default class DataHandler<T extends Row = any>
     private pageHandler     : PageHandler<T>
     private searchHandler   : SearchHandler<T>
     private filterHandler   : FilterHandler<T>
-    public i18n             : Internationalization
+    public  i18n            : Internationalization
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: 5 })
     {
@@ -163,17 +163,14 @@ export default class DataHandler<T extends Row = any>
         this.selectHandler.set(value)
     }
 
-    public getSelected(param?: { acrossPages: boolean })
+    public getSelected()
     {
-        if (param?.acrossPages === true) {
-            return this.context.fullSelection
-        }
         return this.context.selected
     }
 
-    public selectAll(selectBy: keyof T = null): void
+    public selectAll(): void
     {
-        this.selectHandler.all(selectBy)
+        this.selectHandler.all()
     }
 
     public isAllSelected(): Readable<boolean>
