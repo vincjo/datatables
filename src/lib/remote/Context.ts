@@ -138,6 +138,9 @@ export default class Context<Row>
     private createIsAllSelected()
     {
         return derived([this.selected, this.rows], ([$selected, $rows]) => {
+            if ($rows.length === 0) {
+                return false
+            }
             if (this.selectBy) {
                 const ids = $rows.map(row => row[this.selectBy])
                 return ids.every(id => $selected.includes(id))
