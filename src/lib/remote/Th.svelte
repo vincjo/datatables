@@ -6,6 +6,7 @@
     export let handler: DataHandler<T>
     export let orderBy: keyof T
     export let align: 'left' | 'right' | 'center' = 'left'
+    export let rowSpan: number = 1
 
     const sort = handler.getSort()
     const update = () => {
@@ -19,6 +20,7 @@
     class:sortable={orderBy}
     class:active={$sort?.orderBy === orderBy}
     class={$$props.class ?? ''}
+    rowspan={rowSpan}
 >
     <div
         class="flex"

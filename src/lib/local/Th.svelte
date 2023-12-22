@@ -6,6 +6,7 @@
     export let handler: DataHandler<T>
     export let orderBy: Field<T>
     export let align: 'left' | 'right' | 'center' = 'left'
+    export let rowSpan: number = 1;
 
     const identifier = orderBy?.toString()
     const sort = handler.getSort()
@@ -16,6 +17,7 @@
     class:sortable={orderBy}
     class:active={$sort.identifier === identifier}
     class={$$props.class ?? ''}
+    rowspan={rowSpan}
 >
     <div
         class="flex"
