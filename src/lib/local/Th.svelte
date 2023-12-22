@@ -6,7 +6,7 @@
     export let handler: DataHandler<T>
     export let orderBy: Field<T>
     export let align: 'left' | 'right' | 'center' = 'left'
-    export let rowSpan: number = 1;
+    export let rowSpan: number = 1
 
     const identifier = orderBy?.toString()
     const sort = handler.getSort()
