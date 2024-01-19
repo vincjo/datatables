@@ -19,9 +19,9 @@ export default class FilterHandler<Row>
         this.events  = context.events
     }
 
-    public set(value: Value, filterBy: Field<Row>, comparator: Comparator<Row> = null )
+    public set(value: Value, filterBy: Field<Row>, comparator: Comparator<Row> = null, name?: string )
     {
-        const { callback, identifier, key } = parseField(filterBy)
+        const { callback, identifier, key } = parseField(filterBy, name)
         const filter = { value, identifier, callback, comparator, key }
         this.filters.update((store) => {
             store = store.filter((item) => item.identifier !== identifier)
