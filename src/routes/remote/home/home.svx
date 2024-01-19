@@ -1,5 +1,6 @@
 <script>
     import ClientLink from './ClientLink.svelte'
+    import SkeletonLink from '$site/components/SkeletonLink.svelte'
     import { getPath } from 'gros/page'
 </script>
 
@@ -22,6 +23,11 @@ This part of the lib provides 2 additional functions
 ⚠️ In this case `DataHandler` and showcase components are located in <span class="import">@vincjo/datatables**/remote**</span>
 
 <a href="{getPath('/remote/basic-usage')}">&rarr; basic usage</a>
+
+<!--
+## Skeleton components
+<SkeletonLink remote={true}/>
+-->
 
 ## Sample code
 <aside class="bis">

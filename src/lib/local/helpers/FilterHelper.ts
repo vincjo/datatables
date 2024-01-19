@@ -8,6 +8,7 @@ export default class FilterHelper<Row>
 {
     private filterHandler   : FilterHandler<Row>
     private filterBy        : Field<Row>
+    private name            : string
     private comparator      : Comparator<Row>
     private callback        : () => void
 
@@ -15,6 +16,7 @@ export default class FilterHelper<Row>
     {
         this.filterHandler  = filterHandler
         this.filterBy       = filterBy
+        this.name           = 'f_' + (Math.random()).toString(28).substring(2)
         this.comparator     = comparator ?? check.isLike
         this.callback       = () => null
     }
@@ -24,7 +26,7 @@ export default class FilterHelper<Row>
         if (comparator) {
             this.comparator = comparator
         }
-        this.filterHandler.set(value, this.filterBy, this.comparator)
+        this.filterHandler.set(value, this.filterBy, this.comparator, this.name)
     }
 
     public clear()

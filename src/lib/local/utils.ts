@@ -6,8 +6,8 @@ export const isNull = (value: any) => {
 }
 export const isNotNull = (value: any) => { return !isNull(value) }
 
-export const parseField = (field: Field<any>) => {
-    const identifier = field.toString()
+export const parseField = (field: Field<any>, name?: string) => {
+    const identifier = name ?? field.toString()
     if (typeof field === 'string') {
         return {
             callback: (row: Row) => row[field],

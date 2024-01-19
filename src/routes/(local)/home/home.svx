@@ -1,5 +1,6 @@
 <script>
     import RemoteLink from './RemoteLink.svelte'
+    import SkeletonLink from '$site/components/SkeletonLink.svelte'
 </script>
 
 ## Installation
@@ -24,6 +25,10 @@ This lib provides an API to dynamically interact with iterable data: filtering, 
 
 Also provides some demo components, which you can grab and customize in your own project.
 
+<!--
+## Skeleton components
+<SkeletonLink/> 
+-->
 
 ## Server-side pagination
 <RemoteLink/>
