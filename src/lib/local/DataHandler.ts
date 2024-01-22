@@ -99,22 +99,22 @@ export default class DataHandler<T extends Row = any>
         this.searchHandler.clear()
     }
 
-    public sort(orderBy: Field<T>)
+    public sort(orderBy: Field<T>, identifier?: string)
     {
         this.setPage(1)
-        this.sortHandler.set(orderBy)
+        this.sortHandler.set(orderBy, identifier)
     }
 
-    public sortAsc(orderBy: Field<T>)
+    public sortAsc(orderBy: Field<T>, identifier?: string)
     {
         this.setPage(1)
-        this.sortHandler.asc(orderBy)
+        this.sortHandler.asc(orderBy, identifier)
     }
 
-    public sortDesc(orderBy: Field<T>)
+    public sortDesc(orderBy: Field<T>, identifier?: string)
     {
         this.setPage(1)
-        this.sortHandler.desc(orderBy)
+        this.sortHandler.desc(orderBy, identifier)
     }
 
     public getSort(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>

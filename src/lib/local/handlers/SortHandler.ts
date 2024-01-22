@@ -18,28 +18,27 @@ export default class SortHandler<Row>
         this.backup     = []
     }
 
-    public set(orderBy: Field<Row> = null)
+    public set(orderBy: Field<Row> = null, uid?: string)
     {
         if (!orderBy) return
         const sort = get(this.sort)
-        const { identifier } = parseField(orderBy)
-
+        const { identifier } = parseField(orderBy, uid)
         if (sort.identifier !== identifier) {
             this.sort.update((store) => (store.direction = null))
         }
         if (sort.direction === null || sort.direction === 'desc') {
-            this.asc(orderBy)
+            this.asc(orderBy, uid)
         } 
         else if (sort.direction === 'asc') {
-            this.desc(orderBy)
+            this.desc(orderBy, uid)
         }
     }
 
-    public asc(orderBy: Field<Row>, direction: 'asc' = 'asc')
+    public asc(orderBy: Field<Row>, uid?: string)
     {
         if (!orderBy) return
-        const { identifier, callback, key } = parseField(orderBy)
-        this.sort.set({ identifier, callback, direction, key })
+        const { identifier, callback, key } = parseField(orderBy, uid)
+        this.sort.set({ identifier, callback, direction: 'asc', key })
         this.rawRows.update((store) => {
             store.sort((x, y) => {
                 const [a, b] = [callback(x), callback(y)]
@@ -54,15 +53,15 @@ export default class SortHandler<Row>
             })
             return store
         })
-        this.log({ identifier, callback, direction })
+        this.log({ identifier, callback, direction: 'asc' })
         this.event.trigger('change')
     }
 
-    public desc(orderBy: Field<Row>, direction: 'desc' = 'desc')
+    public desc(orderBy: Field<Row>, uid?: string)
     {
         if (!orderBy) return
-        const { identifier, callback, key } = parseField(orderBy)
-        this.sort.set({ identifier, callback, direction, key })
+        const { identifier, callback, key } = parseField(orderBy, uid)
+        this.sort.set({ identifier, callback, direction: 'desc', key })
         this.rawRows.update((store) => {
             store.sort((x, y) => {
                 const [a, b] = [callback(x), callback(y)]
@@ -77,7 +76,7 @@ export default class SortHandler<Row>
             })
             return store
         })
-        this.log({ identifier, callback, direction })
+        this.log({ identifier, callback, direction: 'desc' })
         this.event.trigger('change')
     }
 

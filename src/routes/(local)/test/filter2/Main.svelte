@@ -1,5 +1,5 @@
 <script>
-	import { DataHandler } from '$lib';
+	import { DataHandler, Th } from '$lib';
 	import ThFilter from './ThFilter.svelte';
 
 
@@ -31,8 +31,8 @@
 <table>
 	<thead>
 		<tr>
-			{#each keys as key}
-				<th>{key}</th>
+			{#each keys as key, i}
+				<Th {handler} orderBy={key} identifier={'th' + i}>{key}</Th>
 			{/each}
 		</tr>
 		<tr>
