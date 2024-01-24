@@ -24,10 +24,10 @@ This part of the lib provides 2 additional functions
 
 <a href="{getPath('/remote/basic-usage')}">&rarr; basic usage</a>
 
-<!--
+
 ## Skeleton components
 <SkeletonLink remote={true}/>
--->
+
 
 ## Sample code
 <aside class="bis">
