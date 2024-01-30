@@ -48,31 +48,29 @@
 }
 
 [data-theme="dark"] {
-    --primary: #c2185b;
-    --primary-lighten: #ef6190;
-    --primary-lighten-1: rgba(224, 52, 121, 0.1);
-    --primary-lighten-1: rgba(224, 52, 121, 0.1);
-    --primary-lighten-2: rgba(224, 52, 121, 0.2);
-    --primary-lighten-3: rgba(224, 52, 121, 0.3);
+    --primary: #ef5492;
+    --primary-lighten: #ef84a8;
+    --primary-lighten-1: rgba(239, 84, 146, 0.2);
+    --primary-lighten-2: rgba(239, 84, 146, 0.3);
+    --primary-lighten-3: rgba(239, 84, 146, 0.4);
     --primary-darken: #8c3463;
 
-    --secondary: #006990;
+    --secondary: #0089bb;
     --secondary-lighten: #62c8f3;
-    --secondary-lighten-1: rgba(0, 105, 144, 0.1);
     --secondary-lighten-1: rgba(0, 105, 144, 0.1);
     --secondary-lighten-2: rgba(0, 105, 144, 0.2);
     --secondary-lighten-3: rgba(0, 105, 144, 0.3);
     --secondary-darken: #004058;
 
-    --ternary: #fbc02d;
+    --ternary: #a57e1a;
 
-    --grey: #424242;
+    --grey: #444444;
     --grey-lighten: #212121;
     --grey-lighten-2: #181818;
     --grey-lighten-3: #151515;
-    --bg: #181818;
-    --font: #e0e0e0;
-    --font-grey: #9e9e9e;
+    --bg: #242424;
+    --font: #eee;
+    --font-grey: #bdbdbd;
 
     --bg-code: #212121;
 }
@@ -107,24 +105,21 @@
     --secondary: #c2185b;
     --secondary-lighten: #f48fb1;
     --secondary-lighten-1: rgba(194, 24, 91, 0.1);
-    --secondary-lighten-1: rgba(194, 24, 91, 0.1);
     --secondary-lighten-2: rgba(194, 24, 91, 0.2);
     --secondary-lighten-3: rgba(194, 24, 91, 0.3);
     --secondary-darken: #880e4f;
 }
 
 [data-theme="dark"][data-mode="remote"] {
-    --primary: #006990;
+    --primary: #0089bb;
     --primary-lighten: #62c8f3;
-    --primary-lighten-1: rgba(0, 105, 144, 0.1);
-    --primary-lighten-1: rgba(0, 105, 144, 0.1);
-    --primary-lighten-2: rgba(0, 105, 144, 0.2);
-    --primary-lighten-3: rgba(0, 105, 144, 0.3);
+    --primary-lighten-1: rgba(0, 137, 187, 0.2);
+    --primary-lighten-2: rgba(0, 137, 187, 0.3);
+    --primary-lighten-3: rgba(0, 137, 187, 0.4);
     --primary-darken: #004058;
 
     --secondary: #c2185b;
     --secondary-lighten: #ef6190;
-    --secondary-lighten-1: rgba(224, 52, 121, 0.1);
     --secondary-lighten-1: rgba(224, 52, 121, 0.1);
     --secondary-lighten-2: rgba(224, 52, 121, 0.2);
     --secondary-lighten-3: rgba(224, 52, 121, 0.3);

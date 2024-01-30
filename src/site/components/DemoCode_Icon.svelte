@@ -19,6 +19,6 @@
         width: 16px;
         height: 16px;
         margin: 0 4px 0 0;
-        color: #9e9e9e;
+        color: var(--grey-lighten);
     }
 </style>

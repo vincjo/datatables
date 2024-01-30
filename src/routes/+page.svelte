@@ -1,7 +1,7 @@
 
 
 <h1>Handle data in your Svelte projects.</h1>
-<h2>A headless solution for filtering, sorting, selecting and paginating any iterable object. You can build datatables components and more...</h2>
+<h2>A headless solution to filter, sort, select and paginate iterable objects. You can build datatables components and more.</h2>
 
 
 <style>

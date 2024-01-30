@@ -1,0 +1,12 @@
+<script>
+    import Demo from '$site/components/Demo.svelte'
+    import Main from './Main.svelte'
+    export let data
+</script>
+
+# Hello World
+<Demo components={data.components} dataset={data.dataset} scrollY={false} codeNav={false}>
+    <Main />
+</Demo>
+
+

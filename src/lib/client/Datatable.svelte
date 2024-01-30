@@ -32,7 +32,7 @@
         {/each}
     </header>
 
-    <article bind:this={element}>
+    <article bind:this={element} class="thin-scrollbar">
         <slot />
     </article>
 
@@ -101,7 +101,7 @@
         position: relative;
         height: 100%;
         overflow: auto;
-        scrollbar-width: thin;
+        /* scrollbar-width: thin; */
     }
     article::-webkit-scrollbar {
         width: 6px;

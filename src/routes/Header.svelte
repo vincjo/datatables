@@ -12,7 +12,7 @@
             <Logo height="28px"/>
             <span class="alt-font">svelte simple datatables</span>
         </a>
-        <a class="menu" class:active={$url.indexOf('docs') > -1} href="{getPath('/docs')}">Documentation</a>
+        <a class="menu" class:active={$url.indexOf('docs') > -1} href="{getPath('/docs/home')}">Documentation</a>
         <a class="menu" class:active={$url.indexOf('api') > -1} href="{getPath('/api')}">API</a>
     </nav>
     <div/>
@@ -32,6 +32,7 @@
         right: 0;
         height: 56px;
         border-bottom: 1px solid var(--grey);
+        border-top: 1px solid var(--grey);
         background: var(--bg);
         color: var(--font);
         justify-content: space-between;

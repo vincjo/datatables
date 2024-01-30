@@ -5,6 +5,7 @@
     import Prism from 'prismjs'
     export let dataset
     export let components
+    export let codeNav = true
     export let scrollY = true
     export let width = 'auto'
     let current = 'result'
@@ -29,14 +30,11 @@
         </article>
     {:else if current === 'code'}
         <article class="code">
-            <DemoCode {components} />
+            <DemoCode {components} {codeNav}/>
         </article>
     {:else}
-        <article class="code thin-scrollbar-darken">
-            <CopyButton code={dataset} />
-            <pre class="language-javascript">
-{@html Prism.highlight(dataset, Prism.languages.javascript)}
-                </pre>
+        <article class="code">
+            <pre class="language-javascript thin-scrollbar"><CopyButton code={dataset} />{@html Prism.highlight(dataset, Prism.languages.javascript)}</pre>
         </article>
     {/if}
 </div>
@@ -56,7 +54,7 @@
     li {
         display: block;
         font-size: 16px;
-        color: #676778;
+        color: var(--font-grey);
         line-height: 32px;
         padding: 8px 0 0 0;
         margin: 0 24px 0 16px;
@@ -84,7 +82,14 @@
     }
     article.code {
         height: 480px;
-        background: var(--hljs);
+    }
+    pre {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
         overflow: auto;
+        padding: 0;
     }
 </style>

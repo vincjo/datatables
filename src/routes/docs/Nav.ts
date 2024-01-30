@@ -4,11 +4,9 @@ export const items = [
     {
         title: 'Getting started',
         links: [
-            { name: 'Introduction'          , path: '/docs/intro'       },
-            { name: 'Installation'          , path: '/docs/install'     },
+            { name: 'Introduction'          , path: '/docs/home'        },
             { name: 'Hello World'           , path: '/docs/hello-world' },
             { name: 'Internationalization'  , path: '/docs/i18n'        },
-            { name: 'Dark mode'             , path: '/docs/dark-mode'   },
         ]
     },
     {

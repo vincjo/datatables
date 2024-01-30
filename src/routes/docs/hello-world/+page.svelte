@@ -1,19 +1,12 @@
 <script>
-    import Demo from '$site/components/Demo.svelte'
-    import Main from './Main.svelte'
+    import { mode } from '$site/utils'
+    import Client from './Client.svx'
+    import Remote from './Remote.svx'
     export let data
 </script>
 
-<h2>Basic, with all the features</h2>
-<Demo components={data.components} dataset={data.dataset} scrollY={false}>
-    <Main />
-</Demo>
-
-<style>
-    h2 {
-        font-size: 24px;
-        color: var(--secondary);
-        font-weight: 400;
-        margin: 16px 0 8px 0;
-    }
-</style>
+{#if $mode === 'client'}
+    <Client {data}/>
+{:else}
+    <Remote/>
+{/if}

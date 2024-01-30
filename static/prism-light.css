@@ -69,7 +69,7 @@ Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/b
 }
 
 [data-theme="light"] .token.punctuation {
-	color: #0b3cfe;
+	color: #012dde;
 }
 
 [data-theme="light"] .token.namespace {
@@ -110,6 +110,10 @@ Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/b
 [data-theme="light"] .language-css .token.string,
 [data-theme="light"] .style .token.string {
 	color: #22a2c9;
+}
+
+[data-theme="light"] .language-javascript {
+	color: #c91db8;
 }
 
 [data-theme="light"] .token.attr-value,

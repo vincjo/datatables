@@ -101,22 +101,22 @@ export default class DataHandler<T extends Row = any>
         this.searchHandler.clear()
     }
 
-    public sort(orderBy: Field<T>)
+    public sort(orderBy: Field<T>, identifier?: string)
     {
         this.setPage(1)
-        this.sortHandler.set(orderBy)
+        this.sortHandler.set(orderBy, identifier)
     }
 
-    public sortAsc(orderBy: Field<T>)
+    public sortAsc(orderBy: Field<T>, identifier?: string)
     {
         this.setPage(1)
-        this.sortHandler.asc(orderBy)
+        this.sortHandler.asc(orderBy, identifier)
     }
 
-    public sortDesc(orderBy: Field<T>)
+    public sortDesc(orderBy: Field<T>, identifier?: string)
     {
         this.setPage(1)
-        this.sortHandler.desc(orderBy)
+        this.sortHandler.desc(orderBy, identifier)
     }
 
     public getSort(): Writable<{ identifier?: string, direction?: 'asc' | 'desc' }>
@@ -124,12 +124,12 @@ export default class DataHandler<T extends Row = any>
         return this.context.sort
     }
 
-    public applySort( params: { orderBy: Field<T>, direction?: 'asc' | 'desc' } = null )
+    public applySort( params: { orderBy: Field<T>, direction?: 'asc' | 'desc', identifier?: string } = null )
     {
         this.sortHandler.apply(params)
     }
 
-    public defineSort( params: { orderBy: Field<T>, direction: 'asc' | 'desc' })
+    public defineSort( params: { orderBy: Field<T>, direction: 'asc' | 'desc', identifier?: string })
     {
         this.sortHandler.define(params)
     }
