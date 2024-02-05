@@ -3,47 +3,47 @@ import type FilterHandler from '$lib/client/handlers/FilterHandler'
 import { type Writable, writable } from 'svelte/store'
 import { check } from '$lib/client/Comparator'
 
-type Value = string | number | [min: number, max: number]
-
 export default class AdvancedFilterHelper<Row>
 {
     private filterHandler   : FilterHandler<Row>
     private criteria        : Criterion[]
     private filterBy        : Field<Row>
-    private selected        : Writable<Value[]>
+    private active          : Writable<(string | number | [min: number, max: number])[]>
+    private comparator      : Comparator<any>
 
-    constructor(filterHandler: FilterHandler<Row>, filterBy: Field<Row>)
+    constructor(filterHandler: FilterHandler<Row>, filterBy: Field<Row>, comparator?: Comparator<any>)
     {
         this.filterHandler  = filterHandler
         this.filterBy       = filterBy
         this.criteria       = []
-        this.selected       = writable([])
+        this.comparator     = comparator ?? check.isEqualTo
+        this.active         = writable([])
     }
 
-    public set(value: Value, comparator: Comparator<any> = check.isLike)
+    public set(value: string | number | [min: number, max: number], comparator?: Comparator<any>): void
     {
         if (this.criteria.find(criterion => criterion.value === value)) {
             this.criteria = this.criteria.filter(criterion => criterion.value !== value)
         }
         else {
-            this.criteria = [ { value, comparator }, ...this.criteria ]
+            this.criteria = [ { value, comparator: comparator ?? this.comparator }, ...this.criteria ]
         }
         if (this.criteria.length === 0) {
             return this.clear()
         }
         this.filterHandler.set(this.criteria, this.filterBy, check.whereIn)
-        this.selected.set(this.criteria.map(criterion => criterion.value))
+        this.active.set(this.criteria.map(criterion => criterion.value))
     }
 
-    public getSelected()
+    public get(): Writable<(string | number | [min: number, max: number])[]>
     {
-        return this.selected
+        return this.active
     }
 
-    public clear()
+    public clear(): void
     {
         this.criteria = []
-        this.selected.set([])
+        this.active.set([])
         this.filterHandler.set(undefined, this.filterBy, check.whereIn)
     }
 }

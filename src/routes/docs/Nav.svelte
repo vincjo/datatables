@@ -17,7 +17,7 @@
     nav {
         position: absolute;
         top: 0;
-        left: 0;
+        left: 32px;
         bottom: 0;
         width: 240px;
         overflow-y: scroll;
@@ -54,6 +54,11 @@
     @media (max-width: 800px) {
         nav {
             display: none;
+        }
+    }
+    @media (min-width: 1200px) {
+        nav {
+            left: 96px;
         }
     }
 </style>

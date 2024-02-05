@@ -5,13 +5,14 @@
     export let code
     export let language = 'typescript'
     export let fontSize = '14px'
+    export let padding = '20px'
 
 </script>
 
 
 <aside class="thin-scrollbar-darken" style:font-size="{fontSize}">
     {#if language === 'typescript'}
-<pre class="language-typescript">
+<pre class="language-typescript" style:padding="{padding} 16px">
 <code>{@html Prism.highlight(code, Prism.languages.typescript)}</code>
 </pre>
     {:else}

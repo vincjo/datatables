@@ -8,13 +8,14 @@ import FilterHandler            from './handlers/FilterHandler'
 import FilterHelper             from './helpers/FilterHelper'
 import AdvancedFilterHelper     from './helpers/AdvancedFilterHelper'
 import CalculationHelper        from './helpers/CalculationHelper'
-import ColumnVisibilityHelper   from './helpers/ColumnVisibilityHelper'
+import ViewHelper               from './helpers/ViewHelper'
+import SearchHelper             from './helpers/SearchHelper'
 
 
 import type { Readable, Writable } from 'svelte/store'
 import type { Internationalization, Row, Field, Comparator } from '$lib/client'
 
-export type Params = { rowsPerPage?: number, i18n?: Internationalization }
+export type Params = { rowsPerPage?: number, i18n?: Internationalization, selectBy?: string }
 
 export default class DataHandler<T extends Row = any>
 {
@@ -25,6 +26,7 @@ export default class DataHandler<T extends Row = any>
     private searchHandler   : SearchHandler<T>
     private filterHandler   : FilterHandler<T>
     public  i18n            : Internationalization
+    public  view            : ViewHelper
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: null })
     {
@@ -37,13 +39,6 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler  = new FilterHandler(this.context)
     }
 
-    public setRows(data: T[])
-    {
-        this.context.rawRows.set(data)
-        this.context.events.trigger('change')
-        this.applySort()
-    }
-
     public getRows(): Readable<T[]>
     {
         return this.context.pagedRows
@@ -54,6 +49,13 @@ export default class DataHandler<T extends Row = any>
         return this.context.filteredRows
     }
 
+    public setRows(data: T[])
+    {
+        this.context.rawRows.set(data)
+        this.context.events.trigger('change')
+        this.applySort()
+    }
+
     public getRowCount(): Readable<{ start: number, end: number, total: number }>
     {
         return this.context.rowCount
@@ -62,6 +64,12 @@ export default class DataHandler<T extends Row = any>
     public getRowsPerPage(): Writable<number | null>
     {
         return this.context.rowsPerPage
+    }
+
+    public setRowsPerPage(value: number): void
+    {
+        this.context.rowsPerPage.set(value)
+        this.pageHandler.goto(1)
     }
 
     public getPages(param?: { ellipsis: boolean }): Readable<number[]>
@@ -99,6 +107,11 @@ export default class DataHandler<T extends Row = any>
     public clearSearch()
     {
         this.searchHandler.clear()
+    }
+
+    public createSearch(items?: any[]): SearchHelper
+    {
+        return new SearchHelper(items)
     }
 
     public sort(orderBy: Field<T>, identifier?: string)
@@ -149,19 +162,19 @@ export default class DataHandler<T extends Row = any>
         return this.filterHandler.get()
     }
 
-    public createFilter( filterBy: Field<T>, comparator?: Comparator<T> ): FilterHelper<T>
-    {
-        return new FilterHelper( this.filterHandler, filterBy, comparator )
-    }
-
-    public createAdvancedFilter(filterBy: Field<T>): AdvancedFilterHelper<T>
-    {
-        return new AdvancedFilterHelper(this.filterHandler, filterBy)
-    }
-
     public clearFilters(): void
     {
         this.filterHandler.clear()
+    }
+
+    public createAdvancedFilter(filterBy: Field<T>, comparator?: Comparator<T>): AdvancedFilterHelper<T>
+    {
+        return new AdvancedFilterHelper(this.filterHandler, filterBy, comparator)
+    }
+
+    public createFilter( filterBy: Field<T>, comparator?: Comparator<T> ): FilterHelper<T>
+    {
+        return new FilterHelper( this.filterHandler, filterBy, comparator )
     }
 
     public select(value: T | T[keyof T])
@@ -174,13 +187,13 @@ export default class DataHandler<T extends Row = any>
         return this.context.selected
     }
 
-    public selectAll(params: { selectBy?: keyof T; scope?: 'all' | 'currentPage' } = {}): void
+    public selectAll(params: { scope?: 'all' | 'currentPage' } = {}): void
     {
         this.context.selectScope.set(params.scope === 'currentPage' ? 'currentPage' : 'all')
-        this.selectHandler.all(params.selectBy ?? null)
+        this.selectHandler.all()
     }
 
-    public isAllSelected(): Readable<boolean>
+    public getIsAllSelected(): Readable<boolean>
     {
         return this.context.isAllSelected
     }
@@ -189,6 +202,12 @@ export default class DataHandler<T extends Row = any>
     {
         return this.context.selectedCount
     }
+
+    public clearSelection(): void
+    {
+        this.selectHandler.clear()
+    }
+
 
     public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
     {
@@ -200,9 +219,9 @@ export default class DataHandler<T extends Row = any>
         return new CalculationHelper(this.context, field, { precision: param?.precision ?? 2 })
     }
 
-    public createColumnVisibility(columns: { name: string, index: number, isVisible?: boolean }[]): ColumnVisibilityHelper
+    public createView(columns: { name: string, index: number, isVisible?: boolean }[]): ViewHelper
     {
-        return new ColumnVisibilityHelper(columns)
+        return new ViewHelper(columns)
     }
 
     public translate(i18n: Internationalization)
@@ -220,6 +239,16 @@ export default class DataHandler<T extends Row = any>
             },
             ...i18n
         }
+    }
+
+    public setView(view: ViewHelper)
+    {
+        this.view = view
+    }
+
+    public getView(): ViewHelper
+    {
+        return this.view
     }
 
     /**
@@ -271,5 +300,14 @@ export default class DataHandler<T extends Row = any>
     public getPageNumber(): Readable<number>
     {
         return this.getCurrentPage()
+    }
+
+    /**
+     * @deprecated use getIsAllSelected() instead
+     * @since v2.0.0 2024-02-02
+     */
+    public isAllSelected(): Readable<boolean>
+    {
+        return this.getIsAllSelected()
     }
 }

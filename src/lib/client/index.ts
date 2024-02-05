@@ -68,11 +68,11 @@ export type FilterBy<Row> = Field<Row>
  * 
  * import type { Field } from '@vincjo/datatables'
  */
-export type OrderBy<Row>  = Field<Row>
+export type OrderBy<Row> = Field<Row>
 
 /**
  * @deprecated use type Sort<Row> instead
  * 
  * import type { Sort } from '@vincjo/datatables'
  */
-export type Order<Row>  = Sort<Row>
+export type Order<Row> = Sort<Row>

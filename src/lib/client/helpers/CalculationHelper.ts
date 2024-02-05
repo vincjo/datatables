@@ -18,7 +18,7 @@ export default class CalcultationHelper<Row>
         this.precision      = param.precision
     }
 
-    public distinct(callback?: (values: any[]) => any[])
+    public distinct(callback?: (values: any[]) => any[]): { value: string, count: unknown }[]
     {
         const rawRows = get(this.rawRows)
         const values = rawRows.map(row => this.callback(row))
@@ -32,7 +32,7 @@ export default class CalcultationHelper<Row>
         return Object.entries(result).map(([value, count]) => ({ value, count }))
     }
 
-    public avg(callback?: (values: number[]) => number[])
+    public avg(callback?: (values: number[]) => number[]): Readable<number>
     {
         return derived(this.filteredRows, $filteredRows => {
             if ($filteredRows.length === 0) return 0
@@ -42,7 +42,7 @@ export default class CalcultationHelper<Row>
         })
     }
 
-    public sum(callback?: (values: number[]) => number[])
+    public sum(callback?: (values: number[]) => number[]): Readable<number>
     {
         return derived(this.filteredRows, $filteredRows => {
             const values = $filteredRows.map(row => this.callback(row)) as number[]
@@ -51,14 +51,14 @@ export default class CalcultationHelper<Row>
         })
     }
 
-    public bounds(callback?: (values: number[]) => any[]): [min: number, max: number]
+    public bounds(callback?: (values: number[]) => number[]): [min: number, max: number]
     {
         const rawRows = get(this.rawRows)
         const values = rawRows.map(row => this.callback(row))
 
         const numbers = callback ?
             callback(values as number[]).filter(Boolean) :
-            values.filter(Boolean)
+            values.filter(Boolean) as number[]
 
         return [
             Math.min(...numbers),
@@ -66,7 +66,7 @@ export default class CalcultationHelper<Row>
         ]
     }
 
-    public setPrecision(value: number)
+    public setPrecision(value: number): void
     {
         this.precision = value
     }

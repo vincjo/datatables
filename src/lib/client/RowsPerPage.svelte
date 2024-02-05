@@ -29,6 +29,7 @@
 
 <style>
     aside {
+        margin: 8px 16px;
         display: flex;
         justify-content: flex-start;
         align-items: center;

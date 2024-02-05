@@ -64,13 +64,13 @@ pre::-webkit-scrollbar-track-piece:start {
 }
 .md h1 {
     margin-top: 32px;
-    color: var(--font-grey);
+    color: var(--font);
     font-size: 40px;
     margin-bottom: 16px;
 }
 .md h2 {
     margin-top: 32px;
-    color: var(--font-grey);
+    color: var(--font);
     font-size: 32px;
 }
 .md h3 {
@@ -79,4 +79,5 @@ pre::-webkit-scrollbar-track-piece:start {
 }
 .md p, ul {
     font-size: 17px;
+    color: var(--font-grey);
 }

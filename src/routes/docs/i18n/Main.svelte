@@ -18,7 +18,7 @@
     const rows = handler.getRows()
 </script>
 
-<Datatable {handler}>
+<Datatable basic {handler}>
     <table>
         <thead>
             <tr>

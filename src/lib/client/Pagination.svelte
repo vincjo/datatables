@@ -72,6 +72,7 @@
 <style>
     section {
         display: flex;
+        margin: 8px 16px;
     }
     button {
         background: inherit;

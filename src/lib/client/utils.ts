@@ -1,4 +1,4 @@
-import type { Row, Field } from '$lib/client'
+import { type Row, type Field, type Comparator, type Criterion, check } from '$lib/client'
 
 export const isNull = (value: any) => {
     if (value === null || value === undefined || value === '') return true
@@ -31,3 +31,20 @@ export const parseField = (field: Field<any>, uid?: string) => {
     throw new Error(`Invalid field argument: ${String(field)}`)
 }
 
+export const match = (
+    entry: Row[keyof Row], 
+    value: string|number|boolean|symbol|Criterion[], 
+    compare: Comparator<any> = check.isLike
+) => {
+    if (isNull(value)) {
+        return true
+    }
+    if (!entry) return compare(entry, value)
+    else if (typeof entry === 'object') {
+        return Object.keys(entry).some((k) => {
+            return match(entry[k], value, compare)
+        })
+    }
+    if (!compare) return check.isLike(entry, value)
+    return compare(entry, value)
+}

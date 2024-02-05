@@ -19,12 +19,12 @@
 
 <style>
     input {
+        margin: 8px 16px;
         border: 1px solid var(--grey, #e0e0e0);
         border-radius: 4px;
         outline: none;
         padding: 0 8px;
         line-height: 24px;
-        margin: 0;
         height: 24px;
         background: transparent;
         width: 40%;

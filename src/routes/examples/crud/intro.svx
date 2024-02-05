@@ -1,0 +1,5 @@
+# Reactivity example with a simple CRUD
+
+Data is updated using the `setRows()` method.
+
+In this example I'm using a few Svelte stores to mimic interactions with a Rest API.

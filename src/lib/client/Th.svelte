@@ -5,18 +5,20 @@
 
     export let handler: DataHandler<T>
     export let orderBy: Field<T>
+    export let identifier = orderBy?.toString()
     export let numeric = false
+    export let rowSpan: number = 1
     export let align: 'left' | 'right' | 'center' = numeric ? 'right' : 'left'
 
-    const identifier = orderBy?.toString()
     const sort = handler.getSort()
 </script>
 
 <th
-    on:click={() => handler.sort(orderBy)}
+    on:click={() => handler.sort(orderBy, identifier)}
     class:sortable={orderBy}
     class:active={$sort.identifier === identifier}
     class={$$props.class ?? ''}
+    rowspan={rowSpan}
 >
     <div
         class="flex"

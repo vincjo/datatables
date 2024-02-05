@@ -29,6 +29,7 @@
 
 <style>
     aside {
+        margin: 8px 16px;
         color: var(--font-grey, #757575);
         line-height: 32px;
         font-size: 14px;

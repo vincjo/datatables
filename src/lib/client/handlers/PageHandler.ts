@@ -22,7 +22,7 @@ export default class PageHandler<Row>
         this.currentPage.update((store) => {
             const rowsPerPage = get(this.rowsPerPage)
             if (rowsPerPage) {
-                const total = get(this.rowCount).total
+                const { total } = get(this.rowCount)
                 if (page >= 1 && page <= Math.ceil(total / rowsPerPage)) {
                     store = page
                     this.events.trigger('change')

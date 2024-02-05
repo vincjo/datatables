@@ -6,14 +6,9 @@
 
     export let handler: DataHandler<T>
 
-    export let search       = true
-    export let rowsPerPage  = true
-    export let rowCount     = true
-    export let pagination   = true
-    export let header: ComponentType[] = [search   ? Search   : null, rowsPerPage ? RowsPerPage : null]
-    export let footer: ComponentType[] = [rowCount ? RowCount : null, pagination  ? Pagination  : null]
-    const hasHeader = header.filter(Boolean).length > 0
-    const hasFooter = footer.filter(Boolean).length > 0
+    export let basic = false
+    export let header: ComponentType[] = basic ? [Search, RowsPerPage] : []
+    export let footer: ComponentType[] = basic ? [RowCount, Pagination] : []
 
     let element: HTMLElement
     let clientWidth = 1000
@@ -26,20 +21,22 @@
 
 <section bind:clientWidth class={$$props.class ?? ''}>
 
-    <header class:container={hasHeader}>
+    <header>
         {#each header as component}
             <svelte:component this={component} {handler} {small} {element}/>
         {/each}
+        <slot name="header"/>
     </header>
 
     <article bind:this={element} class="thin-scrollbar">
         <slot />
     </article>
 
-    <footer class:container={hasFooter}>
+    <footer>
         {#each footer as component}
             <svelte:component this={component} {handler} {small} {element}/>
         {/each}
+        <slot name="footer"/>
     </footer>
 
 </section>
@@ -84,17 +81,10 @@
     header,
     footer {
         min-height: 4px;
-        padding: 0 16px;
+        padding: 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
-    footer {
-        border-top: 1px solid var(--grey, #e0e0e0);
-    }
-    header.container,
-    footer.container {
-        min-height: 48px;
     }
 
     article {

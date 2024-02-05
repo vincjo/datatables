@@ -14,6 +14,7 @@
         </a>
         <a class="menu" class:active={$url.indexOf('docs') > -1} href="{getPath('/docs/home')}">Documentation</a>
         <a class="menu" class:active={$url.indexOf('api') > -1} href="{getPath('/api')}">API</a>
+        <a class="menu" class:active={$url.indexOf('examples') > -1} href="{getPath('/examples')}">Examples</a>
     </nav>
     <div/>
     <aside class="flex">
@@ -71,7 +72,7 @@
             padding: 0 96px;
         }
     }
-    @media (max-width: 640px) {
+    @media (max-width: 800px) {
         nav {
             display: none;
         }

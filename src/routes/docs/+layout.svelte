@@ -12,7 +12,7 @@
 <style>
     section {
         position: absolute;
-        left: 240px;
+        left: calc(240px + 32px);
         top: 0;
         bottom: 0;
         right: 0;
@@ -26,6 +26,12 @@
     @media (max-width: 800px) {
         section {
             left: 0;
+            padding: 32px 24px;
+        }
+    }
+    @media (min-width: 1200px) {
+        section {
+            left: calc(240px + 96px);
         }
     }
 </style>

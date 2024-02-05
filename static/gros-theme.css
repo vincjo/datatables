@@ -50,9 +50,9 @@
 [data-theme="dark"] {
     --primary: #ef5492;
     --primary-lighten: #ef84a8;
-    --primary-lighten-1: rgba(239, 84, 146, 0.2);
-    --primary-lighten-2: rgba(239, 84, 146, 0.3);
-    --primary-lighten-3: rgba(239, 84, 146, 0.4);
+    --primary-lighten-1: rgba(239, 84, 146, 0.1);
+    --primary-lighten-2: rgba(239, 84, 146, 0.2);
+    --primary-lighten-3: rgba(239, 84, 146, 0.3);
     --primary-darken: #8c3463;
 
     --secondary: #0089bb;
@@ -68,7 +68,7 @@
     --grey-lighten: #212121;
     --grey-lighten-2: #181818;
     --grey-lighten-3: #151515;
-    --bg: #242424;
+    --bg: #2e2e2e;
     --font: #eee;
     --font-grey: #bdbdbd;
 

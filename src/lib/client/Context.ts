@@ -1,8 +1,7 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store'
-import type { Filter, Sort, Comparator, Criterion, Field } from '$lib/client'
+import type { Filter, Sort, Field } from '$lib/client'
 import type { Params }  from '$lib/client/DataHandler'
-import { isNull, parseField } from './utils'
-import { check } from './Comparator'
+import { parseField, match } from './utils'
 import EventsHandler from './handlers/EventsHandler'
 
 
@@ -23,6 +22,7 @@ export default class Context<Row>
     public pageCount            : Readable<number>
     public sort                 : Writable<(Sort<Row>)>
     public selected             : Writable<(Row | Row[keyof Row])[]>
+    public selectBy             : string
     public selectScope          : Writable<'all' | 'currentPage'>
     public isAllSelected        : Readable<boolean>
     public selectedCount        : Readable<{ count: number, total: number }>
@@ -44,6 +44,7 @@ export default class Context<Row>
         this.pageCount          = this.createPageCount()
         this.sort               = writable({})
         this.selected           = writable([])
+        this.selectBy           = params.selectBy
         this.selectScope        = writable('all')
         this.isAllSelected      = this.createIsAllSelected()
         this.selectedCount      = this.createSelectedCount()
@@ -67,11 +68,11 @@ export default class Context<Row>
                             return callback
                         })
                         return scope.some((callback) => {
-                            return this.match(callback(row), $search.value)
+                            return match(callback(row), $search.value)
                         })
                     })
                     this.currentPage.set(1)
-                    this.selected.set([])
+                    // this.selected.set([])
                     this.events.trigger('change')
                 }
 
@@ -79,31 +80,16 @@ export default class Context<Row>
                     $filters.forEach((filter) => {
                         return ($rawRows = $rawRows.filter((row) => {
                             const entry = filter.callback(row)
-                            return this.match(entry, filter.value, filter.comparator)
+                            return match(entry, filter.value, filter.comparator)
                         }))
                     })
                     this.currentPage.set(1)
-                    this.selected.set([])
+                    // this.selected.set([])
                     this.events.trigger('change')
                 }
                 return $rawRows
             }
         )
-    }
-
-    private match(entry: Row[keyof Row], value: string|number|boolean|symbol|Criterion[], compare: Comparator<Row> = check.isLike) 
-    {
-        if (isNull(value)) {
-            return true
-        }
-        if (!entry) return compare(entry, value)
-        else if (typeof entry === 'object') {
-            return Object.keys(entry).some((k) => {
-                return this.match(entry[k], value, compare)
-            })
-        }
-        if (!compare) return check.isLike(entry, value)
-        return compare(entry, value)
     }
 
     private createPagedRows()
@@ -191,16 +177,27 @@ export default class Context<Row>
 
     private createIsAllSelected()
     {
-        return derived(
-            [this.selected, this.pagedRows, this.filteredRows, this.selectScope],
-            ([$selected, $pagedRows, $filteredRows, $selectScope]) => {
-                const rowCount = $selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
-                if (rowCount === $selected.length && rowCount !== 0) {
-                    return true
-                }
+        // return derived(
+        //     [this.selected, this.pagedRows, this.filteredRows, this.selectScope],
+        //     ([$selected, $pagedRows, $filteredRows, $selectScope]) => {
+        //         const rowCount = $selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
+        //         if (rowCount === $selected.length && rowCount !== 0) {
+        //             return true
+        //         }
+        //         return false
+        //     }
+        // )
+
+        return derived([this.selected, this.pagedRows], ([$selected, $pagedRows]) => {
+            if ($pagedRows.length === 0) {
                 return false
             }
-        )
+            if (this.selectBy) {
+                const ids = $pagedRows.map(row => row[this.selectBy])
+                return ids.every(id => $selected.includes(id))
+            }
+            return $pagedRows.every(row => $selected.includes(row as Row))
+        })
     }
 
     private createSelectedCount()

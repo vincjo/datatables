@@ -1,0 +1,3 @@
+
+
+Use `getIsAllSelected()` instead.
