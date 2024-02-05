@@ -68,7 +68,7 @@ const getParams = ({ offset, rowsPerPage, search, sort, filters }: State) => {
         params += `&sort=${sort.orderBy}&order=${sort.direction}`
     }
     if (filters) {
-        params += filters.map(({ filterBy, value }) => `&${filterBy}=${value}`).join()
+        params += filters.map(({ filterBy, value }) => `&${filterBy}=${value}`).join('')
     }
     return params
 }
