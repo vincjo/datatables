@@ -20,7 +20,7 @@ const getParams = (state: State) => {
         params += `&_sort=${sort.orderBy}&_order=${sort.direction}`
     }
     if (filters) {
-        params += filters.map(({ filterBy, value }) => `&${filterBy}=${value}`).join()
+        params += filters.map(({ filterBy, value }) => `&${filterBy}=${value}`).join('')
     }
     if (search) {
         params += `&q=${search}`
