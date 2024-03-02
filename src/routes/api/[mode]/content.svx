@@ -2,7 +2,7 @@
 
 # Welcome to the API documentation
 
-The documentation is partly generated from the source code using a TS parser.
+This documentation is partly generated from the source code using a TS parser.
 
 ## Quick start
 
