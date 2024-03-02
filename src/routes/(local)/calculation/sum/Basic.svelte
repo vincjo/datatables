@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DataHandler } from '$lib/local'
+    import { DataHandler } from '$lib/client'
     import { data } from '../data_grocery'
 
     let value = ''

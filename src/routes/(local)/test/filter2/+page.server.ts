@@ -2,7 +2,7 @@ import * as fs from 'fs'
 
 export const load = async () => {
     const path = './src/routes/(local)/test'
-    const lib = './src/lib/local'
+    const lib = './src/lib/client'
     const page = 'filter2'
     return {
         components: [

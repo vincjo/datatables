@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { DataHandler } from '$lib/local'
+    import type { DataHandler } from '$lib/client'
     export let handler: DataHandler
 
     const types = handler.createCalculation('type').distinct((values) => {
@@ -8,7 +8,7 @@
             .flat()
     })
     const filter = handler.createAdvancedFilter('type')
-    const selected = filter.getSelected()
+    const selected = filter.get()
 </script>
 
 

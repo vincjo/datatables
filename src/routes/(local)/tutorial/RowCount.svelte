@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { DataHandler } from '$lib/local'
+    import type { DataHandler } from '$lib/client'
     export let handler: DataHandler
     const rowCount = handler.getRowCount()
 </script>

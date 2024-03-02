@@ -1,19 +1,19 @@
-import type Context from '$lib/local/Context'
-import type { Sort, Field, EventHandler } from '$lib/local'
+import type Context from '$lib/client/Context'
+import type { Sort, Field, EventsHandler } from '$lib/client'
 import { type Writable, get } from 'svelte/store'
-import { parseField } from '$lib/local/utils'
+import { parseField } from '$lib/client/utils'
 
 export default class SortHandler<Row> 
 {
     private rawRows     : Writable<Row[]>
-    private event       : EventHandler
+    private events      : EventsHandler
     private sort        : Writable<(Sort<Row>)>
     private backup      : Sort<Row>[]
 
     constructor(context: Context<Row>) 
     {
         this.rawRows    = context.rawRows
-        this.event      = context.event
+        this.events     = context.events
         this.sort       = context.sort
         this.backup     = []
     }
@@ -23,6 +23,7 @@ export default class SortHandler<Row>
         if (!orderBy) return
         const sort = get(this.sort)
         const { identifier } = parseField(orderBy, uid)
+
         if (sort.identifier !== identifier) {
             this.sort.update((store) => (store.direction = null))
         }
@@ -53,8 +54,8 @@ export default class SortHandler<Row>
             })
             return store
         })
-        this.log({ identifier, callback, direction: 'asc' })
-        this.event.trigger('change')
+        this.save({ identifier, callback, direction: 'asc' })
+        this.events.trigger('change')
     }
 
     public desc(orderBy: Field<Row>, uid?: string)
@@ -76,17 +77,18 @@ export default class SortHandler<Row>
             })
             return store
         })
-        this.log({ identifier, callback, direction: 'desc' })
-        this.event.trigger('change')
+        this.save({ identifier, callback, direction: 'desc' })
+        this.events.trigger('change')
     }
 
-    public apply(params: { orderBy: Field<Row>, direction?: 'asc' | 'desc' } = null) 
+    public apply(params?: { orderBy: Field<Row>, direction?: 'asc' | 'desc', identifier?: string }) 
     {
         if (params) {
-            switch (params.direction) {
-                case 'asc' : return this.asc(params.orderBy)
-                case 'desc': return this.desc(params.orderBy)
-                default    : return this.set(params.orderBy)
+            const { orderBy, direction, identifier } = params
+            switch (direction) {
+                case 'asc' : return this.asc(orderBy, identifier)
+                case 'desc': return this.desc(orderBy, identifier)
+                default    : return this.set(orderBy, identifier)
             }
         }
         else {
@@ -100,11 +102,16 @@ export default class SortHandler<Row>
         this.sort.set({})
     }
 
-    public define(orderBy: Field<Row>, direction: 'asc' | 'desc' = 'asc')
+    public define(params: { orderBy: Field<Row>, direction: 'asc' | 'desc', identifier?: string })
     {
-        if (!orderBy) return
-        const { identifier, callback, key } = parseField(orderBy)
-        this.sort.set({ identifier, callback, direction, key })
+        const { orderBy, direction, identifier } = params
+        if (!orderBy || !direction) return
+        const field = parseField(orderBy, identifier)
+        this.sort.set({ 
+            identifier: field.identifier, 
+            callback: field.callback, 
+            direction 
+        })
     }
 
     private restore()
@@ -116,7 +123,7 @@ export default class SortHandler<Row>
         }
     }
 
-    private log(sort: Sort<Row>)
+    private save(sort: Sort<Row>)
     {
         this.backup = this.backup.filter(item => item.identifier !== sort.identifier )
         if (this.backup.length >= 3) {

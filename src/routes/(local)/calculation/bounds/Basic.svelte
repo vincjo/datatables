@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DataHandler, Datatable, Th } from '$lib/local'
+    import { DataHandler, Datatable, Th } from '$lib/client'
     import { data } from '../data_cars'
 
     let value = ''

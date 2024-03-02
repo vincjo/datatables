@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Dropdown } from 'gros/dropdown'
-    import { DataHandler, Datatable, Th } from '$lib/local'
+    import { DataHandler, Datatable, Th } from '$lib/client'
     import PokemonStats from './PokemonStats.svelte'
     import { pokedex } from '$site/data/pokedex'
     const handler = new DataHandler(pokedex, { rowsPerPage: 10 })
@@ -12,7 +12,7 @@
             .filter(Boolean)
     })
     const filter = handler.createAdvancedFilter('type')
-    const selected = filter.getSelected()
+    const selected = filter.get()
 
     const avg = handler.createCalculation('height').avg((values) => values.map(value => value / 10))
 </script>

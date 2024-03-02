@@ -1,5 +1,5 @@
 <script>
-    import { DataHandler }  from '$lib/local'
+    import { DataHandler }  from '$lib/client'
     import Th               from '../Th.svelte'
     import data             from '$site/data/data'
 

@@ -2,7 +2,7 @@ import * as fs from 'fs'
 
 export const load = async () => {
     const path = './src/routes/(local)/examples'
-    const lib = './src/lib/local'
+    const lib = './src/lib/client'
     const page = 'nested-objects'
     return {
         dataset: fs.readFileSync(`./src/site/data/test.ts`).toString('utf-8'),

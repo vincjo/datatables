@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { type DataHandler, Datatable, Th } from '$lib/local'
+    import { type DataHandler, Datatable, Th } from '$lib/client'
     import PokemonStats from './PokemonStats.svelte'
     export let handler: DataHandler
     const rows = handler.getRows()

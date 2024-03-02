@@ -37,7 +37,7 @@ export type Sort<Row> = {
 
 
 export type State = {
-    pageNumber: number,
+    currentPage: number,
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
@@ -47,7 +47,11 @@ export type State = {
     /**
      * @deprecated use 'sort' instead
      */
-    sorted: Sort<Row> | undefined
+    sorted?: Sort<Row>
+    /**
+     * @deprecated use 'currentPage' instead
+     */
+    pageNumber?: number
 }
 
 

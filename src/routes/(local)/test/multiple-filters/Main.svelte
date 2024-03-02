@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DataHandler, Datatable, Th } from '$lib/local'
+    import { DataHandler, Datatable, Th } from '$lib/client'
     import PokemonStats from './PokemonStats.svelte'
     import { pokedex } from '$site/data/pokedex'
     import MultipleFilters from './MultipleFilters.svelte'

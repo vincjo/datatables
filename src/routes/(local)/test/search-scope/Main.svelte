@@ -1,6 +1,6 @@
 <script lang="ts">
     import myData from '$site/data/data'
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/local'
+    import { DataHandler, Datatable, Th, ThFilter } from '$lib/client'
     import Search from './Search.svelte'
     
     const handler = new DataHandler(myData, { rowsPerPage: 10 })
