@@ -15,8 +15,6 @@
     export let hideHeader     = false
     export let hideFooter     = false
     export let hideRowSelection = false
-    export let header         = null
-    export let footer         = null
     export let tableHeight    = (search || rowsPerPage || !hideHeader ? 48 : 8) + (rowCount || selectedCount || pagination || !hideFooter ? 48 : 8)
     export let columns: ColumnProps[] = [];
 
@@ -42,8 +40,6 @@
             <slot name="header">
                     {#if search}
                         <Search {handler} />
-                    {:else}
-                        <div/>
                     {/if}
                     {#if rowsPerPage}
                         <RowsPerPage {handler} small={clientWidth < 600} />
@@ -169,5 +165,12 @@
     }
     article::-webkit-scrollbar-thumb:hover {
         background: #9e9e9e;
+    }
+    td {
+        padding: 3px 20px;
+    }
+    td input {
+        margin: auto;
+        display: block;
     }
 </style>

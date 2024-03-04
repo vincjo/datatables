@@ -35,8 +35,7 @@
 		margin: 0;
 		height: 24px;
 		background: transparent;
-		width: 40%;
-		max-width: 176px;
+		width: 100%;
 		min-width: 96px;
 		transition: all, 0.1s;
 	}

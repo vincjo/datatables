@@ -5,10 +5,9 @@
 
     export let handler: DataHandler<T>
     export let small = false
+    export let options: number[] = [5, 10, 20, 50, 100]
 
     const rowsPerPage = handler.getRowsPerPage()
-
-    const options = [5, 10, 20, 50, 100]
 </script>
 
 <aside class={$$props.class ?? ''}>

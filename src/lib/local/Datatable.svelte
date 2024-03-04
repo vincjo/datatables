@@ -14,8 +14,6 @@
     export let hideHeader   = false
     export let hideFooter   = false
     export let hideRowSelection = false
-    export let header       = null
-    export let footer       = null
     export let tableHeight  = (search || rowsPerPage || !hideHeader ? 48 : 8) + (rowCount || pagination || !hideFooter ? 48 : 8);
     export let columns: ColumnProps[] = [];
 
@@ -172,6 +170,5 @@
     td input {
         margin: auto;
         display: block;
-
     }
 </style>
