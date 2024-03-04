@@ -1,5 +1,7 @@
 <script lang="ts">
-    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, Pagination } from '$lib/local'
+    import { createEventDispatcher } from 'svelte';
+    import type { ColumnProps } from './IDatatable';
+    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, Pagination, Th } from '$lib/local'
 
     type T = $$Generic<Row>
 
@@ -9,11 +11,24 @@
     export let rowsPerPage  = true
     export let rowCount     = true
     export let pagination   = true
+    export let hideHeader   = false
+    export let hideFooter   = false
+    export let hideRowSelection = false
+    export let header       = null
+    export let footer       = null
+    export let tableHeight  = (search || rowsPerPage || !hideHeader ? 48 : 8) + (rowCount || pagination || !hideFooter ? 48 : 8);
+    export let columns: ColumnProps[] = [];
+
+    const selected = handler.getSelected();
+    const isAllSelected = handler.isAllSelected();
+    const rows = handler.getRows();
+
+    let numSelected: number = 0;
+
+    const dispatch = createEventDispatcher();
 
     let element: HTMLElement
     let clientWidth = 1000
-
-    const height = (search || rowsPerPage ? 48 : 8) + (rowCount || pagination ? 48 : 8)
 
     handler.on('change', () => {
         if (element) element.scrollTop = 0
@@ -22,27 +37,80 @@
 </script>
 
 <section bind:clientWidth class={$$props.class ?? ''}>
-    <header class:container={search || rowsPerPage}>
-        {#if search}
-            <Search {handler} />
-        {/if}
-        {#if rowsPerPage}
-            <RowsPerPage {handler} small={clientWidth < 600} />
-        {/if}
-    </header>
+    {#if !hideHeader}
+        <header class:container={search || rowsPerPage}>
+            <slot name="header">
+                {#if search}
+                    <Search {handler} />
+                {/if}
+                {#if rowsPerPage}
+                    <RowsPerPage {handler} small={clientWidth < 600} />
+                {/if}
+            </slot>
+        </header>
+    {/if}
 
-    <article bind:this={element} style="height:calc(100% - {height}px)">
-        <slot />
+    <article bind:this={element} style="height:calc(100% - {tableHeight}px)">
+        <table>
+            <thead>
+                <tr>
+                    {#if !hideRowSelection}
+                        <th class="selection">
+                            <input
+                                type="checkbox"
+                                class='checkbox'
+                                on:click={() => {
+                                    handler.selectAll();
+                                    dispatch('select', $selected);
+                                    numSelected = $selected.length;
+                                    }}
+                                checked={$isAllSelected}
+                            />
+                        </th>
+                    {/if}
+                    {#each columns as column}
+                        <Th {handler} orderBy={column.sortable && column.field}>{column.header ?? column.field}</Th>
+                    {/each}
+                </tr>
+            </thead>
+            <tbody>
+                {#each $rows as row}
+                    <tr class:active={!hideRowSelection && $selected.includes(row)}>
+                        {#if !hideRowSelection}
+                            <td class="selection">
+                                <input
+                                    type="checkbox"
+                                    class='checkbox'
+                                    on:click={() => {
+                                        handler.select(row);
+                                        dispatch('select', $selected);
+                                        numSelected = $selected.length;
+                                        }}
+                                    checked={$selected.includes(row)}
+                                />
+                            </td>
+                        {/if}
+                        {#each columns as column}
+                            <td>{@html row[column.field]}</td>
+                        {/each}
+                    </tr>
+                {/each}
+            </tbody>
+        </table>
     </article>
 
-    <footer class:container={rowCount || pagination}>
-        {#if rowCount}
-            <RowCount {handler} small={clientWidth < 600} />
-        {/if}
-        {#if pagination}
-            <Pagination {handler} small={clientWidth < 600} />
-        {/if}
-    </footer>
+    {#if !hideFooter}
+        <footer class:container={rowCount || pagination}>
+            <slot name="footer">
+                {#if rowCount}
+                    <RowCount {handler} small={clientWidth < 600} />
+                {/if}
+                {#if pagination}
+                    <Pagination {handler} small={clientWidth < 600} />
+                {/if}
+            </slot>
+        </footer>
+    {/if}
 </section>
 
 <style>
@@ -97,5 +165,13 @@
     }
     article::-webkit-scrollbar-thumb:hover {
         background: #9e9e9e;
+    }
+    td {
+        padding: 3px 20px;
+    }
+    td input {
+        margin: auto;
+        display: block;
+
     }
 </style>
