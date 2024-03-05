@@ -51,10 +51,10 @@ export default class DataHandler<T extends Row = any>
         this.fetchHandler.invalidate()
     }
 
-    public setRows(data: T[]): void
-    {
-        this.context.rows.set(data)
-    }
+    // public setRows(data: T[]): void
+    // {
+    //     this.context.rows.set(data)
+    // }
 
     public setTotalRows(value: number): void
     {
@@ -66,7 +66,12 @@ export default class DataHandler<T extends Row = any>
         return this.context.rows
     }
 
-    public getRowCount(): Readable<{ total: number, start: number, end: number }>
+    public getRowCount(): Readable<{ 
+        total: number, 
+        start: number, 
+        end: number, 
+        selected: number 
+    }>
     {
         return this.context.rowCount
     }
@@ -176,11 +181,6 @@ export default class DataHandler<T extends Row = any>
     public getIsAllSelected(): Readable<boolean>
     {
         return this.context.isAllSelected
-    }
-
-    public getSelectedCount(): Readable<{ count: number, total: number }>
-    {
-        return this.context.selectedCount
     }
 
     public clearSelection()

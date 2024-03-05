@@ -12,14 +12,13 @@ export default class Context<Row>
     public search               : Writable<string>
     public filters              : Writable<Filter<Row>[]>
     public rows                 : Writable<Row[]>
-    public rowCount             : Readable<{ total: number, start: number, end: number }>
+    public rowCount             : Readable<{ total: number, start: number, end: number, selected: number }>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
     public sort                 : Writable<Sort<Row>>
     public selected             : Writable<(Row | Row[keyof Row])[]>
     public isAllSelected        : Readable<boolean>
-    public selectedCount        : Readable<{ count: number, total: number }>
     public selectBy             : keyof Row | undefined
 
 
@@ -39,7 +38,6 @@ export default class Context<Row>
         this.sort               = writable(undefined)
         this.selected           = writable([])
         this.isAllSelected      = this.createIsAllSelected()
-        this.selectedCount      = this.createSelectedCount()
         this.selectBy           = params.selectBy as keyof Row ?? undefined
     }
 
@@ -120,16 +118,22 @@ export default class Context<Row>
     private createRowCount()
     {
         return derived(
-            [this.totalRows, this.currentPage, this.rowsPerPage],
-            ([$totalRows, $currentPage, $rowsPerPage]) => {
+            [this.totalRows, this.currentPage, this.rowsPerPage, this.selected],
+            ([$totalRows, $currentPage, $rowsPerPage, $selected]) => {
 
                 if (!$rowsPerPage || !$totalRows) {
-                    return undefined
+                    return {
+                        total: undefined,
+                        start: undefined,
+                        end: undefined,
+                        selected: $selected.length
+                    }
                 }
                 return {
                     total: $totalRows,
                     start: $currentPage * $rowsPerPage - $rowsPerPage + 1,
-                    end: Math.min($currentPage * $rowsPerPage, $totalRows)
+                    end: Math.min($currentPage * $rowsPerPage, $totalRows),
+                    selected: $selected.length
                 }
             }
         )
@@ -147,18 +151,5 @@ export default class Context<Row>
             }
             return $rows.every(row => $selected.includes(row as Row))
         })
-    }
-
-    private createSelectedCount()
-    {
-        return derived(
-            [this.selected, this.totalRows],
-            ([$selected, $totalRows]) => {
-                return {
-                    count: $selected.length,
-                    total: $totalRows
-                }
-            }
-        )
     }
 }
