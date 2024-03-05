@@ -1,7 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
-    import type { ColumnProps } from './IDatatable';
-    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, Pagination, Th } from '$lib/local'
+    import type { Column } from './IDatatable';
+    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, Pagination, Th, ThFilter } from '$lib/local';
 
     type T = $$Generic<Row>
 
@@ -15,11 +15,13 @@
     export let hideFooter   = false
     export let hideRowSelection = false
     export let tableHeight  = (search || rowsPerPage || !hideHeader ? 48 : 8) + (rowCount || pagination || !hideFooter ? 48 : 8);
-    export let columns: ColumnProps[] = [];
+    export let columns: Column[] = [];
 
     const selected = handler.getSelected();
     const isAllSelected = handler.isAllSelected();
     const rows = handler.getRows();
+
+    $: isSomeSelected = numSelected > 0 && numSelected < $rows.length;
 
     let numSelected: number = 0;
 
@@ -57,6 +59,7 @@
                             <input
                                 type="checkbox"
                                 class='checkbox'
+                                class:mixedChecked={isSomeSelected}
                                 on:click={() => {
                                     handler.selectAll();
                                     dispatch('select', $selected);
@@ -67,7 +70,12 @@
                         </th>
                     {/if}
                     {#each columns as column}
-                        <Th {handler} orderBy={column.sortable && column.field}>{column.header ?? column.field}</Th>
+                        <Th {handler} orderBy={column.sortable && column.field} identifier={column.identifier} align={column.align} rowSpan={column.rowSpan}>
+                            {column.header ?? column.field}
+                            {#if column.filterable}
+                                <ThFilter {handler} filterBy={column.field} identifier={column.identifier} align={column.align} comparator={column.comparator}>{column.header ?? column.field}</ThFilter>
+                            {/if}
+                        </Th>
                     {/each}
                 </tr>
             </thead>
@@ -88,9 +96,11 @@
                                 />
                             </td>
                         {/if}
-                        {#each columns as column}
-                            <td>{@html row[column.field]}</td>
-                        {/each}
+                        <slot name="row" row={row}>
+                            {#each columns as column}
+                                <td>{@html row[column.field] ?? ''}</td>
+                            {/each}
+                        </slot>
                     </tr>
                 {/each}
             </tbody>
@@ -170,5 +180,26 @@
     td input {
         margin: auto;
         display: block;
+    }
+    input[type="checkbox"].mixedChecked {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 13px;
+        height: 13px;
+        border: 1px solid #7d7d7d;
+        border-radius: 3px;
+        background-color: #fff;
+        outline: none;
+        cursor: pointer;
+    }
+
+    input[type="checkbox"].mixedChecked::before {
+        content: "-";
+        display: inline-block;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: center;
+        color: #333;
     }
 </style>

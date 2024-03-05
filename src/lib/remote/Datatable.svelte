@@ -22,6 +22,8 @@
     const isAllSelected = handler.isAllSelected();
     const rows = handler.getRows();
 
+    $: isSomeSelected = numSelected > 0 && numSelected < $rows.length;
+
     let numSelected: number = 0;
 
     const dispatch = createEventDispatcher();
@@ -57,6 +59,7 @@
                             <input
                                 type="checkbox"
                                 class='checkbox'
+                                class:mixedChecked={isSomeSelected}
                                 on:click={() => {
                                     handler.selectAll();
                                     dispatch('select', $selected);
@@ -67,7 +70,7 @@
                         </th>
                     {/if}
                     {#each columns as column}
-                        <Th {handler} orderBy={column.sortable && column.field}>{column.header ?? column.field}</Th>
+                        <Th {handler} orderBy={column.sortable && column.field} identifier={column.identifier} align={column.align} rowSpan={column.rowSpan}>{column.header ?? column.field}</Th>
                     {/each}
                 </tr>
             </thead>
