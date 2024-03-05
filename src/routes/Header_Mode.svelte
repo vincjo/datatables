@@ -4,47 +4,49 @@
     import { Tooltip } from 'gros/tooltip'
     import { onMount } from 'svelte'
     import { mode } from '$site/utils'
+    import { getPath } from 'gros/page'
+    import { getMode, setMode } from '$site/utils'
 
-    let currentMode
     onMount(() => {
-        currentMode = getMode()
-        setMode(currentMode)
+        setMode(getMode())
     })
 
-    const setMode = (value) => {
-        document.documentElement.dataset.mode = value
-        document.cookie = `siteMode=${value}; max-age=31536000; path="/"`
-        $mode = value
-        currentMode = value
-    }
-
-    const getMode = () => {
-        const regex = new RegExp(`(^| )siteMode=([^;]+)`)
-        const match = document.cookie.match(regex)
-        if (match) {
-            return match[2]
-        }
-        return 'client'
-    }
 </script>
 
-<button on:click={() => setMode(currentMode === 'remote' ? 'client' : 'remote')} class="btn tooltip">
-    <Tooltip bottom content="{currentMode}"/>
-    {#if currentMode === 'remote'}
-        <Remote/>
-    {:else}
+<aside class="flex">
+    <a on:click={() => setMode('client')} href="{getPath('/')}" class="btn tooltip" class:active={$mode === 'client'}>
+        <Tooltip bottom content="client"/>
         <Client/>
-    {/if}
-</button>
+    </a>
+    <a on:click={() => setMode('remote')} href="{getPath('/')}" class="btn tooltip" class:active={$mode === 'remote'}>
+        <Tooltip bottom content="remote"/>
+        <Remote/>
+    </a>
+</aside>
+
 
 <style>
-    button {
+    aside {
+        border-radius: 4px;
+        margin-right: 4px;
+    }
+    a {
         border-radius: 4px;
         padding: 0;
         width: 40px;
         height: 32px;
     }
-    button:hover {
-        background: var(--grey);
+    a:first-child {
+        border-radius: 4px 0 0 4px;
+        border-right: 1px solid var(--primary-lighten-3);
+    }
+    a:last-child {
+        border-radius: 0 4px 4px 0;
+    }
+    a:hover {
+        background: var(--grey-lighten);
+    }
+    a.active {
+        background: var(--primary-lighten-2);
     }
 </style>

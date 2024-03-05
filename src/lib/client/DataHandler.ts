@@ -56,7 +56,12 @@ export default class DataHandler<T extends Row = any>
         this.applySort()
     }
 
-    public getRowCount(): Readable<{ start: number, end: number, total: number }>
+    public getRowCount(): Readable<{ 
+        start: number, 
+        end: number, 
+        total: number, 
+        selected: number 
+    }>
     {
         return this.context.rowCount
     }
@@ -196,11 +201,6 @@ export default class DataHandler<T extends Row = any>
     public getIsAllSelected(): Readable<boolean>
     {
         return this.context.isAllSelected
-    }
-
-    public getSelectedCount(): Readable<{ count: number, total: number}>
-    {
-        return this.context.selectedCount
     }
 
     public clearSelection(): void

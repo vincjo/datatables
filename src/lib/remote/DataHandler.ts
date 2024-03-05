@@ -173,7 +173,7 @@ export default class DataHandler<T extends Row = any>
         this.selectHandler.all()
     }
 
-    public isAllSelected(): Readable<boolean>
+    public getIsAllSelected(): Readable<boolean>
     {
         return this.context.isAllSelected
     }
@@ -252,9 +252,17 @@ export default class DataHandler<T extends Row = any>
     /**
      * @deprecated use setRemoteControl instead
      */
-    public onChange(callback: (state: State) => Promise<T[]>)
+    public onChange(callback: (state: State) => Promise<T[]>): void
     {
-        this.fetchHandler.set(callback)
+        this.setRemoteControl(callback)
+    }
+
+    /**
+     * @deprecated use getIsAllSelected instead
+     */
+    public isAllSelected(): Readable<boolean>
+    {
+        return this.getIsAllSelected()
     }
 
 }

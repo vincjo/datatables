@@ -46,4 +46,12 @@ export default class AdvancedFilterHelper<Row>
         this.active.set([])
         this.filterHandler.set(undefined, this.filterBy, check.whereIn)
     }
+
+    /**
+     * @deprecated use get() instead
+     */
+    public getSelected()
+    {
+        return this.get()
+    }
 }

@@ -11,31 +11,6 @@ import Pagination       from './Pagination.svelte'
 
 export { DataHandler, Datatable, Search, RowsPerPage, Th, ThFilter, RowCount, SelectedCount, Pagination }
 
-export type Internationalization = {
-    search          ?: string
-    show            ?: string
-    entries         ?: string
-    filter          ?: string
-    rowCount        ?: string
-    noRows          ?: string
-    previous        ?: string
-    next            ?: string
-    selectedCount   ?: string
-}
-
-export type Row = { [key: string]: unknown }
-
-export type Filter<Row> = {
-    filterBy: keyof Row
-    value?: string | number | boolean
-}
-
-export type Sort<Row> = {
-    orderBy?: keyof Row
-    direction?: 'asc' | 'desc'
-}
-
-
 export type State = {
     currentPage: number,
     rowsPerPage: number,
@@ -52,6 +27,32 @@ export type State = {
      * @deprecated use 'currentPage' instead
      */
     pageNumber?: number
+}
+
+export type Filter<Row> = {
+    filterBy: keyof Row
+    value?: string | number | boolean
+}
+
+export type Sort<Row> = {
+    orderBy?: keyof Row
+    direction?: 'asc' | 'desc'
+}
+
+export type Row = { [key: string]: unknown }
+
+
+
+export type Internationalization = {
+    search          ?: string
+    show            ?: string
+    entries         ?: string
+    filter          ?: string
+    rowCount        ?: string
+    noRows          ?: string
+    previous        ?: string
+    next            ?: string
+    selectedCount   ?: string
 }
 
 

@@ -47,15 +47,13 @@ export const check = {
         return entry <= value
     },
 
-    isBetween: (entry: number, value: [min: number, max: number]) => {
+    isBetween: (entry: number, [min, max]: [min: number, max: number]) => {
         if (isNull(entry)) return false
-        const [min, max] = value
         return entry >= min && entry <= max
     },
 
-    isStrictlyBetween: (entry: number, value: [min: number, max: number]) => {
+    isStrictlyBetween: (entry: number, [min, max]: [min: number, max: number]) => {
         if (isNull(entry)) return false
-        const [min, max] = value
         return entry > min && entry < max
     },
 

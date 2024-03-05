@@ -76,6 +76,7 @@ pre::-webkit-scrollbar-track-piece:start {
 .md h3 {
     font-size: 24px;
     margin-bottom: 8px;
+    color: var(--font);
 }
 .md p, ul {
     font-size: 17px;

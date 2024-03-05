@@ -1,0 +1,47 @@
+<script>
+    import Main from './Main.svelte'
+</script>
+
+# Internationalization
+
+Showcase components can be translated into another language at the `DataHandler` instantiation level or using the `translate()` method.
+
+```ts
+import { DataHandler } from '@vincjo/datatables'
+
+const handler = new DataHanlder(data, {
+    rowsPerPage: 10,
+    i18n: {
+        search: 'Rechercher...',
+        show: 'Afficher',
+        entries: 'lignes',
+        filter: 'Filtrer',
+        rowCount: 'Lignes {start} à {end} sur {total}',
+        noRows: 'Aucun résultat',
+        previous: 'Précédent',
+        next: 'Suivant'
+    }
+})
+
+// Using the translate() method: 
+handler.translate({
+    search: 'Rechercher...',
+    show: 'Afficher',
+    ...
+})
+
+```
+
+
+## Result
+<div>
+    <Main/>
+</div>
+
+
+<style>
+    div {
+        border: 1px solid var(--grey);
+        border-radius: 8px;
+    }
+</style>

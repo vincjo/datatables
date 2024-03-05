@@ -4,7 +4,7 @@
 
 ```svelte
 <script>
-    const isAllSelected = handler.isAllSelected()
+    const isAllSelected = handler.getIsAllSelected()
 </script>
 
 <input

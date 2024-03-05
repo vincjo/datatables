@@ -3,6 +3,7 @@ import { TypescriptParser } from 'typescript-parser'
 export default class Parser
 {
     private parser = new TypescriptParser()
+    private isDeprecated = ['update', 'applySorting', 'getSorted', 'getTriggerChange', 'getPageNumber', 'isAllSelected', 'onChange']
 
     public async methods(filepath: string)
     {
@@ -24,9 +25,7 @@ export default class Parser
         }).filter(Boolean)
 
         return parsed.map(method => {
-            const isDeprecated = [
-                'update', 'applySorting', 'getSorted', 'getTriggerChange', 'getPageNumber', 'isAllSelected'
-            ].includes(method.name)
+            const isDeprecated = this.isDeprecated.includes(method.name)
             return { ...method, isDeprecated, declaration: Parser.getDeclaration(method) }
         })
     }

@@ -16,7 +16,7 @@ export default class Context<Row>
     public rawRows              : Writable<Row[]>
     public filteredRows         : Readable<Row[]>
     public pagedRows            : Readable<Row[]>
-    public rowCount             : Readable<{ start: number, end: number, total: number }>
+    public rowCount             : Readable<{ start: number, end: number, total: number, selected: number }>
     public pages                : Readable<number[]>
     public pagesWithEllipsis    : Readable<number[]>
     public pageCount            : Readable<number>
@@ -25,7 +25,6 @@ export default class Context<Row>
     public selectBy             : string
     public selectScope          : Writable<'all' | 'currentPage'>
     public isAllSelected        : Readable<boolean>
-    public selectedCount        : Readable<{ count: number, total: number }>
 
     constructor(data: Row[], params: Params) 
     {
@@ -38,7 +37,6 @@ export default class Context<Row>
         this.rawRows            = writable(data)
         this.filteredRows       = this.createFilteredRows()
         this.pagedRows          = this.createPagedRows()
-        this.rowCount           = this.createRowCount()
         this.pages              = this.createPages()
         this.pagesWithEllipsis  = this.createPagesWithEllipsis()
         this.pageCount          = this.createPageCount()
@@ -47,7 +45,7 @@ export default class Context<Row>
         this.selectBy           = params.selectBy
         this.selectScope        = writable('all')
         this.isAllSelected      = this.createIsAllSelected()
-        this.selectedCount      = this.createSelectedCount()
+        this.rowCount           = this.createRowCount()
     }
 
     private createFilterCount()
@@ -111,16 +109,17 @@ export default class Context<Row>
     private createRowCount()
     {
         return derived(
-            [this.filteredRows, this.currentPage, this.rowsPerPage],
-            ([$filteredRows, $currentPage, $rowsPerPage]) => {
+            [this.filteredRows, this.currentPage, this.rowsPerPage, this.selected],
+            ([$filteredRows, $currentPage, $rowsPerPage, $selected]) => {
                 const total = $filteredRows.length
                 if (!$rowsPerPage) {
-                    return { total: total, start: 1, end: total }
+                    return { total: total, start: 1, end: total, selected: $selected.length }
                 }
                 return {
                     total: total,
                     start: $currentPage * $rowsPerPage - $rowsPerPage + 1,
-                    end: Math.min($currentPage * $rowsPerPage, $filteredRows.length)
+                    end: Math.min($currentPage * $rowsPerPage, $filteredRows.length),
+                    selected: $selected.length
                 }
             }
         )
@@ -177,17 +176,6 @@ export default class Context<Row>
 
     private createIsAllSelected()
     {
-        // return derived(
-        //     [this.selected, this.pagedRows, this.filteredRows, this.selectScope],
-        //     ([$selected, $pagedRows, $filteredRows, $selectScope]) => {
-        //         const rowCount = $selectScope === 'currentPage' ? $pagedRows.length : $filteredRows.length
-        //         if (rowCount === $selected.length && rowCount !== 0) {
-        //             return true
-        //         }
-        //         return false
-        //     }
-        // )
-
         return derived([this.selected, this.pagedRows], ([$selected, $pagedRows]) => {
             if ($pagedRows.length === 0) {
                 return false
@@ -198,18 +186,5 @@ export default class Context<Row>
             }
             return $pagedRows.every(row => $selected.includes(row as Row))
         })
-    }
-
-    private createSelectedCount()
-    {
-        return derived(
-            [this.selected, this.rowCount],
-            ([$selected, $rowCount]) => {
-                return {
-                    count: $selected.length,
-                    total: $rowCount.total
-                }
-            }
-        )
     }
 }
