@@ -3,12 +3,13 @@
 
     type T = $$Generic<Row>
 
-    export let handler: DataHandler<T>
+    export let handler
     export let small = false
     export let extraSmall = false
     export let dropdown = false
     export let dropdownText: string = 'of {pageCount} pages'
 
+    const rowCount = handler.getRowCount();
     const pageNumber = handler.getPageNumber()
     const pageCount = handler.getPageCount()
     const pages = handler.getPages({ ellipsis: true })
@@ -16,7 +17,7 @@
 
     const setPage = (value: 'previous' | 'next' | number) => {
         handler.setPage(value)
-        handler.invalidate()
+        if (handler.invalidate) handler.invalidate()
     }
 
     function handleDropdownChange(event) {

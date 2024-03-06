@@ -5,11 +5,12 @@ import Search           from './Search.svelte'
 import RowsPerPage      from './RowsPerPage.svelte'
 import Th               from './Th.svelte'
 import ThFilter         from './ThFilter.svelte'
+import Td               from './Td.svelte'
 import RowCount         from './RowCount.svelte'
 import SelectedCount    from './SelectedCount.svelte'
 import Pagination       from './Pagination.svelte'
 
-export { DataHandler, Datatable, Search, RowsPerPage, Th, ThFilter, RowCount, SelectedCount, Pagination }
+export { DataHandler, Datatable, Search, RowsPerPage, Th, ThFilter, Td, RowCount, SelectedCount, Pagination }
 
 export type Internationalization = {
     search          ?: string

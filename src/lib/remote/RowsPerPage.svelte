@@ -3,7 +3,7 @@
 
     type T = $$Generic<Row>
 
-    export let handler: DataHandler<T>
+    export let handler
     export let small = false
     export let options = [5, 10, 20]
 

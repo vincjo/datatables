@@ -16,7 +16,7 @@ export type Params = { rowsPerPage?: number, i18n?: Internationalization }
 
 export default class DataHandler<T extends Row = any>
 {
-    private context         : Context<T>
+    private context
     private sortHandler     : SortHandler<T>
     private selectHandler   : SelectHandler<T>
     private pageHandler     : PageHandler<T>

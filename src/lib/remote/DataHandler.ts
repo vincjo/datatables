@@ -18,8 +18,8 @@ export type Params = {
 
 export default class DataHandler<T extends Row = any>
 {
-    private context         : Context<T>
-    private triggerHandler  : TriggerHandler<T>
+    private context
+    private triggerHandler ?: TriggerHandler<T>
     private sortHandler     : SortHandler<T>
     private selectHandler   : SelectHandler<T>
     private pageHandler     : PageHandler<T>
@@ -39,12 +39,12 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler  = new FilterHandler(this.context)
     }
 
-    public onChange(callback: (state: State) => Promise<T[]>)
+    public onChange?(callback: (state: State) => Promise<T[]>)
     {
         this.triggerHandler.set(callback)
     }
 
-    public invalidate()
+    public invalidate?()
     {
         this.triggerHandler.invalidate()
     }
@@ -54,7 +54,7 @@ export default class DataHandler<T extends Row = any>
         this.context.rows.set(data)
     }
 
-    public setTotalRows(value: number)
+    public setTotalRows?(value: number)
     {
         this.context.totalRows.set(value)
     }
@@ -69,7 +69,7 @@ export default class DataHandler<T extends Row = any>
         this.selectHandler.set(value)
     }
 
-    public getSelected()
+    public getSelected?()
     {
         return this.context.selected
     }
@@ -84,12 +84,12 @@ export default class DataHandler<T extends Row = any>
         return this.context.isAllSelected
     }
 
-    public getSelectedCount(): Readable<{ count: number, total: number }>
+    public getSelectedCount?(): Readable<{ count: number, total: number }>
     {
         return this.context.selectedCount
     }
 
-    public clearSelection()
+    public clearSelection?()
     {
         this.selectHandler.clear()
     }

@@ -1,11 +1,11 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
-    import type { ColumnProps } from '$lib/local/IDatatable.ts'
-    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, SelectedCount, Pagination, Th } from '$lib/remote'
+    import type { Column } from '$lib/local/IDatatable.ts'
+    import { type Row, Search, RowsPerPage, RowCount, SelectedCount, Pagination, Th, ThFilter } from '$lib/remote'
 
     type T = $$Generic<Row>
 
-    export let handler: DataHandler<T>
+    export let handler
 
     export let search         = true
     export let rowsPerPage    = true
@@ -16,7 +16,7 @@
     export let hideFooter     = false
     export let hideRowSelection = false
     export let tableHeight    = (search || rowsPerPage || !hideHeader ? 48 : 8) + (rowCount || selectedCount || pagination || !hideFooter ? 48 : 8)
-    export let columns: ColumnProps[] = [];
+    export let columns: Column[] = [];
 
     const selected = handler.getSelected();
     const isAllSelected = handler.isAllSelected();
@@ -70,7 +70,12 @@
                         </th>
                     {/if}
                     {#each columns as column}
-                        <Th {handler} orderBy={column.sortable && column.field} identifier={column.identifier} align={column.align} rowSpan={column.rowSpan}>{column.header ?? column.field}</Th>
+                        <Th {handler} orderBy={column.sortable && column.field} identifier={column.identifier} align={column.align} rowSpan={column.rowSpan}>
+                            {column.header ?? column.field}
+                            {#if column.filterable}
+                                <ThFilter {handler} filterBy={column.field} identifier={column.identifier} align={column.align} comparator={column.comparator}>{column.header ?? column.field}</ThFilter>
+                            {/if}
+                        </Th>
                     {/each}
                 </tr>
             </thead>
@@ -91,9 +96,11 @@
                                 />
                             </td>
                         {/if}
-                        {#each columns as column}
-                            <td>{@html row[column.field]}</td>
-                        {/each}
+                        <slot name="row" row={row}>
+                            {#each columns as column}
+                                <td>{@html row[column.field] ?? ''}</td>
+                            {/each}
+                        </slot>
                     </tr>
                 {/each}
             </tbody>

@@ -3,7 +3,7 @@
 
     type T = $$Generic<Row>
 
-    export let handler: DataHandler<T>
+    export let handler
     const selectedCount = handler.getSelectedCount()
 </script>
 

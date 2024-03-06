@@ -3,7 +3,7 @@
 
     type T = $$Generic<Row>
 
-    export let handler: DataHandler<T>
+    export let handler
     export let filterBy: keyof T
     export let align: 'left' | 'right' | 'center' = 'left'
 

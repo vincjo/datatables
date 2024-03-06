@@ -5,7 +5,7 @@
 
     type T = $$Generic<Row>
 
-    export let handler: DataHandler<T>
+    export let handler: DataHandler<any>
 
     export let search       = true
     export let rowsPerPage  = true
