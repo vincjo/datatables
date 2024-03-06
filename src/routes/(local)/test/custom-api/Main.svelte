@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { DataHandler, type State, Datatable, Pagination, RowsPerPage, Search, RowCount, Td } from '$lib/remote';
-    import type { Column } from '$lib/local/IDatatable';
+    import type { Column } from '$lib/remote/IDatatable';
 
     let myData = [];
     let totalResults = 0;

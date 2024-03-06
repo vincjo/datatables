@@ -1,11 +1,11 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
-    import type { Column } from '$lib/local/IDatatable.ts'
-    import { type Row, Search, RowsPerPage, RowCount, SelectedCount, Pagination, Th, ThFilter } from '$lib/remote'
+    import type { Column } from '$lib/remote/IDatatable.ts'
+    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, SelectedCount, Pagination, Th, ThFilter } from '$lib/remote'
 
     type T = $$Generic<Row>
 
-    export let handler
+    export let handler: DataHandler<T>
 
     export let search         = true
     export let rowsPerPage    = true

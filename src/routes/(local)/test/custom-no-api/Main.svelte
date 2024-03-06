@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Datatable, Pagination, RowsPerPage, Search, RowCount, Td } from '$lib/remote';
-    import { DataHandler } from '$lib';
-    import type { Column } from '$lib/local/IDatatable';
+    import { DataHandler } from '$lib/local';
+    import type { Column } from '$lib/remote/IDatatable';
     import myData from '$site/data/data'
 
     const columns: Column[] = [

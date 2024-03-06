@@ -1,3 +1,5 @@
+import type { Comparator, Field } from "$lib/local";
+
 export interface Column {
     field: string;
     header: string;
@@ -6,6 +8,8 @@ export interface Column {
     identifier?: string;
     align?: 'left' | 'right' | 'center';
     rowSpan?: number;
+    filterBy?: Field<any>;
+    comparator?: Comparator<any>;
 }
 
 export interface Cell {

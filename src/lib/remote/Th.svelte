@@ -11,7 +11,7 @@
     const sort = handler.getSort()
     const update = () => {
         handler.sort(orderBy)
-        handler.invalidate()
+        if (handler.invalidate) handler.invalidate()
     }
 </script>
 

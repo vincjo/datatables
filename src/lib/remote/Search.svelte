@@ -11,6 +11,7 @@
 	const search = () => {
 		handler.search(value)
 		clearTimeout(timeout)
+        if (!handler.invalidate) return;
 		timeout = setTimeout( () => {
             handler.invalidate()
 		}, 400)

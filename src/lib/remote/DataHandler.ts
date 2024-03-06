@@ -18,7 +18,7 @@ export type Params = {
 
 export default class DataHandler<T extends Row = any>
 {
-    private context
+    private context         : Context<T>
     private triggerHandler ?: TriggerHandler<T>
     private sortHandler     : SortHandler<T>
     private selectHandler   : SelectHandler<T>

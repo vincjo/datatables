@@ -1,7 +1,7 @@
 <script lang="ts">
     import myData from '$site/data/data'
     import { DataHandler, Datatable, Pagination, RowsPerPage, Search, RowCount, Td } from '$lib'
-    import type { Column } from '$lib/local/IDatatable'
+    import type { Column } from '$lib/remote/IDatatable'
 
     const columns: Column[] = [
             { field: 'first_name', header:'First Name', sortable: true },

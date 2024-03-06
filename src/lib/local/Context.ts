@@ -3,7 +3,7 @@ import type { Filter, Sort, Comparator, Criterion, Field } from '$lib/local'
 import type { Params }  from '$lib/local/DataHandler'
 import { isNull, parseField } from './utils'
 import { check } from './Comparator'
-import EventHandler from './handlers/EventHandler'
+import EventHandler from '$lib/remote/handlers/EventHandler'
 
 
 export default class Context<Row> 
