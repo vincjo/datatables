@@ -18,13 +18,22 @@
 	}
 </script>
 
-<input
-	class={$$props.class ?? ''}
-	bind:value
-	placeholder={handler.i18n.search}
-	spellcheck="false"
-	on:input={search}
-/>
+<div class='searchContainer'>
+    <input
+        class={$$props.class ?? ''}
+        bind:value
+        placeholder={handler.i18n.search}
+        spellcheck="false"
+        on:input={search}
+    />
+    {#if value.length > 0}
+        <button class='clearSearchButton' on:click={() => {
+            value = '';
+            search();
+            }}
+        >x</button>
+    {/if}
+</div>
 
 <style>
 	input {
@@ -47,4 +56,13 @@
 		color: #9e9e9e;
 		line-height: 24px;
 	}
+    .searchContainer {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .clearSearchButton {
+        padding: 0 5px;
+        border: solid 1px lightGray
+    }
 </style>
