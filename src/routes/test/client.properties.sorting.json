@@ -1,1 +1,0 @@
-{"name":"sorting","type":"$state<(Sorting<Row>)>","ast":{"name":"sorting","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":23,"default":"$state<(Sorting<Row>)>({})","inherited":true}}

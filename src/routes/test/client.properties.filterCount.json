@@ -1,1 +1,0 @@
-{"name":"filterCount","type":"$derived<number>","ast":{"name":"filterCount","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":15,"default":"$derived<number>(this.filters.length)","inherited":true}}

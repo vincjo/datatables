@@ -1,1 +1,0 @@
-{"name":"rowCount","type":"$derived<{total: number, start: number, end: number, selected: number}>","ast":{"name":"rowCount","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":19,"default":"$derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())","inherited":true}}

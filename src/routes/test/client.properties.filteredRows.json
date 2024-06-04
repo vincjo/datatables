@@ -1,1 +1,0 @@
-{"name":"filteredRows","type":"$derived<Row[]>","ast":{"name":"filteredRows","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":17,"default":"$derived<Row[]>(this.createFilteredRows())","inherited":true}}

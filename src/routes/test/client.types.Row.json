@@ -1,1 +1,0 @@
-{"name":"Row","text":"type Row = { [key: string]: any  }","ast":{"name":"Row","kind":"TypeAlias","line":31,"value":{"text":"{ [key: string]: any  }","kind":"TypeLiteral"}}}

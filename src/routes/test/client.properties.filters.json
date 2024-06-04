@@ -1,1 +1,0 @@
-{"name":"filters","type":"$state<(Filter<Row>)[]>","ast":{"name":"filters","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":14,"default":"$state<(Filter<Row>)[]>([])","inherited":true}}

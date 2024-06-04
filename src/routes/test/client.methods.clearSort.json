@@ -1,1 +1,0 @@
-{"name":"clearSort","text":"clearSort(): void","returnType":"void","args":[],"ast":{"name":"clearSort","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":101}]}}

@@ -1,1 +1,0 @@
-{"name":"view","type":"ViewHelper","ast":{"name":"view","kind":"Property","type":{"text":"ViewHelper","kind":"Reference","source":{"line":3,"path":"src\\lib\\client\\helpers\\ViewHelper.svelte.ts"}},"line":23}}

@@ -13,7 +13,7 @@
 
 
 
-:globe_with_meridians: **[vincjo.fr/datatables.next](https://vincjo.fr/datatables.next)**
+:globe_with_meridians: **[vincjo.fr/datatables.runes](https://vincjo.fr/datatables.runes)**
 
 
 
@@ -55,6 +55,6 @@ npm i -D @vincjo/datatables@runes
 </table>
 ```
 
-### :globe_with_meridians: [Documentation](https://vincjo.fr/datatables.next)
+### :globe_with_meridians: [Documentation](https://vincjo.fr/datatables.runes)
 
 
