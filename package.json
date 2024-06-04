@@ -33,7 +33,7 @@
         "@sveltejs/vite-plugin-svelte": "^3.0.0",
         "@ts-ast-parser/core": "^0.8.0",
         "@types/node": "^18.15.11",
-        "gros": "^1.0.0-runes.1",
+        "gros": "^1.0.0-runes.2",
         "mdsvex": "^0.11.2",
         "prettier": "^2.6.2",
         "prism-svelte": "^0.5.0",
