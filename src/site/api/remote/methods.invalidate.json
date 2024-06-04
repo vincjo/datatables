@@ -1,0 +1,1 @@
+{"name":"invalidate","text":"invalidate(): void","returnType":"void","args":[],"ast":{"name":"invalidate","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":49}]}}

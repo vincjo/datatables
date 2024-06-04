@@ -1,0 +1,1 @@
+{"name":"pages","text":"type $derived<number[]>","type":"$derived<number[]>","ast":{"name":"pages","kind":"Property","type":{"text":"number[]","kind":"Array","elementType":{"text":"number","kind":"Intrinsic"}},"line":15,"default":"$derived<number[]>(this.createPages())","inherited":true}}

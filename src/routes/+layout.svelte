@@ -1,7 +1,16 @@
 <script>
     import Header from './Header.svelte'
-    import { ModalContainer } from 'gros/modal'
+    import ModalContainer from '$site/components/Modal_Container.svelte'
+    import { onMount } from 'svelte'
+    import { site } from '$site/utils'
 
+    onMount(() => {
+        const theme = site.getTheme()
+        site.setTheme(theme)
+
+        const mode = site.getMode()
+        site.setMode(mode)
+    })
 </script>
 
 

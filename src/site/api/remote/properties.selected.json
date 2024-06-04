@@ -1,0 +1,1 @@
+{"name":"selected","text":"type $state<(Row | Row[keyof Row])[]>","type":"$state<(Row | Row[keyof Row])[]>","ast":{"name":"selected","kind":"Property","type":{"text":"any[]","kind":"Array","elementType":{"text":"any","kind":"Intrinsic"}},"line":19,"default":"$state<(Row | Row[keyof Row])[]>([])","inherited":true}}

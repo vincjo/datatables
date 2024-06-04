@@ -1,6 +1,6 @@
 <script lang="ts">
     import { TableHandler, Datatable } from '$lib'
-    import { Checkbox } from 'gros/form'
+    import Checkbox from './Checkbox.svelte'
     import Header from './Table_Header.svelte'
     import Footer from './Table_Footer.svelte'
     import Th from './Table_Th.svelte'
@@ -15,7 +15,7 @@
                 <th style:width="160px">
                     <div class="flex">
                         <Checkbox 
-                            on:click={() => table.selectAll({ scope: 'currentPage' })}
+                            onclick={() => table.selectAll({ scope: 'currentPage' })}
                             margin={[0,12,0,0]}
                             size={16}
                             checked={table.isAllSelected}
@@ -34,10 +34,10 @@
                     <td>
                         <div class="flex">
                             <Checkbox 
-                                on:click={() => table.select(row)}
                                 margin={[0,12,0,0]}
                                 size={16}
                                 checked={table.selected.includes(row)}
+                                onclick={() => table.select(row)}
                             />
                             {row.id}
                         </div>
@@ -61,28 +61,34 @@
 
 <style>
     table {
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--grey);
         border-radius: 8px;
-        margin: 16px 0;
+        margin: 16px 0 0 0;
+    }
+    thead th {
+        border-radius: 8px 0 0 0;
+    }
+    thead :global(th:last-child) {
+        border-radius: 0 8px 0 0;
     }
     td :global(svg) {
         margin-right: 6px;
     }
     td span {
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--grey);
         border-radius: 9px;
         padding: 0 6px;
         font-size: 10px;
-        background: #fafafa;
+        background: var(--grey-lighten-3);
         margin-right: 8px;
     }
     tbody td {
-        border: none;
-        border-bottom: 1px solid #e0e0e0;
-        padding: 10px 20px;
+        border: none !important;
+        border-bottom: 1px solid var(--grey-lighten) !important;
+        padding: 10px 20px !important;
     }
     tr:last-child td{
-        border: none;
+        border: none !important;
     }
     tbody tr:last-child td:first-child{
         border-radius: 0 0 0 8px;
@@ -100,12 +106,15 @@
     tr.active {
         background: var(--primary-lighten-1);
     }
+    tr.active:hover {
+        background: var(--primary-lighten-2);
+    }
     th {
         background:inherit;
         margin:0;
         font-size:13px;
         user-select: none;
-        border-bottom:1px solid #e0e0e0;
+        border-bottom:1px solid var(--grey);
         text-align: left;
     }
 </style>

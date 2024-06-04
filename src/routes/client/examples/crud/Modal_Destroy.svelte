@@ -1,8 +1,7 @@
 <script>
-    import { Modal } from 'gros/modal'
+    import Modal from './Modal.svelte'
     import { destroy } from './store'
-    export let close
-    export let props
+    let { close, props } = $props()
 </script>
 
 <Modal title="Remove a user" icon="delete_forever">
@@ -12,15 +11,15 @@
         >" ?
     </aside>
 
-    <svelte:fragment slot="footer">
+    {#snippet footer()}
         <button
-            on:click={() => {
+            onclick={() => {
                 destroy(props)
                 close()
             }}>Delete</button
         >
-        <button on:click={close}>Cancel</button>
-    </svelte:fragment>
+        <button onclick={close}>Cancel</button>
+    {/snippet}
 </Modal>
 
 <style>
@@ -29,5 +28,6 @@
         width: 360px;
         color: #e57373;
         font-size: 14px;
+        background: var(--bg);
     }
 </style>

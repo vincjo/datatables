@@ -33,14 +33,18 @@
         cursor: pointer;
         margin: 0 4px;
         transition: all, 0.2s;
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--grey);
         border-radius: 8px;
+        color: var(--font);
+    }
+    button:hover {
+        background: var(--bg);
     }
     button.disabled {
-        border: 1px solid #eee;
+        border: 1px solid var(--grey-lighten);
     }
     button.disabled svg {
-        color: #9e9e9e;
+        color: var(--grey);
     }
     button.disabled:hover {
         background: inherit;

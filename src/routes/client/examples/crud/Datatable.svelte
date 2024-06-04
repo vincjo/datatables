@@ -5,6 +5,7 @@
     import Update from './Modal_Update.svelte'
     import Destroy from './Modal_Destroy.svelte'
     import Create from './Modal_Create.svelte'
+    import type { Component } from 'svelte'
     const table = new TableHandler($users, { rowsPerPage: 10 })
 
     let element: any
@@ -25,9 +26,9 @@
     }
 </script>
 
-<div class="fieldset">
+<div class="fieldset bg-darken">
     <aside>
-        <button class="btn create" onclick={() => modal.open(Create)}>
+        <button class="btn create" onclick={() => modal.open(Create as Component)}>
             <i class="micon">person_add</i>
             Add a new user
         </button>
@@ -37,7 +38,7 @@
             <table bind:this={element}>
                 <thead>
                     <tr>
-                        <th></th>
+                        <Th {table}>{''}</Th>
                         <Th {table} field="id">ID</Th>
                         <Th {table} field="first_name">First name</Th>
                         <Th {table} field="last_name">Last name</Th>
@@ -49,10 +50,10 @@
                         <tr>
                             <td style:width="96px">
                                 <div class="flex">
-                                    <button class="btn" onclick={() => modal.open(Update, row)}>
+                                    <button class="btn" onclick={() => modal.open(Update as Component, row)}>
                                         <i class="micon">edit</i>
                                     </button>
-                                    <button class="btn" onclick={() => modal.open(Destroy, row)}>
+                                    <button class="btn" onclick={() => modal.open(Destroy as Component, row)}>
                                         <i class="micon">delete_forever</i>
                                     </button>
                                 </div>
@@ -74,7 +75,7 @@
         margin: 0 auto;
         border: 1px solid var(--grey);
         border-radius: 16px;
-        padding: 16px 24px 8px 24px;
+        padding: 16px 24px 16px 24px;
     }
     section {
         height: 400px;

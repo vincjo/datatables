@@ -1,0 +1,1 @@
+{"name":"view","text":"type ColumnVisibilityHelper","type":"ColumnVisibilityHelper","ast":{"name":"view","kind":"Property","type":{"text":"ColumnVisibilityHelper","kind":"Reference","source":{"line":4,"path":"src\\lib\\remote\\helpers\\ViewHelper.svelte.ts"}},"line":30}}

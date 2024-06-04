@@ -1,1 +1,0 @@
-Use `getCurrentPage()` instead.

@@ -131,7 +131,6 @@ export default abstract class AbstractTableHandler<Row>
         if (this.rows.length === 0) {
             return false
         }
-
         if (this.selectBy) {
             const identifiers = this.rows.map(row => row[this.selectBy])
             return identifiers.every(id => this.selected.includes(id))

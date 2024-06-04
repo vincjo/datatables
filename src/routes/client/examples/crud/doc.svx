@@ -33,7 +33,6 @@
         update()
     })
 
-
     const update = () => {
         if (element) {
             const scrollTop = element.parentNode.scrollTop

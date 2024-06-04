@@ -7,6 +7,7 @@ export default class AdvancedFilterHelper<Row>
     private filterHandler   : FilterHandler<Row>
     private criteria        : Criterion[]
     private field           : Field<Row>
+    private uid             : string
     private check           : Check<any>
     public  active          = $state<(string | number | number[])[]>([])
 
@@ -14,8 +15,10 @@ export default class AdvancedFilterHelper<Row>
     {
         this.filterHandler  = filterHandler
         this.field          = field
+        this.uid            = 'af_' + (Math.random()).toString(28).substring(2)
         this.criteria       = []
         this.check          = check ?? comparator.isEqualTo
+        this.cleanup()
     }
 
     public set(value: string | number | number[], check?: Check<any>): void
@@ -29,7 +32,7 @@ export default class AdvancedFilterHelper<Row>
         if (this.criteria.length === 0) {
             return this.clear()
         }
-        this.filterHandler.set(this.criteria, this.field, comparator.whereIn)
+        this.filterHandler.set(this.criteria, this.field, comparator.whereIn, this.uid)
         this.active = this.criteria.map(criterion => criterion.value)
     }
 
@@ -37,6 +40,13 @@ export default class AdvancedFilterHelper<Row>
     {
         this.criteria = []
         this.active = []
-        this.filterHandler.set(undefined, this.field, comparator.whereIn)
+        this.filterHandler.unset(this.uid)
+    }
+
+    private cleanup()
+    {
+        this.filterHandler.getTable().on('clearFilters', () => {
+            this.clear()
+        })
     }
 }

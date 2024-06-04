@@ -3,13 +3,13 @@
 </script>
 
 <h1>shadcn Tasks</h1>
-<section>
+<section class="bg-darken">
     <aside class="flex">
         <div>
             <h1>Welcome back!</h1>
             <p>Here's a list of your tasks for this month!</p>
         </div>
-        <img src="/datatables/external/avatar-shadcn.png" alt="avatar"/>
+        <img src="/datatables.runes/external/avatar-shadcn.png" alt="avatar"/>
     </aside>
 
     <Table/>

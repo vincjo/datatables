@@ -19,6 +19,7 @@
 
 <style>
     footer {
+        margin-top: 16px;
         justify-content: space-between;
     }
 </style>

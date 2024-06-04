@@ -1,6 +1,6 @@
 <script>
     import Banner from './Banner.svelte'
-    import Install from './Install.svelte'
+    import Install from '$site/components/Install.svelte'
 </script>
 
 <Banner/>

@@ -1,0 +1,1 @@
+{"name":"rows","text":"type $state<Row[]>","type":"$state<Row[]>","ast":{"name":"rows","kind":"Property","type":{"text":"Row[]","kind":"Array","elementType":{"text":"Row","kind":"Reference","source":{"line":16,"path":"src\\lib\\remote\\index.ts"}}},"line":13,"default":"$state<Row[]>([])","inherited":true}}

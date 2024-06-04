@@ -1,0 +1,1 @@
+{"name":"selectBy","text":"type string | number","type":"string | number","ast":{"name":"selectBy","kind":"Property","type":{"text":"string | number","kind":"Union","elements":[{"text":"string","kind":"Intrinsic"},{"text":"number","kind":"Intrinsic"}]},"line":21,"inherited":true}}

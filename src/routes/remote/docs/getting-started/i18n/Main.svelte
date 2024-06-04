@@ -1,8 +1,8 @@
 <script lang="ts">
     import myData from '$site/data/data'
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/client'
+    import { TableHandler, Datatable, Th, ThFilter } from '$lib/client'
 
-    const handler = new DataHandler(myData, {
+    const table = new TableHandler(myData, {
         rowsPerPage: 10,
         i18n: {
             search: 'Rechercher...',
@@ -15,25 +15,24 @@
             next: 'Suivant'
         }
     })
-    const rows = handler.getRows()
 </script>
 
-<Datatable basic {handler}>
+<Datatable basic {table}>
     <table>
         <thead>
             <tr>
-                <Th {handler} field="first_name">First Name</Th>
-                <Th {handler} field="last_name">Last Name</Th>
-                <Th {handler} field="email">Email</Th>
+                <Th {table} field="first_name">First Name</Th>
+                <Th {table} field="last_name">Last Name</Th>
+                <Th {table} field="email">Email</Th>
             </tr>
             <tr>
-                <ThFilter {handler} field="first_name" />
-                <ThFilter {handler} field="last_name" />
-                <ThFilter {handler} field="email" />
+                <ThFilter {table} field="first_name" />
+                <ThFilter {table} field="last_name" />
+                <ThFilter {table} field="email" />
             </tr>
         </thead>
         <tbody>
-            {#each $rows as row}
+            {#each table.rows as row}
                 <tr>
                     <td>{row.first_name}</td>
                     <td>{row.last_name}</td>

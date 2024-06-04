@@ -6,7 +6,6 @@ export default class SortingHelper<Row>
     private sortingHandler  : SortingHandler<Row>
     private field           : Field<Row>
     private uid             : string
-    private callback        : () => void
     public  isActive        = $derived<boolean>(this.createIsActive())
     public  direction       = $derived<'asc' | 'desc'>(this.createDirection())
 
@@ -15,7 +14,6 @@ export default class SortingHelper<Row>
         this.sortingHandler = sortingHandler
         this.field          = field
         this.uid            = 's_' + (Math.random()).toString(28).substring(2)
-        this.callback       = () => { return }
     }
 
     public set()
@@ -35,18 +33,12 @@ export default class SortingHelper<Row>
 
     public clear()
     {
-        this.callback()
         this.sortingHandler.clear()
-    }
-
-    public on(event: 'clear', callback: () => void)
-    {
-        this.callback = callback
     }
 
     private createIsActive()
     {
-        if (this.uid === this.sortingHandler?.table?.sorting?.identifier) {
+        if (this.uid === this.sortingHandler.getTable().sorting?.identifier) {
             return true
         }
         return false
@@ -55,6 +47,6 @@ export default class SortingHelper<Row>
     private createDirection()
     {
         if (this.isActive === false) return null
-        return this.sortingHandler?.table?.sorting?.direction
+        return this.sortingHandler.getTable().sorting?.direction
     }
 }

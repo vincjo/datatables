@@ -1,9 +1,9 @@
 <script>
-    import { Modal } from 'gros/modal'
-    import { Input } from 'gros/form'
+    import Modal from './Modal.svelte'
+    import Input from './Input.svelte'
     import { create } from './store'
     const form = { first_name: null, last_name: null, email: null }
-    export let close
+    let { close } = $props()
 </script>
 
 <Modal title="Create a user" icon="person_add">
@@ -13,20 +13,21 @@
         <Input icon="mail" label="Email" bind:value={form.email} field="email" />
     </aside>
 
-    <svelte:fragment slot="footer">
+    {#snippet footer()}
         <button
-            on:click={() => {
+            onclick={() => {
                 create(form)
                 close()
             }}>Create</button
         >
-        <button on:click={close}>Cancel</button>
-    </svelte:fragment>
+        <button onclick={close}>Cancel</button>
+    {/snippet}
 </Modal>
 
 <style>
     aside {
         width: 360px;
         margin: 24px;
+        background: var(--bg);
     }
 </style>

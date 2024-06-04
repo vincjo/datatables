@@ -27,7 +27,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     private searchHandler   : SearchHandler<T>
     private filterHandler   : FilterHandler<T>
     public  i18n            : Internationalization
-    public  view            : ViewHelper
+    private view            : ViewHelper
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: 5 })
     {
@@ -41,7 +41,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.filterHandler  = new FilterHandler(this)
     }
 
-    public setRemoteControl(callback: (state: State) => Promise<T[]>): void
+    public load(callback: (state: State) => Promise<T[]>): void
     {
         this.fetchHandler.set(callback)
     }
@@ -140,7 +140,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return this.view
     }
 
-    public translate(i18n: Internationalization): Internationalization
+    private translate(i18n: Internationalization): Internationalization
     {
         return {
             ...{

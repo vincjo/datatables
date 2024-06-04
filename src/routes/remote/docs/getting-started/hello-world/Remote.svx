@@ -16,26 +16,26 @@ https://api.mysite.com/users?
 ````
 
 
-## Bind your load function to the DataHandler
+## Bind your load function to the TableHandler
 
 This lib is API agnostic. You will have to craft your own wrapper function that fits with specific URL query strings.
 
-At the DataHandler instanciation, you declare your load function using "`setRemoteControl`" method.
+At the TableHandler instanciation, you declare your load function using "`load`" method.
 
 ````svelte
 <script lang="ts">
-    import { type State, DataHandler } from '@vincjo/datatables/remote'
+    import { type State, TableHandler } from '@vincjo/datatables/remote'
     import { myLoadFunction } from './my-api-helper'
 
-    const handler = new DataHandler([], { rowsPerPage: 10 })
+    const table = new TableHandler([], { rowsPerPage: 10 })
 
-    handler.setRemoteControl( (state: State) => myLoadFunction(state): Promise<Row[]> )
+    table.load( (state: State) => myLoadFunction(state): Promise<Row[]> )
 </script>
 
 ````
 
 
-## State (= client-side datatable state)
+## State (= client-side table state)
 
 The client-side state allows you to translate params to specific URL query strings.
 
@@ -45,7 +45,7 @@ type State = {
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
-    sort: Order<Row> | undefined,
+    sorting: Sorting<Row> | undefined,
     filters: Filter<Row>[] | undefined,
     setTotalRows: (value: number) => void
 }
@@ -53,7 +53,7 @@ type State = {
 
 ## Reload function
 
-Here is an example of translation from client-side state to proper URL qs.
+Here is an example of translation from client-side state to a proper URL query string.
 
 ````ts
 import type { State } from '@vincjo/datatables/remote'
@@ -67,10 +67,10 @@ export const myLoadFunction = async (state: State) => {
     return json.rows
 }
 
-const getParams = ({ offset, rowsPerPage, search, sort, filters }: State) => {
+const getParams = ({ offset, rowsPerPage, search, sorting, filters }: State) => {
     let params = `offset=${offset}&limit=${rowsPerPage}`
     if (search) params += `&q=${search}`
-    if (sort)   params += `&sort=${sort.field}&order=${sort.direction}`
+    if (sort)   params += `&sort=${sorting.field}&order=${sorting.direction}`
     if (filters) {
         params += filters.map(({ field, value }) => `&${field}=${value}`).join()
     }
@@ -85,5 +85,5 @@ const getParams = ({ offset, rowsPerPage, search, sort, filters }: State) => {
 "`invalidate()`" method runs your load function and updates your data according to client-side interactions.
 
 ````ts
-handler.invalidate() 
+table.invalidate() 
 ````

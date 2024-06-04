@@ -153,7 +153,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return this.view
     }
 
-    public translate(i18n: Internationalization)
+    private translate(i18n: Internationalization)
     {
         this.i18n = {
             ...{

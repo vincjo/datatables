@@ -11,12 +11,12 @@
                 { name: 'Internationalization'  , path: `${root}/getting-started/i18n`        },
             ]
         },
-        {
-            title: 'Tips',
-            links: [
-                { name: `Sticky header`   , path: `${root}/tips/sticky-header`   },
-            ]
-        },
+        // {
+        //     title: 'Tips',
+        //     links: [
+        //         { name: `Sticky header`   , path: `${root}/tips/sticky-header`   },
+        //     ]
+        // },
     ]
 </script>
 

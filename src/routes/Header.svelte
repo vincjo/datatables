@@ -4,7 +4,7 @@
     import Mode from './Header_Mode.svelte'
     import Logo from '$site/Logo.svelte'
     import { getPath, url } from 'gros/page'
-    import { mode } from '$site/utils'
+    import { site } from '$site/utils'
 </script>
 
 <header class="flex">
@@ -13,9 +13,9 @@
             <Logo height="28px"/>
             <span class="alt-font">svelte simple datatables</span>
         </a>
-        <a class="menu" class:active={$url.indexOf('/docs') > -1} href="{getPath(`/${$mode}/docs`)}">Docs</a>
-        <a class="menu" class:active={$url.indexOf('/api') > -1} href="{getPath(`/${$mode}/api`)}">API</a>
-        <a class="menu" class:active={$url.indexOf('/examples') > -1} href="{getPath(`/${$mode}/examples`)}">Examples</a>
+        <a class="menu" class:active={$url.indexOf('/docs') > -1} href="{getPath(`/${site.mode}/docs`)}">Docs</a>
+        <a class="menu" class:active={$url.indexOf('/api') > -1} href="{getPath(`/${site.mode}/api`)}">API</a>
+        <a class="menu" class:active={$url.indexOf('/examples') > -1} href="{getPath(`/${site.mode}/examples`)}">Examples</a>
     </nav>
     <div></div>
     <aside class="flex">

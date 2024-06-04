@@ -1,0 +1,1 @@
+{"name":"selectAll","text":"selectAll(): void","returnType":"void","args":[],"ast":{"name":"selectAll","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":117}]}}

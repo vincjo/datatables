@@ -8,6 +8,14 @@
     $users = data
 </script>
 
-<Intro/>
-<Datatable users={$users} />
-<Doc/>
+<section>
+    <Intro/>
+    <Datatable users={$users} />
+    <Doc/>
+</section>
+
+<style>
+    section {
+        max-width: 720px;
+    }
+</style>

@@ -4,7 +4,11 @@
 
 # Internationalization
 
-Showcase components can be translated into another language at the `DataHandler` instantiation level or using the `translate()` method.
+Showcase components can be translated into another language at the `DataHandler` instantiation level.
+
+<Main/>
+
+## Code
 
 ```ts
 import { TableHandler } from '@vincjo/datatables'
@@ -23,17 +27,6 @@ const table = new TableHandler(data, {
     }
 })
 
-// Using the translate() method: 
-table.translate({
-    search: 'Rechercher...',
-    show: 'Afficher',
-    ...
-})
-
 ```
 
-
-## Result
-
-<Main/>
 

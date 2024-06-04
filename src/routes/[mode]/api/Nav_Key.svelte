@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { TableHandler } from '$lib/client'
     import { getPath } from 'gros/page'
-    import { mode } from '$site/utils'
+    import { site } from '$site/utils'
     import { page } from '$app/stores'
     import { slide } from 'svelte/transition'
 
@@ -35,7 +35,7 @@
     {#if active}
         <ul transition:slide={{ duration: 200 }}>
             {#each search.items as item}
-                <a href="{getPath(`/${$mode}/api/${key}~${item}`)}">
+                <a href="{getPath(`/${site.mode}/api/${key}~${item}`)}">
                     <li class:active={item === $page.params.slug?.split('~')[1]}>
                         <span>{item}</span>
                     </li>

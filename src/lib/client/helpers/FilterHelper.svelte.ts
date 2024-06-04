@@ -8,7 +8,6 @@ export default class FilterHelper<Row>
     private field           : Field<Row>
     private uid             : string
     private check           : Check<Row>
-    private callback        : () => void
     public  value           = $state<string>('')
 
     constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check<Row>)
@@ -17,7 +16,7 @@ export default class FilterHelper<Row>
         this.field          = field
         this.uid            = 'f_' + (Math.random()).toString(28).substring(2)
         this.check          = check ?? comparator.isLike
-        this.callback       = () => { return }
+        this.cleanup()
     }
 
     public set(check?: Check<Row>)
@@ -27,12 +26,14 @@ export default class FilterHelper<Row>
 
     public clear()
     {
-        this.callback()
-        this.filterHandler.set(undefined, this.field)
+        this.value = ''
+        this.filterHandler.unset(this.uid)
     }
 
-    public on(event: 'clear', callback: () => void)
+    private cleanup()
     {
-        this.callback = callback
+        this.filterHandler.getTable().on('clearFilters', () => {
+            this.clear()
+        })
     }
 }

@@ -1,0 +1,1 @@
+{"name":"currentPage","text":"type $state<number>","type":"$state<number>","ast":{"name":"currentPage","kind":"Property","type":{"text":"number","kind":"Intrinsic"},"line":10,"default":"$state<number>(1)","inherited":true}}

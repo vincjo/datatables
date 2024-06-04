@@ -1,6 +1,5 @@
 <script>
-    export let height = 'auto' 
-    export let width = 'auto'
+	let { width = 'auto', height = 'auto' } = $props()
 </script>
 
 

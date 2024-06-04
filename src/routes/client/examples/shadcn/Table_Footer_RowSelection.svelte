@@ -19,7 +19,7 @@
 
 <style>
     span {
-        color: #616161;
+        color: var(--font-grey);
         font-size: 14px;
     }
     button {
@@ -27,11 +27,12 @@
         height: 32px;
         margin: 0 8px;
         border-radius: 4px;
-        border: 1px solid #f5f5f5;
-        background: #f5f5f5;
+        border: 1px solid var(--grey-lighten);
+        background: var(--grey-lighten);
+        color: var(--font);
     }
     button:hover {
-        background: #eee;
+        background: var(--grey);
     }
     i {
         font-size: 18px;

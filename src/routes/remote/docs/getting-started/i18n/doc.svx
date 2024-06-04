@@ -1,15 +1,15 @@
-<script>
+<!-- <script>
     import Main from './Main.svelte'
-</script>
+</script> -->
 
 # Internationalization
 
-Showcase components can be translated into another language at the `DataHandler` instantiation level or using the `translate()` method.
+Showcase components can be translated into another language at the `TableHandler` instantiation level.
 
 ```ts
-import { DataHandler } from '@vincjo/datatables'
+import { TableHandler } from '@vincjo/datatables/remote'
 
-const handler = new DataHanlder(data, {
+const table = new TableHandler(data, {
     rowsPerPage: 10,
     i18n: {
         search: 'Rechercher...',
@@ -23,20 +23,13 @@ const handler = new DataHanlder(data, {
     }
 })
 
-// Using the translate() method: 
-handler.translate({
-    search: 'Rechercher...',
-    show: 'Afficher',
-    ...
-})
-
 ```
 
-
+<!-- 
 ## Result
 <div>
     <Main/>
-</div>
+</div> -->
 
 
 <style>

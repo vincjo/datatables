@@ -36,13 +36,13 @@ export type Sorting = {
 }
 
 export type Internationalization = {
-    search          ?: string
-    show            ?: string
-    entries         ?: string
-    filter          ?: string
-    rowCount        ?: string
-    noRows          ?: string
-    previous        ?: string
-    next            ?: string
-    selectedCount   ?: string
+    search          ?: string,
+    show            ?: string,
+    entries         ?: string,
+    filter          ?: string,
+    rowCount        ?: string,
+    noRows          ?: string,
+    previous        ?: string,
+    next            ?: string,
+    selectedCount   ?: string,
 }

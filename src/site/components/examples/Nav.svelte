@@ -1,18 +1,18 @@
 <script lang="ts">
     import { TableHandler } from '$lib/client'
     import { getPath, url } from 'gros/page'
-    import { mode } from '$site/utils'
+    import { site } from '$site/utils'
     type Props = { nav: { title: string, page: string, description: string, tag: string[] }[] }
     let { nav }: Props = $props()
-    const handler = new TableHandler(nav)
+    const table = new TableHandler(nav)
 </script>
 
 
 <nav>
-    <input type="text" placeholder="Search..." spellcheck="false" bind:value={handler.search.value}/>
+    <input type="text" placeholder="Search..." spellcheck="false" bind:value={table.search}/>
     <section class="thin-scrollbar">
-        {#each handler.rows as row}
-            <a href="{getPath(`/${$mode}/examples/${row.page}`)}" class:active={$url.indexOf(row.page) > -1}>
+        {#each table.rows as row}
+            <a href="{getPath(`/${site.mode}/examples/${row.page}`)}" class:active={$url.indexOf(row.page) > -1}>
                 <b>{row.title}</b>
                 <span>{row.description}</span>
             </a>

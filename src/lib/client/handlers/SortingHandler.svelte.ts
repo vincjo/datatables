@@ -4,7 +4,7 @@ import { parseField } from '$lib/client/utils'
 export default class SortingHandler<Row> 
 {
     private backup  : Sorting<Row>[]
-    public  table   : TableHandler<Row>
+    private table   : TableHandler<Row>
 
     constructor(table: TableHandler<Row>) 
     {
@@ -89,18 +89,6 @@ export default class SortingHandler<Row>
         this.table.sorting = {}
     }
 
-    // public define(params: { field: Field<Row>, direction: 'asc' | 'desc', identifier?: string })
-    // {
-    //     const { field, direction, identifier } = params
-    //     if (!field || !direction) return
-    //     const field = parseField(field, identifier)
-    //     this.table.sorting = {
-    //         identifier: field.identifier, 
-    //         callback: field.callback, 
-    //         direction 
-    //     }
-    // }
-
     private restore()
     {
         for (const sort of this.backup) {
@@ -120,5 +108,10 @@ export default class SortingHandler<Row>
         else {
             this.backup = [...this.backup, sort]
         }
+    }
+
+    public getTable()
+    {
+        return this.table
     }
 }

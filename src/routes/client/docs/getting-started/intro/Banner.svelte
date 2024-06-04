@@ -1,14 +1,13 @@
-<script>
-    import { mode } from '$site/utils'
+<script lang="ts">
+    import { site } from '$site/utils'
     import Logo from '$site/Logo.svelte'
-    let color = $state('c2185b')
-    $effect(() => {
-        $mode
-        update()
+
+    let color = $derived.by(() => {
+        if (site.mode === 'client') {
+            return 'c2185b'
+        }
+        return '006990'
     })
-    const update = () => {
-        color = ($mode === 'client') ? 'c2185b' : '006990'
-    }
 </script>
 
 <section>

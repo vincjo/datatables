@@ -5,7 +5,6 @@ Get paginated and filtered rows.
 ## Usage
 
 ```svelte
-
 <ul>
     {#each table.rows as row}
         <li>{row.first_name} {row.last_name}</li>

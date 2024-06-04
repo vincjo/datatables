@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "2.0.0",
+    "version": "2.0.0-runes.1",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],
@@ -19,6 +19,7 @@
         "dev": "vite dev",
         "build": "vite build",
         "package": "svelte-kit sync && svelte-package",
+        "publish:runes": "svelte-kit sync && svelte-package && npm publish --tag runes",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
         "format": "prettier --plugin-search-dir . --write .",
@@ -31,7 +32,7 @@
         "@sveltejs/vite-plugin-svelte": "^3.0.0",
         "@ts-ast-parser/core": "^0.8.0",
         "@types/node": "^18.15.11",
-        "gros": "^1.0.1",
+        "gros": "^1.0.0-runes.1",
         "mdsvex": "^0.11.0",
         "prettier": "^2.6.2",
         "prettier-plugin-svelte": "^2.10.1",
@@ -63,112 +64,14 @@
         "./remote": {
             "types": "./dist/remote/index.d.ts",
             "default": "./dist/remote/index.js"
-        }
-    },
-    "typesVersions": {
-        ">4.0": {
-            "index.d.ts": [
-                "./dist/index.d.ts"
-            ],
-            "local/Comparator": [
-                "./dist/client/Comparator.d.ts"
-            ],
-            "local/Context": [
-                "./dist/client/Context.d.ts"
-            ],
-            "local/DataHandler": [
-                "./dist/client/DataHandler.d.ts"
-            ],
-            "local/Datatable.svelte": [
-                "./dist/client/Datatable.svelte.d.ts"
-            ],
-            "local/handlers/FilterHandler": [
-                "./dist/client/handlers/FilterHandler.d.ts"
-            ],
-            "local/handlers/PageHandler": [
-                "./dist/client/handlers/PageHandler.d.ts"
-            ],
-            "local/handlers/SearchHandler": [
-                "./dist/client/handlers/SearchHandler.d.ts"
-            ],
-            "local/handlers/SelectHandler": [
-                "./dist/client/handlers/SelectHandler.d.ts"
-            ],
-            "local/handlers/SortHandler": [
-                "./dist/client/handlers/SortHandler.d.ts"
-            ],
-            "local": [
-                "./dist/client/index.d.ts"
-            ],
-            "local/Pagination.svelte": [
-                "./dist/client/Pagination.svelte.d.ts"
-            ],
-            "local/RowCount.svelte": [
-                "./dist/client/RowCount.svelte.d.ts"
-            ],
-            "local/RowsPerPage.svelte": [
-                "./dist/client/RowsPerPage.svelte.d.ts"
-            ],
-            "local/Search.svelte": [
-                "./dist/client/Search.svelte.d.ts"
-            ],
-            "local/Th.svelte": [
-                "./dist/client/Th.svelte.d.ts"
-            ],
-            "local/ThFilter.svelte": [
-                "./dist/client/ThFilter.svelte.d.ts"
-            ],
-            "remote/Context": [
-                "./dist/remote/Context.d.ts"
-            ],
-            "remote/DataHandler": [
-                "./dist/remote/DataHandler.d.ts"
-            ],
-            "remote/Datatable.svelte": [
-                "./dist/remote/Datatable.svelte.d.ts"
-            ],
-            "remote/handlers/FilterHandler": [
-                "./dist/remote/handlers/FilterHandler.d.ts"
-            ],
-            "remote/handlers/PageHandler": [
-                "./dist/remote/handlers/PageHandler.d.ts"
-            ],
-            "remote/handlers/SearchHandler": [
-                "./dist/remote/handlers/SearchHandler.d.ts"
-            ],
-            "remote/handlers/SelectHandler": [
-                "./dist/remote/handlers/SelectHandler.d.ts"
-            ],
-            "remote/handlers/SortHandler": [
-                "./dist/remote/handlers/SortHandler.d.ts"
-            ],
-            "remote/handlers/TriggerHandler": [
-                "./dist/remote/handlers/TriggerHandler.d.ts"
-            ],
-            "remote": [
-                "./dist/remote/index.d.ts"
-            ],
-            "remote/Pagination.svelte": [
-                "./dist/remote/Pagination.svelte.d.ts"
-            ],
-            "remote/README.svelte": [
-                "./dist/remote/README.svelte.d.ts"
-            ],
-            "remote/RowCount.svelte": [
-                "./dist/remote/RowCount.svelte.d.ts"
-            ],
-            "remote/RowsPerPage.svelte": [
-                "./dist/remote/RowsPerPage.svelte.d.ts"
-            ],
-            "remote/Search.svelte": [
-                "./dist/remote/Search.svelte.d.ts"
-            ],
-            "remote/Th.svelte": [
-                "./dist/remote/Th.svelte.d.ts"
-            ],
-            "remote/ThFilter.svelte": [
-                "./dist/remote/ThFilter.svelte.d.ts"
-            ]
+        },
+        "./legacy": {
+            "types": "./dist/legacy/index.d.ts",
+            "default": "./dist/legacy/index.js"
+        },
+        "./legacy/remote": {
+            "types": "./dist/legacy/remote/index.d.ts",
+            "default": "./dist/legacy/remote/index.js"
         }
     }
 }

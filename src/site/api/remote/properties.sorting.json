@@ -1,0 +1,1 @@
+{"name":"sorting","text":"type $state<Sorting>","type":"$state<Sorting>","ast":{"name":"sorting","kind":"Property","type":{"text":"Sorting","kind":"Reference","source":{"line":33,"path":"src\\lib\\remote\\index.ts"}},"line":18,"default":"$state<Sorting>({})","inherited":true}}

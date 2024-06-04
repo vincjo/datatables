@@ -1,0 +1,1 @@
+{"name":"sortAsc","text":"sortAsc(field: string): void","returnType":"void","args":[{"name":"field","type":"string","text":"field: string"}],"ast":{"name":"sortAsc","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":86,"parameters":[{"name":"field","type":{"text":"string","kind":"Intrinsic"},"line":86}]}]}}

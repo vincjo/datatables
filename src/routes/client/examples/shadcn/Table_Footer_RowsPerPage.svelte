@@ -34,17 +34,19 @@
     aside.trigger {
         height: 32px;
         padding: 0 8px;
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--grey);
         border-radius: 8px;
         margin: 0 16px 0 8px;
         width: 72px;
+        color: var(--font);
     }
     button {
         justify-content: space-between;
+        color: var(--font);
     }
     aside {
-        border: 1px solid #e0e0e0;
-        background: #fff;
+        border: 1px solid var(--grey);
+        background: var(--bg);
         margin-bottom: 4px;
         border-radius: 8px;
         padding: 4px;
@@ -56,7 +58,7 @@
         width: 100%;
     }
     button:not(.trigger):hover {
-        background: #eee;
+        background: var(--grey);
     }
     i.micon {
         font-size: 18px;
