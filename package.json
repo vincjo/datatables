@@ -23,7 +23,8 @@
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
         "format": "prettier --plugin-search-dir . --write .",
-        "deploy": "pm2 deploy ecosystem.config.cjs production"
+        "deploy": "pm2 deploy ecosystem.config.cjs production",
+        "deploy:setup": "pm2 deploy ecosystem.config.cjs production setup"
     },
     "devDependencies": {
         "@sveltejs/adapter-node": "^5.0.0",
