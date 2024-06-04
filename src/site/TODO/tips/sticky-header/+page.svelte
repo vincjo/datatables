@@ -9,8 +9,10 @@
     <article>
         <table>
             <thead>
-                <th>First name</th>
-                <th>Last name</th>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                </tr>
             </thead>
             <tbody>
                 {#each Array.from(Array(100).keys()) as row}
