@@ -2,7 +2,7 @@ import type { Field, TypeAliasDeclaration, Method as ASTMethod } from '@ts-ast-p
 
 export { default as API } from './API'
 
-export const ROOT_DIR = './ssstatic/doc'
+export const ROOT_DIR = './static/doc'
 
 export const internal = {
     properties: ['events', 'rawRows', 'sorting', 'filters', 'selectScope'],
