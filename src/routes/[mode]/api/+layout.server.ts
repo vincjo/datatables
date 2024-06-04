@@ -3,14 +3,18 @@ import { internal } from '$site/api'
 
 export const load = async (url) => {
     const mode = url.params.mode
-    const nav = API.nav(mode)
+    let nav: any
+    try {
+        nav = API.nav(mode)
+    } catch (error) {
+        return {
+            nav: { properties: [], methods: [], types: [] }, 
+            error: error
+        }
+    }
     if (nav.error) {
         return {
-            nav: {
-                properties: [],
-                methods: [],
-                types: []
-            }, 
+            nav: { properties: [], methods: [], types: [] }, 
             error: nav.error
         }
     }
