@@ -1,5 +1,4 @@
 import type { ServerLoadEvent } from '@sveltejs/kit'
-import { dev } from '$app/environment'
 import { ROOT_DIR } from './index'
 import FS from './FS'
 import AST from './AST'
@@ -10,7 +9,6 @@ type Params = [
 ]
 import * as fs from 'fs'
 import * as path from 'path'
-
 export default class API
 {
 
@@ -18,7 +16,7 @@ export default class API
     {
         const mode = url.params.mode
         const [key, name] = url.params.slug.split('~')
-        const source = API.read(`${API.getDIR()}/${mode}/${key}.${name}.json`)
+        const source = API.read(`${ROOT_DIR}/${mode}/${key}.${name}.json`)
         return {
             ...source,
             markdown: await this.markdown(mode, key, name)
@@ -28,12 +26,12 @@ export default class API
     public static find(params: Params)
     {
         const [mode, key, name] = params
-        return API.read(`${API.getDIR()}/${mode}/${key}.${name}.json`)
+        return API.read(`${ROOT_DIR}/${mode}/${key}.${name}.json`)
     }
 
     public static nav(mode: string)
     {
-        return API.read(`${API.getDIR()}/${mode}/nav.json`)
+        return API.read(`${ROOT_DIR}/${mode}/nav.json`)
     }
 
     public static async generate(mode: 'client' | 'remote')
@@ -60,7 +58,7 @@ export default class API
     public static async markdown(mode: string, key: string, name: string,)
     {
         const doc = { md: '', error: null }
-        const filepath = `${API.getDIR()}/${mode}/${key}.${name}.md`
+        const filepath = `${ROOT_DIR}/${mode}/${key}.${name}.md`
         try {
             const mdsvex = await import('mdsvex')
             const md = fs.readFileSync(filepath).toString('utf-8')
@@ -71,14 +69,5 @@ export default class API
             doc.error = JSON.stringify(error)
         }
         return doc.md
-    }
-
-    public static getDIR()
-    {
-        return ROOT_DIR
-        // if (dev) {
-        //     return ROOT_DIR
-        // }
-        // return path.dirname('.')
     }
 }

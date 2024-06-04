@@ -1,5 +1,5 @@
 <script>
-    export let top = '16px'
+    // export let top = '16px'
     export let code
     let buttonContent = 'Copy'
 

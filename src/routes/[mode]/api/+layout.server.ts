@@ -1,29 +1,12 @@
 import { API } from '$site/api'
+import { dev } from '$app/environment'
 import { internal } from '$site/api'
 
 export const load = async (url) => {
+    if (dev === false) return { nav: undefined, internal: internal }
     const mode = url.params.mode
-    let nav: any
-    try {
-        nav = API.nav(mode)
-    } catch (error) {
-        return {
-            nav: { properties: [], methods: [], types: [] }, 
-            error: error
-        }
-    }
-    if (nav.error) {
-        return {
-            nav: { properties: [], methods: [], types: [] }, 
-            error: nav.error
-        }
-    }
-    const { properties, methods, types } = nav
-    return {
-        nav: {
-            properties: properties.filter((item: string) => internal.properties.includes(item) === false).sort(),
-            methods   : methods.filter((item: string) => internal.methods.includes(item) === false).sort(),
-            types     : types.filter((item: string) => internal.types.includes(item) === false).sort()
-        }
+    return { 
+        nav: API.nav(mode),
+        internal: internal
     }
 }

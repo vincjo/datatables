@@ -18,7 +18,7 @@
     "scripts": {
         "dev": "vite dev",
         "build": "vite build",
-		"preview": "vite preview",
+        "preview": "vite preview",
         "package": "svelte-kit sync && svelte-package",
         "publish:runes": "svelte-kit sync && svelte-package && npm publish --tag runes",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -29,14 +29,13 @@
     },
     "devDependencies": {
         "@sveltejs/adapter-node": "^5.0.0",
-        "@sveltejs/kit": "^2.0.0",
+        "@sveltejs/kit": "^2.5.10",
         "@sveltejs/package": "^2.3.1",
-        "@sveltejs/vite-plugin-svelte": "^3.0.0",
+        "@sveltejs/vite-plugin-svelte": "^3.1.1",
         "@ts-ast-parser/core": "^0.8.0",
         "@types/node": "^18.15.11",
         "gros": "^1.0.0-runes.3",
         "mdsvex": "^0.11.2",
-        "prettier": "^2.6.2",
         "prism-svelte": "^0.5.0",
         "prismjs": "^1.29.0",
         "svelte": "^5.0.0-next.148",
@@ -73,5 +72,8 @@
             "types": "./dist/legacy/remote/index.d.ts",
             "default": "./dist/legacy/remote/index.js"
         }
+    },
+    "resolutions": {
+        "globby": "13.2.2"
     }
 }

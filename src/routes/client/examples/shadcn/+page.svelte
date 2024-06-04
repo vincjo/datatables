@@ -9,7 +9,7 @@
             <h1>Welcome back!</h1>
             <p>Here's a list of your tasks for this month!</p>
         </div>
-        <img src="/datatables.next/external/avatar-shadcn.png" alt="avatar"/>
+        <img src="/datatables.runes/external/avatar-shadcn.png" alt="avatar"/>
     </aside>
 
     <Table/>

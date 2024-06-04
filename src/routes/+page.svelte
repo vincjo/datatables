@@ -13,9 +13,9 @@
 
             <h3>Client-side data processing</h3>
             <div class="flex">
-                <a href="{site.getPath('/client/docs')}">Docs</a>
+                <a href="{site.getPath('/client/docs/getting-started/intro')}">Docs</a>
                 <a href="{site.getPath('/client/api')}">API</a>
-                <a href="{site.getPath('/client/examples')}">Examples</a>
+                <a href="{site.getPath('/client/examples/hello-world')}">Examples</a>
             </div>
         </aside>
         <aside onmouseenter={() => site.setMode('remote')} class="flex" class:active={site.mode === 'remote'}>
@@ -23,9 +23,9 @@
 
             <h3>Server-side data processing</h3>
             <div class="flex">
-                <a href="{site.getPath('/remote/docs')}">Docs</a>
+                <a href="{site.getPath('/remote/docs/getting-started/intro')}">Docs</a>
                 <a href="{site.getPath('/remote/api')}">API</a>
-                <a href="{site.getPath('/remote/examples')}">Examples</a>
+                <a href="{site.getPath('/remote/examples/hello-world')}">Examples</a>
             </div>
         </aside>
     </article>
