@@ -5,7 +5,7 @@
 
     const table = new TableHandler(data, { rowsPerPage: 5, totalRows: 500 })
 
-    table.setRemoteControl((state: State) => reload(state) )
+    table.load((state: State) => reload(state) )
 </script>
 
 <Datatable basic {table}>
@@ -24,7 +24,7 @@
                     <td>{row.id}</td>
                     <td><b>{row.name}</b></td>
                     <td>{row.email}</td>
-                    <td><p>{row.body}</p></td>
+                    <td><p>{row.body.substring(0, 60) + '...'}</p></td>
                 </tr>
             {/each}
         </tbody>

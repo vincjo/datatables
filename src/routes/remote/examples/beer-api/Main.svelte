@@ -4,7 +4,7 @@
     let { data }: { data: any[]} = $props()
     const table = new TableHandler(data, { rowsPerPage: 10, selectBy: 'id' })
 
-    table.setRemoteControl((state: State) => reload(state))
+    table.load((state: State) => reload(state))
 </script>
 
 <Datatable {table}>

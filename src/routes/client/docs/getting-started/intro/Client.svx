@@ -1,5 +1,5 @@
 <script>
-    import Banner from './Banner.svelte'
+    import Banner from '$site/Banner.svelte'
     import Install from '$site/components/Install.svelte'
 </script>
 

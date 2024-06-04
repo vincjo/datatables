@@ -6,7 +6,7 @@
 <section>
     <h1>Experimental support for Svelte 5 - Runes</h1>
     <Install/>
-    <h2>Chose your path:</h2>
+    <h2>Paths</h2>
     <article class="flex">
         <aside onmouseenter={() => site.setMode('client')} class="flex" class:active={site.mode === 'client'}>
             <svg width="80px" height="80px" viewBox="0 0 24 24"><path fill="currentColor" d="M1 18.77v-1h3.616V17q-.691 0-1.153-.462T3 15.385v-8.77q0-.69.463-1.152T4.615 5h14.77q.69 0 1.152.463T21 6.615v8.77q0 .69-.463 1.153T19.385 17v.77H23v1zM4.616 16h14.769q.269 0 .442-.173t.173-.442v-8.77q0-.269-.173-.442T19.385 6H4.615q-.269 0-.442.173T4 6.615v8.77q0 .269.173.442t.443.173M4 16V6z"/></svg>
@@ -44,9 +44,12 @@
         font-size: 24px;
         font-weight: normal;
         max-width: 600px;
+        margin: 32px 0 16px 0;
     }
     section {
-        padding: 0 32px;
+        position: relative;
+        overflow-y: auto;
+        padding: 0 32px 96px 0;
     }
     article {
         flex-wrap: wrap;
@@ -57,8 +60,9 @@
         width: 336px;
         border: 2px solid var(--grey);
         border-radius: 8px;
-        margin: 16px;
+        margin: 16px 16px 16px 0;
         padding: 16px 32px 32px 32px;
+        color: var(--grey);
     }
     aside:hover {
         border: 2px solid var(--primary);
@@ -70,7 +74,7 @@
         text-align: center;
         font-size: 20px;
         margin: 8px 0;
-        color: var(--font);
+        color: var(--grey);
     }
     aside.active h3 {
         color: var(--primary)

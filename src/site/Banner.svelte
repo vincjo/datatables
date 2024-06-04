@@ -16,14 +16,7 @@
         <h1>svelte simple datatables</h1>
         <p>A toolkit for creating datatable components with Svelte</p>
         <div>
-            <img
-                src="https://img.shields.io/npm/dt/@vincjo/datatables?color=%23{color}"
-                alt="npm downloads"
-            />
-            <img
-                src="https://img.shields.io/npm/v/@vincjo/datatables?color=%23{color}"
-                alt="npm version"
-            />
+            <img src="https://img.shields.io/badge/v2-runes-v2?color=%23{color}" alt="any text"/>
         </div>
     </aside>
 </section>
@@ -48,8 +41,8 @@
         color: var(--font);
     }
     img {
-        width: 88px;
-        max-width: 400px;
+        height: 24px;
+        max-width: 80px;
         margin: 0 16px 0 0;
     }
     p {

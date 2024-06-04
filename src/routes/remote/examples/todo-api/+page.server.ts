@@ -2,7 +2,7 @@ import * as fs from 'fs'
 
 export const load = async () => {
 
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos?_page=1&_limit=20')
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos?_page=1&_limit=10')
 
     const path = './src/routes/remote/examples'
     const lib = './src/lib/remote'

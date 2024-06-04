@@ -1,5 +1,5 @@
 <script>
-    import Banner from './Banner.svelte'
+    import Banner from '$site/Banner.svelte'
     import Install from '$site/components/Install.svelte'
 </script>
 
@@ -24,30 +24,29 @@ You will craft your own wrapper function to fetch the remote API.
 ```svelte
 <script lang="ts">
     import { 
-        type State, DataHandler, 
+        type State, TableHandler, 
         Datatable, Th 
     } from '@vincjo/datatables/remote'
     import { myLoadFunction } from './my-api-helper'
 
-    const handler = new DataHandler([], { rowsPerPage: 10 })
-    const rows = handler.getRows()
+    const table = new TableHandler([], { rowsPerPage: 10 })
 
-    handler.setRemoteControl( (state: State) => myLoadFunction(state) )
+    table.load((state: State) => myLoadFunction(state))
 
-    handler.invalidate()
+    table.invalidate()
 </script>
 
-<Datatable {handler}>
+<Datatable {table}>
     <table>
         <thead>
             <tr>
-                <Th {handler} field="first_name">First Name</Th>
-                <Th {handler} field="last_name">Last Name</Th>
-                <Th {handler} field="email">Email</Th>
+                <Th {table} field="first_name">First Name</Th>
+                <Th {table} field="last_name">Last Name</Th>
+                <Th {table} field="email">Email</Th>
             </tr>
         </thead>
         <tbody>
-            {#each $rows as row}
+            {#each table.rows as row}
                 <tr>
                     <td>{row.first_name}</td>
                     <td>{row.last_name}</td>

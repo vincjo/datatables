@@ -5,7 +5,7 @@
 
     const table = new TableHandler(data.users, { rowsPerPage: 10, totalRows: data.total })
 
-    table.setRemoteControl( (state: State) => reload(state) )
+    table.load( (state: State) => reload(state) )
 </script>
 
 <Datatable basic {table}>

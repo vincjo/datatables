@@ -6,7 +6,7 @@
 
     const table = new TableHandler([], { rowsPerPage: 10 })
 
-    table.setRemoteControl( (state: State) => reload(state) )
+    table.load( (state: State) => reload(state) )
     table.invalidate()
 </script>
 

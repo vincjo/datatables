@@ -1,1 +1,0 @@
-{"name":"applySort","text":"applySort(): void","returnType":"void","args":[],"ast":{"name":"applySort","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":96}]}}

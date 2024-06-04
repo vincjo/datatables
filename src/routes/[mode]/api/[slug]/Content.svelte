@@ -4,7 +4,6 @@
 
     let { data }: { data: any, key: string } = $props()
     const isDeprecated = false
-    console.log(data.args)
 </script>
 
 

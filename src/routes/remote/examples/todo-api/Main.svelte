@@ -3,9 +3,9 @@
     import { reload } from './api'
     export let data: any[]
 
-    const table = new TableHandler(data, { rowsPerPage: 20 })
+    const table = new TableHandler(data, { rowsPerPage: 10 })
 
-    table.setRemoteControl((state: State) => reload(state))
+    table.load((state: State) => reload(state))
 </script>
 
 <Datatable basic {table}>

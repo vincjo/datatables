@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
     import { getPath, url } from 'gros/page'
-    export let nav
+    let { nav }: { nav: any } = $props()
 </script>
 
 <nav class="thin-scrollbar">

@@ -18,7 +18,7 @@
 
 <main>
     <Header/>
-    <section>
+    <section class="thin-scrollbar">
         <slot/>
     </section>
 </main>
@@ -37,5 +37,6 @@
         bottom: 0;
         right: 0;
         padding: 0 32px;
+        overflow-y: auto;
     }
 </style>

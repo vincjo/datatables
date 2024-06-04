@@ -18,13 +18,17 @@ export default class Site
 
     public getMode()
     {
+        if (this.url.indexOf(`/client/`) > -1) {
+            return 'client'
+        }
+        else if (this.url.indexOf(`/remote/`)) {
+            return 'remote'
+        }
         const regex = new RegExp(`(^| )siteMode=([^;]+)`)
         const match = document.cookie.match(regex)
         if (match) {
-            this.mode = match[2]
             return match[2]
         }
-        this.mode = 'client'
         return 'client'
     }
 
@@ -50,6 +54,7 @@ export default class Site
 
     public getPath(url: string)
     {
+        console.log(url, base)
         if (base) {
             return `${base}${url}`.replace('//', '/').replace(/\/$/, '')
         }
