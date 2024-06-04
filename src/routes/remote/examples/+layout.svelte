@@ -4,7 +4,7 @@
     const nav = [
         {
             title: `Comment API`,
-            page: 'comment-api',
+            page: 'hello-world',
             description: `Columns sorting. Source: JSON Placeholder`,
             tag: ['rows per page', 'sorting', 'pagination', 'row count']
         },

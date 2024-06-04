@@ -1,9 +1,8 @@
 import type { Field, TypeAliasDeclaration, Method as ASTMethod } from '@ts-ast-parser/core'
 
-
 export { default as API } from './API'
 
-export const ROOT_DIR = './src/site/api'
+export const ROOT_DIR = './ssstatic/doc'
 
 export const internal = {
     properties: ['events', 'rawRows', 'sorting', 'filters', 'selectScope'],

@@ -3,7 +3,18 @@ import { internal } from '$site/api'
 
 export const load = async (url) => {
     const mode = url.params.mode
-    const { properties, methods, types } = API.nav(mode)
+    const nav = API.nav(mode)
+    if (nav.error) {
+        return {
+            nav: {
+                properties: [],
+                methods: [],
+                types: []
+            }, 
+            error: nav.error
+        }
+    }
+    const { properties, methods, types } = nav
     return {
         nav: {
             properties: properties.filter((item: string) => internal.properties.includes(item) === false).sort(),

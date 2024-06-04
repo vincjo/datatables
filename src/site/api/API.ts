@@ -8,6 +8,7 @@ type Params = [
     name: string
 ]
 import * as fs from 'fs'
+import * as path from 'path'
 
 export default class API
 {
@@ -51,7 +52,7 @@ export default class API
     {
         const exists = fs.existsSync(filepath)
         if (!exists) return {
-            error: `Documentation not found - ${filepath}`
+            error: `Documentation not found - ${path.resolve(filepath)}`
         }
         return JSON.parse(fs.readFileSync(filepath, 'utf8'))
     }

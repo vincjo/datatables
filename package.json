@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "2.0.0-runes.1",
+    "version": "2.0.0-runes.2",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],
@@ -18,6 +18,7 @@
     "scripts": {
         "dev": "vite dev",
         "build": "vite build",
+		"preview": "vite preview",
         "package": "svelte-kit sync && svelte-package",
         "publish:runes": "svelte-kit sync && svelte-package && npm publish --tag runes",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -33,7 +34,7 @@
         "@sveltejs/vite-plugin-svelte": "^3.0.0",
         "@ts-ast-parser/core": "^0.8.0",
         "@types/node": "^18.15.11",
-        "gros": "^1.0.0-runes.2",
+        "gros": "^1.0.0-runes.3",
         "mdsvex": "^0.11.2",
         "prettier": "^2.6.2",
         "prism-svelte": "^0.5.0",
@@ -46,7 +47,7 @@
         "vite": "^5.0.0"
     },
     "peerDependencies": {
-        "svelte": ">=5.0.0"
+        "svelte": "^3.56.0 || ^4.0.0 || ^5.0.0-next.120"
     },
     "type": "module",
     "files": [

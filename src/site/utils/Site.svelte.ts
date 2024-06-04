@@ -6,7 +6,6 @@ export default class Site
 {
     public mode     = $state('client')
     public theme    = $state('dark')
-    public url      = $derived(get(page).url.pathname)
 
     public setMode(value: 'client' | 'remote' | string)
     {
@@ -19,10 +18,10 @@ export default class Site
     public getMode()
     {
         let mode = 'client'
-        if (this.url.indexOf(`/client/`) > -1) {
+        if (get(page).url.pathname.indexOf(`/client/`) > -1) {
             mode = 'client'
         }
-        else if (this.url.indexOf(`/remote/`) > -1) {
+        else if (get(page).url.pathname.indexOf(`/remote/`) > -1) {
             mode = 'remote'
         }
         else {
@@ -64,23 +63,5 @@ export default class Site
         }
         return url
 
-    }
-
-    public switchMode(mode: string)
-    {
-        if (this.url.indexOf(`/${this.mode}/docs`) > -1) {
-            this.setMode(mode)
-            return this.getPath(`/${mode}/docs`)
-        }
-        else if (this.url.indexOf(`/${this.mode}/api`)) {
-            this.setMode(mode)
-            return this.getPath(`/${mode}/api`)
-        }
-        else if (this.url.indexOf(`/${this.mode}/examples`)) {
-            this.setMode(mode)
-            return this.getPath(`/${mode}/examples`)
-        }
-        this.setMode(mode)
-        return this.getPath('/')
     }
 }

@@ -1,21 +1,21 @@
-<script>
+<script lang="ts">
     import Github from './Header_Github.svelte'
     import Theme from './Header_Theme.svelte'
     import Mode from './Header_Mode.svelte'
     import Logo from '$site/Logo.svelte'
-    import { getPath, url } from 'gros/page'
     import { site } from '$site/utils'
+    import { page } from '$app/stores'
 </script>
 
 <header class="flex">
     <nav class="flex">
-        <a class="flex logo" href="{getPath('/')}">
+        <a class="flex logo" href="{site.getPath('/')}">
             <Logo height="28px"/>
             <span class="alt-font">svelte simple datatables</span>
         </a>
-        <a class="menu" class:active={$url.indexOf('/docs') > -1} href="{getPath(`/${site.mode}/docs`)}">Docs</a>
-        <a class="menu" class:active={$url.indexOf('/api') > -1} href="{getPath(`/${site.mode}/api`)}">API</a>
-        <a class="menu" class:active={$url.indexOf('/examples') > -1} href="{getPath(`/${site.mode}/examples`)}">Examples</a>
+        <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}">Docs</a>
+        <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/${site.mode}/api`)}">API</a>
+        <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}">Examples</a>
     </nav>
     <div></div>
     <aside class="flex">

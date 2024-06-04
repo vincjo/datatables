@@ -19,7 +19,7 @@ module.exports = {
             repo: 'git@github.com:vincjo/datatables.git',
             path: '/home/vincjo/www/datatables-runes',
             'post-deploy':
-                'npm install --force && npm run build && pm2 startOrRestart ecosystem.config.cjs --env production'
+                'npm install && pm2 startOrRestart ecosystem.config.cjs --env production'
         }
     }
 }
