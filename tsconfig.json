@@ -3,11 +3,10 @@
     "moduleResolution": "NodeNext",
     "compilerOptions": {
         "paths": {
-            "$site": ["./src/site"],
-            "$site/*": ["./src/site/*"],
-            "$lib": ["./src/lib"],
-            "$lib/*": ["./src/lib/*"],
-        }
+			"$site/*": ["./src/site/*"],
+			"$lib": ["./src/lib"],
+			"$lib/*": ["./src/lib/*"],
+		}
     },
     "strictNullChecks": false,
     "noImplicitAny": true

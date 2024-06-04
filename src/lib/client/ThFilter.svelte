@@ -1,33 +1,30 @@
 <script lang="ts">
-    import type { DataHandler, Field, Comparator, Row } from '$lib/client'
+    import type { TableHandler, Field, Check, Row } from '$lib/client'
 
     type T = $$Generic<Row>
+    type Props = {
+        table       : TableHandler<T>,
+        field       : Field<T>,
+        check      ?: Check<T>
+    }
+    let { table, field, check = undefined }: Props = $props()
 
-    export let handler: DataHandler<T>
-    export let filterBy: Field<T>
-    export let numeric = false
-    export let align: 'left' | 'right' | 'center' = numeric ? 'right' : 'left'
-    export let comparator: Comparator<T> = null
-
-    let value: string = ''
-
-    handler.on('clearFilters', () => value = '')
+    const filter = table.createFilter(field, check)
 </script>
 
-<th class={$$props.class ?? ''}>
+<th>
     <input
-        style:text-align={align}
         type="text"
-        placeholder={handler.i18n.filter}
+        placeholder={table.i18n.filter}
         spellcheck="false"
-        bind:value
-        on:input={() => handler.filter(value, filterBy, comparator)}
+        bind:value={filter.value}
+        oninput={() => filter.set()}
     />
 </th>
 
 <style>
     th {
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--grey, #e0e0e0);
     }
     input {
         width: 100%;

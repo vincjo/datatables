@@ -25,11 +25,10 @@ Also provides some demo components, which you can grab and customize in your own
 
 ```svelte
 <script lang="ts">
-    import { DataHandler } from '@vincjo/datatables'
+    import { TableHandler } from '@vincjo/datatables'
     import { someData } from './data'
 
-    const handler = new DataHandler(someData, { rowsPerPage: 50 })
-    const rows = handler.getRows()
+    const table = new TableHandler(someData, { rowsPerPage: 50 })
 </script>
 
 <table>
@@ -40,7 +39,7 @@ Also provides some demo components, which you can grab and customize in your own
         </tr>
     </thead>
     <tbody>
-        {#each $rows as row}
+        {#each table.rows as row}
             <tr>
                 <td>{row.first_name}</td>
                 <td>{row.last_name}</td>

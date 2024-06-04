@@ -1,0 +1,1 @@
+When table rows are updated, `applySort` is automatically triggered to play again last 3 sorts.

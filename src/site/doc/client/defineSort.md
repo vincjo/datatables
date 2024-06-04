@@ -1,1 +1,0 @@
-Set sort state without applying it.

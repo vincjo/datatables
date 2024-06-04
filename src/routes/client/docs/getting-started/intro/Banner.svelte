@@ -1,9 +1,11 @@
 <script>
     import { mode } from '$site/utils'
     import Logo from '$site/Logo.svelte'
-    let color = 'c2185b'
-    $: $mode, update()
-    
+    let color = $state('c2185b')
+    $effect(() => {
+        $mode
+        update()
+    })
     const update = () => {
         color = ($mode === 'client') ? 'c2185b' : '006990'
     }

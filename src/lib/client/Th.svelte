@@ -1,33 +1,31 @@
 <script lang="ts">
-    import type { DataHandler, Field, Row } from '$lib/client'
+    import type { TableHandler, Field, Row } from '$lib/client'
+    import type { Snippet } from 'svelte'
 
     type T = $$Generic<Row>
+    type Props = { 
+        table   : TableHandler<T>, 
+        field  ?: Field<T>, 
+        children: Snippet
+    }
+    let { table, field, children }: Props = $props()
 
-    export let handler: DataHandler<T>
-    export let orderBy: Field<T>
-    export let identifier = orderBy?.toString()
-    export let numeric = false
-    export let rowSpan: number = 1
-    export let align: 'left' | 'right' | 'center' = numeric ? 'right' : 'left'
-
-    const sort = handler.getSort()
+    const sorting = table.createSorting(field)
 </script>
 
 <th
-    on:click={() => handler.sort(orderBy, identifier)}
-    class:sortable={orderBy}
-    class:active={$sort.identifier === identifier}
-    class={$$props.class ?? ''}
-    rowspan={rowSpan}
+    onclick={() => sorting.set()}
+    class:sortable={field}
+    class:active={sorting.isActive}
 >
-    <div
-        class="flex"
-        style:justify-content={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'}
-    >
+    <div class="flex">
         <strong>
-            <slot />
+            {@render children()}
         </strong>
-        <span class:asc={$sort.direction === 'asc'} class:desc={$sort.direction === 'desc'} />
+        <span 
+            class:asc={sorting.direction === 'asc'} 
+            class:desc={sorting.direction === 'desc'}>
+        </span>
     </div>
 </th>
 
@@ -81,5 +79,10 @@
     }
     th:not(.sortable) span {
         visibility: hidden;
+    }
+    div.flex {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
     }
 </style>

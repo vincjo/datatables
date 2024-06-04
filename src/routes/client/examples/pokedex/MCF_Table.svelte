@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { type DataHandler, Datatable, Th } from '$lib/client'
+    import { type TableHandler, Datatable, Th } from '$lib/client'
     import PokemonStats from './MCF_PokemonStats.svelte'
-    export let handler: DataHandler
-    const rows = handler.getRows()
+    type Props = { table: TableHandler }
+    let { table }: Props = $props()
 
     const sumStats = (stats: [name: string, value: number][]) => {
         return stats
@@ -12,18 +12,18 @@
 </script>
 
 
-<Datatable basic {handler}>
+<Datatable basic {table}>
     <table>
-        <thead>
+        <thead class="bg-darken">
             <tr>
-                <Th {handler} orderBy="id">ID</Th>
-                <Th {handler} orderBy="name">Name</Th>
-                <Th {handler} orderBy="type">Type</Th>
-                <Th {handler} orderBy={(row) => sumStats(row.stats)}>Base stats</Th>
+                <Th {table} field="id">ID</Th>
+                <Th {table} field="name">Name</Th>
+                <Th {table} field="type">Type</Th>
+                <Th {table} field={(row) => sumStats(row.stats)}>Base stats</Th>
             </tr>
         </thead>
         <tbody>
-            {#each $rows as row}
+            {#each table.rows as row}
                 <tr>
                     <td>{row.id}</td>
                     <td>
@@ -49,16 +49,16 @@
         background: var(--bg);
     }
     img {
-        height: 64px;
-        width: 64px;
+        height: 56px;
+        width: 56px;
         object-fit: cover;
         border-radius: 50%;
         margin-right: 16px;
     }
     b {
-        color: var(--primary);
         font-weight: normal;
         line-height: 16px;
         white-space:break-spaces;
+        text-transform: capitalize;
     }
 </style>

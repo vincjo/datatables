@@ -1,14 +1,13 @@
 import * as fs from 'fs'
 
 export const load = async () => {
-    
     const response = await fetch('https://dummyjson.com/users?limit=10&skip=0')
 
     const path = './src/routes/remote/examples'
     const lib = './src/lib/remote'
     const page = 'user-api'
     return {
-        dataset: response.json(),
+        dataset: await response.json(),
         components: [
             {
                 name: '+page.server.ts',

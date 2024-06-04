@@ -1,32 +1,33 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '$lib/remote'
+    import type { TableHandler } from '$lib/remote'
 
-    type T = $$Generic<Row>
-
-    export let handler: DataHandler<T>
-    export let small = false
-    const rowCount = handler.getRowCount()
+    type Props = {
+        table: TableHandler,
+        small?: boolean
+    }
+    let { table, small = false }: Props = $props()
+    const { total, start, end } = $derived(table.rowCount)
 </script>
 
-{#if $rowCount === undefined}
-    <div/>
+{#if start === undefined}
+    <div></div>
 {:else}
-    <aside class={$$props.class ?? ''}>
+    <aside>
         {#if small}
-            {#if $rowCount.total > 0}
-                <b>{$rowCount.start}</b>-
-                <b>{$rowCount.end}</b>/
-                <b>{$rowCount.total}</b>
+            {#if total > 0}
+                <b>{start}</b>-
+                <b>{end}</b>/
+                <b>{total}</b>
             {:else}
-                {handler.i18n.noRows}
+                {table.i18n.noRows}
             {/if}
-        {:else if $rowCount.total > 0}
-            {@html handler.i18n.rowCount
-                .replace('{start}', `<b>${$rowCount.start}</b>`)
-                .replace('{end}',   `<b>${$rowCount.end}</b>`)
-                .replace('{total}', `<b>${$rowCount.total}</b>`)}
+        {:else if total > 0}
+            {@html table.i18n.rowCount
+                .replace('{start}', `<b>${start}</b>`)
+                .replace('{end}',   `<b>${end}</b>`)
+                .replace('{total}', `<b>${total}</b>`)}
         {:else}
-            {handler.i18n.noRows}
+            {table.i18n.noRows}
         {/if}
     </aside>
 {/if}
@@ -34,7 +35,8 @@
 
 <style>
     aside {
-        color: #616161;
+        margin: 8px 16px;
+        color: var(--font-grey, #757575);
         line-height: 32px;
         font-size: 14px;
     }

@@ -22,14 +22,14 @@
     <table>
         <thead>
             <tr>
-                <Th {handler} orderBy="first_name">First Name</Th>
-                <Th {handler} orderBy="last_name">Last Name</Th>
-                <Th {handler} orderBy="email">Email</Th>
+                <Th {handler} field="first_name">First Name</Th>
+                <Th {handler} field="last_name">Last Name</Th>
+                <Th {handler} field="email">Email</Th>
             </tr>
             <tr>
-                <ThFilter {handler} filterBy="first_name" />
-                <ThFilter {handler} filterBy="last_name" />
-                <ThFilter {handler} filterBy="email" />
+                <ThFilter {handler} field="first_name" />
+                <ThFilter {handler} field="last_name" />
+                <ThFilter {handler} field="email" />
             </tr>
         </thead>
         <tbody>

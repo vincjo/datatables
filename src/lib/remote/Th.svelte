@@ -1,33 +1,29 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '$lib/remote'
+    import type { TableHandler, Row } from '$lib/remote'
+    import type { Snippet } from 'svelte'
 
     type T = $$Generic<Row>
-
-    export let handler: DataHandler<T>
-    export let orderBy: keyof T
-    export let align: 'left' | 'right' | 'center' = 'left'
-
-    const sort = handler.getSort()
-    const update = () => {
-        handler.sort(orderBy)
-        handler.invalidate()
+    type Props = {
+        table: TableHandler,
+        field?: string,
+        children: Snippet
     }
+    let { table, field, children }: Props = $props()
 </script>
 
 <th
-    on:click={update}
-    class:sortable={orderBy}
-    class:active={$sort?.orderBy === orderBy}
-    class={$$props.class ?? ''}
+    onclick={() => table.sort(field)}
+    class:sortable={field}
+    class:active={table.sorting.field === field}
 >
-    <div
-        class="flex"
-        style:justify-content={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'}
-    >
+    <div class="flex">
         <strong>
-            <slot />
+            {@render children()}
         </strong>
-        <span class:asc={$sort?.direction === 'asc'} class:desc={$sort?.direction === 'desc'} />
+        <span 
+            class:asc={table.sorting.direction === 'asc'} 
+            class:desc={table.sorting.direction === 'desc'}>
+        </span>
     </div>
 </th>
 
@@ -38,7 +34,7 @@
         white-space: nowrap;
         font-size: 13px;
         user-select: none;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--grey, #e0e0e0);
     }
     th.sortable {
         cursor: pointer;
@@ -66,20 +62,25 @@
         width: 0;
     }
     th.sortable span:before {
-        border-bottom-color: #e0e0e0;
+        border-bottom-color: var(--grey, #e0e0e0);
         margin-top: 2px;
     }
     th.sortable span:after {
-        border-top-color: #e0e0e0;
+        border-top-color: var(--grey, #e0e0e0);
         margin-top: 2px;
     }
     th.active.sortable span.asc:before {
-        border-bottom-color: #9e9e9e;
+        border-bottom-color: var(--font-grey, #9e9e9e);
     }
     th.active.sortable span.desc:after {
-        border-top-color: #9e9e9e;
+        border-top-color: var(--font-grey, #9e9e9e);
     }
     th:not(.sortable) span {
         visibility: hidden;
+    }
+    div.flex {
+        display: flex;
+        align-items: center;
+        justify-content: left;
     }
 </style>

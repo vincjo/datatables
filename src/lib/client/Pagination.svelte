@@ -1,70 +1,40 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '$lib/client'
-
+    import type { TableHandler, Row } from '$lib/client'
+    import SmallPagination from './Pagination_SM.svelte'
     type T = $$Generic<Row>
+    type Props = { table: TableHandler<T>, small: boolean }
 
-    export let handler: DataHandler<T>
-    export let small = false
-
-    const currentPage = handler.getCurrentPage()
-    const pageCount = handler.getPageCount()
-    const pages = handler.getPages({ ellipsis: true })
+    let { table, small = false }: Props = $props()
 </script>
 
-<section class={$$props.class ?? ''}>
+<section>
     {#if small}
-        <button
-            type="button"
-            class="small"
-            class:disabled={$currentPage === 1}
-            on:click={() => handler.setPage(1)}
-        >
-            &#10092;&#10092;
-        </button>
-        <button
-            type="button"
-            class:disabled={$currentPage === 1}
-            on:click={() => handler.setPage('previous')}
-        >
-            &#10094;
-        </button>
-        <button
-            class:disabled={$currentPage === $pageCount}
-            on:click={() => handler.setPage('next')}
-        >
-            &#10095;
-        </button>
-        <button
-            class="small"
-            class:disabled={$currentPage === $pageCount}
-            on:click={() => handler.setPage($pageCount)}
-        >
-            &#10093;&#10093;
-        </button>
+        <SmallPagination {table}/>
     {:else}
         <button
             type="button"
-            class:disabled={$currentPage === 1}
-            on:click={() => handler.setPage('previous')}
+            class:disabled={table.currentPage === 1}
+            onclick={() => table.setPage('previous')}
         >
-            {@html handler.i18n.previous}
+            {@html table.i18n.previous}
         </button>
-        {#each $pages as page}
+        {#each table.pagesWithEllipsis as page}
             <button
                 type="button"
-                class:active={$currentPage === page}
+                class="bg-darken-active"
+                class:active={table.currentPage === page}
                 class:ellipse={page === null}
-                on:click={() => handler.setPage(page)}
+                onclick={() => table.setPage(page)}
             >
                 {page ?? '...'}
             </button>
         {/each}
         <button
             type="button"
-            class:disabled={$currentPage === $pageCount}
-            on:click={() => handler.setPage('next')}
+            class:disabled={table.currentPage === table.pageCount}
+            onclick={() => table.setPage('next')}
         >
-            {@html handler.i18n.next}
+            {@html table.i18n.next}
         </button>
     {/if}
 </section>

@@ -1,26 +1,21 @@
 <script lang="ts">
-    import { DataHandler, Datatable, type State } from '$lib/remote'
+    import { TableHandler, Datatable, type State } from '$lib/remote'
     import { reload } from './api'
-    export let data: any[]
+    let { data }: { data: any[]} = $props()
+    const table = new TableHandler(data, { rowsPerPage: 10, selectBy: 'id' })
 
-    const handler = new DataHandler(data, { rowsPerPage: 10, selectBy: 'id' })
-    const rows = handler.getRows()
-
-    handler.setRemoteControl((state: State) => reload(state))
-
-    const selected = handler.getSelected()
-    const isAllSelected = handler.isAllSelected()
+    table.setRemoteControl((state: State) => reload(state))
 </script>
 
-<Datatable {handler}>
+<Datatable {table}>
     <table>
         <thead>
             <tr>
                 <th class="selection">
                     <input
                         type="checkbox"
-                        on:click={() => handler.selectAll()}
-                        checked={$isAllSelected}
+                        onclick={() => table.selectAll()}
+                        checked={table.isAllSelected}
                     />
                 </th>
                 <th>Name</th>
@@ -29,13 +24,13 @@
             </tr>
         </thead>
         <tbody>
-            {#each $rows as row}
-                <tr class:active={$selected.includes(row.id)}>
+            {#each table.rows as row}
+                <tr class:active={table.selected.includes(row.id)}>
                     <td class="selection">
                         <input
                             type="checkbox"
-                            on:click={() => handler.select(row.id)}
-                            checked={$selected.includes(row.id)}
+                            onclick={() => table.select(row.id)}
+                            checked={table.selected.includes(row.id)}
                         />
                     </td>
                     <td>

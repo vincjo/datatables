@@ -1,19 +1,15 @@
 <script>
-    export let sort = false
-    export let totalRows = false
-    export let rowsPerPage = false
-    export let search = false
-    export let filters = false
-    export let pagination = true
+    let { ...f } = $props()
 </script>
 
 <ul class="flex">
-    <li>{search         ? '✅' : '❌'} search</li>
-    <li>{rowsPerPage    ? '✅' : '❌'} rows per page</li>
-    <li>{sort           ? '✅' : '❌'} sorting</li>
-    <li>{filters        ? '✅' : '❌'} column filters</li>
-    <li>{pagination     ? '✅' : '❌'} pagination</li>
-    <li>{totalRows      ? '✅' : '❌'} row count</li>
+    Capabilities: 
+    <li>{f.search         ? '✅' : '❌'} search</li>
+    <li>{f.rowsPerPage    ? '✅' : '❌'} rows per page</li>
+    <li>{f.sort           ? '✅' : '❌'} sorting</li>
+    <li>{f.filters        ? '✅' : '❌'} column filters</li>
+    <li>{f.pagination     ? '✅' : '❌'} pagination</li>
+    <li>{f.totalRows      ? '✅' : '❌'} row count</li>
 </ul>
 
 <style>
@@ -27,9 +23,8 @@
         padding: 2px 8px;
         margin: 2px;
         border-radius: 4px;
-        border: 1px solid #e0e0e0;
-        color: #212121;
+        color: var(--font);
         font-size: 12px;
-        background: #f5f5f5;
+        background: var(--grey-lighten);
     }
 </style>

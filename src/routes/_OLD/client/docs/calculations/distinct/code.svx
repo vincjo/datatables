@@ -1,0 +1,55 @@
+<script>
+    import Basic from './Basic.svelte'
+</script>
+
+### Basic usage
+
+````svelte
+<script lang="ts">
+    import type { Datahandler } from '@vincjo/datatables'
+    export let handler: DataHandler
+
+    const distinct = handler.createCalculation('columnName').distinct()
+</script>
+
+<ul>
+    {#each distinct as item}
+        {@const { value, count } = item}
+        <li>{value} has {count} occurrences</li>
+    {/each}
+</ul>
+````
+<Basic/>
+
+
+### Avanced usage
+
+````svelte
+<script lang="ts">
+    import type { Datahandler } from '@vincjo/datatables'
+    export let handler: DataHandler
+
+    // Merge colors from 2 columns using '/' separator
+    const calc = handler.createCalculation((row) => row.color1 + '/' + row.color2)
+
+    // split merged colors and get distinct values
+    const distinct = calc.distinct((colors) => {
+        return colors
+            .map((value: string) => value.split('/') )
+            .flat()
+    })
+</script>
+
+<ul>
+    {#each distinct as item}
+        {@const { value, count } = item}
+        <li>{value} has {count} occurrences</li>
+    {/each}
+</ul>
+````
+
+<style>
+    pre {
+        max-width: 800px;
+    }
+</style>    

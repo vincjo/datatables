@@ -1,25 +1,19 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '$lib/remote'
+    import type { TableHandler } from '$lib/remote'
 
-    type T = $$Generic<Row>
-
-    export let handler: DataHandler<T>
-    export let small = false
-    export let options = [5, 10, 20]
-
-    const rowsPerPage = handler.getRowsPerPage()
-
-    const setRowsPerPage = () => {
-        handler.setPage(1)
-        handler.invalidate()
+    type Props = {
+        table: TableHandler,
+        small?: boolean
+        options?: number[]
     }
+    let { table, small = false, options = [5, 10, 20] }: Props = $props()
 </script>
 
-<aside class={$$props.class ?? ''}>
+<aside>
     {#if !small}
-        <span>{handler.i18n.show}</span>
+        <span>{table.i18n.show}</span>
     {/if}
-    <select bind:value={$rowsPerPage} on:change={setRowsPerPage}>
+    <select bind:value={table.rowsPerPage} onchange={() => table.setPage(1)}>
         {#each options as option}
             <option value={option}>
                 {option}
@@ -27,12 +21,13 @@
         {/each}
     </select>
     {#if !small}
-        <span>{handler.i18n.entries}</span>
+        <span>{table.i18n.entries}</span>
     {/if}
 </aside>
 
 <style>
     aside {
+        margin: 8px 16px;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -41,5 +36,13 @@
     }
     select {
         margin: 0 4px;
+        background: var(--bg, #fff);
+        color: var(--font-grey, #757575);
+        border-radius: 4px;
+        border: 1px solid var(--grey, #9e9e9e);
+        padding: 2px 4px;
+    }
+    select:focus {
+        outline: 2px solid var(--grey, #e0e0e0);
     }
 </style>

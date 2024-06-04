@@ -1,46 +1,43 @@
 <script lang="ts">
-    import { DataHandler, Datatable } from '$lib'
+    import { TableHandler, Datatable } from '$lib'
     import { Checkbox } from 'gros/form'
     import Header from './Table_Header.svelte'
     import Footer from './Table_Footer.svelte'
     import Th from './Table_Th.svelte'
     import { data, poemize, glyph } from './utils'
-    const handler = new DataHandler(data, { rowsPerPage: 10, selectBy: 'id' })
-    const rows = handler.getRows()
-    const selected = handler.getSelected()
-    const isAllSelected = handler.getIsAllSelected()
+    const table = new TableHandler(data, { rowsPerPage: 10 })
 </script>
 
-<Datatable {handler} header={Header} footer={Footer}>
+<Datatable {table} header={Header} footer={Footer}>
     <table>
         <thead>
             <tr>
                 <th style:width="160px">
                     <div class="flex">
                         <Checkbox 
-                            on:click={() => handler.selectAll({ scope: 'currentPage' })}
+                            on:click={() => table.selectAll({ scope: 'currentPage' })}
                             margin={[0,12,0,0]}
                             size={16}
-                            checked={$isAllSelected}
+                            checked={table.isAllSelected}
                         />
                         Task
                     </div>
                 </th>
-                <Th {handler} name="Title" orderBy="title">Title</Th>
-                <Th {handler} name="Status" orderBy="status">Status</Th>
-                <Th {handler} name="Priority" orderBy="priority">Priority</Th>
+                <Th {table} name="Title" field="title">Title</Th>
+                <Th {table} name="Status" field="status">Status</Th>
+                <Th {table} name="Priority" field="priority">Priority</Th>
             </tr>
         </thead>
         <tbody>
-            {#each  $rows as row}
-                <tr class:active={$selected.includes(row.id)}>
+            {#each  table.rows as row}
+                <tr class:active={table.selected.includes(row)}>
                     <td>
                         <div class="flex">
                             <Checkbox 
-                                on:click={() => handler.select(row.id)}
+                                on:click={() => table.select(row)}
                                 margin={[0,12,0,0]}
                                 size={16}
-                                checked={$selected.includes(row.id)}
+                                checked={table.selected.includes(row)}
                             />
                             {row.id}
                         </div>
@@ -79,7 +76,7 @@
         background: #fafafa;
         margin-right: 8px;
     }
-    td {
+    tbody td {
         border: none;
         border-bottom: 1px solid #e0e0e0;
         padding: 10px 20px;
@@ -101,6 +98,14 @@
         overflow: hidden;
     }
     tr.active {
-        background: #f5f5f5;
+        background: var(--primary-lighten-1);
+    }
+    th {
+        background:inherit;
+        margin:0;
+        font-size:13px;
+        user-select: none;
+        border-bottom:1px solid #e0e0e0;
+        text-align: left;
     }
 </style>

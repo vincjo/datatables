@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "1.12.8",
+    "version": "2.0.0",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],
@@ -21,38 +21,32 @@
         "package": "svelte-kit sync && svelte-package",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-        "lint": "prettier --plugin-search-dir . --check . && eslint .",
         "format": "prettier --plugin-search-dir . --write .",
         "deploy": "pm2 deploy ecosystem.config.cjs production"
     },
     "devDependencies": {
-        "@iconify-json/material-symbols-light": "^1.1.0",
-        "@sveltejs/adapter-node": "^1.0.0-next.100",
-        "@sveltejs/kit": "^1.20.4",
-        "@sveltejs/package": "^2.1.0",
+        "@sveltejs/adapter-node": "^2.0.0",
+        "@sveltejs/kit": "^2.0.0",
+        "@sveltejs/package": "^2.3.1",
+        "@sveltejs/vite-plugin-svelte": "^3.0.0",
+        "@ts-ast-parser/core": "^0.8.0",
         "@types/node": "^18.15.11",
-        "@typescript-eslint/eslint-plugin": "^5.27.0",
-        "@typescript-eslint/parser": "^5.27.0",
-        "eslint": "^8.16.0",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-svelte": "^2.30.0",
-        "gros": "^0.19.0",
+        "gros": "^1.0.1",
         "mdsvex": "^0.11.0",
         "prettier": "^2.6.2",
         "prettier-plugin-svelte": "^2.10.1",
         "prism-svelte": "^0.5.0",
         "prismjs": "^1.29.0",
-        "svelte": "^4.0.0",
+        "svelte": "^5.0.0-next.148",
         "svelte-check": "^3.4.3",
         "svelte-preprocess": "^5.0.3",
         "tslib": "^2.3.1",
         "typescript": "^5.0.0",
         "typescript-parser": "^2.6.1",
-        "unplugin-icons": "^0.17.1",
-        "vite": "^4.2.2"
+        "vite": "^5.0.0"
     },
     "peerDependencies": {
-        "svelte": ">=3.54.0"
+        "svelte": ">=5.0.0"
     },
     "type": "module",
     "files": [
@@ -66,154 +60,9 @@
             "svelte": "./dist/index.js",
             "default": "./dist/index.js"
         },
-        "./client/Comparator": {
-            "types": "./dist/client/Comparator.d.ts",
-            "default": "./dist/client/Comparator.js"
-        },
-        "./client/Context": {
-            "types": "./dist/client/Context.d.ts",
-            "default": "./dist/client/Context.js"
-        },
-        "./client/DataHandler": {
-            "types": "./dist/client/DataHandler.d.ts",
-            "default": "./dist/client/DataHandler.js"
-        },
-        "./client/Datatable.svelte": {
-            "types": "./dist/client/Datatable.svelte.d.ts",
-            "svelte": "./dist/client/Datatable.svelte",
-            "default": "./dist/client/Datatable.svelte"
-        },
-        "./client/handlers/FilterHandler": {
-            "types": "./dist/client/handlers/FilterHandler.d.ts",
-            "default": "./dist/client/handlers/FilterHandler.js"
-        },
-        "./client/handlers/PageHandler": {
-            "types": "./dist/client/handlers/PageHandler.d.ts",
-            "default": "./dist/client/handlers/PageHandler.js"
-        },
-        "./client/handlers/SearchHandler": {
-            "types": "./dist/client/handlers/SearchHandler.d.ts",
-            "default": "./dist/client/handlers/SearchHandler.js"
-        },
-        "./client/handlers/SelectHandler": {
-            "types": "./dist/client/handlers/SelectHandler.d.ts",
-            "default": "./dist/client/handlers/SelectHandler.js"
-        },
-        "./client/handlers/SortHandler": {
-            "types": "./dist/client/handlers/SortHandler.d.ts",
-            "default": "./dist/client/handlers/SortHandler.js"
-        },
-        "./local": {
-            "types": "./dist/client/index.d.ts",
-            "svelte": "./dist/client/index.js",
-            "default": "./dist/client/index.js"
-        },
-        "./client/Pagination.svelte": {
-            "types": "./dist/client/Pagination.svelte.d.ts",
-            "svelte": "./dist/client/Pagination.svelte",
-            "default": "./dist/client/Pagination.svelte"
-        },
-        "./client/RowCount.svelte": {
-            "types": "./dist/client/RowCount.svelte.d.ts",
-            "svelte": "./dist/client/RowCount.svelte",
-            "default": "./dist/client/RowCount.svelte"
-        },
-        "./client/RowsPerPage.svelte": {
-            "types": "./dist/client/RowsPerPage.svelte.d.ts",
-            "svelte": "./dist/client/RowsPerPage.svelte",
-            "default": "./dist/client/RowsPerPage.svelte"
-        },
-        "./client/Search.svelte": {
-            "types": "./dist/client/Search.svelte.d.ts",
-            "svelte": "./dist/client/Search.svelte",
-            "default": "./dist/client/Search.svelte"
-        },
-        "./client/Th.svelte": {
-            "types": "./dist/client/Th.svelte.d.ts",
-            "svelte": "./dist/client/Th.svelte",
-            "default": "./dist/client/Th.svelte"
-        },
-        "./client/ThFilter.svelte": {
-            "types": "./dist/client/ThFilter.svelte.d.ts",
-            "svelte": "./dist/client/ThFilter.svelte",
-            "default": "./dist/client/ThFilter.svelte"
-        },
-        "./remote/Context": {
-            "types": "./dist/remote/Context.d.ts",
-            "default": "./dist/remote/Context.js"
-        },
-        "./remote/DataHandler": {
-            "types": "./dist/remote/DataHandler.d.ts",
-            "default": "./dist/remote/DataHandler.js"
-        },
-        "./remote/Datatable.svelte": {
-            "types": "./dist/remote/Datatable.svelte.d.ts",
-            "svelte": "./dist/remote/Datatable.svelte",
-            "default": "./dist/remote/Datatable.svelte"
-        },
-        "./remote/handlers/FilterHandler": {
-            "types": "./dist/remote/handlers/FilterHandler.d.ts",
-            "default": "./dist/remote/handlers/FilterHandler.js"
-        },
-        "./remote/handlers/PageHandler": {
-            "types": "./dist/remote/handlers/PageHandler.d.ts",
-            "default": "./dist/remote/handlers/PageHandler.js"
-        },
-        "./remote/handlers/SearchHandler": {
-            "types": "./dist/remote/handlers/SearchHandler.d.ts",
-            "default": "./dist/remote/handlers/SearchHandler.js"
-        },
-        "./remote/handlers/SelectHandler": {
-            "types": "./dist/remote/handlers/SelectHandler.d.ts",
-            "default": "./dist/remote/handlers/SelectHandler.js"
-        },
-        "./remote/handlers/SortHandler": {
-            "types": "./dist/remote/handlers/SortHandler.d.ts",
-            "default": "./dist/remote/handlers/SortHandler.js"
-        },
-        "./remote/handlers/TriggerHandler": {
-            "types": "./dist/remote/handlers/TriggerHandler.d.ts",
-            "default": "./dist/remote/handlers/TriggerHandler.js"
-        },
         "./remote": {
             "types": "./dist/remote/index.d.ts",
-            "svelte": "./dist/remote/index.js",
             "default": "./dist/remote/index.js"
-        },
-        "./remote/Pagination.svelte": {
-            "types": "./dist/remote/Pagination.svelte.d.ts",
-            "svelte": "./dist/remote/Pagination.svelte",
-            "default": "./dist/remote/Pagination.svelte"
-        },
-        "./remote/README.svelte": {
-            "types": "./dist/remote/README.svelte.d.ts",
-            "svelte": "./dist/remote/README.svelte",
-            "default": "./dist/remote/README.svelte"
-        },
-        "./remote/RowCount.svelte": {
-            "types": "./dist/remote/RowCount.svelte.d.ts",
-            "svelte": "./dist/remote/RowCount.svelte",
-            "default": "./dist/remote/RowCount.svelte"
-        },
-        "./remote/RowsPerPage.svelte": {
-            "types": "./dist/remote/RowsPerPage.svelte.d.ts",
-            "svelte": "./dist/remote/RowsPerPage.svelte",
-            "default": "./dist/remote/RowsPerPage.svelte"
-        },
-        "./remote/Search.svelte": {
-            "types": "./dist/remote/Search.svelte.d.ts",
-            "svelte": "./dist/remote/Search.svelte",
-            "default": "./dist/remote/Search.svelte"
-        },
-        "./remote/Th.svelte": {
-            "types": "./dist/remote/Th.svelte.d.ts",
-            "svelte": "./dist/remote/Th.svelte",
-            "default": "./dist/remote/Th.svelte"
-        },
-        "./remote/ThFilter.svelte": {
-            "types": "./dist/remote/ThFilter.svelte.d.ts",
-            "svelte": "./dist/remote/ThFilter.svelte",
-            "default": "./dist/remote/ThFilter.svelte"
         }
     },
     "typesVersions": {

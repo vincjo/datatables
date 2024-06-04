@@ -1,30 +1,28 @@
 <script lang="ts">
-    import { DataHandler, Datatable, type State } from '$lib/remote'
+    import { TableHandler, Datatable, Th, type State } from '$lib/remote'
     import { reload } from './api'
     import PokemonStats from './PokemonStats.svelte'
     import PokemonTypes from './PokemonTypes.svelte'
 
-    const handler = new DataHandler([], { rowsPerPage: 10 })
-    const rows = handler.getRows()
+    const table = new TableHandler([], { rowsPerPage: 10 })
 
-    handler.setRemoteControl( (state: State) => reload(state) )
-
-    handler.invalidate()
+    table.setRemoteControl( (state: State) => reload(state) )
+    table.invalidate()
 </script>
 
-<Datatable {handler} search={false}>
+<Datatable basic {table}>
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Base stats</th>
-                <th>Height / Weight</th>
+                <Th {table}>ID</Th>
+                <Th {table}>Name</Th>
+                <Th {table}>Type</Th>
+                <Th {table}>Base stats</Th>
+                <Th {table}>Height / Weight</Th>
             </tr>
         </thead>
         <tbody>
-            {#each $rows as row}
+            {#each table.rows as row}
                 <tr>
                     <td>{row.id}</td>
                     <td>
@@ -52,25 +50,6 @@
 
 
 <style>
-    thead {
-        background: #fff;
-    }
-    th {
-        text-align: left;
-        padding: 8px 16px;
-        color: #424242;
-        border-bottom: 1px solid #e0e0e0;
-    }
-    tbody td {
-        border: 1px solid #f5f5f5;
-        padding: 2px 16px;
-    }
-    tbody tr {
-        transition: all, 0.2s;
-    }
-    tbody tr:hover {
-        background: #f5f5f5;
-    }
     img {
         height: 72px;
         width: 72px;
@@ -79,7 +58,6 @@
         margin-right: 16px;
     }
     b {
-        color: var(--r-primary);
         font-weight: normal;
         line-height: 16px;
         white-space:break-spaces;

@@ -65,7 +65,7 @@
     --ternary: #a57e1a;
 
     --grey: #444444;
-    --grey-lighten: #212121;
+    --grey-lighten: #333;
     --grey-lighten-2: #181818;
     --grey-lighten-3: #151515;
     --bg: #222729;
@@ -125,4 +125,18 @@
     --secondary-lighten-3: rgba(224, 52, 121, 0.3);
     --secondary-darken: #8c3463;
 
+}
+
+[data-theme="dark"] .bg-darken {
+    background: #212121;
+}
+[data-theme="dark"] table thead {
+    background: #212121 !important;
+}
+[data-theme="dark"] .active.bg-darken-active {
+    background: var(--grey-lighten-3);
+}
+
+body {
+    background: var(--bg);
 }

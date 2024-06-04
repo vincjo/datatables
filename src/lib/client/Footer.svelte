@@ -1,12 +1,14 @@
 <script lang="ts">
-    import { type DataHandler, RowsPerPage, Pagination } from '$lib/client'
-    export let handler: DataHandler
-    export let small: boolean
+    import { type TableHandler, RowCount, Pagination } from '$lib/client'
+    type T = $$Generic<Row>
+    type Props = { table: TableHandler<T>, small: boolean }
+
+    let { table, small = false }: Props = $props()
 </script>
 
 <footer>
-    <RowsPerPage {handler} {small}/>
-    <Pagination {handler}  {small}/>
+    <RowCount {table} {small}/>
+    <Pagination {table}  {small}/>
 </footer>
 
 <style>

@@ -1,70 +1,65 @@
 <script lang="ts">
     import { poemize, glyph } from './utils'
-    import type { DataHandler } from '$lib'
+    import type { TableHandler } from '$lib'
     import { Dropdown } from 'gros/dropdown'
     import { Checkbox } from 'gros/form'
-    export let handler: DataHandler
-    export let key = 'status'
 
-    const distinct = handler.createCalculation(key).distinct()
-    const search = handler.createSearch(distinct)
-    const items = search.get()
-    const filter = handler.createAdvancedFilter(key)
-    const filtered = filter.get()
+    type Props = { table: TableHandler, key: string }
+    let { table, key }: Props = $props()
 
-    let value = ''
-
-    handler.on('clearFilters', () => {
-        value = ''
-        filter.clear()
-    })
+    const distinct = table.createCalculation(key).distinct()
+    const search = table.createSearch(distinct)
+    const filter = table.createAdvancedFilter(key)
 </script>
 
 <Dropdown position="bottom-start" preventClosing>
-    <button class="trigger flex">
+    <div class="trigger flex">
+        <svg width="14px" height="14px" viewBox="0 0 15 15" fill="none"><path d="M7.49991 0.876892C3.84222 0.876892 0.877075 3.84204 0.877075 7.49972C0.877075 11.1574 3.84222 14.1226 7.49991 14.1226C11.1576 14.1226 14.1227 11.1574 14.1227 7.49972C14.1227 3.84204 11.1576 0.876892 7.49991 0.876892ZM1.82707 7.49972C1.82707 4.36671 4.36689 1.82689 7.49991 1.82689C10.6329 1.82689 13.1727 4.36671 13.1727 7.49972C13.1727 10.6327 10.6329 13.1726 7.49991 13.1726C4.36689 13.1726 1.82707 10.6327 1.82707 7.49972ZM7.50003 4C7.77617 4 8.00003 4.22386 8.00003 4.5V7H10.5C10.7762 7 11 7.22386 11 7.5C11 7.77614 10.7762 8 10.5 8H8.00003V10.5C8.00003 10.7761 7.77617 11 7.50003 11C7.22389 11 7.00003 10.7761 7.00003 10.5V8H4.50003C4.22389 8 4.00003 7.77614 4.00003 7.5C4.00003 7.22386 4.22389 7 4.50003 7H7.00003V4.5C7.00003 4.22386 7.22389 4 7.50003 4Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
         {poemize(key)}
-        {#if $filtered.length > 0 && $filtered.length < 3}
+        {#if filter.active.length > 0 && filter.active.length < 3}
             <aside class="flex">
-                {#each $filtered as item}
+                {#each filter.active as item}
                     <span>{poemize(item)}</span>
                 {/each}
             </aside>
-        {:else if $filtered.length >= 3}
+        {:else if filter.active.length >= 3}
             <aside class="flex">
-                <span>{$filtered.length} selected</span>
+                <span>{filter.active.length} selected</span>
             </aside>
         {/if}
-    </button>
-    <article slot="content" class="z-depth-1">
+    </div>
+    {#snippet content()}
+    <article class="z-depth-1">
         <div class="flex search">
             {@html glyph.search}
-            <input type="text" bind:value on:input={() => search.set(value)} placeholder="{poemize(key)}">
+            <input type="text" bind:value={search.value} placeholder="{poemize(key)}">
         </div>
-        {#each $items as item}
+        {#each distinct as item}
             {@const { value, count } = item}
             <button 
                 class="btn select close-dropdown" 
-                on:click={() => filter.set(value)}
-                class:active={$filtered.includes(value)}
+                onclick={() => filter.set(value)}
+                class:active={filter.active.includes(value)}
             >
                 <div class="flex">
-                    <Checkbox checked={$filtered.includes(value)} margin={[0,8,0,0]} size={16}/>
+                    <Checkbox checked={filter.active.includes(value)} margin={[0,8,0,0]} size={16}/>
                     {@html glyph[value]} <span>{poemize(value)}</span>
                 </div>
                {count}
             </button>
         {/each}
-        {#if $filtered.length > 0}
+        {#if filter.active.length > 0}
             <div class="divider"></div>
-            <button class="clear close-dropdown" on:click={() => filter.clear()}>
+            <button class="clear close-dropdown" onclick={() => filter.clear()}>
                 Clear filters
             </button>
         {/if}
     </article>
+    {/snippet}
 </Dropdown>
 
 <style>
-    button.trigger {
+    div.trigger {
         border: 1px dashed var(--grey);
         height: 32px;
         padding: 0 12px;
@@ -83,12 +78,14 @@
     }
     article span {
         margin-left: 4px;
+        color: var(--font);
     }
     aside {
         height: 20px;
         margin-left: 8px;
         border-left: 1px solid var(--grey);
         padding-left: 4px; 
+        color: var(--font);
     }
     aside span {
         background: var(--grey-lighten);
@@ -98,6 +95,7 @@
         height: 20px;
         font-size: 11px;
         line-height: 20px;
+        color: var(--font);
     }
     button:not(.trigger) {
         height: 28px;
@@ -131,5 +129,8 @@
     button.clear {
         justify-content: center;
         text-align: center;
+    }
+    svg {
+        margin-right: 8px;
     }
 </style>

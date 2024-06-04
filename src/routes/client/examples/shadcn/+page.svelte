@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Table from './Table.svelte'
 </script>
 
@@ -9,7 +9,7 @@
             <h1>Welcome back!</h1>
             <p>Here's a list of your tasks for this month!</p>
         </div>
-        <img src="/external/avatar-shadcn.png" alt="avatar"/>
+        <img src="/datatables/external/avatar-shadcn.png" alt="avatar"/>
     </aside>
 
     <Table/>

@@ -1,42 +1,42 @@
 <script lang="ts">
-    import type { ComponentType } from 'svelte'
-    import { type DataHandler, type Row, Header, Footer  } from '$lib/client'
+    import type { Component, Snippet } from 'svelte'
+    import { type TableHandler, type Row, Header, Footer  } from '$lib/client'
 
     type T = $$Generic<Row>
+    type Props = { table: TableHandler<T>, basic?: boolean, header?: Component, footer?: Component, children: Snippet }
+    let {
+        table,
+        basic = false,
+        header = basic ? Header: null,
+        footer = basic ? Footer: null,
+        children
+    }: Props = $props()
 
-    export let handler: DataHandler<T>
+    let element: HTMLElement = $state(undefined)
+    let clientWidth = $state(1000)
+    let small = $derived(clientWidth < 600)
 
-    export let basic = false
-    export let header: ComponentType = basic ? Header : null
-    export let footer: ComponentType = basic ? Footer : null
-
-    let element: HTMLElement
-    let clientWidth = 1000
-    $: small = clientWidth < 600
-
-    handler.on('change', () => {
+    table.on('change', () => {
         if (element) element.scrollTop = 0
     })
 </script>
 
-<section bind:clientWidth class={$$props.class ?? ''}>
+<section bind:clientWidth>
 
     <aside>
         {#if header}
-            <svelte:component this={header} {handler} {small} {element}/>
+            <svelte:component this={header} {table} {small} {element}/>
         {/if}
-        <slot name="header"/>
     </aside>
 
     <article bind:this={element} class="thin-scrollbar">
-        <slot />
+        {@render children()}
     </article>
 
     <aside>
         {#if footer}
-            <svelte:component this={footer} {handler} {small} {element}/>
+            <svelte:component this={footer} {table} {small} {element}/>
         {/if}
-        <slot name="footer"/>
     </aside>
 
 </section>
@@ -69,7 +69,10 @@
     section :global(tbody td) {
         padding: 4px 20px;
         border-right: 1px solid var(--grey-lighten, #eee);
-        border-bottom: 1px solid var(--grey-lighten, #eee)
+        border-bottom: 1px solid var(--grey-lighten, #eee);
+    }
+    section :global(tbody td:first-child) {
+        border-left: 1px solid var(--grey-lighten, #eee);
     }
     section :global(tbody td.numeric) {
         text-align: right;

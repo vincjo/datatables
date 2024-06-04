@@ -1,32 +1,37 @@
 <script lang="ts">
     import { glyph } from './utils'
     import { Dropdown } from 'gros/dropdown'
-    import type { DataHandler } from '$lib'
-    export let handler: DataHandler
-    const rowsPerPage = handler.getRowsPerPage()
+    import type { TableHandler } from '$lib'
+    type Props = { table: TableHandler }
+    let { table }: Props = $props()
     const options = [10, 20, 30, 40, 50]
 </script>
 
 <article class="flex">
     <strong>Rows per page</strong>
     <Dropdown position="top-end">
-        <button class="btn trigger">{$rowsPerPage} {@html glyph.dropdown}</button>
-        <aside slot="content" class="z-depth-1">
+        <aside class="btn trigger">{table.rowsPerPage} {@html glyph.dropdown}</aside>
+        {#snippet content()}
+        <aside class="z-depth-1">
             {#each options as option}
-                <button class="btn" on:click={() => handler.setRowsPerPage(option)}>
+                <button class="btn" onclick={() => table.setRowsPerPage(option)}>
                     {option}
-                    {#if $rowsPerPage === option}
+                    {#if table.rowsPerPage === option}
                         <i class="micon">check</i>
                     {/if}
                 </button>
             {/each}
         </aside>
+        {/snippet}
     </Dropdown>
 </article>
 
 
 <style>
-    button.trigger {
+    .btn {
+        letter-spacing: 0;
+    }
+    aside.trigger {
         height: 32px;
         padding: 0 8px;
         border: 1px solid #e0e0e0;

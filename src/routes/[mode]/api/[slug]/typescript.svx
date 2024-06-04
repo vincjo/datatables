@@ -1,0 +1,7 @@
+<script>
+    export let code
+</script>
+
+```typescript
+{code}
+```

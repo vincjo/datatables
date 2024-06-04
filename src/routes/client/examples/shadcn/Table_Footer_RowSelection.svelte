@@ -1,15 +1,16 @@
 <script lang="ts">
-    import type { DataHandler } from '$lib'
-    export let handler: DataHandler
-    const rowCount = handler.getRowCount()
+    import type { TableHandler } from '$lib'
+    type Props = { table: TableHandler }
+    let { table }: Props = $props()
+    const { selected, total } = $derived(table.rowCount)
 </script>
 
 <div class="flex">
     <span>
-        {$rowCount.selected} of {$rowCount.total} row(s) selected.
+        {selected} of {total} row(s) selected.
     </span>
-    {#if $rowCount.selected > 0}
-        <button class="flex" on:click={() => handler.clearSelection()}>
+    {#if selected > 0}
+        <button class="flex" onclick={() => table.clearSelection()}>
             Reset
             <i class="micon">clear</i>
         </button>

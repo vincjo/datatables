@@ -1,0 +1,25 @@
+<script>
+    import Basic from './Basic.svelte'
+</script>
+
+# Calculate distinct values and their counts
+
+
+<Basic/>
+
+
+````svelte
+<script lang="ts">
+    import type { Datahandler } from '@vincjo/datatables'
+    export let handler: DataHandler
+
+    const distinct = handler.createCalculation('make').distinct()
+</script>
+
+<ul>
+    {#each distinct as item}
+        {@const { value, count } = item}
+        <li>{value} has {count} occurrences</li>
+    {/each}
+</ul>
+````

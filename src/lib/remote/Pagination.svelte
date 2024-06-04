@@ -1,34 +1,26 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '$lib/remote'
+     import type { TableHandler } from '$lib/remote'
 
-    type T = $$Generic<Row>
-
-    export let handler: DataHandler<T>
-    export let small = false
-
-    const currentPage = handler.getCurrentPage()
-    const pageCount = handler.getPageCount()
-    const pages = handler.getPages({ ellipsis: true })
-
-    const setPage = (value: 'previous' | 'next' | number) => {
-        handler.setPage(value)
-        handler.invalidate()
+    type Props = {
+        table: TableHandler,
+        small?: boolean
     }
+    let { table, small = false }: Props = $props()
 </script>
 
-<section class={$$props.class ?? ''}>
-    {#if $pages === undefined}
+<section>
+    {#if table.pages === undefined}
         <button
             type="button" class="small"
-            class:disabled={$currentPage === 1}
-            on:click={() => setPage('previous')}
+            class:disabled={table.currentPage === 1}
+            onclick={() => table.setPage('previous')}
         >
             &#10094;
         </button>
-        <button class="page">page <b>{$currentPage}</b></button>
+        <button class="page">page <b>{table.currentPage}</b></button>
         <button
             type="button" class="small"
-            on:click={() => setPage('next')}
+            onclick={() => table.setPage('next')}
         >
             &#10095;
         </button>
@@ -37,55 +29,56 @@
             <button
                 type="button"
                 class="small"
-                class:disabled={$currentPage === 1}
-                on:click={() => setPage(1)}
+                class:disabled={table.currentPage === 1}
+                onclick={() => table.setPage(1)}
             >
                 &#10092;&#10092;
             </button>
             <button
                 type="button"
-                class:disabled={$currentPage === 1}
-                on:click={() => setPage('previous')}
+                class:disabled={table.currentPage === 1}
+                onclick={() => table.setPage('previous')}
             >
                 &#10094;
             </button>
             <button
-                class:disabled={$currentPage === $pageCount}
-                on:click={() => setPage('next')}
+                class:disabled={table.currentPage === table.pageCount}
+                onclick={() => table.setPage('next')}
             >
                 &#10095;
             </button>
             <button
                 class="small"
-                class:disabled={$currentPage === $pageCount}
-                on:click={() => setPage($pageCount)}
+                class:disabled={table.currentPage === table.pageCount}
+                onclick={() => table.setPage(table.pageCount)}
             >
                 &#10093;&#10093;
             </button>
         {:else}
             <button
                 type="button"
-                class:disabled={$currentPage === 1}
-                on:click={() => setPage('previous')}
+                class:disabled={table.currentPage === 1}
+                onclick={() => table.setPage('previous')}
             >
-                {@html handler.i18n.previous}
+                {@html table.i18n.previous}
             </button>
-            {#each $pages as page}
+            {#each table.pagesWithEllipsis as page}
                 <button
                     type="button"
-                    class:active={$currentPage === page}
+                    class="bg-darken-active"
+                    class:active={table.currentPage === page}
                     class:ellipse={page === null}
-                    on:click={() => setPage(page)}
+                    onclick={() => table.setPage(page)}
                 >
                     {page ?? '...'}
                 </button>
             {/each}
             <button
                 type="button"
-                class:disabled={$currentPage === $pageCount}
-                on:click={() => setPage('next')}
+                class:disabled={table.currentPage === table.pageCount}
+                onclick={() => table.setPage('next')}
             >
-                {@html handler.i18n.next}
+                {@html table.i18n.next}
             </button>
         {/if}
     {/if}
@@ -94,19 +87,20 @@
 <style>
     section {
         display: flex;
+        margin: 8px 16px;
     }
     button {
         background: inherit;
         height: 32px;
         width: 32px;
-        color: #616161;
+        color: var(--font-grey, #9e9e9e);
         cursor: pointer;
         font-size: 13px;
         margin: 0;
         padding: 0;
         transition: all, 0.2s;
         line-height: 32px;
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--grey, #e0e0e0);
         border-right: none;
         border-radius: 0;
         outline: none;
@@ -115,7 +109,7 @@
         border-radius: 4px 0 0 4px;
     }
     button:last-child {
-        border-right: 1px solid #e0e0e0;
+        border-right: 1px solid var(--grey, #e0e0e0);
         border-radius: 0 4px 4px 0;
     }
 
@@ -125,34 +119,23 @@
     }
 
     button:not(.active):hover {
-        background: #eee;
-    }
-    button.disabled:hover {
-        background: inherit;
-        cursor: default;
-    }
-    button.page {
-        width: 72px;
-        background: #fafafa;
-    }
-    button.page:hover {
-        background: #fafafa;
-        cursor: default;
+        background: var(--grey-lighten, #eee);
     }
     button.ellipse:hover {
         background: inherit;
         cursor: default;
     }
     button.active {
-        background: #eee;
+        background: var(--grey-lighten, #eee);
         font-weight: bold;
+        color: var(--font, #424242);
         cursor: default;
-    }
-    button.disabled {
-        color: #bdbdbd;
     }
     button.disabled:hover {
         background: inherit;
         cursor: default;
+    }
+    button.page {
+        width: 80px;
     }
 </style>

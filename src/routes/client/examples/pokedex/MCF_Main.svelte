@@ -1,17 +1,16 @@
 <script lang="ts">
-    import { DataHandler } from '$lib/client'
+    import { TableHandler } from '$lib/client'
     import { pokedex } from '$site/data/pokedex'
     import Table from './MCF_Table.svelte'
     import Filter from './MCF_TableFilter.svelte'
-    const handler = new DataHandler(pokedex, { rowsPerPage: 10 })
- 
+    const table = new TableHandler(pokedex, { rowsPerPage: 10 })
 </script>
 
 
 <section class="flex">
-    <Filter {handler}/>
+    <Filter {table}/>
     <aside>
-        <Table {handler}/>
+        <Table {table}/>
     </aside>
 </section>
 
@@ -20,6 +19,7 @@
     section {
         position: relative;
         align-items: flex-start;
+        border-radius: 8px;
     }
     aside {
         position: absolute;

@@ -1,35 +1,42 @@
 <script lang="ts">
-    import { DataHandler, Datatable, Th, ThFilter } from '$lib/client'
+    import { TableHandler, Datatable, Th, ThFilter } from '$lib/client'
     import myData from '$site/data/data'
 
-    const handler = new DataHandler(myData, { rowsPerPage: 10 })
-    const rows = handler.getRows()
+    const table = new TableHandler(myData, { rowsPerPage: 10 })
 
 </script>
 
-<Datatable basic {handler}>
-    <table>
-        <thead>
-            <tr>
-                <Th {handler} orderBy="first_name">First Name</Th>
-                <Th {handler} orderBy="last_name">Last Name</Th>
-                <Th {handler} orderBy="email">Email</Th>
-            </tr>
-            <tr>
-                <ThFilter {handler} filterBy="first_name"/>
-                <ThFilter {handler} filterBy="last_name" />
-                <ThFilter {handler} filterBy="email"/>
-            </tr>
-        </thead>
-        <tbody>
-            {#each $rows as row}
+<section class="bg-darken">
+    <Datatable basic {table}>
+        <table>
+            <thead>
                 <tr>
-                    <td>{row.first_name}</td>
-                    <td>{row.last_name}</td>
-                    <td>{row.email}</td>
+                    <Th {table} field="first_name">First Name</Th>
+                    <Th {table} field="last_name">Last Name</Th>
+                    <Th {table} field="email">Email</Th>
                 </tr>
-            {/each}
-        </tbody>
-    </table>
-</Datatable>
+                <tr>
+                    <ThFilter {table} field="first_name"/>
+                    <ThFilter {table} field="last_name" />
+                    <ThFilter {table} field="email"/>
+                </tr>
+            </thead>
+            <tbody>
+                {#each table.rows as row}
+                    <tr>
+                        <td>{row.first_name}</td>
+                        <td>{row.last_name}</td>
+                        <td>{row.email}</td>
+                    </tr>
+                {/each}
+            </tbody>
+        </table>
+    </Datatable>
+</section>
 
+<style>
+    section {
+        border: 1px solid var(--grey);
+        border-radius: 8px;
+    }
+</style>

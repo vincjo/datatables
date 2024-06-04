@@ -35,9 +35,9 @@ export const myLoadFunction = async (state: State) => {
 const getParams = ({ offset, rowsPerPage, search, sort, filters }: State) => {
     let params = `offset=${offset}&limit=${rowsPerPage}`
     if (search) params += `&q=${search}`
-    if (sort)   params += `&sort=${sort.orderBy}&order=${sort.direction}`
+    if (sort)   params += `&sort=${sort.field}&order=${sort.direction}`
     if (filters) {
-        params += filters.map(({ filterBy, value }) => `&${filterBy}=${value}`).join()
+        params += filters.map(({ field, value }) => `&${field}=${value}`).join()
     }
     return params
 }

@@ -8,7 +8,7 @@ export const load = async () => {
     const lib = './src/lib/remote'
     const page = 'todo-api'
     return {
-        dataset: response.json(),
+        dataset: await response.json(),
         components: [
             {
                 name: '+page.server.ts',

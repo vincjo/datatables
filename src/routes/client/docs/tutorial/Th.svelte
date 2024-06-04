@@ -1,13 +1,13 @@
 <script lang="ts">
     import type { DataHandler } from '$lib/local'
     export let handler: DataHandler
-    export let orderBy = null
+    export let field = null
 
-    const identifier = orderBy?.toString()
+    const identifier = field?.toString()
     const sorted = handler.getSort()
 </script>
 
-<th on:click={() => handler.sort(orderBy)} class:active={$sorted.identifier === identifier}>
+<th on:click={() => handler.sort(field)} class:active={$sorted.identifier === identifier}>
     <div class="flex">
         <strong>
             <slot />

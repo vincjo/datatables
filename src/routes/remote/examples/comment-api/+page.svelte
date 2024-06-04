@@ -2,7 +2,7 @@
     import Demo from '$site/components/Demo.svelte'
     import Main from './Main.svelte'
     import Features from '../Features.svelte'
-    export let data
+    let { data } = $props()
 </script>
 
 <h1>

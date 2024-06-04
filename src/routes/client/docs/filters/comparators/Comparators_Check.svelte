@@ -1,20 +1,24 @@
 <script>
-    import { DataHandler, check } from '$lib/client'
+    import { TableHandler, check } from '$lib/client'
     import { Range, Checkbox } from 'gros/form'
     import { data } from './data'
-    export let comparator
 
-    const handler = new DataHandler(data[comparator.type ?? 'string'])
-    const rows = handler.getRows()
-    let value = ''
-    let checked = false
+    let { comparator, value = '', checked = false } = $props()
 
-    $: comparator, clear()
-    $: displayedValue = comparator.bounds ? `[${value[0]}, ${value[1]}]` : ''
-    $: value, handler.filter(value, 'value', check[comparator.name])
+    const table = new TableHandler(data[comparator.type ?? 'string'])
+    const filter = table.createFilter('value')
+
+    $effect(() => { comparator; clear() })
+    $effect(() => {
+        displayedValue = comparator.bounds ? `[${value[0]}, ${value[1]}]` : ''
+    })
+    $effect(() => {
+        value
+        filter.set(value, 'value', check[comparator.name])
+    })
     const clear = () => {
-        handler.clearFilters()
-        handler.setRows(data[comparator.type ?? 'string'])
+        table.clearFilters()
+        table.setRows(data[comparator.type ?? 'string'])
         if (comparator.bounds) {
             value = comparator.bounds
         } else {
@@ -38,7 +42,7 @@
                 bind:checked
                 size={20}
                 margin={[0, 8, 0, 0]}
-                on:click={() => (checked ? (value = 'x') : (value = ''))}
+                onclick={() => (checked ? (value = 'x') : (value = ''))}
             >
                 {comparator.name}
             </Checkbox>
@@ -47,7 +51,7 @@
         <input type="text" spellcheck="false" bind:value />
     {/if}
     <ul class="thin-scrollbar">
-        {#each $rows as row}
+        {#each table.rows as row}
             <li>{@html row.value ?? '<i>' + row.value + '</i>'}</li>
         {/each}
     </ul>

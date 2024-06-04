@@ -1,0 +1,1 @@
+{"name":"search","text":"type $state<string>","type":"$state<string>","ast":{"name":"search","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":15,"default":"$state<string>('')","inherited":true}}

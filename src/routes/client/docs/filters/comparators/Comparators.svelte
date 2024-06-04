@@ -1,6 +1,6 @@
 <script lang="ts">
     import Check from './Comparators_Check.svelte'
-    let comparators = [
+    const comparators = [
         { name: 'isLike', isDefault: true },
         { name: 'isNotLike' },
         { name: 'startsWith' },
@@ -18,7 +18,7 @@
         { name: 'isNull', type: 'boolean' },
         { name: 'isNotNull', type: 'boolean' }
     ]
-    let current = comparators[0]
+    let current = $state(comparators[0])
 </script>
 
 <section class="flex">
@@ -27,7 +27,7 @@
             <li>
                 <button
                     class:active={current === comparator}
-                    on:click={() => (current = comparator)}
+                    onclick={() => (current = comparator)}
                 >
                     {comparator.name}
                     {#if comparator.isDefault}

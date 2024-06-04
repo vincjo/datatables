@@ -1,29 +1,26 @@
 <script lang="ts">
-    import type { DataHandler } from '$lib'
+    import type { TableHandler } from '$lib'
     import Filter from './Table_Header_Filter.svelte'
     import ColumnVisibility from './Table_Header_ColumnVisibility.svelte'
-    export let handler: DataHandler
-    export let element: HTMLElement
-    const filters = handler.getFilters()
-    let value = ''
-
-    handler.on('clearFilters', () => value = '')
+    type Props = { table: TableHandler, element: HTMLElement }
+    let { table, element }: Props = $props()
+    const filter = table.createFilter('title')
 </script>
 
 
 <header class="flex">
     <aside class="flex">
-        <input type="text" bind:value on:input={() => handler.filter(value, 'title')} placeholder="Filter tasks...">
-        <Filter {handler} key="status"/>
-        <Filter {handler} key="priority"/>
-        {#if $filters.length > 0}
-            <button class="flex" on:click={() => handler.clearFilters()}>
+        <input type="text" bind:value={filter.value} oninput={() => filter.set()} placeholder="Filter tasks...">
+        <Filter {table} key="status"/>
+        <Filter {table} key="priority"/>
+        {#if table.filters.length > 0}
+            <button class="flex" onclick={() => table.clearFilters()}>
                 Reset
                 <i class="micon">clear</i>
             </button>
         {/if}
     </aside>
-    <ColumnVisibility {handler} {element}/>
+    <ColumnVisibility {table} {element}/>
 </header>
 
 
@@ -33,6 +30,8 @@
     }
     input {
         height: 32px;
+        color: var(--font);
+        border: 1px solid var(--grey);
     }
     button {
         padding: 0 8px;

@@ -7,9 +7,9 @@
 Showcase components can be translated into another language at the `DataHandler` instantiation level or using the `translate()` method.
 
 ```ts
-import { DataHandler } from '@vincjo/datatables'
+import { TableHandler } from '@vincjo/datatables'
 
-const handler = new DataHanlder(data, {
+const table = new TableHandler(data, {
     rowsPerPage: 10,
     i18n: {
         search: 'Rechercher...',
@@ -24,7 +24,7 @@ const handler = new DataHanlder(data, {
 })
 
 // Using the translate() method: 
-handler.translate({
+table.translate({
     search: 'Rechercher...',
     show: 'Afficher',
     ...
@@ -34,14 +34,6 @@ handler.translate({
 
 
 ## Result
-<div>
-    <Main/>
-</div>
 
+<Main/>
 
-<style>
-    div {
-        border: 1px solid var(--grey);
-        border-radius: 8px;
-    }
-</style>

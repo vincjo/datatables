@@ -12,7 +12,7 @@
 </p>
 <p>We create a dedicated component <code>Th.svelte</code> to keep the logic well separated.</p>
 <p>
-    We will need to specify which object key will be sorted by passing the <code>orderBy</code> property
+    We will need to specify which object key will be sorted by passing the <code>field</code> property
     to the component.
 </p>
 <Tutorial components={data.components} dataset={data.dataset} scrollY={false}>

@@ -21,7 +21,7 @@
     </ul>
     {#if current === 'result'}
         <article
-            class="table"
+            class="table bg-darken"
             in:fade={{ duration: 200 }}
             style="max-width:{width};"
             class:scroll-y={scrollY}
@@ -76,6 +76,7 @@
     article.table {
         border: 1px solid var(--grey);
         max-width: 800px;
+        padding-bottom: 8px;
     }
     article.table.scroll-y {
         height: 480px;

@@ -1,29 +1,28 @@
 <script lang="ts">
-    import { DataHandler, Datatable, type State } from '$lib/remote'
+    import { TableHandler, Datatable, Th, type State } from '$lib/remote'
     import { reload } from './api'
     export let data: { users: any[], total: number }
 
-    const handler = new DataHandler(data.users, { rowsPerPage: 10, totalRows: data.total })
-    const rows = handler.getRows()
+    const table = new TableHandler(data.users, { rowsPerPage: 10, totalRows: data.total })
 
-    handler.setRemoteControl( (state: State) => reload(state) )
+    table.setRemoteControl( (state: State) => reload(state) )
 </script>
 
-<Datatable {handler}>
+<Datatable basic {table}>
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Avatar</th>
-                <th>Fristname</th>
-                <th>Lastname</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Height / Weight</th>
+                <Th {table}>ID</Th>
+                <Th {table}>Avatar</Th>
+                <Th {table}>Fristname</Th>
+                <Th {table}>Lastname</Th>
+                <Th {table}>Age</Th>
+                <Th {table}>Gender</Th>
+                <Th {table}>Height / Weight</Th>
             </tr>
         </thead>
         <tbody>
-            {#each $rows as row}
+            {#each table.rows as row}
                 <tr>
                     <td>{row.id}</td>
                     <td>
@@ -34,7 +33,7 @@
                     <td>{row.age}</td>
                     <td>{row.gender}</td>
                     <td>
-                        {(row.height / 100)}m / {row.weight}kg
+                        {String(row.height / 100).substring(0, 4)}m / {String(row.weight).substring(0, 4)}kg
                     </td>
                 </tr>
             {/each}
@@ -43,25 +42,6 @@
 </Datatable>
 
 <style>
-    thead {
-        background: #fff;
-    }
-    th {
-        text-align: left;
-        padding: 8px 16px;
-        color: #424242;
-        border-bottom: 1px solid #e0e0e0;
-    }
-    tbody td {
-        border: 1px solid #f5f5f5;
-        padding: 2px 16px;
-    }
-    tbody tr {
-        transition: all, 0.2s;
-    }
-    tbody tr:hover {
-        background: #f5f5f5;
-    }
     img {
         height: 56px;
         width: 56px;

@@ -13,7 +13,7 @@
     input.
 </p>
 <p>
-    We will need to specify which object key will be filtered by passing the <code>filterBy</code> property
+    We will need to specify which object key will be filtered by passing the <code>field</code> property
     to the component.
 </p>
 

@@ -1,12 +1,14 @@
 <script lang="ts">
-    import { type DataHandler, Search, RowsPerPage } from '$lib/client'
-    export let handler: DataHandler
-    export let small: boolean
+    import { type TableHandler, Search, RowsPerPage } from '$lib/client'
+    type T = $$Generic<Row>
+    type Props = { table: TableHandler<T>, small: boolean }
+
+    let { table, small = false }: Props = $props()
 </script>
 
 <header>
-    <Search {handler} {small}/>
-    <RowsPerPage {handler}  {small}/>
+    <Search {table}/>
+    <RowsPerPage {table} {small}/>
 </header>
 
 <style>

@@ -1,17 +1,18 @@
 <script lang="ts">
-    import type { DataHandler } from '$lib'
+    import type { TableHandler } from '$lib'
     import RowsPerPage from './Table_Footer_RowsPerPage.svelte'
     import Pagination from './Table_Footer_Pagination.svelte'
     import RowSelection from './Table_Footer_RowSelection.svelte'
-    export let handler: DataHandler
+    type Props = { table: TableHandler }
+    let { table }: Props = $props()
 </script>
 
 <footer class="flex">
-    <RowSelection {handler}/>
+    <RowSelection {table}/>
 
     <div class="flex">
-        <RowsPerPage {handler}/>
-        <Pagination {handler}/>
+        <RowsPerPage {table}/>
+        <Pagination {table}/>
     </div>
 </footer>
 

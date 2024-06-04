@@ -1,5 +1,5 @@
 // Reexport your entry components here
-import DataHandler  from './client/DataHandler'
+import TableHandler from './client/TableHandler.svelte'
 import Datatable    from './client/Datatable.svelte'
 import Header       from './client/Header.svelte'
 import Footer       from './client/Footer.svelte'
@@ -12,7 +12,7 @@ import Search       from './client/Search.svelte'
 import { check }    from './client/Comparator'
 import type { Internationalization, Row, Field, Comparator, Filter, Sort, Selectable, Order, FilterBy, OrderBy  } from './client'
 
-export { DataHandler, check, Datatable, Header, Footer, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search }
+export { TableHandler, check, Datatable, Header, Footer, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search }
 
 export type  {
     Internationalization,

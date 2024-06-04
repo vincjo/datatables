@@ -63,7 +63,8 @@
 </nav>
 
 {#if show}
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <!-- svelte-ignore element_invalid_self_closing_tag -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div on:click={() => show = false} on:keypress in:fade={{ duration: 200 }}/>
 {/if}
 

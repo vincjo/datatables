@@ -1,43 +1,40 @@
 <script lang="ts">
-    import type { DataHandler, Field, Row } from '$lib/client'
+    import type { TableHandler, Field, Row } from '$lib/client'
+    import type { Snippet } from 'svelte'
     import { Dropdown } from 'gros/dropdown'
     import { glyph } from './utils'
 
-    export let handler: DataHandler
-    export let orderBy: Field<Row>
-    export let identifier = orderBy?.toString()
-    export let numeric = false
-    export let rowSpan: number = 1
-    export let align: 'left' | 'right' | 'center' = numeric ? 'right' : 'left'
-    export let name
+    type Props = { table: TableHandler, field: Field<Row>, name: string, children: Snippet }
+    let { table, field, name, children }: Props = $props()
 
-    const sort = handler.getSort()
-    const view = handler.getView()
+    const identifier = field?.toString()
+    const view = table.getView()
 </script>
 
 <th
-    class:sortable={orderBy}
-    class:active={$sort.identifier === identifier}
-    rowspan={rowSpan}
+    class:sortable={field}
+    class:active={table.sorting.identifier === identifier}
 >
     <Dropdown position="bottom-start">
         <button
             class="flex trigger"
-            style:justify-content={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'}
+            style:justify-content="left"
         >
-            <strong><slot /></strong>
-            {#if $sort.identifier !== identifier}
+            <strong>{@render children()}</strong>
+            {#if table.sorting.identifier !== identifier}
                 <em>{@html glyph.dropdown}</em>
             {:else}
-                <span>{@html glyph[$sort.direction]}</span>
+                <span>{@html glyph[table.sorting.direction]}</span>
             {/if}
         </button>
-        <aside slot="content" class="z-depth-1">
-            <button class="btn" on:click={() => handler.sortAsc(orderBy)}>{@html glyph.asc} Asc</button>
-            <button class="btn" on:click={() => handler.sortDesc(orderBy)}>{@html glyph.desc} Desc</button>
+        {#snippet content()}
+        <aside class="z-depth-1">
+            <button class="btn" onclick={() => table.sortAsc(field)}>{@html glyph.asc} Asc</button>
+            <button class="btn" onclick={() => table.sortDesc(field)}>{@html glyph.desc} Desc</button>
             <div class="divider"></div>
-            <button class="btn" on:click={() => view.toggle(name)}>{@html glyph.hide} Hide</button>
+            <button class="btn" onclick={() => view.toggle(name)}>{@html glyph.hide} Hide</button>
         </aside>
+        {/snippet}
     </Dropdown>
 
 </th>

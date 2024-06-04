@@ -1,14 +1,14 @@
 <script lang="ts">
-    import type { DataHandler } from '$lib/client'
-    export let handler: DataHandler
+    import { check, type TableHandler } from '$lib/client'
+    type Props = { table: TableHandler }
+    let { table }: Props = $props()
 
-    const types = handler.createCalculation('type').distinct((values) => {
+    const types = table.createCalculation('type').distinct((values) => {
         return values
             .map((value: string) => value.split(' / ') )
             .flat()
     })
-    const filter = handler.createAdvancedFilter('type')
-    const selected = filter.get()
+    const filter = table.createAdvancedFilter('type', check.isLike)
 </script>
 
 
@@ -17,17 +17,17 @@
     <h3 class="flex">
         <i class="micon">filter_list</i>
         by Types
-        {#if $selected.length > 0}
-            <button class="clear btn" on:click={() => filter.clear()}>
+        {#if filter.active.length > 0}
+            <button class="clear btn" onclick={() => filter.clear()}>
                 Clear
             </button>
         {/if}
     </h3>
     {#each types as type}
         {@const { value, count } = type}
-        <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
+        <button onclick={() => filter.set(value)} class="btn select" class:active={filter.active.includes(value)}>
             <i class="micon">
-                {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
+                {filter.active.includes(value) ? 'check_box' : 'check_box_outline_blank'}
             </i>
             <span>{value}</span>
             <code>{count}</code>

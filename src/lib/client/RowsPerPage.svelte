@@ -1,21 +1,19 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '$lib/client'
+    import type { TableHandler, Row } from '$lib/client'
 
     type T = $$Generic<Row>
+    type Props = { table: TableHandler<T>, small: boolean }
 
-    export let handler: DataHandler<T>
-    export let small = false
-
-    const rowsPerPage = handler.getRowsPerPage()
+    let { table, small = false }: Props = $props()
 
     const options = [5, 10, 20, 50, 100]
 </script>
 
-<aside class={$$props.class ?? ''}>
+<aside>
     {#if !small}
-        <span>{handler.i18n.show}</span>
+        <span>{table.i18n.show}</span>
     {/if}
-    <select bind:value={$rowsPerPage} on:change={() => handler.setPage(1)}>
+    <select bind:value={table.rowsPerPage} onchange={() => table.setPage(1)}>
         {#each options as option}
             <option value={option}>
                 {option}
@@ -23,7 +21,7 @@
         {/each}
     </select>
     {#if !small}
-        <span>{handler.i18n.entries}</span>
+        <span>{table.i18n.entries}</span>
     {/if}
 </aside>
 

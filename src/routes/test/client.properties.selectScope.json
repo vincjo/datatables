@@ -1,0 +1,1 @@
+{"name":"selectScope","type":"$state<'all' | 'currentPage'>","ast":{"name":"selectScope","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":26,"default":"$state<'all' | 'currentPage'>('currentPage')","inherited":true}}

@@ -1,0 +1,1 @@
+{"name":"searchScope","type":"$state<(Field<Row>)[]>","ast":{"name":"searchScope","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":13,"default":"$state<(Field<Row>)[]>(null)","inherited":true}}

@@ -1,38 +1,39 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '$lib/remote'
+    import type { TableHandler, Row } from '$lib/remote'
 
     type T = $$Generic<Row>
+    type Props = {
+        table: TableHandler,
+        field: string
+    }
+    let { table, field }: Props = $props()
 
-    export let handler: DataHandler<T>
-    export let filterBy: keyof T
-    export let align: 'left' | 'right' | 'center' = 'left'
-
-    let value: string = ''
-	let timeout: any
+    let value: string = $state('')
+	let timeout: any = $state(undefined)
 
     const filter = () => {
-        handler.filter(value, filterBy)
+        table.filter(value, field)
 		clearTimeout(timeout)
 		timeout = setTimeout( () => {
-            handler.invalidate()
+            table.invalidate()
 		}, 400)
 	}
 </script>
 
-<th class={$$props.class ?? ''}>
+<th>
     <input
-        style:text-align={align}
+        style:text-align="left"
         type="text"
-        placeholder={handler.i18n.filter}
+        placeholder={table.i18n.filter}
         spellcheck="false"
         bind:value
-        on:input={filter}
+        oninput={filter}
     />
 </th>
 
 <style>
     th {
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--grey, #e0e0e0);
     }
     input {
         width: 100%;
@@ -44,11 +45,11 @@
         outline: none;
         border-radius: 0;
         font-size: 14px;
+        color: var(--font-grey, #757575);
         font-family: Arial, Helvetica, sans-serif;
     }
     input::placeholder {
-        color: #bdbdbd;
-        font-style: italic;
+        color: var(--grey, #bdbdbd);
         font-size: 13px;
     }
     input:focus {

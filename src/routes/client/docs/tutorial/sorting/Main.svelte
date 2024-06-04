@@ -10,9 +10,9 @@
 <table>
     <thead>
         <tr>
-            <Th {handler} orderBy="first_name">First name</Th>
-            <Th {handler} orderBy="last_name">Last name</Th>
-            <Th {handler} orderBy="email">Email</Th>
+            <Th {handler} field="first_name">First name</Th>
+            <Th {handler} field="last_name">Last name</Th>
+            <Th {handler} field="email">Email</Th>
         </tr>
     </thead>
     <tbody>

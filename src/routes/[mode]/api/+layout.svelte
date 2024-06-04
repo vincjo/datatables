@@ -1,7 +1,7 @@
 <script>
     import Nav from './Nav.svelte'
     import { url } from 'gros/page'
-    export let data
+    let { data, children } = $props()
 
     let element
     const scrollTop = () => {
@@ -9,14 +9,17 @@
             element.scrollTop = 0
         }
     }
-    $: $url, scrollTop()
+    $effect(() => {
+        $url
+        scrollTop()
+    })
 </script>
 
 
-<Nav data={data.parser}/>
+<Nav nav={data.nav}/>
 <section class="thin-scrollbar" bind:this={element}>
     <div>
-        <slot/>
+        {@render children()}
     </div>
 </section>
 

@@ -2,6 +2,9 @@
     import Basic from './Basic.svelte'
 </script>
 
+
+<div>
+
 # Calculate distinct values and their counts
 
 
@@ -10,10 +13,9 @@
 
 ````svelte
 <script lang="ts">
-    import type { Datahandler } from '@vincjo/datatables'
-    export let handler: DataHandler
-
-    const distinct = handler.createCalculation('make').distinct()
+    import type { TableHandler } from '@vincjo/datatables'
+    let { table }: { table: TableHandler } = $props()
+    const distinct = table.createCalculation('make').distinct()
 </script>
 
 <ul>
@@ -23,3 +25,10 @@
     {/each}
 </ul>
 ````
+</div>
+
+<style>
+    div { 
+        max-width: 720px;
+    }
+</style>

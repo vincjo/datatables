@@ -1,0 +1,51 @@
+<script>
+    import Banner from './Banner.svelte'
+    import Install from './Install.svelte'
+</script>
+
+<Banner/>
+
+## Installation
+
+<Install/>
+
+
+## Client-side data processing
+
+This part of the lib provides an API to dynamically interact with iterable data on the client-side: filtering, paging, sorting, selecting…
+
+- **Headless** by design
+- **Typescript** support
+- **SSR** friendly
+- no dependencies
+
+Also provides some demo components, which you can grab and customize in your own project.
+
+## Sample code
+
+```svelte
+<script lang="ts">
+    import { DataHandler } from '@vincjo/datatables'
+    import { someData } from './data'
+
+    const handler = new DataHandler(someData, { rowsPerPage: 50 })
+    const rows = handler.getRows()
+</script>
+
+<table>
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {#each $rows as row}
+            <tr>
+                <td>{row.first_name}</td>
+                <td>{row.last_name}</td>
+            </tr>
+        {/each}
+    </tbody>
+</table>
+```

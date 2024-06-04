@@ -1,8 +1,10 @@
 <script lang="ts">
     import Nav from './Nav.svelte'
+    import type { Snippet } from 'svelte'
     import { url } from 'gros/page'
 
-    export let nav: { title: string, page: string, description: string, tag: string[] }[]
+    type Props = { nav: { title: string, page: string, description: string, tag: string[] }[], children: Snippet }
+    let { nav, children }: Props = $props()
 
     let element: HTMLElement
     const scrollTop = () => {
@@ -10,14 +12,17 @@
             element.scrollTop = 0
         }
     }
-    $: $url, scrollTop()
+    $effect(() => {
+        $url
+        scrollTop()
+    })
 </script>
 
 
 <Nav {nav}/>
 <section class="thin-scrollbar" bind:this={element}>
     <article class="md">
-        <slot/>
+        {@render children()}
     </article>
 </section>
 

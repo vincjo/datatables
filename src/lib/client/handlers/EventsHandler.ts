@@ -1,6 +1,3 @@
-import { writable } from 'svelte/store'
-
-
 export default class EventsHandler
 {
     private events = {
@@ -8,8 +5,6 @@ export default class EventsHandler
         clearFilters: [] as (() => void)[],
         clearSearch : [] as (() => void)[]
     }
-    public triggerChange = writable(0)     // legacy
-
 
     public add(event: keyof EventsHandler['events'], callback: () => void)
     {
@@ -20,10 +15,6 @@ export default class EventsHandler
     {
         for (const callback of this.events[event]) {
             callback()
-        }
-        /* legacy: support for triggerChange store */
-        if (event === 'change') {
-            this.triggerChange.update((store) => { return store + 1 })
         }
     }
 }

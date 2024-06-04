@@ -26,9 +26,9 @@
             <table>
                 <thead>
                     <tr>
-                        <Th {handler} orderBy="make">make</Th> 
-                        <Th {handler} orderBy="model">model</Th> 
-                        <Th {handler} orderBy="model_year">model_year</Th> 
+                        <Th {handler} field="make">make</Th> 
+                        <Th {handler} field="model">model</Th> 
+                        <Th {handler} field="model_year">model_year</Th> 
                     </tr>
                 </thead>
                 <tbody>

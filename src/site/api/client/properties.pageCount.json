@@ -1,0 +1,1 @@
+{"name":"pageCount","text":"type $derived<number>","type":"$derived<number>","ast":{"name":"pageCount","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":21,"default":"$derived<number>(this.pages.length)","inherited":true}}

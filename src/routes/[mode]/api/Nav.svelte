@@ -1,15 +1,18 @@
 <script>
-    import Category from './Nav_Category.svelte'
-    export let data
-    let value = ''
+    import { TableHandler } from '$lib/client'
+    import Key from './Nav_Key.svelte'
+    let { nav } = $props()
+    let value = $state('')
+    const table = new TableHandler()
 </script>
 
 
 <nav>
-    <input type="text" placeholder="Search..." spellcheck="false" bind:value/>
+    <input type="text" placeholder="Search..." spellcheck="false" bind:value={value}/>
     <section class="thin-scrollbar">
-        <Category data={data.methods} {value} category={'methods'}/>
-        <Category data={data.types} {value} category={'types'}/>
+        <Key data={nav.properties} {table} {value} key={'properties'}/>
+        <Key data={nav.methods}    {table} {value} key={'methods'}/>
+        <Key data={nav.types}      {table} {value} key={'types'}/>
     </section>
 </nav>
 
@@ -34,11 +37,12 @@
     section {
         position: absolute;
         top: 80px;
-        bottom: 24px;
+        bottom: 0px;
         left: 0;
         right: 16px;
         overflow-y: auto;
         border-top: 1px dotted var(--grey);
+        padding-bottom: 40px;
     }
     @media (min-width: 1200px) {
         nav {

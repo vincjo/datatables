@@ -76,20 +76,12 @@ export const check = {
     whereIn: (entry: any, values: Criterion[] = []) => {
         if (isNull(entry)) return false
         if (values.length === 0) return false
-        for(const { value, comparator } of values) {
-            if (comparator(entry, value)) {
+        for(const { value, check } of values) {
+            if (check(entry, value)) {
                 return true
             }
         }
         return false
-    },
-
-    /**
-     * @deprecated use "isLike" instead 
-     * @since 1.12.7 2023-09-27
-     */
-    contains: (entry: any, value: any) => {
-        return check.isLike(entry, value)
     },
 }
 

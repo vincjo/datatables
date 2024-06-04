@@ -1,5 +1,6 @@
 <script lang="ts">
     import Layout from '$site/components/examples/Layout.svelte'
+    let { children } = $props()
     const nav = [
         {
             title: `Hello World`,
@@ -28,7 +29,7 @@
         {
             title: `Pokedex`,
             page: 'pokedex',
-            description: `Filter by types with counts`,
+            description: `Multiple criteria filter`,
             tag: ['calculation', 'aggregate', 'distinct values', 'pokemon', 'filter', 'criteria', 'multiple']
         },
     ]
@@ -36,5 +37,5 @@
 
 
 <Layout {nav}>
-    <slot/>
+    {@render children()}
 </Layout>

@@ -1,22 +1,19 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '$lib/remote'
+    import type { TableHandler } from '$lib/remote'
 
-    type T = $$Generic<Row>
-
-    export let handler: DataHandler<T>
-    const selectedCount = handler.getSelectedCount()
+    let { table }: { table: TableHandler } = $props()
+    const { selected, total } = $derived(table.rowCount)
 </script>
 
 
-<aside class={$$props.class ?? ''}>
-
-    <b>{$selectedCount.count}</b> 
-    {#if $selectedCount.total}
-        of <b>{$selectedCount.total}</b>
+<aside>
+    <b>{selected}</b> 
+    {#if total}
+        of <b>{total}</b>
     {/if}
     row(s) selected.
-    {#if $selectedCount.count > 0}
-        <button on:click={() => handler.clearSelection()}>❌ Clear</button>
+    {#if selected > 0}
+        <button onclick={() => table.clearSelection()}>❌ Clear</button>
     {/if}
 </aside>
 

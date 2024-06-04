@@ -1,19 +1,17 @@
 <script lang="ts">
-    import { DataHandler } from '$lib/client'
+    import { TableHandler } from '$lib/client'
     import { getPath, url } from 'gros/page'
     import { mode } from '$site/utils'
-    export let nav: { title: string, page: string, description: string, tag: string[] }[]
-    let value = ''
-    const handler = new DataHandler(nav)
-    const rows = handler.getRows()
-    $: value, handler.search(value)
+    type Props = { nav: { title: string, page: string, description: string, tag: string[] }[] }
+    let { nav }: Props = $props()
+    const handler = new TableHandler(nav)
 </script>
 
 
 <nav>
-    <input type="text" placeholder="Search..." spellcheck="false" bind:value/>
+    <input type="text" placeholder="Search..." spellcheck="false" bind:value={handler.search.value}/>
     <section class="thin-scrollbar">
-        {#each $rows as row}
+        {#each handler.rows as row}
             <a href="{getPath(`/${$mode}/examples/${row.page}`)}" class:active={$url.indexOf(row.page) > -1}>
                 <b>{row.title}</b>
                 <span>{row.description}</span>
@@ -57,13 +55,13 @@
         padding: 8px 12px;
         transition: all, 0.2s;
         border-radius: 8px;
-        color: var(--font);
+        color: var(--primary);
     }
     a:hover {
         background: var(--grey-lighten-2);
     }
     a.active {
-        background: var(--primary-lighten-2);
+        background: var(--primary-lighten-1);
     }
     a b {
         display: block;

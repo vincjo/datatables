@@ -1,6 +1,6 @@
-<script>
-    let current = 'npm'
-    let managers = {
+<script lang="ts">
+    let current = $state('npm')
+    const managers = {
         npm: 'npm install -D @vincjo/datatables',
         yarn: 'yarn add -D @vincjo/datatables',
         pnpm: 'pnpm install -D @vincjo/datatables'
@@ -9,9 +9,9 @@
 
 <article>
     <nav class="flex">
-        <button on:click={() => current = 'npm'}  class:active={current === 'npm'} >npm </button>
-        <button on:click={() => current = 'pnpm'} class:active={current === 'pnpm'}>pnpm</button>
-        <button on:click={() => current = 'yarn'} class:active={current === 'yarn'}>yarn</button>
+        <button onclick={() => current = 'npm'}  class:active={current === 'npm'} >npm </button>
+        <button onclick={() => current = 'pnpm'} class:active={current === 'pnpm'}>pnpm</button>
+        <button onclick={() => current = 'yarn'} class:active={current === 'yarn'}>yarn</button>
     </nav>
     <aside>
         {managers[current]}

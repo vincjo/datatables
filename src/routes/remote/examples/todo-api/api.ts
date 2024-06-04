@@ -9,18 +9,18 @@ export const reload = async (state: State) => {
 }
 
 const getParams = (state: State) => {
-    const { currentPage, rowsPerPage, sort, filters, search } = state
+    const { currentPage, rowsPerPage, sorting, filters, search } = state
 
     let params = `_page=${currentPage}`
 
     if (rowsPerPage) {
         params += `&_limit=${rowsPerPage}`
     }
-    if (sort) {
-        params += `&_sort=${sort.orderBy}&_order=${sort.direction}`
+    if (sorting) {
+        params += `&_sort=${sorting.field}&_order=${sorting.direction}`
     }
     if (filters) {
-        params += filters.map(({ filterBy, value }) => `&${filterBy}=${value}`).join()
+        params += filters.map(({ field, value }) => `&${field}=${value}`).join()
     }
     if (search) {
         params += `&q=${search}`

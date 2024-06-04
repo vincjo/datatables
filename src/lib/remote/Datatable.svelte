@@ -1,94 +1,95 @@
 <script lang="ts">
-    import { type DataHandler, type Row, Search, RowsPerPage, RowCount, SelectedCount, Pagination } from '$lib/remote'
+    import type { Component, Snippet } from 'svelte'
+    import { type TableHandler, type Row, Header, Footer  } from '$lib/remote'
 
     type T = $$Generic<Row>
+    type Props = { table: TableHandler<T>, basic?: boolean, header?: Component, footer?: Component, children: Snippet }
+    let {
+        table,
+        basic = false,
+        header = basic ? Header: null,
+        footer = basic ? Footer: null,
+        children
+    }: Props = $props()
 
-    export let handler: DataHandler<T>
+    let element: HTMLElement = $state(undefined)
+    let clientWidth = $state(1000)
+    let small = $derived(clientWidth < 600)
 
-    export let search         = true
-    export let rowsPerPage    = true
-    export let rowCount       = true
-    export let selectedCount  = false
-    export let pagination     = true
-
-    let element: HTMLElement
-    let clientWidth = 1000
-
-    const height = (search || rowsPerPage ? 48 : 8) + (rowCount || selectedCount || pagination ? 48 : 8)
-
-    handler.on('change', () => {
+    table.on('change', () => {
         if (element) element.scrollTop = 0
     })
 </script>
 
-<section bind:clientWidth class={$$props.class ?? ''}>
-    <header class:container={search || rowsPerPage}>
-        {#if search}
-            <Search {handler} />
-        {:else}
-            <div/>
-        {/if}
-        {#if rowsPerPage}
-            <RowsPerPage {handler} small={clientWidth < 600} />
-        {/if}
-    </header>
+<section bind:clientWidth>
 
-    <article bind:this={element} style="height:calc(100% - {height}px)">
-        <slot />
+    <aside>
+        {#if header}
+            <svelte:component this={header} {table} {small} {element}/>
+        {/if}
+    </aside>
+
+    <article bind:this={element} class="thin-scrollbar">
+        {@render children()}
     </article>
 
-    <footer class:container={rowCount || pagination}>
-        {#if selectedCount}
-            <SelectedCount {handler}/>
-        {:else if rowCount}
-            <RowCount {handler} small={clientWidth < 600} />
+    <aside>
+        {#if footer}
+            <svelte:component this={footer} {table} {small} {element}/>
         {/if}
-        {#if pagination}
-            <Pagination {handler} small={clientWidth < 600} />
-        {/if}
-    </footer>
+    </aside>
+
 </section>
 
 <style>
     section {
         height: 100%;
+        display: flex;
+        flex-direction: column;
     }
-
     section :global(table) {
         border-collapse: separate;
         border-spacing: 0;
         width: 100%;
     }
-
     section :global(thead) {
         position: sticky;
         inset-block-start: 0;
-        z-index: 1;
+        z-index: 1 !important;
+        background: var(--bg, #fff);
     }
-
-    header,
-    footer {
-        min-height: 8px;
-        padding: 0 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    section :global(thead tr:first-child th) {
+        padding: 8px 20px;
     }
-    header.container,
-    footer.container {
-        height: 48px;
+    section :global(tbody tr) {
+        transition: background, 0.2s;
     }
-    footer {
-        border-top: 1px solid #e0e0e0;
+    section :global(tbody tr:hover) {
+        background: var(--grey-lighten-3, #fafafa);
+    }
+    section :global(tbody td) {
+        padding: 4px 20px;
+        border-right: 1px solid var(--grey-lighten, #eee);
+        border-bottom: 1px solid var(--grey-lighten, #eee);
+    }
+    section :global(tbody td:first-child) {
+        border-left: 1px solid var(--grey-lighten, #eee);
+    }
+    section :global(tbody td.numeric) {
+        text-align: right;
+        font-family: JetBrains, monospace, inherit;
+    }
+    aside {
+        min-height: 4px;
+        padding: 0;
     }
 
     article {
         position: relative;
-        /* height:calc(100% - 96px); */
+        height: 100%;
         overflow: auto;
-        scrollbar-width: thin;
+        /* scrollbar-width: thin; */
     }
-
     article::-webkit-scrollbar {
         width: 6px;
         height: 6px;
@@ -101,5 +102,8 @@
     }
     article::-webkit-scrollbar-thumb:hover {
         background: #9e9e9e;
+    }
+    article :global(.hidden) {
+        display: none;
     }
 </style>

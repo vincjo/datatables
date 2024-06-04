@@ -1,4 +1,5 @@
 <script lang="ts">
+    let { children } = $props()
     import Layout from '$site/components/examples/Layout.svelte'
     const nav = [
         {
@@ -25,15 +26,15 @@
             description: `A Pokemon list. Source: Poke API`,
             tag: ['rows per page', 'pagination', 'row count']
         },
-        {
-            title: `Beer API`,
-            page: 'beer-api',
-            description: `Row selection. Source: Punk API`,
-            tag: ['search', 'rows per page', 'pagination']
-        },
+        // {
+        //     title: `Beer API`,
+        //     page: 'beer-api',
+        //     description: `Row selection. Source: Punk API`,
+        //     tag: ['search', 'rows per page', 'pagination']
+        // },
     ]
 </script>
 
 <Layout {nav}>
-    <slot/>
+    {@render children()}
 </Layout>

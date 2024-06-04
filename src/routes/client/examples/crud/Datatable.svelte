@@ -1,21 +1,23 @@
 <script lang="ts">
-    import { DataHandler, Datatable, Th } from '$lib'
+    import { TableHandler, Datatable, Th } from '$lib'
     import { users } from './store'
     import { modal } from 'gros/modal'
     import Update from './Modal_Update.svelte'
     import Destroy from './Modal_Destroy.svelte'
     import Create from './Modal_Create.svelte'
-    const handler = new DataHandler($users, { rowsPerPage: 10 })
-    const rows = handler.getRows()
+    const table = new TableHandler($users, { rowsPerPage: 10 })
 
-    let element
+    let element: any
 
-    $: $users, update()
+    $effect(() => {
+        $users
+        update()
+    })
 
     const update = () => {
         if (element) {
             const scrollTop = element.parentNode.scrollTop
-            handler.setRows($users)
+            table.setRows($users)
             setTimeout(() => {
                 element.parentNode.scrollTop = scrollTop
             }, 2)
@@ -25,32 +27,32 @@
 
 <div class="fieldset">
     <aside>
-        <button class="btn create" on:click={() => modal.open(Create)}>
+        <button class="btn create" onclick={() => modal.open(Create)}>
             <i class="micon">person_add</i>
             Add a new user
         </button>
     </aside>
     <section>
-        <Datatable {handler} basic>
+        <Datatable {table} basic>
             <table bind:this={element}>
                 <thead>
                     <tr>
-                        <th/>
-                        <Th {handler} orderBy="id">ID</Th>
-                        <Th {handler} orderBy="first_name">First name</Th>
-                        <Th {handler} orderBy="last_name">Last name</Th>
-                        <Th {handler} orderBy="email">Email</Th>
+                        <th></th>
+                        <Th {table} field="id">ID</Th>
+                        <Th {table} field="first_name">First name</Th>
+                        <Th {table} field="last_name">Last name</Th>
+                        <Th {table} field="email">Email</Th>
                     </tr>
                 </thead>
                 <tbody>
-                    {#each $rows as row}
+                    {#each table.rows as row}
                         <tr>
                             <td style:width="96px">
                                 <div class="flex">
-                                    <button class="btn" on:click={() => modal.open(Update, row)}>
+                                    <button class="btn" onclick={() => modal.open(Update, row)}>
                                         <i class="micon">edit</i>
                                     </button>
-                                    <button class="btn" on:click={() => modal.open(Destroy, row)}>
+                                    <button class="btn" onclick={() => modal.open(Destroy, row)}>
                                         <i class="micon">delete_forever</i>
                                     </button>
                                 </div>

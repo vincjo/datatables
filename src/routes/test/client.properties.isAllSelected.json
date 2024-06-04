@@ -1,0 +1,1 @@
+{"name":"isAllSelected","type":"$derived<boolean>","ast":{"name":"isAllSelected","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":27,"default":"$derived<boolean>(this.createIsAllSelected())","inherited":true}}

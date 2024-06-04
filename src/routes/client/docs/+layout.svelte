@@ -1,5 +1,6 @@
 <script>
     import Layout from '$site/components/docs/Layout.svelte'
+    let { children } = $props()
     const root = `/client/docs`
     const nav = [
         {
@@ -48,5 +49,5 @@
 </script>
 
 <Layout {nav}>
-    <slot/>
+    {@render children()}
 </Layout>

@@ -1,0 +1,1 @@
+{"name":"rawRows","text":"type $state<Row[]>","type":"$state<Row[]>","ast":{"name":"rawRows","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":10,"default":"$state<Row[]>([])","inherited":true}}

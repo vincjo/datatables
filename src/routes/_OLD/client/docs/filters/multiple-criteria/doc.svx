@@ -1,0 +1,34 @@
+<script>
+    import Main from './Main.svelte'
+</script>
+
+
+# Multiple criteria filter
+
+You may have descrete values in your datasets. The "`createAdvancedFilter`" method allows you to define multiple criteria for a single filter.
+
+## Code
+
+```svelte
+<script lang="ts">
+    import { type DataHandler, check } from '@vincjo/datatables'
+    export let handler: DataHandler
+
+    const filter = handler.createAdvancedFilter('columnName', check.isEqualTo)
+    const selected = filter.get()
+</script>
+
+<button 
+    on:click={() => filter.set('high')}
+    class:active={$selected.includes('high')}
+>High priority</button>
+
+<button
+    on:click={() => filter.set('low')}
+    class:active={$selected.includes('low')}
+>Low priority</button>
+```
+
+## Result
+
+<Main/>

@@ -41,9 +41,9 @@ You will craft your own wrapper function to fetch the remote API.
     <table>
         <thead>
             <tr>
-                <Th {handler} orderBy="first_name">First Name</Th>
-                <Th {handler} orderBy="last_name">Last Name</Th>
-                <Th {handler} orderBy="email">Email</Th>
+                <Th {handler} field="first_name">First Name</Th>
+                <Th {handler} field="last_name">Last Name</Th>
+                <Th {handler} field="email">Email</Th>
             </tr>
         </thead>
         <tbody>

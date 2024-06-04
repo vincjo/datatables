@@ -1,12 +1,14 @@
-import { TSParser } from '$site/utils'
+import { API } from '$site/api'
+import { internal } from '$site/api'
 
 export const load = async (url) => {
     const mode = url.params.mode
-    const parser = new TSParser()
-    const methods = await parser.methods(`./src/lib/${mode}/DataHandler.ts`)
-    const types = await parser.types(`./src/lib/${mode}/index.ts`)
-
+    const { properties, methods, types } = API.nav(mode)
     return {
-        parser: { types, methods }
+        nav: {
+            properties: properties.filter((item: string) => internal.properties.includes(item) === false).sort(),
+            methods   : methods.filter((item: string) => internal.methods.includes(item) === false).sort(),
+            types     : types.filter((item: string) => internal.types.includes(item) === false).sort()
+        }
     }
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { DataHandler } from '$lib/local'
     export let handler: DataHandler
-    export let filterBy = null
+    export let field = null
     let value = ''
 </script>
 
@@ -10,7 +10,7 @@
         type="text"
         placeholder="Filter"
         bind:value
-        on:input={() => handler.filter(value, filterBy)}
+        on:input={() => handler.filter(value, field)}
     />
 </th>
 

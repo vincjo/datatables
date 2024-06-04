@@ -1,0 +1,1 @@
+{"name":"rowsPerPage","text":"type $state<number>","type":"$state<number>","ast":{"name":"rowsPerPage","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":13,"default":"$state<number>(10)","inherited":true}}

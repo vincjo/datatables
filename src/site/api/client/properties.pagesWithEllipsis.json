@@ -1,0 +1,1 @@
+{"name":"pagesWithEllipsis","text":"type $derived<number[]>","type":"$derived<number[]>","ast":{"name":"pagesWithEllipsis","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":22,"default":"$derived<number[]>(this.createPagesWithEllipsis())","inherited":true}}

@@ -3,7 +3,7 @@ import { TypescriptParser } from 'typescript-parser'
 export default class Parser
 {
     private parser = new TypescriptParser()
-    private isDeprecated = ['update', 'applySorting', 'getSorted', 'getTriggerChange', 'getPageNumber', 'isAllSelected', 'onChange']
+    private isDeprecated = []
 
     public async methods(filepath: string)
     {
@@ -39,7 +39,7 @@ export default class Parser
 
     public async types(filepath: string)
     {
-        const deprecated = ['Selectable', 'FilterBy', 'OrderBy', 'Order']
+        const deprecated = []
         const file = await this.parser.parseFile(filepath, 'root')
         return  file.declarations.filter(item => item['isExported']).map(type => {
             return { name: type.name, isDeprecated: deprecated.includes(type.name) }

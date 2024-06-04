@@ -1,14 +1,11 @@
 
 <script lang="ts">
-    import { DataHandler, check } from '$lib/client'
+    import { TableHandler, check } from '$lib/client'
     import { data } from './data'
-    let value = ''
 
-    const handler = new DataHandler(data) 
-    const rows = handler.getRows()
-
-    const filter = handler.createAdvancedFilter('priority')
-    const selected = filter.get()
+    const table = new TableHandler(data) 
+    table.searchScope = ['task']
+    const filter = table.createAdvancedFilter('priority')
 </script>
 
 
@@ -21,35 +18,35 @@
             Filter
         </h2>
         <button 
-            on:click={() => filter.set('high', check.isEqualTo)}
-            class:active={$selected.includes('high')} class="btn" style:color="red">
+            onclick={() => filter.set('high', check.isEqualTo)}
+            class:active={filter.active.includes('high')} class="btn" style:color="red">
             <i class="micon">
-                {$selected.includes('high') ? 'check_box' : 'check_box_outline_blank'}
+                {filter.active.includes('high') ? 'check_box' : 'check_box_outline_blank'}
             </i>
             High
         </button>
         <button 
-            on:click={() => filter.set('medium', check.isEqualTo)}
-            class:active={$selected.includes('medium')} class="btn" style:color="orange">
+            onclick={() => filter.set('medium', check.isEqualTo)}
+            class:active={filter.active.includes('medium')} class="btn" style:color="orange">
             <i class="micon">
-                {$selected.includes('medium') ? 'check_box' : 'check_box_outline_blank'}
+                {filter.active.includes('medium') ? 'check_box' : 'check_box_outline_blank'}
             </i>
             Medium
         </button>
         <button 
-            on:click={() => filter.set('low', check.isEqualTo)}
-            class:active={$selected.includes('low')} class="btn" style:color="green">
+            onclick={() => filter.set('low', check.isEqualTo)}
+            class:active={filter.active.includes('low')} class="btn" style:color="green">
             <i class="micon">
-                {$selected.includes('low') ? 'check_box' : 'check_box_outline_blank'}
+                {filter.active.includes('low') ? 'check_box' : 'check_box_outline_blank'}
             </i>
             Low
         </button>
     </aside>
 
     <article>
-        <input type="text" bind:value  on:input={() => handler.search(value, ['task'])} placeholder="Search tasks..."/>
+        <input type="text" bind:value={table.search} placeholder="Search tasks..."/>
         <ul class="thin-scrollbar">
-            {#each $rows as row}
+            {#each table.rows as row}
                 <li class="flex">
                     <span>{row.task}</span>
                     <code style:color={row.priority === 'high' ? 'red' : row.priority === 'medium' ? 'orange' : 'green'}>
