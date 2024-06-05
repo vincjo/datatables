@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "1.14.6",
+    "version": "1.14.5",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],
@@ -50,7 +50,7 @@
     },
     "dependencies": {},
     "peerDependencies": {
-        "svelte": "^3.56.0 || ^4.0.0 || ^5.0.0-next.120"
+        "svelte": ">=3.54.0"
     },
     "type": "module",
     "files": ["dist"],
@@ -62,10 +62,260 @@
             "svelte": "./dist/index.js",
             "default": "./dist/index.js"
         },
+        "./local/Comparator": {
+            "types": "./dist/local/Comparator.d.ts",
+            "default": "./dist/local/Comparator.js"
+        },
+        "./local/Context": {
+            "types": "./dist/local/Context.d.ts",
+            "default": "./dist/local/Context.js"
+        },
+        "./local/DataHandler": {
+            "types": "./dist/local/DataHandler.d.ts",
+            "default": "./dist/local/DataHandler.js"
+        },
+        "./local/Datatable.svelte": {
+            "types": "./dist/local/Datatable.svelte.d.ts",
+            "svelte": "./dist/local/Datatable.svelte",
+            "default": "./dist/local/Datatable.svelte"
+        },
+        "./local/handlers/FilterHandler": {
+            "types": "./dist/local/handlers/FilterHandler.d.ts",
+            "default": "./dist/local/handlers/FilterHandler.js"
+        },
+        "./local/handlers/PageHandler": {
+            "types": "./dist/local/handlers/PageHandler.d.ts",
+            "default": "./dist/local/handlers/PageHandler.js"
+        },
+        "./local/handlers/SearchHandler": {
+            "types": "./dist/local/handlers/SearchHandler.d.ts",
+            "default": "./dist/local/handlers/SearchHandler.js"
+        },
+        "./local/handlers/SelectHandler": {
+            "types": "./dist/local/handlers/SelectHandler.d.ts",
+            "default": "./dist/local/handlers/SelectHandler.js"
+        },
+        "./local/handlers/SortHandler": {
+            "types": "./dist/local/handlers/SortHandler.d.ts",
+            "default": "./dist/local/handlers/SortHandler.js"
+        },
+        "./local": {
+            "types": "./dist/local/index.d.ts",
+            "svelte": "./dist/local/index.js",
+            "default": "./dist/local/index.js"
+        },
+        "./local/Pagination.svelte": {
+            "types": "./dist/local/Pagination.svelte.d.ts",
+            "svelte": "./dist/local/Pagination.svelte",
+            "default": "./dist/local/Pagination.svelte"
+        },
+        "./local/RowCount.svelte": {
+            "types": "./dist/local/RowCount.svelte.d.ts",
+            "svelte": "./dist/local/RowCount.svelte",
+            "default": "./dist/local/RowCount.svelte"
+        },
+        "./local/RowsPerPage.svelte": {
+            "types": "./dist/local/RowsPerPage.svelte.d.ts",
+            "svelte": "./dist/local/RowsPerPage.svelte",
+            "default": "./dist/local/RowsPerPage.svelte"
+        },
+        "./local/Search.svelte": {
+            "types": "./dist/local/Search.svelte.d.ts",
+            "svelte": "./dist/local/Search.svelte",
+            "default": "./dist/local/Search.svelte"
+        },
+        "./local/Th.svelte": {
+            "types": "./dist/local/Th.svelte.d.ts",
+            "svelte": "./dist/local/Th.svelte",
+            "default": "./dist/local/Th.svelte"
+        },
+        "./local/ThFilter.svelte": {
+            "types": "./dist/local/ThFilter.svelte.d.ts",
+            "svelte": "./dist/local/ThFilter.svelte",
+            "default": "./dist/local/ThFilter.svelte"
+        },
+        "./remote/Context": {
+            "types": "./dist/remote/Context.d.ts",
+            "default": "./dist/remote/Context.js"
+        },
+        "./remote/DataHandler": {
+            "types": "./dist/remote/DataHandler.d.ts",
+            "default": "./dist/remote/DataHandler.js"
+        },
+        "./remote/Datatable.svelte": {
+            "types": "./dist/remote/Datatable.svelte.d.ts",
+            "svelte": "./dist/remote/Datatable.svelte",
+            "default": "./dist/remote/Datatable.svelte"
+        },
+        "./remote/handlers/FilterHandler": {
+            "types": "./dist/remote/handlers/FilterHandler.d.ts",
+            "default": "./dist/remote/handlers/FilterHandler.js"
+        },
+        "./remote/handlers/PageHandler": {
+            "types": "./dist/remote/handlers/PageHandler.d.ts",
+            "default": "./dist/remote/handlers/PageHandler.js"
+        },
+        "./remote/handlers/SearchHandler": {
+            "types": "./dist/remote/handlers/SearchHandler.d.ts",
+            "default": "./dist/remote/handlers/SearchHandler.js"
+        },
+        "./remote/handlers/SelectHandler": {
+            "types": "./dist/remote/handlers/SelectHandler.d.ts",
+            "default": "./dist/remote/handlers/SelectHandler.js"
+        },
+        "./remote/handlers/SortHandler": {
+            "types": "./dist/remote/handlers/SortHandler.d.ts",
+            "default": "./dist/remote/handlers/SortHandler.js"
+        },
+        "./remote/handlers/TriggerHandler": {
+            "types": "./dist/remote/handlers/TriggerHandler.d.ts",
+            "default": "./dist/remote/handlers/TriggerHandler.js"
+        },
         "./remote": {
             "types": "./dist/remote/index.d.ts",
             "svelte": "./dist/remote/index.js",
             "default": "./dist/remote/index.js"
+        },
+        "./remote/Pagination.svelte": {
+            "types": "./dist/remote/Pagination.svelte.d.ts",
+            "svelte": "./dist/remote/Pagination.svelte",
+            "default": "./dist/remote/Pagination.svelte"
+        },
+        "./remote/README.svelte": {
+            "types": "./dist/remote/README.svelte.d.ts",
+            "svelte": "./dist/remote/README.svelte",
+            "default": "./dist/remote/README.svelte"
+        },
+        "./remote/RowCount.svelte": {
+            "types": "./dist/remote/RowCount.svelte.d.ts",
+            "svelte": "./dist/remote/RowCount.svelte",
+            "default": "./dist/remote/RowCount.svelte"
+        },
+        "./remote/RowsPerPage.svelte": {
+            "types": "./dist/remote/RowsPerPage.svelte.d.ts",
+            "svelte": "./dist/remote/RowsPerPage.svelte",
+            "default": "./dist/remote/RowsPerPage.svelte"
+        },
+        "./remote/Search.svelte": {
+            "types": "./dist/remote/Search.svelte.d.ts",
+            "svelte": "./dist/remote/Search.svelte",
+            "default": "./dist/remote/Search.svelte"
+        },
+        "./remote/Th.svelte": {
+            "types": "./dist/remote/Th.svelte.d.ts",
+            "svelte": "./dist/remote/Th.svelte",
+            "default": "./dist/remote/Th.svelte"
+        },
+        "./remote/ThFilter.svelte": {
+            "types": "./dist/remote/ThFilter.svelte.d.ts",
+            "svelte": "./dist/remote/ThFilter.svelte",
+            "default": "./dist/remote/ThFilter.svelte"
+        }
+    },
+    "typesVersions": {
+        ">4.0": {
+            "index.d.ts": [
+                "./dist/index.d.ts"
+            ],
+            "local/Comparator": [
+                "./dist/local/Comparator.d.ts"
+            ],
+            "local/Context": [
+                "./dist/local/Context.d.ts"
+            ],
+            "local/DataHandler": [
+                "./dist/local/DataHandler.d.ts"
+            ],
+            "local/Datatable.svelte": [
+                "./dist/local/Datatable.svelte.d.ts"
+            ],
+            "local/handlers/FilterHandler": [
+                "./dist/local/handlers/FilterHandler.d.ts"
+            ],
+            "local/handlers/PageHandler": [
+                "./dist/local/handlers/PageHandler.d.ts"
+            ],
+            "local/handlers/SearchHandler": [
+                "./dist/local/handlers/SearchHandler.d.ts"
+            ],
+            "local/handlers/SelectHandler": [
+                "./dist/local/handlers/SelectHandler.d.ts"
+            ],
+            "local/handlers/SortHandler": [
+                "./dist/local/handlers/SortHandler.d.ts"
+            ],
+            "local": [
+                "./dist/local/index.d.ts"
+            ],
+            "local/Pagination.svelte": [
+                "./dist/local/Pagination.svelte.d.ts"
+            ],
+            "local/RowCount.svelte": [
+                "./dist/local/RowCount.svelte.d.ts"
+            ],
+            "local/RowsPerPage.svelte": [
+                "./dist/local/RowsPerPage.svelte.d.ts"
+            ],
+            "local/Search.svelte": [
+                "./dist/local/Search.svelte.d.ts"
+            ],
+            "local/Th.svelte": [
+                "./dist/local/Th.svelte.d.ts"
+            ],
+            "local/ThFilter.svelte": [
+                "./dist/local/ThFilter.svelte.d.ts"
+            ],
+            "remote/Context": [
+                "./dist/remote/Context.d.ts"
+            ],
+            "remote/DataHandler": [
+                "./dist/remote/DataHandler.d.ts"
+            ],
+            "remote/Datatable.svelte": [
+                "./dist/remote/Datatable.svelte.d.ts"
+            ],
+            "remote/handlers/FilterHandler": [
+                "./dist/remote/handlers/FilterHandler.d.ts"
+            ],
+            "remote/handlers/PageHandler": [
+                "./dist/remote/handlers/PageHandler.d.ts"
+            ],
+            "remote/handlers/SearchHandler": [
+                "./dist/remote/handlers/SearchHandler.d.ts"
+            ],
+            "remote/handlers/SelectHandler": [
+                "./dist/remote/handlers/SelectHandler.d.ts"
+            ],
+            "remote/handlers/SortHandler": [
+                "./dist/remote/handlers/SortHandler.d.ts"
+            ],
+            "remote/handlers/TriggerHandler": [
+                "./dist/remote/handlers/TriggerHandler.d.ts"
+            ],
+            "remote": [
+                "./dist/remote/index.d.ts"
+            ],
+            "remote/Pagination.svelte": [
+                "./dist/remote/Pagination.svelte.d.ts"
+            ],
+            "remote/README.svelte": [
+                "./dist/remote/README.svelte.d.ts"
+            ],
+            "remote/RowCount.svelte": [
+                "./dist/remote/RowCount.svelte.d.ts"
+            ],
+            "remote/RowsPerPage.svelte": [
+                "./dist/remote/RowsPerPage.svelte.d.ts"
+            ],
+            "remote/Search.svelte": [
+                "./dist/remote/Search.svelte.d.ts"
+            ],
+            "remote/Th.svelte": [
+                "./dist/remote/Th.svelte.d.ts"
+            ],
+            "remote/ThFilter.svelte": [
+                "./dist/remote/ThFilter.svelte.d.ts"
+            ]
         }
     }
 }

@@ -1,9 +1,10 @@
 <script>
     export let remote = false
     const ssdLogo = remote ? 'logo-remote' : 'logo'
+    const href = remote ? 'https://github.com/kmalloy24/simple-datatables-skeleton/tree/main/src/lib/components/server' : 'https://github.com/kmalloy24/simple-datatables-skeleton/tree/main/src/lib/components/client'
 </script>
 
-<a class="skeleton flex" href="https://www.skeleton.dev/docs/ssd" rel="external">
+<a class="skeleton flex" href="{href}">
     <button class="btn">
         <img src="/datatables/skeleton.svg" alt="skeleton + svg"/> <div>+</div> <img src="/datatables/{ssdLogo}.svg" alt="SSD logo"/> 
     </button>
