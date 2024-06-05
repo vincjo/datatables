@@ -3,7 +3,7 @@
 </script>
 
 <section>
-    <h1>Documentation for the upcoming version 2.0</h1>
+    <h1>Documentation for the next major v2.0</h1>
     <h2>Support for Svelte 5 runes in progress.</h2>
     <article class="flex">
         <aside onmouseenter={() => site.setMode('client')} class="flex" class:active={site.mode === 'client'}>
