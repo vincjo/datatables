@@ -5,7 +5,7 @@ export { default as API } from './API'
 export const ROOT_DIR = './static/doc'
 
 export const internal = {
-    properties: ['events', 'rawRows', 'sorting', 'filters', 'selectScope'],
+    properties: ['events', 'rawRows', 'sorting', 'filters', 'selectScope', 'selectBy'],
     types: ['Sorting'],
     methods: [],
 }

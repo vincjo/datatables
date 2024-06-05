@@ -3,15 +3,16 @@ import { parseField } from '$lib/client/utils'
 
 export default class CalcultationHelper<Row>
 {
+    
     private callback    : (row: Row) => Row[keyof Row]
     private precision   : number
     private table       : TableHandler<Row>
 
-    constructor(table: TableHandler<Row>, field: Field<Row>, param: { precision: number })
+    constructor(table: TableHandler<Row>, field: Field<Row>, param?: { precision: number })
     {
         this.table      = table
         this.callback   = parseField(field).callback
-        this.precision  = param.precision
+        this.precision  = param?.precision ?? 2
     }
 
     public distinct(callback?: (values: any[]) => any[]): { value: string, count: unknown }[]
@@ -63,10 +64,11 @@ export default class CalcultationHelper<Row>
 
     private round(value: number)
     {
-        if (this.precision === 0) {
-            return Math.round(value)
-        }
-        const denominator = Math.pow(10, this.precision)
-        return Math.round( (value + Number.EPSILON) * denominator ) / denominator
+        return Number(value.toFixed(this.precision))
+        // if (this.precision === 0) {
+        //     return Math.round(value)
+        // }
+        // const denominator = Math.pow(10, this.precision)
+        // return Math.round( (value + Number.EPSILON) * denominator ) / denominator
     }
 }

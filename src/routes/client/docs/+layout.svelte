@@ -18,15 +18,15 @@
         //         { name: 'Multiple criteria'     , path: `${root}/filters/multiple-criteria`   },
         //     ]
         // },
-        // {
-        //     title: 'Column calculations',
-        //     links: [
-        //         { name: 'Sum'                   , path: `${root}/calculations/sum`           },
-        //         { name: 'Average'               , path: `${root}/calculations/avg`           },
-        //         { name: 'Distinct values'       , path: `${root}/calculations/distinct`      },
-        //         { name: 'Bounds'                , path: `${root}/calculations/bounds`        },
-        //     ]
-        // },
+        {
+            title: 'Column calculations',
+            links: [
+                { name: 'Sum'                   , path: `${root}/calculations/sum`           },
+                { name: 'Average'               , path: `${root}/calculations/avg`           },
+                { name: 'Distinct values'       , path: `${root}/calculations/distinct`      },
+                { name: 'Bounds'                , path: `${root}/calculations/bounds`        },
+            ]
+        },
         // {
         //     title: 'Tutorial',
         //     links: [

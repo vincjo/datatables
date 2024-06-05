@@ -4,18 +4,18 @@ import { check as comparator } from '$lib/client/Comparator'
 
 export default class AdvancedFilterHelper<Row>
 {
+    public  active          = $state<(string | number | number[])[]>([])
     private filterHandler   : FilterHandler<Row>
     private criteria        : Criterion[]
     private field           : Field<Row>
     private uid             : string
     private check           : Check<any>
-    public  active          = $state<(string | number | number[])[]>([])
 
     constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check<any>)
     {
         this.filterHandler  = filterHandler
         this.field          = field
-        this.uid            = 'af_' + (Math.random()).toString(28).substring(2)
+        this.uid            = 'm_' + (Math.random()).toString(28).substring(2)
         this.criteria       = []
         this.check          = check ?? comparator.isEqualTo
         this.cleanup()

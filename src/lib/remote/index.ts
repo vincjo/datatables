@@ -12,7 +12,6 @@ import Header           from './Header.svelte'
 
 export { TableHandler, Datatable, Search, RowsPerPage, Th, ThFilter, RowCount, SelectedCount, Pagination, Footer, Header }
 
-
 export type Row = { [key: string]: any }
 
 export type State = {

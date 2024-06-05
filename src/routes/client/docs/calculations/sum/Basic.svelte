@@ -1,21 +1,18 @@
 <script lang="ts">
-    import { DataHandler } from '$lib/client'
+    import { TableHandler } from '$lib/client'
     import { data } from '../data_grocery'
 
-    let value = ''
+    const table = new TableHandler(data)
 
-    const handler = new DataHandler(data)
-    const rows = handler.getRows()
-
-    const sum = handler.createCalculation('price').sum()
+    const sum = $derived(table.createCalculation('price', { precision: 2 }).sum())
 </script>
 
 <section class="flex">
 
     <article>
-        <input type="text" bind:value  on:input={() => handler.search(value, ['product'])} placeholder="Search products..."/>
+        <input type="text" bind:value={table.search}  placeholder="Search products..."/>
         <ul class="thin-scrollbar">
-            {#each $rows as row}
+            {#each table.rows as row}
                 <li class="flex">
                     <span>{row.product}</span>
                     <code>🪙 {row.price}</code>
@@ -25,7 +22,7 @@
     </article>
     <aside class="z-depth-2">
         <p>Total</p>
-        <code>🪙 {$sum}</code>
+        <code>🪙 {sum}</code>
     </aside>
 </section>  
 

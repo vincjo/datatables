@@ -1,36 +1,39 @@
 <script lang="ts">
-    import { DataHandler, Datatable, Th } from '$lib/client'
+    import { TableHandler, Datatable, Th } from '$lib/client'
     import { data } from '../data_cars'
 
-    let value = ''
+    const table = new TableHandler(data)
 
-    const handler = new DataHandler(data)
-    const rows = handler.getRows()
-
-    const [min, max] = handler.createCalculation('model_year').bounds()
+    const distinct = $derived.by(() => {
+        return table.createCalculation('make')
+            .distinct()
+            .sort((a, b) => (a.count < b.count ? 1 : -1))
+    })
 </script>
 
 <section class="flex">
     <aside class="z-depth-2">
-        <p>Model year</p>
-        <ul>
-            <li>Older: {min}</li>
-            <li>Newer: {max}</li>
-        </ul>
+        <p>Distinct make</p>
+        <div class="thin-scrollbar">
+            {#each distinct as item}
+                {@const { value, count } = item }
+                <code>{count}</code> {value} <br>
+            {/each}
+        </div>
     </aside>
     <article>
-        <input type="text" bind:value  on:input={() => handler.search(value)} placeholder="Search cars..."/>
-        <Datatable {handler} search={false} rowsPerPage={false} pagination={false}>
+        <input type="text" bind:value={table.search} placeholder="Search cars..."/>
+        <Datatable {table}>
             <table>
                 <thead>
                     <tr>
-                        <Th {handler} field="make">make</Th> 
-                        <Th {handler} field="model">model</Th> 
-                        <Th {handler} field="model_year">model_year</Th> 
+                        <Th {table} field="make">make</Th> 
+                        <Th {table} field="model">model</Th> 
+                        <Th {table} field="model_year">model_year</Th> 
                     </tr>
                 </thead>
                 <tbody>
-                    {#each $rows as row}
+                    {#each table.rows as row}
                         <tr>
                             <td>{row.make}</td>
                             <td>{row.model}</td>
@@ -78,6 +81,15 @@
         font-size: 13px;
         color: var(--primary);
         text-transform: uppercase;
+    }
+    aside code {
+        color: var(--secondary);
+        font-size: 24px;
+    }
+    aside div {
+        overflow-y: auto;
+        position: relative;
+        height: 320px;
     }
 
     thead {

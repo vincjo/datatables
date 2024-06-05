@@ -33,7 +33,7 @@ export default class SortingHandler<Row>
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
         this.table.sorting = { identifier, callback, direction: 'asc', key }
-        this.table.rawRows = this.table.rawRows.sort((x, y) => {
+        this.table.rawRows = [...this.table.rawRows].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
             if (a === b) return 0
             if (a === null) return 1
@@ -53,7 +53,7 @@ export default class SortingHandler<Row>
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
         this.table.sorting = { identifier, callback, direction: 'desc', key }
-        this.table.rawRows = this.table.rawRows.sort((x, y) => {
+        this.table.rawRows = [...this.table.rawRows].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
             if (a === b) return 0
             if (a === null) return 1

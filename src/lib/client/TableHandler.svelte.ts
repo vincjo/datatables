@@ -14,6 +14,7 @@ import FilterHelper             from './helpers/FilterHelper.svelte'
 import AdvancedFilterHelper     from './helpers/AdvancedFilterHelper.svelte'
 import CalculationHelper        from './helpers/CalculationHelper.svelte'
 import SortingHelper            from './helpers/SortingHelper.svelte'
+import CSVHelper                from './helpers/CSVHelper.svelte'
 
 export type Params = { rowsPerPage?: number, i18n?: Internationalization, selectBy?: string }
 
@@ -140,6 +141,11 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public createCalculation(field: Field<T>, param?: { precision: number }): CalculationHelper<T>
     {
         return new CalculationHelper(this, field, { precision: param?.precision ?? 2 })
+    }
+
+    public createCSV()
+    {
+        return new CSVHelper(this)
     }
 
     public createView(columns: { name: string, index: number, isVisible?: boolean }[]): ViewHelper

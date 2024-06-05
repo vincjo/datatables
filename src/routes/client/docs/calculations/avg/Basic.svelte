@@ -1,41 +1,31 @@
 <script lang="ts">
-    import { DataHandler } from '$lib/client'
-    import { data } from '../data_parcel'
+    import { TableHandler } from '$lib/client'
+    import { data } from '../data_cars'
 
-    let value = ''
+    const table = new TableHandler(data)
+    table.searchScope = ['make', 'model']
 
-    const handler = new DataHandler(data)
-    const rows = handler.getRows()
-
-    const calc = handler.createCalculation((row) => row.width * row['length'])
-
-    calc.setPrecision(3)
-
-    const avg = calc.avg((values) => values.map((value: number) => value *  1.196))
-
+    const avg = $derived(table.createCalculation('price').avg())
 </script>
 
 <section class="flex">
 
     <article>
-        <input type="text" bind:value  on:input={() => handler.search(value, ['address'])} placeholder="Search addresses..."/>
+        <input type="text" bind:value={table.search} placeholder="Search cars..."/>
         <ul class="thin-scrollbar">
-            {#each $rows as row}
+            {#each table.rows as row}
                 <li class="flex">
-                    <span>{row.address}</span>
-                    <code>
-                        &harr; {new Intl.NumberFormat('en-US').format(row.width)}m<br>
-                        &varr; {new Intl.NumberFormat('en-US').format(row['length'])}m
-                    </code>
+                    <span>{row.make} - {row.model} ({row.model_year ?? 'N/A'})</span>
+                    <code>🪙 {new Intl.NumberFormat('en-US').format(row.price)}</code>
                 </li>
             {/each}
         </ul>
     </article>
     <aside class="z-depth-2">
-        <p>Average area</p>
-        <code>{new Intl.NumberFormat('en-US').format($avg)} yd²</code>
+        <p>Average price</p>
+        <code>🪙 {new Intl.NumberFormat('en-US').format(avg)}</code>
     </aside>
-</section>
+</section>  
 
 <style>
     section {
@@ -54,7 +44,7 @@
         padding: 0 8px;
     }
     aside {
-        width: 280px;
+        width: 240px;
         border: 1px solid var(--grey);
         border-radius: 8px;
         padding: 24px 24px;
@@ -91,7 +81,7 @@
         white-space: nowrap;
     }
     li span {
-        width: 176px;
+        width: 184px;
         font-size: 11px;
     }
 </style>

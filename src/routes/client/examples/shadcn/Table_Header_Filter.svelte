@@ -34,7 +34,7 @@
             {@html glyph.search}
             <input type="text" bind:value={search.value} placeholder="{poemize(key)}">
         </div>
-        {#each distinct as item}
+        {#each search.items as item}
             {@const { value, count } = item}
             <button 
                 class="btn select close-dropdown" 

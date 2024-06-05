@@ -20,18 +20,18 @@ export default class SelectHandler<Row>
 
     public all()
     {
-        const rows = this.table.selectScope === 'currentPage' ? this.table.rows : this.table.filteredRows
+        const rows = this.table.selectScope === 'currentPage' ? this.table.rows : this.table.allRows
         const selection = this.table.selectBy ? rows.map((row) => row[this.table.selectBy]) : rows
         if (this.table.selectScope === 'currentPage') {
             if (this.table.isAllSelected) {
-                this.table.selected = this.table.selected.filter(item => selection.includes(item) === false)
+                this.table.selected = this.table.selected.filter(item => selection.includes(item as any) === false)
             }
             else {
                 this.table.selected = [...selection, ...this.table.selected]
             }
         }
         else {
-            this.table.isAllSelected ? this.clear() : this.table.selected = selection
+            this.table.isAllSelected ? this.clear() : this.table.selected = selection as any
         }
     }
 

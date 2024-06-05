@@ -1,26 +1,25 @@
 <script lang="ts">
-    import { DataHandler } from '$lib/client'
+    import { TableHandler } from '$lib/client'
     import { data } from '../data_parcel'
 
-    let value = ''
+    const table = new TableHandler(data)
+    table.searchScope = ['address']
 
-    const handler = new DataHandler(data)
-    const rows = handler.getRows()
+    const calc = table.createCalculation((row) => row.width * row['length'], {
+        precision: 3
+    })
 
-    const calc = handler.createCalculation((row) => row.width * row['length'])
-
-    calc.setPrecision(3)
-
-    const sum = calc.sum((values) => values.map((value: number) => value *  1.196))
-
+    const avg = $derived.by(() => {
+        return calc.avg((values) => values.map((value: number) => value *  1.196))
+    })
 </script>
 
 <section class="flex">
 
     <article>
-        <input type="text" bind:value  on:input={() => handler.search(value, ['address'])} placeholder="Search addresses..."/>
+        <input type="text" bind:value={table.search} placeholder="Search addresses..."/>
         <ul class="thin-scrollbar">
-            {#each $rows as row}
+            {#each table.rows as row}
                 <li class="flex">
                     <span>{row.address}</span>
                     <code>
@@ -32,8 +31,8 @@
         </ul>
     </article>
     <aside class="z-depth-2">
-        <p>Total area</p>
-        <code>{new Intl.NumberFormat('en-US').format($sum)} yd²</code>
+        <p>Average area</p>
+        <code>{new Intl.NumberFormat('en-US').format(avg)} yd²</code>
     </aside>
 </section>
 

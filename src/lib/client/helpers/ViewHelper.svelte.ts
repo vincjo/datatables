@@ -2,9 +2,9 @@
 
 export default class ViewHelper
 {
+    public columns  = $state<{ name: string, index: number, isVisible?: boolean }[]>([])
     private element : HTMLElement
     private mutation: MutationObserver
-    public columns = $state<{ name: string, index: number, isVisible?: boolean }[]>([])
 
     constructor(columns: { name: string, index: number, isVisible?: boolean }[])
     {

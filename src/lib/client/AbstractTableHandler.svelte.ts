@@ -7,7 +7,7 @@ import { parseField, match } from './utils'
 export default abstract class AbstractTableHandler<Row>
 {
     public events               = new EventsHandler()
-    public rawRows              = $state<Row[]>([])
+    public rawRows              = $state.frozen<Row[]>([])
     public allRows              = $derived<Row[]>(this.createAllRows())
     public filters              = $state<(Filter<Row>)[]>([])
     public rowsPerPage          = $state<number>(10)
@@ -15,14 +15,14 @@ export default abstract class AbstractTableHandler<Row>
     public search               = $state<string>('')
     public searchScope          = $state<(Field<Row>)[]>(null)
     public filterCount          = $derived<number>(this.filters.length)
-    public rows                 = $derived<Row[]>(this.createPagedRows())
+    public rows                 = $derived<readonly Row[]>(this.createPagedRows())
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
     public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())
     public sorting              = $state<(Sorting<Row>)>({})
     public selected             = $state<(Row | Row[keyof Row])[]>([])
-    private selectBy            : string
+    public selectBy             : string
     public selectScope          = $state<'all' | 'currentPage'>('currentPage')
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
 

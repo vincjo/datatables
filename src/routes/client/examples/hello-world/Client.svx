@@ -8,18 +8,16 @@
 
 <Main/>
 
-
 ## Code
 
-
-To display row count, global search, pagination and rows per page components, `<Datatable>` is set with the `basic` property.
+To display row count, global search, pagination and rows per page components, `<Datatable>` is set with the `basic` property. 
 
 ```svelte
 <script lang="ts">
-    import { TableHandler, Datatable, Th, ThFilter } from '$lib/client'
-    import myData from '$site/data/data'
+    import { TableHandler, Datatable, Th, ThFilter } from '@vincjo/datatables'
+    import { data } from 'somewhere'
 
-    const table = new TableHandler(myData, { rowsPerPage: 10 })
+    const table = new TableHandler(data, { rowsPerPage: 10 })
 </script>
 
 <Datatable basic {table}>
@@ -48,11 +46,6 @@ To display row count, global search, pagination and rows per page components, `<
     </table>
 </Datatable>
 ```
-
- 
-
-<br>
-
 ## Data
 
 ```ts
@@ -64,4 +57,3 @@ const data = [
     ...
 ]
 ```
-
