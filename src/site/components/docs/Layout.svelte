@@ -5,15 +5,15 @@
 
     let { nav, children }: { nav: any, children: Snippet } = $props()
     let element: HTMLElement
-    // const scrollTop = () => {
-    //     if (element) {
-    //         element.scrollTop = 0
-    //     }
-    // }
-    // $effect(() => {
-    //     $url
-    //     scrollTop()
-    // })
+    const scrollTop = () => {
+        if (element) {
+            element.scrollTop = 0
+        }
+    }
+    $effect(() => {
+        $url
+        scrollTop()
+    })
 </script>
 
 <Nav {nav}/>

@@ -2,14 +2,12 @@
     import { TableHandler, Datatable, Th } from '$lib/client'
     import { data } from '../data_cars'
 
-    let value = ''
-
     const table = new TableHandler(data)
 
     const [min, max] = $derived(table.createCalculation('model_year').bounds())
 </script>
 
-<section class="flex">
+<section class="flex bg-darken">
     <aside class="z-depth-2">
         <p>Model year</p>
         <ul>
@@ -49,6 +47,7 @@
         max-width: 800px;
         flex-wrap: wrap;
         align-items: flex-start;
+        border: 1px solid var(--grey);
     }
     article {
         position: relative;

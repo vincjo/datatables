@@ -4,10 +4,10 @@
 
     const table = new TableHandler(data)
 
-    const sum = $derived(table.createCalculation('price', { precision: 2 }).sum())
+    const sum = $derived(table.createCalculation('price').sum())
 </script>
 
-<section class="flex">
+<section class="flex bg-darken">
 
     <article>
         <input type="text" bind:value={table.search}  placeholder="Search products..."/>
@@ -33,6 +33,7 @@
         max-width: 800px;
         flex-wrap: wrap;
         align-items: flex-start;
+        border: 1px solid var(--grey);
     }
     input {
         background: var(--bg);

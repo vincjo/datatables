@@ -5,21 +5,28 @@
 
 <Banner/>
 
-## Installation
+## Client-side data processing
+
+This part of the lib provides an API to dynamically interact with iterable data on the client-side: filters, pagination, sorting, row selection…
 
 <Install/>
 
 
-## Client-side data processing
-
-This part of the lib provides an API to dynamically interact with iterable data on the client-side: filtering, paging, sorting, selecting…
-
-- **Headless** by design
+<!-- - **Headless** by design
 - **Typescript** support
 - **SSR** friendly
 - no dependencies
 
-Also provides some demo components, which you can grab and customize in your own project.
+Also provides some demo components, which you can grab and customize in your own project. -->
+
+## Migration from v1 to v2
+
+In order to make the migration process a little easier, v1 is embed in "legacy" namespace so you'll be able to upgrade your components progressively by simply modifying imports.
+
+```diff
+- @vincjo/datatables
++ @vincjo/datatables/legacy
+```
 
 ## Sample code
 

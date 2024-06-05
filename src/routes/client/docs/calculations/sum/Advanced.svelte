@@ -6,15 +6,13 @@
     const table = new TableHandler(data)
     table.searchScope = ['address']
 
-    const calc = table.createCalculation((row) => row.width * row['length'], { precision: 4 })
+    const calc = table.createCalculation(({ width, length }) => width * length * 1.196)
 
-    const sum = $derived.by(() => {
-        return calc.sum((values) => values.map((value: number) => value *  1.196))
-    })
+    const sum = $derived(calc.sum({ precision: 3 }))
 
 </script>
 
-<section class="flex">
+<section class="flex bg-darken">
 
     <article>
         <input type="text" bind:value={table.search} placeholder="Search addresses..."/>
@@ -43,6 +41,7 @@
         max-width: 800px;
         flex-wrap: wrap;
         align-items: flex-start;
+        border: 1px solid var(--grey);
     }
     input {
         background: var(--bg);

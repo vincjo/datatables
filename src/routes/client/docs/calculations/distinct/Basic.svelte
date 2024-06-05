@@ -4,14 +4,11 @@
 
     const table = new TableHandler(data)
 
-    const distinct = $derived.by(() => {
-        return table.createCalculation('make')
-            .distinct()
+    const distinct = table.createCalculation('make').distinct()
             .sort((a, b) => (a.count < b.count ? 1 : -1))
-    })
 </script>
 
-<section class="flex">
+<section class="flex bg-darken">
     <aside class="z-depth-2">
         <p>Distinct make</p>
         <div class="thin-scrollbar">
@@ -53,6 +50,7 @@
         max-width: 800px;
         flex-wrap: wrap;
         align-items: flex-start;
+        border: 1px solid var(--grey);
     }
     article {
         position: relative;

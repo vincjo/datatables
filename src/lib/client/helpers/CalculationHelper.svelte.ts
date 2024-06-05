@@ -3,54 +3,48 @@ import { parseField } from '$lib/client/utils'
 
 export default class CalcultationHelper<Row>
 {
-    
     private callback    : (row: Row) => Row[keyof Row]
     private precision   : number
     private table       : TableHandler<Row>
 
-    constructor(table: TableHandler<Row>, field: Field<Row>, param?: { precision: number })
+    constructor(table: TableHandler<Row>, field: Field<Row>)
     {
         this.table      = table
         this.callback   = parseField(field).callback
-        this.precision  = param?.precision ?? 2
     }
 
-    public distinct(callback?: (values: any[]) => any[]): { value: string, count: unknown }[]
+    public distinct(): { value: string, count: unknown }[]
     {
-        const values = this.table.rawRows.map(row => this.callback(row))
+        const values = this.table.rawRows.map(row => this.callback(row)) as any[]
 
-        const array = callback ? callback(values) : values
-
-        const result = array.reduce((acc, curr) => {
+        const result = values.reduce((acc, curr) => {
             acc[curr] = (acc[curr] ?? 0) + 1
             return acc
         }, {})
         return Object.entries(result).map(([value, count]) => ({ value, count }))
     }
 
-    public avg(callback?: (values: number[]) => number[]): number
+    public avg(param?: { precision: number }): number
     {
+        this.precision  = param?.precision ?? 2
         if (this.table.allRows.length === 0) return 0
         const values = this.table.allRows.map(row => this.callback(row)).filter(Boolean) as number[]
-        const array = callback ? callback(values) : values
-        return this.round(array.reduce((acc, curr) => acc + curr, 0) / array.length)
+        return this.round(values.reduce((acc, curr) => acc + curr, 0) / values.length)
     }
 
-    public sum(callback?: (values: number[]) => number[]): number
+    public sum(param?: { precision: number }): number
     {
+        this.precision  = param?.precision ?? 2
         const values = this.table.allRows.map(row => this.callback(row)) as number[]
-        const array = callback ? callback(values) : values
-        return this.round(array.reduce((acc, curr) => acc + curr, 0))
+        return this.round(values.reduce((acc, curr) => acc + curr, 0))
     }
 
-    public bounds(callback?: (values: number[]) => number[]): number[]
+    public bounds(): number[]
     {
-        const values = this.table.rawRows.map(row => this.callback(row))
+        const values = this.table.allRows.map(row => this.callback(row))
 
-        const numbers = callback ?
-            callback(values as number[]).filter(Boolean) :
-            values.filter(Boolean) as number[]
-
+        const numbers = values.filter(Boolean) as number[]
+        if (numbers.length === 0) return [null, null]
         return [
             Math.min(...numbers),
             Math.max(...numbers)

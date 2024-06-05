@@ -8,14 +8,9 @@
     </p>
 </div>
 
-# Experimental support for Svelte 5 - Runes
-
-
-
+# Support for Svelte 5 - Runes in progress
 
 :globe_with_meridians: **[vincjo.fr/datatables.runes](https://vincjo.fr/datatables.runes)**
-
-
 
 
 <br>
@@ -26,6 +21,19 @@
 npm i -D @vincjo/datatables@runes
 ```
 
+
+# Migration from v1 to v2
+
+In order to make the migration process a little easier, v1 is embed in "legacy" namespace so you'll be able to upgrade your components progressively by simply modifying imports.
+
+```diff
+- @vincjo/datatables
++ @vincjo/datatables/legacy
+
+- @vincjo/datatables/remote
++ @vincjo/datatables/legacy/remote
+```
+<br>
 
 # Sample code
 

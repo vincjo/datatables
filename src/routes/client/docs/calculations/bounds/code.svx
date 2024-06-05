@@ -6,10 +6,11 @@
 
 ````svelte
 <script lang="ts">
-    import type { Datahandler } from '@vincjo/datatables'
-    export let handler: DataHandler
+    import { TableHandler } from '@vincjo/datatables'
 
-    const [min, max] = handler.createCalculation('columnName').bounds()
+    const table = new TableHandler(data)
+
+    const [min, max] = $derived(table.createCalculation('model_year').bounds())
 </script>
 
 <ul>

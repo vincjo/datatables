@@ -6,10 +6,11 @@
 
 ````svelte
 <script lang="ts">
-    import type { Datahandler } from '@vincjo/datatables'
-    export let handler: DataHandler
+    import type { TableHandler } from '@vincjo/datatables'
 
-    const distinct = handler.createCalculation('columnName').distinct()
+    let { table }: { table: TableHandler } = $props()
+
+    const distinct = table.createCalculation('columnName').distinct()
 </script>
 
 <ul>

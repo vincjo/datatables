@@ -5,21 +5,25 @@
 
 <Banner/>
 
-<h2 class="alt-font">Installation</h2>
+## Server-side data processing
+
+This part of the lib provides utilities to interact with a remote API that handles pagination, filters, sorting...
 
 <Install/>
 
-
-<h2 class="alt-font">Server-side data processing</h2>
-
-This part of the lib provides utilities to interact with a remote API that handles pagination, filtering, sorts...
-
-You will craft your own wrapper function to fetch the remote API.
-
-
 ⚠️ Imports will be located in <span class="import">@vincjo/datatables**/remote**</span>
 
-<h2 class="alt-font">Sample code</h2>
+
+## Migration from v1 to v2
+
+In order to make the migration process a little easier, v1 is embed in "legacy" namespace so you'll be able to upgrade your components progressively by simply modifying imports.
+
+```diff
+- @vincjo/datatables/remote
++ @vincjo/datatables/legacy/remote
+```
+
+## Sample code
 
 ```svelte
 <script lang="ts">

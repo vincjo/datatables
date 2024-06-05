@@ -5,16 +5,14 @@
     const table = new TableHandler(data)
     table.searchScope = ['address']
 
-    const calc = table.createCalculation((row) => row.width * row['length'], {
-        precision: 3
+    const calc = table.createCalculation(({ width, length }) => {
+        return width * length * 1.196
     })
 
-    const avg = $derived.by(() => {
-        return calc.avg((values) => values.map((value: number) => value *  1.196))
-    })
+    const avg = $derived(calc.avg({ precision: 3 }))
 </script>
 
-<section class="flex">
+<section class="flex bg-darken">
 
     <article>
         <input type="text" bind:value={table.search} placeholder="Search addresses..."/>
@@ -43,6 +41,7 @@
         max-width: 800px;
         flex-wrap: wrap;
         align-items: flex-start;
+        border: 1px solid var(--grey);
     }
     input {
         background: var(--bg);
