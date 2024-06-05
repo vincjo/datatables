@@ -9,13 +9,16 @@ if (result.error) {
 	dotenv({ path: '../../.env'})
 }
 
+const port = process.env.NODE_ENV === 'development' ? ':5173' : ''
+
+
 const config: UserConfig = {
     plugins: [
         sveltekit(),
         replace({
             preventAssignment: true,
             values: {
-                'BASE_URL': process.env.BASE_URL + `:5173/datatables.runes/api`,
+                'BASE_URL': process.env.BASE_URL + `${port}/datatables.runes/api`,
                 'STATIC_PATH': '/datatables.runes',
             }
         }),
