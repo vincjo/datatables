@@ -18,6 +18,12 @@ export default class CalcultationHelper<Row>
         const values = this.table.rawRows.map(row => this.callback(row)) as any[]
 
         const result = values.reduce((acc, curr) => {
+            if (Array.isArray(curr)) {
+                for (const item of curr) {
+                    acc[item] = (acc[item] ?? 0) + 1
+                }
+                return acc
+            }
             acc[curr] = (acc[curr] ?? 0) + 1
             return acc
         }, {})

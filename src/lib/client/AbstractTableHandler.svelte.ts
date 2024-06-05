@@ -7,7 +7,7 @@ import { parseField, match } from './utils'
 export default abstract class AbstractTableHandler<Row>
 {
     public events               = new EventsHandler()
-    public rawRows              = $state.frozen<Row[]>([])
+    public rawRows              = $state<Row[]>([])
     public allRows              = $derived<Row[]>(this.createAllRows())
     public filters              = $state<(Filter<Row>)[]>([])
     public rowsPerPage          = $state<number>(10)

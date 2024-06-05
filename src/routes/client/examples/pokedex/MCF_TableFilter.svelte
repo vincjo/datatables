@@ -4,7 +4,7 @@
     let { table }: Props = $props()
 
     const types = table.createCalculation(({ type }) => {
-        return type.map((value: string) => value.split(' / ')).flat()
+        return type.split(' / ')
     }).distinct()
     const filter = table.createAdvancedFilter('type', check.isLike)
 </script>

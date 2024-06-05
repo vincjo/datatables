@@ -15,7 +15,7 @@
                 <th style:width="160px">
                     <div class="flex">
                         <Checkbox 
-                            onclick={() => table.selectAll({ scope: 'currentPage' })}
+                            onclick={() => table.selectAll()}
                             margin={[0,12,0,0]}
                             size={16}
                             checked={table.isAllSelected}
