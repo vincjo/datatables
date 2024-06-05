@@ -8,6 +8,13 @@
     </p>
 </div>
 
+> [!NOTE]
+> ### Upcoming Svelte 5 runes
+>
+> With the imminent release of Svelte 5, SSD is getting a facelift for its next major release.
+> You can take a look at the preview documentation here:
+> https://vincjo.fr/datatables.runes/
+
 # Presentation
 
 This lib provides an API to dynamically interact with iterable data on the client-side: filtering, paging, sorting, selecting...
