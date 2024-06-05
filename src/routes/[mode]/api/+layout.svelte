@@ -6,13 +6,11 @@
 
 <Nav nav={data.nav}/>
 <section class="thin-scrollbar">
-    {#if data.error}
-        <p>{data.error}</p>
-    {:else}    
-        <div>
-            {@render children()}
-        </div>
-    {/if}
+
+    <div>
+        {@render children()}
+    </div>
+
 </section>
 
 <style>
@@ -37,18 +35,5 @@
         section {
             left: 0;
         }
-    }
-    p {
-        display: block;
-        margin: 80px auto;
-        color: var(--ternary);
-        width: 600px;
-        text-align: center;
-        padding: 24px 16px;
-        border-radius: 19px;
-        border: 2px dashed var(--ternary);
-        font-weight: bold;
-        font-size: 16px;
-        font-family: JetBrains;
     }
 </style>

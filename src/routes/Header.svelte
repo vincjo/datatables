@@ -1,10 +1,11 @@
 <script lang="ts">
-    import Github from './Header_Github.svelte'
-    import Theme from './Header_Theme.svelte'
-    import Mode from './Header_Mode.svelte'
-    import Logo from '$site/Logo.svelte'
+    import Github   from './Header_Github.svelte'
+    import Theme    from './Header_Theme.svelte'
+    import Mode     from './Header_Mode.svelte'
+    import Logo     from '$site/Logo.svelte'
     import { site } from '$site/utils'
     import { page } from '$app/stores'
+    import { dev }  from '$app/environment'
 </script>
 
 <header class="flex">
@@ -16,6 +17,11 @@
         <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}">Docs</a>
         <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/${site.mode}/api`)}">API</a>
         <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}">Examples</a>
+
+        {#if dev}
+            <a class="menu" class:active={$page.url.pathname.indexOf('/gen') > -1}   href="{site.getPath(`/${site.mode}/gen`)}">[gen]</a>
+            <a class="menu" class:active={$page.url.pathname.indexOf('/md') > -1}   href="{site.getPath(`/${site.mode}/md`)}">[md]</a>
+        {/if}
     </nav>
     <div></div>
     <aside class="flex">
