@@ -1,17 +1,17 @@
 import type Context from '$lib/remote/Context'
-import type { Sort } from '$lib/remote'
+import type { Order } from '$lib/remote'
 import { type Writable, get } from 'svelte/store'
-import type EventsHandler from './EventsHandler'
+import type EventHandler from './EventHandler'
 
 export default class SortHandler<Row>
 {
-    private events          : EventsHandler
+    private event           : EventHandler
     private hasMultipleSort : boolean
-    private sort            : Writable<Sort<Row>>
+    private sort            : Writable<Order<Row>>
 
     constructor(context: Context<Row>)
     {
-        this.events             = context.events
+        this.event              = context.event
         this.hasMultipleSort    = false
         this.sort               = context.sort
     }
@@ -36,14 +36,14 @@ export default class SortHandler<Row>
     {
         if (!orderBy) return
         this.sort.set({ orderBy, direction: 'asc' })
-        this.events.trigger('change')
+        this.event.trigger('change')
     }
 
     public desc(orderBy: keyof Row)
     {
         if (!orderBy) return
         this.sort.set({ orderBy, direction: 'desc' })
-        this.events.trigger('change')
+        this.event.trigger('change')
     }
 
     public apply(params: { orderBy: keyof Row, direction?: 'asc' | 'desc' } = null)
@@ -60,13 +60,6 @@ export default class SortHandler<Row>
             return this.apply({ orderBy: sort.orderBy, direction: sort.direction })
         }
         return
-    }
-
-    public define(params: { orderBy: keyof Row, direction: 'asc' | 'desc' })
-    {
-        const { orderBy, direction } = params
-        if (!orderBy || !direction) return
-        this.sort.set({ orderBy, direction })
     }
 
 

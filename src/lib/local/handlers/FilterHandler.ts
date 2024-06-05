@@ -1,27 +1,34 @@
-import type { Filter, Field, Comparator, EventsHandler, Criterion } from '$lib/client'
+import type { Filter, Field, Comparator, EventHandler, Criterion } from '$lib/local'
 import { isNotNull } from '../utils'
-import type Context from '$lib/client/Context'
+import type Context from '$lib/local/Context'
 import { type Writable, type Readable, derived } from 'svelte/store'
-import { parseField } from '$lib/client/utils'
+import { parseField } from '$lib/local/utils'
+// import { check } from '$lib/local/Comparator'
 
-type Value = string | number | null | undefined | boolean | Criterion[]
+type Value = string | number | null | undefined | boolean | number[] | Criterion[]
+// type Collection<Row> = {
+//     value: unknown
+//     filterBy: Field<Row>
+//     set: (value: unknown, comparator: Comparator<Row>) => void,
+//     clear: () => void
+// }
 
 
 export default class FilterHandler<Row>
 {
-    private filters     : Writable<Filter<Row>[]>
-    private events      : EventsHandler
-    private collection  : Readable<{ value: unknown, filterBy: Field<Row>, check: string }[]>
+    protected filters: Writable<Filter<Row>[]>
+    protected event: EventHandler
+    private collection: Readable<{ value: unknown, filterBy: Field<Row>, check: string }[]>
 
     constructor(context: Context<Row>)
     {
         this.filters = context.filters
-        this.events  = context.events
+        this.event   = context.event
     }
 
-    public set(value: Value, filterBy: Field<Row>, comparator: Comparator<Row> = null, uid?: string )
+    public set(value: Value, filterBy: Field<Row>, comparator: Comparator<Row> = null, name?: string )
     {
-        const { callback, identifier, key } = parseField(filterBy, uid)
+        const { callback, identifier, key } = parseField(filterBy, name)
         const filter = { value, identifier, callback, comparator, key }
         this.filters.update((store) => {
             store = store.filter((item) => item.identifier !== identifier)
@@ -35,8 +42,8 @@ export default class FilterHandler<Row>
     public clear()
     {
         this.filters.set([])
-        this.events.trigger('change')
-        this.events.trigger('clearFilters')
+        this.event.trigger('change')
+        this.event.trigger('clearFilters')
     }
 
     public get()

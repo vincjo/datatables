@@ -1,24 +1,26 @@
 import type Context from '$lib/remote/Context'
 import { type Writable, type Readable, get } from 'svelte/store'
-import type EventsHandler from './EventsHandler'
+import type EventHandler from './EventHandler'
 
 export default class PageHandler<Row>
 {
     public totalRows        : Writable<number>
-    public currentPage      : Writable<number>
+    public pageNumber       : Writable<number>
     public rowCount         : Readable<{ total: number, start: number, end: number }>
     public rowsPerPage      : Writable<number | null>
-    public events           : EventsHandler
+    public event            : EventHandler
     public pages            : Readable<number[]>
+    public selected         : Writable<(Row | Row[keyof Row])[]>
 
     constructor(context: Context<Row>)
     {
         this.totalRows          = context.totalRows
-        this.currentPage        = context.currentPage
+        this.pageNumber         = context.pageNumber
         this.rowCount           = context.rowCount
         this.rowsPerPage        = context.rowsPerPage
-        this.events             = context.events
+        this.event              = context.event
         this.pages              = context.pages
+        this.selected           = context.selected
     }
 
     public get()
@@ -31,18 +33,18 @@ export default class PageHandler<Row>
         const rowsPerPage = get(this.rowsPerPage)
         const totalRows = get(this.totalRows)
 
-        this.currentPage.update((store) => {
+        this.pageNumber.update((store) => {
             if (rowsPerPage && totalRows) {
                 if (number >= 1 && number <= Math.ceil(totalRows / rowsPerPage)) {
                     store = number
-                    this.events.trigger('change')
+                    this.event.trigger('change')
                 }
                 return store
             }
             else {
                 if (number >= 1) {
                     store = number
-                    this.events.trigger('change')
+                    this.event.trigger('change')
                 }
                 return store
             }
@@ -51,13 +53,13 @@ export default class PageHandler<Row>
 
     public previous()
     {
-        const number = get(this.currentPage) - 1
+        const number = get(this.pageNumber) - 1
         this.goto(number)
     }
 
     public next()
     {
-        const number = get(this.currentPage) + 1
+        const number = get(this.pageNumber) + 1
         this.goto(number)
     }
 }

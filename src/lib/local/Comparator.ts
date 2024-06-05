@@ -1,5 +1,4 @@
-import type { Criterion } from '$lib/client'
-import { isNull, isNotNull, stringify } from './utils'
+import type { Criterion } from '$lib/local'
 
 export const check = {
 
@@ -68,11 +67,11 @@ export const check = {
     },
 
     isNull: (entry: null, _: any) => {
-        return isNull(entry)
+        return entry === null || entry === undefined
     },
 
     isNotNull: (entry: any, _: any) => {
-        return isNotNull(entry)
+        return entry === null || entry === undefined ? false : true
     },
 
     whereIn: (entry: any, values: Criterion[] = []) => {
@@ -95,3 +94,16 @@ export const check = {
     },
 }
 
+
+/* utils */
+
+function stringify(value: string | number | boolean = null) {
+    return String(value)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+}
+
+function isNull(entry: any) {
+    if (entry === null || entry === undefined) return true
+}

@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store'
 
 
-export default class EventsHandler
+export default class EventHandler
 {
     private events = {
         change      : [] as (() => void)[],
@@ -11,12 +11,12 @@ export default class EventsHandler
     public triggerChange = writable(0)     // legacy
 
 
-    public add(event: keyof EventsHandler['events'], callback: () => void)
+    public add(event: keyof EventHandler['events'], callback: () => void)
     {
         this.events[event].push(callback)
     }
 
-    public trigger(event: keyof EventsHandler['events'])
+    public trigger(event: keyof EventHandler['events'])
     {
         for (const callback of this.events[event]) {
             callback()

@@ -1,20 +1,21 @@
-import type Context from '$lib/client/Context'
+import type Context from '$lib/local/Context'
 import type { Writable } from 'svelte/store'
-import type { EventsHandler, Field } from '$lib/client'
+import type { EventHandler, Field } from '$lib/local'
 
 export default class SearchHandler<Row> 
 {
     private search  : Writable<{ value?: string, scope?: Field<Row>[] }>
-    private events  : EventsHandler
+    private event   : EventHandler
 
     constructor(context: Context<Row>) 
     {
         this.search = context.search
-        this.events = context.events
+        this.event  = context.event
     }
 
     public set(value: string, scope: Field<Row>[] = null)
     {
+
         this.search.update((store) => {
             store = {
                 value: value ?? '',
@@ -27,7 +28,7 @@ export default class SearchHandler<Row>
     public clear()
     {
         this.search.set({ value: null, scope: null })
-        this.events.trigger('change')
-        this.events.trigger('clearSearch')
+        this.event.trigger('change')
+        this.event.trigger('clearSearch')
     }
 }

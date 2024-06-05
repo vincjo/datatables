@@ -1,5 +1,5 @@
-import type { Field, Comparator } from '$lib/client'
-import { check } from '$lib/client/Comparator'
+import type { Field, Comparator } from '$lib/local'
+import { check } from '$lib/local/Comparator'
 import type FilterHandler from '../handlers/FilterHandler'
 
 type Value = string | number | boolean
@@ -18,7 +18,7 @@ export default class FilterHelper<Row>
         this.filterBy       = filterBy
         this.uid            = 'f_' + (Math.random()).toString(28).substring(2)
         this.comparator     = comparator ?? check.isLike
-        this.callback       = () => { return }
+        this.callback       = () => null
     }
 
     public set(value: Value, comparator?: Comparator<any>)

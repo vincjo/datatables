@@ -12,10 +12,10 @@ export default class SelectHandler<Row>
 
     constructor(context: Context<Row>)
     {
-        this.rows           = context.rows
-        this.selected       = context.selected
-        this.isAllSelected  = context.isAllSelected
-        this.selectBy       = context.selectBy
+        this.rows               = context.rows
+        this.selected           = context.selected
+        this.isAllSelected      = context.isAllSelected
+        this.selectBy           = context.selectBy
     }
 
     public set(value: Row | Row[keyof Row])

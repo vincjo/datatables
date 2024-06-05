@@ -8,14 +8,11 @@ import FilterHandler            from './handlers/FilterHandler'
 import FilterHelper             from './helpers/FilterHelper'
 import AdvancedFilterHelper     from './helpers/AdvancedFilterHelper'
 import CalculationHelper        from './helpers/CalculationHelper'
-import ViewHelper               from './helpers/ViewHelper'
-import SearchHelper             from './helpers/SearchHelper'
-
 
 import type { Readable, Writable } from 'svelte/store'
-import type { Internationalization, Row, Field, Comparator } from '$lib/client'
+import type { Internationalization, Row, Field, Comparator } from '$lib/local'
 
-export type Params = { rowsPerPage?: number, i18n?: Internationalization, selectBy?: string }
+export type Params = { rowsPerPage?: number, i18n?: Internationalization }
 
 export default class DataHandler<T extends Row = any>
 {
@@ -26,17 +23,23 @@ export default class DataHandler<T extends Row = any>
     private searchHandler   : SearchHandler<T>
     private filterHandler   : FilterHandler<T>
     public  i18n            : Internationalization
-    public  view            : ViewHelper
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: null })
     {
-        this.translate(params.i18n)
+        this.i18n           = this.translate(params.i18n)
         this.context        = new Context(data, params)
         this.sortHandler    = new SortHandler(this.context)
         this.selectHandler  = new SelectHandler(this.context)
         this.pageHandler    = new PageHandler(this.context)
         this.searchHandler  = new SearchHandler(this.context)
         this.filterHandler  = new FilterHandler(this.context)
+    }
+
+    public setRows(data: T[])
+    {
+        this.context.rawRows.set(data)
+        this.context.event.trigger('change')
+        this.applySort()
     }
 
     public getRows(): Readable<T[]>
@@ -49,14 +52,7 @@ export default class DataHandler<T extends Row = any>
         return this.context.filteredRows
     }
 
-    public setRows(data: T[])
-    {
-        this.context.rawRows.set(data)
-        this.context.events.trigger('change')
-        this.applySort()
-    }
-
-    public getRowCount(): Readable<{ start: number, end: number, total: number, selected: number }>
+    public getRowCount(): Readable<{ total: number, start: number, end: number }>
     {
         return this.context.rowCount
     }
@@ -66,15 +62,9 @@ export default class DataHandler<T extends Row = any>
         return this.context.rowsPerPage
     }
 
-    public setRowsPerPage(value: number): void
+    public getPages(param = { ellipsis: false }): Readable<number[]>
     {
-        this.context.rowsPerPage.set(value)
-        this.pageHandler.goto(1)
-    }
-
-    public getPages(param?: { ellipsis: boolean }): Readable<number[]>
-    {
-        if (param?.ellipsis) {
+        if (param.ellipsis) {
             return this.context.pagesWithEllipsis
         }
         return this.context.pages
@@ -85,9 +75,9 @@ export default class DataHandler<T extends Row = any>
         return this.context.pageCount
     }
 
-    public getCurrentPage(): Readable<number>
+    public getPageNumber(): Readable<number>
     {
-        return this.context.currentPage
+        return this.context.pageNumber
     }
 
     public setPage(value: number | 'previous' | 'next'): void
@@ -99,7 +89,7 @@ export default class DataHandler<T extends Row = any>
         }
     }
 
-    public search(value: any, scope: Field<T>[] = null)
+    public search(value: string, scope: Field<T>[] = null)
     {
         this.searchHandler.set(value, scope)
     }
@@ -107,11 +97,6 @@ export default class DataHandler<T extends Row = any>
     public clearSearch()
     {
         this.searchHandler.clear()
-    }
-
-    public createSearch(items?: any[]): SearchHelper
-    {
-        return new SearchHelper(items)
     }
 
     public sort(orderBy: Field<T>, identifier?: string)
@@ -137,14 +122,14 @@ export default class DataHandler<T extends Row = any>
         return this.context.sort
     }
 
-    public applySort( params: { orderBy: Field<T>, direction?: 'asc' | 'desc', identifier?: string } = null )
+    public applySort( params: { orderBy: Field<T>, direction?: 'asc' | 'desc' } = null )
     {
         this.sortHandler.apply(params)
     }
 
-    public defineSort( params: { orderBy: Field<T>, direction: 'asc' | 'desc', identifier?: string })
+    public defineSort(orderBy: Field<T>, direction?: 'asc' | 'desc')
     {
-        this.sortHandler.define(params)
+        this.sortHandler.define(orderBy, direction)
     }
 
     public clearSort()
@@ -152,14 +137,29 @@ export default class DataHandler<T extends Row = any>
         this.sortHandler.clear()
     }
 
-    public filter( value: any, filterBy: Field<T>, comparator?: Comparator<T> )
+    public filter( value: string | number | null | undefined | boolean | number[], filterBy: Field<T>, comparator: Comparator<T> = null )
     {
         this.filterHandler.set(value, filterBy, comparator)
     }
 
-    public getFilters(): Readable<{ filterBy: Field<T>, check: string, value: unknown }[]>
+    public getFilters()
     {
         return this.filterHandler.get()
+    }
+
+    public createFilter( filterBy: Field<T>, comparator?: Comparator<T> )
+    {
+        return new FilterHelper( this.filterHandler, filterBy, comparator )
+    }
+
+    public createAdvancedFilter(filterBy: Field<T>)
+    {
+        return new AdvancedFilterHelper(this.filterHandler, filterBy)
+    }
+
+    public getFilterCount(): Readable<number>
+    {
+        return this.context.filterCount
     }
 
     public clearFilters(): void
@@ -167,61 +167,40 @@ export default class DataHandler<T extends Row = any>
         this.filterHandler.clear()
     }
 
-    public createAdvancedFilter(filterBy: Field<T>, comparator?: Comparator<T>): AdvancedFilterHelper<T>
-    {
-        return new AdvancedFilterHelper(this.filterHandler, filterBy, comparator)
-    }
-
-    public createFilter( filterBy: Field<T>, comparator?: Comparator<T> ): FilterHelper<T>
-    {
-        return new FilterHelper( this.filterHandler, filterBy, comparator )
-    }
-
     public select(value: T | T[keyof T])
     {
         this.selectHandler.set(value)
     }
 
-    public getSelected(): Writable<(T | T[keyof T])[]>
+    public getSelected()
     {
         return this.context.selected
     }
 
-    public selectAll(params: { scope?: 'all' | 'currentPage' } = {}): void
+    public selectAll(params: { selectBy?: keyof T; scope?: 'all' | 'currentPage' } = {}): void
     {
         this.context.selectScope.set(params.scope === 'currentPage' ? 'currentPage' : 'all')
-        this.selectHandler.all()
+        this.selectHandler.all(params.selectBy ?? null)
     }
 
-    public getIsAllSelected(): Readable<boolean>
+    public isAllSelected(): Readable<boolean>
     {
         return this.context.isAllSelected
     }
 
-    public clearSelection(): void
-    {
-        this.selectHandler.clear()
-    }
-
-
     public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
     {
-        this.context.events.add(event, callback)
+        this.context.event.add(event, callback)
     }
 
-    public createCalculation(field: Field<T>, param?: { precision: number }): CalculationHelper<T>
+    public createCalculation(field: Field<T>, param: { precision: number } = null)
     {
         return new CalculationHelper(this.context, field, { precision: param?.precision ?? 2 })
     }
 
-    public createView(columns: { name: string, index: number, isVisible?: boolean }[]): ViewHelper
+    public translate(i18n: Internationalization): Internationalization
     {
-        return new ViewHelper(columns)
-    }
-
-    public translate(i18n: Internationalization)
-    {
-        this.i18n = {
+        return {
             ...{
                 search: 'Search...',
                 show: 'Show',
@@ -236,15 +215,8 @@ export default class DataHandler<T extends Row = any>
         }
     }
 
-    public setView(view: ViewHelper)
-    {
-        this.view = view
-    }
 
-    public getView(): ViewHelper
-    {
-        return this.view
-    }
+
 
     /**
      * @deprecated use setRows() instead
@@ -278,31 +250,9 @@ export default class DataHandler<T extends Row = any>
         return this.getSort()
     }
 
-    /**
-     * @deprecated use on('change', callback) instead
-     * @since v1.12.0 2023-07-14
-     */
+
     public getTriggerChange(): Writable<number>
     {
-        return this.context.events.triggerChange
-    }
-
-
-    /**
-     * @deprecated use getCurrentPage() instead
-     * @since v2.0.0 2023-10-31
-     */
-    public getPageNumber(): Readable<number>
-    {
-        return this.getCurrentPage()
-    }
-
-    /**
-     * @deprecated use getIsAllSelected() instead
-     * @since v2.0.0 2024-02-02
-     */
-    public isAllSelected(): Readable<boolean>
-    {
-        return this.getIsAllSelected()
+        return this.context.event.triggerChange
     }
 }
