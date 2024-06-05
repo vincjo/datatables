@@ -28,11 +28,11 @@
         "deploy:setup": "pm2 deploy ecosystem.config.cjs production setup"
     },
     "devDependencies": {
+        "@rollup/plugin-replace": "^5.0.7",
         "@sveltejs/adapter-node": "^5.0.0",
         "@sveltejs/kit": "^2.5.10",
         "@sveltejs/package": "^2.3.1",
         "@sveltejs/vite-plugin-svelte": "^3.1.1",
-        "@ts-ast-parser/core": "^0.8.0",
         "@types/node": "^18.15.11",
         "gros": "^1.0.0-runes.4",
         "mdsvex": "^0.11.2",
@@ -72,5 +72,10 @@
             "types": "./dist/legacy/remote/index.d.ts",
             "default": "./dist/legacy/remote/index.js"
         }
+    },
+    "dependencies": {
+        "-": "^0.0.1",
+        "D": "^1.0.0",
+        "dotenv": "^16.4.5"
     }
 }

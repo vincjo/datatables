@@ -1,1 +1,0 @@
-{"name":"allRows","text":"type $derived<Row[]>","type":"$derived<Row[]>","ast":{"name":"allRows","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":11,"default":"$derived<Row[]>(this.createAllRows())","inherited":true}}

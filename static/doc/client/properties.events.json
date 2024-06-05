@@ -1,1 +1,0 @@
-{"name":"events","text":"type EventsHandler","type":"EventsHandler","ast":{"name":"events","kind":"Property","type":{"text":"EventsHandler","kind":"Reference","source":{"line":1,"path":"src\\lib\\client\\handlers\\EventsHandler.ts"}},"line":9,"default":"new EventsHandler()","inherited":true}}

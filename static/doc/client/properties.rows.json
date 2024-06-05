@@ -1,1 +1,0 @@
-{"name":"rows","text":"type $derived<Row[]>","type":"$derived<Row[]>","ast":{"name":"rows","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":18,"default":"$derived<Row[]>(this.createPagedRows())","inherited":true}}

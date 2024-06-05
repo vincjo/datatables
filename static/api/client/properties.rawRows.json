@@ -1,0 +1,1 @@
+{"name":"rawRows","text":"type $state.frozen<Row[]>","type":"$state.frozen<Row[]>","ast":{"name":"rawRows","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":10,"default":"$state.frozen<Row[]>([])"},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

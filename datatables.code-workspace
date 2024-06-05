@@ -9,6 +9,12 @@
 			 {
 				"profile": "Git Bash",
 				"splitTerminals": [{
+					"name": "API",
+					"commands": ["cd ../autodoc && npm run dev"],
+				}],
+			}, {
+				"profile": "Git Bash",
+				"splitTerminals": [{
 					"name": "DEV",
 					"commands": ["npm run dev"],
 				}],

@@ -1,0 +1,1 @@
+{"name":"sorting","text":"type $state<(Sorting<Row>)>","type":"$state<(Sorting<Row>)>","ast":{"name":"sorting","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":23,"default":"$state<(Sorting<Row>)>({})"},"markdown":"\n<h2>Usage</h2>\n<p>There is no usage with this property.\nIt just stores the current sorting.</p>\n"}
