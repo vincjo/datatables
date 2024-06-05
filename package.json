@@ -72,8 +72,5 @@
             "types": "./dist/legacy/remote/index.d.ts",
             "default": "./dist/legacy/remote/index.js"
         }
-    },
-    "resolutions": {
-        "globby": "13.2.2"
     }
 }
