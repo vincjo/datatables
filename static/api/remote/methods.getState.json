@@ -1,1 +1,1 @@
-{"name":"getState","text":"getState(): State","returnType":"State","args":[],"ast":{"name":"getState","kind":"Method","signatures":[{"return":{"type":{"text":"State","kind":"Reference","source":{"line":18,"path":"src\\lib\\remote\\index.ts"}}},"line":31}],"inherited":true}}
+{"name":"getState","text":"getState(): State","returnType":"State","args":[],"ast":{"name":"getState","kind":"Method","signatures":[{"return":{"type":{"text":"State","kind":"Reference"}},"line":31}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

@@ -1,1 +1,1 @@
-{"name":"clearSearch","text":"clearSearch(): void","returnType":"void","args":[],"ast":{"name":"clearSearch","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":74}]}}
+{"name":"clearSearch","text":"clearSearch(): void","returnType":"void","args":[],"ast":{"name":"clearSearch","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":74}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

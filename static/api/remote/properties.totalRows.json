@@ -1,1 +1,1 @@
-{"name":"totalRows","text":"type $state<number>","type":"$state<number>","ast":{"name":"totalRows","kind":"Property","type":{"text":"number","kind":"Intrinsic"},"line":8,"default":"$state<number>(undefined)","inherited":true}}
+{"name":"totalRows","text":"type $state<number>","type":"$state<number>","ast":{"name":"totalRows","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":8,"default":"$state<number>(undefined)"},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

@@ -1,20 +1,21 @@
 import { dev } from '$app/environment'
-import { API } from '$site/api'
 
 export const load = async (url) => {
     if (!dev) {
         return {
-            message: 'Document generation runs only in dev mode.'
+            message: 'Document generation runs only in dev mode.',
+            error: true,
         }
     }
     const mode = url.params.mode
     if (['client', 'remote'].includes(mode) === false) {
         return {
-            message: 'Wrong mode: use "client" or "remote".'
+            message: 'Wrong mode: use "client" or "remote".',
+            error: true,
         }
     }
-    await API.generate(mode as 'client' | 'remote')
     return {
-        message: `Documentation for ${mode} mode has been successfully generated.`
+        message: `Welcome to the documentation center`,
+        error: false,
     }
 }

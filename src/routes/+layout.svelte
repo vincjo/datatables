@@ -1,6 +1,7 @@
 <script>
     import Header from './Header.svelte'
     import ModalContainer from '$site/components/Modal_Container.svelte'
+    import { Loading } from 'gros/loading'
     import { onMount } from 'svelte'
     import { site } from '$site/utils'
 
@@ -13,7 +14,7 @@
     })
 </script>
 
-
+<Loading process/>
 <ModalContainer/>
 
 <main>

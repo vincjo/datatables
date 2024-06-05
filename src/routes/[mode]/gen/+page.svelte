@@ -1,10 +1,13 @@
 <script>
+    import Board from './Board.svelte'
     let { data } = $props()
 </script>
 
 <section class="flex">
     <h1>{data.message}</h1>
 </section>
+
+<Board/>
 
 <style>
     section {

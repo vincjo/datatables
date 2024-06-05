@@ -1,1 +1,1 @@
-{"name":"events","text":"type EventsHandler","type":"EventsHandler","ast":{"name":"events","kind":"Property","type":{"text":"EventsHandler","kind":"Reference","source":{"line":4,"path":"src\\lib\\remote\\handlers\\EventsHandler.ts"}},"line":7,"default":"new EventsHandler()","inherited":true}}
+{"name":"events","text":"type any","type":"any","ast":{"name":"events","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":7,"default":"new EventsHandler()"},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}
