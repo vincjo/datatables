@@ -25,6 +25,8 @@ export default abstract class AbstractTableHandler<Row>
     public selectBy             : string
     public selectScope          = $state<'all' | 'currentPage'>('currentPage')
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
+    public element              = $state<HTMLElement>(undefined)
+    public clientWidth          = $state<number>(1000)
 
     constructor(data: Row[], params: Params)
     {

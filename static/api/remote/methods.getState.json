@@ -1,1 +1,1 @@
-{"name":"getState","text":"getState(): State","returnType":"State","args":[],"ast":{"name":"getState","kind":"Method","signatures":[{"return":{"type":{"text":"State","kind":"Reference"}},"line":31}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}
+{"name":"getState","text":"getState(): State","returnType":"State","args":[],"ast":{"name":"getState","kind":"Method","signatures":[{"return":{"type":{"text":"State","kind":"Reference"}},"line":33}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

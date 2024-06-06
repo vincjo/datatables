@@ -1,0 +1,1 @@
+{"name":"clientWidth","text":"type $state<number>","type":"$state<number>","ast":{"name":"clientWidth","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":23,"default":"$state<number>(1000)"},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th, ThFilter, type State } from '$lib/remote'
+    import { TableHandler, Datatable, Th, ThFilter, Search, RowsPerPage, Pagination, RowCount, type State } from '$lib/remote'
     import { reload } from './api'
     export let data: any[]
 
-    const table = new TableHandler(data, { rowsPerPage: 10 })
+    const table = new TableHandler(data, { rowsPerPage: 10, totalRows: 200 })
 
     table.load((state: State) => reload(state))
 </script>

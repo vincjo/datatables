@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib'
+    import type { TableHandler } from '$lib/client'
     import Filter from './Table_Header_Filter.svelte'
     import ColumnVisibility from './Table_Header_ColumnVisibility.svelte'
-    type Props = { table: TableHandler, element: HTMLElement }
-    let { table, element }: Props = $props()
+
+    let { table }: { table: TableHandler } = $props()
     const filter = table.createFilter('title')
 </script>
 
@@ -20,7 +20,7 @@
             </button>
         {/if}
     </aside>
-    <ColumnVisibility {table} {element}/>
+    <ColumnVisibility {table}/>
 </header>
 
 

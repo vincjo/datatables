@@ -19,6 +19,8 @@ export default class AbstractTableHandler<Row>
     public selected             = $state<(Row | Row[keyof Row])[]>([])
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
     public selectBy             : keyof Row | undefined
+    public element              = $state<HTMLElement>(undefined)
+    public clientWidth          = $state<number>(1000)
 
     constructor(data: Row[], params: Params)
     {

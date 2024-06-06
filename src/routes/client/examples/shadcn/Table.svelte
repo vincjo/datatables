@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable } from '$lib'
+    import { TableHandler, Datatable } from '$lib/client'
     import Checkbox from './Checkbox.svelte'
     import Header from './Table_Header.svelte'
     import Footer from './Table_Footer.svelte'
@@ -8,7 +8,10 @@
     const table = new TableHandler(data, { rowsPerPage: 10 })
 </script>
 
-<Datatable {table} header={Header} footer={Footer}>
+<Datatable {table}>
+    {#snippet header()}
+        <Header {table}/>
+    {/snippet}
     <table>
         <thead>
             <tr>
@@ -57,6 +60,9 @@
             {/each}
         </tbody>
     </table>
+    {#snippet}
+        <Footer {table}/>
+    {/snippet}
 </Datatable>
 
 <style>

@@ -2,8 +2,7 @@
     import type { TableHandler } from '$lib/client'
     import { Dropdown } from 'gros/dropdown'
 
-    type Props = { table: TableHandler, element: HTMLElement }
-    let { table, element }: Props = $props()
+    let { table }: { table: TableHandler } = $props()
 
     const view = table.createView([
         { name: 'Title', index: 1 },
@@ -12,7 +11,7 @@
     ])
 
     $effect(() => {
-        if (element) view.bind(element)
+        if (table.element) view.bind(table.element)
     })
 </script>
 

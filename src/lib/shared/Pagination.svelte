@@ -1,65 +1,28 @@
 <script lang="ts">
-     import type { TableHandler } from '$lib/remote'
-
-    type Props = {
-        table: TableHandler,
-        small?: boolean
-    }
-    let { table, small = false }: Props = $props()
+    import type { TableHandler } from '$lib/shared'
+    type T = $$Generic<Row>
+    let { table }: { table: TableHandler<T> } = $props()
 </script>
 
 <section>
     {#if table.pages === undefined}
-        <button
-            type="button" class="small"
-            class:disabled={table.currentPage === 1}
-            onclick={() => table.setPage('previous')}
-        >
+        <button type="button" class="small" class:disabled={table.currentPage === 1} onclick={() => table.setPage('previous')}>
             &#10094;
         </button>
-        <button class="page">page <b>{table.currentPage}</b></button>
-        <button
-            type="button" class="small"
-            onclick={() => table.setPage('next')}
-        >
+        <button class="page">Page <b>{table.currentPage}</b></button>
+        <button type="button" class="small" onclick={() => table.setPage('next')}>
             &#10095;
         </button>
     {:else}
-        {#if small}
-            <button
-                type="button"
-                class="small"
-                class:disabled={table.currentPage === 1}
-                onclick={() => table.setPage(1)}
-            >
+        {#if table.clientWidth < 600}
+            <button type="button" class="small" class:disabled={table.currentPage === 1} onclick={() => table.setPage(1)}>
                 &#10092;&#10092;
             </button>
-            <button
-                type="button"
-                class:disabled={table.currentPage === 1}
-                onclick={() => table.setPage('previous')}
-            >
+            <button type="button" class:disabled={table.currentPage === 1} onclick={() => table.setPage('previous')}>
                 &#10094;
             </button>
-            <button
-                class:disabled={table.currentPage === table.pageCount}
-                onclick={() => table.setPage('next')}
-            >
-                &#10095;
-            </button>
-            <button
-                class="small"
-                class:disabled={table.currentPage === table.pageCount}
-                onclick={() => table.setPage(table.pageCount)}
-            >
-                &#10093;&#10093;
-            </button>
         {:else}
-            <button
-                type="button"
-                class:disabled={table.currentPage === 1}
-                onclick={() => table.setPage('previous')}
-            >
+            <button type="button" class:disabled={table.currentPage === 1} onclick={() => table.setPage('previous')}>
                 {@html table.i18n.previous}
             </button>
             {#each table.pagesWithEllipsis as page}
@@ -73,12 +36,16 @@
                     {page ?? '...'}
                 </button>
             {/each}
-            <button
-                type="button"
-                class:disabled={table.currentPage === table.pageCount}
-                onclick={() => table.setPage('next')}
-            >
+            <button type="button" class:disabled={table.currentPage === table.pageCount} onclick={() => table.setPage('next')}>
                 {@html table.i18n.next}
+            </button>
+        {/if}
+        {#if table.clientWidth < 600}
+            <button class:disabled={table.currentPage === table.pageCount} onclick={() => table.setPage('next')}>
+                &#10095;
+            </button>
+            <button class="small" class:disabled={table.currentPage === table.pageCount} onclick={() => table.setPage('last')}>
+                &#10093;&#10093;
             </button>
         {/if}
     {/if}

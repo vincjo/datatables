@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th, type State } from '$lib/remote'
+    import { TableHandler, Datatable, Th, RowsPerPage, Pagination, type State } from '$lib/remote'
     import { reload } from './api'
     import PokemonStats from './PokemonStats.svelte'
     import PokemonTypes from './PokemonTypes.svelte'
@@ -10,7 +10,7 @@
     table.invalidate()
 </script>
 
-<Datatable basic {table}>
+<Datatable {table}>
     <table>
         <thead>
             <tr>
@@ -46,6 +46,10 @@
             {/each}
         </tbody>
     </table>
+    {#snippet footer()}
+        <RowsPerPage {table}/>
+        <Pagination {table}/>
+    {/snippet}
 </Datatable>
 
 

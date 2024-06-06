@@ -1,28 +1,30 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib/remote'
+    import type { TableHandler, Field, Row } from '$lib/shared'
     import type { Snippet } from 'svelte'
 
     type T = $$Generic<Row>
-    type Props = {
-        table: TableHandler,
-        field?: string,
+    type Props = { 
+        table   : TableHandler<T>, 
+        field  ?: Field<T>, 
         children: Snippet
     }
     let { table, field, children }: Props = $props()
+
+    const sorting = table.createSorting(field)
 </script>
 
 <th
-    onclick={() => table.sort(field)}
+    onclick={() => sorting.set()}
     class:sortable={field}
-    class:active={table.sorting.field === field}
+    class:active={sorting.isActive}
 >
     <div class="flex">
         <strong>
             {@render children()}
         </strong>
         <span 
-            class:asc={table.sorting.direction === 'asc'} 
-            class:desc={table.sorting.direction === 'desc'}>
+            class:asc={sorting.direction === 'asc'} 
+            class:desc={sorting.direction === 'desc'}>
         </span>
     </div>
 </th>
@@ -81,6 +83,6 @@
     div.flex {
         display: flex;
         align-items: center;
-        justify-content: left;
+        justify-content: flex-start;
     }
 </style>

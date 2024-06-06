@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { type TableHandler, Search, RowsPerPage } from '$lib/remote'
+    import { type TableHandler, Search, RowsPerPage } from '$lib/shared'
+    type T = $$Generic<Row>
+    type Props = { table: TableHandler<T> }
 
-    type Props = { table: TableHandler, small: boolean }
-
-    let { table, small = false }: Props = $props()
+    let { table }: Props = $props()
 </script>
 
 <header>
     <Search {table}/>
-    <RowsPerPage {table} {small}/>
+    <RowsPerPage {table}/>
 </header>
 
 <style>

@@ -1,33 +1,24 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib/remote'
+    import type { TableHandler, Field, Check, Row } from '$lib/client'
 
     type T = $$Generic<Row>
     type Props = {
-        table: TableHandler,
-        field: string
+        table       : TableHandler<T>,
+        field       : Field<T>,
+        check      ?: Check<T>
     }
-    let { table, field }: Props = $props()
+    let { table, field, check = undefined }: Props = $props()
 
-    let value: string = $state('')
-	let timeout: any = $state(undefined)
-
-    const filter = () => {
-        table.filter(value, field)
-		clearTimeout(timeout)
-		timeout = setTimeout( () => {
-            table.invalidate()
-		}, 400)
-	}
+    const filter = table.createFilter(field, check)
 </script>
 
 <th>
     <input
-        style:text-align="left"
         type="text"
         placeholder={table.i18n.filter}
         spellcheck="false"
-        bind:value
-        oninput={filter}
+        bind:value={filter.value}
+        oninput={() => filter.set()}
     />
 </th>
 

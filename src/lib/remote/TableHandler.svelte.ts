@@ -62,11 +62,12 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.setPage(1)
     }
 
-    public setPage(value: number | 'previous' | 'next'): void
+    public setPage(value: number | 'previous' | 'next' | 'last'): void
     {
         switch (value) {
             case 'previous' : return this.pageHandler.previous()
             case 'next'     : return this.pageHandler.next()
+            case 'last'     : return this.pageHandler.goto(this.pageCount)
             default         : return this.pageHandler.goto(value as number)
         }
     }

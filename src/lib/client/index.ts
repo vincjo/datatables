@@ -1,16 +1,12 @@
 import TableHandler from './TableHandler.svelte'
-import Datatable    from './Datatable.svelte'
-import Header       from './Header.svelte'
-import Footer       from './Footer.svelte'
 import Th           from './Th.svelte'
 import ThFilter     from './ThFilter.svelte'
-import Pagination   from './Pagination.svelte'
-import RowCount     from './RowCount.svelte'
-import RowsPerPage  from './RowsPerPage.svelte'
 import Search       from './Search.svelte'
 import { check }    from './Comparator'
 
-export { TableHandler, check, Datatable, Header, Footer, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search }
+export { TableHandler, Th, ThFilter, Search, check }
+
+export { Datatable, Header, Footer, Pagination, RowCount, RowsPerPage } from '$lib/shared'
 
 export type { default as EventsHandler } from './handlers/EventsHandler'
 

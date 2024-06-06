@@ -1,7 +1,8 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib/remote'
+    import type { TableHandler } from '$lib/shared'
 
-    let { table }: { table: TableHandler } = $props()
+    type T = $$Generic<Row>
+    let { table }: { table: TableHandler<T> } = $props()
     const { selected, total } = $derived(table.rowCount)
 </script>
 

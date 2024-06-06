@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { type TableHandler, RowCount, Pagination } from '$lib/client'
+    import { type TableHandler, RowCount, Pagination } from '$lib/shared'
     type T = $$Generic<Row>
-    type Props = { table: TableHandler<T>, small: boolean }
+    type Props = { table: TableHandler<T> }
 
-    let { table, small = false }: Props = $props()
+    let { table }: Props = $props()
 </script>
 
 <footer>
-    <RowCount {table} {small}/>
-    <Pagination {table}  {small}/>
+    <RowCount {table}/>
+    <Pagination {table}/>
 </footer>
 
 <style>

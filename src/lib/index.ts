@@ -1,23 +1,15 @@
-import TableHandler from './client/TableHandler.svelte'
-import Datatable    from './client/Datatable.svelte'
-import Header       from './client/Header.svelte'
-import Footer       from './client/Footer.svelte'
-import Th           from './client/Th.svelte'
-import ThFilter     from './client/ThFilter.svelte'
-import Pagination   from './client/Pagination.svelte'
-import RowCount     from './client/RowCount.svelte'
-import RowsPerPage  from './client/RowsPerPage.svelte'
-import Search       from './client/Search.svelte'
-import { check }    from './client/Comparator'
-import type { Internationalization, Row, Field, Check, Filter, Sorting } from './client'
+export { Datatable, Header, Footer, Pagination, RowCount, RowsPerPage } from '$lib/shared'
 
-export { TableHandler, check, Datatable, Header, Footer, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search }
-
-export type  {
-    Internationalization,
-    Row,
-    Field,
-    Sorting,
-    Filter,
-    Check
-}
+export {
+    TableHandler,
+    check,
+    Th,
+    ThFilter,
+    Search,
+    type Internationalization,
+    type Row,
+    type Field,
+    type Sorting,
+    type Filter,
+    type Check
+} from '$lib/client'

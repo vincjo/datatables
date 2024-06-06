@@ -1,41 +1,41 @@
 <script lang="ts">
-    import type { Component, Snippet } from 'svelte'
+    import type { Snippet } from 'svelte'
     import { type TableHandler, type Row, Header, Footer  } from '$lib/remote'
 
     type T = $$Generic<Row>
-    type Props = { table: TableHandler<T>, basic?: boolean, header?: Component, footer?: Component, children: Snippet }
-    let {
-        table,
-        basic = false,
-        header = basic ? Header: null,
-        footer = basic ? Footer: null,
-        children
-    }: Props = $props()
-
-    let element: HTMLElement = $state(undefined)
-    let clientWidth = $state(1000)
-    let small = $derived(clientWidth < 600)
+    type Props = {
+        table: TableHandler<T>,
+        basic?: boolean,
+        header?: Snippet,
+        footer?: Snippet,
+        children: Snippet
+    }
+    let { table, basic = false, header, footer, children }: Props = $props()
 
     table.on('change', () => {
-        if (element) element.scrollTop = 0
+        if (table.element) table.element.scrollTop = 0
     })
 </script>
 
-<section bind:clientWidth>
+<section bind:clientWidth={table.clientWidth}>
 
-    <aside>
-        {#if header}
-            <svelte:component this={header} {table} {small} {element}/>
+    <aside class:container={header}>
+        {#if basic === true}
+            <Header {table}/>
+        {:else if header}
+            {@render header()}
         {/if}
     </aside>
 
-    <article bind:this={element} class="thin-scrollbar">
+    <article bind:this={table.element} class="thin-scrollbar">
         {@render children()}
     </article>
 
-    <aside>
-        {#if footer}
-            <svelte:component this={footer} {table} {small} {element}/>
+    <aside class:container={footer}>
+        {#if basic}
+            <Footer {table}/>
+        {:else if footer}
+            {@render footer()}
         {/if}
     </aside>
 
@@ -55,8 +55,7 @@
     section :global(thead) {
         position: sticky;
         inset-block-start: 0;
-        z-index: 1 !important;
-        background: var(--bg, #fff);
+        z-index: 1;
     }
     section :global(thead tr:first-child th) {
         padding: 8px 20px;
@@ -83,7 +82,13 @@
         min-height: 4px;
         padding: 0;
     }
-
+    aside.container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
     article {
         position: relative;
         height: 100%;

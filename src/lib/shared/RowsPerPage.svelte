@@ -1,16 +1,14 @@
 <script lang="ts">
-    import type { TableHandler, Row } from '$lib/client'
+    import type { TableHandler } from '$lib/shared'
 
     type T = $$Generic<Row>
-    type Props = { table: TableHandler<T>, small: boolean }
-
-    let { table, small = false }: Props = $props()
+    let { table }: { table: TableHandler<T> } = $props()
 
     const options = [5, 10, 20, 50, 100]
 </script>
 
 <aside>
-    {#if !small}
+    {#if table.clientWidth > 600}
         <span>{table.i18n.show}</span>
     {/if}
     <select bind:value={table.rowsPerPage} onchange={() => table.setPage(1)}>
@@ -20,7 +18,7 @@
             </option>
         {/each}
     </select>
-    {#if !small}
+    {#if table.clientWidth > 600}
         <span>{table.i18n.entries}</span>
     {/if}
 </aside>

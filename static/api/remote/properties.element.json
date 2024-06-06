@@ -1,0 +1,1 @@
+{"name":"element","text":"type $state<HTMLElement>","type":"$state<HTMLElement>","ast":{"name":"element","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":22,"default":"$state<HTMLElement>(undefined)"},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

@@ -3,7 +3,6 @@
     import myData from '$site/data/data'
 
     const table = new TableHandler(myData, { rowsPerPage: 10 })
-
 </script>
 
 <section class="bg-darken">

@@ -57,11 +57,6 @@ export default class CalcultationHelper<Row>
         ]
     }
 
-    public setPrecision(value: number): void
-    {
-        this.precision = value
-    }
-
     private round(value: number)
     {
         return Number(value.toFixed(this.precision))

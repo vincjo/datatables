@@ -1,16 +1,9 @@
-import TableHandler     from './TableHandler.svelte'
-import Datatable        from './Datatable.svelte'
-import Search           from './Search.svelte'
-import RowsPerPage      from './RowsPerPage.svelte'
-import Th               from './Th.svelte'
-import ThFilter         from './ThFilter.svelte'
-import RowCount         from './RowCount.svelte'
-import SelectedCount    from './SelectedCount.svelte'
-import Pagination       from './Pagination.svelte'
-import Footer           from './Footer.svelte'
-import Header           from './Header.svelte'
+export { default as TableHandler }  from './TableHandler.svelte'
+export { default as ThFilter     }  from './ThFilter.svelte'
+export { default as Search       }  from './Search.svelte'
+export { default as Th           }  from './Th.svelte'
 
-export { TableHandler, Datatable, Search, RowsPerPage, Th, ThFilter, RowCount, SelectedCount, Pagination, Footer, Header }
+export { Datatable, RowsPerPage, RowCount, Pagination, Footer, Header } from '$lib/shared'
 
 export type Row = { [key: string]: any }
 

@@ -1,1 +1,1 @@
-{"name":"selectAll","text":"selectAll(): void","returnType":"void","args":[],"ast":{"name":"selectAll","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":117}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}
+{"name":"selectAll","text":"selectAll(): void","returnType":"void","args":[],"ast":{"name":"selectAll","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":118}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}
