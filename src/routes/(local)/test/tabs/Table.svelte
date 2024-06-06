@@ -1,5 +1,5 @@
 <script>
-    import { Datatable, Th } from '$lib/client'
+    import { Datatable, Th } from '$lib/local'
     export let handler
     const rows = handler.getRows()
 </script>

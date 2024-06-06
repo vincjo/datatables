@@ -11,7 +11,7 @@ export default [
             { name: 'Users API', path: '/user-api' },
             { name: 'Todos API', path: '/todo-api' },
             { name: 'Pokédex API', path: '/poke-api' },
-            { name: 'Beers API', path: '/beer-api' },
+            // { name: 'Beers API', path: '/beer-api' },
         ]
     },
     {

@@ -1,5 +1,5 @@
 <script>
-    import { DataHandler } from '$lib/client'
+    import { DataHandler } from '$lib/local'
     import { tab1, tab2 } from './data'
     import Table from './Table.svelte'
     const handler = new DataHandler(tab1, { rowsPerPage: 50 })

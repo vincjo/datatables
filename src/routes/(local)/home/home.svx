@@ -1,6 +1,7 @@
 <script>
     import RemoteLink from './RemoteLink.svelte'
     import SkeletonLink from '$site/components/SkeletonLink.svelte'
+    import PreviewLink from '$site/components/PreviewLink.svelte'
 </script>
 
 ## Installation
@@ -29,6 +30,9 @@ Also provides some demo components, which you can grab and customize in your own
 ## Skeleton components
 <SkeletonLink/> 
 
+
+## 2.0 preview documentation (Svelte 5)
+<PreviewLink/> 
 
 ## Server-side pagination
 <RemoteLink/>

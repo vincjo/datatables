@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DataHandler } from '$lib/client'
+    import { DataHandler } from '$lib/local'
     import { pokedex } from '$site/data/pokedex'
     import Table from './Table.svelte'
     import Filter from './Table_Filter.svelte'

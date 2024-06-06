@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { DataHandler } from '$lib/client'
+    import type { DataHandler } from '$lib/local'
     export let handler: DataHandler
     const currentPage = handler.getCurrentPage()
     const pageCount = handler.getPageCount()

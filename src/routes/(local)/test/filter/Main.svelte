@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Dropdown } from 'gros/dropdown'
-    import { DataHandler, Datatable, Th } from '$lib/client'
+    import { DataHandler, Datatable, Th } from '$lib/local'
     import PokemonStats from './PokemonStats.svelte'
     import { pokedex } from '$site/data/pokedex'
     const handler = new DataHandler(pokedex, { rowsPerPage: 10 })

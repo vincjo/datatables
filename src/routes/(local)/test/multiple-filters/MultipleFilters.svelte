@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Dropdown } from 'gros/dropdown'
-    import type { DataHandler } from '$lib/client'
+    import type { DataHandler } from '$lib/local'
     
     export let handler: DataHandler
 

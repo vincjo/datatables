@@ -1,6 +1,6 @@
 <script lang="ts">
     import myData from '$site/data/data'
-    import { DataHandler, check, Datatable, Th, ThFilter } from '$lib/client'
+    import { DataHandler, check, Datatable, Th, ThFilter } from '$lib/local'
 
     const handler = new DataHandler(myData, { rowsPerPage: 50, selectBy: 'id' })
     const rows = handler.getRows()

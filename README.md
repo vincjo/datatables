@@ -11,8 +11,8 @@
 > [!NOTE]
 > ### Upcoming Svelte 5 runes
 >
-> With the imminent release of Svelte 5, SSD is getting a facelift for its next major release.
-> You can take a look at the preview documentation here:
+> With the imminent release of Svelte 5, SSD is getting a facelift for its next major 2.0.
+> You can have a look at the preview documentation here:
 > https://vincjo.fr/datatables.runes/
 
 # Presentation

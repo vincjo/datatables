@@ -1,6 +1,6 @@
 
 <script lang="ts">
-    import { DataHandler, check } from '$lib/client'
+    import { DataHandler, check } from '$lib/local'
     import { data } from './data'
     let value = ''
 

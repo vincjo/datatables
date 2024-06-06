@@ -1,6 +1,7 @@
 <script>
     import ClientLink from './ClientLink.svelte'
     import SkeletonLink from '$site/components/SkeletonLink.svelte'
+    import PreviewLink from '$site/components/PreviewLink.svelte'
     import { getPath } from 'gros/page'
 </script>
 
@@ -28,6 +29,9 @@ This part of the lib provides 2 additional functions
 ## Skeleton components
 <SkeletonLink remote={true}/>
 
+
+## 2.0 preview documentation (Svelte 5)
+<PreviewLink remote="true"/> 
 
 ## Sample code
 <aside class="bis">

@@ -1,5 +1,5 @@
 <script>
-    import { DataHandler, check } from '$lib/client'
+    import { DataHandler, check } from '$lib/local'
     import { Range, Checkbox } from 'gros/form'
     import { data } from './data'
     export let comparator

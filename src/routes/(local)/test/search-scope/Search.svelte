@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '$lib/client'
+    import type { DataHandler, Row } from '$lib/local'
 
     type T = $$Generic<Row>
 
