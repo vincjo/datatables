@@ -60,7 +60,7 @@
             {/each}
         </tbody>
     </table>
-    {#snippet}
+    {#snippet footer()}
         <Footer {table}/>
     {/snippet}
 </Datatable>
