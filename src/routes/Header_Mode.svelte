@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Tooltip } from 'gros/tooltip'
-    import { site } from '$site/utils'
+    import { site } from '$site'
 </script>
 
 <aside class="flex">

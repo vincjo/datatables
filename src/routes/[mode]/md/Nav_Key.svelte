@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { TableHandler } from '$lib/client'
-    import { site } from '$site/utils'
+    import { site } from '$site'
     import { page } from '$app/stores'
     import { slide } from 'svelte/transition'
 

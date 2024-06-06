@@ -30,15 +30,8 @@
     import type { Datahandler } from '@vincjo/datatables'
     export let handler: DataHandler
 
-    // Merge colors from 2 columns using '/' separator
-    const calc = handler.createCalculation((row) => row.color1 + '/' + row.color2)
-
-    // split merged colors and get distinct values
-    const distinct = calc.distinct((colors) => {
-        return colors
-            .map((value: string) => value.split('/') )
-            .flat()
-    })
+    // Merge colors inside an array af values
+    const calc = handler.createCalculation(({ color1, color2 }) => [color1, color2]).distinct()
 </script>
 
 <ul>

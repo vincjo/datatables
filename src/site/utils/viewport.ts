@@ -1,4 +1,4 @@
-let intersectionObserver
+let intersectionObserver: IntersectionObserver
 
 function ensureIntersectionObserver() {
     if (intersectionObserver) return

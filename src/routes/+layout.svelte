@@ -3,7 +3,7 @@
     import ModalContainer from '$site/components/Modal_Container.svelte'
     import { Loading } from 'gros/loading'
     import { onMount } from 'svelte'
-    import { site } from '$site/utils'
+    import { site } from '$site'
 
     onMount(() => {
         const theme = site.getTheme()

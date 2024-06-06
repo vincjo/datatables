@@ -14,7 +14,11 @@ const config = {
         adapter: adapter({ out: 'build' }),
         paths: {
             base: '/datatables.runes'
-        }
+        },
+        alias: {
+			$site: 'src/site',
+			$site: 'src/site/*'
+		}
     },
 	vitePlugin: {
         inspector: {

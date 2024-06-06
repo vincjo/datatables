@@ -1,7 +1,7 @@
 <script lang="ts">
     import { TableHandler } from '$lib/client'
     import { getPath, url } from 'gros/page'
-    import { site } from '$site/utils'
+    import { site } from '$site'
     type Props = { nav: { title: string, page: string, description: string, tag: string[] }[] }
     let { nav }: Props = $props()
     const table = new TableHandler(nav)

@@ -4,11 +4,15 @@ Get rows according to client side state.
 ## Usage
 
 ```svelte
-<ul>
+<tbody>
     {#each table.rows as row}
-        <li>{row.first_name} {row.last_name}</li>
+        <tr>
+            <td>{row.first_name}</td> 
+            <td>{row.last_name}</td>
+            <td>{row.address}</td>
+        </tr>
     {/each}
-</ul>
+</tbody>
 ```
 
 ## Output

@@ -1,9 +1,8 @@
 <script lang="ts">
+    import { site, Logo } from '$site'
     import Github   from './Header_Github.svelte'
     import Theme    from './Header_Theme.svelte'
     import Mode     from './Header_Mode.svelte'
-    import Logo     from '$site/Logo.svelte'
-    import { site } from '$site/utils'
     import { page } from '$app/stores'
     import { dev }  from '$app/environment'
 </script>

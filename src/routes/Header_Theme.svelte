@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { site } from '$site/utils'
+    import { site } from '$site'
 </script>
 
 <button onclick={() => site.setTheme(site.theme === 'dark' ? 'light' : 'dark')} class="btn">

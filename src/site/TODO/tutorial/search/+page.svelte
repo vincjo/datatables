@@ -1,5 +1,5 @@
 <script>
-    import Tutorial from '$site/components/Tutorial.svelte'
+    import Tutorial from '$site/TODO/Tutorial.svelte'
     import Main from './Main.svelte'
     export let data
 </script>

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { site } from '$site/utils'
+    import { site } from '$site'
 </script>
 
 <section>
-    <h1>Documentation for the next major v2.0</h1>
+    <h1>Documentation for the next major 2.0</h1>
     <h2>Support for Svelte 5 runes in progress.</h2>
     <article class="flex">
         <aside onmouseenter={() => site.setMode('client')} class="flex" class:active={site.mode === 'client'}>

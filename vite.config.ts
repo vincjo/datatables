@@ -22,12 +22,7 @@ const config: UserConfig = {
                 'STATIC_PATH': '/datatables.runes',
             }
         }),
-    ],
-    resolve: {
-        alias: {
-            $site: path.resolve('./src/site'),
-        }
-    }
+    ]
 }
 
 export default config

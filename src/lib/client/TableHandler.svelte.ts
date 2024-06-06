@@ -138,9 +138,9 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.events.add(event, callback)
     }
 
-    public createCalculation(field: Field<T>, param?: { precision: number }): CalculationHelper<T>
+    public createCalculation(field: Field<T>): CalculationHelper<T>
     {
-        return new CalculationHelper(this, field, { precision: param?.precision ?? 2 })
+        return new CalculationHelper(this, field)
     }
 
     public createCSV()

@@ -3,7 +3,13 @@
     import { type TableHandler, type Row, Header, Footer  } from '$lib/client'
 
     type T = $$Generic<Row>
-    type Props = { table: TableHandler<T>, basic?: boolean, header?: Component, footer?: Component, children: Snippet }
+    type Props = { 
+        table: TableHandler<T>, 
+        basic?: boolean, 
+        header?: Component, 
+        footer?: Component, 
+        children: Snippet 
+    }
     let {
         table,
         basic = false,

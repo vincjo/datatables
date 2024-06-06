@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { site } from '$site/utils'
-    import Logo from '$site/Logo.svelte'
+    import { site, Logo } from '$site'
 
     let color = $derived.by(() => {
         if (site.mode === 'client') {
