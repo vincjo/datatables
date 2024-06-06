@@ -1,5 +1,4 @@
 <script>
-    import Demo from '$site/components/Demo.svelte'
     import Main from './Main.svelte'
 </script>
 

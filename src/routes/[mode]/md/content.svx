@@ -1,5 +1,5 @@
 <script>
-    import { site } from '$site/utils'
+    import { site } from '$site'
 </script>
 
 
