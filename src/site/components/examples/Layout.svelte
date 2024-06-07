@@ -7,14 +7,9 @@
     let { nav, children }: Props = $props()
 
     let element: HTMLElement
-    const scrollTop = () => {
-        if (element) {
-            element.scrollTop = 0
-        }
-    }
     $effect(() => {
         $url
-        scrollTop()
+        if (element) element.scrollTop = 0
     })
 </script>
 
@@ -38,7 +33,7 @@
         color: var(--font);
     }
     article {
-        margin: 0 auto;
+        margin: 0 40px;
         margin-bottom: 80px;
         max-width: 1080px;
     }

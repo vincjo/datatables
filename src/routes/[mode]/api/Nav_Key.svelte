@@ -1,39 +1,22 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib/client'
     import { site } from '$site'
     import { page } from '$app/stores'
     import { slide } from 'svelte/transition'
 
-    type Props = {
-        data?: string[],
-        key: string,
-        value: string,
-        table: TableHandler
-    }
-    let {
-        data = [],
-        key,
-        value = $bindable(),
-        table
-    }: Props = $props()
+    let { data = [], key }: { data?: string[], key: string } = $props()
 
-    const search = table.createSearch(data)
-    $effect(() => {
-        value
-        search.value = value
-    })
     let active = $state(true)
 </script>
 
 
 <aside class={key}>
     <button class="alt-font flex" onclick={() => active = !active} class:active={active}>
-        <span>{key} <b>({search.items.length})</b></span>
+        <span>{key} <b>({data.length})</b></span>
         <i class="micon">{active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</i>
     </button>
     {#if active}
         <ul transition:slide={{ duration: 200 }}>
-            {#each search.items as item}
+            {#each data as item}
                 <a href="{site.getPath(`/${site.mode}/api/${key}~${item}`)}">
                     <li class:active={item === $page.params.slug?.split('~')[1]}>
                         <span>{item}</span>

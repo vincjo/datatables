@@ -10,7 +10,7 @@
 <article class="flex">
     <strong>Rows per page</strong>
     <Dropdown position="top-end">
-        <aside class="btn trigger">{table.rowsPerPage} {@html glyph.dropdown}</aside>
+        <aside class="btn trigger flex">{table.rowsPerPage} {@html glyph.dropdown}</aside>
         {#snippet content()}
         <aside class="z-depth-1">
             {#each options as option}
@@ -35,6 +35,7 @@
         height: 32px;
         padding: 0 8px;
         border: 1px solid var(--grey);
+        justify-content: space-between;
         border-radius: 8px;
         margin: 0 16px 0 8px;
         width: 72px;

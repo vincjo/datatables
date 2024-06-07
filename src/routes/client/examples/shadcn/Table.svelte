@@ -4,7 +4,7 @@
     import Header from './Table_Header.svelte'
     import Footer from './Table_Footer.svelte'
     import Th from './Table_Th.svelte'
-    import { data, poemize, glyph } from './utils'
+    import { data, poemize, glyph, ellipse } from './utils'
     const table = new TableHandler(data, { rowsPerPage: 10, selectBy: 'id' })
 </script>
 
@@ -26,9 +26,9 @@
                         Task
                     </div>
                 </th>
-                <Th {table} name="Title" field="title">Title</Th>
-                <Th {table} name="Status" field="status">Status</Th>
-                <Th {table} name="Priority" field="priority">Priority</Th>
+                <Th {table} field="title">Title</Th>
+                <Th {table} field="status">Status</Th>
+                <Th {table} field="priority">Priority</Th>
             </tr>
         </thead>
         <tbody>
@@ -47,7 +47,7 @@
                     </td>
                     <td class="truncate">
                         <div class="flex">
-                            <span>{row.label}</span> {row.title}
+                            <span>{row.label}</span> {ellipse(row.title, 60)}
                         </div>
                     </td>
                     <td>

@@ -20,7 +20,7 @@
         padding: 24px;
         border-radius: 8px;
         margin: 40px 0 96px 0;
-        max-width: 1080px;
+        min-width: 1080px;
         border: 1px solid var(--grey);
     }
     aside {
@@ -40,5 +40,8 @@
     img {
         width: 48px;
         height: 48px;
+    }
+    section :global(aside.container) {
+        border-top: none !important;
     }
 </style>

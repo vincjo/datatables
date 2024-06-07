@@ -1,12 +1,19 @@
 <script lang="ts">
     import Nav from './Nav.svelte'
+    import { url } from 'gros/page'
     import { dev } from '$app/environment'
+
     let { data, children } = $props()
+    let element: HTMLElement = $state(undefined)
+    $effect(() => {
+        $url
+        if (element) element.scrollTop = 0
+    })
 </script>
 
 {#if dev}
     <Nav nav={data.nav}/>
-    <section class="thin-scrollbar">
+    <section class="thin-scrollbar" bind:this={element}>
 
         <div>
             {@render children()}

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import type { TableHandler, Field, Row } from '$lib/client'
+    import type { TableHandler } from '$lib/client'
     import type { Snippet } from 'svelte'
     import { Dropdown } from 'gros/dropdown'
     import { glyph } from './utils'
 
-    type Props = { table: TableHandler, field: Field<Row>, name: string, children: Snippet }
-    let { table, field, name, children }: Props = $props()
+    type Props = { table: TableHandler, field: string, children: Snippet }
+    let { table, field, children }: Props = $props()
 
     const view = table.getView()
 
@@ -33,7 +33,7 @@
             <button class="btn" onclick={() => sorting.asc()}>{@html glyph.asc} Asc</button>
             <button class="btn" onclick={() => sorting.desc()}>{@html glyph.desc} Desc</button>
             <div class="divider"></div>
-            <button class="btn" onclick={() => view.toggle(name)}>{@html glyph.hide} Hide</button>
+            <button class="btn" onclick={() => view.toggle(field)}>{@html glyph.hide} Hide</button>
         </aside>
         {/snippet}
     </Dropdown>

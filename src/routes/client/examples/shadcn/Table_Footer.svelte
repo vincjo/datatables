@@ -7,11 +7,11 @@
     let { table }: Props = $props()
 </script>
 
-    <div>
+    <div style:margin-left="8px">
         <RowSelection {table}/>
     </div>
 
-    <div class="flex">
+    <div class="flex" style:margin-right="8px">
         <RowsPerPage {table}/>
         <Pagination {table}/>
     </div>

@@ -1,17 +1,20 @@
 <script lang="ts">
     import type { TableHandler } from '$lib/client'
+    // import Dropdown from './Dropdown.svelte'
     import { Dropdown } from 'gros/dropdown'
 
     let { table }: { table: TableHandler } = $props()
 
     const view = table.createView([
-        { name: 'Title', index: 1 },
-        { name: 'Status', index: 2 },
-        { name: 'Priority', index: 3 },
+        { name: 'title', index: 1 },
+        { name: 'status', index: 2 },
+        { name: 'priority', index: 3 },
     ])
 
     $effect(() => {
-        if (table.element) view.bind(table.element)
+        if (table.element) {
+            view.bind(table.element)
+        }
     })
 </script>
 
@@ -22,7 +25,7 @@
         View
      </article>
      {#snippet content()}
-    <aside>
+    <aside class="z-depth-2 open-dropdown">
         <strong>Toggle columns</strong>
         {#each view.columns as column}
             <button onclick={() => view.toggle(column.name)} class="btn">
@@ -31,7 +34,7 @@
                 {:else}
                     <div class="micon"></div>
                 {/if}
-                {column.name}
+                <span style:text-transform="capitalize">{column.name}</span>
             </button>
         {/each}
     </aside>

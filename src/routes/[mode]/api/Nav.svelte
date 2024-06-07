@@ -1,18 +1,23 @@
-<script>
+<script lang="ts">
     import { TableHandler } from '$lib/client'
     import Key from './Nav_Key.svelte'
-    let { nav } = $props()
-    let value = $state('')
-    const table = new TableHandler()
+    let { nav }: { nav: {
+        properties: string[],
+        methods: string[],
+        types: string[]
+    }} = $props()
+    const data = $state.snapshot(nav)
+    const table = new TableHandler([data])
+    const { properties, methods, types } = $derived(table?.rows?.[0] ?? [] as any)
 </script>
 
 
 <nav>
-    <input type="text" placeholder="Search..." spellcheck="false" bind:value={value}/>
+    <input type="text" placeholder="Search..." spellcheck="false" bind:value={table.search}/>
     <section class="thin-scrollbar">
-        <Key data={nav.properties} {table} {value} key={'properties'}/>
-        <Key data={nav.methods}    {table} {value} key={'methods'}/>
-        <Key data={nav.types}      {table} {value} key={'types'}/>
+        <Key data={properties} key={'properties'}/>
+        <Key data={methods}    key={'methods'}/>
+        <Key data={types}      key={'types'}/>
     </section>
 </nav>
 

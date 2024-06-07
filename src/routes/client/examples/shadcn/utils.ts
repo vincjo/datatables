@@ -21,6 +21,12 @@ export const glyph = {
 
 }
 
+export const ellipse = (value: string, max: number) => {
+    if (value && value.length > max) {
+        return value.substring(0, max) + '...'
+    }
+    return value
+}
 
 export const data = [
     {

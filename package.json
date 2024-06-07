@@ -35,11 +35,11 @@
         "@sveltejs/vite-plugin-svelte": "^3.1.1",
         "@types/node": "^18.15.11",
         "dotenv": "^16.4.5",
-        "gros": "^1.0.0-runes.4",
+        "gros": "^1.0.0-runes.11",
         "mdsvex": "^0.11.2",
         "prism-svelte": "^0.5.0",
         "prismjs": "^1.29.0",
-        "svelte": "^5.0.0-next.148",
+        "svelte": "^5.0.0-next.151",
         "svelte-check": "^3.8.0",
         "svelte-preprocess": "^5.0.3",
         "tslib": "^2.3.1",
@@ -47,7 +47,7 @@
         "vite": "^5.0.0"
     },
     "peerDependencies": {
-        "svelte": "^3.56.0 || ^4.0.0 || ^5.0.0-next.120"
+        "svelte": "^5.0.0-next.120"
     },
     "type": "module",
     "files": [
@@ -63,14 +63,17 @@
         },
         "./remote": {
             "types": "./dist/remote/index.d.ts",
+            "svelte": "./dist/remote/index.js",
             "default": "./dist/remote/index.js"
         },
         "./legacy": {
             "types": "./dist/legacy/index.d.ts",
+            "svelte": "./dist/legacy/index.js",
             "default": "./dist/legacy/index.js"
         },
         "./legacy/remote": {
             "types": "./dist/legacy/remote/index.d.ts",
+            "svelte": "./dist/legacy/remote/index.js",
             "default": "./dist/legacy/remote/index.js"
         }
     }

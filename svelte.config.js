@@ -6,10 +6,10 @@ import preprocess from 'svelte-preprocess'
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
     extensions: ['.svelte', ...mdsvexConfig.extensions],
-    preprocess: [
-        mdsvex(mdsvexConfig),
-        preprocess(), 
-    ],
+    preprocess: [mdsvex(mdsvexConfig), preprocess()],
+    // compilerOptions: {
+    //     runes: true
+    // },
     kit: {
         adapter: adapter({ out: 'build' }),
         paths: {
