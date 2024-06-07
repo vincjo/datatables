@@ -29,11 +29,11 @@
         left: calc(240px + 32px);
         right: 0;
         overflow-y: auto;
-        padding: 0 40px;
+        padding: 0 80px;
         color: var(--font);
     }
     article {
-        margin: 0 40px;
+        margin: 0;
         margin-bottom: 80px;
         max-width: 1080px;
     }

@@ -14,6 +14,8 @@
 pre {
     border-radius: 4px;
 }
+
+
 * {
     --color: #444;
     --label: #555;
@@ -49,13 +51,6 @@ a {
     width: 368px !important;
 }
 
-pre::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-pre::-webkit-scrollbar-track-piece:start {
-    top: 40px;
-}
 
 .md h1, .md h2, .md h3 {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;

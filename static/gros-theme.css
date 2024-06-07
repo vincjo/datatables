@@ -24,27 +24,31 @@
     --bg: #fff;
     --font: #424242;
     --font-grey: #757575;
+    --bg-image: #fff;
 
     --bg-code: #f5f7ff;
 }
-.thin-scrollbar::-webkit-scrollbar {
+.thin-scrollbar::-webkit-scrollbar, pre::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
-.thin-scrollbar::-webkit-scrollbar-track-piece:start {
+.thin-scrollbar::-webkit-scrollbar-track-piece:start, pre::-webkit-scrollbar {
     top: 40px;
 }
 
-.thin-scrollbar::-webkit-scrollbar-track {
+.thin-scrollbar::-webkit-scrollbar-track, pre::-webkit-scrollbar-track {
     background: #eee;
     border-radius: 8px;
 }
-.thin-scrollbar::-webkit-scrollbar-thumb {
+.thin-scrollbar::-webkit-scrollbar-thumb, pre::-webkit-scrollbar-thumb {
     background: #e0e0e0;
     border-radius: 8px;
 }
-.thin-scrollbar::-webkit-scrollbar-thumb:hover {
+.thin-scrollbar::-webkit-scrollbar-thumb:hover, pre::-webkit-scrollbar-thumb:hover {
     background: #e0e0e0;
+}
+.thin-scrollbar::-webkit-scrollbar-corner {
+    display: none;
 }
 
 [data-theme="dark"] {
@@ -73,17 +77,18 @@
     --font-grey: #bdbdbd;
 
     --bg-code: #212121;
+    --bg-image: radial-gradient(circle, #1a1b1f, #1c1e22, #1e2124, #202427, #222729);
 }
-[data-theme="dark"] .thin-scrollbar::-webkit-scrollbar-track {
+[data-theme="dark"] .thin-scrollbar::-webkit-scrollbar-track, [data-theme="dark"] pre::-webkit-scrollbar-track {
     background: #212121;
     border-radius: 8px;
 }
-[data-theme="dark"] .thin-scrollbar::-webkit-scrollbar-thumb {
+[data-theme="dark"] .thin-scrollbar::-webkit-scrollbar-thumb, [data-theme="dark"] pre::-webkit-scrollbar-thumb {
     background: #424242;
     border-radius: 8px;
 }
-[data-theme="dark"] .thin-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #424242;
+[data-theme="dark"] .thin-scrollbar::-webkit-scrollbar-thumb:hover, [data-theme="dark"] pre::-webkit-scrollbar-thumb:hover {
+    background: #333;
     transition: background, 0.2s;
 }
 

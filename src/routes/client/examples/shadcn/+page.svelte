@@ -19,7 +19,7 @@
     section {
         padding: 24px;
         border-radius: 8px;
-        margin: 40px 0 96px 0;
+        margin: 40px 80px 96px 0;
         min-width: 1080px;
         border: 1px solid var(--grey);
     }
