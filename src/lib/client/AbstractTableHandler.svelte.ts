@@ -1,13 +1,13 @@
 import type { Params }  from './TableHandler.svelte'
 import EventsHandler    from './handlers/EventsHandler'
 import type { Filter, Sorting, Field } from '$lib/client'
-import { parseField, match } from './utils'
+import { parseField, match, clone } from './utils'
 
 
 export default abstract class AbstractTableHandler<Row>
 {
     public events               = new EventsHandler()
-    public rawRows              = $state<Row[]>([])
+    public rawRows              = $state.frozen<Row[]>([])
     public allRows              = $derived<Row[]>(this.createAllRows())
     public filters              = $state<(Filter<Row>)[]>([])
     public rowsPerPage          = $state<number>(10)
@@ -37,15 +37,19 @@ export default abstract class AbstractTableHandler<Row>
 
     private createAllRows()
     {
-        let allRows = [...this.rawRows]
+        let allRows = structuredClone(this.rawRows) as Row[]
+
         if (this.search) {
-            allRows = this.rawRows.filter((row) => {
+            allRows = allRows.filter((row) => {
                 const fields = this.searchScope ?? Object.keys(row) as Field<Row>[]
                 const scope = fields.map((field: Field<Row>) => {
-                    const { callback } = parseField(field)
-                    return callback
+                    return parseField(field)
                 })
-                return scope.some((callback) => {
+                return scope.some(({ callback, key }) => {
+                    if (key && Array.isArray(row[key])) {
+                        row[key] = row[key].filter((item: any) => match(item, this.search))
+                        return match(row[key], this.search)
+                    }
                     return match(callback(row), this.search)
                 })
             })
@@ -53,10 +57,13 @@ export default abstract class AbstractTableHandler<Row>
             this.events.trigger('change')
         }
         if (this.filterCount > 0) {
-            for (const filter of this.filters) {
-                allRows = allRows.filter(row => {
-                    const entry = filter.callback(row)
-                    return match(entry, filter.value, filter.check)
+            for (const { callback, value, check, key } of this.filters) {
+                allRows = allRows.filter((row) => {
+                    if (key && Array.isArray(row[key])) {
+                        row[key] = row[key].filter((item: any) => match(item, value, check))
+                        return match(row[key], value, check)
+                    }
+                    return match(callback(row), value, check)
                 })
             }
             this.currentPage = 1

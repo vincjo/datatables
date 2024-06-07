@@ -53,6 +53,7 @@
         display: block;
         text-decoration: none;
         padding: 8px 12px;
+        margin-right: 8px;
         transition: all, 0.2s;
         border-radius: 8px;
         color: var(--primary);

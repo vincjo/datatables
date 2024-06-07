@@ -28,6 +28,7 @@ export default class AbstractTableHandler<Row>
         this.rows               = data
         this.selectBy           = params.selectBy as keyof Row ?? undefined
         this.totalRows          = params.totalRows
+        this.rowsPerPage        = params.rowsPerPage ?? 10
     }
 
     public getState(): State

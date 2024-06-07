@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th, RowsPerPage, Pagination, type State } from '$lib/remote'
+    import { TableHandler, Datatable, Th, RowCount, RowsPerPage, Pagination, type State } from '$lib/remote'
     import { reload } from './api'
     let { data }: { data: any } = $props()
 
@@ -10,6 +10,10 @@
 
 
 <Datatable {table}>
+    {#snippet header()}
+        <div></div>
+        <RowsPerPage {table}/>
+    {/snippet}
     <table>
         <thead>
             <tr>
@@ -31,7 +35,7 @@
         </tbody>
     </table>
     {#snippet footer()}
-        <RowsPerPage {table}/>
+        <RowCount {table}/>
         <Pagination {table}/>
     {/snippet}
 </Datatable>

@@ -32,8 +32,8 @@ export const parseField = (field: Field<any>, uid?: string) => {
 }
 
 export const match = (
-    entry: Row[keyof Row], 
-    value: string|number|boolean|symbol|Criterion[], 
+    entry: Row[keyof Row],
+    value: string|number|boolean|symbol|Criterion[],
     compare: Check<any> = check.isLike
 ) => {
     if (isNull(value)) return true
@@ -45,6 +45,22 @@ export const match = (
             return match(entry[k], value, compare)
         })
     }
+    else if (Array.isArray(entry))
     if (!compare) return check.isLike(entry, value)
     return compare(entry, value)
 }
+
+
+export const clone = (data: Row[]) => {
+    let copy = Array.isArray(data) ? [] : {};
+    let value: Row | Row[keyof Row]
+
+    for (const key in data) {
+        // Prevent self-references to parent object
+        //   if (Object.is(aObject[key], aObject)) continue;
+        value = data[key]
+        copy[key] = (typeof value === 'object') ? clone(value) : value
+    }
+    return copy
+  }
+

@@ -5,7 +5,7 @@
     import Footer from './Table_Footer.svelte'
     import Th from './Table_Th.svelte'
     import { data, poemize, glyph } from './utils'
-    const table = new TableHandler(data, { rowsPerPage: 10 })
+    const table = new TableHandler(data, { rowsPerPage: 10, selectBy: 'id' })
 </script>
 
 <Datatable {table}>
@@ -33,14 +33,14 @@
         </thead>
         <tbody>
             {#each  table.rows as row}
-                <tr class:active={table.selected.includes(row)}>
+                <tr class:active={table.selected.includes(row.id)}>
                     <td>
                         <div class="flex">
                             <Checkbox 
                                 margin={[0,12,0,0]}
                                 size={16}
-                                checked={table.selected.includes(row)}
-                                onclick={() => table.select(row)}
+                                checked={table.selected.includes(row.id)}
+                                onclick={() => table.select(row.id)}
                             />
                             {row.id}
                         </div>

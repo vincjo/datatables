@@ -7,19 +7,18 @@
     let { table }: Props = $props()
 </script>
 
-<footer class="flex">
-    <RowSelection {table}/>
+    <div>
+        <RowSelection {table}/>
+    </div>
 
     <div class="flex">
         <RowsPerPage {table}/>
         <Pagination {table}/>
     </div>
-</footer>
 
 
 <style>
-    footer {
+    div {
         margin-top: 16px;
-        justify-content: space-between;
     }
 </style>

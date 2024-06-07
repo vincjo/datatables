@@ -32,6 +32,12 @@
             description: `Multiple criteria filter`,
             tag: ['calculation', 'aggregate', 'distinct values', 'pokemon', 'filter', 'criteria', 'multiple']
         },
+        {
+            title: `Recursive filters`,
+            page: 'nested-array',
+            description: `Search and filters also apply recursively to nested arrays`,
+            tag: ['calculation', 'aggregate', 'distinct values', 'car', 'make']
+        },
     ]
 </script>
 

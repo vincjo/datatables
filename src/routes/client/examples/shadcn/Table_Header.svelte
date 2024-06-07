@@ -8,26 +8,21 @@
 </script>
 
 
-<header class="flex">
-    <aside class="flex">
-        <input type="text" bind:value={filter.value} oninput={() => filter.set()} placeholder="Filter tasks...">
-        <Filter {table} key="status"/>
-        <Filter {table} key="priority"/>
-        {#if table.filters.length > 0}
-            <button class="flex" onclick={() => table.clearFilters()}>
-                Reset
-                <i class="micon">clear</i>
-            </button>
-        {/if}
-    </aside>
-    <ColumnVisibility {table}/>
-</header>
+<aside class="flex">
+    <input type="text" bind:value={filter.value} oninput={() => filter.set()} placeholder="Filter tasks...">
+    <Filter {table} key="status"/>
+    <Filter {table} key="priority"/>
+    {#if table.filters.length > 0}
+        <button class="flex" onclick={() => table.clearFilters()}>
+            Reset
+            <i class="micon">clear</i>
+        </button>
+    {/if}
+</aside>
+<ColumnVisibility {table}/>
 
 
 <style>
-    header {
-        justify-content: space-between;
-    }
     input {
         height: 32px;
         color: var(--font);
