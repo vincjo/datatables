@@ -21,11 +21,17 @@
             tag: ['data update', 'sticky header', 'basic', 'setRows', 'scroll y', 'store']
         },
         {
-            title: `Cars per make`,
-            page: 'distinct',
-            description: `Calculate distinct values and their counts`,
-            tag: ['calculation', 'aggregate', 'distinct values', 'car', 'make']
+            title: `Recursive filters`,
+            page: 'nested-array',
+            description: `Search and filters also apply recursively to nested arrays`,
+            tag: ['filters', 'search', 'nested', 'props', 'recursive']
         },
+        // {
+        //     title: `Tree view`,
+        //     page: 'tree',
+        //     description: `Search on a tree structure`,
+        //     tag: ['tree', 'folder', 'file', 'recursive', 'nested']
+        // },
         {
             title: `Pokedex`,
             page: 'pokedex',
@@ -33,9 +39,9 @@
             tag: ['calculation', 'aggregate', 'distinct values', 'pokemon', 'filter', 'criteria', 'multiple']
         },
         {
-            title: `Recursive filters`,
-            page: 'nested-array',
-            description: `Search and filters also apply recursively to nested arrays`,
+            title: `Cars per make`,
+            page: 'distinct',
+            description: `Calculate distinct values and their counts`,
             tag: ['calculation', 'aggregate', 'distinct values', 'car', 'make']
         },
     ]

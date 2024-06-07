@@ -1,6 +1,6 @@
 <script>
     import Modal from './Modal.svelte'
-    import { destroy } from './store'
+    import { api } from './api.svelte'
     let { close, props } = $props()
 </script>
 
@@ -14,7 +14,7 @@
     {#snippet footer()}
         <button
             onclick={() => {
-                destroy(props)
+                api.destroy(props)
                 close()
             }}>Delete</button
         >

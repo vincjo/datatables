@@ -50,17 +50,3 @@ export const match = (
     return compare(entry, value)
 }
 
-
-export const clone = (data: Row[]) => {
-    let copy = Array.isArray(data) ? [] : {};
-    let value: Row | Row[keyof Row]
-
-    for (const key in data) {
-        // Prevent self-references to parent object
-        //   if (Object.is(aObject[key], aObject)) continue;
-        value = data[key]
-        copy[key] = (typeof value === 'object') ? clone(value) : value
-    }
-    return copy
-  }
-

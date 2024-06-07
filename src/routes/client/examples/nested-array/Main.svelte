@@ -2,7 +2,6 @@
     import { TableHandler, Datatable, Th, ThFilter } from '$lib/client'
     import myData from '$site/data/cars'
     const table = new TableHandler(myData, { rowsPerPage: 10 })
-    console.log(table.filters)
 </script>
 
 <section class="bg-darken">

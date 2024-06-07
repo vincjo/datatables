@@ -11,8 +11,8 @@
     <aside class="z-depth-2">
         <p>Model year</p>
         <ul>
-            <li>Older: {min}</li>
-            <li>Newer: {max}</li>
+            <li>Older: <div>{min}</div></li>
+            <li>Newer: <div>{max}</div></li>
         </ul>
     </aside>
     <article>
@@ -91,5 +91,13 @@
     }
     tbody tr:hover {
         background: var(--grey-lighten-3);
+    }
+    li {
+        margin-top: 16px;
+    }
+    li div {
+        font-family: JetBrains;
+        color: var(--secondary);
+        font-size: 22px;
     }
 </style>

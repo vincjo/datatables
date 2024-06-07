@@ -59,6 +59,7 @@
         text-transform: uppercase;
     }
     aside code {
+        font-family: JetBrains;
         color: var(--secondary);
         font-size: 24px;
     }

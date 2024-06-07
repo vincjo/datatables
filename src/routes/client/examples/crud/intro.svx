@@ -1,4 +1,4 @@
 # Reactivity example with a simple CRUD
 
 
-This example uses Svelte stores to mimic interactions with a Rest API.
+This example uses Svelte runes to mimic interactions with a Rest API.

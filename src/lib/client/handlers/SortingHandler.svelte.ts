@@ -14,7 +14,6 @@ export default class SortingHandler<Row>
 
     public set(field: Field<Row> = null, uid?: string)
     {
-        if (!field) return
         const { identifier } = parseField(field, uid)
 
         if (this.table.sorting.identifier !== identifier) {

@@ -1,20 +1,20 @@
 import type { Params }  from './TableHandler.svelte'
 import EventsHandler    from './handlers/EventsHandler'
 import type { Filter, Sorting, Field } from '$lib/client'
-import { parseField, match, clone } from './utils'
+import { parseField, match } from './utils'
 
 
 export default abstract class AbstractTableHandler<Row>
 {
     public events               = new EventsHandler()
-    public rawRows              = $state.frozen<Row[]>([])
-    public allRows              = $derived<Row[]>(this.createAllRows())
     public filters              = $state<(Filter<Row>)[]>([])
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
     public search               = $state<string>('')
     public searchScope          = $state<(Field<Row>)[]>(null)
     public filterCount          = $derived<number>(this.filters.length)
+    public rawRows              = $state.frozen<Row[]>([])
+    public allRows              = $derived<Row[]>(this.createAllRows())
     public rows                 = $derived<readonly Row[]>(this.createPagedRows())
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
     public pages                = $derived<number[]>(this.createPages())
@@ -38,7 +38,6 @@ export default abstract class AbstractTableHandler<Row>
     private createAllRows()
     {
         let allRows = structuredClone(this.rawRows) as Row[]
-
         if (this.search) {
             allRows = allRows.filter((row) => {
                 const fields = this.searchScope ?? Object.keys(row) as Field<Row>[]

@@ -52,26 +52,31 @@
     a {
         display: block;
         text-decoration: none;
-        padding: 8px 12px;
+        padding: 4px 12px;
         margin-right: 8px;
         transition: all, 0.2s;
         border-radius: 8px;
-        color: var(--primary);
+        color: var(--font);
     }
     a:hover {
-        background: var(--grey-lighten-2);
+        background: var(--primary-lighten-1);
     }
     a.active {
-        background: var(--primary-lighten-1);
+        background: var(--primary-lighten-2);
     }
     a b {
         display: block;
-        font-size: 16px;
+        font-weight: 400;
+        font-size: 14px;
+        padding-bottom: 2px;
+    }
+    a.active b {
+        color: var(--primary);
     }
     a span {
         color: var(--font-grey);
         display: block;
-        font-size: 13px;
+        font-size: 11px;
         line-height: 16px;
     }
     div.divider {

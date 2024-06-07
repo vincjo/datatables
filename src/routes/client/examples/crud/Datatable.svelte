@@ -1,24 +1,24 @@
 <script lang="ts">
     import { TableHandler, Datatable, Th } from '$lib'
-    import { users } from './store'
+    import { api } from './api.svelte'
     import { modal } from 'gros/modal'
     import Update from './Modal_Update.svelte'
     import Destroy from './Modal_Destroy.svelte'
     import Create from './Modal_Create.svelte'
     import type { Component } from 'svelte'
-    const table = new TableHandler($users, { rowsPerPage: 10 })
+    const table = new TableHandler(api.users, { rowsPerPage: 10 })
 
     let element: any
 
     $effect(() => {
-        $users
+        api.users
         update()
     })
 
     const update = () => {
         if (element) {
             const scrollTop = element.parentNode.scrollTop
-            table.setRows($users)
+            table.setRows(api.users)
             setTimeout(() => {
                 element.parentNode.scrollTop = scrollTop
             }, 2)

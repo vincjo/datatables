@@ -1,7 +1,7 @@
 <script>
     import Modal from './Modal.svelte'
     import Input from './Input.svelte'
-    import { update } from './store'
+    import { api } from './api.svelte'
     let { close, props } = $props()
 </script>
 
@@ -15,7 +15,7 @@
     {#snippet footer()}
         <button
             onclick={() => {
-                update(props)
+                api.update(props)
                 close()
             }}>Update</button
         >

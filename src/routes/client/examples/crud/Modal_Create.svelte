@@ -1,7 +1,7 @@
 <script>
     import Modal from './Modal.svelte'
     import Input from './Input.svelte'
-    import { create } from './store'
+    import { api } from './api.svelte'
     const form = { first_name: null, last_name: null, email: null }
     let { close } = $props()
 </script>
@@ -16,7 +16,7 @@
     {#snippet footer()}
         <button
             onclick={() => {
-                create(form)
+                api.create(form)
                 close()
             }}>Create</button
         >
