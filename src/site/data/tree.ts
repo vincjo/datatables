@@ -136,7 +136,7 @@ export default [
                                     { name: 'Pagination.svelte' }, 
                                     { name: 'Th.svelte' }, 
                                     { name: 'ThFilter.svelte' }, 
-                                    { name: 'Search.sevelte' }, 
+                                    { name: 'Search.svelte' }, 
                                 ],
                             },
                         ],

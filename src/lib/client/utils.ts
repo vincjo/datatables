@@ -53,19 +53,30 @@ export const match = (
 export const nestedFilter = (
     entry: any,
     value: any,
-    compare: Check<any> = undefined
+    highlight = false,
+    compare: Check<any> = undefined,
 ) => {
     if (Array.isArray(entry)) {
         entry = entry.filter((item: any) => {
             const check = match(item, value, compare)
             if (typeof item === 'object' && check === true) {
                 for (const k of Object.keys(item)) {
-                    item[k] = nestedFilter(item[k], value, compare)
+                    item[k] = nestedFilter(item[k], value, highlight, compare)
                 }
             }
             return check
         })
     }
-
+    if (highlight && typeof entry === 'string' && match(entry, value, compare)) {
+        const search = value
+            .replace(/a/g, '[aàâáä]')
+            .replace(/e/g, '[eèêéë]')
+            .replace(/i/g, '[iìîíï]')
+            .replace(/o/g, '[oòôо́ö]')
+            .replace(/u/g, '[uùûúü]')
+            .replace(/y/g, '[yỳŷýÿ]')
+        const exp = new RegExp(`${search}`, 'gi')
+        return entry.replace(exp, `<u class="highlight">$&</u>`)
+    }
     return entry
 }

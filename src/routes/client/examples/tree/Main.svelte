@@ -4,7 +4,7 @@
     import Tree from './Main_Tree.svelte'
     import Search from './Main_Search.svelte'
 
-    const table = new TableHandler(tree, { rowsPerPage: 10 })
+    const table = new TableHandler(tree, { rowsPerPage: 10, highlight: true })
 </script>
 
 <section class="bg-darken">

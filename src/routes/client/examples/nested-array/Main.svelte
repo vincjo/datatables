@@ -1,7 +1,7 @@
 <script lang="ts">
     import { TableHandler, Datatable, ThSort, ThFilter } from '$lib/client'
     import myData from '$site/data/cars'
-    const table = new TableHandler(myData, { rowsPerPage: 10 })
+    const table = new TableHandler(myData, { rowsPerPage: 10, highlight: true })
 </script>
 
 <section class="bg-darken">
@@ -24,8 +24,8 @@
             <tbody>
                 {#each table.rows as row}
                     <tr>
-                        <td>{row.firstname}</td>
-                        <td>{row.lastname}</td>
+                        <td>{@html row.firstname}</td>
+                        <td>{@html row.lastname}</td>
                         <td>{@html row.country ?? '<code>null</code>'}</td>
                         <td class="list">
                             {#if !row.car}
@@ -34,7 +34,7 @@
                                 <ul>
                                     {#each row.car as car}
                                         <li>
-                                            {car.model} ({car.manufacturer})
+                                            {@html car.model} ({@html car.manufacturer})
                                         </li>
                                     {/each}
                                 </ul>
@@ -54,7 +54,7 @@
     }
     li {
         font-size: 12px;
-        color: var(--ternary);
+        color: var(--secondary);
     }
     td :global(code) {
         color: var(--grey-lighten);

@@ -17,7 +17,12 @@ import SortHelper               from './helpers/SortHelper.svelte'
 import CSVHelper                from './helpers/CSVHelper.svelte'
 import RecordFilterHelper       from './helpers/RecordFilterHelper.svelte'
 
-export type Params = { rowsPerPage?: number, i18n?: Internationalization, selectBy?: string }
+export type Params = {
+    rowsPerPage?: number,
+    selectBy?: string,
+    highlight?: boolean,
+    i18n?: Internationalization,
+}
 
 export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T>
 {

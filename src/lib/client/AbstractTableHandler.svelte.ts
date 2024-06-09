@@ -21,6 +21,7 @@ export default abstract class AbstractTableHandler<Row>
     public sort                 = $state<(Sort<Row>)>({})
     public selected             = $state<(Row | Row[keyof Row])[]>([])
     public selectBy             : string
+    public highlight            : boolean
     public selectScope          = $state<'all' | 'currentPage'>('currentPage')
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
     public element              = $state<HTMLElement>(undefined)
@@ -30,9 +31,10 @@ export default abstract class AbstractTableHandler<Row>
 
     constructor(data: Row[], params: Params)
     {
-        this.rawRows = data
-        this.rowsPerPage = params.rowsPerPage ?? 10
-        this.selectBy = params.selectBy
+        this.rawRows        = data
+        this.rowsPerPage    = params.rowsPerPage ?? 10
+        this.highlight      = params.highlight ?? false
+        this.selectBy       = params.selectBy
     }
 
     private createAllRows()
@@ -46,10 +48,10 @@ export default abstract class AbstractTableHandler<Row>
                 })
                 for(const { key } of scope) {
                     if (key) {
-                        row[key] = nestedFilter(row[key], this.search)
+                        row[key] = nestedFilter(row[key], this.search, this.highlight)
                     }
                 }
-                return scope.some(({ callback, key }) => {
+                return scope.some(({ callback }) => {
                     return match(callback(row), this.search)
                 })
             })
@@ -60,7 +62,7 @@ export default abstract class AbstractTableHandler<Row>
             for (const { callback, value, check, key } of this.filters) {
                 allRows = allRows.filter((row) => {
                     if (key) {
-                        row[key] = nestedFilter(row[key], value, check)
+                        row[key] = nestedFilter(row[key], value, this.highlight, check)
                     }
                     return match(callback(row), value, check)
                 })

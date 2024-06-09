@@ -114,4 +114,9 @@
     article :global(.hidden) {
         display: none;
     }
+    article :global(u.highlight) {
+        text-decoration: none;
+        background: rgb(255, 245, 157, 0.8);
+        border-radius: 2px;
+    }
 </style>
