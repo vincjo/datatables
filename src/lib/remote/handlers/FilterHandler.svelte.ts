@@ -17,8 +17,9 @@ export default class FilterHandler<Row>
         }
     }
 
-    public remove()
+    public clear()
     {
         this.table.filters = []
+        this.table.events.trigger('clearFilters')
     }
 }

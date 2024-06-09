@@ -1,10 +1,8 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib/shared'
+    import type { TableHandlerLike } from '$lib/shared'
 
     type T = $$Generic<Row>
-    let { table }: { table: TableHandler<T> } = $props()
-
-    const options = [5, 10, 20, 50, 100]
+    let { table, options = [5, 10, 20, 50, 100] }: { table: TableHandlerLike<T>, options?: number[] } = $props()
 </script>
 
 <aside>

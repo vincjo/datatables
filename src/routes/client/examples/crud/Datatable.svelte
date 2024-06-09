@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th } from '$lib'
+    import { TableHandler, Datatable, ThSort, Th } from '$lib'
     import { api } from './api.svelte'
     import { modal } from 'gros/modal'
     import Update from './Modal_Update.svelte'
@@ -38,11 +38,11 @@
             <table bind:this={element}>
                 <thead>
                     <tr>
-                        <Th {table}>{''}</Th>
-                        <Th {table} field="id">ID</Th>
-                        <Th {table} field="first_name">First name</Th>
-                        <Th {table} field="last_name">Last name</Th>
-                        <Th {table} field="email">Email</Th>
+                        <Th>{''}</Th>
+                        <ThSort {table} field="id">ID</ThSort>
+                        <ThSort {table} field="first_name">First name</ThSort>
+                        <ThSort {table} field="last_name">Last name</ThSort>
+                        <ThSort {table} field="email">Email</ThSort>
                     </tr>
                 </thead>
                 <tbody>

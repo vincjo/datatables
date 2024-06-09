@@ -2,7 +2,7 @@
     import Table from './Table.svelte'
 </script>
 
-<h1>shadcn Tasks</h1>
+<h1>shadcn-ui "Tasks"</h1>
 <section class="bg-darken">
     <aside class="flex">
         <div>

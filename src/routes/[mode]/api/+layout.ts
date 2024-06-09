@@ -1,8 +1,4 @@
-const internal = {
-    properties: ['events', 'rawRows', 'sorting', 'filters', 'selectScope', 'selectBy'],
-    types: ['Sorting'],
-    methods: [],
-}
+import { internalFilter } from '$site'
 
 export const load = async ({ params }) => {
 
@@ -11,9 +7,9 @@ export const load = async ({ params }) => {
     const { properties, methods, types } =  await response.json()
     return {
         nav: {
-            properties: properties.filter((item: string) => internal.properties.includes(item) === false).sort(),
-            methods   : methods.filter((item: string) => internal.methods.includes(item) === false).sort(),
-            types     : types.filter((item: string) => internal.types.includes(item) === false).sort()
+            properties: internalFilter(properties, 'properties'),
+            methods   : internalFilter(methods, 'methods'),
+            types     : internalFilter(types, 'types')
         }
     }
 }

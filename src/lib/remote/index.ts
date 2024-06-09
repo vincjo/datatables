@@ -1,18 +1,26 @@
 export { default as TableHandler }  from './TableHandler.svelte'
 export { default as ThFilter     }  from './ThFilter.svelte'
-export { default as Search       }  from './Search.svelte'
-export { default as Th           }  from './Th.svelte'
 
-export { Datatable, RowsPerPage, RowCount, Pagination, Footer, Header } from '$lib/shared'
+export {
+    Datatable,
+    Header,
+    Search,
+    RowsPerPage,
+    Th,
+    ThSort,
+    Footer,
+    Pagination,
+    RowCount,
+} from '$lib/shared'
 
-export type Row = { [key: string]: any }
+export type Row = { [key: string]: any  }
 
 export type State = {
     currentPage: number,
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
-    sorting: Sorting | undefined
+    sort: Sort | undefined
     filters: Filter[] | undefined
     setTotalRows: (value: number) => void
 }
@@ -22,19 +30,18 @@ export type Filter = {
     value?: any
 }
 
-export type Sorting = {
+export type Sort = {
     field?: string
     direction?: 'asc' | 'desc'
 }
 
 export type Internationalization = {
-    search          ?: string,
-    show            ?: string,
-    entries         ?: string,
-    filter          ?: string,
-    rowCount        ?: string,
-    noRows          ?: string,
-    previous        ?: string,
-    next            ?: string,
-    selectedCount   ?: string,
+    search  ?: string,
+    show    ?: string,
+    entries ?: string,
+    filter  ?: string,
+    rowCount?: string,
+    noRows  ?: string,
+    previous?: string,
+    next    ?: string
 }

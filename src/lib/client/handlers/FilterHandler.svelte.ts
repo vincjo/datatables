@@ -29,9 +29,4 @@ export default class FilterHandler<Row>
     {
         this.table.filters = this.table.filters.filter(filter => filter.identifier !== uid)
     }
-
-    public getTable()
-    {
-        return this.table
-    }
 }

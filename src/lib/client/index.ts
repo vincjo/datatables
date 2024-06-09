@@ -1,30 +1,21 @@
-import TableHandler from './TableHandler.svelte'
-import Th           from './Th.svelte'
-import ThFilter     from './ThFilter.svelte'
-import Search       from './Search.svelte'
-import { check }    from './Comparator'
+export { default as TableHandler } from './TableHandler.svelte'
+export { default as ThFilter     } from './ThFilter.svelte'
+export { check                   } from './Comparator'
 
-export { TableHandler, Th, ThFilter, Search, check }
-
-export { Datatable, Header, Footer, Pagination, RowCount, RowsPerPage } from '$lib/shared'
-
-export type { default as EventsHandler } from './handlers/EventsHandler'
-
-/**
- * @description Used to define the text displayed in showcase components.
- */
-export type Internationalization = {
-    search  ?: string,
-    show    ?: string,
-    entries ?: string,
-    filter  ?: string,
-    rowCount?: string,
-    noRows  ?: string,
-    previous?: string,
-    next    ?: string
-}
+export {
+    Datatable,
+    Header,
+    Search,
+    RowsPerPage,
+    Th,
+    ThSort,
+    Footer,
+    Pagination,
+    RowCount,
+} from '$lib/shared'
 
 export type Row = { [key: string]: any  }
+
 export type Field<Row> = keyof Row | ((row: Row) => Row[keyof Row])
 
 export type Filter<Row> = {
@@ -35,7 +26,7 @@ export type Filter<Row> = {
     key?: string
 }
 
-export type Sorting<Row> = {
+export type Sort<Row> = {
     callback?: (row: Row) => Row[keyof Row]
     identifier?: string
     direction?: 'asc' | 'desc'
@@ -44,8 +35,18 @@ export type Sorting<Row> = {
 
 export type Check<Row> = (entry: Row[keyof Row], value: any) => boolean
 
-export type Criterion = { 
-    value: string | number | number[], 
-    check: Check<Row> 
+export type Criterion = {
+    value: string | number | number[],
+    check: Check<Row>
 }
 
+export type Internationalization = {
+    search  ?: string,
+    show    ?: string,
+    entries ?: string,
+    filter  ?: string,
+    rowCount?: string,
+    noRows  ?: string,
+    previous?: string,
+    next    ?: string
+}

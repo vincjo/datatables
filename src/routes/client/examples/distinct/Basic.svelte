@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th } from '$lib/client'
+    import { TableHandler, Datatable, ThSort } from '$lib/client'
     import { cars } from './data'
 
     const table = new TableHandler(cars)
@@ -21,9 +21,9 @@
             <table>
                 <thead class="bg-darken">
                     <tr>
-                        <Th {table} field="make">make</Th> 
-                        <Th {table} field="model">model</Th> 
-                        <Th {table} field="model_year">model_year</Th> 
+                        <ThSort {table} field="make">make</ThSort> 
+                        <ThSort {table} field="model">model</ThSort> 
+                        <ThSort {table} field="model_year">model_year</ThSort> 
                     </tr>
                 </thead>
                 <tbody>

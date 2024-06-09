@@ -1,13 +1,15 @@
 import AbstractTableHandler from './AbstractTableHandler.svelte'
 
 import FetchHandler         from './handlers/FetchHandler.svelte'
-import SortingHandler       from './handlers/SortingHandler.svelte'
+import SortHandler          from './handlers/SortHandler.svelte'
 import SelectHandler        from './handlers/SelectHandler.svelte'
 import PageHandler          from './handlers/PageHandler.svelte'
 import SearchHandler        from './handlers/SearchHandler.svelte'
 import FilterHandler        from './handlers/FilterHandler.svelte'
 
 import ViewHelper           from './helpers/ViewHelper.svelte'
+import SearchHelper         from './helpers/SearchHelper.svelte'
+import SortHelper           from './helpers/SortHelper.svelte'
 
 import type { Internationalization, Row, State } from '$lib/remote'
 
@@ -21,7 +23,7 @@ export type Params = {
 export default class TableHandler<T extends Row = any> extends AbstractTableHandler<Row>
 {
     private fetchHandler    : FetchHandler<T>
-    private sortingHandler  : SortingHandler<T>
+    private sortHandler     : SortHandler<T>
     private selectHandler   : SelectHandler<T>
     private pageHandler     : PageHandler<T>
     private searchHandler   : SearchHandler<T>
@@ -34,7 +36,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         super(data, params)
         this.i18n           = this.translate(params.i18n)
         this.fetchHandler   = new FetchHandler(this)
-        this.sortingHandler = new SortingHandler(this)
+        this.sortHandler    = new SortHandler(this)
         this.selectHandler  = new SelectHandler(this)
         this.pageHandler    = new PageHandler(this)
         this.searchHandler  = new SearchHandler(this)
@@ -77,25 +79,35 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.searchHandler.clear()
     }
 
-    public sort(field: string): void
+    public createSearch(): SearchHelper<T>
     {
-        this.sortingHandler.set(field)
-        this.invalidate()
-        this.setPage(1)
+        return new SearchHelper(this)
     }
 
-    public sortAsc(field: string): void
-    {
-        this.sortingHandler.asc(field)
-        this.invalidate()
-        this.setPage(1)
-    }
+    // public sort(field: string): void
+    // {
+    //     this.sortHandler.set(field)
+    //     this.invalidate()
+    //     this.setPage(1)
+    // }
 
-    public sortDesc(field: string): void
+    // public sortAsc(field: string): void
+    // {
+    //     this.sortHandler.asc(field)
+    //     this.invalidate()
+    //     this.setPage(1)
+    // }
+
+    // public sortDesc(field: string): void
+    // {
+    //     this.sortHandler.desc(field)
+    //     this.invalidate()
+    //     this.setPage(1)
+    // }
+
+    public createSort(field: string): SortHelper<T>
     {
-        this.sortingHandler.desc(field)
-        this.invalidate()
-        this.setPage(1)
+        return new SortHelper(this.sortHandler, field)
     }
 
     public filter(value: string | number, field: string): void
@@ -106,7 +118,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 
     public clearFilters(): void
     {
-        this.filterHandler.remove()
+        this.filterHandler.clear()
         this.invalidate()
     }
 
@@ -125,7 +137,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.selectHandler.clear()
     }
 
-    public on(event: 'change', callback: () => void): void
+    public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void): void
     {
         this.events.add(event, callback)
     }

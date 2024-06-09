@@ -1,44 +1,44 @@
 import type { Field } from '$lib/client'
-import type SortingHandler from '../handlers/SortingHandler.svelte'
+import type SortHandler from '../handlers/SortHandler.svelte'
 
 export default class SortingHelper<Row>
 {
-    private sortingHandler  : SortingHandler<Row>
+    private sortHandler     : SortHandler<Row>
     private field           : Field<Row>
     private uid             : string
     public  isActive        = $derived<boolean>(this.createIsActive())
     public  direction       = $derived<'asc' | 'desc'>(this.createDirection())
 
-    constructor(sortingHandler: SortingHandler<Row>, field: Field<Row>)
+    constructor(sortHandler: SortHandler<Row>, field: Field<Row>)
     {
-        this.sortingHandler = sortingHandler
+        this.sortHandler    = sortHandler
         this.field          = field
         this.uid            = 's_' + (Math.random()).toString(28).substring(2)
     }
 
     public set()
     {
-        this.sortingHandler.set(this.field, this.uid)
+        this.sortHandler.set(this.field, this.uid)
     }
 
     public asc()
     {
-        this.sortingHandler.asc(this.field, this.uid)
+        this.sortHandler.asc(this.field, this.uid)
     }
 
     public desc()
     {
-        this.sortingHandler.desc(this.field, this.uid)
+        this.sortHandler.desc(this.field, this.uid)
     }
 
     public clear()
     {
-        this.sortingHandler.clear()
+        this.sortHandler.clear()
     }
 
     private createIsActive()
     {
-        if (this.uid === this.sortingHandler.getTable().sorting?.identifier) {
+        if (this.uid === this.sortHandler['table'].sort?.identifier) {
             return true
         }
         return false
@@ -47,6 +47,6 @@ export default class SortingHelper<Row>
     private createDirection()
     {
         if (this.isActive === false) return null
-        return this.sortingHandler.getTable().sorting?.direction
+        return this.sortHandler['table'].sort?.direction
     }
 }

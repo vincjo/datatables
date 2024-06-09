@@ -28,10 +28,10 @@
         color: var(--font-grey);
     }
     section :global(p code) {
-        background: var(--primary-lighten-1);
+        background: var(--secondary-lighten-1);
         padding: 2px 4px;
-        color: var(--primary);
-        border: 1px solid var(--primary-lighten-1);
+        color: var(--secondary);
+        border: 1px solid var(--secondary-lighten-1);
         border-radius: 4px;
     }
 </style>

@@ -1,6 +1,6 @@
 import type { Field, Check } from '$lib/client'
-import { check as comparator } from '$lib/client/Comparator'
 import type FilterHandler from '../handlers/FilterHandler.svelte'
+import { check as comparator } from '$lib/client/Comparator'
 
 export default class FilterHelper<Row>
 {
@@ -32,7 +32,7 @@ export default class FilterHelper<Row>
 
     private cleanup()
     {
-        this.filterHandler.getTable().on('clearFilters', () => {
+        this.filterHandler['table'].on('clearFilters', () => {
             this.clear()
         })
     }

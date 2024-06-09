@@ -20,8 +20,8 @@ export const load = async () => {
                 code: fs.readFileSync(`${path}/${page}/Main.svelte`).toString('utf-8'),
                 components: [
                     // {
-                    //     name: 'Th.svelte',
-                    //     code: fs.readFileSync(`${lib}/Th.svelte`).toString('utf-8')
+                    //     name: 'ThSort.svelte',
+                    //     code: fs.readFileSync(`${lib}/ThSort.svelte`).toString('utf-8')
                     // },
                     // {
                     //     name: 'ThFilter.svelte',

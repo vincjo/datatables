@@ -4,10 +4,20 @@
     import { data } from './data'
 
     const table = new TableHandler(data) 
-    table.searchScope = ['task']
+    const search = table.createSearch(['task'])
     const filter = table.createAdvancedFilter('priority')
 </script>
 
+{#snippet item(name, color)}
+    <button 
+        onclick={() => filter.set(name, check.isEqualTo)}
+        class:active={filter.active.includes(name)} class="btn" style:color="{color}">
+    <i class="micon">
+        {filter.active.includes(name) ? 'check_box' : 'check_box_outline_blank'}
+    </i>
+    {name}
+    </button>
+{/snippet}
 
 
 <section class="flex">
@@ -17,34 +27,13 @@
             <i class="micon">filter_list</i>
             Filter
         </h2>
-        <button 
-            onclick={() => filter.set('high', check.isEqualTo)}
-            class:active={filter.active.includes('high')} class="btn" style:color="red">
-            <i class="micon">
-                {filter.active.includes('high') ? 'check_box' : 'check_box_outline_blank'}
-            </i>
-            High
-        </button>
-        <button 
-            onclick={() => filter.set('medium', check.isEqualTo)}
-            class:active={filter.active.includes('medium')} class="btn" style:color="orange">
-            <i class="micon">
-                {filter.active.includes('medium') ? 'check_box' : 'check_box_outline_blank'}
-            </i>
-            Medium
-        </button>
-        <button 
-            onclick={() => filter.set('low', check.isEqualTo)}
-            class:active={filter.active.includes('low')} class="btn" style:color="green">
-            <i class="micon">
-                {filter.active.includes('low') ? 'check_box' : 'check_box_outline_blank'}
-            </i>
-            Low
-        </button>
+        {@render item('high', 'red')}
+        {@render item('medium', 'orange')}
+        {@render item('low', 'green')}
     </aside>
 
     <article>
-        <input type="text" bind:value={table.search} placeholder="Search tasks..."/>
+        <input type="text" bind:value={search.value} placeholder="Search tasks..."/>
         <ul class="thin-scrollbar">
             {#each table.rows as row}
                 <li class="flex">

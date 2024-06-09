@@ -6,7 +6,7 @@
 </script>
 
 <h1>Pokedex API <a href="https://pokeapi.co/docs/v2#pokemon-section" rel="external"> DOC &rarr;</a></h1>
-<Features rowsPerPage={true} totalRows={true}/>
+<Features rowsPerPage={true} totalRows={true} pagination/>
 <!-- <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={false}>
     <Main data={data.dataset}/>
 </Demo> -->

@@ -3,7 +3,7 @@
     import { data } from '../data_cars'
 
     const table = new TableHandler(data)
-    table.searchScope = ['make', 'model']
+    const search = table.createSearch(['make', 'model'])
 
     const avg = $derived(table.createCalculation('price').avg())
 </script>
@@ -11,7 +11,7 @@
 <section class="flex bg-darken">
 
     <article>
-        <input type="text" bind:value={table.search} placeholder="Search cars..."/>
+        <input type="text" bind:value={search.value} oninput={() => search.set()} placeholder="Search cars..."/>
         <ul class="thin-scrollbar">
             {#each table.rows as row}
                 <li class="flex">

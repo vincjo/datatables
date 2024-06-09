@@ -1,6 +1,6 @@
 <script lang="ts">
     import myData from '$site/data/data'
-    import { TableHandler, Datatable, Th, ThFilter } from '$lib/client'
+    import { TableHandler, Datatable, ThSort, ThFilter } from '$lib/client'
 
     const table = new TableHandler(myData, {
         rowsPerPage: 10,
@@ -21,9 +21,9 @@
     <table>
         <thead>
             <tr>
-                <Th {table} field="first_name">First Name</Th>
-                <Th {table} field="last_name">Last Name</Th>
-                <Th {table} field="email">Email</Th>
+                <ThSort {table} field="first_name">First Name</ThSort>
+                <ThSort {table} field="last_name">Last Name</ThSort>
+                <ThSort {table} field="email">Email</ThSort>
             </tr>
             <tr>
                 <ThFilter {table} field="first_name" />

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { page } from '$app/stores'
     import Content  from './Content.svelte'
+    import AST from './AST.svelte'
 
     let { data } = $props()
 
@@ -11,6 +12,7 @@
     <Content data={data.page} {key}/>
 </section>
 
+<AST/>
 
 <style>
     section :global(p) {

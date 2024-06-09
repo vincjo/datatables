@@ -29,7 +29,7 @@
         left: calc(240px + 32px);
         right: 0;
         overflow-y: auto;
-        padding: 0 80px;
+        padding: 0 72px;
         color: var(--font);
     }
     article {

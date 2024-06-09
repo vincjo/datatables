@@ -1,4 +1,4 @@
-import type { State, Sorting, Filter } from '$lib/remote'
+import type { State, Sort, Filter } from '$lib/remote'
 import type { Params }  from './TableHandler.svelte'
 import EventsHandler    from './handlers/EventsHandler'
 
@@ -15,7 +15,7 @@ export default class AbstractTableHandler<Row>
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.createPageCount())
     public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())
-    public sorting              = $state<Sorting>({})
+    public sort                 = $state<Sort>({})
     public selected             = $state<(Row | Row[keyof Row])[]>([])
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
     public selectBy             : keyof Row | undefined
@@ -38,8 +38,8 @@ export default class AbstractTableHandler<Row>
             rowsPerPage: this.rowsPerPage,
             offset: this.rowsPerPage * (this.currentPage - 1),
             search: this.search,
-            sorting: this.sorting.field ? this.sorting : undefined,
-            filters: this.filters.length > 0 ? this.filters : undefined as any,
+            sort: this.sort.field ? this.sort : undefined,
+            filters: this.filters.length > 0 ? this.filters : undefined,
             setTotalRows: (value: number) => this.totalRows = value
         }
     }

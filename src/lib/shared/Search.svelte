@@ -1,11 +1,13 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib/shared'
+    import type { TableHandlerLike } from '$lib/shared'
     type T = $$Generic<Row>
-    let { table }: { table: TableHandler<T> } = $props()
+    let { table }: { table: TableHandlerLike<T> } = $props()
+    const search = table.createSearch()
 </script>
 
 <input
-    bind:value={table.search}
+    bind:value={search.value}
+    oninput={() => search.set()}
     placeholder={table.i18n.search}
     spellcheck="false"
 />

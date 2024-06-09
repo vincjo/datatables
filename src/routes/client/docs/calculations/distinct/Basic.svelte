@@ -1,11 +1,14 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th } from '$lib/client'
+    import { TableHandler, Datatable, ThSort } from '$lib/client'
     import { data } from '../data_cars'
 
     const table = new TableHandler(data)
+    const search = table.createSearch()
 
-    const distinct = table.createCalculation('make').distinct()
-            .sort((a, b) => (a.count < b.count ? 1 : -1))
+    const distinct = $derived.by(() => {
+        return table.createCalculation('make').distinct()
+                    .sort((a, b) => (a.count < b.count ? 1 : -1))
+    })
 </script>
 
 <section class="flex bg-darken">
@@ -19,14 +22,14 @@
         </div>
     </aside>
     <article>
-        <input type="text" bind:value={table.search} placeholder="Search cars..."/>
+        <input type="text" bind:value={search.value} oninput={() => search.set()} placeholder="Search cars..."/>
         <Datatable {table}>
             <table>
                 <thead>
                     <tr>
-                        <Th {table} field="make">make</Th> 
-                        <Th {table} field="model">model</Th> 
-                        <Th {table} field="model_year">model_year</Th> 
+                        <ThSort {table} field="make">make</ThSort> 
+                        <ThSort {table} field="model">model</ThSort> 
+                        <ThSort {table} field="model_year">model_year</ThSort> 
                     </tr>
                 </thead>
                 <tbody>

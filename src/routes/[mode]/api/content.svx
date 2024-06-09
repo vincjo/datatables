@@ -11,7 +11,7 @@
 
 # Welcome to the TableHandler API
 
-The documentation is partly generated from the source code.
+The documentation is partly generated from source using an [AST Parser](https://jordimarimon.github.io/ts-ast-parser/).
 
 
 ## Quick start
@@ -30,7 +30,7 @@ From then on, you can access any properties documented here:
 ```ts
 table.rows
 table.currentPage
-table.search
+table.isAllSelected
 table.rowCount
 ...
 ```
@@ -39,10 +39,10 @@ table.rowCount
 
 
 ```ts
-table.sortAsc('first_name')
+table.setRowsPerPage(10)
 table.select(row)
 table.setPage('previous')
-table.createCalculation()
+table.createSort()
 ...
 ```
 

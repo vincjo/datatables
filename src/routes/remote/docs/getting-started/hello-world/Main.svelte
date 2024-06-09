@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th, ThFilter } from '$lib/remote'
+    import { TableHandler, Datatable, ThSort, ThFilter } from '$lib/remote'
 
     const table = new TableHandler([], { rowsPerPage: 10 })
 
@@ -9,9 +9,9 @@
     <table>
         <thead>
             <tr>
-                <Th {table} field="first_name">First Name</Th>
-                <Th {table} field="last_name">Last Name</Th>
-                <Th {table} field="email">Email</Th>
+                <ThSort {table} field="first_name">First Name</ThSort>
+                <ThSort {table} field="last_name">Last Name</ThSort>
+                <ThSort {table} field="email">Email</ThSort>
             </tr>
             <tr>
                 <ThFilter {table} field="first_name"/>

@@ -9,9 +9,9 @@
             tag: ['basic', 'row per page', 'row count', 'search', 'filter', 'default']
         },
         {
-            title: `shadcn Tasks`,
+            title: `shadcn-ui "Tasks"`,
             page: 'shadcn',
-            description: `A copy of shadcn's datatable powered by the DataHandler API`,
+            description: `A copy of shadcn-ui's datatable powered by SSD`,
             tag: ['advanced', 'shadcn', 'column visibility', 'advanced filter', 'multiple criteria filter', 'row selection', 'distinct values']
         },
         {
@@ -26,12 +26,12 @@
             description: `Search and filters also apply recursively to nested arrays`,
             tag: ['filters', 'search', 'nested', 'props', 'recursive']
         },
-        // {
-        //     title: `Tree view`,
-        //     page: 'tree',
-        //     description: `Search on a tree structure`,
-        //     tag: ['tree', 'folder', 'file', 'recursive', 'nested']
-        // },
+        {
+            title: `Tree view`,
+            page: 'tree',
+            description: `Search on a tree structure`,
+            tag: ['tree', 'folder', 'file', 'recursive', 'nested']
+        },
         {
             title: `Pokedex`,
             page: 'pokedex',

@@ -4,7 +4,7 @@
 
 
     const table = new TableHandler(data)
-    table.searchScope = ['address']
+    const search = table.createSearch(['address'])
 
     const calc = table.createCalculation(({ width, length }) => width * length * 1.196)
 
@@ -15,7 +15,7 @@
 <section class="flex bg-darken">
 
     <article>
-        <input type="text" bind:value={table.search} placeholder="Search addresses..."/>
+        <input type="text" bind:value={search.value} oninput={() => search.set()} placeholder="Search addresses..."/>
         <ul class="thin-scrollbar">
             {#each table.rows as row}
                 <li class="flex">

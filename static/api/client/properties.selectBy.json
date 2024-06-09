@@ -1,1 +1,1 @@
-{"name":"selectBy","text":"type string","type":"string","ast":{"name":"selectBy","kind":"Property","type":{"text":"string","kind":"Intrinsic"},"line":25},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}
+{"name":"selectBy","text":"type string","type":"string","ast":{"name":"selectBy","kind":"Property","type":{"text":"string","kind":"Intrinsic"},"line":23},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

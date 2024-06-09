@@ -45,7 +45,7 @@ export default class AdvancedFilterHelper<Row>
 
     private cleanup()
     {
-        this.filterHandler.getTable().on('clearFilters', () => {
+        this.filterHandler['table'].on('clearFilters', () => {
             this.clear()
         })
     }

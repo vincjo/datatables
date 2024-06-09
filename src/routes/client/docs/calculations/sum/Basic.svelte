@@ -3,6 +3,7 @@
     import { data } from '../data_grocery'
 
     const table = new TableHandler(data)
+    const search = table.createSearch()
 
     const sum = $derived(table.createCalculation('price').sum())
 </script>
@@ -10,7 +11,7 @@
 <section class="flex bg-darken">
 
     <article>
-        <input type="text" bind:value={table.search}  placeholder="Search products..."/>
+        <input type="text" bind:value={search.value} oninput={() => search.set()} placeholder="Search products..."/>
         <ul class="thin-scrollbar">
             {#each table.rows as row}
                 <li class="flex">

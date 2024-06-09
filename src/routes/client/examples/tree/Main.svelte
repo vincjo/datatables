@@ -1,19 +1,15 @@
 <script lang="ts">
     import { TableHandler } from '$lib/client'
-    import data from '$site/data/tree'
+    import tree from '$site/data/tree'
     import Tree from './Main_Tree.svelte'
     import Search from './Main_Search.svelte'
 
-    const table = new TableHandler(data, { rowsPerPage: 10 })
-    let value = $state('')
+    const table = new TableHandler(tree, { rowsPerPage: 10 })
 </script>
 
 <section class="bg-darken">
-    <!-- <aside>
-        <input type="text" bind:value oninput={() => table.searchHandler.set(value)}>
-    </aside> -->
     <Search {table}/>
-    <Tree folders={table.rows}/>
+    <Tree folders={table.rows ?? []}/>
 </section>
 
 <style>

@@ -1,15 +1,21 @@
-export { Datatable, Header, Footer, Pagination, RowCount, RowsPerPage } from '$lib/shared'
 
 export {
     TableHandler,
-    check,
-    Th,
-    ThFilter,
+    Datatable,
+    Header,
     Search,
+    RowsPerPage,
+    Th,
+    ThSort,
+    ThFilter,
+    Footer,
+    Pagination,
+    RowCount,
+    check,
+    type Field,
+    type Sort,
+    type Filter,
+    type Check,
     type Internationalization,
     type Row,
-    type Field,
-    type Sorting,
-    type Filter,
-    type Check
 } from '$lib/client'

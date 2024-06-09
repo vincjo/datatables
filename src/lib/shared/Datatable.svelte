@@ -1,10 +1,10 @@
 <script lang="ts">
     import type { Snippet } from 'svelte'
-    import { type TableHandler, Header, Footer  } from '$lib/shared'
+    import { type TableHandlerLike, Header, Footer  } from '$lib/shared'
 
     type T = $$Generic<Row>
     type Props = {
-        table: TableHandler<T>,
+        table: TableHandlerLike<T>,
         basic?: boolean,
         header?: Snippet,
         footer?: Snippet,

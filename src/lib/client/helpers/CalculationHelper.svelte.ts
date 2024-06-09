@@ -13,11 +13,11 @@ export default class CalcultationHelper<Row>
         this.callback   = parseField(field).callback
     }
 
-    public distinct(): { value: string, count: unknown }[]
+    public distinct(): { value: string; count: number }[]
     {
-        const values = this.table.rawRows.map(row => this.callback(row)) as any[]
+        const values = this.table.allRows.map(row => this.callback(row)) as any[]
 
-        const result = values.reduce((acc, curr) => {
+        const result: { [key: string ]: number } = values.reduce((acc, curr) => {
             if (Array.isArray(curr)) {
                 for (const item of curr) {
                     acc[item] = (acc[item] ?? 0) + 1

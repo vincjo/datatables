@@ -9,12 +9,12 @@
 
     const view = table.getView()
 
-    const sorting = table.createSorting(field)
+    const sort = table.createSort(field)
 </script>
 
 <th
     class:sortable={field}
-    class:active={sorting.isActive}
+    class:active={sort.isActive}
 >
     <Dropdown position="bottom-start">
         <div
@@ -22,16 +22,16 @@
             style:justify-content="left"
         >
             <strong>{@render children()}</strong>
-            {#if !sorting.isActive}
+            {#if !sort.isActive}
                 <em>{@html glyph.dropdown}</em>
             {:else}
-                <span>{@html glyph[table.sorting.direction]}</span>
+                <span>{@html glyph[table.sort.direction]}</span>
             {/if}
         </div>
         {#snippet content()}
         <aside class="z-depth-1">
-            <button class="btn" onclick={() => sorting.asc()}>{@html glyph.asc} Asc</button>
-            <button class="btn" onclick={() => sorting.desc()}>{@html glyph.desc} Desc</button>
+            <button class="btn" onclick={() => sort.asc()}>{@html glyph.asc} Asc</button>
+            <button class="btn" onclick={() => sort.desc()}>{@html glyph.desc} Desc</button>
             <div class="divider"></div>
             <button class="btn" onclick={() => view.toggle(field)}>{@html glyph.hide} Hide</button>
         </aside>

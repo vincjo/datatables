@@ -10,7 +10,10 @@
 
     let { table }: { table: TableHandler } = $props()
 
-    const distinct = table.createCalculation('columnName').distinct()
+    const distinct = $derived.by(() => {
+        return table.createCalculation('columnName').distinct()
+                    .sort((a, b) => (a.count < b.count ? 1 : -1))
+    })
 </script>
 
 <ul>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th, RowCount, RowsPerPage, Pagination, type State } from '$lib/remote'
+    import { TableHandler, Datatable, ThSort, RowCount, RowsPerPage, Pagination, type State } from '$lib/remote'
     import { reload } from './api'
     let { data }: { data: any } = $props()
 
@@ -17,10 +17,10 @@
     <table>
         <thead>
             <tr>
-                <Th {table} field="id">ID</Th>
-                <Th {table} field="name">Name</Th>
-                <Th {table} field="email">Email</Th>
-                <Th {table} field="body">Comment</Th>
+                <ThSort {table} field="id">ID</ThSort>
+                <ThSort {table} field="name">Name</ThSort>
+                <ThSort {table} field="email">Email</ThSort>
+                <ThSort {table} field="body">Comment</ThSort>
             </tr>
         </thead>
         <tbody>

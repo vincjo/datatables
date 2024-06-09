@@ -50,3 +50,22 @@ export const match = (
     return compare(entry, value)
 }
 
+export const nestedFilter = (
+    entry: any,
+    value: any,
+    compare: Check<any> = undefined
+) => {
+    if (Array.isArray(entry)) {
+        entry = entry.filter((item: any) => {
+            const check = match(item, value, compare)
+            if (typeof item === 'object' && check === true) {
+                for (const k of Object.keys(item)) {
+                    item[k] = nestedFilter(item[k], value, compare)
+                }
+            }
+            return check
+        })
+    }
+
+    return entry
+}

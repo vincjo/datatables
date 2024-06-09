@@ -9,11 +9,12 @@
     const data = $state.snapshot(nav)
     const table = new TableHandler([data])
     const { properties, methods, types } = $derived(table?.rows?.[0] ?? [] as any)
+    const search = table.createSearch()
 </script>
 
 
 <nav>
-    <input type="text" placeholder="Search..." spellcheck="false" bind:value={table.search}/>
+    <input type="text" placeholder="Search..." spellcheck="false" bind:value={search.value} oninput={() => search.set()}/>
     <section class="thin-scrollbar">
         <Key data={properties} key={'properties'}/>
         <Key data={methods}    key={'methods'}/>

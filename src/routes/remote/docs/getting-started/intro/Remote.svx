@@ -29,7 +29,7 @@ In order to make the migration process a little easier, v1 is embed in "legacy" 
 <script lang="ts">
     import { 
         type State, TableHandler, 
-        Datatable, Th 
+        Datatable, ThSort 
     } from '@vincjo/datatables/remote'
     import { myLoadFunction } from './my-api-helper'
 
@@ -44,9 +44,9 @@ In order to make the migration process a little easier, v1 is embed in "legacy" 
     <table>
         <thead>
             <tr>
-                <Th {table} field="first_name">First Name</Th>
-                <Th {table} field="last_name">Last Name</Th>
-                <Th {table} field="email">Email</Th>
+                <ThSort {table} field="first_name">First Name</ThSort>
+                <ThSort {table} field="last_name">Last Name</ThSort>
+                <ThSort {table} field="email">Email</ThSort>
             </tr>
         </thead>
         <tbody>

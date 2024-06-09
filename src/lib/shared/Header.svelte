@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { type TableHandler, Search, RowsPerPage } from '$lib/shared'
+    import { type TableHandlerLike, Search, RowsPerPage } from '$lib/shared'
     type T = $$Generic<Row>
-    type Props = { table: TableHandler<T> }
+    type Props = { table: TableHandlerLike<T> }
 
     let { table }: Props = $props()
 </script>

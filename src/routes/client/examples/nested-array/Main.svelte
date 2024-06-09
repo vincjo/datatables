@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th, ThFilter } from '$lib/client'
+    import { TableHandler, Datatable, ThSort, ThFilter } from '$lib/client'
     import myData from '$site/data/cars'
     const table = new TableHandler(myData, { rowsPerPage: 10 })
 </script>
@@ -9,10 +9,10 @@
         <table>
             <thead>
                 <tr>
-                    <Th {table} field="firstname">First Name</Th>
-                    <Th {table} field="lastname">Last Name</Th>
-                    <Th {table} field="country">Country</Th>
-                    <Th {table} field="car">Car</Th>
+                    <ThSort {table} field="firstname">First Name</ThSort>
+                    <ThSort {table} field="lastname">Last Name</ThSort>
+                    <ThSort {table} field="country">Country</ThSort>
+                    <ThSort {table} field="car">Car</ThSort>
                 </tr>
                 <tr>
                     <ThFilter {table} field="firstname"/>

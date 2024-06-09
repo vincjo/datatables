@@ -12,13 +12,13 @@
     <table>
         <thead>
             <tr>
-                <Th {table}>ID</Th>
-                <Th {table}>Avatar</Th>
-                <Th {table}>Fristname</Th>
-                <Th {table}>Lastname</Th>
-                <Th {table}>Age</Th>
-                <Th {table}>Gender</Th>
-                <Th {table}>Height / Weight</Th>
+                <Th>ID</Th>
+                <Th>Avatar</Th>
+                <Th>Fristname</Th>
+                <Th>Lastname</Th>
+                <Th>Age</Th>
+                <Th>Gender</Th>
+                <Th>Height / Weight</Th>
             </tr>
         </thead>
         <tbody>

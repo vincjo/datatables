@@ -1,6 +1,6 @@
 import type { TableHandler } from '$lib/remote'
 
-export default class SortHandler<Row>
+export default class ort<Row>
 {
     private table: TableHandler
 
@@ -9,10 +9,9 @@ export default class SortHandler<Row>
         this.table = table
     }
 
-    public set(field: string = null)
+    public set(field: string)
     {
-        if (!field) return
-        const sort = this.table.sorting
+        const sort = this.table.sort
 
         if(!sort || sort.field !== field) {
             this.asc(field)
@@ -22,20 +21,20 @@ export default class SortHandler<Row>
         }
         else if (sort.direction === 'desc') {
             this.asc(field)
-        } 
+        }
     }
 
     public asc(field: string)
     {
-        if (!field) return
-        this.table.sorting = { field, direction: 'asc' }
+        this.table.sort = { field, direction: 'asc' }
+        this.table.setPage(1)
         this.table.events.trigger('change')
     }
 
     public desc(field: string)
     {
-        if (!field) return
-        this.table.sorting = { field, direction: 'desc' }
+        this.table.sort = { field, direction: 'desc' }
+        this.table.setPage(1)
         this.table.events.trigger('change')
     }
 
@@ -88,7 +87,7 @@ export default class SortHandler<Row>
     //     this.triggerChange.update((store) => { return store + 1 })
     // }
 
-    // public applySorting(params: { field: string, direction?: 'asc' | 'desc' } = null)
+    // public applySort(params: { field: string, direction?: 'asc' | 'desc' } = null)
     // {
     //     if (params) {
     //         switch (params.direction) {
@@ -100,7 +99,7 @@ export default class SortHandler<Row>
     //     const sort = get(this.sort)
     //     if (sort.length > 0) {
     //         for (const order of sort) {
-    //             return this.applySorting({ field: order.field, direction: order.direction })
+    //             return this.applySort({ field: order.field, direction: order.direction })
     //         }
     //     }
     //     return

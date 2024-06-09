@@ -8,7 +8,7 @@
     let { table, key }: Props = $props()
 
     const distinct = table.createCalculation(key).distinct()
-    const search = table.createSearch(distinct)
+    const search = table.createRecordFilter(distinct)
     const filter = table.createAdvancedFilter(key)
 </script>
 
@@ -32,9 +32,9 @@
     <article class="z-depth-2 open-dropdown">
         <div class="flex search">
             {@html glyph.search}
-            <input type="text" bind:value={search.value} placeholder="{poemize(key)}">
+            <input type="text" bind:value={search.value} oninput={() => search.set()} placeholder="{poemize(key)}">
         </div>
-        {#each search.items as item}
+        {#each search.records as item}
             {@const { value, count } = item}
             <button 
                 class="btn select close-dropdown" 

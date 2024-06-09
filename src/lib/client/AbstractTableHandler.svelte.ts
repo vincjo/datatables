@@ -1,7 +1,7 @@
 import type { Params }  from './TableHandler.svelte'
 import EventsHandler    from './handlers/EventsHandler'
-import type { Filter, Sorting, Field } from '$lib/client'
-import { parseField, match } from './utils'
+import type { Filter, Sort, Field } from '$lib/client'
+import { parseField, match, nestedFilter } from './utils'
 
 
 export default abstract class AbstractTableHandler<Row>
@@ -10,8 +10,6 @@ export default abstract class AbstractTableHandler<Row>
     public filters              = $state<(Filter<Row>)[]>([])
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
-    public search               = $state<string>('')
-    public searchScope          = $state<(Field<Row>)[]>(null)
     public filterCount          = $derived<number>(this.filters.length)
     public rawRows              = $state.frozen<Row[]>([])
     public allRows              = $derived<Row[]>(this.createAllRows())
@@ -20,13 +18,15 @@ export default abstract class AbstractTableHandler<Row>
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
     public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())
-    public sorting              = $state<(Sorting<Row>)>({})
+    public sort                 = $state<(Sort<Row>)>({})
     public selected             = $state<(Row | Row[keyof Row])[]>([])
     public selectBy             : string
     public selectScope          = $state<'all' | 'currentPage'>('currentPage')
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
     public element              = $state<HTMLElement>(undefined)
     public clientWidth          = $state<number>(1000)
+    protected searchScope       = $state<(Field<Row>)[]>(null)
+    protected search            = $state<string>('')
 
     constructor(data: Row[], params: Params)
     {
@@ -44,11 +44,12 @@ export default abstract class AbstractTableHandler<Row>
                 const scope = fields.map((field: Field<Row>) => {
                     return parseField(field)
                 })
-                return scope.some(({ callback, key }) => {
-                    if (key && Array.isArray(row[key])) {
-                        row[key] = row[key].filter((item: any) => match(item, this.search))
-                        return match(row[key], this.search)
+                for(const { key } of scope) {
+                    if (key) {
+                        row[key] = nestedFilter(row[key], this.search)
                     }
+                }
+                return scope.some(({ callback, key }) => {
                     return match(callback(row), this.search)
                 })
             })
@@ -58,9 +59,8 @@ export default abstract class AbstractTableHandler<Row>
         if (this.filterCount > 0) {
             for (const { callback, value, check, key } of this.filters) {
                 allRows = allRows.filter((row) => {
-                    if (key && Array.isArray(row[key])) {
-                        row[key] = row[key].filter((item: any) => match(item, value, check))
-                        return match(row[key], value, check)
+                    if (key) {
+                        row[key] = nestedFilter(row[key], value, check)
                     }
                     return match(callback(row), value, check)
                 })

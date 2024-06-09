@@ -24,7 +24,7 @@
     }
     div {
         max-width: 960px;
-        padding: 40px 40px 80px 40px;
+        padding: 40px 72px 80px 72px;
     }
     @media (min-width: 1200px) {
         section {

@@ -39,4 +39,11 @@ export default class SelectHandler<Row>
     {
         this.table.selected = []
     }
+
+    public getRows()
+    {
+        return this.table.rawRows.filter(row => {
+            return this.table.selected.includes(row[this.table.selectBy])
+        })
+    }
 }

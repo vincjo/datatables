@@ -7,7 +7,7 @@ class API
     public create(user)
     {
         user.id = Math.floor(Math.random() * 9999)
-        this.users.push(user)
+        this.users.unshift(user)
     }
 
     public destroy(user)

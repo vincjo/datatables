@@ -1,20 +1,34 @@
-import { match, isNotNull } from '$lib/client/utils'
+import type { Field } from '$lib/client'
+import type TableHandler from '../TableHandler.svelte'
 
-export default class SearchHelper 
+export default class SearchHelper<Row>
 {
-    private rawItems    = $state.frozen<any[]>([])
-    public  value       = $state<string>('')
-    public  items       = $derived<readonly any[]>(this.createFilteredItems())
-    constructor(items: any[])
+    public  value           = $state<string>('')
+    public  scope           = $state<Field<Row>[]>([])
+    private table           : TableHandler<Row>
+
+    constructor(table: TableHandler<Row>, scope: Field<Row>[])
     {
-        this.rawItems = items
+        this.table                  = table
+        this.table['searchScope']   = scope
+        this.cleanup()
     }
 
-    private createFilteredItems(): readonly any[]
+    public set()
     {
-        if (isNotNull(this.value)) {
-            return this.rawItems.filter(item => match(item, this.value))
-        }
-        return this.rawItems
+        this.table['search'] = this.value
+    }
+
+    public clear()
+    {
+        this.value = ''
+        this.table['search'] = ''
+    }
+
+    private cleanup()
+    {
+        this.table.on('clearSearch', () => {
+            this.clear()
+        })
     }
 }

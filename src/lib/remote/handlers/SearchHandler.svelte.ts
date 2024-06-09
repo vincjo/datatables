@@ -10,6 +10,6 @@ export default class SearchHandler<Row>
 
     public clear()
     {
-        return
+        this.table.events.trigger('clearSearch')
     }
 }

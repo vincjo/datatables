@@ -1,6 +1,6 @@
 import AbstractTableHandler     from './AbstractTableHandler.svelte'
 
-import SortingHandler           from './handlers/SortingHandler.svelte'
+import SortHandler              from './handlers/SortHandler.svelte'
 import FilterHandler            from './handlers/FilterHandler.svelte'
 import SelectHandler            from './handlers/SelectHandler.svelte'
 import PageHandler              from './handlers/PageHandler.svelte'
@@ -13,8 +13,9 @@ import SearchHelper             from './helpers/SearchHelper.svelte'
 import FilterHelper             from './helpers/FilterHelper.svelte'
 import AdvancedFilterHelper     from './helpers/AdvancedFilterHelper.svelte'
 import CalculationHelper        from './helpers/CalculationHelper.svelte'
-import SortingHelper            from './helpers/SortingHelper.svelte'
+import SortHelper               from './helpers/SortHelper.svelte'
 import CSVHelper                from './helpers/CSVHelper.svelte'
+import RecordFilterHelper       from './helpers/RecordFilterHelper.svelte'
 
 export type Params = { rowsPerPage?: number, i18n?: Internationalization, selectBy?: string }
 
@@ -22,7 +23,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 {
     public  i18n            : Internationalization
     private view            : ViewHelper
-    private sortingHandler  : SortingHandler<T>
+    private sortHandler     : SortHandler<T>
     private filterHandler   : FilterHandler<T>
     private selectHandler   : SelectHandler<T>
     private pageHandler     : PageHandler<T>
@@ -32,7 +33,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     {
         super(data, params)
         this.translate(params.i18n)
-        this.sortingHandler = new SortingHandler(this)
+        this.sortHandler    = new SortHandler(this)
         this.filterHandler  = new FilterHandler(this)
         this.selectHandler  = new SelectHandler(this)
         this.pageHandler    = new PageHandler(this)
@@ -43,7 +44,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     {
         this.rawRows = data
         this.events.trigger('change')
-        this.sortingHandler.apply()
+        this.sortHandler.apply()
     }
 
     public setRowsPerPage(value: number): void
@@ -67,32 +68,19 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.searchHandler.clear()
     }
 
-    public createSearch(items?: any[]): SearchHelper
+    public createSearch(scope?: Field<T>[]): SearchHelper<T>
     {
-        return new SearchHelper(items)
+        return new SearchHelper(this, scope)
     }
 
-    public sort(field: Field<T>)
+    public createRecordFilter(records?: Row[]): RecordFilterHelper
     {
-        this.setPage(1)
-        this.sortingHandler.set(field, field.toString())
+        return new RecordFilterHelper(records)
     }
 
-    public sortAsc(field: Field<T>)
+    public createSort(field: Field<T>): SortHelper<T>
     {
-        this.setPage(1)
-        this.sortingHandler.asc(field, field.toString())
-    }
-
-    public sortDesc(field: Field<T>)
-    {
-        this.setPage(1)
-        this.sortingHandler.desc(field, field.toString())
-    }
-
-    public createSorting(field: Field<T>): SortingHelper<T>
-    {
-        return new SortingHelper(this.sortingHandler, field)
+        return new SortHelper(this.sortHandler, field)
     }
 
     public filter(value: any, field: Field<T>, check?: Check<T>): void
@@ -128,11 +116,15 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.selectHandler.all()
     }
 
+    public getSelectedRows()
+    {
+        return this.selectHandler.getRows()
+    }
+
     public clearSelection(): void
     {
         this.selectHandler.clear()
     }
-
 
     public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
     {

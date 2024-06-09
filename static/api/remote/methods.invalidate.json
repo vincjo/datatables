@@ -1,1 +1,1 @@
-{"name":"invalidate","text":"invalidate(): void","returnType":"void","args":[],"ast":{"name":"invalidate","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":49}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}
+{"name":"invalidate","text":"invalidate(): void","returnType":"void","args":[],"ast":{"name":"invalidate","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":51}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

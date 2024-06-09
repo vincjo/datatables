@@ -1,10 +1,14 @@
-<script>
-    let { table } = $props()
+<script lang="ts">
+    import type { TableHandler } from '$lib/client'
+
+    let { table }: { table: TableHandler } = $props()
+    const search = table.createSearch()
 </script>
 
 
 <aside>
-    <input type="text" bind:value={table.search}>
+    <div class="btn">SEARCH</div>
+    <input type="text" bind:value={search.value} oninput={() => search.set()}>
 </aside>
 
 <style>
@@ -13,5 +17,13 @@
     }
     input {
         color: var(--font);
+        border-radius: 0 8px 8px 8px;
+    }
+    div {
+        color: var(--font);
+        background: var(--ternary);
+        border-radius: 8px 8px 0 0;
+        width: 80px;
+        height: 32px;
     }
 </style>

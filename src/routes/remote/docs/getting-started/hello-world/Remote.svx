@@ -45,7 +45,7 @@ type State = {
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
-    sorting: Sorting<Row> | undefined,
+    sort: Sort<Row> | undefined,
     filters: Filter<Row>[] | undefined,
     setTotalRows: (value: number) => void
 }
@@ -67,10 +67,10 @@ export const myLoadFunction = async (state: State) => {
     return json.rows
 }
 
-const getParams = ({ offset, rowsPerPage, search, sorting, filters }: State) => {
+const getParams = ({ offset, rowsPerPage, search, sort, filters }: State) => {
     let params = `offset=${offset}&limit=${rowsPerPage}`
     if (search) params += `&q=${search}`
-    if (sort)   params += `&sort=${sorting.field}&order=${sorting.direction}`
+    if (sort)   params += `&sort=${sort.field}&order=${sort.direction}`
     if (filters) {
         params += filters.map(({ field, value }) => `&${field}=${value}`).join()
     }

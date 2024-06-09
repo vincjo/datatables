@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { type TableHandler, Datatable, Th } from '$lib/client'
+    import { type TableHandler, Datatable, ThSort } from '$lib/client'
     import PokemonStats from './MCF_PokemonStats.svelte'
     type Props = { table: TableHandler }
     let { table }: Props = $props()
@@ -16,10 +16,10 @@
     <table>
         <thead class="bg-darken">
             <tr>
-                <Th {table} field="id">ID</Th>
-                <Th {table} field="name">Name</Th>
-                <Th {table} field="type">Type</Th>
-                <Th {table} field={(row) => sumStats(row.stats)}>Base stats</Th>
+                <ThSort {table} field="id">ID</ThSort>
+                <ThSort {table} field="name">Name</ThSort>
+                <ThSort {table} field="type">Type</ThSort>
+                <ThSort {table} field={(row) => sumStats(row.stats)}>Base stats</ThSort>
             </tr>
         </thead>
         <tbody>

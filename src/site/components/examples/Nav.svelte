@@ -5,11 +5,12 @@
     type Props = { nav: { title: string, page: string, description: string, tag: string[] }[] }
     let { nav }: Props = $props()
     const table = new TableHandler(nav)
+    const search = table.createSearch()
 </script>
 
 
 <nav>
-    <input type="text" placeholder="Search..." spellcheck="false" bind:value={table.search}/>
+    <input type="text" placeholder="Search..." spellcheck="false" bind:value={search.value} oninput={() => search.set()}/>
     <section class="thin-scrollbar">
         {#each table.rows as row}
             <a href="{getPath(`/${site.mode}/examples/${row.page}`)}" class:active={$url.indexOf(row.page) > -1}>

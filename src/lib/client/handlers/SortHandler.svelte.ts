@@ -1,9 +1,9 @@
-import type { Sorting, Field, TableHandler } from '$lib/client'
+import type { Sort, Field, TableHandler } from '$lib/client'
 import { parseField } from '$lib/client/utils'
 
-export default class SortingHandler<Row> 
+export default class SortHandler<Row> 
 {
-    private backup  : Sorting<Row>[]
+    private backup  : Sort<Row>[]
     private table   : TableHandler<Row>
 
     constructor(table: TableHandler<Row>) 
@@ -16,13 +16,13 @@ export default class SortingHandler<Row>
     {
         const { identifier } = parseField(field, uid)
 
-        if (this.table.sorting.identifier !== identifier) {
-            this.table.sorting.direction = null
+        if (this.table.sort.identifier !== identifier) {
+            this.table.sort.direction = null
         }
-        if (this.table.sorting.direction === null || this.table.sorting.direction === 'desc') {
+        if (this.table.sort.direction === null || this.table.sort.direction === 'desc') {
             this.asc(field, uid)
         }
-        else if (this.table.sorting.direction === 'asc') {
+        else if (this.table.sort.direction === 'asc') {
             this.desc(field, uid)
         }
     }
@@ -31,7 +31,7 @@ export default class SortingHandler<Row>
     {
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
-        this.table.sorting = { identifier, callback, direction: 'asc', key }
+        this.table.sort = { identifier, callback, direction: 'asc', key }
         this.table.rawRows = [...this.table.rawRows].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
             if (a === b) return 0
@@ -44,6 +44,7 @@ export default class SortingHandler<Row>
             else return String(a).localeCompare(String(b))
         })
         this.save({ identifier, callback, direction: 'asc' })
+        this.table.setPage(1)
         this.table.events.trigger('change')
     }
 
@@ -51,7 +52,7 @@ export default class SortingHandler<Row>
     {
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
-        this.table.sorting = { identifier, callback, direction: 'desc', key }
+        this.table.sort = { identifier, callback, direction: 'desc', key }
         this.table.rawRows = [...this.table.rawRows].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
             if (a === b) return 0
@@ -64,6 +65,7 @@ export default class SortingHandler<Row>
             else return String(b).localeCompare(String(a))
         })
         this.save({ identifier, callback, direction: 'desc' })
+        this.table.setPage(1)
         this.table.events.trigger('change')
     }
 
@@ -85,7 +87,7 @@ export default class SortingHandler<Row>
     public clear()
     {
         this.backup = []
-        this.table.sorting = {}
+        this.table.sort = {}
     }
 
     private restore()
@@ -97,7 +99,7 @@ export default class SortingHandler<Row>
         }
     }
 
-    private save(sort: Sorting<Row>)
+    private save(sort: Sort<Row>)
     {
         this.backup = this.backup.filter(item => item.identifier !== sort.identifier )
         if (this.backup.length >= 3) {
@@ -107,10 +109,5 @@ export default class SortingHandler<Row>
         else {
             this.backup = [...this.backup, sort]
         }
-    }
-
-    public getTable()
-    {
-        return this.table
     }
 }

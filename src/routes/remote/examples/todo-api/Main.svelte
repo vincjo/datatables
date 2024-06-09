@@ -1,20 +1,24 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th, ThFilter, Search, RowsPerPage, Pagination, RowCount, type State } from '$lib/remote'
+    import { TableHandler, Datatable, ThSort, ThFilter, Pagination, RowsPerPage, Search, type State } from '$lib/remote'
     import { reload } from './api'
     export let data: any[]
 
-    const table = new TableHandler(data, { rowsPerPage: 10, totalRows: 200 })
+    const table = new TableHandler(data, { rowsPerPage: 10 })
 
     table.load((state: State) => reload(state))
 </script>
 
-<Datatable basic {table}>
+<Datatable {table}>
+    {#snippet header()}
+        <Search {table}/>
+        <RowsPerPage {table}/>
+    {/snippet}
     <table>
         <thead>
             <tr>
-                <Th {table} field="id">ID</Th>
-                <Th {table} field="title">Title</Th>
-                <Th {table} field="completed">Completed</Th>
+                <ThSort {table} field="id">ID</ThSort>
+                <ThSort {table} field="title">Title</ThSort>
+                <ThSort {table} field="completed">Completed</ThSort>
             </tr>
             <tr>
                 <ThFilter {table} field="id"/>
@@ -32,6 +36,10 @@
             {/each}
         </tbody>
     </table>
+    {#snippet footer()}
+        <div></div>
+        <Pagination {table}/>
+    {/snippet}
 </Datatable>
 
 <style>

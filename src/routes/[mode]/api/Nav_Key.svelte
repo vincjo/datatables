@@ -22,6 +22,7 @@
                         <span>{item}</span>
                     </li>
                 </a>
+                <div class="divider"></div>
             {/each}
         </ul>
     {/if}
@@ -76,7 +77,6 @@
         padding: 2px 8px;
         font-size: 13px;
         color: var(--font-grey);
-        border-bottom: 1px solid var(--grey-lighten);
     }
     li:hover {
         background: var(--primary-lighten-1);
@@ -87,6 +87,11 @@
     }
     a {
         text-decoration: none;
+    }
+    .divider {
+        border-bottom: 1px solid var(--grey-lighten);
+        width: calc(100% - 8px);
+        margin: 0 auto;
     }
     /* li.deprecated {
         text-decoration: solid line-through var(--font-grey);
