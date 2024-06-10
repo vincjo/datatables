@@ -10,3 +10,5 @@ const table = new TableHandler(data, { highlight: true })
 This will add `<u class="highlight">` tag around matching values of type *string* or *number*.
 
 **Caveat:** requires `{@html}` everywhere in the template.
+
+**Limitation**: currently not working if "field" is a callback.

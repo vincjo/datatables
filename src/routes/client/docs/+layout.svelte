@@ -19,20 +19,38 @@
                 { name: 'Highlight results'     , path: `${root}/search/highlight`            },
             ]
         },
-        // {
-        //     title: 'Filters',
-        //     links: [
-        //         { name: 'Comparators'           , path: `${root}/filters/comparators`         },
-        //         { name: 'Multiple criteria'     , path: `${root}/filters/multiple-criteria`   },
-        //     ]
-        // },
         {
-            title: 'Column calculations',
+            title: 'Column sort',
             links: [
-                { name: 'Sum'                   , path: `${root}/calculations/sum`           },
-                { name: 'Average'               , path: `${root}/calculations/avg`           },
-                { name: 'Distinct values'       , path: `${root}/calculations/distinct`      },
-                { name: 'Bounds'                , path: `${root}/calculations/bounds`        },
+                { name: 'Sort button '          , path: `${root}/sort/button`                 },
+                { name: 'Nested prop'           , path: `${root}/sort/nested`                 },
+            ]
+        },
+        {
+            title: 'Column filter',
+            links: [
+                { name: 'Filter input'          , path: `${root}/filters/input`               },
+                { name: 'Check function'        , path: `${root}/filters/check`               },
+                { name: 'Nested prop'           , path: `${root}/filters/nested`              },
+                { name: 'Multiple criteria'     , path: `${root}/filters/criteria`            },
+                { name: 'Highlight results'     , path: `${root}/filters/highlight`           },
+            ]
+        },
+        {
+            title: 'Row selection',
+            links: [
+                { name: 'Select a row'          , path: `${root}/select/row`                  },
+                { name: 'Select all'            , path: `${root}/select/all`                  },
+                { name: 'Select scope'          , path: `${root}/select/scope`                },
+            ]
+        },
+        {
+            title: 'Column calculation',
+            links: [
+                { name: 'Sum'                   , path: `${root}/calculation/sum`           },
+                { name: 'Average'               , path: `${root}/calculation/avg`           },
+                { name: 'Distinct values'       , path: `${root}/calculation/distinct`      },
+                { name: 'Bounds'                , path: `${root}/calculation/bounds`        },
             ]
         },
         // {

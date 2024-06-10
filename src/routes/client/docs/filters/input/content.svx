@@ -1,0 +1,16 @@
+# Filter input 
+
+To create a filter input, use `table.createFilter(field)`.
+
+<!-- This function reduces boilerplates from the shortchut `table.filter(valuefield,)` -->
+
+```svelte
+<script lang="ts">
+    import type { TableHandler } from '@vincjo/datatables'
+    let { table }: { table: TableHandler } = $props()
+
+    const filter = table.createFilter('last_name')
+</script>
+
+<input type="text" bind:value={filter.value} oninput={() => filter.set()}>
+```

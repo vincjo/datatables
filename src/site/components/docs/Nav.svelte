@@ -38,15 +38,16 @@
     section {
         position: absolute;
         top: 80px;
-        bottom: 24px;
+        bottom: 0px;
         left: 0;
         right: 16px;
         overflow-y: auto;
         border-top: 1px dotted var(--grey);
+        padding-bottom: 40px;
     }
     h1 {
         font-weight: bold;
-        margin-top: 24px;
+        margin-top: 16px;
         font-size: 15px;
         margin-bottom: 0;
         color: var(--font);
@@ -55,9 +56,9 @@
         display: block;
         text-decoration: none;
         color: var(--font-grey);
-        margin-top: 2px;
+        margin-top: 1px;
         margin-right: 8px;
-        padding: 4px 8px;
+        padding: 3px 12px;
         border-radius: 4px;
         transition: background, 0.2s;
     }

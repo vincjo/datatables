@@ -1,0 +1,12 @@
+
+# Select all
+
+- All rows are selected ? `table.isAllSelected`
+- Select all rows: `table.selectAll()`
+
+```svelte
+<input type="checkbox"
+    checked={table.isAllSelected}
+    onclick={() => table.selectAll()}
+>
+```

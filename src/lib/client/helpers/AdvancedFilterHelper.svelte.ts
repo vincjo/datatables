@@ -4,9 +4,9 @@ import { check as comparator } from '$lib/client/Comparator'
 
 export default class AdvancedFilterHelper<Row>
 {
-    public  active          = $state<(string | number | number[])[]>([])
+    public  criteria        = $state<(string | number | number[])[]>([])
     private filterHandler   : FilterHandler<Row>
-    private criteria        : Criterion[]
+    private collection      : Criterion[]
     private field           : Field<Row>
     private uid             : string
     private check           : Check<any>
@@ -16,30 +16,30 @@ export default class AdvancedFilterHelper<Row>
         this.filterHandler  = filterHandler
         this.field          = field
         this.uid            = 'm_' + (Math.random()).toString(28).substring(2)
-        this.criteria       = []
+        this.collection     = []
         this.check          = check ?? comparator.isEqualTo
         this.cleanup()
     }
 
     public set(value: string | number | number[], check?: Check<any>): void
     {
-        if (this.criteria.find(criterion => criterion.value === value)) {
-            this.criteria = this.criteria.filter(criterion => criterion.value !== value)
+        if (this.collection.find(criterion => criterion.value === value)) {
+            this.collection = this.collection.filter(criterion => criterion.value !== value)
         }
         else {
-            this.criteria = [ { value, check: check ?? this.check }, ...this.criteria ]
+            this.collection = [ { value, check: check ?? this.check }, ...this.collection ]
         }
-        if (this.criteria.length === 0) {
+        if (this.collection.length === 0) {
             return this.clear()
         }
-        this.filterHandler.set(this.criteria, this.field, comparator.whereIn, this.uid)
-        this.active = this.criteria.map(criterion => criterion.value)
+        this.filterHandler.set(this.collection, this.field, comparator.whereIn, this.uid)
+        this.criteria = this.collection.map(criterion => criterion.value)
     }
 
     public clear(): void
     {
+        this.collection = []
         this.criteria = []
-        this.active = []
         this.filterHandler.unset(this.uid)
     }
 

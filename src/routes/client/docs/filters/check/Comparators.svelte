@@ -26,10 +26,10 @@
         {#each comparators as comparator}
             <li>
                 <button
-                    class:active={current === comparator}
+                    class:active={$state.is(current, comparator)}
                     onclick={() => (current = comparator)}
                 >
-                    {comparator.name}
+                    check.{comparator.name}
                     {#if comparator.isDefault}
                         <span>(default)</span>
                     {/if}
@@ -37,13 +37,14 @@
             </li>
         {/each}
     </ul>
-    <Check comparator={current} />
+    {#key current}
+        <Check comparator={current} />
+    {/key}
 </section>
 
 <style>
     section {
         align-items: flex-start;
-        flex-wrap: wrap;
         border-radius: 8px;
     }
     ul {

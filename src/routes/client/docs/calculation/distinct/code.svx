@@ -17,8 +17,7 @@
 </script>
 
 <ul>
-    {#each distinct as item}
-        {@const { value, count } = item}
+    {#each distinct as { value, count }}
         <li>{value} has {count} occurrences</li>
     {/each}
 </ul>
@@ -38,8 +37,7 @@
 </script>
 
 <ul>
-    {#each distinct as item}
-        {@const { value, count } = item}
+    {#each distinct as { value, count }}
         <li>{value} has {count} occurrences</li>
     {/each}
 </ul>

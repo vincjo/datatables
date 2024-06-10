@@ -5,22 +5,22 @@
 
     const table = new TableHandler(data) 
     const search = table.createSearch(['task'])
-    const filter = table.createAdvancedFilter('priority')
+    const filter = table.createAdvancedFilter('priority', check.isEqualTo)
 </script>
 
 {#snippet item(name, color)}
     <button 
-        onclick={() => filter.set(name, check.isEqualTo)}
-        class:active={filter.active.includes(name)} class="btn" style:color="{color}">
+        onclick={() => filter.set(name)}
+        class:active={filter.criteria.includes(name)} class="btn" style:color="{color}">
     <i class="micon">
-        {filter.active.includes(name) ? 'check_box' : 'check_box_outline_blank'}
+        {filter.criteria.includes(name) ? 'check_box' : 'check_box_outline_blank'}
     </i>
     {name}
     </button>
 {/snippet}
 
 
-<section class="flex">
+<section class="flex bg-darken">
 
     <aside>
         <h2 class="flex">
@@ -50,10 +50,9 @@
 <style>
     section {
         border-radius: 8px;
-        padding: 16px 0;
-        max-width: 800px;
-        flex-wrap: wrap;
+        padding: 16px;
         align-items: flex-start;
+        width:fit-content;
     }
     input {
         background: var(--bg);
@@ -80,7 +79,7 @@
     aside h2 i {
         margin-right: 8px;
     }
-    aside button {
+    button {
         margin: 0;
         width: 100%;
         font-size: 13px;
@@ -91,10 +90,10 @@
         font-weight: bold;
         font-family: JetBrains;
     }
-    aside button.active {
+    button.active {
         background: var(--grey-lighten);
     }
-    aside button i {
+    button i {
         font-size: 18px;
         margin-right: 8px;
         color: var(--font-grey);

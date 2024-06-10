@@ -48,6 +48,7 @@
         padding: 0;
         display: flex;
         align-items: center;
+        justify-content: flex-start;
         height: 100%;
     }
     th.sortable span {

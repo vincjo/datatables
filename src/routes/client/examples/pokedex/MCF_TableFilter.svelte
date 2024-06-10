@@ -15,7 +15,7 @@
     <h3 class="flex">
         <i class="micon">filter_list</i>
         by Types
-        {#if filter.active.length > 0}
+        {#if filter.criteria.length > 0}
             <button class="clear btn" onclick={() => filter.clear()}>
                 Clear
             </button>
@@ -23,9 +23,9 @@
     </h3>
     {#each types as type}
         {@const { value, count } = type}
-        <button onclick={() => filter.set(value)} class="btn select" class:active={filter.active.includes(value)}>
+        <button onclick={() => filter.set(value)} class="btn select" class:active={filter.criteria.includes(value)}>
             <i class="micon">
-                {filter.active.includes(value) ? 'check_box' : 'check_box_outline_blank'}
+                {filter.criteria.includes(value) ? 'check_box' : 'check_box_outline_blank'}
             </i>
             <span>{value}</span>
             <code>{count}</code>

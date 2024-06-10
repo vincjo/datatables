@@ -72,7 +72,7 @@ a {
     color: var(--font-grey);
 }
 
-.md p code {
+.md p code, .md li code {
     background: var(--secondary-lighten-1);
     padding: 2px 4px;
     color: var(--secondary);

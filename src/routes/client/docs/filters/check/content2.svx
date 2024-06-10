@@ -1,0 +1,23 @@
+<script>
+    import Comparators from './Comparators.svelte'
+</script>
+
+
+## Available check functions:
+
+```ts
+import { check } from '@vincjo/datatables'
+```
+
+<Comparators/>
+
+
+## Custom check function
+
+````ts
+const customCheck = (entry, value): boolean => {
+    return entry != value
+}
+
+const filter = table.createFilter('last_name', customCheck)
+````

@@ -11,9 +11,7 @@ To create a search input, use `table.createSearch()`.
     let { table }: { table: TableHandler } = $props()
 
     const search = table.createSearch()
-
 </script>
 
 <input type="text" bind:value={search.value} oninput={() => search.set()}>
-
 ```

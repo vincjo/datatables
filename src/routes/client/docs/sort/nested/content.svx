@@ -1,0 +1,15 @@
+# Nested prop 
+
+You may have nested properties that you need to sort specifically.
+
+`field` can be set as a callback with `row` as argument:
+
+```ts
+const field = (row) => row.nested.prop
+```
+
+## Example 
+
+```ts
+const sort = table.createSort((row) => row.user.login_count)
+```

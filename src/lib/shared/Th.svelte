@@ -17,6 +17,7 @@
         white-space: nowrap;
         font-size: 13px;
         user-select: none;
+        text-align: left;
         border-bottom: 1px solid var(--grey, #e0e0e0);
     }
     th strong {

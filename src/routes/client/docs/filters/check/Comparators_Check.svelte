@@ -1,54 +1,47 @@
 <script>
     import { TableHandler, check } from '$lib/client'
-    import { Range, Checkbox } from 'gros/form'
+    import { Range } from 'gros/form'
     import { data } from './data'
 
-    let { comparator, value = '', checked = false } = $props()
+    let { comparator } = $props()
 
     const table = new TableHandler(data[comparator.type ?? 'string'])
-    const filter = table.createFilter('value')
 
-    $effect(() => { comparator; clear() })
-    $effect(() => {
-        displayedValue = comparator.bounds ? `[${value[0]}, ${value[1]}]` : ''
-    })
-    $effect(() => {
-        value
-        filter.set(value, 'value', check[comparator.name])
-    })
-    const clear = () => {
-        table.clearFilters()
-        table.setRows(data[comparator.type ?? 'string'])
-        if (comparator.bounds) {
-            value = comparator.bounds
-        } else {
-            value = ''
-            checked = false
-        }
+    let checked = $state(false)
+    
+    const filter = table.createFilter('value', check[comparator.name])
+
+    let range = $state([0, 100])
+
+    const handleRange = () => {
+        filter.value = range
+        filter.set()
     }
+
 </script>
 
 <aside>
-    <h3>{comparator.name} <span>{displayedValue}</span></h3>
+    <h3>{comparator.name} <span>{comparator.bounds ? `[${range[0]}, ${range[1]}]` : ''}</span></h3>
     {#if comparator.type === 'number' && !comparator.bounds}
-        <input type="number" bind:value />
+        <input type="number" bind:value={filter.value} oninput={() => filter.set()}>
     {:else if comparator.bounds}
-        <div class="range">
-            <Range bind:value min={0} max={100} step={1} />
+        <div class="range flex">
+            <input type="number" bind:value={range[0]} oninput={handleRange}>
+            <input type="number" bind:value={range[1]} oninput={handleRange}>
         </div>
     {:else if comparator.type === 'boolean'}
         <div class="range">
-            <Checkbox
-                bind:checked
-                size={20}
-                margin={[0, 8, 0, 0]}
-                onclick={() => (checked ? (value = 'x') : (value = ''))}
-            >
+            <button class="btn" onclick={() => {
+                checked = !checked
+                checked ? filter.value = 'x' : filter.value = ''
+                filter.set()
+            }}>
+                <i class="micon">{checked ? 'check_box' : 'check_box_outline_blank'}</i>
                 {comparator.name}
-            </Checkbox>
+            </button>
         </div>
     {:else}
-        <input type="text" spellcheck="false" bind:value />
+        <input type="text" spellcheck="false" bind:value={filter.value} oninput={() => filter.set()}>
     {/if}
     <ul class="thin-scrollbar">
         {#each table.rows as row}
@@ -99,5 +92,20 @@
         background: var(--bg);
         color: var(--font);
         border: 1px solid var(--grey);
+    }
+    button {
+        color: var(--font);
+        text-transform: none;
+        padding: 0;
+        text-align: left;
+        font-family: JetBrains;
+    }
+    button i {
+        margin-right: 8px;
+        color: var(--secondary);
+    }
+    div.range input {
+        margin:0 4px;
+        height: 28px;
     }
 </style>
