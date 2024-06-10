@@ -1,6 +1,11 @@
 import type { Sort, Field, TableHandler } from '$lib/client'
 import { parseField } from '$lib/client/utils'
 
+export type Params = {
+    locales?: Intl.LocalesArgument,
+    options?: Intl.CollatorOptions
+}
+
 export default class SortHandler<Row> 
 {
     private backup  : Sort<Row>[]
@@ -12,7 +17,7 @@ export default class SortHandler<Row>
         this.backup = []
     }
 
-    public set(field: Field<Row> = null, uid?: string)
+    public set(field: Field<Row>, uid: string, params: Params = {})
     {
         const { identifier } = parseField(field, uid)
 
@@ -20,14 +25,14 @@ export default class SortHandler<Row>
             this.table.sort.direction = null
         }
         if (this.table.sort.direction === null || this.table.sort.direction === 'desc') {
-            this.asc(field, uid)
+            this.asc(field, uid, params)
         }
         else if (this.table.sort.direction === 'asc') {
-            this.desc(field, uid)
+            this.desc(field, uid, params)
         }
     }
 
-    public asc(field: Field<Row>, uid?: string)
+    public asc(field: Field<Row>, uid?: string, { locales, options }: Params = {})
     {
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
@@ -40,15 +45,15 @@ export default class SortHandler<Row>
             if (typeof a === 'boolean') return a === false ? 1 : -1
             if (typeof a === 'string') return a.localeCompare(b as string)
             if (typeof a === 'number') return a - (b as number)
-            if (typeof a === 'object') return JSON.stringify(a).localeCompare(JSON.stringify(b))
-            else return String(a).localeCompare(String(b))
+            if (typeof a === 'object') return JSON.stringify(a).localeCompare(JSON.stringify(b), locales, options)
+            else return String(a).localeCompare(String(b), locales, options)
         })
         this.save({ identifier, callback, direction: 'asc' })
         this.table.setPage(1)
         this.table.events.trigger('change')
     }
 
-    public desc(field: Field<Row>, uid?: string)
+    public desc(field: Field<Row>, uid?: string, { locales, options }: Params = {})
     {
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
@@ -61,27 +66,17 @@ export default class SortHandler<Row>
             if (typeof b === 'boolean') return b === false ? 1 : -1
             if (typeof b === 'string') return b.localeCompare(a as string)
             if (typeof b === 'number') return b - (a as number)
-            if (typeof b === 'object') return JSON.stringify(b).localeCompare(JSON.stringify(a))
-            else return String(b).localeCompare(String(a))
+            if (typeof b === 'object') return JSON.stringify(b).localeCompare(JSON.stringify(a), locales, options)
+            else return String(b).localeCompare(String(a), locales, options)
         })
         this.save({ identifier, callback, direction: 'desc' })
         this.table.setPage(1)
         this.table.events.trigger('change')
     }
 
-    public apply(params?: { field: Field<Row>, direction?: 'asc' | 'desc', identifier?: string }) 
+    public apply() 
     {
-        if (params) {
-            const { field, direction, identifier } = params
-            switch (direction) {
-                case 'asc' : return this.asc(field, identifier)
-                case 'desc': return this.desc(field, identifier)
-                default    : return this.set(field, identifier)
-            }
-        }
-        else {
-            this.restore()
-        }
+        this.restore()
     }
 
     public clear()

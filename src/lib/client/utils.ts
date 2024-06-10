@@ -67,7 +67,7 @@ export const nestedFilter = (
             return check
         })
     }
-    if (highlight && typeof entry === 'string' && match(entry, value, compare)) {
+    if (highlight && (typeof entry === 'string' || typeof entry === 'number') && match(entry, value, compare)) {
         const search = value
             .replace(/a/g, '[aàâáä]')
             .replace(/e/g, '[eèêéë]')
@@ -76,7 +76,7 @@ export const nestedFilter = (
             .replace(/u/g, '[uùûúü]')
             .replace(/y/g, '[yỳŷýÿ]')
         const exp = new RegExp(`${search}`, 'gi')
-        return entry.replace(exp, `<u class="highlight">$&</u>`)
+        return String(entry).replace(exp, `<u class="highlight">$&</u>`)
     }
     return entry
 }

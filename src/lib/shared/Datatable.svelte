@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Snippet } from 'svelte'
-    import { type TableHandlerLike, Header, Footer  } from '$lib/shared'
+    import { type TableHandlerLike, Header, Footer } from '$lib/shared'
 
     type T = $$Generic<Row>
     type Props = {
@@ -116,7 +116,7 @@
     }
     article :global(u.highlight) {
         text-decoration: none;
-        background: rgb(255, 245, 157, 0.8);
+        background: rgba(251, 192, 45, 0.6);
         border-radius: 2px;
     }
 </style>

@@ -16,19 +16,13 @@ pre {
 }
 
 
-* {
-    --color: #444;
-    --label: #555;
-    --hljs: #212121;
-}
-
 body {
     margin: 0;
     font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell,
         Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 14px;
     line-height: 1.5;
-    color: #333;
+    color: var(--font);
 }
 body > * {
     scrollbar-width: thin;
@@ -76,4 +70,12 @@ a {
 .md p, ul {
     font-size: 17px;
     color: var(--font-grey);
+}
+
+.md p code {
+    background: var(--secondary-lighten-1);
+    padding: 2px 4px;
+    color: var(--secondary);
+    border: 1px solid var(--secondary-lighten-1);
+    border-radius: 4px;
 }

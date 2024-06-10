@@ -11,6 +11,14 @@
                 { name: 'Internationalization'  , path: `${root}/getting-started/i18n`        },
             ]
         },
+        {
+            title: 'Search',
+            links: [
+                { name: 'Search input'          , path: `${root}/search/input`                },
+                { name: 'Search scope'          , path: `${root}/search/scope`                },
+                { name: 'Highlight results'     , path: `${root}/search/highlight`            },
+            ]
+        },
         // {
         //     title: 'Filters',
         //     links: [

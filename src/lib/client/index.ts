@@ -1,6 +1,5 @@
 export { default as TableHandler } from './TableHandler.svelte'
-export { default as ThFilter     } from './ThFilter.svelte'
-export { check                   } from './Comparator'
+export { check } from './Comparator'
 
 export {
     Datatable,
@@ -9,6 +8,7 @@ export {
     RowsPerPage,
     Th,
     ThSort,
+    ThFilter,
     Footer,
     Pagination,
     RowCount,
@@ -34,6 +34,13 @@ export type Sort<Row> = {
 }
 
 export type Check<Row> = (entry: Row[keyof Row], value: any) => boolean
+
+export type TableHandlerParams = {
+    rowsPerPage?: number,
+    selectBy?: string,
+    highlight?: boolean,
+    i18n?: Internationalization,
+}
 
 export type Criterion = {
     value: string | number | number[],

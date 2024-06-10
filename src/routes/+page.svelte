@@ -33,12 +33,10 @@
 
 <style>
     h1 {
-        color: var(--font);
         font-size: 40px;
         margin-bottom: 0;
     }
     h2 {
-        color: var(--font-grey);
         font-size: 24px;
         font-weight: normal;
         max-width: 600px;

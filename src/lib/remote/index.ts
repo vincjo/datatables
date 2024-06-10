@@ -1,5 +1,4 @@
 export { default as TableHandler }  from './TableHandler.svelte'
-export { default as ThFilter     }  from './ThFilter.svelte'
 
 export {
     Datatable,
@@ -8,6 +7,7 @@ export {
     RowsPerPage,
     Th,
     ThSort,
+    ThFilter,
     Footer,
     Pagination,
     RowCount,

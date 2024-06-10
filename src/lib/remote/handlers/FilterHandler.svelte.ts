@@ -17,6 +17,11 @@ export default class FilterHandler<Row>
         }
     }
 
+    public unset(field: string )
+    {
+        this.table.filters = this.table.filters.filter(filter => filter.field !== field)
+    }
+
     public clear()
     {
         this.table.filters = []

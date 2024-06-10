@@ -25,7 +25,7 @@
         top: 0;
         bottom: 0;
         right: 0;
-        padding: 32px 72px;
+        padding: 32px 64px;
         color: var(--font);
         overflow-y: auto;
     }

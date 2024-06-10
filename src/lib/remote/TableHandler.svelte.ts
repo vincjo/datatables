@@ -10,6 +10,7 @@ import FilterHandler        from './handlers/FilterHandler.svelte'
 import ViewHelper           from './helpers/ViewHelper.svelte'
 import SearchHelper         from './helpers/SearchHelper.svelte'
 import SortHelper           from './helpers/SortHelper.svelte'
+import FilterHelper         from './helpers/FilterHelper.svelte'
 
 import type { Internationalization, Row, State } from '$lib/remote'
 
@@ -120,6 +121,11 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     {
         this.filterHandler.clear()
         this.invalidate()
+    }
+
+    public createFilter(field: string, _ = undefined): FilterHelper<T>
+    {
+        return new FilterHelper(this.filterHandler, field)
     }
 
     public select(value: T[keyof T] | T)

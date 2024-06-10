@@ -1,4 +1,4 @@
-import type { Params }  from './TableHandler.svelte'
+import type { TableHandlerParams }  from '$lib/client'
 import EventsHandler    from './handlers/EventsHandler'
 import type { Filter, Sort, Field } from '$lib/client'
 import { parseField, match, nestedFilter } from './utils'
@@ -7,21 +7,21 @@ import { parseField, match, nestedFilter } from './utils'
 export default abstract class AbstractTableHandler<Row>
 {
     public events               = new EventsHandler()
+    public selectBy             : string
+    public highlight            : boolean
     public filters              = $state<(Filter<Row>)[]>([])
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
     public filterCount          = $derived<number>(this.filters.length)
     public rawRows              = $state.frozen<Row[]>([])
     public allRows              = $derived<Row[]>(this.createAllRows())
-    public rows                 = $derived<readonly Row[]>(this.createPagedRows())
+    public rows                 = $derived<readonly Row[]>(this.createRows())
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
     public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())
     public sort                 = $state<(Sort<Row>)>({})
     public selected             = $state<(Row | Row[keyof Row])[]>([])
-    public selectBy             : string
-    public highlight            : boolean
     public selectScope          = $state<'all' | 'currentPage'>('currentPage')
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
     public element              = $state<HTMLElement>(undefined)
@@ -29,7 +29,7 @@ export default abstract class AbstractTableHandler<Row>
     protected searchScope       = $state<(Field<Row>)[]>(null)
     protected search            = $state<string>('')
 
-    constructor(data: Row[], params: Params)
+    constructor(data: Row[], params: TableHandlerParams)
     {
         this.rawRows        = data
         this.rowsPerPage    = params.rowsPerPage ?? 10
@@ -73,9 +73,9 @@ export default abstract class AbstractTableHandler<Row>
         return allRows
     }
 
-    private createPagedRows()
+    private createRows()
     {
-        if (!this.rowsPerPage) return this.rawRows
+        if (!this.rowsPerPage) return this.allRows
         return this.allRows.slice(
             (this.currentPage - 1) * this.rowsPerPage,
             this.currentPage * this.rowsPerPage

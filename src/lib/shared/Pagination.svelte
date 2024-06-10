@@ -4,6 +4,17 @@
     let { table }: { table: TableHandlerLike<T> } = $props()
 </script>
 
+<section>
+    {#if table.pages === undefined}
+        {@render nopages()}
+    {:else if table.clientWidth < 600}
+        {@render small()}
+    {:else}
+        {@render ellipsis()}
+    {/if}
+</section>
+
+
 
 {#snippet nopages()}
     <button type="button" class="small" class:disabled={table.currentPage === 1} onclick={() => table.setPage('previous')}>
@@ -14,6 +25,8 @@
         &#10095;
     </button>
 {/snippet}
+
+
 
 {#snippet small()}
     <button type="button" class="small" class:disabled={table.currentPage === 1} onclick={() => table.setPage(1)}>
@@ -29,6 +42,8 @@
         &#10093;&#10093;
     </button>
 {/snippet}
+
+
 
 {#snippet ellipsis()}
     <button type="button" class:disabled={table.currentPage === 1} onclick={() => table.setPage('previous')}>
@@ -50,15 +65,6 @@
     </button>
 {/snippet}
 
-<section>
-    {#if table.pages === undefined}
-        {@render nopages()}
-    {:else if table.clientWidth < 600}
-        {@render small()}
-    {:else}
-        {@render ellipsis()}
-    {/if}
-</section>
 
 <style>
     section {

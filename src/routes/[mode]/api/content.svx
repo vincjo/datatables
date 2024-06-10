@@ -40,7 +40,7 @@ table.rowCount
 
 ```ts
 table.setRowsPerPage(10)
-table.select(row)
+table.select(row.id)
 table.setPage('previous')
 table.createSort()
 ...

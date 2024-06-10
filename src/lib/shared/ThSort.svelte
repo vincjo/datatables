@@ -10,7 +10,8 @@
     }
     let { table, field, children }: Props = $props()
 
-    const sort = table.createSort(field)
+    // "field as any" for compatibility between client and remote
+    const sort = table.createSort(field as any)
 </script>
 
 <th onclick={() => sort.set()} class="sortable" class:active={sort.isActive}>

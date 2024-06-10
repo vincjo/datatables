@@ -1,28 +1,48 @@
 <script lang="ts">
+    import { TableHandler } from '$lib/client'
     import { getPath, url } from 'gros/page'
     let { nav }: { nav: any } = $props()
+    const table = new TableHandler(nav)
+    const search = table.createSearch()
 </script>
 
 <nav class="thin-scrollbar">
-    {#each nav as item}
-        <h1>{item.title}</h1>
-        {#each item.links as link}
-            <a class:active={$url.indexOf(link.path) > -1} href="{getPath(link.path)}">{link.name}</a>
+    <input type="text" placeholder="Search..." spellcheck="false" bind:value={search.value} oninput={() => search.set()}/>
+    <section class="thin-scrollbar">
+        {#each table.rows as item}
+            <h1>{item.title}</h1>
+            {#each item.links as link}
+                <a class:active={$url.indexOf(link.path) > -1} href="{getPath(link.path)}">{link.name}</a>
+            {/each}
         {/each}
-    {/each}
+    </section>
 </nav>
 
 
 <style>
+    input {
+        background: var(--bg);
+        border: 1px solid var(--grey);
+        color: var(--font);
+        width: 100%;
+    }
     nav {
         position: absolute;
-        top: 0;
-        left: 32px;
+        top:0;
         bottom: 0;
+        left: 32px;
         width: 240px;
-        overflow-y: scroll;
-        padding: 16px 0 24px 36px;
-        border-left: 1px solid var(--grey);
+        padding: 24px 16px 24px 0;
+        border-right: 1px solid var(--grey);
+    }
+    section {
+        position: absolute;
+        top: 80px;
+        bottom: 24px;
+        left: 0;
+        right: 16px;
+        overflow-y: auto;
+        border-top: 1px dotted var(--grey);
     }
     h1 {
         font-weight: bold;

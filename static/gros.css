@@ -56,7 +56,7 @@ textarea {
     appearance: none;
     -webkit-appearance: none;
     background-color: transparent;
-    border: 1px solid #d1d1d1;
+    border: 1px solid var(--grey);
     border-radius: 0.4rem;
     box-shadow: none;
     box-sizing: border-box;
@@ -83,40 +83,6 @@ input:not([type]):focus,
 textarea:focus {
     border-color: var(--primary-lighten);
     outline: 0;
-}
-
-.thin-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-.thin-scrollbar::-webkit-scrollbar-track {
-    background: #fafafa;
-}
-.thin-scrollbar::-webkit-scrollbar-thumb {
-    background: #bdbdbd;
-}
-.thin-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #9e9e9e;
-}
-.thin-scrollbar::-webkit-scrollbar-track-piece:start {
-    top: 40px;
-}
-
-.thin-scrollbar-darken::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-.thin-scrollbar-darken::-webkit-scrollbar-track {
-    background: #424242;
-}
-.thin-scrollbar-darken::-webkit-scrollbar-thumb {
-    background: #000;
-}
-.thin-scrollbar-darken::-webkit-scrollbar-thumb:hover {
-    background: #212121;
-}
-.thin-scrollbar-darken::-webkit-scrollbar-track-piece:start {
-    top: 40px;
 }
 
 i.material-icons,

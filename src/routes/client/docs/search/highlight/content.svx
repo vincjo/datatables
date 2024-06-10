@@ -1,0 +1,12 @@
+
+# Highlight results
+
+To highlight results, define "highlight" at `true` in your `TableHandler` instanciation:
+
+```ts
+const table = new TableHandler(data, { highlight: true })
+```
+
+This will add `<u>` html tag into matching values of type *string* or *number*.
+
+**Caveat:** requires `{@html}` everywhere in the template.

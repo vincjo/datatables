@@ -26,11 +26,9 @@ npm i -D @vincjo/datatables@runes
 ```
 
 
-<!-- # Migration from v1 to v2
+# Smooth transition from v1 to v2
 
-
-
- In order to make the migration process a little easier, v1 is embed in "legacy" namespace so you'll be able to upgrade your components progressively by simply modifying imports.
+In order to make the migration process a little easier, v1 is embed in “legacy” namespace so you will have the opportunity to upgrade your components progressively by simply modifying imports.
 
 ```diff
 - @vincjo/datatables
@@ -38,8 +36,9 @@ npm i -D @vincjo/datatables@runes
 
 - @vincjo/datatables/remote
 + @vincjo/datatables/legacy/remote
-``` -->
+```
 <br>
+
 
 # Sample code
 

@@ -40,7 +40,6 @@
         height: 56px;
         border-bottom: 1px solid var(--grey);
         border-top: 1px solid var(--grey);
-        color: var(--font);
         justify-content: space-between;
         padding: 0 32px;
         backdrop-filter: blur(4px);

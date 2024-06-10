@@ -6,7 +6,7 @@ import SelectHandler            from './handlers/SelectHandler.svelte'
 import PageHandler              from './handlers/PageHandler.svelte'
 import SearchHandler            from './handlers/SearchHandler.svelte'
 
-import type { Internationalization, Row, Field, Check } from '$lib/client'
+import type { Internationalization, Row, Field, Check, TableHandlerParams } from '$lib/client'
 
 import ViewHelper               from './helpers/ViewHelper.svelte'
 import SearchHelper             from './helpers/SearchHelper.svelte'
@@ -16,13 +16,6 @@ import CalculationHelper        from './helpers/CalculationHelper.svelte'
 import SortHelper               from './helpers/SortHelper.svelte'
 import CSVHelper                from './helpers/CSVHelper.svelte'
 import RecordFilterHelper       from './helpers/RecordFilterHelper.svelte'
-
-export type Params = {
-    rowsPerPage?: number,
-    selectBy?: string,
-    highlight?: boolean,
-    i18n?: Internationalization,
-}
 
 export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T>
 {
@@ -34,7 +27,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     private pageHandler     : PageHandler<T>
     private searchHandler   : SearchHandler<T>
 
-    constructor(data: T[] = [], params: Params = { rowsPerPage: null })
+    constructor(data: T[] = [], params: TableHandlerParams = { rowsPerPage: null })
     {
         super(data, params)
         this.translate(params.i18n)
@@ -83,9 +76,9 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new RecordFilterHelper(records)
     }
 
-    public createSort(field: Field<T>): SortHelper<T>
+    public createSort(field: Field<T>, params?: { locales: Intl.LocalesArgument, options: Intl.CollatorOptions}): SortHelper<T>
     {
-        return new SortHelper(this.sortHandler, field)
+        return new SortHelper(this.sortHandler, field, params)
     }
 
     public filter(value: any, field: Field<T>, check?: Check<T>): void
