@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { Snippet } from 'svelte'
-    import { type TableHandlerLike, Header, Footer } from '$lib/shared'
-
+    import { type TableHandlerLike, Search, RowsPerPage, RowCount, Pagination } from '$lib/shared'
     type T = $$Generic<Row>
     type Props = {
         table: TableHandlerLike<T>,
@@ -19,25 +18,27 @@
 
 <section bind:clientWidth={table.clientWidth}>
 
-    <aside class:container={header}>
+    <header class:container={basic || header}>
         {#if basic === true}
-            <Header {table}/>
+            <Search {table}/>
+            <RowsPerPage {table}/>
         {:else if header}
             {@render header()}
         {/if}
-    </aside>
+    </header>
 
     <article bind:this={table.element} class="thin-scrollbar">
         {@render children()}
     </article>
 
-    <aside class:container={footer}>
+    <footer class:container={basic || footer}>
         {#if basic}
-            <Footer {table}/>
+            <RowCount {table}/>
+            <Pagination {table}/>
         {:else if footer}
             {@render footer()}
         {/if}
-    </aside>
+    </footer>
 
 </section>
 
@@ -78,18 +79,18 @@
         text-align: right;
         font-family: JetBrains, monospace, inherit;
     }
-    aside {
+    header, footer {
         min-height: 4px;
         padding: 0;
     }
-    aside.container {
+    .container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         width: 100%;
     }
-    aside.container:last-child {
+    footer.container {
         border-top: 1px solid var(--grey, #e0e0e0);
     }
     article {

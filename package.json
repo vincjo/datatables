@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "2.0.0-runes.11",
+    "version": "2.0.0-runes.12",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],

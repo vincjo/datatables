@@ -6,17 +6,5 @@
     let { table }: Props = $props()
 </script>
 
-<header>
-    <Search {table}/>
-    <RowsPerPage {table}/>
-</header>
-
-<style>
-    header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-</style>
+<Search {table}/>
+<RowsPerPage {table}/>

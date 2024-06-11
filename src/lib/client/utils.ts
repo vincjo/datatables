@@ -67,16 +67,65 @@ export const nestedFilter = (
             return check
         })
     }
-    if (highlight && (typeof entry === 'string' || typeof entry === 'number') && match(entry, value, compare)) {
-        const search = value
-            .replace(/a/g, '[aàâáä]')
-            .replace(/e/g, '[eèêéë]')
-            .replace(/i/g, '[iìîíï]')
-            .replace(/o/g, '[oòôо́ö]')
-            .replace(/u/g, '[uùûúü]')
-            .replace(/y/g, '[yỳŷýÿ]')
-        const exp = new RegExp(`${search}`, 'gi')
-        return String(entry).replace(exp, `<u class="highlight">$&</u>`)
+    if (highlight && (typeof entry === 'string' || typeof entry === 'number') && typeof value === 'string' && match(entry, value, compare)) {
+        return insertHighlight(entry, value)
     }
     return entry
+}
+
+export const deepHighlight = (row: Row, callback: (row: Row) => any, value: string) => {
+    const path = callbackToPath(callback)
+    if (!path) return row
+    return deepSet(row, path, value)
+
+}
+
+const insertHighlight = (entry: string | number, value: string) => {
+    const search = value
+        .replace(/a/g, '[aàâáä]')
+        .replace(/e/g, '[eèêéë]')
+        .replace(/i/g, '[iìîíï]')
+        .replace(/o/g, '[oòôо́ö]')
+        .replace(/u/g, '[uùûúü]')
+        .replace(/y/g, '[yỳŷýÿ]')
+    const exp = new RegExp(`${search}`, 'gi')
+    return String(entry).replace(exp, `<u class="highlight">$&</u>`)
+}
+
+
+const callbackToPath = (callback: (row: Row) => any) => {
+    const path = callback.toString()
+        .split('=>')[1]
+        .replace(/\(\)/g, '')
+        .replace(/row\./g, '')
+        .replace(/\?/g, '')
+        .trim()
+    if (path.indexOf(' ') > -1) return undefined
+    return path
+}
+
+const deepSet = (object: Row, path: string, value: string) => {
+    const initial = object
+    const keys = path.replace(/\[/g, '.[').split(".")
+    try {
+        for (let i = 0; i < keys.length; i++) {
+            let current = keys[i]
+            let next = keys[i + 1]
+            if (current.includes('[')) {
+                current = String(parseInt(current.substring(1, current.length - 1)))
+            }
+            if (next && next.includes('[')) {
+                next = String(parseInt(next.substring(1, next.length - 1)))
+            }
+            if (next !== undefined) {
+                object[current] = object[current] ? object[current] : (isNaN(Number(next)) ? {} : [])
+            } else {
+                object[current] = insertHighlight(object[current], value)
+            }
+            object = object[current]
+        }
+        return initial
+    } catch(_) {
+        return initial
+    }
 }

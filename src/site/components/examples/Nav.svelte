@@ -68,8 +68,10 @@
     a b {
         display: block;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 17px;
         padding-bottom: 2px;
+        font-family: Archivo;
+        font-weight: bold;
     }
     a.active b {
         color: var(--primary);

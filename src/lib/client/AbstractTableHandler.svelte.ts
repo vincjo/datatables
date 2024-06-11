@@ -1,7 +1,7 @@
 import type { TableHandlerParams }  from '$lib/client'
 import EventsHandler    from './handlers/EventsHandler'
 import type { Filter, Sort, Field } from '$lib/client'
-import { parseField, match, nestedFilter } from './utils'
+import { parseField, match, nestedFilter, deepHighlight } from './utils'
 
 
 export default abstract class AbstractTableHandler<Row>
@@ -46,9 +46,12 @@ export default abstract class AbstractTableHandler<Row>
                 const scope = fields.map((field: Field<Row>) => {
                     return parseField(field)
                 })
-                for(const { key } of scope) {
+                for(const { key, callback } of scope) {
                     if (key) {
                         row[key] = nestedFilter(row[key], this.search, this.highlight)
+                    }
+                    else if (this.highlight) {
+                        row = deepHighlight(row, callback, this.search) as Row
                     }
                 }
                 return scope.some(({ callback }) => {
@@ -61,10 +64,14 @@ export default abstract class AbstractTableHandler<Row>
         if (this.filterCount > 0) {
             for (const { callback, value, check, key } of this.filters) {
                 allRows = allRows.filter((row) => {
+                    const checked = match(callback(row), value, check)
                     if (key) {
                         row[key] = nestedFilter(row[key], value, this.highlight, check)
                     }
-                    return match(callback(row), value, check)
+                    else if (this.highlight && checked && value && typeof value === 'string') {
+                        row = deepHighlight(row, callback, value) as Row
+                    }
+                    return checked
                 })
             }
             this.currentPage = 1

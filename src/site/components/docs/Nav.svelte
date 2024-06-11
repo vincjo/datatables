@@ -10,7 +10,10 @@
     <input type="text" placeholder="Search..." spellcheck="false" bind:value={search.value} oninput={() => search.set()}/>
     <section class="thin-scrollbar">
         {#each table.rows as item}
-            <h1>{item.title}</h1>
+            <h1 class="flex">
+                <!-- <i class="icon">{@html item.icon ?? ''}</i> -->
+                {item.title}
+            </h1>
             {#each item.links as link}
                 <a class:active={$url.indexOf(link.path) > -1} href="{getPath(link.path)}">{link.name}</a>
             {/each}
@@ -48,9 +51,10 @@
     h1 {
         font-weight: bold;
         margin-top: 16px;
-        font-size: 15px;
+        font-size: 17px;
         margin-bottom: 0;
         color: var(--font);
+        font-family: Archivo;
     }
     a {
         display: block;
@@ -71,7 +75,12 @@
         font-weight: bold;
         background: var(--primary-lighten-1)
     }
-
+    /* i.icon {
+        color: var(--font-grey);
+        width: 24px;
+        height: 24px;
+        margin-right: 4px;
+    } */
     @media (max-width: 800px) {
         nav {
             display: none;

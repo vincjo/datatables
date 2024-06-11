@@ -3,7 +3,7 @@
     import { TableHandler, check } from '$lib/client'
     import { data } from './data'
 
-    const table = new TableHandler(data) 
+    const table = new TableHandler(data, { highlight: true }) 
     const search = table.createSearch(['task'])
     const filter = table.createAdvancedFilter('priority', check.isEqualTo)
 </script>

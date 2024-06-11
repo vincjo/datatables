@@ -6,6 +6,10 @@
     font-family:Inter;
     src:url('./fonts/Inter/static/Inter-Regular.ttf')
 }
+@font-face{
+    font-family:Archivo;
+    src:url('./fonts/Archivo.ttf')
+}
 * {
     box-sizing: border-box;
 }

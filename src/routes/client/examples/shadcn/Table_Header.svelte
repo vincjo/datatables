@@ -4,12 +4,12 @@
     import ColumnVisibility from './Table_Header_ColumnVisibility.svelte'
 
     let { table }: { table: TableHandler } = $props()
-    const filter = table.createFilter('title')
+    const search = table.createSearch(['title', 'label'])
 </script>
 
 
 <aside class="flex">
-    <input type="text" bind:value={filter.value} oninput={() => filter.set()} placeholder="Filter tasks...">
+    <input type="text" bind:value={search.value} oninput={() => search.set()} placeholder="Filter tasks...">
     <Filter {table} key="status"/>
     <Filter {table} key="priority"/>
     {#if table.filters.length > 0}
