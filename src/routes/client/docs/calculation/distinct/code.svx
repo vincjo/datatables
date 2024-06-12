@@ -4,18 +4,13 @@
 
 ### Basic usage
 
+```ts
+const distinct = $derived.by(() => {
+    return table.createCalculation('columnName').distinct()
+                .sort((a, b) => (a.count < b.count ? 1 : -1))
+})
+```
 ````svelte
-<script lang="ts">
-    import type { TableHandler } from '@vincjo/datatables'
-
-    let { table }: { table: TableHandler } = $props()
-
-    const distinct = $derived.by(() => {
-        return table.createCalculation('columnName').distinct()
-                    .sort((a, b) => (a.count < b.count ? 1 : -1))
-    })
-</script>
-
 <ul>
     {#each distinct as { value, count }}
         <li>{value} has {count} occurrences</li>
@@ -27,15 +22,13 @@
 
 ### Avanced usage
 
+```ts
+// Merge colors inside an array af values
+const calc = table.createCalculation(({ color1, color2 }) => [color1, color2])
+
+const distinct = $derived(calc.distinct())
+```
 ````svelte
-<script lang="ts">
-    import type { Tablehandler } from '@vincjo/datatables'
-    export let table: TableHandler
-
-    // Merge colors inside an array af values
-    const calc = table.createCalculation(({ color1, color2 }) => [color1, color2]).distinct()
-</script>
-
 <ul>
     {#each distinct as { value, count }}
         <li>{value} has {count} occurrences</li>

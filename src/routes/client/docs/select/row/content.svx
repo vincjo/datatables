@@ -9,7 +9,7 @@ const table = new TableHandler(data, { selectBy: 'id' })
 
 # Select a row
 
-- Row is selected ? `table.selected.includes(id)`
+- Is row selected ? `table.selected.includes(id)`
 - Select a row: `table.select(id)`
 
 

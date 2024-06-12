@@ -11,9 +11,7 @@
     }
     let { table, basic = false, header, footer, children }: Props = $props()
 
-    table.on('change', () => {
-        if (table.element) table.element.scrollTop = 0
-    })
+    table.on('change', () => table.element ? table.element.scrollTop = 0 : '')
 </script>
 
 <section bind:clientWidth={table.clientWidth} class="svelte-simple-datatable">

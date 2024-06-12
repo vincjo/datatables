@@ -9,7 +9,6 @@ const view = table.createView([
     { index: 3, name: 'Email' },
 ])
 ```
-Template:
 
 ```svelte
 {#each view.columns as column}

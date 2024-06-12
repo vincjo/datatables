@@ -86,7 +86,7 @@
         font-style: normal;
     }
     div.range {
-        padding: 24px 8px 16px 8px;
+        padding: 16px 8px 8px 8px;
     }
     input {
         background: var(--bg);

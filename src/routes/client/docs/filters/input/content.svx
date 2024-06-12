@@ -1,8 +1,17 @@
 # Filter input 
 
+```ts
+const filter = table.createFilter('last_name')
+```
+
+```svelte
+<input type="text" bind:value={filter.value} oninput={() => filter.set()}>
+```
+
+
+<!-- 
 To create a filter input, use `table.createFilter(field)`.
 
-<!-- This function reduces boilerplates from the shortchut `table.filter(valuefield,)` -->
 
 ```svelte
 <script lang="ts">
@@ -14,3 +23,4 @@ To create a filter input, use `table.createFilter(field)`.
 
 <input type="text" bind:value={filter.value} oninput={() => filter.set()}>
 ```
+ -->

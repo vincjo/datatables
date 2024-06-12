@@ -1,7 +1,7 @@
 
 # Select all
 
-- All rows are selected ? `table.isAllSelected`
+- Are all rows selected ? `table.isAllSelected`
 - Select all rows: `table.selectAll()`
 
 ```svelte

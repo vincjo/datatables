@@ -5,15 +5,11 @@
 
 ### Basic usage
 
+
+```ts
+const avg = $derived(table.createCalculation('price').avg())
+```
 ````svelte
-<script lang="ts">
-    import type { TableHandler } from '@vincjo/datatables'
-
-    let { table }: { table: TableHandler } = $props()
-
-    const avg = $derived(table.createCalculation('price').avg())
-</script>
-
 <h1>Average: {avg}</h1>
 ````
 
@@ -21,18 +17,13 @@
 
 ### Avanced usage
 
+```ts
+// calc area from 'width' and 'length' row props and conversion to yd²
+const calc = table.createCalculation(({ width, length }) => width * length * 1.196)
+
+const avg = $derived(calc.avg({ precision: 3 }))
+```
 ````svelte
-<script lang="ts">
-    import type { TableHandler } from '@vincjo/datatables'
-
-    let { table }: { table: TableHandler } = $props()
-
-    // calc area from 'width' and 'length' properties and conversion to yd²
-    const calc = table.createCalculation(({ width, length }) => width * length * 1.196)
-
-    const avg = $derived(calc.avg({ precision: 3 }))
-</script>
-
 <h1>Average area: {$avg} yd²</h1>
 ````
 

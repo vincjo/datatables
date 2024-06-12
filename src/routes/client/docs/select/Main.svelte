@@ -4,7 +4,7 @@
 
     let { all = false, scope = 'currentPage' } = $props()
 
-    const table = new TableHandler(data, { selectBy: 'id' })
+    const table = new TableHandler(data, { selectBy: 'id', rowsPerPage: 10 })
 </script>
 
 

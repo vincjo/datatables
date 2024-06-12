@@ -2,7 +2,20 @@
 
 # Sort button
 
-To create a sort button, use `table.createSort(field)`.
+
+```ts
+const sort = table.createSort('last_name')
+```
+
+```svelte
+<button onclick={() => sort.set()} class:active={sort.isActive} type="button">
+    last_name
+    <span class:active={sort.direction === 'asc'} >↑</span>
+    <span class:active={sort.direction === 'desc'}>↓</span>
+</button>
+```
+
+<!-- To create a sort button, use `table.createSort(field)`.
 
 
 ```svelte
@@ -19,3 +32,4 @@ To create a sort button, use `table.createSort(field)`.
     <span class:active={sort.direction === 'desc'}>↓</span>
 </button>
 ```
+ -->

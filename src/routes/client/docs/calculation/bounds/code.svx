@@ -3,16 +3,10 @@
 </script>
 
 ### Basic usage
-
+```ts
+const [min, max] = $derived(table.createCalculation('model_year').bounds())
+```
 ````svelte
-<script lang="ts">
-    import { TableHandler } from '@vincjo/datatables'
-
-    const table = new TableHandler(data)
-
-    const [min, max] = $derived(table.createCalculation('model_year').bounds())
-</script>
-
 <ul>
     <li>Minimum value: {min}</li>
     <li>Maximum value: {max}</li>

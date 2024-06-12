@@ -80,9 +80,10 @@
     li code {
         font-family: JetBrains;
         white-space: nowrap;
+        width: 96px;
     }
     li span {
-        width: 184px;
+        width: 160px;
         font-size: 11px;
     }
 </style>

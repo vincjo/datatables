@@ -21,34 +21,36 @@
             </button>
         {/each}
     </aside>
-    <Datatable basic {table}>
-        <table>
-            <thead>
-                <tr>
-                    <ThSort {table} field="id">ID</ThSort>
-                    <ThSort {table} field="first_name">First Name</ThSort>
-                    <ThSort {table} field="last_name">Last Name</ThSort>
-                    <ThSort {table} field="email">Email</ThSort>
-                </tr>
-                <tr>
-                    <ThFilter {table} field="id"/>
-                    <ThFilter {table} field="first_name"/>
-                    <ThFilter {table} field="last_name"/>
-                    <ThFilter {table} field="email"/>
-                </tr>
-            </thead>
-            <tbody>
-                {#each table.rows as row}
+    <article class="bg-darken">
+        <Datatable basic {table}>
+            <table>
+                <thead>
                     <tr>
-                        <td>{row.id}</td>
-                        <td>{row.first_name}</td>
-                        <td>{row.last_name}</td>
-                        <td>{row.email}</td>
+                        <ThSort {table} field="id">ID</ThSort>
+                        <ThSort {table} field="first_name">First Name</ThSort>
+                        <ThSort {table} field="last_name">Last Name</ThSort>
+                        <ThSort {table} field="email">Email</ThSort>
                     </tr>
-                {/each}
-            </tbody>
-        </table>
-    </Datatable>
+                    <tr>
+                        <ThFilter {table} field="id"/>
+                        <ThFilter {table} field="first_name"/>
+                        <ThFilter {table} field="last_name"/>
+                        <ThFilter {table} field="email"/>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each table.rows as row}
+                        <tr>
+                            <td>{row.id}</td>
+                            <td>{row.first_name}</td>
+                            <td>{row.last_name}</td>
+                            <td>{row.email}</td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+        </Datatable>
+    </article>
 </section>
 
 <style>
@@ -57,8 +59,14 @@
         border-radius: 8px;
         align-items: flex-start;
     }
+    article {
+        width: 100%;
+        border-radius: 0 8px 8px 0;
+        padding: 0;
+        border-left: 1px solid var(--grey);
+    }
     aside {
-        margin: 24px 8px;
+        margin: 24px 16px;
         border-radius: 8px;
         border: 1px solid var(--grey);
         background: var(--bg);

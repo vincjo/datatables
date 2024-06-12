@@ -26,7 +26,7 @@
         {#if search}
             <Search {handler} />
         {:else}
-            <div/>
+            <div></div>
         {/if}
         {#if rowsPerPage}
             <RowsPerPage {handler} small={clientWidth < 600} />

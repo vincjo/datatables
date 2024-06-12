@@ -2,8 +2,19 @@
 
 # Search input
 
-To create a search input, use `table.createSearch()`.
+```ts
+const search = table.createSearch()
+```
 
+```svelte
+<input type="text" bind:value={search.value} oninput={() => search.set()}>
+``` 
+
+<!-- To create a search input, use `table.createSearch()`.
+
+```ts
+const search = table.createSearch()
+```
 
 ```svelte
 <script lang="ts">
@@ -14,4 +25,5 @@ To create a search input, use `table.createSearch()`.
 </script>
 
 <input type="text" bind:value={search.value} oninput={() => search.set()}>
-```
+``` 
+-->
