@@ -1,53 +1,75 @@
+import type { TableHandler, ViewColumn } from '$lib/remote'
 
 
 export default class ViewHelper
 {
-    private element : HTMLElement
+    public  columns = $state<ViewColumn[]>([])
+    private table   : TableHandler
+    private interval: any
     private mutation: MutationObserver
-    public columns = $state<{ name: string, index: number, isVisible?: boolean }[]>([])
 
-    constructor(columns: { name: string, index: number, isVisible?: boolean }[])
+    constructor(table: TableHandler, columns: ViewColumn[])
     {
-        this.columns = this.set(columns)
+        this.table   = table
+        this.columns = []
+        this.interval = setInterval(() => this.createColumns(columns), 500)
     }
 
     public toggle(name: string)
     {
-        if (!this.element) return
+        if (!this.table.element) return
 
         const column = this.columns.find(column => column.name === name)
         if (!column) return
-        column.isVisible = !column.isVisible
-        this.element.querySelectorAll(`tr > *:nth-child(${column.index + 1})`).forEach((element: HTMLElement) => {
-            element.classList.toggle('hidden')
-        })
+        column.toggle()
     }
 
-    public bind(element: HTMLElement)
+    private createColumns(columns: ViewColumn[])
     {
-        this.element = element
+        if (!this.table?.element) {
+            return
+        }
+        clearInterval(this.interval)
+
+        this.columns = columns.map(({name, index, isVisible, isFrozen}) => {
+            return { 
+                name, 
+                index, 
+                isVisible: isVisible === false ? false : true,
+                isFrozen: isFrozen === true ? true : false,
+                element: this.table.element,
+                toggle: function() {
+                    this.isVisible = !this.isVisible
+                    this.element.querySelectorAll(`tr > *:nth-child(${this.index + 1})`).forEach((element: HTMLElement) => {
+                        element.classList.toggle('hidden')
+                    })
+                }
+            }
+        })
         this.preset()
         this.mutation = new MutationObserver(() => {
             setTimeout(() => {
                 this.preset()
             }, 2)
         })
-        this.mutation.observe(this.element, { childList: true, subtree: true })
-    }
-
-    private set(columns: { name: string, index: number, isVisible?: boolean }[])
-    {
-        return columns.map(({name, index, isVisible}) => {
-            return { name, index, isVisible: isVisible === false ? false : true }
-        })
+        this.mutation.observe(this.table.element, { childList: true, subtree: true })
     }
 
     private preset()
     {
-        if (!this.element) return
-        for (const { isVisible, index } of this.columns) {
+        let left = 0
+        for (const { isVisible, isFrozen, index } of this.columns) {
+            if (isFrozen === true) {
+                const { width } = this.table.element.querySelector(`thead th:nth-child(${index + 1})`).getBoundingClientRect() 
+                this.table.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
+                    element.style.position = 'sticky'
+                    element.style.left = (index * left) + 'px'
+                    element.style.width = width + 'px'
+                })
+                left = width
+            }
             if (isVisible === false) {
-                this.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
+                this.table.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
                     element.classList.add('hidden')
                 })
             }

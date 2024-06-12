@@ -16,8 +16,8 @@
             <li>Newer: <div>{max}</div></li>
         </ul>
     </aside>
-    <article>
-        <input type="text" bind:value={search.value} oninput={() => search.set()} placeholder="Search cars..."/>
+    <article class="bg-darken">
+        <input type="text" bind:value={search.value} oninput={() => search.set()} placeholder="Search cars...">
         <Datatable {table}>
             <table>
                 <thead>

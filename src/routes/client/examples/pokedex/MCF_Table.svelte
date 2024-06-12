@@ -14,7 +14,7 @@
 
 <Datatable basic {table}>
     <table>
-        <thead class="bg-darken">
+        <thead>
             <tr>
                 <ThSort {table} field="id">ID</ThSort>
                 <ThSort {table} field="name">Name</ThSort>

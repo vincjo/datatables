@@ -135,8 +135,8 @@
 [data-theme="dark"] .bg-darken {
     background: #171a1b;
 }
-[data-theme="dark"] table thead {
-    background: #171a1b !important;
+[data-theme="light"] .bg-darken {
+    background: #fff;
 }
 [data-theme="dark"] .active.bg-darken-active {
     background: var(--grey-lighten-3);

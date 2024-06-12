@@ -16,7 +16,7 @@
     })
 </script>
 
-<section bind:clientWidth={table.clientWidth}>
+<section bind:clientWidth={table.clientWidth} class="svelte-simple-datatable">
 
     <header class:container={basic || header}>
         {#if basic === true}
@@ -47,38 +47,10 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        background: inherit;
+        border-radius: inherit;
     }
-    section :global(table) {
-        border-collapse: separate;
-        border-spacing: 0;
-        width: 100%;
-    }
-    section :global(thead) {
-        position: sticky;
-        inset-block-start: 0;
-        z-index: 1;
-    }
-    section :global(thead tr:first-child th) {
-        padding: 8px 20px;
-    }
-    section :global(tbody tr) {
-        transition: background, 0.2s;
-    }
-    section :global(tbody tr:hover) {
-        background: var(--grey-lighten-3, #fafafa);
-    }
-    section :global(tbody td) {
-        padding: 4px 20px;
-        border-right: 1px solid var(--grey-lighten, #eee);
-        border-bottom: 1px solid var(--grey-lighten, #eee);
-    }
-    section :global(tbody td:first-child) {
-        border-left: 1px solid var(--grey-lighten, #eee);
-    }
-    section :global(tbody td.numeric) {
-        text-align: right;
-        font-family: JetBrains, monospace, inherit;
-    }
+
     header, footer {
         min-height: 4px;
         padding: 0;
@@ -97,6 +69,7 @@
         position: relative;
         height: 100%;
         overflow: auto;
+        background: inherit;
         /* scrollbar-width: thin; */
     }
     article::-webkit-scrollbar {
@@ -112,6 +85,49 @@
     article::-webkit-scrollbar-thumb:hover {
         background: #9e9e9e;
     }
+
+    article :global(table) {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        background: inherit;
+    }
+    article :global(table thead) {
+        position: sticky;
+        inset-block-start: 0;
+        background: inherit;
+        z-index: 1;
+    }
+    article :global(thead tr) {
+        background: inherit;
+    }
+    article :global(thead tr th) {
+        background: inherit;
+    }
+    article :global(thead tr:first-child th) {
+        padding: 8px 20px;
+        background: inherit;
+    }
+    article :global(tbody) {
+        background: inherit;
+    }
+    article :global(tbody tr) {
+        transition: background, 0.2s;
+        background: inherit;
+    }
+    article :global(tbody tr:hover) {
+        background: var(--grey-lighten-3, #fafafa);
+    }
+    article :global(tbody td) {
+        padding: 4px 20px;
+        border-right: 1px solid var(--grey-lighten, #eee);
+        border-bottom: 1px solid var(--grey-lighten, #eee);
+        background: inherit;
+    }
+    article :global(tbody td:first-child) {
+        border-left: 1px solid var(--grey-lighten, #eee);
+    }
+
     article :global(.hidden) {
         display: none;
     }

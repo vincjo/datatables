@@ -8,7 +8,6 @@
     let { table, field, children }: Props = $props()
 
     const view = table.getView()
-
     const sort = table.createSort(field)
 </script>
 
@@ -17,10 +16,7 @@
     class:active={sort.isActive}
 >
     <Dropdown position="bottom-start">
-        <div
-            class="flex trigger"
-            style:justify-content="left"
-        >
+        <div class="flex trigger" style:justify-content="left">
             <strong>{@render children()}</strong>
             {#if !sort.isActive}
                 <em>{@html glyph.dropdown}</em>
@@ -29,12 +25,12 @@
             {/if}
         </div>
         {#snippet content()}
-        <aside class="z-depth-1">
-            <button class="btn" onclick={() => sort.asc()}>{@html glyph.asc} Asc</button>
-            <button class="btn" onclick={() => sort.desc()}>{@html glyph.desc} Desc</button>
-            <div class="divider"></div>
-            <button class="btn" onclick={() => view.toggle(field)}>{@html glyph.hide} Hide</button>
-        </aside>
+            <aside class="z-depth-1">
+                <button class="btn" onclick={() => sort.asc()}>{@html glyph.asc} Asc</button>
+                <button class="btn" onclick={() => sort.desc()}>{@html glyph.desc} Desc</button>
+                <div class="divider"></div>
+                <button class="btn" onclick={() => view.toggle(field)}>{@html glyph.hide} Hide</button>
+            </aside>
         {/snippet}
     </Dropdown>
 

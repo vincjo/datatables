@@ -7,11 +7,10 @@
     import Create from './Modal_Create.svelte'
     import type { Component } from 'svelte'
     const table = new TableHandler(api.users, { rowsPerPage: 10 })
-
     let element: any
 
     $effect(() => {
-        api.users
+        api.users;
         update()
     })
 
@@ -33,7 +32,7 @@
             Add a new user
         </button>
     </aside>
-    <section>
+    <section class="bg-darken">
         <Datatable {table} basic>
             <table bind:this={element}>
                 <thead>

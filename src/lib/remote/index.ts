@@ -35,6 +35,14 @@ export type Sort = {
     direction?: 'asc' | 'desc'
 }
 
+export type ViewColumn = {
+    index: number,
+    name?: string,
+    isVisible?: boolean,
+    isFrozen?: boolean,
+    toggle?: () => void
+}
+
 export type Internationalization = {
     search  ?: string,
     show    ?: string,

@@ -12,7 +12,7 @@ import SearchHelper         from './helpers/SearchHelper.svelte'
 import SortHelper           from './helpers/SortHelper.svelte'
 import FilterHelper         from './helpers/FilterHelper.svelte'
 
-import type { Internationalization, Row, State } from '$lib/remote'
+import type { Internationalization, Row, State, ViewColumn } from '$lib/remote'
 
 export type Params = {
     rowsPerPage     ?: number,
@@ -85,27 +85,6 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new SearchHelper(this)
     }
 
-    // public sort(field: string): void
-    // {
-    //     this.sortHandler.set(field)
-    //     this.invalidate()
-    //     this.setPage(1)
-    // }
-
-    // public sortAsc(field: string): void
-    // {
-    //     this.sortHandler.asc(field)
-    //     this.invalidate()
-    //     this.setPage(1)
-    // }
-
-    // public sortDesc(field: string): void
-    // {
-    //     this.sortHandler.desc(field)
-    //     this.invalidate()
-    //     this.setPage(1)
-    // }
-
     public createSort(field: string): SortHelper<T>
     {
         return new SortHelper(this.sortHandler, field)
@@ -148,9 +127,9 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.events.add(event, callback)
     }
 
-    public createView(columns: { name: string, index: number, isVisible?: boolean }[]): ViewHelper
+    public createView(columns: ViewColumn[]): ViewHelper
     {
-        this.view = new ViewHelper(columns)
+        this.view = new ViewHelper(this, columns)
         return this.view
     }
 

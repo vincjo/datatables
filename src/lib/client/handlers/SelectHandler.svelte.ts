@@ -21,7 +21,7 @@ export default class SelectHandler<Row>
     public all()
     {
         const rows = this.table.selectScope === 'currentPage' ? this.table.rows : this.table.allRows
-        const selection = this.table.selectBy ? rows.map((row) => row[this.table.selectBy]) : rows
+        const selection = this.table['selectBy'] ? rows.map((row) => row[this.table['selectBy']]) : rows
         if (this.table.selectScope === 'currentPage') {
             if (this.table.isAllSelected) {
                 this.table.selected = this.table.selected.filter(item => selection.includes(item as any) === false)
@@ -42,8 +42,8 @@ export default class SelectHandler<Row>
 
     public getRows()
     {
-        return this.table.rawRows.filter(row => {
-            return this.table.selected.includes(row[this.table.selectBy])
+        return this.table['rawRows'].filter(row => {
+            return this.table.selected.includes(row[this.table['selectBy']])
         })
     }
 }

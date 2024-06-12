@@ -5,7 +5,7 @@
         {
             title: `Comment API`,
             page: 'hello-world',
-            description: `Columns sorting. Source: JSON Placeholder`,
+            description: `Column sort. Source: JSON Placeholder`,
             tag: ['rows per page', 'sorting', 'pagination', 'row count']
         },
         {
@@ -18,7 +18,7 @@
             title: `Todo API`,
             page: 'todo-api',
             description: `Column filtering. Source: JSON Placeholder`,
-            tag: ['search', 'rows per page', 'sorting', 'column filters', 'pagination']
+            tag: ['search', 'rows per page', 'sort', 'column filters', 'pagination']
         },
         {
             title: `Pokedex API`,

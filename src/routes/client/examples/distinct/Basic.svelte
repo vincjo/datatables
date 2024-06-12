@@ -16,10 +16,10 @@
             {/each}
         </div>
     </aside>
-    <article>
+    <article class="bg-darken">
         <Datatable basic {table}>
             <table>
-                <thead class="bg-darken">
+                <thead>
                     <tr>
                         <ThSort {table} field="make">make</ThSort> 
                         <ThSort {table} field="model">model</ThSort> 

@@ -29,11 +29,11 @@
 
 ````svelte
 <script lang="ts">
-    import type { Datahandler } from '@vincjo/datatables'
-    export let handler: DataHandler
+    import type { Tablehandler } from '@vincjo/datatables'
+    export let table: TableHandler
 
     // Merge colors inside an array af values
-    const calc = handler.createCalculation(({ color1, color2 }) => [color1, color2]).distinct()
+    const calc = table.createCalculation(({ color1, color2 }) => [color1, color2]).distinct()
 </script>
 
 <ul>

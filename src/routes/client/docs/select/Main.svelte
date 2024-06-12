@@ -66,6 +66,7 @@
         text-transform: none;
         letter-spacing: 0;
         font-weight: bold;
+        background: transparent;
     }
     button i {
         color: var(--font-grey);

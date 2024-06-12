@@ -58,3 +58,11 @@ export type Internationalization = {
     previous?: string,
     next    ?: string
 }
+
+export type ViewColumn = {
+    index: number,
+    name?: string,
+    isVisible?: boolean,
+    isFrozen?: boolean,
+    toggle?: () => void
+}

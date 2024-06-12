@@ -37,7 +37,7 @@ export default class SortHandler<Row>
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
         this.table.sort = { identifier, callback, direction: 'asc', key }
-        this.table.rawRows = [...this.table.rawRows].sort((x, y) => {
+        this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
             if (a === b) return 0
             if (a === null) return 1
@@ -50,7 +50,7 @@ export default class SortHandler<Row>
         })
         this.save({ identifier, callback, direction: 'asc' })
         this.table.setPage(1)
-        this.table.events.trigger('change')
+        this.table['events'].trigger('change')
     }
 
     public desc(field: Field<Row>, uid?: string, { locales, options }: Params = {})
@@ -58,7 +58,7 @@ export default class SortHandler<Row>
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
         this.table.sort = { identifier, callback, direction: 'desc', key }
-        this.table.rawRows = [...this.table.rawRows].sort((x, y) => {
+        this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
             if (a === b) return 0
             if (a === null) return 1
@@ -71,7 +71,7 @@ export default class SortHandler<Row>
         })
         this.save({ identifier, callback, direction: 'desc' })
         this.table.setPage(1)
-        this.table.events.trigger('change')
+        this.table['events'].trigger('change')
     }
 
     public apply() 

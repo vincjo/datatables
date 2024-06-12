@@ -4,7 +4,7 @@
 
 # Internationalization
 
-Showcase components can be translated into another language at the `DataHandler` instantiation level.
+Showcase components can be translated into another language at the `TableHandler` instantiation level.
 
 <Main/>
 

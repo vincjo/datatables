@@ -1,6 +1,6 @@
 import type { TableHandler } from '$lib/remote'
 
-export default class ort<Row>
+export default class SortHandler<Row>
 {
     private table: TableHandler
 

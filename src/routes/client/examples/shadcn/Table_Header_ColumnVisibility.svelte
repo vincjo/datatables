@@ -2,6 +2,7 @@
     import type { TableHandler } from '$lib/client'
     // import Dropdown from './Dropdown.svelte'
     import { Dropdown } from 'gros/dropdown'
+    import { onMount } from 'svelte'
 
     let { table }: { table: TableHandler } = $props()
 
@@ -10,12 +11,6 @@
         { name: 'status', index: 2 },
         { name: 'priority', index: 3 },
     ])
-
-    $effect(() => {
-        if (table.element) {
-            view.bind(table.element)
-        }
-    })
 </script>
 
 
@@ -28,7 +23,7 @@
     <aside class="z-depth-2 open-dropdown">
         <strong>Toggle columns</strong>
         {#each view.columns as column}
-            <button onclick={() => view.toggle(column.name)} class="btn">
+            <button onclick={() => column.toggle()} class="btn">
                 {#if column.isVisible}
                     <i class="micon">check</i>
                 {:else}

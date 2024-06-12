@@ -2,9 +2,9 @@
     import { TableHandler } from '$lib/client'
     import Key from './Nav_Key.svelte'
     let { nav }: { nav: {
-        properties: string[],
-        methods: string[],
-        types: string[]
+        properties?: string[],
+        methods?: string[],
+        types?: string[]
     }} = $props()
     const data = $state.snapshot(nav)
     const table = new TableHandler([data])

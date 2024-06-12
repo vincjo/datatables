@@ -4,7 +4,7 @@
 
     let { check = undefined, isHighlighted = false } = $props()
 
-    const table = new TableHandler(data, { highlight: isHighlighted })
+    const table = new TableHandler(data, { highlight: isHighlighted, rowsPerPage: 10 })
     const filter = table.createFilter('last_name', check)
 </script>
 

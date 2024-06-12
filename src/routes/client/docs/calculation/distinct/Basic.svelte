@@ -21,7 +21,7 @@
             {/each}
         </div>
     </aside>
-    <article>
+    <article class="bg-darken">
         <input type="text" bind:value={search.value} oninput={() => search.set()} placeholder="Search cars..."/>
         <Datatable {table}>
             <table>

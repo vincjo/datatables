@@ -1,19 +1,22 @@
 import type { TableHandlerParams }  from '$lib/client'
 import EventsHandler    from './handlers/EventsHandler'
 import type { Filter, Sort, Field } from '$lib/client'
-import { parseField, match, nestedFilter, deepHighlight } from './utils'
+import { parseField, match, nestedFilter, deepEmphasize } from './utils'
 
 
 export default abstract class AbstractTableHandler<Row>
 {
-    public events               = new EventsHandler()
-    public selectBy             : string
-    public highlight            : boolean
+    protected selectBy          : string
+    protected highlight         : boolean
+    protected events            = new EventsHandler()
+    protected searchScope       = $state<(Field<Row>)[]>(null)
+    protected search            = $state<string>('')
+    protected rawRows           = $state.frozen<Row[]>([])
+
     public filters              = $state<(Filter<Row>)[]>([])
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
     public filterCount          = $derived<number>(this.filters.length)
-    public rawRows              = $state.frozen<Row[]>([])
     public allRows              = $derived<Row[]>(this.createAllRows())
     public rows                 = $derived<readonly Row[]>(this.createRows())
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
@@ -26,13 +29,11 @@ export default abstract class AbstractTableHandler<Row>
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
     public element              = $state<HTMLElement>(undefined)
     public clientWidth          = $state<number>(1000)
-    protected searchScope       = $state<(Field<Row>)[]>(null)
-    protected search            = $state<string>('')
 
     constructor(data: Row[], params: TableHandlerParams)
     {
         this.rawRows        = data
-        this.rowsPerPage    = params.rowsPerPage ?? 10
+        this.rowsPerPage    = params.rowsPerPage
         this.highlight      = params.highlight ?? false
         this.selectBy       = params.selectBy
     }
@@ -51,7 +52,7 @@ export default abstract class AbstractTableHandler<Row>
                         row[key] = nestedFilter(row[key], this.search, this.highlight)
                     }
                     else if (this.highlight) {
-                        row = deepHighlight(row, callback, this.search) as Row
+                        row = deepEmphasize(row, callback, this.search) as Row
                     }
                 }
                 return scope.some(({ callback }) => {
@@ -69,7 +70,7 @@ export default abstract class AbstractTableHandler<Row>
                         row[key] = nestedFilter(row[key], value, this.highlight, check)
                     }
                     else if (this.highlight && checked && value && typeof value === 'string') {
-                        row = deepHighlight(row, callback, value) as Row
+                        row = deepEmphasize(row, callback, value) as Row
                     }
                     return checked
                 })

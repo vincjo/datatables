@@ -68,19 +68,12 @@ export const nestedFilter = (
         })
     }
     if (highlight && (typeof entry === 'string' || typeof entry === 'number') && typeof value === 'string' && match(entry, value, compare)) {
-        return insertHighlight(entry, value)
+        return emphasize(entry, value)
     }
     return entry
 }
 
-export const deepHighlight = (row: Row, callback: (row: Row) => any, value: string) => {
-    const path = callbackToPath(callback)
-    if (!path) return row
-    return deepSet(row, path, value)
-
-}
-
-const insertHighlight = (entry: string | number, value: string) => {
+const emphasize = (entry: string | number, value: string) => {
     const search = value
         .replace(/a/g, '[aàâáä]')
         .replace(/e/g, '[eèêéë]')
@@ -92,16 +85,15 @@ const insertHighlight = (entry: string | number, value: string) => {
     return String(entry).replace(exp, `<u class="highlight">$&</u>`)
 }
 
-
-const callbackToPath = (callback: (row: Row) => any) => {
+export const deepEmphasize = (row: Row, callback: (row: Row) => any, value: string) => {
     const path = callback.toString()
         .split('=>')[1]
         .replace(/\(\)/g, '')
-        .replace(/row\./g, '')
         .replace(/\?/g, '')
+        .replace(/row\./g, '')
         .trim()
-    if (path.indexOf(' ') > -1) return undefined
-    return path
+    if (path.indexOf(' ') > -1) return row
+    return deepSet(row, path, value)
 }
 
 const deepSet = (object: Row, path: string, value: string) => {
@@ -120,7 +112,7 @@ const deepSet = (object: Row, path: string, value: string) => {
             if (next !== undefined) {
                 object[current] = object[current] ? object[current] : (isNaN(Number(next)) ? {} : [])
             } else {
-                object[current] = insertHighlight(object[current], value)
+                object[current] = emphasize(object[current], value)
             }
             object = object[current]
         }

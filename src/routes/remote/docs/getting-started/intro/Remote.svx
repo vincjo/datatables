@@ -7,7 +7,7 @@
 
 ## Server-side data processing
 
-This part of the lib provides utilities to interact with a remote API that handles pagination, filters, sorting...
+This part of the lib provides utilities to interact with a remote API that handles pagination, filters, sort...
 
 <Install/>
 

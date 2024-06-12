@@ -9,7 +9,7 @@
 
 <section class="flex">
     <Filter {table}/>
-    <aside>
+    <aside class="bg-darken">
         <Table {table}/>
     </aside>
 </section>

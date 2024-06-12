@@ -14,7 +14,7 @@ export default class PageHandler<Row>
         if (this.table.rowsPerPage) {
             if (page >= 1 && page <= this.table.pageCount) {
                 this.table.currentPage = page
-                this.table.events.trigger('change')
+                this.table['events'].trigger('change')
             }
         }
     }

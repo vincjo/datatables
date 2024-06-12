@@ -12,7 +12,7 @@
         { user: { name: 'Michel Trapu', login_count: 637 } },
     ]
 
-    const table = new TableHandler(data, { highlight: true })
+    const table = new TableHandler(data, { highlight: true, rowsPerPage: 10 })
     const filter = table.createFilter((row) => row.user.name)
 </script>
 

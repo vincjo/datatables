@@ -4,7 +4,7 @@
 
     let { scoped = undefined, isHighlighted = false } = $props()
 
-    const table = new TableHandler(data, { highlight: isHighlighted })
+    const table = new TableHandler(data, { highlight: isHighlighted, rowsPerPage: 10 })
     const search = table.createSearch(scoped)
 </script>
 
