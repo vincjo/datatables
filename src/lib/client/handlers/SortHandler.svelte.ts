@@ -21,13 +21,13 @@ export default class SortHandler<Row>
     {
         const { identifier } = parseField(field, uid)
 
-        if (this.table.sort.identifier !== identifier) {
-            this.table.sort.direction = null
+        if (this.table['sort'].identifier !== identifier) {
+            this.table['sort'].direction = null
         }
-        if (this.table.sort.direction === null || this.table.sort.direction === 'desc') {
+        if (this.table['sort'].direction === null || this.table['sort'].direction === 'desc') {
             this.asc(field, uid, params)
         }
-        else if (this.table.sort.direction === 'asc') {
+        else if (this.table['sort'].direction === 'asc') {
             this.desc(field, uid, params)
         }
     }
@@ -36,7 +36,7 @@ export default class SortHandler<Row>
     {
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
-        this.table.sort = { identifier, callback, direction: 'asc', key }
+        this.table['sort'] = { identifier, callback, direction: 'asc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
             if (a === b) return 0
@@ -57,7 +57,7 @@ export default class SortHandler<Row>
     {
         if (!field) return
         const { identifier, callback, key } = parseField(field, uid)
-        this.table.sort = { identifier, callback, direction: 'desc', key }
+        this.table['sort'] = { identifier, callback, direction: 'desc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
             if (a === b) return 0
@@ -82,7 +82,7 @@ export default class SortHandler<Row>
     public clear()
     {
         this.backup = []
-        this.table.sort = {}
+        this.table['sort'] = {}
     }
 
     private restore()

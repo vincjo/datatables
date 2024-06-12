@@ -103,7 +103,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new FilterHelper(this.filterHandler, field, check)
     }
 
-    public select(value: T | T[keyof T])
+    public select(value: T[keyof T])
     {
         this.selectHandler.set(value)
     }
@@ -114,7 +114,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.selectHandler.all()
     }
 
-    public getSelectedRows()
+    public getSelectedRows(): T[]
     {
         return this.selectHandler.getRows()
     }
@@ -134,7 +134,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new CalculationHelper(this, field)
     }
 
-    public createCSV()
+    public createCSV(): CSVHelper<T>
     {
         return new CSVHelper(this)
     }

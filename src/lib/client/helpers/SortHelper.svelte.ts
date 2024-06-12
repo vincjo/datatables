@@ -42,7 +42,7 @@ export default class SortHelper<Row>
 
     private createIsActive()
     {
-        if (this.uid === this.sortHandler['table'].sort?.identifier) {
+        if (this.uid === this.sortHandler['table']['sort']?.identifier) {
             return true
         }
         return false
@@ -51,6 +51,6 @@ export default class SortHelper<Row>
     private createDirection()
     {
         if (this.isActive === false) return null
-        return this.sortHandler['table'].sort?.direction
+        return this.sortHandler['table']['sort']?.direction
     }
 }

@@ -5,5 +5,6 @@ Criterion is a part of multiple-criteria filters called with `createAdvancedFilt
 
 ```ts
 import { check } from '@vincjo/datatables'
-const criterion = { value: 'High priority', comparator: check.isEqualTo }
+
+const criterion = { value: 'High priority', check: check.isEqualTo }
 ```

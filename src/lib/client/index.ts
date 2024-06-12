@@ -23,8 +23,7 @@ export type Filter<Row> = {
     identifier: string
     value?: string | number | boolean | symbol | Criterion[]
     check?: Check<Row>
-    key?: string,
-    accessor?: string
+    key?: string
 }
 
 export type Sort<Row> = {

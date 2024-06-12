@@ -6,9 +6,9 @@ export { default as Banner } from './Banner.svelte'
 export const site = new Site()
 
 export const internal = {
-    properties  : ['events', 'rawRows', 'sorting', 'filters', 'selectScope', 'selectBy'],
-    types       : ['Sorting'],
-    methods     : ['sort', 'sortAsc', 'sortDesc'],
+    properties  : [],
+    types       : ['Sort'],
+    methods     : [],
 }
 
 export const deprcated = {

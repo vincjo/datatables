@@ -9,26 +9,26 @@ export default abstract class AbstractTableHandler<Row>
     protected selectBy          : string
     protected highlight         : boolean
     protected events            = new EventsHandler()
+    protected rawRows           = $state.frozen<Row[]>([])
     protected searchScope       = $state<(Field<Row>)[]>(null)
     protected search            = $state<string>('')
-    protected rawRows           = $state.frozen<Row[]>([])
+    protected selectScope       = $state<'all' | 'currentPage'>('currentPage')
+    protected sort              = $state<(Sort<Row>)>({})
 
     public filters              = $state<(Filter<Row>)[]>([])
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
+    public element              = $state<HTMLElement>(undefined)
+    public clientWidth          = $state<number>(1000)
     public filterCount          = $derived<number>(this.filters.length)
     public allRows              = $derived<Row[]>(this.createAllRows())
-    public rows                 = $derived<readonly Row[]>(this.createRows())
+    public rows                 = $derived<Row[]>(this.createRows())
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
     public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())
-    public sort                 = $state<(Sort<Row>)>({})
     public selected             = $state<(Row | Row[keyof Row])[]>([])
-    public selectScope          = $state<'all' | 'currentPage'>('currentPage')
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
-    public element              = $state<HTMLElement>(undefined)
-    public clientWidth          = $state<number>(1000)
 
     constructor(data: Row[], params: TableHandlerParams)
     {

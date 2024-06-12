@@ -2,22 +2,13 @@
 
 ## Usage
 
-```svelte
-<input type="checkbox" 
-    onclick={() => table.select(row)}
-/>
-```
-
-<br>
-
-🚨 If you select only a value of a unique key (ex: "row.id"), it is necessary to specify `selectBy` param at instantiation.
-
+1# Define the name of the key in `selectBy` parameter:
 ```ts
-const table = new TableHandler(data, { selectBy: 'id', rowsPerPage: 10 })
+const table = new TableHandler(data, { selectBy: 'id' })
 ```
 
+2# For each row:
 ```svelte
-<input type="checkbox" 
-    onclick={() => table.select(row.id)}
-/>
+<input type="checkbox" onclick={() => table.select(row.id)}>
 ```
+
