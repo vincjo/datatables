@@ -7,22 +7,20 @@
     import Create from './Modal_Create.svelte'
     import type { Component } from 'svelte'
     const table = new TableHandler(api.users, { rowsPerPage: 10 })
+
+
     let element: any
 
     $effect(() => {
         api.users;
-        update()
-    })
-
-    const update = () => {
         if (element) {
+            console.log('updated')
             const scrollTop = element.parentNode.scrollTop
             table.setRows(api.users)
-            setTimeout(() => {
-                element.parentNode.scrollTop = scrollTop
-            }, 2)
+            setTimeout(() => element.parentNode.scrollTop = scrollTop, 2)
         }
-    }
+    })
+
 </script>
 
 <div class="fieldset bg-darken">

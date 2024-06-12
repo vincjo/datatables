@@ -1,3 +1,4 @@
+import { untrack } from 'svelte'
 import AbstractTableHandler     from './AbstractTableHandler.svelte'
 
 import SortHandler              from './handlers/SortHandler.svelte'
@@ -41,8 +42,8 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public setRows(data: T[])
     {
         this.rawRows = data
-        this.events.trigger('change')
-        this.sortHandler.apply()
+        this.event.dispatch('change')
+        untrack(() => this.sortHandler.apply())
     }
 
     public setRowsPerPage(value: number): void
@@ -89,8 +90,8 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public clearFilters(): void
     {
         this.filters = []
-        this.events.trigger('change')
-        this.events.trigger('clearFilters')
+        this.event.dispatch('change')
+        this.event.dispatch('clearFilters')
     }
 
     public createAdvancedFilter(field: Field<T>, check?: Check<T>): AdvancedFilterHelper<T>
@@ -126,7 +127,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 
     public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void)
     {
-        this.events.add(event, callback)
+        this.event.add(event, callback)
     }
 
     public createCalculation(field: Field<T>): CalculationHelper<T>

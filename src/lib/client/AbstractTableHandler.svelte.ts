@@ -1,5 +1,5 @@
 import type { TableHandlerParams }  from '$lib/client'
-import EventsHandler    from './handlers/EventsHandler'
+import EventDispatcher from './EventDispatcher'
 import type { Filter, Sort, Field } from '$lib/client'
 import { parseField, match, nestedFilter, deepEmphasize } from './utils'
 
@@ -8,7 +8,7 @@ export default abstract class AbstractTableHandler<Row>
 {
     protected selectBy          : string
     protected highlight         : boolean
-    protected events            = new EventsHandler()
+    protected event             = new EventDispatcher()
     protected rawRows           = $state.frozen<Row[]>([])
     protected searchScope       = $state<(Field<Row>)[]>(null)
     protected search            = $state<string>('')
@@ -21,8 +21,8 @@ export default abstract class AbstractTableHandler<Row>
     public element              = $state<HTMLElement>(undefined)
     public clientWidth          = $state<number>(1000)
     public filterCount          = $derived<number>(this.filters.length)
-    public allRows              = $derived<Row[]>(this.createAllRows())
-    public rows                 = $derived<Row[]>(this.createRows())
+    public allRows              = $derived<readonly Row[]>(this.createAllRows())
+    public rows                 = $derived<readonly Row[]>(this.createRows())
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
@@ -40,7 +40,7 @@ export default abstract class AbstractTableHandler<Row>
 
     private createAllRows()
     {
-        let allRows = structuredClone(this.rawRows) as Row[]
+        let allRows = structuredClone(this.rawRows)
         if (this.search) {
             allRows = allRows.filter((row) => {
                 const fields = this.searchScope ?? Object.keys(row) as Field<Row>[]
@@ -60,7 +60,7 @@ export default abstract class AbstractTableHandler<Row>
                 })
             })
             this.currentPage = 1
-            this.events.trigger('change')
+            this.event.dispatch('change')
         }
         if (this.filterCount > 0) {
             for (const { callback, value, check, key } of this.filters) {
@@ -76,7 +76,7 @@ export default abstract class AbstractTableHandler<Row>
                 })
             }
             this.currentPage = 1
-            this.events.trigger('change')
+            this.event.dispatch('change')
         }
         return allRows
     }

@@ -18,7 +18,7 @@ export default class SearchHandler<Row>
     public clear()
     {
         this.table['search'] = ''
-        this.table['events'].trigger('change')
-        this.table['events'].trigger('clearSearch')
+        this.table['event'].dispatch('change')
+        this.table['event'].dispatch('clearSearch')
     }
 }

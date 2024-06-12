@@ -50,7 +50,7 @@ export default class SortHandler<Row>
         })
         this.save({ identifier, callback, direction: 'asc' })
         this.table.setPage(1)
-        this.table['events'].trigger('change')
+        this.table['event'].dispatch('change')
     }
 
     public desc(field: Field<Row>, uid?: string, { locales, options }: Params = {})
@@ -71,7 +71,7 @@ export default class SortHandler<Row>
         })
         this.save({ identifier, callback, direction: 'desc' })
         this.table.setPage(1)
-        this.table['events'].trigger('change')
+        this.table['event'].dispatch('change')
     }
 
     public apply() 
