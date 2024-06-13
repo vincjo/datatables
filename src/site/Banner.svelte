@@ -33,11 +33,13 @@
     }
     h1 {
         font-size: 32px;
+        font-family: Archivo;
         line-height: 32px;
         text-align: left;
         font-weight: 400;
         margin: 0;
         color: var(--font);
+        letter-spacing: 0.01em;
     }
     img {
         height: 24px;

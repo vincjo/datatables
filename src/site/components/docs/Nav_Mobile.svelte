@@ -2,9 +2,9 @@
     import { getPath, url } from 'gros/page'
     import { clickOutside } from 'gros/action'
     import { fly, fade }    from 'svelte/transition'
+    import { site }         from '$site'
     let { nav }: { nav: any } = $props()
     let show = $state(false)
-    let active = $state('Docs')
     const close = () => show = false
 </script>
 
@@ -13,7 +13,7 @@
         <svg width="18px" height="18px" viewBox="0 0 24 24"><path fill="currentColor" d="M15.616 20q-.402 0-.701-.299t-.3-.701v-4.384q0-.402.3-.701t.7-.3H20q.402 0 .701.3t.299.7V19q0 .402-.299.701T20 20zM3 17.308v-1h8.23v1zm12.616-6.924q-.402 0-.701-.299t-.3-.7V5q0-.402.3-.701t.7-.299H20q.402 0 .701.299T21 5v4.385q0 .401-.299.7t-.701.3zM3 7.692v-1h8.23v1z"/></svg>
         <span>Menu</span>
     </button>
-    <b>{active}</b>
+    <b>{site.mode === 'client' ? 'Client-side' : 'Server-side'} / Docs</b>
 </nav>
 
 {#if show}
@@ -21,17 +21,14 @@
 {/if}
 
 {#if show}
-    <article in:fly|global={{ duration: 400, x: -200 }} out:fly|global={{ duration: 400, x: -200, delay: 400 }} class="thin-scrollbar" use:clickOutside={close}>
+    <article in:fly|global={{ duration: 400, x: -200 }} out:fly|global={{ duration: 400, x: -200, delay: 200 }} class="thin-scrollbar" use:clickOutside={close}>
         {#each nav as item}
             <h1 class="flex">
                 <i class="icon">{@html item.icon ?? ''}</i>
                 {item.title}
             </h1>
             {#each item.links as link}
-                <a class:active={$url.indexOf(link.path) > -1} href="{getPath(link.path)}" onclick={() => {
-                    active = item.title + ' / ' + link.name
-                    close()
-                }}>
+                <a class:active={$url.indexOf(link.path) > -1} href="{getPath(link.path)}" onclick={close}>
                     {link.name}
                 </a>
                 <div class="divider"></div>
@@ -50,7 +47,7 @@
         justify-content: space-between;
         border-bottom: 1px solid var(--grey);
         background: var(--bg);
-        padding: 0 40px 0 16px;
+        padding: 0 16px 0 16px;
     }
     nav b {
         color: var(--font-grey);
@@ -92,6 +89,7 @@
         margin-bottom: 4px;
         color: var(--font);
         font-family: Archivo;
+        letter-spacing: 0.01em;
     }
     i.icon {
         color: var(--font-grey);

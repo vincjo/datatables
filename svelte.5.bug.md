@@ -1,7 +1,0 @@
-
-
-# V4 OK
-https://svelte.dev/repl/6a66d8a2be5c42ceadbef94c67ababd7?version=4.2.18
-
-# V5 NOK
-https://svelte-5-preview.vercel.app/#H4sIAAAAAAAACo2PwWrDMAyGX0WIQVsIDblmXulue4Ddlh1SR2kMim1kZ1BC3n3YpQnbZUMHoV__L_TN2BumgPXHjLYdCWt89R4LjDefhvBFHAkLDG4SnRQVtBgfT41tohm9kwjvFCL04kbYHcs0HO-xXWNVudmtSrscVEN1eiNmp8qhOiXbY5VLhXhjys6hgjn1JmrHTmpw0torPSdtyfezFQscXWd6Qx3WUSZaihUonf4vEVOEGfRguBOysMALPHlxPuwPv2EGajuSnJrPQrYjWYP7Q_5ts_xAyirUV3aXlh94G-iKKnQhrVs_iec7cWb-A_xz-QaUfsym1QEAAA==

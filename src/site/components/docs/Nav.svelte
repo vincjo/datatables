@@ -55,6 +55,7 @@
         margin-bottom: 0;
         color: var(--font);
         font-family: Archivo;
+        letter-spacing: 0.02em;
     }
     a {
         display: block;

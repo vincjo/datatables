@@ -32,6 +32,7 @@
         background: var(--bg);
         color: var(--font);
         transition: all, 0.4s;
+        /* background-image: var(--bg-image); */
     }
     section {
         position: absolute;

@@ -13,8 +13,8 @@
 <header class="flex">
     <a class="flex logo" href="{site.getPath('/')}">
         <Logo height="32px"/>
-        <span class="alt-font desktop">svelte simple datatables</span>
-        <span class="alt-font mobile">SSD</span>
+        <span class="desktop">svelte simple datatables</span>
+        <span class="mobile">SSD</span>
     </a>
     <nav class="flex desktop">
         <aside class="flex">
@@ -74,7 +74,8 @@
     a.logo span {
         font-size: 18px;
         margin-left: 8px;
-        letter-spacing: -0.4px;
+        letter-spacing: 0.1px;
+        font-family: Archivo;
     }
     a.menu {
         margin-left: 16px;

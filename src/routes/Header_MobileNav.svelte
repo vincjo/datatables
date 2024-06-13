@@ -19,19 +19,11 @@
 
         <div class="divider"></div>
 
-        <aside>
-            <span>Mode:</span>
-            <Mode/>
-        </aside>
-
-        <aside>
-            <span>Theme:</span>
-            <Theme/>
-        </aside>
-        <aside>
-            <Github/>
-            <span>Github</span>
-        </aside>
+        <Mode isMobile/>
+        <div class="divider-16"></div>
+        <Theme isMobile/>
+        <div class="divider-16"></div>
+        <Github isMobile/>
     </nav>
 {/if}
 
@@ -42,25 +34,22 @@
         left: 0;
         bottom: 0;
         right: 0;
-        background: var(--bg);
+        /* background: var(--bg); */
+        background: var(--bg-gradient);
         z-index: 400;
         padding: 32px 40px;
     }
     a {
         border-bottom: 1px solid var(--grey);
-    }
-    a, aside {
         display: flex;
         align-items: center;
         text-decoration: none;
         height: 56px;
-    }
-    aside {
-        width: 50%;
-        color: var(--font-grey);
-    }
-    span {
-        width: 64px;
+        padding-left: 8px;
+        font-weight: bold;
+        letter-spacing: 0.1em;
+        font-family: Archivo;
+        font-size: 18px;
     }
     a.active {
         color: var(--primary);
@@ -68,5 +57,8 @@
     }
     .divider {
         margin-top: 64px;
+    }
+    .divider-16 {
+        margin-bottom: 16px;
     }
 </style>

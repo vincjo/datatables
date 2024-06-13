@@ -24,7 +24,7 @@
     --bg: #fff;
     --font: #424242;
     --font-grey: #757575;
-    --bg-image: #fff;
+    --bg-gradient: linear-gradient(4deg, rgba(248,248,248,1) 0%, rgba(255,255,255,1) 100%);
 
     --bg-code: #f5f7ff;
 }
@@ -77,7 +77,7 @@
     --font-grey: #bdbdbd;
 
     --bg-code: #212121;
-    --bg-image: radial-gradient(circle, #1a1b1f, #1c1e22, #1e2124, #202427, #222729);
+    --bg-gradient: linear-gradient(4deg, rgba(38,52,57,1) 0%, rgba(20,23,24,1) 100%);
 }
 [data-theme="dark"] .thin-scrollbar::-webkit-scrollbar-track, [data-theme="dark"] pre::-webkit-scrollbar-track {
     background: #212121;

@@ -51,7 +51,8 @@ a {
 
 
 .md h1, .md h2, .md h3 {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+    font-family: Archivo;
     letter-spacing: 0.01em;
     font-weight: 200;
 }
@@ -60,11 +61,13 @@ a {
     color: var(--font);
     font-size: 40px;
     margin-bottom: 16px;
+    line-height: 44px;
 }
 .md h2 {
     margin-top: 32px;
     color: var(--font);
     font-size: 32px;
+    line-height: 38px;
 }
 .md h3 {
     font-size: 24px;
