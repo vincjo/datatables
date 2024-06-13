@@ -30,7 +30,7 @@ In order to make the migration process a little easier, v1 is embed in "legacy" 
     import { 
         type State, TableHandler, 
         Datatable, ThSort 
-    } from '@vincjo/datatables/remote'
+    } from '@vincjo/datatables/server'
     import { myLoadFunction } from './my-api-helper'
 
     const table = new TableHandler([], { rowsPerPage: 10 })
