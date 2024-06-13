@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler } from '$lib/client'
+    import { TableHandler } from '$lib/src/client'
     import { pokedex } from '$site/data/pokedex'
     import Table from './MCF_Table.svelte'
     import Filter from './MCF_TableFilter.svelte'

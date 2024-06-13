@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib/client'
+    import type { TableHandler } from '$lib/src/client'
     import Filter from './Table_Header_Filter.svelte'
     import ColumnVisibility from './Table_Header_ColumnVisibility.svelte'
 

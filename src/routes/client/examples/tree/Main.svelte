@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler } from '$lib/client'
+    import { TableHandler } from '$lib/src/client'
     import tree from '$site/data/tree'
     import Tree from './Main_Tree.svelte'
     import Search from './Main_Search.svelte'

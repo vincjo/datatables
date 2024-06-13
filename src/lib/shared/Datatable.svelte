@@ -9,7 +9,7 @@
         footer?: Snippet,
         children: Snippet
     }
-    let { table, basic = false, header, footer, children }: Props = $props()
+    let { table, basic = false, header = undefined, footer = undefined, children }: Props = $props()
 
     table.on('change', () => table.element ? table.element.scrollTop = 0 : '')
 </script>

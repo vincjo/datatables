@@ -1,5 +1,5 @@
 <script>
-    import { TableHandler, Datatable, ThSort } from '$lib/client'
+    import { TableHandler, Datatable, ThSort } from '$lib/src/client'
 
     const data = [
         { user: { name: 'John Doe', login_count: 120 } },

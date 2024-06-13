@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { check, type TableHandler } from '$lib/client'
+    import { check, type TableHandler } from '$lib/src/client'
     type Props = { table: TableHandler }
     let { table }: Props = $props()
 

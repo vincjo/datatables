@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler } from '$lib/client'
+    import { TableHandler } from '$lib/src/client'
     import { getPath, url } from 'gros/page'
     let { nav }: { nav: any } = $props()
     const table = new TableHandler(nav)

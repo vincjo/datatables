@@ -12,7 +12,7 @@
 
 <section class="flex">
     <button onclick={() => generate('client')}>Create files for "client"</button>
-    <button onclick={() => generate('remote')}>Create files for "remote"</button>
+    <button onclick={() => generate('server')}>Create files for "server"</button>
 </section>
 
 <style>

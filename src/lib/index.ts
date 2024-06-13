@@ -4,13 +4,11 @@ export {
     TableHandler,
     // components:
     Datatable,
-    Header,
     Search,
     RowsPerPage,
     Th,
     ThSort,
     ThFilter,
-    Footer,
     Pagination,
     RowCount,
     // utils:
@@ -23,4 +21,4 @@ export {
     type Internationalization,
     type Row,
     type TableHandlerParams,
-} from '$lib/client'
+} from '$lib/src/client'

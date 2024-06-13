@@ -1,5 +1,5 @@
 <script>
-    import { TableHandler, Datatable, Th } from '$lib/client'
+    import { TableHandler, Datatable, Th } from '$lib/src/client'
 
     const data = [
         { user: { name: 'John Doe', login_count: 120 } },

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { type TableHandler, Datatable, ThSort } from '$lib/client'
+    import { type TableHandler, Datatable, ThSort } from '$lib/src/client'
     import PokemonStats from './MCF_PokemonStats.svelte'
     type Props = { table: TableHandler }
     let { table }: Props = $props()

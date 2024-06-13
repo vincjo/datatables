@@ -1,5 +1,5 @@
 <script>
-    import { TableHandler, check } from '$lib/client'
+    import { TableHandler, check } from '$lib/src/client'
     import { Range } from 'gros/form'
     import { data } from './data'
 

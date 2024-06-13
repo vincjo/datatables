@@ -1,6 +1,6 @@
 
 <script lang="ts">
-    import { TableHandler, check } from '$lib/client'
+    import { TableHandler, check } from '$lib/src/client'
     import { data } from './data'
 
     const table = new TableHandler(data, { highlight: true }) 

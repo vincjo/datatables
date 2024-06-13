@@ -98,7 +98,7 @@
 }
 
 
-[data-mode="remote"] {
+[data-mode="server"] {
     --primary: #006990;
     --primary-lighten: #62c8f3;
     --primary-lighten-1: rgba(0, 105, 144, 0.1);
@@ -115,7 +115,7 @@
     --secondary-darken: #827717;
 }
 
-[data-theme="dark"][data-mode="remote"] {
+[data-theme="dark"][data-mode="server"] {
     --primary: #0089bb;
     --primary-lighten: #62c8f3;
     --primary-lighten-1: rgba(0, 137, 187, 0.2);

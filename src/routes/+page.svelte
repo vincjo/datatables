@@ -16,14 +16,14 @@
                 <a href="{site.getPath('/client/api')}">API</a>
             </div>
         </aside>
-        <aside onmouseenter={() => site.setMode('remote')} class="flex" class:active={site.mode === 'remote'}>
+        <aside onmouseenter={() => site.setMode('server')} class="flex" class:active={site.mode === 'server'}>
             <svg width="80px" height="80px" viewBox="0 0 24 24"><path fill="currentColor" d="M7.502 7.116q-.415 0-.709.29t-.293.707t.291.709t.707.294t.709-.292t.293-.706t-.291-.71t-.707-.293m0 8.77q-.415 0-.709.29q-.293.292-.293.707q0 .416.291.71t.707.293t.709-.292t.293-.706t-.291-.709t-.707-.294M4.77 4.616h14.462q.327 0 .548.22t.22.544v5.35q0 .387-.221.636q-.221.25-.548.25H4.769q-.327 0-.548-.25Q4 11.117 4 10.731V5.38q0-.325.221-.545t.548-.22m.231 1v5h14v-5zm-.23 7.77h14.422q.368 0 .588.243t.22.603v5.23q0 .426-.22.675t-.588.249H4.808q-.367 0-.588-.25q-.22-.248-.22-.673V14.23q0-.36.201-.603q.201-.244.568-.244m.231 1v5h14v-5zm0-8.768v5zm0 8.769v5z"/></svg>
 
             <h3>Server-side data processing</h3>
             <div class="flex">
-                <a href="{site.getPath('/remote/docs/getting-started/intro')}">Docs</a>
-                <a href="{site.getPath('/remote/examples/hello-world')}">Examples</a>
-                <a href="{site.getPath('/remote/api')}">API</a>
+                <a href="{site.getPath('/server/docs/getting-started/intro')}">Docs</a>
+                <a href="{site.getPath('/server/examples/hello-world')}">Examples</a>
+                <a href="{site.getPath('/server/api')}">API</a>
             </div>
         </aside>
     </article>

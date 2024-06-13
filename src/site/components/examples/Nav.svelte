@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler } from '$lib/client'
+    import { TableHandler } from '$lib/src/client'
     import { getPath, url } from 'gros/page'
     import { site } from '$site'
     type Props = { nav: { title: string, page: string, description: string, tag: string[] }[] }

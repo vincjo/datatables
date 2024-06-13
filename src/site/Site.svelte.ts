@@ -7,7 +7,7 @@ export default class Site
     public mode     = $state('client')
     public theme    = $state('dark')
 
-    public setMode(value: 'client' | 'remote' | string)
+    public setMode(value: 'client' | 'server' | string)
     {
         document.documentElement.dataset.mode = value
         document.cookie = `siteMode=${value}; max-age=31536000; path="/"`
@@ -21,8 +21,8 @@ export default class Site
         if (get(page).url.pathname.indexOf(`/client/`) > -1) {
             mode = 'client'
         }
-        else if (get(page).url.pathname.indexOf(`/remote/`) > -1) {
-            mode = 'remote'
+        else if (get(page).url.pathname.indexOf(`/server/`) > -1) {
+            mode = 'server'
         }
         else {
             const regex = new RegExp(`(^| )siteMode=([^;]+)`)

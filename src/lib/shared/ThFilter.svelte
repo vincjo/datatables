@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { TableHandlerLike, FieldLike } from '$lib/shared'
-    import type { Check } from '$lib/client'
+    import type { Check } from '$lib/src/client'
 
     type T = $$Generic<Row>
     type Props = {

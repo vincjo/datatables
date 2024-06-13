@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler } from '$lib/client'
+    import { TableHandler } from '$lib/src/client'
     import Key from './Nav_Key.svelte'
     let { nav }: { nav: {
         properties?: string[],

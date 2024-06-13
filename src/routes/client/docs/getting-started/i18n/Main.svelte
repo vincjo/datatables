@@ -1,6 +1,6 @@
 <script lang="ts">
     import myData from '$site/data/data'
-    import { TableHandler, Datatable, ThSort, ThFilter } from '$lib/client'
+    import { TableHandler, Datatable, ThSort, ThFilter } from '$lib/src/client'
 
     const table = new TableHandler(myData, {
         rowsPerPage: 10,

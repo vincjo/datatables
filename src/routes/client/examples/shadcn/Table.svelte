@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable } from '$lib/client'
+    import { TableHandler, Datatable } from '$lib/src/client'
     import Checkbox from './Checkbox.svelte'
     import Header from './Table_Header.svelte'
     import Footer from './Table_Footer.svelte'

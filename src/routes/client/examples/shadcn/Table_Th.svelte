@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib/client'
+    import type { TableHandler } from '$lib/src/client'
     import type { Snippet } from 'svelte'
     import { Dropdown } from 'gros/dropdown'
     import { glyph } from './utils'

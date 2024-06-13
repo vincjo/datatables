@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "2.0.0-runes.15",
+    "version": "2.0.0-runes.17",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],
@@ -61,7 +61,7 @@
             "svelte": "./dist/index.js",
             "default": "./dist/index.js"
         },
-        "./remote": {
+        "./server": {
             "types": "./dist/remote/index.d.ts",
             "svelte": "./dist/remote/index.js",
             "default": "./dist/remote/index.js"

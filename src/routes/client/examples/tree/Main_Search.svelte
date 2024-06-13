@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TableHandler } from '$lib/client'
+    import type { TableHandler } from '$lib/src/client'
 
     let { table }: { table: TableHandler } = $props()
     const search = table.createSearch()

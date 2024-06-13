@@ -1,1 +1,0 @@
-{"name":"sort","text":"type $state<(Sort<Row>)>","type":"$state<(Sort<Row>)>","ast":{"name":"sort","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":26,"default":"$state<(Sort<Row>)>({})"},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

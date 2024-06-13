@@ -14,7 +14,6 @@
     $effect(() => {
         api.users;
         if (element) {
-            console.log('updated')
             const scrollTop = element.parentNode.scrollTop
             table.setRows(api.users)
             setTimeout(() => element.parentNode.scrollTop = scrollTop, 2)

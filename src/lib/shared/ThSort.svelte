@@ -10,7 +10,7 @@
     }
     let { table, field, children }: Props = $props()
 
-    // "field as any" for compatibility between client and remote
+    // "field as any" for compatibility between client and server
     const sort = table.createSort(field as any)
 </script>
 

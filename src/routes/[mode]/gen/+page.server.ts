@@ -8,9 +8,9 @@ export const load = async (url) => {
         }
     }
     const mode = url.params.mode
-    if (['client', 'remote'].includes(mode) === false) {
+    if (['client', 'server'].includes(mode) === false) {
         return {
-            message: 'Wrong mode: use "client" or "remote".',
+            message: 'Wrong mode: use "client" or "server".',
             error: true,
         }
     }

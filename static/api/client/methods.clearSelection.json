@@ -1,1 +1,1 @@
-{"name":"clearSelection","text":"clearSelection(): void","returnType":"void","args":[],"ast":{"name":"clearSelection","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":126}]},"markdown":"\n<p>Delete selection. </p>\n"}
+{"name":"clearSelection","text":"clearSelection(): void","returnType":"void","args":[],"ast":{"name":"clearSelection","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":125}]},"markdown":"\n<p>Delete selection. </p>\n"}

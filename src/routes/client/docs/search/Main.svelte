@@ -1,6 +1,6 @@
 <script>
     import data from '$site/data/data'
-    import { TableHandler, Datatable, Th, Pagination } from '$lib/client'
+    import { TableHandler, Datatable, Th, Pagination } from '$lib/src/client'
 
     let { scoped = undefined, isHighlighted = false } = $props()
 

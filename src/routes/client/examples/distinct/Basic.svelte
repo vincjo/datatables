@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable, ThSort } from '$lib/client'
+    import { TableHandler, Datatable, ThSort } from '$lib/src/client'
     import { cars } from './data'
 
     const table = new TableHandler(cars)

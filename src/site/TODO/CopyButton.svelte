@@ -21,8 +21,8 @@
 
     const parse = (code) => {
         return code
-            .replace('$lib/local', '@vincjo/datatables')
-            .replace('$lib/remote', '@vincjo/datatables/remote')
+            .replace('$lib/src/client', '@vincjo/datatables')
+            .replace('$lib/src/server', '@vincjo/datatables/server')
     }
 </script>
 
