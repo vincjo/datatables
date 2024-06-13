@@ -9,8 +9,6 @@
 const filter = table.createAdvancedFilter('priority', check.isEqualTo)
 ```
 
-Template side:
-
 ```svelte
 <button 
     onclick={() => filter.set('high')}

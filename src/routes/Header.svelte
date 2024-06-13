@@ -1,35 +1,49 @@
 <script lang="ts">
     import { site, Logo } from '$site'
-    import Github   from './Header_Github.svelte'
-    import Theme    from './Header_Theme.svelte'
-    import Mode     from './Header_Mode.svelte'
-    import { page } from '$app/stores'
-    import { dev }  from '$app/environment'
+    import Github       from './Header_Github.svelte'
+    import Theme        from './Header_Theme.svelte'
+    import Mode         from './Header_Mode.svelte'
+    import MobileNav    from './Header_MobileNav.svelte'
+    import { page }     from '$app/stores'
+    import { dev }      from '$app/environment'
+
+    let show = $state(false)
 </script>
 
 <header class="flex">
-    <nav class="flex">
-        <a class="flex logo" href="{site.getPath('/')}">
-            <Logo height="28px"/>
-            <span class="alt-font">svelte simple datatables</span>
-        </a>
-        <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}">Docs</a>
-        <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}">Examples</a>
-        <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/${site.mode}/api`)}">API</a>
-
-        {#if dev}
-            <a class="menu" class:active={$page.url.pathname.indexOf('/gen') > -1}   href="{site.getPath(`/${site.mode}/gen`)}">[gen]</a>
-            <a class="menu" class:active={$page.url.pathname.indexOf('/md') > -1}   href="{site.getPath(`/${site.mode}/md`)}">[md]</a>
-        {/if}
+    <a class="flex logo" href="{site.getPath('/')}">
+        <Logo height="32px"/>
+        <span class="alt-font desktop">svelte simple datatables</span>
+        <span class="alt-font mobile">SSD</span>
+    </a>
+    <nav class="flex desktop">
+        <aside class="flex">
+            <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}">Docs</a>
+            <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}">Examples</a>
+            <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/${site.mode}/api`)}">API</a>
+            {#if dev}
+                <a class="menu" class:active={$page.url.pathname.indexOf('/gen') > -1}   href="{site.getPath(`/${site.mode}/gen`)}">[gen]</a>
+                <a class="menu" class:active={$page.url.pathname.indexOf('/md') > -1}   href="{site.getPath(`/${site.mode}/md`)}">[md]</a>
+            {/if}
+        </aside>
+        <aside class="flex">
+            <Mode/>
+            <Theme/>
+            <Github/>
+        </aside>
     </nav>
-    <div></div>
-    <aside class="flex">
-        <Mode/>
-        <Theme/>
-        <Github/>
-    </aside>
+    <nav class="mobile flex">
+        <div></div>
+        <button onclick={() => show = !show} class:active={show} class="flex">
+            {#if show}
+                <svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275L12 13.4Z"/></svg>
+            {:else}
+                <svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.713-.288T3 17q0-.425.288-.713T4 16h16q.425 0 .713.288T21 17q0 .425-.288.713T20 18H4Zm0-5q-.425 0-.713-.288T3 12q0-.425.288-.713T4 11h16q.425 0 .713.288T21 12q0 .425-.288.713T20 13H4Zm0-5q-.425 0-.713-.288T3 7q0-.425.288-.713T4 6h16q.425 0 .713.288T21 7q0 .425-.288.713T20 8H4Z"/></svg>
+            {/if}
+        </button>
+    </nav>
 </header>
-
+<MobileNav bind:show/>
 
 <style>
     header {
@@ -40,20 +54,27 @@
         height: 56px;
         border-bottom: 1px solid var(--grey);
         border-top: 1px solid var(--grey);
-        justify-content: space-between;
+        justify-content: flex-start;
         padding: 0 32px;
         backdrop-filter: blur(4px);
     }
+    .mobile {
+        display: none;
+    }
+    nav {
+        justify-content: space-between;
+        width: calc(100% - 240px);
+    }
     a {
         text-decoration: none;
+    }
+    a.logo {
+        width: 240px;
     }
     a.logo span {
         font-size: 18px;
         margin-left: 8px;
         letter-spacing: -0.4px;
-    }
-    a.logo {
-        margin-right: 16px;
     }
     a.menu {
         margin-left: 16px;
@@ -70,15 +91,30 @@
         color: var(--primary);
         background: var(--primary-lighten-1);
     }
-
+    button {
+        color: var(--font-grey);
+        transition: color, 0.2s;
+        padding: 0 2px;
+        border-radius: 4px;
+        height: 32px;
+    }
     @media (min-width: 1200px) {
         header {
             padding: 0 96px;
         }
     }
     @media (max-width: 800px) {
-        nav {
+        .desktop {
             display: none;
+        }
+        .mobile {
+            display: flex;
+        }
+        a.logo {
+            width: 28%;
+        }
+        nav {
+            width: 72%;
         }
     }
 </style>

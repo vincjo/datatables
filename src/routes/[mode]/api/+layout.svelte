@@ -1,16 +1,16 @@
 <script lang="ts">
     import Nav from './Nav.svelte'
+    import MobibleNav from './Nav_Mobile.svelte'
     let { data, children } = $props()
 </script>
 
 
 <Nav nav={data.nav}/>
+<MobibleNav nav={data.nav}/>
 <section class="thin-scrollbar">
-
     <div>
         {@render children()}
     </div>
-
 </section>
 
 <style>
@@ -34,6 +34,10 @@
     @media (max-width: 800px) {
         section {
             left: 0;
+            top: 48px;
+        }
+        div {
+            padding: 32px 16px;
         }
     }
 </style>

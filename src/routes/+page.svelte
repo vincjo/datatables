@@ -35,6 +35,7 @@
     h1 {
         font-size: 40px;
         margin-bottom: 0;
+        line-height: 48px;
     }
     h2 {
         font-size: 24px;
@@ -92,6 +93,11 @@
     @media (min-width: 1200px) {
         section {
             padding-left: 96px;
+        }
+    }
+    @media (max-width: 800px) {
+        section {
+            padding: 0 16px;
         }
     }
 </style>

@@ -16,5 +16,6 @@
         border: 1px solid var(--grey);
         border-radius: 8px;
         padding-bottom: 8px;
+        min-width: 680px;
     }
 </style>

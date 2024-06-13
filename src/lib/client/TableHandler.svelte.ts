@@ -1,4 +1,4 @@
-import { untrack } from 'svelte'
+
 import AbstractTableHandler     from './AbstractTableHandler.svelte'
 
 import SortHandler              from './handlers/SortHandler.svelte'
@@ -17,6 +17,9 @@ import CalculationHelper        from './helpers/CalculationHelper.svelte'
 import SortHelper               from './helpers/SortHelper.svelte'
 import CSVHelper                from './helpers/CSVHelper.svelte'
 import RecordFilterHelper       from './helpers/RecordFilterHelper.svelte'
+
+import { untrack }              from 'svelte'
+
 
 export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T>
 {

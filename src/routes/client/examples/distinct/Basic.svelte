@@ -44,9 +44,9 @@
     section {
         border-radius: 8px;
         padding: 16px;
-        flex-wrap: wrap;
         align-items: flex-start;
         border: 1px solid var(--grey);
+        min-width: 680px;
     }
     article {
         position: relative;

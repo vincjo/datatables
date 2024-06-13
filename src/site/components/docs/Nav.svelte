@@ -11,7 +11,7 @@
     <section class="thin-scrollbar">
         {#each table.rows as item}
             <h1 class="flex">
-                <!-- <i class="icon">{@html item.icon ?? ''}</i> -->
+                <i class="icon">{@html item.icon ?? ''}</i>
                 {item.title}
             </h1>
             {#each item.links as link}
@@ -51,7 +51,7 @@
     h1 {
         font-weight: bold;
         margin-top: 16px;
-        font-size: 17px;
+        font-size: 18px;
         margin-bottom: 0;
         color: var(--font);
         font-family: Archivo;
@@ -62,7 +62,7 @@
         color: var(--font-grey);
         margin-top: 1px;
         margin-right: 8px;
-        padding: 3px 12px;
+        padding: 3px 12px 3px 28px;
         border-radius: 4px;
         transition: background, 0.2s;
     }
@@ -75,12 +75,12 @@
         font-weight: bold;
         background: var(--primary-lighten-1)
     }
-    /* i.icon {
+    i.icon {
         color: var(--font-grey);
         width: 24px;
         height: 24px;
         margin-right: 4px;
-    } */
+    }
     @media (max-width: 800px) {
         nav {
             display: none;

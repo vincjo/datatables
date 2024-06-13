@@ -1,5 +1,6 @@
 <script lang="ts">
     import Nav from './Nav.svelte'
+    import MobileNav from './Nav_Mobile.svelte'
     import { url } from 'gros/page'
     import type { Snippet } from 'svelte'
 
@@ -12,6 +13,7 @@
 </script>
 
 <Nav {nav}/>
+<MobileNav {nav}/>
 <section  class="thin-scrollbar" bind:this={element}>
     <article class="md">
         {@render children()}
@@ -35,6 +37,7 @@
     @media (max-width: 800px) {
         section {
             left: 0;
+            top: 48px;
             padding: 32px 24px;
         }
     }

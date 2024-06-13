@@ -3,7 +3,7 @@
     import { page } from '$app/stores'
     import { slide } from 'svelte/transition'
 
-    let { data = [], key }: { data?: string[], key: string } = $props()
+    let { data = [], key, close = () => { return } }: { data?: string[], key: string, close?: () => void } = $props()
 
     let active = $state(true)
 </script>
@@ -17,7 +17,7 @@
     {#if active}
         <ul transition:slide={{ duration: 200 }}>
             {#each data as item}
-                <a href="{site.getPath(`/${site.mode}/api/${key}~${item}`)}">
+                <a href="{site.getPath(`/${site.mode}/api/${key}~${item}`)}" onclick={close}>
                     <li class:active={item === $page.params.slug?.split('~')[1]}>
                         <span>{item}</span>
                     </li>
