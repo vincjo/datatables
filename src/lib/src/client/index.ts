@@ -21,14 +21,14 @@ export type Filter<Row> = {
     identifier: string
     value?: string | number | boolean | symbol | Criterion[]
     check?: Check<Row>
-    key?: string
+    key?: string,
 }
 
 export type Sort<Row> = {
     callback?: (row: Row) => Row[keyof Row]
     identifier?: string
     direction?: 'asc' | 'desc'
-    key?: string
+    key?: string,
 }
 
 export type Check<Row> = (entry: Row[keyof Row], value: any) => boolean

@@ -19,13 +19,13 @@ export const parseField = (field: Field<any>, uid?: string) => {
         return {
             callback: (row: Row) => row[field],
             identifier,
-            key: field as string
+            key: field as string,
         }
     } else if (typeof field === 'function') {
         return {
             callback: field,
             identifier,
-            key: undefined
+            key: undefined,
         }
     }
     throw new Error(`Invalid field argument: ${String(field)}`)
@@ -90,7 +90,7 @@ export const deepEmphasize = (row: Row, callback: (row: Row) => any, value: stri
         .split('=>')[1]
         .replace(/\(\)/g, '')
         .replace(/\?/g, '')
-        .replace(/row\./g, '')
+        .split('.').splice(1).join('.')
         .trim()
     if (path.indexOf(' ') > -1) return row
     return deepSet(row, path, value)
