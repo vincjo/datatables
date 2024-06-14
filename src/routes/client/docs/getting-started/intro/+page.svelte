@@ -1,5 +1,5 @@
 <script>
-    import Client from './Client.svx'
+    import Content from './content.svx'
 </script>
 
-<Client />
+<Content/>

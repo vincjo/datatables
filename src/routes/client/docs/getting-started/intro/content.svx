@@ -5,7 +5,12 @@
 
 <Banner/>
 
-This part of the lib provides an API to dynamically interact with iterable data on the client-side: filters, pagination, sort, row selection…
+This part focuses on handling data processing on the client-side (i.e., in the browser).
+
+It includes features such as:
+- Pagination: dividing a large dataset into smaller chunks and displaying only a portion of it at a time.
+- Sorting: allowing users to sort the data by one or more columns.
+- Filtering: enabling users to filter the data based on specific conditions.
 
 ## Installation
 
