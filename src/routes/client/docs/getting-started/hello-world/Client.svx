@@ -4,6 +4,7 @@
 
 # Hello World
 
+Here is a preview of what the default datatable looks like, with almost all the features included.
 
 <Main/>
 

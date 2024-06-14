@@ -5,9 +5,10 @@
 
 <Banner/>
 
-## Client-side data processing
-
 This part of the lib provides an API to dynamically interact with iterable data on the client-side: filters, pagination, sort, row selection…
+
+## Installation
+
 
 <Install/>
 

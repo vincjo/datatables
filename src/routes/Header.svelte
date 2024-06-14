@@ -57,6 +57,7 @@
         justify-content: flex-start;
         padding: 0 32px;
         backdrop-filter: blur(4px);
+        z-index: 2;
     }
     .mobile {
         display: none;

@@ -3,8 +3,10 @@
 </script>
 
 <section>
-    <h1>Documentation for the next major 2.0</h1>
-    <h2>Work-in-progress implementation of Runes</h2>
+    <h1>svelte simple datatables</h1>
+    <h2>A powerful toolkit for building datatable components.</h2>
+    <!-- <h2><b>{site.mode}</b>-side data processing</h2> -->
+    <p>Streamline your data workflow with a robust API providing advanced features while reducing code complexity.</p>
     <article class="flex">
         <aside onmouseenter={() => site.setMode('client')} class="flex" class:active={site.mode === 'client'}>
             <svg width="80px" height="80px" viewBox="0 0 24 24"><path fill="currentColor" d="M1 18.77v-1h3.616V17q-.691 0-1.153-.462T3 15.385v-8.77q0-.69.463-1.152T4.615 5h14.77q.69 0 1.152.463T21 6.615v8.77q0 .69-.463 1.153T19.385 17v.77H23v1zM4.616 16h14.769q.269 0 .442-.173t.173-.442v-8.77q0-.269-.173-.442T19.385 6H4.615q-.269 0-.442.173T4 6.615v8.77q0 .269.173.442t.443.173M4 16V6z"/></svg>
@@ -33,19 +35,34 @@
 
 <style>
     h1 {
-        font-size: 40px;
+        font-size: 64px;
         margin-bottom: 0;
         line-height: 48px;
+        font-weight: 400;
+        color: var(--font);
+        font-family: Archivo;
+        letter-spacing: 0;
+        margin-bottom: 8px;
+        line-height: 64px;
     }
     h2 {
-        font-size: 24px;
+        font-size: 30px;
         font-weight: normal;
-        max-width: 600px;
+        margin: 0 0 24px 0;
+        font-family: Archivo;
+        color: var(--primary);
+        line-height: 36px;
+    }
+    p {
+        color: var(--font-grey);
+        font-size: 22px;
+        font-family: Inter;
+        max-width: 480px;
     }
     section {
-        position: relative;
         overflow-y: auto;
-        padding: 0 32px 96px 0;
+        background: var(--bg-gradient);
+        min-height: calc(100vh - 56px);
     }
     article {
         flex-wrap: wrap;
@@ -99,5 +116,9 @@
         section {
             padding: 0 16px;
         }
+        article {
+            display: none;
+        } 
     }
+    
 </style>

@@ -1,22 +1,12 @@
 <script lang="ts">
     import { site, Logo } from '$site'
-
-    let color = $derived.by(() => {
-        if (site.mode === 'client') {
-            return 'c2185b'
-        }
-        return '006990'
-    })
 </script>
 
 <section>
-    <Logo height="92px"/>
+    <Logo height="80px"/>
     <aside>
         <h1>svelte simple datatables</h1>
-        <p>A toolkit for creating datatable components with Svelte</p>
-        <div>
-            <img src="https://img.shields.io/badge/v2-runes-v2?color=%23{color}" alt="any text"/>
-        </div>
+        <p>For <b>{site.mode}-side</b> data processing</p>
     </aside>
 </section>
 
@@ -32,30 +22,25 @@
         margin-left: 20px;
     }
     h1 {
-        font-size: 32px;
+        font-size: 36px;
         font-family: Archivo;
-        line-height: 32px;
+        line-height: 34px;
         text-align: left;
         font-weight: 400;
         margin: 0;
         color: var(--font);
-        letter-spacing: 0.01em;
-    }
-    img {
-        height: 24px;
-        max-width: 80px;
-        margin: 0 16px 0 0;
+        letter-spacing: 0;
     }
     p {
-        color: var(--font-grey);
+        color: var(--primary);
+        font-family: Archivo;
         margin: 0;
         padding: 0;
         line-height: 16px;
-        font-size: 16px;
+        font-size: 26px;
+        line-height: 28px;
         margin: 8px 0;
-    }
-    div img {
-        width: 96px;
+        font-family: Archivo;
     }
 
     @media (max-width: 800px) {

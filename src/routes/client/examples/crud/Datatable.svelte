@@ -71,10 +71,11 @@
         margin: 0 auto;
         border: 1px solid var(--grey);
         border-radius: 16px;
-        padding: 16px 24px 16px 24px;
+        padding: 16px 0 4px 0;
     }
     section {
         height: 400px;
+        border-radius: 16px;
     }
     section :global(footer) {
         border-top: 1px solid var(--grey);
@@ -94,8 +95,9 @@
         color: var(--primary);
     }
     button.create {
-        margin: 8px;
+        margin: 0px 16px 16px 16px;
         border-radius: 8px;
+        background: var(--bg);
     }
     button.create i {
         margin: 0 8px 0 0px;

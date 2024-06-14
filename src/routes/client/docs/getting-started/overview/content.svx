@@ -1,0 +1,34 @@
+
+# Overview
+
+The entry point is an instance of `TableHandler`. This class is responsible for handling all the data processing operations.
+
+```ts
+import { TableHandler } from '@vincjo/datatables'
+
+const table = new TableHandler(yourDataHere, { rowsPerPage: 10 })
+```
+
+The library provides a set of pre-built components that you can use to quickly create your data table.
+
+```ts
+import { Datatable, Search, RowsPerPage, RowCount, Pagination, } from '@vincjo/datatables'
+```
+
+```svelte
+<Search {table}>
+<RowsPerPage {table}/>
+
+<Datatable {table}>
+    <table>
+        [...]
+    </table>
+</Datatable>
+
+<RowCount {table}>
+<Pagination {table}/>
+```
+
+The pre-built components bring specific design choices, and may not respond to your customization requirements. They are not intended to be a fully customizable solution, but rather a starting point.
+
+The documentation shows the absolute minimum code required to get each feature up and running. 
