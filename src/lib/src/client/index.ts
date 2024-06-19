@@ -10,7 +10,7 @@ export {
     ThFilter,
     Pagination,
     RowCount,
-} from '$lib/shared'
+} from '$lib/src/shared'
 
 export type Row = { [key: string]: any  }
 

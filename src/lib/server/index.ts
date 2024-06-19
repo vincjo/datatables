@@ -1,14 +1,7 @@
-export { 
-    TableHandler,
-    type Row,
-    type State,
-    type Filter,
-    type Sort,
-    type ViewColumn,
-    type Internationalization,
-}  from '$lib/src/server'
-
 export {
+    // class:
+    TableHandler,
+    // components:
     Datatable,
     Search,
     RowsPerPage,
@@ -17,5 +10,13 @@ export {
     ThFilter,
     Pagination,
     RowCount,
-} from '$lib/shared'
+    // types:
+    type Row,
+    type State,
+    type Filter,
+    type Sort,
+    type ViewColumn,
+    type Internationalization,
+}  from '$lib/src/server'
+
 
