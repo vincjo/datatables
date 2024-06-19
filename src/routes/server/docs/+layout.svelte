@@ -22,6 +22,11 @@
     ]
 </script>
 
+<svelte:head>
+    <title>svelte simple datatables - docs</title>
+    <meta name="description" content="Documentation for server-side data processing">
+</svelte:head>
+
 <Layout {nav}>
     {@render children()}
 </Layout>

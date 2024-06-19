@@ -89,6 +89,11 @@
     ]
 </script>
 
+<svelte:head>
+    <title>svelte simple datatables - docs</title>
+    <meta name="description" content="Documentation for client-side data processing">
+</svelte:head>
+
 <Layout {nav}>
     {@render children()}
 </Layout>

@@ -4,6 +4,10 @@
     let { data, children } = $props()
 </script>
 
+<svelte:head>
+    <title>svelte simple datatables - api</title>
+    <meta name="description" content="API documentation for svelte simple datatables">
+</svelte:head>
 
 <Nav nav={data.nav}/>
 <MobibleNav nav={data.nav}/>

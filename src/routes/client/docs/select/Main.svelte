@@ -32,7 +32,7 @@
                         <td>
                             <button class="btn" type="button" onclick={() => table.select(row.id)}>
                                 <i class="micon">{table.selected.includes(row.id) ? 'check_box' : 'check_box_outline_blank'}</i>
-                                Select row
+                                Select me
                             </button>
                         </td>
                         <td>{row.id}</td>

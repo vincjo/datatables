@@ -2,6 +2,12 @@
     import { site } from '$site'
 </script>
 
+
+<svelte:head>
+    <title>svelte simple datatables</title>
+    <meta name="description" content="A powerful toolkit for building datatable components.">
+</svelte:head>
+
 <section>
     <h1>svelte simple datatables</h1>
     <h2>A powerful toolkit for building datatable components.</h2>
