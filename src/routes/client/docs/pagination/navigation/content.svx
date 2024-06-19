@@ -1,7 +1,7 @@
 
 # Navigation
 
-### Go to the page number 5
+### Go to any page number
 ```ts
 table.setPage(5)
 ```
