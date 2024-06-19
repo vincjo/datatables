@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TableHandlerLike } from '$lib/shared'
+    import type { TableHandlerLike } from '$lib/src/shared'
 
     type T = $$Generic<Row>
     let { table, selection = false }: { table: TableHandlerLike<T>, selection?: boolean } = $props()

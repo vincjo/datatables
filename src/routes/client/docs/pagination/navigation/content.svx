@@ -1,0 +1,23 @@
+
+# Navigation
+
+### Go to the page number 5
+```ts
+table.setPage(5)
+```
+
+### Go to the previous page
+```ts
+table.setPage('previous')
+```
+
+### Go to the next page
+```ts
+table.setPage('next')
+```
+
+### Go to the last page
+```ts
+table.setPage('last')
+```
+

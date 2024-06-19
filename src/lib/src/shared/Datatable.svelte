@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Snippet } from 'svelte'
-    import { type TableHandlerLike, Search, RowsPerPage, RowCount, Pagination } from '$lib/shared'
+    import { type TableHandlerLike, Search, RowsPerPage, RowCount, Pagination } from '$lib/src/shared'
     type T = $$Generic<Row>
     type Props = {
         table: TableHandlerLike<T>,

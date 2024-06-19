@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TableHandlerLike, FieldLike } from '$lib/shared'
+    import type { TableHandlerLike, FieldLike } from '$lib/src/shared'
     import type { Check } from '$lib/src/client'
 
     type T = $$Generic<Row>

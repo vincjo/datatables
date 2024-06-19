@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TableHandlerLike, FieldLike, Row } from '$lib/shared'
+    import type { TableHandlerLike, FieldLike, Row } from '$lib/src/shared'
     import type { Snippet } from 'svelte'
 
     type T = $$Generic<Row>

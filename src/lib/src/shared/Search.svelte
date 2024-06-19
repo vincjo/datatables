@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TableHandlerLike } from '$lib/shared'
+    import type { TableHandlerLike } from '$lib/src/shared'
     type T = $$Generic<Row>
     let { table }: { table: TableHandlerLike<T> } = $props()
     const search = table.createSearch()
