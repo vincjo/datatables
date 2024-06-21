@@ -70,8 +70,6 @@ export default class SortHandler<Row>
             else return String(b).localeCompare(String(a), locales, options)
         })
         this.save({ identifier, callback, direction: 'desc' })
-        this.table.setPage(1)
-        this.table['event'].dispatch('change')
     }
 
     public apply() 
@@ -104,5 +102,11 @@ export default class SortHandler<Row>
         else {
             this.backup = [...this.backup, sort]
         }
+    }
+
+    public dispatch()
+    {
+        this.table.setPage(1)
+        this.table['event'].dispatch('change')
     }
 }

@@ -45,7 +45,7 @@ export const match = (
             return match(entry[k], value, compare)
         })
     }
-    else if (Array.isArray(entry))
+    // else if (Array.isArray(entry))
     if (!compare) return check.isLike(entry, value)
     return compare(entry, value)
 }

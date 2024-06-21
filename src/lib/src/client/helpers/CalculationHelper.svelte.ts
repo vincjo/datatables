@@ -60,10 +60,5 @@ export default class CalcultationHelper<Row>
     private round(value: number)
     {
         return Number(value.toFixed(this.precision))
-        // if (this.precision === 0) {
-        //     return Math.round(value)
-        // }
-        // const denominator = Math.pow(10, this.precision)
-        // return Math.round( (value + Number.EPSILON) * denominator ) / denominator
     }
 }

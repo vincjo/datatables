@@ -14,7 +14,7 @@ export default class FilterHandler<Row>
         this.table = table
     }
 
-    public set(value: Value, field: Field<Row>, check: Check<Row> = null, uid?: string )
+    public set(value: Value, field: Field<Row>, check: Check<Row> = null, uid?: string)
     {
         const { callback, identifier, key } = parseField(field, uid)
         const filter = { value, identifier, callback, check, key }

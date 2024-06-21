@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "2.0.0-runes.20",
+    "version": "2.0.0-runes.21",
     "keywords": [
         "svelte sveltejs table tables datatable datatables"
     ],
@@ -29,22 +29,22 @@
     },
     "devDependencies": {
         "@rollup/plugin-replace": "^5.0.7",
-        "@sveltejs/adapter-node": "^5.0.0",
-        "@sveltejs/kit": "^2.5.10",
-        "@sveltejs/package": "^2.3.1",
-        "@sveltejs/vite-plugin-svelte": "^3.1.1",
-        "@types/node": "^18.15.11",
+        "@sveltejs/adapter-node": "^5.2.0",
+        "@sveltejs/kit": "^2.5.17",
+        "@sveltejs/package": "^2.3.2",
+        "@sveltejs/vite-plugin-svelte": "^4.0.0-next.3",
+        "@types/node": "^20.14.7",
         "dotenv": "^16.4.5",
-        "gros": "^1.0.0-runes.11",
+        "gros": "^1.0.0-runes.12",
         "mdsvex": "^0.11.2",
         "prism-svelte": "^0.5.0",
         "prismjs": "^1.29.0",
-        "svelte": "^5.0.0-next.154",
-        "svelte-check": "^3.8.0",
-        "svelte-preprocess": "^5.0.3",
-        "tslib": "^2.3.1",
-        "typescript": "^5.0.0",
-        "vite": "^5.0.0"
+        "svelte": "^5.0.0-next.160",
+        "svelte-check": "^3.8.1",
+        "svelte-preprocess": "^6.0.1",
+        "tslib": "^2.6.3",
+        "typescript": "^5.5.2",
+        "vite": "^5.3.1"
     },
     "peerDependencies": {
         "svelte": "^5.0.0-next.120"

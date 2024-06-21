@@ -1,6 +1,5 @@
 <script lang="ts">
     import type { TableHandler } from '$lib/src/client'
-    // import Dropdown from './Dropdown.svelte'
     import { Dropdown } from 'gros/dropdown'
 
     let { table }: { table: TableHandler } = $props()
