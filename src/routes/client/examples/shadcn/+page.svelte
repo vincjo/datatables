@@ -41,7 +41,7 @@
         width: 48px;
         height: 48px;
     }
-    section :global(aside.container) {
+    section :global(footer.container) {
         border-top: none !important;
     }
 </style>
