@@ -1,0 +1,55 @@
+<script lang="ts">
+    import { TableHandler } from '$lib/src/client'
+    import data from '$site/data/data'
+    const table = new TableHandler(data, { rowsPerPage: 10 })
+    table.setPage(5)
+</script>
+
+
+<aside class="bg-darken">
+    <button class="nav" onclick={() => table.setPage(1)}>&#8676; First page</button>
+    <button class="nav" onclick={() => table.setPage('previous')}>&larr; Previous</button>
+    {#each table.pagesWithEllipsis as page}
+        <button class:active={page === table.currentPage} onclick={() => table.setPage(page)}>
+            {page ?? '...'}
+        </button>
+    {/each}
+    <button class="nav" onclick={() => table.setPage('next')}>Next &rarr;</button>
+    <button class="nav" onclick={() => table.setPage('last')}>Last page &#8677;</button>
+</aside>
+
+
+<style>
+    button {
+        width: 32px;
+        height: 32px;
+        background: var(--grey);
+        color: var(--font);
+        margin: 0 2px;
+        border: 3px solid transparent;
+        transition: all, 0.2s;
+    }
+    button:hover {
+        background: var(--grey-lighten);
+    }
+    aside {
+        border: 1px solid var(--grey);
+        border-radius: 8px;
+        padding: 24px;
+    }
+    button.active {
+        background: var(--secondary);
+        color: #eee;
+        font-weight: bold;
+    }
+    button.nav {
+        width: fit-content;
+        padding: 0 4px;
+        margin: 0;
+        background: var(--primary);
+        color: #eee;
+    }
+    button.nav:hover {
+        background: var(--primary-darken);
+    }
+</style>
