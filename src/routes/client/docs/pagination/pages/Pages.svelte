@@ -17,7 +17,7 @@
         width: 32px;
         background: var(--grey);
         color: var(--font);
-        margin: 0 2px;
+        margin: 2px;
         transition: all, 0.2s;
     }
     button:hover {

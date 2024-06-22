@@ -7,15 +7,15 @@
 
 
 <aside class="bg-darken">
-    <button class="nav" onclick={() => table.setPage(1)}>&#8676; First page</button>
-    <button class="nav" onclick={() => table.setPage('previous')}>&larr; Previous</button>
+    <button class="nav" onclick={() => table.setPage(1)}>&#8676; <span>First page</span></button>
+    <button class="nav" onclick={() => table.setPage('previous')}>&larr; <span>Previous</span></button>
     {#each table.pagesWithEllipsis as page}
         <button class:active={page === table.currentPage} onclick={() => table.setPage(page)}>
             {page ?? '...'}
         </button>
     {/each}
-    <button class="nav" onclick={() => table.setPage('next')}>Next &rarr;</button>
-    <button class="nav" onclick={() => table.setPage('last')}>Last page &#8677;</button>
+    <button class="nav" onclick={() => table.setPage('next')}><span>Next</span> &rarr;</button>
+    <button class="nav" onclick={() => table.setPage('last')}><span>Last page</span> &#8677;</button>
 </aside>
 
 
@@ -25,7 +25,7 @@
         height: 32px;
         background: var(--grey);
         color: var(--font);
-        margin: 0 2px;
+        margin: 2px;
         border: 3px solid transparent;
         transition: all, 0.2s;
     }
@@ -51,5 +51,16 @@
     }
     button.nav:hover {
         background: var(--primary-darken);
+    }
+    @media (max-width: 600px) {
+        button span {
+            display: none;
+        }
+        button {
+            width: 22px;
+        }
+        aside {
+            padding: 8px 4px;
+        }
     }
 </style>
