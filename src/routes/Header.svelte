@@ -1,6 +1,7 @@
 <script lang="ts">
     import { site, Logo } from '$site'
     import Github       from './Header_Github.svelte'
+    import Version      from './Header_Version.svelte'
     import Theme        from './Header_Theme.svelte'
     import Mode         from './Header_Mode.svelte'
     import MobileNav    from './Header_MobileNav.svelte'
@@ -30,6 +31,7 @@
             <Mode/>
             <Theme/>
             <Github/>
+            <Version/>
         </aside>
     </nav>
     <nav class="mobile flex">

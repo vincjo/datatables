@@ -21,6 +21,10 @@
             {@html checked}
             <span>No dependency</span>
         </li>
+        <!-- <li>
+            {@html checked}
+            <span>&#5835; &#5828; &#5796; &#5815; &#5792; &#5872;</span>
+        </li> -->
     </ul>
 </section>
 

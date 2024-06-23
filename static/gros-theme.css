@@ -24,7 +24,7 @@
     --bg: #fff;
     --font: #424242;
     --font-grey: #757575;
-    --bg-gradient: linear-gradient(180deg, #d3dee6 0%, #feffff 40%, rgba(255,255,255,1) 100%);
+    --bg-gradient: linear-gradient(180deg, #e0e8ee 0%, #feffff 40%, #fff 100%);
     --bg-code: #f5f7ff;
 }
 .thin-scrollbar::-webkit-scrollbar, pre::-webkit-scrollbar {
