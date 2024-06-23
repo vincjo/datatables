@@ -1,9 +1,0 @@
-
-# Freeze columns
-
-```ts
-table.createView([
-    { index: 0, isFrozen: true },
-    { index: 1, isFrozen: true },
-])
-```

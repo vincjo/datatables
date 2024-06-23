@@ -1,1 +1,0 @@
-{"name":"getView","text":"getView(): ViewHelper","returnType":"ViewHelper","args":[],"ast":{"name":"getView","kind":"Method","signatures":[{"return":{"type":{"text":"ViewHelper","kind":"Reference"}},"line":151}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

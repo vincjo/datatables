@@ -1,9 +1,0 @@
-<script>
-    import Main from './Main.svelte'
-</script>
-
-
-# Tree structure
-
-<Main/>
-

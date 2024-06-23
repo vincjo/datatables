@@ -1,1 +1,0 @@
-{"name":"events","text":"type any","type":"any","ast":{"name":"events","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":7,"default":"new EventsHandler()"},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

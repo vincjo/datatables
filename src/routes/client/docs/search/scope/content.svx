@@ -1,8 +1,0 @@
-
-# Search scope
-
-Additionally, you can limit the scope by defining fields where the search is applied:
-
-```ts
-const search = table.createSearch(['id', 'last_name'])
-```

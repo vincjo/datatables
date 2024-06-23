@@ -1,88 +1,593 @@
-@font-face {
-    font-family: 'JetBrains';
-    src: url('./fonts/JetBrainsMono-VariableFont_wght.ttf');
-}
-@font-face{
-    font-family:Inter;
-    src:url('./fonts/Inter/static/Inter-Regular.ttf')
-}
-@font-face{
-    font-family:Archivo;
-    src:url('./fonts/Archivo.ttf')
-}
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box;}
+*{
+    --primary:#b71540;
+    --color:#444;
+    --label:#38ada9;
+    --hljs: #171c19;
 }
 
-#svelte-inspector-toggle{z-index:999999 !important;}
-pre {
+
+    /* 40b3ff     ff3e00    676778 */
+
+.hljs{background:var(--hljs);}
+.hljs::-webkit-scrollbar {width:8px;height:8px;}
+.hljs::-webkit-scrollbar-track {background:#3d433f;}
+.hljs::-webkit-scrollbar-thumb {background:#000;}
+.hljs::-webkit-scrollbar-thumb:hover {background: #111411;}
+.hljs::-webkit-scrollbar-track-piece:start {top:40px;}
+body {margin: 0; font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; font-size: 14px; line-height: 1.5;color: #333;}
+body > * {scrollbar-width:thin}
+.code{position:relative;overflow:auto;max-width:880px;max-height:640px;}
+.code::-webkit-scrollbar {width:8px;height:8px;}
+.code::-webkit-scrollbar-track {background:#f5f5f5;}
+.code::-webkit-scrollbar-thumb {background:#e0e0e0;}
+.code::-webkit-scrollbar-thumb:hover {background: #bdbdbd;}
+.code::-webkit-scrollbar-track-piece:start {top:40px;}
+
+a{color:inherit;}
+
+pre{margin:0 !important;}
+
+.i18n-form .text-field.i18n{width:256px !important;margin-right:32px !important;}
+.i18n-form .text-field.i18n.small{width:200px  !important;}
+.i18n-form .text-field.i18n.tall{width:368px  !important;}
+
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {-webkit-box-shadow: 0 2px 2px 0 rgba(189,189,189, 0.14), 0 3px 1px -2px rgba(189,189,189, 0.12), 0 1px 5px 0 rgba(189,189,189, 0.2);box-shadow: 0 2px 2px 0 rgba(189,189,189, 0.14), 0 3px 1px -2px rgba(189,189,189, 0.12), 0 1px 5px 0 rgba(189,189,189, 0.2);}
+.z-depth-1-half, .btn:hover, .btn-large:hover, .btn-small:hover, .btn-floating:hover {-webkit-box-shadow: 0 3px 3px 0 rgba(189,189,189, 0.14), 0 1px 7px 0 rgba(189,189,189, 0.12), 0 3px 1px -1px rgba(189,189,189, 0.2);box-shadow: 0 3px 3px 0 rgba(189,189,189, 0.14), 0 1px 7px 0 rgba(189,189,189, 0.12), 0 3px 1px -1px rgba(189,189,189, 0.2);}
+.z-depth-2 {-webkit-box-shadow: 0 4px 5px 0 rgba(189,189,189, 0.14), 0 1px 10px 0 rgba(189,189,189, 0.12), 0 2px 4px -1px rgba(189,189,189, 0.3);box-shadow: 0 4px 5px 0 rgba(189,189,189, 0.14), 0 1px 10px 0 rgba(189,189,189, 0.12), 0 2px 4px -1px rgba(189,189,189, 0.3);}
+.z-depth-3 {-webkit-box-shadow: 0 8px 17px 2px rgba(189,189,189, 0.14), 0 3px 14px 2px rgba(189,189,189, 0.12), 0 5px 5px -3px rgba(189,189,189, 0.2);box-shadow: 0 8px 17px 2px rgba(189,189,189, 0.14), 0 3px 14px 2px rgba(189,189,189, 0.12), 0 5px 5px -3px rgba(189,189,189, 0.2);}
+.z-depth-4 {-webkit-box-shadow: 0 16px 24px 2px rgba(189,189,189, 0.14), 0 6px 30px 5px rgba(189,189,189, 0.12), 0 8px 10px -7px rgba(189,189,189, 0.2);box-shadow: 0 16px 24px 2px rgba(189,189,189, 0.14), 0 6px 30px 5px rgba(189,189,189, 0.12), 0 8px 10px -7px rgba(189,189,189, 0.2);}
+.z-depth-5, .modal {-webkit-box-shadow: 0 24px 38px 3px rgba(189,189,189, 0.14), 0 9px 46px 8px rgba(189,189,189, 0.12), 0 11px 15px -7px rgba(189,189,189, 0.2);box-shadow: 0 24px 38px 3px rgba(189,189,189, 0.14), 0 9px 46px 8px rgba(189,189,189, 0.12), 0 11px 15px -7px rgba(189,189,189, 0.2);}
+
+
+.default {
+    background: #fff;
+}
+
+.default .dt-search {
+    margin-left: 16px
+}
+.default .dt-search input {
+    border: 1px solid #e0e0e0;
     border-radius: 4px;
-}
-
-
-body {
+    outline: none;
+    padding: 0 8px;
+    line-height: 24px;
     margin: 0;
-    font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell,
-        Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--font);
+    height: 24px;
+    background: transparent;
+    width: 176px;
+    transition: all, 0.1s;
 }
-body > * {
+.default .dt-search input:focus {
+    border: 2px solid #e0e0e0;
+}
+.default .dt-search input::placeholder {
+    color: #9e9e9e;
+    line-height: 24px;
+}
+
+.default thead:not([style*='hidden']) th {
+    padding: 8px 0px 8px 16px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+}
+.default .dt-table th.sortable {
+    cursor: pointer;
+}
+.default .dt-table th.sortable span {
+    padding-right: 16px;
+    position: relative;
+}
+.default .dt-table th.sortable span:before,
+.default .dt-table th.sortable span:after {
+    border: 4px solid transparent;
+    content: '';
+    display: block;
+    height: 0;
+    right: 0;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+.default .dt-table th.sortable span:before {
+    border-bottom-color: #e0e0e0;
+    margin-top: -9px;
+}
+.default .dt-table th.sortable span:after {
+    border-top-color: #e0e0e0;
+    margin-top: 1px;
+}
+.default .dt-table th.sortable.asc:not(.desc) span:before {
+    border-bottom-color: #9e9e9e;
+}
+.default .dt-table th.sortable.desc:not(.asc) span:after {
+    border-top-color: #9e9e9e;
+}
+.default .dt-table th.filter {
+    padding: 0;
+    margin: 0;
+    background-image: none;
+    border: 1px solid #fafafa;
+}
+.default .dt-table th.filter input {
+    background: #fff;
+    height: 24px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    outline: none;
+    border-radius: 0;
+    font-size: 14px;
+}
+.default .dt-table th.filter input::placeholder {
+    color: #bdbdbd;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.default .dt-table {
+    border-bottom: 1px solid #e0e0e0;
     scrollbar-width: thin;
 }
-
-a {
-    color: inherit;
+.default .dt-table::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.default .dt-table::-webkit-scrollbar-track {
+    background: #f5f5f5;
+}
+.default .dt-table::-webkit-scrollbar-thumb {
+    background: #c2c2c2;
+}
+.default .dt-table::-webkit-scrollbar-thumb:hover {
+    background: #9e9e9e;
+}
+.default .dt-table::-webkit-scrollbar-track-piece:start {
+    top: 40px;
+}
+.default .dt-table table {
+    margin-bottom: 6px;
 }
 
-/* pre{margin:0 !important;} */
-
-.i18n-form .text-field.i18n {
-    width: 256px !important;
-    margin-right: 32px !important;
-}
-.i18n-form .text-field.i18n.small {
-    width: 200px !important;
-}
-.i18n-form .text-field.i18n.tall {
-    width: 368px !important;
+.default .dt-pagination {
+    background: #fff;
 }
 
+.default .dt-pagination-buttons {
+    height: 32px;
+    margin-right: 16px;
+}
+.default .dt-pagination-buttons button {
+    background: inherit;
+    height: 32px;
+    width: 32px;
+    color: #616161;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+    transition: all, .2s;
+    line-height: 32px;
+    border: 1px solid #e0e0e0;
+    border-right: none;
+    outline: none;
+}
+.default .dt-pagination-buttons button:first-child {
+    border-radius: 4px 0 0 4px;
+}
+.default .dt-pagination-buttons button:last-child {
+    border-right: 1px solid #e0e0e0;
+    border-radius: 0 4px 4px 0;
+}
+.default .dt-pagination-buttons button:not(.active):hover {
+    background: #eee;
+    cursor: pointer;
+}
+.default .dt-pagination-buttons button.text {
+    width: auto;
+    min-width: 70px;
+    cursor: pointer;
+}
+.default .dt-pagination-buttons button.ellipse:hover {
+    background: inherit;
+    cursor: default;
+}
+.default .dt-pagination-buttons button.active {
+    background: #eee;
+    font-weight: bold;
+}
+.default .dt-pagination-buttons button.disabled:hover {
+    background: inherit;
+    cursor: default;
+}
+.default .dt-pagination-buttons.mobile button.disabled {
+    color: #bdbdbd;
+}
+.default .dt-pagination-buttons.mobile button {
+    font-weight: bold;
+}
 
-.md h1, .md h2, .md h3 {
-    /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
-    font-family: Archivo;
-    letter-spacing: 0.01em;
-    font-weight: 200;
-}
-.md h1 {
-    margin-top: 32px;
-    color: var(--font);
-    font-size: 40px;
-    margin-bottom: 16px;
-    line-height: 44px;
-}
-.md h2 {
-    margin-top: 32px;
-    color: var(--font);
-    font-size: 32px;
-    line-height: 38px;
-}
-.md h3 {
-    font-size: 24px;
-    margin-bottom: 8px;
-    color: var(--font);
-}
-.md p, ul {
-    font-size: 17px;
-    color: var(--font-grey);
+.default .dt-pagination-rowcount {
+    color: #616161;
+    line-height: 32px;
+    margin-left: 16px;
+    font-size: 14px;
 }
 
-.md p code, .md li code {
-    background: var(--secondary-lighten-1);
-    padding: 2px 4px;
-    color: var(--secondary);
-    border: 1px solid var(--secondary-lighten-1);
+
+
+
+
+
+.dark {
+    background: #263238;
+}
+
+.dark .dt-search {
+    margin-left: 16px
+}
+.dark .dt-search input {
+    border: 1px solid #37474f;
     border-radius: 4px;
+    outline: none;
+    padding: 0 8px;
+    line-height: 24px;
+    margin: 0;
+    height: 24px;
+    background: #455a64;
+    width: 176px;
+    transition: all, 0.1s;
+}
+.dark .dt-search input:focus {
+    border: 2px solid #546e7a;
+}
+.dark .dt-search input::placeholder {
+    color: #eee;
+    line-height: 24px;
+}
+
+.dark thead:not([style*='hidden']) th {
+    padding: 8px 0px 8px 16px;
+    color: #eee;
+    text-align: center;
+    border-bottom: 1px solid #546e7a;
+    background: #263238;
+}
+.dark .dt-table th.sortable {
+    cursor: pointer;
+}
+.dark .dt-table th.sortable span {
+    padding-right: 16px;
+    position: relative;
+}
+.dark .dt-table th.sortable span:before,
+.dark .dt-table th.sortable span:after {
+    border: 4px solid transparent;
+    content: '';
+    display: block;
+    height: 0;
+    right: 0;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+.dark .dt-table th.sortable span:before {
+    border-bottom-color: #546e7a;
+    margin-top: -9px;
+}
+.dark .dt-table th.sortable span:after {
+    border-top-color: #546e7a;
+    margin-top: 1px;
+}
+.dark .dt-table th.sortable.asc:not(.desc) span:before {
+    border-bottom-color: #eee;
+}
+.dark .dt-table th.sortable.desc:not(.asc) span:after {
+    border-top-color: #eee;
+}
+.dark .dt-table th.filter {
+    padding: 0;
+    margin: 0;
+    background-image: none;
+    border: 1px solid #37474f;
+}
+.dark .dt-table th.filter input {
+    background: #263238;
+    height: 24px;
+    border: none;
+    border-bottom: 1px solid #546e7a;
+    text-align: center;
+    outline: none;
+    border-radius: 0;
+    font-size: 14px;
+    color: #eee;
+}
+.dark .dt-table th.filter input::placeholder {
+    color: #607d8b;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.dark .dt-table {
+    border-bottom: 1px solid #546e7a;
+    scrollbar-width: thin;
+}
+.dark .dt-table::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.dark .dt-table::-webkit-scrollbar-track {
+    background: #000a12;
+}
+.dark .dt-table::-webkit-scrollbar-thumb {
+    background: #455a64;
+}
+.dark .dt-table::-webkit-scrollbar-thumb:hover {
+    background: #546e7a;
+}
+.dark .dt-table::-webkit-scrollbar-track-piece:start {
+    top: 40px;
+}
+.dark .dt-table table {
+    margin-bottom: 6px;
+    color: #eee;
+}
+
+.dark .dt-pagination {
+    background: #263238;
+}
+
+.dark .dt-pagination-buttons {
+    height: 32px;
+    margin-right: 16px;
+}
+.dark .dt-pagination-buttons button {
+    background: inherit;
+    height: 32px;
+    width: 32px;
+    color: #eee;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+    transition: all, .2s;
+    line-height: 32px;
+    border: 1px solid #37474f;
+    border-right: none;
+    outline: none;
+}
+.dark .dt-pagination-buttons button:first-child {
+    border-radius: 4px 0 0 4px;
+}
+.dark .dt-pagination-buttons button:last-child {
+    border-right: 1px solid #37474f;
+    border-radius: 0 4px 4px 0;
+}
+.dark .dt-pagination-buttons button:not(.active):hover {
+    background: #455a64;
+    cursor: pointer;
+}
+.dark .dt-pagination-buttons button.text {
+    width: auto;
+    min-width: 70px;
+    cursor: pointer;
+}
+.dark .dt-pagination-buttons button.ellipse:hover {
+    background: inherit;
+    cursor: default;
+}
+.dark .dt-pagination-buttons button.active {
+    background: #37474f;
+    font-weight: bold;
+}
+.dark .dt-pagination-buttons button.disabled:hover {
+    background: inherit;
+    cursor: default;
+}
+.dark .dt-pagination-buttons.mobile button.disabled {
+    color: #bdbdbd;
+}
+.dark .dt-pagination-buttons.mobile button {
+    font-weight: bold;
+}
+
+.dark .dt-pagination-rowcount {
+    color: #eee;
+    line-height: 32px;
+    margin-left: 16px;
+    font-size: 14px;
+}
+
+
+
+
+
+
+.custom {
+    background: #fff;
+}
+
+.custom .dt-search {
+    margin-right: 16px
+}
+.custom .dt-search input {
+    float: right;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    outline: none;
+    padding: 0 8px;
+    line-height: 24px;
+    margin: 0;
+    height: 24px;
+    background: transparent;
+    width: 176px;
+    transition: all, 0.1s;
+}
+.custom .dt-search input:focus {
+    border: 2px solid #bdbdbd;
+}
+.custom .dt-search input::placeholder {
+    color: #9e9e9e;
+    line-height: 24px;
+}
+
+.custom thead:not([style*='hidden']) th {
+    padding: 8px 0px 8px 16px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fff;
+}
+.custom .dt-table th.sortable {
+    cursor: pointer;
+}
+.custom .dt-table th.sortable span {
+    padding-right: 16px;
+    position: relative;
+}
+.custom .dt-table th.sortable span:before,
+.custom .dt-table th.sortable span:after {
+    border: 4px solid transparent;
+    content: '';
+    display: block;
+    height: 0;
+    right: 0;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+.custom .dt-table th.sortable span:before {
+    border-bottom-color: #bdbdbd;
+    margin-top: -9px;
+}
+.custom .dt-table th.sortable span:after {
+    border-top-color: #bdbdbd;
+    margin-top: 1px;
+}
+.custom .dt-table th.sortable.asc:not(.desc) span:before {
+    border-bottom-color: #616161;
+}
+.custom .dt-table th.sortable.desc:not(.asc) span:after {
+    border-top-color: #616161;
+}
+.custom .dt-table th.filter {
+    padding: 0;
+    margin: 0;
+    background-image: none;
+    border: 1px solid #fafafa;
+}
+.custom .dt-table th.filter input {
+    background: #fff;
+    height: 24px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    outline: none;
+    border-radius: 0;
+    font-size: 14px;
+}
+.custom .dt-table th.filter input::placeholder {
+    color: #bdbdbd;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.custom .dt-table {
+    border-bottom: 1px solid #bdbdbd;
+    scrollbar-width: thin;
+}
+.custom .dt-table::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.custom .dt-table::-webkit-scrollbar-track {
+    background: #f5f5f5;
+}
+.custom .dt-table::-webkit-scrollbar-thumb {
+    background: #c2c2c2;
+}
+.custom .dt-table::-webkit-scrollbar-thumb:hover {
+    background: #9e9e9e;
+}
+.custom .dt-table::-webkit-scrollbar-track-piece:start {
+    top: 40px;
+}
+.custom .dt-table table {
+    margin-bottom: 6px;
+}
+.custom .dt-table tbody tr {
+    transition: all, 0.3s;
+}
+.custom .dt-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+.custom .dt-table tbody tr:hover {
+    background: #eee;
+}
+
+.custom .dt-pagination {
+    background: #fff;
+    flex-direction: row-reverse;
+}
+
+.custom .dt-pagination-buttons {
+    height: 32px;
+    margin-left: 16px;
+}
+.custom .dt-pagination-buttons button {
+    background: #eee;
+    height: 32px;
+    width: 32px;
+    color: #424242;
+    font-size: 13px;
+    margin: 0 4px 0 0;
+    padding: 0;
+    transition: all, .2s;
+    line-height: 32px;
+    border: 1px solid #bdbdbd;
+    outline: none;
+    cursor: pointer;
+    border-radius:2px;
+}
+.custom .dt-pagination-buttons button:not(.text) {
+    border-radius:50%;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 4px 4px 0 0;
+}
+
+.custom .dt-pagination-buttons button:last-child {
+    border-right: 1px solid #bdbdbd;
+}
+.custom .dt-pagination-buttons button:not(.active):hover {
+    background: #fafafa;
+}
+.custom .dt-pagination-buttons button.text {
+    width: auto;
+    min-width: 70px;
+}
+.custom .dt-pagination-buttons button.ellipse:hover {
+    background: inherit;
+    cursor: default;
+}
+.custom .dt-pagination-buttons button.active {
+    background: #333;
+    color: #fafafa;
+    font-weight: bold;
+}
+.custom .dt-pagination-buttons button.disabled:hover {
+    cursor: default;
+}
+.custom .dt-pagination-buttons.mobile button.disabled {
+    color: #bdbdbd;
+}
+.custom .dt-pagination-buttons.mobile button {
+    font-weight: bold;
+}
+
+.custom .dt-pagination-rowcount {
+    color: #616161;
+    line-height: 32px;
+    margin-right: 16px;
+    font-size: 14px;
 }

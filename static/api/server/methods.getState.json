@@ -1,1 +1,0 @@
-{"name":"getState","text":"getState(): State","returnType":"State","args":[],"ast":{"name":"getState","kind":"Method","signatures":[{"return":{"type":{"text":"State","kind":"Reference"}},"line":34}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

@@ -1,1 +1,0 @@
-{"name":"search","text":"type $state<string>","type":"$state<string>","ast":{"name":"search","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":11,"default":"$state<string>('')"},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

@@ -1,1 +1,0 @@
-{"name":"clearFilters","text":"clearFilters(): void","returnType":"void","args":[],"ast":{"name":"clearFilters","kind":"Method","signatures":[{"return":{"type":{"text":"void","kind":"Intrinsic"}},"line":99}]},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}

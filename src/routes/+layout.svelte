@@ -1,45 +1,35 @@
 <script>
     import Header from './Header.svelte'
-    import ModalContainer from '$site/components/Modal_Container.svelte'
-    import { Loading } from 'gros/loading'
-    import { onMount } from 'svelte'
-    import { site } from '$site'
-
-    onMount(() => {
-        const theme = site.getTheme()
-        site.setTheme(theme)
-
-        const mode = site.getMode()
-        site.setMode(mode)
-    })
+    import Nav from './Nav.svelte'
 </script>
 
-
-<Loading process/>
-<ModalContainer/>
-
 <main>
-    <Header/>
+    <Nav />
+    <Header />
     <section>
-        <slot/>
+        <article>
+            <slot />
+        </article>
     </section>
 </main>
 
-
 <style>
-    main {
-        position: absolute;
-        top:0;left:0;bottom:0;right:0;
-        background: var(--bg);
-        color: var(--font);
-        transition: all, 0.4s;
-        /* background-image: var(--bg-image); */
-    }
     section {
         position: absolute;
-        top: 56px;
-        left: 0;
+        left: 240px;
         bottom: 0;
+        top: 0px;
         right: 0;
+        background-color: white;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        padding-bottom: 80px;
+        padding-left: 56px;
+        background: #fff;
+    }
+    article {
+        max-width: 960px;
+        padding-bottom: 80px;
     }
 </style>

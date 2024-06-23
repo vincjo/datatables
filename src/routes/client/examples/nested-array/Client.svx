@@ -1,8 +1,0 @@
-<script>
-    import Main from './Main.svelte'
-</script>
-
-
-# Search and filters handle nested objects
-
-<Main/>

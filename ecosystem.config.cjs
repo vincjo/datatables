@@ -1,13 +1,13 @@
 module.exports = {
     apps: [
         {
-            name: 'datatables-v2',
+            name: 'datatables-v0',
             script: './build/index.js',
             watch: false,
             max_restarts: 10,
             env: {
                 NODE_ENV: 'production',
-                PORT: 3011
+                PORT: 3009
             }
         }
     ],
@@ -15,9 +15,9 @@ module.exports = {
         production: {
             user: 'vincjo',
             host: ['vincjo.fr -p 625'],
-            ref: 'origin/runes',
+            ref: 'origin/v0',
             repo: 'git@github.com:vincjo/datatables.git',
-            path: '/home/vincjo/www/datatables-runes',
+            path: '/home/vincjo/www/datatables-v0',
             'post-deploy':
                 'npm install --force && npm run build && pm2 startOrRestart ecosystem.config.cjs --env production'
         }
