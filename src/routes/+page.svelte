@@ -1,5 +1,6 @@
 <script lang="ts">
     import { site } from '$site'
+    import Description from './Description.svelte'
 </script>
 
 
@@ -38,6 +39,7 @@
 
 </section>
 
+<Description/>
 
 <style>
     h1 {
@@ -126,5 +128,4 @@
             display: none;
         } 
     }
-    
 </style>
