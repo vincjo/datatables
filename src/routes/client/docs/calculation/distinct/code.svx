@@ -6,8 +6,7 @@
 
 ```ts
 const distinct = $derived.by(() => {
-    return table.createCalculation('columnName').distinct()
-                .sort((a, b) => (a.count < b.count ? 1 : -1))
+    return table.createCalculation('make').distinct({ sort: ['count', 'desc']})
 })
 ```
 ````svelte

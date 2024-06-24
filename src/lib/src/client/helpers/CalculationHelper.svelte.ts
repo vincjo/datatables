@@ -1,5 +1,5 @@
 import type { Field, TableHandler } from '$lib/src/client'
-import { parseField } from '$lib/src/client/utils'
+import { parseField, sort } from '$lib/src/client/utils'
 
 export default class CalcultationHelper<Row>
 {
@@ -13,11 +13,11 @@ export default class CalcultationHelper<Row>
         this.callback   = parseField(field).callback
     }
 
-    public distinct(): { value: string; count: number }[]
+    public distinct(params?: { sort: [key: 'value' | 'count', direction: 'asc' | 'desc'] }): { value: string; count: number }[]
     {
         const values = this.table.allRows.map(row => this.callback(row)) as any[]
 
-        const result: { [key: string ]: number } = values.reduce((acc, curr) => {
+        const aggregat: { [key: string ]: number } = values.reduce((acc, curr) => {
             if (Array.isArray(curr)) {
                 for (const item of curr) {
                     acc[item] = (acc[item] ?? 0) + 1
@@ -27,7 +27,15 @@ export default class CalcultationHelper<Row>
             acc[curr] = (acc[curr] ?? 0) + 1
             return acc
         }, {})
-        return Object.entries(result).map(([value, count]) => ({ value, count }))
+        const result = Object.entries(aggregat).map(([value, count]) => ({ value, count }))
+        if (params) {
+            const [key, direction] = params.sort
+            return result.sort((x, y) => {
+                const [a, b] = [x[key], y[key]]
+                return sort[direction](a, b)
+            })
+        }
+        return result
     }
 
     public avg(param?: { precision: number }): number

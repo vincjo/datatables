@@ -1,10 +1,10 @@
 {
     "name": "@vincjo/datatables",
-    "version": "2.0.0-runes.21",
+    "version": "2.0.0-runes.22",
     "keywords": [
-        "svelte sveltejs table tables datatable datatables"
+        "svelte sveltejs table tables datatable datatables filter headless sort selection"
     ],
-    "description": "A toolkit for creating datatable components with Svelte",
+    "description": "A powerful toolkit for building datatable components",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/vincjo/datatables.git"

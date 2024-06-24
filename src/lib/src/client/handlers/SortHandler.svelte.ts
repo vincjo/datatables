@@ -1,5 +1,5 @@
 import type { Sort, Field, TableHandler }   from '$lib/src/client'
-import { parseField, sortasc, sortdesc }    from '$lib/src/client/utils'
+import { parseField, sort }    from '$lib/src/client/utils'
 
 export type Params = {
     locales?: Intl.LocalesArgument,
@@ -39,7 +39,7 @@ export default class SortHandler<Row>
         this.table['sort'] = { identifier, callback, direction: 'asc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
-            return sortasc(a, b, locales, options)
+            return sort.asc(a, b, locales, options)
         })
         this.save({ identifier, callback, direction: 'asc' })
         this.table.setPage(1)
@@ -53,7 +53,7 @@ export default class SortHandler<Row>
         this.table['sort'] = { identifier, callback, direction: 'desc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
-            return sortdesc(a, b, locales, options)
+            return sort.desc(a, b, locales, options)
         })
         this.save({ identifier, callback, direction: 'desc' })
     }
