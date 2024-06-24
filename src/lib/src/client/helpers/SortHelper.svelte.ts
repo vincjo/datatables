@@ -12,7 +12,7 @@ export default class SortHelper<Row>
     public  direction       = $derived<'asc' | 'desc'>(this.createDirection())
     private params          : Params
 
-    constructor(sortHandler: SortHandler<Row>, field: Field<Row>, params)
+    constructor(sortHandler: SortHandler<Row>, field: Field<Row>, params: Params)
     {
         this.sortHandler    = sortHandler
         this.field          = field
