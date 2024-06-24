@@ -15,6 +15,12 @@ export default class SearchHandler<Row>
         this.table['searchScope'] = scope ?? null
     }
 
+    public regex(pattern: string, scope:Field<Row>[] = null)
+    {
+        this.table['search'] = pattern ?? ''
+        this.table['searchScope'] = scope ?? null
+    }
+
     public clear()
     {
         this.table['search'] = ''

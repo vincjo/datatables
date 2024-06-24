@@ -14,7 +14,7 @@ export {
 
 export type Row = { [key: string]: any  }
 
-export type Field<Row> = keyof Row | ((row: Row) => Row[keyof Row])
+export type Field<Row> = keyof Row | ((row: Row) => unknown)
 
 export type Filter<Row> = {
     callback: (row: Row) => Row[keyof Row]

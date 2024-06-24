@@ -8,7 +8,7 @@
     const table = new TableHandler(data[comparator.type ?? 'string'])
 
     let checked = $state(false)
-    
+
     const filter = table.createFilter('value', check[comparator.name])
 
     let range = $state([0, 100])

@@ -9,13 +9,13 @@ const distinct = $derived.by(() => {
     return table.createCalculation('make').distinct({ sort: ['count', 'desc']})
 })
 ```
-````svelte
+```svelte
 <ul>
     {#each distinct as { value, count }}
         <li>{value} has {count} occurrences</li>
     {/each}
 </ul>
-````
+```
 <Basic/>
 
 
@@ -27,13 +27,13 @@ const calc = table.createCalculation(({ color1, color2 }) => [color1, color2])
 
 const distinct = $derived(calc.distinct())
 ```
-````svelte
+```svelte
 <ul>
     {#each distinct as { value, count }}
         <li>{value} has {count} occurrences</li>
     {/each}
 </ul>
-````
+```
 
 <style>
     pre {

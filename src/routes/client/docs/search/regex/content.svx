@@ -1,0 +1,12 @@
+
+
+# Regular expression
+
+```ts
+const search = table.createSearch()
+```
+
+```svelte
+<input type="text" bind:value={search.value}>
+<button onclick={() => search.regex()}>OK</button>
+``` 
