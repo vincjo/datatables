@@ -8,7 +8,7 @@
         v2
     </aside>
     {#snippet content()}
-        <article class="flex">
+        <article class="flex bg-darken z-depth-2">
             <a href="https://vincjo.fr/datatables.v1">v1</a>
             <a href="https://vincjo.fr/datatables.deprecated">v0</a>
         </article>

@@ -34,7 +34,7 @@ export default class Site
         return mode
     }
 
-    public setTheme = (theme: 'dark' | 'light') => {
+    public setTheme = (theme: string) => {
         document.documentElement.dataset.theme = theme
         document.cookie = `siteTheme=${theme}; max-age=31536000; path="/"`
         this.theme = theme

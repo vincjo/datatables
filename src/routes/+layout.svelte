@@ -5,6 +5,8 @@
     import { onMount } from 'svelte'
     import { site } from '$site'
 
+    let { children } = $props()
+
     onMount(() => {
         const theme = site.getTheme()
         site.setTheme(theme)
@@ -21,7 +23,7 @@
 <main>
     <Header/>
     <section>
-        <slot/>
+        {@render children()}
     </section>
 </main>
 

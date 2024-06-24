@@ -37,9 +37,9 @@
         </aside>
     </article>
 
+    <Description/>
 </section>
 
-<Description/>
 
 <style>
     h1 {
@@ -71,6 +71,7 @@
         overflow-y: auto;
         background: var(--bg-gradient);
         min-height: calc(100vh - 56px);
+        padding-left: 40px;
     }
     article {
         flex-wrap: wrap;

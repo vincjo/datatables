@@ -53,7 +53,8 @@
     }
     @media (width < 1256px) {
         section {
-            display: none;
+            position: initial;
+            margin: 24px 0;
         }
     }
 </style>

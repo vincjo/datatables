@@ -12,7 +12,7 @@
 </script>
 
 <header class="flex">
-    <a class="flex logo" href="{site.getPath('/')}">
+    <a class="flex logo" href="{site.getPath('/')}" onclick={() => show = false}>
         <Logo height="32px"/>
         <span class="desktop">svelte simple datatables</span>
         <span class="mobile">SSD</span>
