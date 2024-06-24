@@ -1,5 +1,5 @@
-import type { Sort, Field, TableHandler } from '$lib/src/client'
-import { parseField } from '$lib/src/client/utils'
+import type { Sort, Field, TableHandler }   from '$lib/src/client'
+import { parseField, sortasc, sortdesc }    from '$lib/src/client/utils'
 
 export type Params = {
     locales?: Intl.LocalesArgument,
@@ -39,14 +39,7 @@ export default class SortHandler<Row>
         this.table['sort'] = { identifier, callback, direction: 'asc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
-            if (a === b) return 0
-            if (a === null) return 1
-            if (b === null) return -1
-            if (typeof a === 'boolean') return a === false ? 1 : -1
-            if (typeof a === 'string') return a.localeCompare(b as string)
-            if (typeof a === 'number') return a - (b as number)
-            if (typeof a === 'object') return JSON.stringify(a).localeCompare(JSON.stringify(b), locales, options)
-            else return String(a).localeCompare(String(b), locales, options)
+            return sortasc(a, b, locales, options)
         })
         this.save({ identifier, callback, direction: 'asc' })
         this.table.setPage(1)
@@ -60,14 +53,7 @@ export default class SortHandler<Row>
         this.table['sort'] = { identifier, callback, direction: 'desc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x), callback(y)]
-            if (a === b) return 0
-            if (a === null) return 1
-            if (b === null) return -1
-            if (typeof b === 'boolean') return b === false ? 1 : -1
-            if (typeof b === 'string') return b.localeCompare(a as string)
-            if (typeof b === 'number') return b - (a as number)
-            if (typeof b === 'object') return JSON.stringify(b).localeCompare(JSON.stringify(a), locales, options)
-            else return String(b).localeCompare(String(a), locales, options)
+            return sortdesc(a, b, locales, options)
         })
         this.save({ identifier, callback, direction: 'desc' })
     }

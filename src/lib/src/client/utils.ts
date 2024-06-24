@@ -121,3 +121,25 @@ const deepSet = (object: Row, path: string, value: string) => {
         return initial
     }
 }
+
+export const sortasc = (a: unknown, b: unknown, locales?: Intl.LocalesArgument, options?: Intl.CollatorOptions) => {
+    if (a === b) return 0
+    if (isNull(a)) return 1
+    if (isNull(b)) return -1
+    if (typeof a === 'boolean') return a === false ? 1 : -1
+    if (typeof a === 'string') return a.localeCompare(b as string)
+    if (typeof a === 'number') return a - (b as number)
+    if (typeof a === 'object') return JSON.stringify(a).localeCompare(JSON.stringify(b), locales, options)
+    else return String(a).localeCompare(String(b), locales, options)
+}
+
+export const sortdesc = (a: unknown, b: unknown, locales?: Intl.LocalesArgument, options?: Intl.CollatorOptions) => {
+    if (a === b) return 0
+    if (isNull(a)) return 1
+    if (isNull(b)) return -1
+    if (typeof b === 'boolean') return b === false ? 1 : -1
+    if (typeof b === 'string') return b.localeCompare(a as string)
+    if (typeof b === 'number') return b - (a as number)
+    if (typeof b === 'object') return JSON.stringify(b).localeCompare(JSON.stringify(a), locales, options)
+    else return String(b).localeCompare(String(a), locales, options)
+}
