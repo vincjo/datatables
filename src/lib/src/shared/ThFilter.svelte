@@ -10,7 +10,7 @@
     }
     let { table, field, check = undefined }: Props = $props()
 
-    // "field as any" for compatibility between client and remote
+    // "field as any" for compatibility between client and server
     const filter = table.createFilter(field as any, check)
 </script>
 

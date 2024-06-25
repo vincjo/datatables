@@ -12,7 +12,6 @@
 
 <section class="flex bg-darken">
     <aside class="z-depth-2">
-        <p>Distinct make</p>
         <input type="text" 
             bind:value={filter.value} 
             oninput={() => filter.set()} 
@@ -27,7 +26,6 @@
         </div>
     </aside>
     <article class="bg-darken">
-        <input class="search" type="text" bind:value={search.value} oninput={() => search.set()} placeholder="Search cars..."/>
         <Datatable {table}>
             <table>
                 <thead>
