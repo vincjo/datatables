@@ -44,8 +44,10 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public setRows(data: T[])
     {
         this.rawRows = data
-        this.event.dispatch('change')
-        untrack(() => this.sortHandler.apply())
+        untrack(() => {
+            this.event.dispatch('change')
+            this.sortHandler.apply()
+        })
     }
 
     public setRowsPerPage(value: number): void
