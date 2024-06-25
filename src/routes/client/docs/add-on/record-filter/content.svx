@@ -1,0 +1,16 @@
+
+# Record filter
+
+```ts
+const filter = table.createRecordFilter(distinct)
+```
+
+```svelte
+<input type="text" bind:value={filter.value} oninput={() => filter.set()}>
+
+<ul>
+    {#each filter.records as record}
+        <li>{record.count} {record.value}</li>
+    {/each}
+</ul>
+```
