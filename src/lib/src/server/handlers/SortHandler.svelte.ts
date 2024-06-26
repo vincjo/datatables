@@ -11,7 +11,7 @@ export default class SortHandler<Row>
 
     public set(field: string)
     {
-        const sort = this.table.sort
+        const sort = this.table['sort']
 
         if(!sort || sort.field !== field) {
             this.asc(field)
@@ -26,16 +26,16 @@ export default class SortHandler<Row>
 
     public asc(field: string)
     {
-        this.table.sort = { field, direction: 'asc' }
+        this.table['sort'] = { field, direction: 'asc' }
         this.table.setPage(1)
-        this.table.events.trigger('change')
+        this.table['event'].dispatch('change')
     }
 
     public desc(field: string)
     {
-        this.table.sort = { field, direction: 'desc' }
+        this.table['sort'] = { field, direction: 'desc' }
         this.table.setPage(1)
-        this.table.events.trigger('change')
+        this.table['event'].dispatch('change')
     }
 
     // public set(field: string, direction: 'asc' | 'desc')

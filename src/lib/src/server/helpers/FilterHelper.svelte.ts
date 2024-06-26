@@ -31,6 +31,6 @@ export default class FilterHelper<Row>
 
     private cleanup()
     {
-        this.filterHandler['table'].on('clearFilters', this.clear)
+        this.filterHandler['table'].on('clearFilters', () => this.clear())
     }
 }

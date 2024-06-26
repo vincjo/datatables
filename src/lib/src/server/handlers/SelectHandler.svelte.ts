@@ -21,7 +21,7 @@ export default class SelectHandler<Row>
 
     public all()
     {
-        const selection = this.table.rows.map((row) => row[this.table.selectBy])
+        const selection = this.table.rows.map((row) => row[this.table['selectBy']])
         if (this.table.isAllSelected) {
             this.table.selected = this.table.selected.filter(item => selection.includes(item) === false)
         }

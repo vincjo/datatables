@@ -1,30 +1,30 @@
 import type { State, Sort, Filter } from '$lib/src/server'
 import type { Params }  from './TableHandler.svelte'
-import EventsHandler    from './handlers/EventsHandler'
+import EventDispatcher    from '$lib/src/shared/EventDispatcher'
 
 export default class AbstractTableHandler<Row>
 {
-    public events               = new EventsHandler()
+    protected selectBy          : keyof Row | undefined
+    protected event             = new EventDispatcher()
+    protected search            = $state<string>('')
+    protected sort              = $state<Sort>({})
+
     public totalRows            = $state<number>(undefined)
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
-    public search               = $state<string>('')
     public filters              = $state<Filter[]>([])
     public rows                 = $state<Row[]>([])
     public rowCount             = $derived(this.createRowCount())
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.createPageCount())
     public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())
-    public sort                 = $state<Sort>({})
     public selected             = $state<(Row | Row[keyof Row])[]>([])
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
-    public selectBy             : keyof Row | undefined
     public element              = $state<HTMLElement>(undefined)
     public clientWidth          = $state<number>(1000)
 
     constructor(data: Row[], params: Params)
     {
-        this.events             = new EventsHandler()
         this.rows               = data
         this.selectBy           = params.selectBy as keyof Row ?? undefined
         this.totalRows          = params.totalRows

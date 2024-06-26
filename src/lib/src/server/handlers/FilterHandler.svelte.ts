@@ -25,6 +25,6 @@ export default class FilterHandler<Row>
     public clear()
     {
         this.table.filters = []
-        this.table.events.trigger('clearFilters')
+        this.table['event'].dispatch('clearFilters')
     }
 }

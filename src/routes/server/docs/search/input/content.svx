@@ -1,0 +1,29 @@
+
+
+# Search input
+
+```ts
+const search = table.createSearch()
+```
+
+```svelte
+<input type="text" bind:value={search.value} oninput={() => search.set()}>
+``` 
+
+<!-- To create a search input, use `table.createSearch()`.
+
+```ts
+const search = table.createSearch()
+```
+
+```svelte
+<script lang="ts">
+    import type { TableHandler } from '@vincjo/datatables'
+    let { table }: { table: TableHandler } = $props()
+
+    const search = table.createSearch()
+</script>
+
+<input type="text" bind:value={search.value} oninput={() => search.set()}>
+``` 
+-->

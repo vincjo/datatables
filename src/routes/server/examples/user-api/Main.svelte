@@ -43,10 +43,9 @@
 
 <style>
     img {
-        height: 56px;
-        width: 56px;
+        height: 24px;
+        width: 24px;
         object-fit: cover;
-        border-radius: 50%;
-        margin-right: 16px;
+        /* border-radius: 50%; */
     }
 </style>

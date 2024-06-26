@@ -1,0 +1,46 @@
+<script>
+    import Pages from './Pages.svelte'
+    import PagesWithEllipsis from './PagesWithEllipsis.svelte'
+    import CurrentPage from './CurrentPage.svelte'
+</script>
+
+# Enable pagination
+
+To enable pagination, define `rowsPerPage` parameter.
+
+```ts
+const table = new TableHandler(data, { rowsPerPage: 20 })
+```
+
+
+## Pages
+
+```svelte
+{#each table.pages as page}
+    <button type="button">{page}</button>
+{/each}
+```
+<Pages/>
+
+
+## Pages with ellipsis
+
+```svelte
+{#each table.pagesWithEllipsis as page}
+    <button type="button">{page ?? '...'}</button>
+{/each}
+```
+<PagesWithEllipsis/>
+
+
+## Current page
+```svelte
+<button type="button"
+    class:active={page === table.currentPage}
+    onclick={() => table.setPage(page)}
+>
+    {page ?? '...'}
+</button>
+```
+
+<CurrentPage/>

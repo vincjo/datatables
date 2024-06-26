@@ -60,13 +60,7 @@ export default class ViewHelper
         let left = 0
         for (const { isVisible, isFrozen, index } of this.columns) {
             if (isFrozen === true) {
-                const { width } = this.table.element.querySelector(`thead th:nth-child(${index + 1})`).getBoundingClientRect() 
-                this.table.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
-                    element.style.position = 'sticky'
-                    element.style.left = (index * left) + 'px'
-                    element.style.width = width + 'px'
-                })
-                left = width
+                left = this.freeze(index, left)
             }
             if (isVisible === false) {
                 this.table.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
@@ -75,4 +69,19 @@ export default class ViewHelper
             }
         }
     }
+
+    private freeze(index: number, left = 0) 
+    {
+        const column = this.table.element.querySelector(`thead th:nth-child(${index + 1})`) as HTMLElement
+        const { width } = column.getBoundingClientRect()
+
+        this.table.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
+            element.style.position = 'sticky'
+            element.style.left = (index * left) + 'px'
+            element.style.width = width + 'px'
+        })
+        return width
+    }
+
 }
+

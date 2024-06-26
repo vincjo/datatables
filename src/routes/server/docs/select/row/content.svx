@@ -1,0 +1,27 @@
+# Enable row selection
+
+To enable row selection, rows must have at least a unique id field.
+This unique id must be defined in `TableHandler` params:
+
+```ts
+const table = new TableHandler(data, { selectBy: 'id' })
+```
+
+# Select a row
+
+- Is row selected ? `table.selected.includes(id)`
+- Select a row: `table.select(id)`
+
+
+```svelte
+{#each table.rows as row}
+    <tr class:active={table.selected.includes(row.id)}>
+        <td>
+            <input type="checkbox" 
+                checked={table.selected.includes(row.id)}
+                onclick={() => table.select(row.id)}
+            >
+        </td>
+    </tr>
+{/each}
+```

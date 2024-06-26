@@ -1,7 +1,6 @@
-import type { TableHandlerParams }  from '$lib/src/client'
-import EventDispatcher from './EventDispatcher'
-import type { Filter, Sort, Field } from '$lib/src/client'
+import type { Filter, Sort, Field, TableHandlerParams } from '$lib/src/client'
 import { parseField, match, nestedFilter, deepEmphasize } from './utils'
+import EventDispatcher from '$lib/src/shared/EventDispatcher'
 
 
 export default abstract class AbstractTableHandler<Row>

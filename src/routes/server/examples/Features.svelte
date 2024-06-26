@@ -6,7 +6,7 @@
     Capabilities: 
     <li>{f.search         ? '✅' : '❌'} search</li>
     <li>{f.rowsPerPage    ? '✅' : '❌'} rows per page</li>
-    <li>{f.sort           ? '✅' : '❌'} sorting</li>
+    <li>{f.sort           ? '✅' : '❌'} sort</li>
     <li>{f.filters        ? '✅' : '❌'} column filters</li>
     <li>{f.pagination     ? '✅' : '❌'} pagination</li>
     <li>{f.totalRows      ? '✅' : '❌'} row count</li>

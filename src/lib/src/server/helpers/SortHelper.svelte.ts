@@ -30,7 +30,7 @@ export default class SortHelper<Row>
 
     private createIsActive()
     {
-        if (this.field === this.sortHandler['table'].sort?.field) {
+        if (this.field === this.sortHandler['table']['sort']?.field) {
             return true
         }
         return false
@@ -39,6 +39,6 @@ export default class SortHelper<Row>
     private createDirection()
     {
         if (this.isActive === false) return null
-        return this.sortHandler['table'].sort?.direction
+        return this.sortHandler['table']['sort']?.direction
     }
 }

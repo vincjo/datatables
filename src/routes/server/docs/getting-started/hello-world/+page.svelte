@@ -1,6 +1,11 @@
 <script>
-    import Remote from './Remote.svx'
+    import Main from './Main.svelte'
+    import Content from './content.svx'
+    let { data } = $props()
 </script>
 
+<h1>Hello world</h1>
 
-<Remote/>
+<Main data={data.dataset}/>
+
+<Content/>

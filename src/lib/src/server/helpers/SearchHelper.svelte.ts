@@ -30,6 +30,6 @@ export default class SearchHelper<Row>
 
     private cleanup()
     {
-        this.table.on('clearSearch', this.clear)
+        this.table.on('clearSearch', () => this.clear())
     }
 }

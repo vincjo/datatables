@@ -5,7 +5,7 @@
 
 <Banner/>
 
-Server-side part focuses fetching and manipulating data from a remote API. A simple wrapper function provides a standardized interface for building requests, making it easy to integrate with existing data sources and APIs.
+Server-side part focuses on fetching and manipulating data from a remote API. A simple wrapper function provides a standardized interface for building requests, making it easy to integrate with existing data sources and APIs.
 
 ⚠️ All imports are located in <span class="import">@vincjo/datatables**/server**</span>
 
@@ -21,7 +21,7 @@ In order to make the migration process a little easier, v1 is embed in "legacy" 
 - @vincjo/datatables/remote
 + @vincjo/datatables/legacy/remote
 ```
-
+<!-- 
 ## Sample code
 
 ```svelte
@@ -60,7 +60,7 @@ In order to make the migration process a little easier, v1 is embed in "legacy" 
     </table>
 </Datatable>
 ```
-
+ -->
 
 
 <style>

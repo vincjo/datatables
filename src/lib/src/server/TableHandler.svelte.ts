@@ -124,7 +124,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 
     public on(event: 'change' | 'clearFilters' | 'clearSearch', callback: () => void): void
     {
-        this.events.add(event, callback)
+        this.event.add(event, callback)
     }
 
     public createView(columns: ViewColumn[]): ViewHelper

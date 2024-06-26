@@ -14,14 +14,14 @@ export default class PageHandler<Row>
         if (this.table.rowsPerPage && this.table.totalRows) {
             if (number >= 1 && number <= this.table.pageCount) {
                 this.table.currentPage = number
-                this.table.events.trigger('change')
+                this.table['event'].dispatch('change')
                 this.table.invalidate()
             }
         }
         else {
             if (number >= 1) {
                 this.table.currentPage = number
-                this.table.events.trigger('change')
+                this.table['event'].dispatch('change')
                 this.table.invalidate()
             }
         }

@@ -1,0 +1,11 @@
+# Filter input 
+
+```ts
+const filter = table.createFilter('last_name')
+```
+
+```svelte
+<input type="text" bind:value={filter.value} oninput={() => filter.set()}>
+```
+
+
