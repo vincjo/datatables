@@ -14,7 +14,7 @@ export default class SearchHelper<Row>
 
     public set()
     {
-        this.table.search = this.value
+        this.table['search'] = this.value
         clearTimeout(this.timeout)
         this.timeout = setTimeout( () => {
             this.table.invalidate()
@@ -24,7 +24,7 @@ export default class SearchHelper<Row>
     public clear()
     {
         this.value = ''
-        this.table.search = ''
+        this.table['search'] = ''
         this.table.invalidate()
     }
 

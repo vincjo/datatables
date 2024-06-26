@@ -11,7 +11,7 @@ export default class FilterHandler<Row>
 
     public set(value: string | number, field: string )
     {
-        this.table.filters.filter(filter =>  filter.field !== field && filter.value)
+        this.table.filters = this.table.filters.filter(filter =>  filter.field !== field && filter.value)
         if (value) {
             this.table.filters.push({ value, field })
         }
