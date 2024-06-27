@@ -44,8 +44,8 @@ type State = {
     rowsPerPage: number,
     offset: number,
     search: string | undefined,
-    sort: Sort<Row> | undefined,
-    filters: Filter<Row>[] | undefined,
+    sort: { field: string, direction: 'asc' | 'desc' } | undefined,
+    filters: { field: string, value: unknown }[] | undefined,
     setTotalRows: (value: number) => void
 }
 ````

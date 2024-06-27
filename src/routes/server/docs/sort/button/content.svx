@@ -4,32 +4,15 @@
 
 
 ```ts
-const sort = table.createSort('last_name')
+const sort = table.createSort('name')
 ```
 
 ```svelte
 <button onclick={() => sort.set()} class:active={sort.isActive} type="button">
-    last_name
+    name
     <span class:active={sort.direction === 'asc'} >↑</span>
     <span class:active={sort.direction === 'desc'}>↓</span>
 </button>
 ```
 
-<!-- To create a sort button, use `table.createSort(field)`.
-
-
-```svelte
-<script lang="ts">
-    import type { TableHandler } from '@vincjo/datatables'
-    let { table }: { table: TableHandler } = $props()
-
-    const sort = table.createSort('last_name')
-</script>
-
-<button onclick={() => sort.set()} class:active={sort.isActive} type="button">
-    last_name
-    <span class:active={sort.direction === 'asc'} >↑</span>
-    <span class:active={sort.direction === 'desc'}>↓</span>
-</button>
-```
- -->
+Your data is automatically reloaded with each sort.

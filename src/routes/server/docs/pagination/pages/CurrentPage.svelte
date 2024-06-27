@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { TableHandler } from '$lib/src/client'
+    import { TableHandler } from '$lib/src/server'
     import data from '$site/data/data'
-    const table = new TableHandler(data, { rowsPerPage: 10 })
+    const table = new TableHandler(data, { rowsPerPage: 10, totalRows: 150 })
     table.setPage(12)
 </script>
 
@@ -33,7 +33,7 @@
         padding: 24px;
     }
     button.active {
-        background: var(--secondary);
+        background: var(--secondary-darken);
         color: #eee;
         font-weight: bold;
     }

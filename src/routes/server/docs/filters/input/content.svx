@@ -1,11 +1,11 @@
 # Filter input 
 
 ```ts
-const filter = table.createFilter('last_name')
+const filter = table.createFilter('completed')
 ```
 
 ```svelte
 <input type="text" bind:value={filter.value} oninput={() => filter.set()}>
 ```
 
-
+The example API bellow requires strict equality for the filter to be functional: must write "true" or "false" in text input.

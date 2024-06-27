@@ -1,20 +1,20 @@
-<script>
-    import data from '$site/data/data'
-    import { TableHandler, Datatable, Th, Pagination } from '$lib/src/client'
+<script lang="ts">
+    import { TableHandler, Datatable, Th, ThFilter, Pagination, type State } from '$lib/src/server'
+    import { reload } from './api'
+    export let data: any[]
 
-    let { check = undefined, isHighlighted = false } = $props()
+    const table = new TableHandler(data, { rowsPerPage: 10 })
 
-    const table = new TableHandler(data, { highlight: isHighlighted, rowsPerPage: 10 })
-    const filter = table.createFilter('last_name', check)
+    table.load((state: State) => reload(state))
+    const filter = table.createFilter('completed')
 </script>
-
 
 <section class="bg-darken">
     <Datatable {table}>
         <table>
             <thead>
                 <tr>
-                    <Th>last_name</Th>
+                    <Th>completed</Th>
                 </tr>
                 <tr>
                     <th class="input">
@@ -25,7 +25,7 @@
             <tbody>
                 {#each table.rows as row}
                     <tr>
-                        <td>{@html row.last_name}</td>
+                        <td><span>{row.completed  ? '✅' : '❌'} {row.completed}</span></td>
                     </tr>
                 {/each}
             </tbody>
@@ -37,15 +37,16 @@
     </Datatable>
 </section>
 
-
 <style>
     section {
         border-radius: 8px;
+        border: 1px solid var(--grey);
         padding: 16px 40px 0 40px;
         width: 400px;
         margin: 16px 0;
-        border: 1px solid var(--grey);
-        height: 460px;
+    }
+    span {
+        padding-left: 8px;
     }
     input {
         color: var(--font);
