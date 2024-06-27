@@ -10,6 +10,7 @@ export default class AbstractTableHandler<Row>
     protected sort              = $state<Sort>({})
 
     public totalRows            = $state<number>(undefined)
+    public isLoading            = $state<boolean>(false)
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
     public filters              = $state<Filter[]>([])
