@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TableHandler, Datatable, Th, type State, Pagination, Search } from '$lib/src/server'
+    import { TableHandler, Datatable, Th, type State, Pagination, RowCount } from '$lib/src/server'
     import { reload } from './api'
     export let data: { users: any[]; total: number }
 
@@ -18,8 +18,6 @@
                 <tr>
                     <Th>Fristname</Th>
                     <Th>Lastname</Th>
-                    <Th>Gender</Th>
-                    <Th>Height / Weight</Th>
                 </tr>
             </thead>
             <tbody>
@@ -27,16 +25,12 @@
                     <tr>
                         <td>{row.firstName}</td>
                         <td>{row.lastName}</td>
-                        <td>{row.gender}</td>
-                        <td>
-                            {String(row.height / 100).substring(0, 4)}m / {String(row.weight).substring(0, 4)}kg
-                        </td>
                     </tr>
                 {/each}
             </tbody>
         </table>
         {#snippet footer()}
-            <div></div>
+            <RowCount {table}/>
             <Pagination {table}/>
         {/snippet}
     </Datatable>
@@ -46,7 +40,7 @@
     section {
         border: 1px solid var(--grey);
         border-radius: 8px;
-        max-width: 600px;
+        max-width: 400px;
     }
     input {
         width: 200px;
