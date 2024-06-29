@@ -21,7 +21,12 @@
 {/if}
 
 {#if show}
-    <article in:fly|global={{ duration: 400, x: -200 }} out:fly|global={{ duration: 400, x: -200, delay: 400 }} class="thin-scrollbar" use:clickOutside={close}>
+    <article 
+        class="thin-scrollbar" 
+        in:fly|global={{ duration: 400, x: -200 }} 
+        out:fly|global={{ duration: 400, x: -200, delay: 200 }} 
+        use:clickOutside={close}
+    >
         {#each nav as item}
             <a href="{getPath(`/${site.mode}/examples/${item.page}`)}" class:active={$url.indexOf(item.page) > -1} onclick={close}>
                 <b>{item.title}</b>
@@ -71,12 +76,14 @@
         bottom: 0px;
         left: 0;
         width: 80%;
+        max-width: 240px;
         overflow-y: auto;
         border-top: 1px dotted var(--grey);
         background: var(--bg);
         padding: 32px 24px 40px 24px;
         z-index: 7;
-    }    a {
+    }
+    a {
         display: block;
         text-decoration: none;
         padding: 4px 12px;
@@ -111,6 +118,7 @@
     div.divider {
         width: 96%;
         height: 8px;
+        border: none;
         border-top: 1px solid var(--grey);
         margin: 8px auto 0 auto;
     }

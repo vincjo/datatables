@@ -1,10 +1,10 @@
 import type { TableHandler } from '$lib/src/client'
 
-export default class PageHandler<Row> 
+export default class PageHandler<Row>
 {
-    private table : TableHandler<Row>
+    private table: TableHandler<Row>
 
-    constructor(table: TableHandler<Row>) 
+    constructor(table: TableHandler<Row>)
     {
         this.table = table
     }

@@ -22,7 +22,7 @@
 
 <main>
     <Header/>
-    <section>
+    <section class="thin-scrollbar">
         {@render children()}
     </section>
 </main>
@@ -43,5 +43,6 @@
         left: 0;
         bottom: 0;
         right: 0;
+        overflow-y: auto;
     }
 </style>

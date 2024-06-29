@@ -43,14 +43,11 @@
         background: var(--grey);
     }
 
-
-
-
- 
     aside.mobile {
         border-radius: 4px;
         margin-right: 4px;
         width: 100%;
+        max-width: 320px;
         background: var(--grey-lighten);
         justify-content: flex-start;
         padding: 4px;
@@ -63,6 +60,7 @@
         text-transform: none;
         letter-spacing: 0;
         border-radius: 4px;
+        opacity: .4;
         padding: 0;
         width: 50%;
         height: 32px;
@@ -86,6 +84,7 @@
     }
     aside.mobile button.active {
         background: var(--primary-lighten-2);
+        opacity: 1;
     }
 
 </style>

@@ -22,7 +22,7 @@
         height: 32px;
     }
     a.mobile {
-        width: 100%;
+        width: fit-content;
         background: var(--grey-lighten);
         justify-content: flex-start;
         padding: 0 16px;

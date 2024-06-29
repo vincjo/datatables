@@ -21,7 +21,12 @@
 {/if}
 
 {#if show}
-    <article in:fly|global={{ duration: 400, x: -200 }} out:fly|global={{ duration: 400, x: -200, delay: 200 }} class="thin-scrollbar" use:clickOutside={close}>
+    <article 
+        in:fly|global={{ duration: 400, x: -200 }} 
+        out:fly|global={{ duration: 400, x: -200, delay: 200 }} 
+        class="thin-scrollbar" 
+        use:clickOutside={close}
+    >
         {#each nav as item}
             <h1 class="flex">
                 <i class="icon">{@html item.icon ?? ''}</i>
@@ -76,6 +81,7 @@
         bottom: 0px;
         left: 0;
         width: 80%;
+        max-width: 240px;
         overflow-y: auto;
         border-top: 1px dotted var(--grey);
         background: var(--bg);

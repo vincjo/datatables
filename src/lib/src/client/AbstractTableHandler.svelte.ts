@@ -22,9 +22,9 @@ export default abstract class AbstractTableHandler<Row>
     public allRows              = $derived<readonly Row[]>(this.createAllRows())
     public rows                 = $derived<readonly Row[]>(this.createRows())
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
-    public pages                = $derived<number[]>(this.createPages())
+    public pages                = $derived<readonly number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
-    public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())
+    public pagesWithEllipsis    = $derived<readonly number[]>(this.createPagesWithEllipsis())
     public selected             = $state<(Row | Row[keyof Row])[]>([])
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
 
@@ -42,9 +42,7 @@ export default abstract class AbstractTableHandler<Row>
         if (this.search.value) {
             allRows = allRows.filter((row) => {
                 const fields = this.search.scope ?? Object.keys(row) as Field<Row>[]
-                const scope = fields.map((field: Field<Row>) => {
-                    return parseField(field)
-                })
+                const scope = fields.map((field: Field<Row>) => parseField(field))
                 for(const { key, callback } of scope) {
                     if (key) {
                         row[key] = nestedFilter(row[key], this.search.value, this.highlight)

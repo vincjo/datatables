@@ -58,6 +58,7 @@
         padding: 0;
         width: 40px;
         height: 32px;
+        opacity: .4;
     }
     a:first-child {
         border-radius: 4px 0 0 4px;
@@ -71,10 +72,12 @@
     }
     a.active {
         background: var(--primary-lighten-2);
+        opacity: 1;
     }
 
     aside.mobile {
         width: 100%;
+        max-width: 320px;
         background: var(--grey-lighten);
         justify-content: flex-start;
         padding: 4px;

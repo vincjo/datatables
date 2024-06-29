@@ -12,25 +12,26 @@
 </script>
 
 {#if show}
-    <nav transition:slide={{ duration: 120 }}>
-        <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}" onclick={close}>Docs</a>
-        <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}" onclick={close}>Examples</a>
-        <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/${site.mode}/api`)}" onclick={close}>API</a>
+    <nav transition:slide={{ duration: 120 }} class="thin-scrollbar">
+        <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
+        <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}" onclick={close}>Examples&#8599;</a>
+        <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/${site.mode}/api`)}" onclick={close}>API&#8599;</a>
 
         <div class="divider"></div>
-        <span>Data processing:</span>
+        <span>Data processing</span>
         <Mode isMobile/>
         <div class="divider-16"></div>
-        <span>Theme:</span>
+        <span>Theme</span>
         <Theme isMobile/>
         <div class="divider-16"></div>
-        <span>Older doc sites:</span>
+        <span>Source</span>
+        <Github isMobile/>
+        <div class="divider-16"></div>
+        <span>Older doc sites</span>
         <aside class="flex">
             <a href="https://vincjo.fr/datatables.v1">V1</a>
             <a href="https://vincjo.fr/datatables.deprecated">V0 (deprecated)</a>
         </aside>
-        <div class="divider"></div>
-        <Github isMobile/>
     </nav>
 {/if}
 
@@ -45,6 +46,8 @@
         background: var(--bg-gradient);
         z-index: 400;
         padding: 32px 40px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     a.menu {
         border-bottom: 1px solid var(--grey);
@@ -55,6 +58,7 @@
         padding-left: 8px;
         font-weight: bold;
         letter-spacing: 0.1em;
+        max-width: 320px;
         font-family: Archivo;
         font-size: 18px;
     }
@@ -63,20 +67,21 @@
         font-weight: bold;
     }
     .divider {
-        margin-top: 64px;
+        margin-top: 40px;
     }
     .divider-16 {
-        margin-bottom: 16px;
+        padding-top: 8px;
+        margin-bottom: 8px;
     }
     span {
         font-family: Archivo;
         font-size: 18px;
+        color: var(--font-grey);
     }
     aside a {
         font-family: JetBrains;
         color: var(--primary);
         margin: 4px 16px 4px 0;
-        text-decoration: none;
         background: var(--grey-lighten);
         padding: 4px 8px;
         border-radius: 4px;
