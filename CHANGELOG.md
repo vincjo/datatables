@@ -1,17 +1,24 @@
+# 2.0.0-runes.28 - 2024-06-30
+
+<!-- ### Added -->
+
+### Changed
+- client-side *(breaking)*:  sort params for distinct values is now an object `{ field: 'value' | 'count', direction: 'asc' | 'desc' }` instead of an array
+- client-side: use crypto UUID instead of js random string
+- client-side: improve types
+<!-- ### Fixed -->
+
 # 2.0.0-runes.27 - 2024-06-29
 
 ### Added
-  - client-side: regular expression search takes scope parameter into account
-
-<!-- ### Changed -->
-<!-- ### Fixed -->
+- client-side: regular expression search takes scope parameter into account
 
 # 2.0.0-runes.26 - 2024-06-27
 
 ### Added
-  - server-side: added a `table.isLoading` state which is true while `invalidate()` method runs
+- server-side: added a `table.isLoading` state which is true while `invalidate()` method runs
 
 # 2.0.0-runes.25 - 2024-06-26
 
 ### Fixed
-  - server-side: column filtering
+- server-side: column filtering

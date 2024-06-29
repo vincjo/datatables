@@ -1,9 +1,7 @@
-import type { Field, Check, Criterion } from '$lib/src/client'
-import { isNotNull } from '../utils'
-import type { TableHandler } from '$lib/src/client'
-import { parseField } from '$lib/src/client/utils'
+import type { Field, Check, Criterion, TableHandler } from '$lib/src/client'
+import { isNotNull, parseField } from '../utils'
+import type { UUID } from 'crypto'
 
-type Value = string | number | null | undefined | boolean | Criterion[]
 
 export default class FilterHandler<Row>
 {
@@ -14,19 +12,19 @@ export default class FilterHandler<Row>
         this.table = table
     }
 
-    public set(value: Value, field: Field<Row>, check: Check<Row> = null, uid?: string)
+    public set(value: unknown | Criterion[], field: Field<Row>, check: Check = null, uuid: UUID)
     {
-        const { callback, identifier, key } = parseField(field, uid)
-        const filter = { value, identifier, callback, check, key }
+        const { callback, id, key } = parseField(field, uuid)
+        const filter = { value, id, callback, check, key }
 
-        this.table.filters = this.table.filters.filter(filter => filter.identifier !== identifier)
+        this.table.filters = this.table.filters.filter(filter => filter.id !== id)
         if (isNotNull(value)) {
             this.table.filters.push(filter)
         }
     }
 
-    public unset(uid: string)
+    public unset(id: UUID)
     {
-        this.table.filters = this.table.filters.filter(filter => filter.identifier !== uid)
+        this.table.filters = this.table.filters.filter(filter => filter.id !== id)
     }
 }

@@ -5,23 +5,22 @@ import { check as comparator } from '$lib/src/client/Comparator'
 export default class AdvancedFilterHelper<Row>
 {
     public  criteria        = $state<(string | number | number[])[]>([])
+    private uid             = crypto.randomUUID()
     private filterHandler   : FilterHandler<Row>
     private collection      : Criterion[]
     private field           : Field<Row>
-    private uid             : string
-    private check           : Check<any>
+    private check           : Check
 
-    constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check<any>)
+    constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check)
     {
         this.filterHandler  = filterHandler
         this.field          = field
-        this.uid            = 'm_' + (Math.random()).toString(28).substring(2)
         this.collection     = []
         this.check          = check ?? comparator.isEqualTo
         this.cleanup()
     }
 
-    public set(value: string | number | number[], check?: Check<any>): void
+    public set(value: string | number | number[], check?: Check): void
     {
         if (this.collection.find(criterion => criterion.value === value)) {
             this.collection = this.collection.filter(criterion => criterion.value !== value)

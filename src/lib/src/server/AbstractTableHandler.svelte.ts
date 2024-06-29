@@ -1,6 +1,6 @@
 import type { State, Sort, Filter } from '$lib/src/server'
-import type { Params }  from './TableHandler.svelte'
-import EventDispatcher    from '$lib/src/shared/EventDispatcher'
+import type { Params } from './TableHandler.svelte'
+import { EventDispatcher } from '$lib/src/shared'
 
 export default class AbstractTableHandler<Row>
 {
@@ -14,8 +14,9 @@ export default class AbstractTableHandler<Row>
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
     public filters              = $state<Filter[]>([])
+    public filterCount          = $derived<number>(this.filters.length)
     public rows                 = $state<Row[]>([])
-    public rowCount             = $derived(this.createRowCount())
+    public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.createPageCount())
     public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())

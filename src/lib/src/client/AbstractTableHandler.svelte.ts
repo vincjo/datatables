@@ -1,4 +1,4 @@
-import type { Filter, Sort, Field, SearchType, TableHandlerParams } from '$lib/src/client'
+import type { Filter, Sort, Field, SearchType, TableParams } from '$lib/src/client'
 import { parseField, match, nestedFilter, deepEmphasize } from './utils'
 import { EventDispatcher } from '$lib/src/shared'
 
@@ -28,7 +28,7 @@ export default abstract class AbstractTableHandler<Row>
     public selected             = $state<(Row | Row[keyof Row])[]>([])
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
 
-    constructor(data: Row[], params: TableHandlerParams)
+    constructor(data: Row[], params: TableParams)
     {
         this.rawRows        = data
         this.rowsPerPage    = params.rowsPerPage

@@ -14,4 +14,4 @@ import type { Field as ClientField }    from '$lib/src/client'
 export type TableHandlerLike<Row> = ClientTableHandler<Row> | ServerTableHandler<Row>
 export type FieldLike<Row> = ClientField<Row>
 
-export type Row = { [key: string]: any  }
+export type Row = { [key: string]: any }

@@ -3,9 +3,9 @@ import type { Row } from '$lib/src/client'
 
 export default class RecordFilterHelper
 {
-    private rawRecords  = $state.frozen<Row[]>([])
     public  value       = $state<string>('')
     public  records     = $derived<readonly Row[]>(this.createRecords())
+    private rawRecords  = $state.frozen<Row[]>([])
     private search      = $state<string>('')
 
     constructor(records: Row[])

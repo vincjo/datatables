@@ -3,7 +3,7 @@
     import { cars } from './data'
 
     const table = new TableHandler(cars)
-    const distinct = table.createCalculation('make').distinct().sort((a, b) => (a.count < b.count ? 1 : -1))
+    const distinct = table.createCalculation('make').distinct({ field: 'count', direction: 'desc' })
 </script>
 
 <section class="flex bg-darken">

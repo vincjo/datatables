@@ -1,4 +1,4 @@
-import { untrack }              from 'svelte'
+// import { untrack }              from 'svelte'
 import AbstractTableHandler     from './AbstractTableHandler.svelte'
 
 import SortHandler              from './handlers/SortHandler.svelte'
@@ -7,7 +7,7 @@ import SelectHandler            from './handlers/SelectHandler.svelte'
 import PageHandler              from './handlers/PageHandler.svelte'
 import SearchHandler            from './handlers/SearchHandler.svelte'
 
-import type { Internationalization, Row, Field, Check, TableHandlerParams, ViewColumn } from '$lib/src/client'
+import type { Internationalization, Row, Field, Check, TableParams, ViewColumn } from '$lib/src/client'
 
 import ViewHelper               from './helpers/ViewHelper.svelte'
 import SearchHelper             from './helpers/SearchHelper.svelte'
@@ -23,14 +23,14 @@ import RecordFilterHelper       from './helpers/RecordFilterHelper.svelte'
 export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T>
 {
     public  i18n            : Internationalization
-    private view            : ViewHelper
+    private view            : ViewHelper<T>
     private sortHandler     : SortHandler<T>
     private filterHandler   : FilterHandler<T>
     private selectHandler   : SelectHandler<T>
     private pageHandler     : PageHandler<T>
     private searchHandler   : SearchHandler<T>
 
-    constructor(data: T[] = [], params: TableHandlerParams = { rowsPerPage: null })
+    constructor(data: T[] = [], params: TableParams = { rowsPerPage: null })
     {
         super(data, params)
         this.translate(params.i18n)
@@ -44,10 +44,10 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public setRows(data: T[])
     {
         this.rawRows = data
-        untrack(() => {
-            this.event.dispatch('change')
-            this.sortHandler.apply()
-        })
+        // untrack(() => {
+        //     this.event.dispatch('change')
+        //     this.sortHandler.apply()
+        // })
     }
 
     public setRowsPerPage(value: number): void
@@ -61,14 +61,17 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         switch (value) {
             case 'previous' : return this.pageHandler.previous()
             case 'next'     : return this.pageHandler.next()
-            case 'last'     : return this.pageHandler.goto(this.pageCount)
+            case 'last'     : return this.pageHandler.last()
             default         : return this.pageHandler.goto(value as number)
         }
     }
 
-    public clearSearch()
+    public clearSearch(): void
     {
-        this.searchHandler.clear()
+        this.search.value = ''
+        this.event.dispatch('change')
+        this.event.dispatch('clearSearch')
+        this.setPage(1)
     }
 
     public createSearch(scope?: Field<T>[]): SearchHelper<T>
@@ -86,24 +89,20 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new SortHelper(this.sortHandler, field, params)
     }
 
-    public filter(value: any, field: Field<T>, check?: Check<T>): void
-    {
-        this.filterHandler.set(value, field, check)
-    }
-
     public clearFilters(): void
     {
         this.filters = []
         this.event.dispatch('change')
         this.event.dispatch('clearFilters')
+        this.setPage(1)
     }
 
-    public createAdvancedFilter(field: Field<T>, check?: Check<T>): AdvancedFilterHelper<T>
+    public createAdvancedFilter(field: Field<T>, check?: Check): AdvancedFilterHelper<T>
     {
         return new AdvancedFilterHelper(this.filterHandler, field, check)
     }
 
-    public createFilter(field: Field<T>, check?: Check<T>): FilterHelper<T>
+    public createFilter(field: Field<T>, check?: Check): FilterHelper<T>
     {
         return new FilterHelper(this.filterHandler, field, check)
     }
@@ -144,13 +143,13 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new CSVHelper(this)
     }
 
-    public createView(columns: ViewColumn[]): ViewHelper
+    public createView(columns: ViewColumn[]): ViewHelper<T>
     {
         this.view = new ViewHelper(this, columns)
         return this.view
     }
 
-    public getView(): ViewHelper
+    public getView(): ViewHelper<T>
     {
         return this.view
     }

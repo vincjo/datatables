@@ -9,7 +9,7 @@
     }
     const table = new TableHandler(data, { rowsPerPage: 10 })
     const search = table.createSearch()
-    search.value = '/\\.ru/g'
+    // search.value = '/\\.ru/g'
 </script>
 
 
@@ -68,13 +68,10 @@
         font-family: JetBrains;
     }
     button {
-        color: var(--font);
+        color: #eee;
         background: var(--primary);
         height: 36px;
         border-radius: 0 4px 4px 0;
         padding: 0 8px;
-    }
-    td.scoped {
-        background: var(--secondary-lighten-1);
     }
 </style>

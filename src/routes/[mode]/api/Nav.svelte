@@ -1,6 +1,7 @@
 <script lang="ts">
     import { TableHandler } from '$lib/src/client'
     import Key from './Nav_Key.svelte'
+    import Search from '$site/components/Nav_Search.svelte'
     let { nav }: { nav: {
         properties: string[],
         methods: string[],
@@ -9,12 +10,11 @@
     const data = $state.snapshot(nav)
     const table = new TableHandler([data])
     const { properties, methods, types } = $derived(table.rows?.[0] ?? [] as any)
-    const search = table.createSearch()
 </script>
 
 
 <nav>
-    <input type="text" placeholder="Search..." spellcheck="false" bind:value={search.value} oninput={() => search.set()}/>
+    <Search {table}/>
     <section class="thin-scrollbar">
         <Key data={properties} key={'properties'}/>
         <Key data={methods}    key={'methods'}/>
@@ -24,12 +24,6 @@
 
 
 <style>
-    input {
-        background: var(--bg);
-        border: 1px solid var(--grey);
-        color: var(--font);
-        width: 100%;
-    }
     nav {
         position: absolute;
         top:0;

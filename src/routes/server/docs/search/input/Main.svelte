@@ -1,7 +1,7 @@
 <script lang="ts">
     import { TableHandler, Datatable, Th, type State, Pagination, RowCount } from '$lib/src/server'
     import { reload } from './api'
-    export let data: { users: any[]; total: number }
+    let { data }: { data: { users: any[]; total: number } } = $props()
 
     const table = new TableHandler(data.users, { rowsPerPage: 10, totalRows: data.total })
     const search = table.createSearch()

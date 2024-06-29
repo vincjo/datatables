@@ -1,5 +1,5 @@
 <script>
-    export let stats
+    let { stats } = $props()
 </script>
 
 <section class="flex">

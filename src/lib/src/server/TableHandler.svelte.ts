@@ -54,11 +54,6 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.fetchHandler.invalidate()
     }
 
-    public setTotalRows(value: number): void
-    {
-        this.totalRows = value
-    }
-
     public setRowsPerPage(value: number)
     {
         this.rowsPerPage = value
@@ -90,11 +85,11 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new SortHelper(this.sortHandler, field)
     }
 
-    public filter(value: string | number, field: string): void
-    {
-        this.filterHandler.set(value, field)
-        this.setPage(1)
-    }
+    // public filter(value: string | number, field: string): void
+    // {
+    //     this.filterHandler.set(value, field)
+    //     this.setPage(1)
+    // }
 
     public clearFilters(): void
     {

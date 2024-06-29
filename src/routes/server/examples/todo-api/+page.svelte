@@ -2,7 +2,7 @@
     // import Demo from '$site/components/Demo.svelte'
     import Main from './Main.svelte'
     import Features from '../Features.svelte'
-    export let data
+    let { data } = $props()
 </script>
 
 <h1>
@@ -19,7 +19,7 @@
     <Main data={data.dataset}/>
 </section>
 
-<style>
+<style> 
     section {
         max-width: 800px;
         border-radius: 8px;

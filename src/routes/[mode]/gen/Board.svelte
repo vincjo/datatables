@@ -11,8 +11,8 @@
 </script>
 
 <section class="flex">
-    <button onclick={() => generate('client')}>Create files for "client"</button>
-    <button onclick={() => generate('server')}>Create files for "server"</button>
+    <button onclick={() => generate('client')}>Create files for <b>client</b></button>
+    <button onclick={() => generate('server')}>Create files for <b>server</b></button>
 </section>
 
 <style>
@@ -24,8 +24,10 @@
     button {
         background: var(--ternary);
         color: var(--font);
+        font-family: JetBrains;
         margin: 8px;
         border-radius: 8px;
         padding: 16px;
+        font-size: 18px;
     }
 </style>

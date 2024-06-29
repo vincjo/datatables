@@ -21,15 +21,15 @@
             {#if !sort.isActive}
                 <em>{@html glyph.dropdown}</em>
             {:else}
-                <span>{@html glyph[table.sort.direction]}</span>
+                <span>{@html glyph[sort.direction]}</span>
             {/if}
         </div>
         {#snippet content()}
             <aside class="z-depth-1">
-                <button class="btn" onclick={() => sort.asc()}>{@html glyph.asc} Asc</button>
-                <button class="btn" onclick={() => sort.desc()}>{@html glyph.desc} Desc</button>
+                <button class="btn" onclick={() => sort.asc()}><span>{@html glyph.asc}</span> Asc</button>
+                <button class="btn" onclick={() => sort.desc()}><span>{@html glyph.desc}</span> Desc</button>
                 <div class="divider"></div>
-                <button class="btn" onclick={() => view.toggle(field)}>{@html glyph.hide} Hide</button>
+                <button class="btn" onclick={() => view.toggle(field)}><span>{@html glyph.hide}</span> Hide</button>
             </aside>
         {/snippet}
     </Dropdown>
@@ -95,6 +95,9 @@
         width: 100%;
         border-radius: 4px;
         color: var(--font);
+    }
+    aside button span {
+        margin-right: 4px;
     }
     aside button:hover {
         background: var(--grey-lighten);

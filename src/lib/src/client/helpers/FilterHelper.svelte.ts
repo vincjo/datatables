@@ -4,30 +4,29 @@ import { check as comparator } from '$lib/src/client/Comparator'
 
 export default class FilterHelper<Row>
 {
+    public  value           = $state<string>('')
+    private id              = crypto.randomUUID()
     private filterHandler   : FilterHandler<Row>
     private field           : Field<Row>
-    private uid             : string
-    private check           : Check<Row>
-    public  value           = $state<string>('')
+    private check           : Check
 
-    constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check<Row>)
+    constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check)
     {
         this.filterHandler  = filterHandler
         this.field          = field
-        this.uid            = 'f_' + (Math.random()).toString(28).substring(2)
         this.check          = check ?? comparator.isLike
         this.cleanup()
     }
 
-    public set(check?: Check<Row>)
+    public set(check?: Check)
     {
-        this.filterHandler.set(this.value, this.field, check ?? this.check, this.uid)
+        this.filterHandler.set(this.value, this.field, check ?? this.check, this.id)
     }
 
     public clear()
     {
         this.value = ''
-        this.filterHandler.unset(this.uid)
+        this.filterHandler.unset(this.id)
     }
 
     private cleanup()

@@ -1,14 +1,12 @@
 <script lang="ts">
-    import type { Method, Property } from '$site/api'
     import Prism from 'prismjs'
     import 'prism-svelte'
     import 'prismjs/components/prism-typescript.js'
 
-    let { methods, properties }: { methods: Method[], properties: Property[] } = $props()
-
+    let { methods, properties }: { methods: any[], properties: any[] } = $props()
 </script>
 
-<section>
+<section class="thin-scrollbar">
     {#each properties as property}
     <article class="flex">
         <span class="key">prop</span>
@@ -25,12 +23,14 @@
 
 <style>
     section {
+        position: relative;
         max-width: 800px;
         border: 1px solid var(--grey);
-        border-radius: 8px;
+        border-radius: 4px;
         margin: 24px 0;
         padding: 16px 24px;
         color: var(--font);
+        overflow-x: auto;
     }
     article {
         font-family: JetBrains;
@@ -41,7 +41,7 @@
         border: none;
     }
     span.key {
-        width: 64px;
+        min-width: 64px;
         color: var(--font-grey);
         margin-right: 4px;
     }

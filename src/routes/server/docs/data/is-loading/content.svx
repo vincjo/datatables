@@ -1,0 +1,22 @@
+
+# Is loading
+
+Table gives a `isLoading` state property to help with transitions.
+
+```svelte
+<Datatable {table}>
+    <div class="spinner" class:active={table.isLoading}></div>
+    <table>
+        [...]
+    </table>
+</Datatable>
+
+<style>
+    div.spinner {
+        display: none;
+    }
+    div.spinner.active {
+        display: block;
+    }
+</style>
+```

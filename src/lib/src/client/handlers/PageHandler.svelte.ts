@@ -28,4 +28,9 @@ export default class PageHandler<Row>
     {
         this.goto(this.table.currentPage + 1)
     }
+
+    public last()
+    {
+        this.goto(this.table.pageCount)
+    }
 }

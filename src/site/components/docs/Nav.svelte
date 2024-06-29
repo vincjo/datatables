@@ -1,13 +1,13 @@
 <script lang="ts">
     import { TableHandler } from '$lib/src/client'
     import { getPath, url } from 'gros/page'
+    import Search from '../Nav_Search.svelte'
     let { nav }: { nav: any } = $props()
     const table = new TableHandler(nav)
-    const search = table.createSearch()
 </script>
 
 <nav class="thin-scrollbar">
-    <input type="text" placeholder="Search..." spellcheck="false" bind:value={search.value} oninput={() => search.set()}/>
+    <Search {table}/>
     <section class="thin-scrollbar">
         {#each table.rows as item}
             <h1 class="flex">
@@ -23,12 +23,6 @@
 
 
 <style>
-    input {
-        background: var(--bg);
-        border: 1px solid var(--grey);
-        color: var(--font);
-        width: 100%;
-    }
     nav {
         position: absolute;
         top:0;

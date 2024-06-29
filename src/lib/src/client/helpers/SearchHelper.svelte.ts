@@ -1,5 +1,5 @@
-import { type Field, check }    from '$lib/src/client'
-import type SearchHandler       from '../handlers/SearchHandler.svelte'
+import { type Field }       from '$lib/src/client'
+import type SearchHandler   from '../handlers/SearchHandler.svelte'
 
 export default class SearchHelper<Row>
 {

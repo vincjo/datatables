@@ -1,6 +1,6 @@
 <script>
-    export let types
-    $: [typ1, typ2] = types
+    let { types } = $props()
+    const [ typ1, typ2 ] = $derived(types)
 </script>
 
 <b>{typ1.type.name}</b>

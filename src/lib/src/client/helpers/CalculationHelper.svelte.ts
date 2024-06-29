@@ -3,7 +3,7 @@ import { parseField, sort } from '$lib/src/client/utils'
 
 export default class CalcultationHelper<Row>
 {
-    private callback    : (row: Row) => Row[keyof Row]
+    private callback    : (row: Row) => unknown
     private precision   : number
     private table       : TableHandler<Row>
 
@@ -13,7 +13,7 @@ export default class CalcultationHelper<Row>
         this.callback   = parseField(field).callback
     }
 
-    public distinct(params?: { sort: [key: 'value' | 'count', direction: 'asc' | 'desc'] }): { value: string, count: number }[]
+    public distinct(sortBy?: { field: 'value' | 'count', direction?: 'asc' | 'desc' }): { value: string, count: number }[]
     {
         const values = this.table.allRows.map(row => this.callback(row)) as any[]
 
@@ -28,11 +28,11 @@ export default class CalcultationHelper<Row>
             return acc
         }, {})
         const result = Object.entries(aggregate).map(([value, count]) => ({ value, count }))
-        if (params) {
-            const [key, direction] = params.sort
+        if (sortBy) {
+            const { field, direction } = sortBy
             return result.sort((x, y) => {
-                const [a, b] = [x[key], y[key]]
-                return sort[direction](a, b)
+                const [a, b] = [x[field], y[field]]
+                return sort[direction ?? 'asc'](a, b)
             })
         }
         return result

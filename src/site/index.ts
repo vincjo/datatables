@@ -6,9 +6,9 @@ export { default as Banner } from './Banner.svelte'
 export const site = new Site()
 
 export const internal = {
-    properties  : ['$$slot_def', '$$prop_def', '$$events_def', '$$bindings'],
+    properties  : [],
     types       : ['Sort', 'SearchType'],
-    methods     : ['$destroy', '$on', '$set'],
+    methods     : [],
 }
 
 export const deprcated = {

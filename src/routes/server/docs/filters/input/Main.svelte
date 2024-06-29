@@ -1,7 +1,7 @@
 <script lang="ts">
     import { TableHandler, Datatable, Th, ThFilter, Pagination, type State } from '$lib/src/server'
     import { reload } from './api'
-    export let data: any[]
+    let { data }: { data: any[] } = $props()
 
     const table = new TableHandler(data, { rowsPerPage: 10 })
 

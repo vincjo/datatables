@@ -1,40 +1,38 @@
-import type { Field } from '$lib/src/client'
+import type { Field, SortParams }   from '$lib/src/client'
 import type SortHandler from '../handlers/SortHandler.svelte'
-import type { Params } from '../handlers/SortHandler.svelte'
 
 
 export default class SortHelper<Row>
 {
+    public  direction       = $derived<'asc' | 'desc'>(this.createDirection())
+    public  isActive        = $derived<boolean>(this.createIsActive())
+    private id              = crypto.randomUUID()
     private sortHandler     : SortHandler<Row>
     private field           : Field<Row>
-    private uid             : string
-    public  isActive        = $derived<boolean>(this.createIsActive())
-    public  direction       = $derived<'asc' | 'desc'>(this.createDirection())
-    private params          : Params
+    private params          : SortParams
 
-    constructor(sortHandler: SortHandler<Row>, field: Field<Row>, params: Params)
+    constructor(sortHandler: SortHandler<Row>, field: Field<Row>, params: SortParams)
     {
         this.sortHandler    = sortHandler
         this.field          = field
-        this.uid            = 's_' + (Math.random()).toString(28).substring(2)
         this.params         = params ?? {}
     }
 
     public set()
     {
-        this.sortHandler.set(this.field, this.uid, this.params)
+        this.sortHandler.set(this.field, this.id, this.params)
         this.sortHandler.dispatch()
     }
 
     public asc()
     {
-        this.sortHandler.asc(this.field, this.uid, this.params)
+        this.sortHandler.asc(this.field, this.id, this.params)
         this.sortHandler.dispatch()
     }
 
     public desc()
     {
-        this.sortHandler.desc(this.field, this.uid, this.params)
+        this.sortHandler.desc(this.field, this.id, this.params)
         this.sortHandler.dispatch()
     }
 
@@ -45,7 +43,7 @@ export default class SortHelper<Row>
 
     private createIsActive()
     {
-        if (this.uid === this.sortHandler['table']['sort']?.identifier) {
+        if (this.id === this.sortHandler['table']['sort']?.id) {
             return true
         }
         return false

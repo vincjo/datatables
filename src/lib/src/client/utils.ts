@@ -1,41 +1,37 @@
 import { type Row, type Field, type Check, type Criterion, check } from '$lib/src/client'
+import type { UUID } from 'crypto'
 
-export const isNull = (value: any) => {
+export const isNull = (value: unknown) => {
     if (value === null || value === undefined || value === '') return true
     return false
 }
-export const isNotNull = (value: any) => { return !isNull(value) }
+export const isNotNull = (value: unknown) => { return !isNull(value) }
 
-export const stringify = (value: any = null) => {
+export const stringify = (value: unknown = null) => {
     return String(value)
         .toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
 }
 
-export const parseField = (field: Field<any>, uid?: string) => {
-    const identifier = uid ?? field.toString()
+export const parseField = (field: Field<any>, uuid?: UUID) => {
     if (typeof field === 'string') {
         return {
             callback: (row: Row) => row[field],
-            identifier,
-            key: field as string,
+            id: uuid,
+            key: field,
         }
     } else if (typeof field === 'function') {
         return {
             callback: field,
-            identifier,
+            id: uuid,
             key: undefined,
         }
     }
     throw new Error(`Invalid field argument: ${String(field)}`)
 }
 
-export const match = (
-    entry: Row[keyof Row],
-    value: string|number|boolean|symbol|Criterion[],
-    compare: Check<any> = check.isLike
-) => {
+export const match = (entry: unknown, value: unknown | Criterion[], compare: Check = check.isLike) => {
     if (isNull(value)) return true
 
     if (!entry) return compare(entry, value)
@@ -45,19 +41,18 @@ export const match = (
             return match(entry[k], value, compare)
         })
     }
-    // else if (Array.isArray(entry))
     if (!compare) return check.isLike(entry, value)
     return compare(entry, value)
 }
 
 export const nestedFilter = (
-    entry: any,
-    value: any,
+    entry: unknown,
+    value: unknown,
     highlight = false,
-    compare: Check<any> = undefined,
+    compare: Check = undefined,
 ) => {
     if (Array.isArray(entry)) {
-        entry = entry.filter((item: any) => {
+        entry = entry.filter((item: unknown) => {
             const check = match(item, value, compare)
             if (typeof item === 'object' && check === true) {
                 for (const k of Object.keys(item)) {
@@ -85,7 +80,7 @@ const emphasize = (entry: string | number, value: string) => {
     return String(entry).replace(exp, `<u class="highlight">$&</u>`)
 }
 
-export const deepEmphasize = (row: Row, callback: (row: Row) => any, value: string) => {
+export const deepEmphasize = (row: Row, callback: (row: Row) => unknown, value: string) => {
     const path = callback.toString()
         .split('=>')[1]
         .replace(/\(\)/g, '')

@@ -1,5 +1,6 @@
 export { default as TableHandler } from './TableHandler.svelte'
 export { check } from './Comparator'
+import type { UUID } from 'crypto'
 
 export {
     Datatable,
@@ -17,29 +18,34 @@ export type Row = { [key: string]: any  }
 export type Field<Row> = keyof Row | ((row: Row) => unknown)
 
 export type Filter<Row> = {
-    callback: (row: Row) => Row[keyof Row]
-    identifier: string
-    value?: string | number | boolean | symbol | Criterion[]
-    check?: Check<Row>
+    callback: (row: Row) => unknown
+    id: UUID,
+    value?: unknown | Criterion[]
+    check?: Check
     key?: string,
 }
 
 export type SearchType<Row> = {
     value: string,
     scope?: Field<Row>[],
-    check?: Check<Row>
+    check?: Check
 }
 
 export type Sort<Row> = {
     callback?: (row: Row) => Row[keyof Row]
-    identifier?: string
+    id?: UUID
     direction?: 'asc' | 'desc'
     key?: string,
 }
 
-export type Check<Row> = (entry: Row[keyof Row], value: any) => boolean
+export type SortParams = {
+    locales?: Intl.LocalesArgument,
+    options?: Intl.CollatorOptions
+}
 
-export type TableHandlerParams = {
+export type Check = (a: unknown, b: unknown) => boolean
+
+export type TableParams = {
     rowsPerPage?: number,
     selectBy?: string,
     highlight?: boolean,
@@ -48,7 +54,7 @@ export type TableHandlerParams = {
 
 export type Criterion = {
     value: string | number | number[],
-    check: Check<Row>
+    check: Check
 }
 
 export type Internationalization = {
