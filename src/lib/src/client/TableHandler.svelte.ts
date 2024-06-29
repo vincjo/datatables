@@ -1,4 +1,4 @@
-// import { untrack }              from 'svelte'
+import { untrack }              from 'svelte'
 import AbstractTableHandler     from './AbstractTableHandler.svelte'
 
 import SortHandler              from './handlers/SortHandler.svelte'
@@ -44,10 +44,10 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public setRows(data: T[])
     {
         this.rawRows = data
-        // untrack(() => {
-        //     this.event.dispatch('change')
-        //     this.sortHandler.apply()
-        // })
+        untrack(() => {
+            this.event.dispatch('change')
+            this.sortHandler.apply()
+        })
     }
 
     public setRowsPerPage(value: number): void

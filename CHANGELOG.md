@@ -1,3 +1,11 @@
+# 2.0.0-runes.29 - 2024-06-30
+
+<!-- ### Added -->
+<!-- ### Changed -->
+### Fixed
+- client-side: untrack sort and event dispatcher when rows are updated.
+
+
 # 2.0.0-runes.28 - 2024-06-30
 
 <!-- ### Added -->
