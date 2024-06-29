@@ -73,7 +73,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 
     public createSearch(scope?: Field<T>[]): SearchHelper<T>
     {
-        return new SearchHelper(this, scope)
+        return new SearchHelper(this.searchHandler, scope)
     }
 
     public createRecordFilter(records?: Row[]): RecordFilterHelper

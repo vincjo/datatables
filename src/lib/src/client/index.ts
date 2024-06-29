@@ -24,6 +24,12 @@ export type Filter<Row> = {
     key?: string,
 }
 
+export type SearchType<Row> = {
+    value: string,
+    scope?: Field<Row>[],
+    check?: Check<Row>
+}
+
 export type Sort<Row> = {
     callback?: (row: Row) => Row[keyof Row]
     identifier?: string

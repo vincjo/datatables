@@ -1,48 +1,37 @@
-import type { Field }       from '$lib/src/client'
-import type TableHandler    from '../TableHandler.svelte'
-import { check }            from '$lib/src/client'
-import { parseField }       from '../utils'
+import { type Field, check }    from '$lib/src/client'
+import type SearchHandler       from '../handlers/SearchHandler.svelte'
 
 export default class SearchHelper<Row>
 {
     public  value           = $state<string>('')
-    public  scope           = $state<Field<Row>[]>([])
-    public  uid             : string
-    private table           : TableHandler<Row>
+    private scope           : Field<Row>[]
+    private searchHandler   : SearchHandler<Row>
 
-    constructor(table: TableHandler<Row>, scope: Field<Row>[])
+    constructor(searchHandler: SearchHandler<Row>, scope?: Field<Row>[])
     {
-        this.table                  = table
-        this.table['searchScope']   = scope
-        this.uid                    = 'm_' + (Math.random()).toString(28).substring(2)
+        this.searchHandler  = searchHandler
+        this.scope          = scope
         this.cleanup()
     }
 
     public set()
     {
-        this.table['search'] = this.value
+        this.searchHandler.set(this.value, this.scope)
     }
 
     public regex()
     {
-        if (!this.value) {
-            return this.table['filterHandler'].unset(this.uid)
-        }
-        // if (this.table['searchScope']) {
-        //     const fields = this.table['searchScope'].map(field => parseField(field))
-        // }
-        this.table['filterHandler'].set(this.value, (row) => row, check.match, this.uid)
+        this.searchHandler.regex(this.value, this.scope)
     }
 
     public clear()
     {
         this.value = ''
-        this.table['search'] = ''
-        this.table['filterHandler'].unset(this.uid)
+        this.searchHandler.clear()
     }
 
     private cleanup()
     {
-        this.table.on('clearSearch', () => this.clear())
+        this.searchHandler['table'].on('clearSearch', () => this.clear())
     }
 }

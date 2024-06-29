@@ -13,11 +13,11 @@ export default class CalcultationHelper<Row>
         this.callback   = parseField(field).callback
     }
 
-    public distinct(params?: { sort: [key: 'value' | 'count', direction: 'asc' | 'desc'] }): { value: string; count: number }[]
+    public distinct(params?: { sort: [key: 'value' | 'count', direction: 'asc' | 'desc'] }): { value: string, count: number }[]
     {
         const values = this.table.allRows.map(row => this.callback(row)) as any[]
 
-        const aggregat: { [key: string ]: number } = values.reduce((acc, curr) => {
+        const aggregate: { [key: string ]: number } = values.reduce((acc, curr) => {
             if (Array.isArray(curr)) {
                 for (const item of curr) {
                     acc[item] = (acc[item] ?? 0) + 1
@@ -27,7 +27,7 @@ export default class CalcultationHelper<Row>
             acc[curr] = (acc[curr] ?? 0) + 1
             return acc
         }, {})
-        const result = Object.entries(aggregat).map(([value, count]) => ({ value, count }))
+        const result = Object.entries(aggregate).map(([value, count]) => ({ value, count }))
         if (params) {
             const [key, direction] = params.sort
             return result.sort((x, y) => {

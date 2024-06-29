@@ -1,6 +1,6 @@
-import type { Filter, Sort, Field, TableHandlerParams } from '$lib/src/client'
+import type { Filter, Sort, Field, SearchType, TableHandlerParams } from '$lib/src/client'
 import { parseField, match, nestedFilter, deepEmphasize } from './utils'
-import EventDispatcher from '$lib/src/shared/EventDispatcher'
+import { EventDispatcher } from '$lib/src/shared'
 
 
 export default abstract class AbstractTableHandler<Row>
@@ -9,8 +9,7 @@ export default abstract class AbstractTableHandler<Row>
     protected highlight         : boolean
     protected event             = new EventDispatcher()
     protected rawRows           = $state.frozen<Row[]>([])
-    protected searchScope       = $state<(Field<Row>)[]>(null)
-    protected search            = $state<string>('')
+    protected search            = $state<(SearchType<Row>)>({ value: null, scope: undefined })
     protected selectScope       = $state<'all' | 'currentPage'>('currentPage')
     protected sort              = $state<(Sort<Row>)>({})
 
@@ -40,22 +39,22 @@ export default abstract class AbstractTableHandler<Row>
     private createAllRows()
     {
         let allRows = structuredClone(this.rawRows)
-        if (this.search) {
+        if (this.search.value) {
             allRows = allRows.filter((row) => {
-                const fields = this.searchScope ?? Object.keys(row) as Field<Row>[]
+                const fields = this.search.scope ?? Object.keys(row) as Field<Row>[]
                 const scope = fields.map((field: Field<Row>) => {
                     return parseField(field)
                 })
                 for(const { key, callback } of scope) {
                     if (key) {
-                        row[key] = nestedFilter(row[key], this.search, this.highlight)
+                        row[key] = nestedFilter(row[key], this.search.value, this.highlight)
                     }
                     else if (this.highlight) {
-                        row = deepEmphasize(row, callback, this.search) as Row
+                        row = deepEmphasize(row, callback, this.search.value) as Row
                     }
                 }
                 return scope.some(({ callback }) => {
-                    return match(callback(row), this.search)
+                    return match(callback(row), this.search.value, this.search.check)
                 })
             })
             this.currentPage = 1

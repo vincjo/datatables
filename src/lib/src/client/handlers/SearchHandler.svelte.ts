@@ -1,29 +1,27 @@
-import type { TableHandler, Field } from '$lib/src/client'
+import { type TableHandler, type Field, check } from '$lib/src/client'
 
-export default class SearchHandler<Row> 
+export default class SearchHandler<Row>
 {
-    private table : TableHandler<Row>
+    private table: TableHandler<Row>
 
-    constructor(table: TableHandler<Row>) 
+    constructor(table: TableHandler<Row>)
     {
         this.table = table
     }
 
-    public set(value: string, scope: Field<Row>[] = null)
+    public set(value: string, scope?: Field<Row>[])
     {
-        this.table['search'] = value ?? ''
-        this.table['searchScope'] = scope ?? null
+        this.table['search'] = { value: value, scope: scope }
     }
 
-    public regex(pattern: string, scope:Field<Row>[] = null)
+    public regex(pattern: string, scope?: Field<Row>[])
     {
-        this.table['search'] = pattern ?? ''
-        this.table['searchScope'] = scope ?? null
+        this.table['search'] = { value: pattern, scope: scope, check: check.match }
     }
 
     public clear()
     {
-        this.table['search'] = ''
+        this.table['search'] = { value: '' }
         this.table['event'].dispatch('change')
         this.table['event'].dispatch('clearSearch')
     }
