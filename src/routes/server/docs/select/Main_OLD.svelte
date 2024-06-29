@@ -1,18 +1,12 @@
-<script lang="ts">
-    import { TableHandler, Datatable, Th, type State } from '$lib/src/server'
-    import { reload } from './api'
+<script>
+    import data from '$site/data/data'
+    import { TableHandler, Datatable, ThSort, Th } from '$lib/src/client'
 
-    type Props = {
-        data: { users: any[], total: number },
-        all?: boolean
-    }
+    let { all = false, scope = 'currentPage' } = $props()
 
-    let { data, all = false }: Props = $props()
-
-    const table = new TableHandler(data.users, { rowsPerPage: 10, totalRows: data.total, selectBy: 'id' })
-
-    table.load( (state: State) => reload(state) )
+    const table = new TableHandler(data, { selectBy: 'id', rowsPerPage: 10 })
 </script>
+
 
 <section class="bg-darken">
     <Datatable basic {table}>
@@ -21,16 +15,15 @@
                 <tr>
                     <Th>
                         {#if all}
-                            <button class="btn" type="button" onclick={() => table.selectAll()}>
+                            <button class="btn" type="button" onclick={() => table.selectAll({ scope: scope })}>
                                 <i class="micon">{table.isAllSelected ? 'check_box' : 'check_box_outline_blank'}</i>
                                 Select all
                             </button>
                         {/if}
                     </Th>
-                    <Th>Avatar</Th>
-                    <Th>Fristname</Th>
-                    <Th>Lastname</Th>
-                    <Th>Age</Th>
+                    <ThSort {table} field="id">id</ThSort>
+                    <ThSort {table} field="first_name">first_name</ThSort>
+                    <ThSort {table} field="last_name">last_name</ThSort>
                 </tr>
             </thead>
             <tbody>
@@ -42,12 +35,9 @@
                                 Select me
                             </button>
                         </td>
-                        <td>
-                            <img src="{row.image}" alt="avatar" />
-                        </td>
-                        <td>{row.firstName}</td>
-                        <td>{row.lastName}</td>
-                        <td>{row.age}</td>
+                        <td>{row.id}</td>
+                        <td>{row.first_name}</td>
+                        <td>{row.last_name}</td>
                     </tr>
                 {/each}
             </tbody>
@@ -55,18 +45,14 @@
     </Datatable>
 </section>
 
+
 <style>
     section {
         border-radius: 8px;
+        padding: 16px 40px 0 40px;
+        width: 800px;
+        margin: 16px 0;
         border: 1px solid var(--grey);
-        width: 600px;
-        padding: 0 24px;
-    }
-    img {
-        height: 24px;
-        width: 24px;
-        object-fit: cover;
-        /* border-radius: 50%; */
     }
     tr.active {
         background: var(--primary-lighten-1);

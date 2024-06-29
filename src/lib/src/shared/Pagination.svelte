@@ -6,7 +6,7 @@
 
 <section>
     {#if table.pages === undefined}
-        {@render nopages()}
+        {@render nopage()}
     {:else if table.clientWidth < 600}
         {@render small()}
     {:else}
@@ -16,7 +16,7 @@
 
 
 
-{#snippet nopages()}
+{#snippet nopage()}
     <button type="button" class="small" class:disabled={table.currentPage === 1} onclick={() => table.setPage('previous')}>
         &#10094;
     </button>

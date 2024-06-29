@@ -4,9 +4,9 @@
 ```ts
 const view = table.createView([
     { index: 0, name: 'ID', isVisible: false },
-    { index: 1, name: 'First name' },
-    { index: 2, name: 'Last name' },
-    { index: 3, name: 'Email' },
+    { index: 1, name: 'Name' },
+    { index: 2, name: 'Email' },
+    { index: 3, name: 'Comment' },
 ])
 ```
 
