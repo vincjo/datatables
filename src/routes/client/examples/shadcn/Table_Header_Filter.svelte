@@ -7,7 +7,7 @@
     type Props = { table: TableHandler, key: string }
     let { table, key }: Props = $props()
 
-    const distinct = table.createCalculation(key).distinct()
+    const distinct = table.createCalculation(key).distinct({ field: 'count', direction: 'desc' })
     const search = table.createRecordFilter(distinct)
     const filter = table.createAdvancedFilter(key)
 </script>

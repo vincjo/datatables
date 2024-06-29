@@ -1,5 +1,5 @@
 
-# Load function
+# Load method
 
 The load method gives you access to the table state.
 

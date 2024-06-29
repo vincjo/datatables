@@ -1,9 +1,9 @@
 <script lang="ts">
     import { TableHandler, Datatable, Th, RowCount, Pagination, type State } from '$lib/src/server'
-    import { reload } from './api'
+    import { reload, initial } from './api'
     import { RingLoader } from 'svelte-loading-spinners'
 
-    const table = new TableHandler([], { rowsPerPage: 5 })
+    const table = new TableHandler(initial, { rowsPerPage: 5 })
 
     table.load((state: State) => reload(state))
     table.invalidate()
@@ -14,7 +14,7 @@
     <h1>is loading: <span>{table.isLoading}</span></h1>
 
     <Datatable {table}>
-        <div class="spin flex" class:active={table.isLoading}><RingLoader size="120" color="var(--secondary)" unit="px" duration="0.8s"/></div>
+        <div class="spin flex" class:active={table.isLoading}><RingLoader size="96" color="var(--secondary)" unit="px" duration="0.8s"/></div>
         <table>
             <thead>
                 <tr>
@@ -54,6 +54,7 @@
         border: 1px solid var(--grey);
         width: 480px;
         margin-bottom: 96px;
+        min-height: 320px;
     }
     tbody.loading {
         opacity: 0.2;
