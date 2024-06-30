@@ -11,11 +11,6 @@ To display pagination buttons, you'll need at least to know the total row count 
 ```ts
 const table = new TableHandler(initialData, { rowsPerPage: 10, totalRows: 150 })
 ```
-`totalRows` can be set at anytime, for example once you received data from the server:
-
-```ts
-table.setTotalRows(number)
-```
 
 Most of the time, `totalRows` is given back from the server with each request: 
 ```json
@@ -27,8 +22,8 @@ Most of the time, `totalRows` is given back from the server with each request:
 ```
 `state` exposes a `setTotalRows()` function:
 ```ts
-table.load((state) => {
-    // fetch data...
+table.load(async (state) => {
+    // [fetching data...]
     state.setTotalRows(json.count)
     return json.data
 })

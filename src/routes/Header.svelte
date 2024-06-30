@@ -22,9 +22,10 @@
             <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}">Docs</a>
             <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}">Examples</a>
             <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/${site.mode}/api`)}">API</a>
+            <!-- <a class="menu" class:active={$page.url.pathname.indexOf('/components') > -1} href="{site.getPath(`/components`)}">Components</a> -->
             {#if dev}
-                <a class="menu" class:active={$page.url.pathname.indexOf('/gen') > -1}   href="{site.getPath(`/${site.mode}/gen`)}">[gen]</a>
-                <a class="menu" class:active={$page.url.pathname.indexOf('/md') > -1}   href="{site.getPath(`/${site.mode}/md`)}">[md]</a>
+                <a class="menu dev" class:active={$page.url.pathname.indexOf('/gen') > -1}   href="{site.getPath(`/${site.mode}/gen`)}">[gen]</a>
+                <a class="menu dev" class:active={$page.url.pathname.indexOf('/md') > -1}   href="{site.getPath(`/${site.mode}/md`)}">[md]</a>
             {/if}
         </aside>
         <aside class="flex">
@@ -81,15 +82,21 @@
         font-family: Archivo;
     }
     a.menu {
-        margin-left: 16px;
+        margin-left: 8px;
         color: var(--font-grey);
         font-size: 16px;
         transition: color, 0.2s;
         padding: 6px 16px;
         border-radius: 4px;
     }
+    a.menu.dev {
+        font-family: JetBrains;
+        margin: 0 4px;
+        font-size: 10px;
+        padding: 6px 2px;
+    }
     a.menu:hover {
-        font-size: 16px;
+        background: var(--grey-lighten);
     }
     a.menu.active {
         color: var(--primary);

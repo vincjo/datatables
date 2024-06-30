@@ -1,7 +1,17 @@
 <script lang="ts">
     import Nav from './Nav.svelte'
     import MobibleNav from './Nav_Mobile.svelte'
+    import type { Snippet } from 'svelte'
+    import { url } from 'gros/page'
     let { data, children } = $props()
+
+
+    let element: HTMLElement
+    $effect(() => {
+        $url
+        if (element) element.scrollTop = 0
+    })
+
 </script>
 
 <svelte:head>
@@ -11,7 +21,7 @@
 
 <Nav nav={data.nav}/>
 <MobibleNav nav={data.nav}/>
-<section class="thin-scrollbar">
+<section class="thin-scrollbar" bind:this={element}>
     <div>
         {@render children()}
     </div>

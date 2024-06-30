@@ -58,6 +58,8 @@
         padding: 0;
         width: 40px;
         height: 32px;
+    }
+    .mobile a {
         opacity: .4;
     }
     a:first-child {

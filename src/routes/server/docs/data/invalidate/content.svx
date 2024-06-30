@@ -1,7 +1,7 @@
 
 # Invalidate
 
-The invalidate method runs your load function and updates table's data.
+The invalidate method runs your data fetching function and updates table rows.
 
 ```ts
 table.invalidate()
