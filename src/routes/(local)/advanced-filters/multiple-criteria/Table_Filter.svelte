@@ -8,7 +8,7 @@
             .flat()
     })
     const filter = handler.createAdvancedFilter('type')
-    const selected = filter.get()
+    const selected = filter.getSelected()
 </script>
 
 
