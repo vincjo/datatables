@@ -3,16 +3,16 @@ import type { TableHandler, ViewColumn } from '$lib/src/client'
 
 export default class ViewHelper<Row>
 {
-    public  columns = $state<ViewColumn[]>([])
-    private table   : TableHandler<Row>
-    private interval: any
-    private mutation: MutationObserver
+    public  columns     = $state<ViewColumn[]>([])
+    private table       : TableHandler<Row>
+    private interval    : any
+    private mutation    : MutationObserver
 
     constructor(table: TableHandler<Row>, columns: ViewColumn[])
     {
-        this.table   = table
-        this.columns = []
-        this.interval = setInterval(() => this.createColumns(columns), 200)
+        this.table      = table
+        this.columns    = []
+        this.interval   = setInterval(() => this.createColumns(columns), 200)
     }
 
     public toggle(name: string)

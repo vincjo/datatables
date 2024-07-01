@@ -21,10 +21,12 @@
     --grey-lighten: #eee;
     --grey-lighten-2: #f5f5f5;
     --grey-lighten-3: #fafafa;
+    /* --bg: #f4f6f8; */
+    /* --bg: #f4ecf1; */
     --bg: #fff;
     --font: #424242;
     --font-grey: #757575;
-    --bg-gradient: linear-gradient(180deg, #e0e8ee 0%, #feffff 40%, #fff 100%);
+    --bg-gradient: linear-gradient(180deg, #dfe8eb 0%, #feffff 40%, #fff 100%);
     --bg-code: #f5f7ff;
 }
 .thin-scrollbar::-webkit-scrollbar, pre::-webkit-scrollbar {
@@ -128,7 +130,6 @@
     --secondary-lighten-2: rgba(220, 231, 117, 0.2);
     --secondary-lighten-3: rgba(220, 231, 117, 0.3);
     --secondary-darken: #9e9d24;
-
 }
 
 [data-theme="dark"] .bg-darken {

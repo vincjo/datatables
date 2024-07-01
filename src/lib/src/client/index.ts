@@ -43,7 +43,7 @@ export type SortParams = {
     options?: Intl.CollatorOptions
 }
 
-export type Check = (a: unknown, b: unknown) => boolean
+export type Check = (entry: unknown, value: unknown) => boolean
 
 export type TableParams = {
     rowsPerPage?: number,

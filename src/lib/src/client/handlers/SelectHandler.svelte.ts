@@ -25,14 +25,14 @@ export default class SelectHandler<Row>
         const selection = rows.map((row) => row[this.table['selectBy']])
         if (this.table['selectScope'] === 'currentPage') {
             if (this.table.isAllSelected) {
-                this.table.selected = this.table.selected.filter(item => selection.includes(item as any) === false)
+                this.table.selected = this.table.selected.filter(item => selection.includes(item) === false)
             }
             else {
                 this.table.selected = [...selection, ...this.table.selected]
             }
         }
         else {
-            this.table.isAllSelected ? this.clear() : this.table.selected = selection as any
+            this.table.isAllSelected ? this.clear() : this.table.selected = selection
         }
     }
 

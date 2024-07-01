@@ -3,7 +3,7 @@
 </script>
 
 
-# Tree structure
+# Tree view
 
 <Main/>
 

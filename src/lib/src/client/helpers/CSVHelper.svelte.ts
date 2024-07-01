@@ -6,7 +6,7 @@ export default class CSVHelper<Row>
 
     constructor(table: TableHandler<Row>)
     {
-        this.table  = table
+        this.table = table
     }
 
     public download(filename: string)

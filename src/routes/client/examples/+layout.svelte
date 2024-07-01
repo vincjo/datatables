@@ -29,7 +29,7 @@
         {
             title: `Tree view`,
             page: 'tree',
-            description: `Search on a tree structure`,
+            description: `Search on a deep tree with highlighting`,
             tag: ['tree', 'folder', 'file', 'recursive', 'nested']
         },
         {

@@ -45,12 +45,7 @@ export const match = (entry: unknown, value: unknown | Criterion[], compare: Che
     return compare(entry, value)
 }
 
-export const nestedFilter = (
-    entry: unknown,
-    value: unknown,
-    highlight = false,
-    compare: Check = undefined,
-) => {
+export const nestedFilter = (entry: unknown, value: unknown, highlight = false, compare: Check = undefined) => {
     if (Array.isArray(entry)) {
         entry = entry.filter((item: unknown) => {
             const check = match(item, value, compare)

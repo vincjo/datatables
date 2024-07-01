@@ -41,7 +41,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.searchHandler  = new SearchHandler(this)
     }
 
-    public setRows(data: T[])
+    public setRows(data: T[]): void
     {
         this.rawRows = data
         untrack(() => {
@@ -107,7 +107,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new FilterHelper(this.filterHandler, field, check)
     }
 
-    public select(value: T[keyof T])
+    public select(value: T[keyof T]): void
     {
         this.selectHandler.set(value)
     }
@@ -154,7 +154,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return this.view
     }
 
-    private translate(i18n: Internationalization)
+    private translate(i18n: Internationalization): void
     {
         this.i18n = {
             ...{

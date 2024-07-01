@@ -21,7 +21,7 @@
     }
     div {
         color: var(--font);
-        background: var(--ternary);
+        background: var(--grey);
         border-radius: 8px 8px 0 0;
         width: 80px;
         height: 32px;

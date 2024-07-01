@@ -1,7 +1,12 @@
-# 2.0.0-runes.29 - 2024-06-30
+# 2.0.0-runes.30 - 2024-07-01
 
 <!-- ### Added -->
 <!-- ### Changed -->
+### Fixed
+- client-side: refactor / improve types
+
+# 2.0.0-runes.29 - 2024-06-30
+
 ### Fixed
 - client-side: untrack sort and event dispatcher when rows are updated.
 

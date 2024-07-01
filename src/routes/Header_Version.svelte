@@ -8,7 +8,7 @@
         v2
     </aside>
     {#snippet content()}
-        <article class="flex bg-darken z-depth-2">
+        <article class="flex z-depth-2">
             <a href="https://vincjo.fr/datatables.v1">v1</a>
             <a href="https://vincjo.fr/datatables.deprecated">v0</a>
         </article>
@@ -37,6 +37,7 @@
         margin-top: 16px; 
         justify-content: center;
         align-items: center;
+        border: 1px solid var(--grey);
     }
     a {
         height: 24px;
