@@ -2,17 +2,12 @@
     import myData from '$site/data/data'
     import { DataHandler, check, Datatable, Th, ThFilter } from '$lib/local'
 
-    const handler = new DataHandler(myData, { rowsPerPage: 50, selectBy: 'id' })
+    const handler = new DataHandler(myData, { rowsPerPage: 50 })
     const rows = handler.getRows()
     const selected = handler.getSelected()
-    const isAllSelected = handler.getIsAllSelected()
-    const rowCount = handler.getRowCount()
+    const isAllSelected = handler.isAllSelected()
 </script>
 
-<aside class="flex">
-    <p>{$rowCount.selected} of {$rowCount.total} row(s) selected</p>
-    <button on:click={() => handler.clearSelection()}>Clear</button>
-</aside>
 
 <Datatable {handler}>
     <table>
@@ -21,7 +16,7 @@
                 <th class="selection">
                     <input
                         type="checkbox"
-                        on:click={() => handler.selectAll({ scope: 'currentPage' })}
+                        on:click={() => handler.selectAll({ selectBy: 'id', scope: 'currentPage' })}
                         checked={$isAllSelected}
                     />
                 </th>
@@ -91,23 +86,5 @@
     }
     td.selection {
         padding-left: 24px;
-    }
-    aside {
-        max-width: 280px;
-        justify-content: space-between;
-        margin: 8px 16px 4px 16px;
-        padding: 4px 4px 4px 8px;
-        border: 1px solid #e0e0e0;
-        background: #eee;
-        border-radius: 4px;
-    }
-    aside p {
-        margin: 0;
-    }
-    aside button {
-        margin: 0 8px;
-        padding: 4px;
-        background: var(--primary);
-        color: #eee;
     }
 </style>
