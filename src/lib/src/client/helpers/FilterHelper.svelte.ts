@@ -4,7 +4,7 @@ import { check as comparator } from '$lib/src/client/Comparator'
 
 export default class FilterHelper<Row>
 {
-    public  value           = $state<string>('')
+    public  value           = $state<unknown>('')
     private id              = crypto.randomUUID()
     private filterHandler   : FilterHandler<Row>
     private field           : Field<Row>

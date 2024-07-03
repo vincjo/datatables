@@ -12,21 +12,23 @@ const table = new TableHandler(yourDataHere, { rowsPerPage: 10 })
 The library provides a set of pre-built components that you can use to quickly create your data table.
 
 ```ts
-import { Datatable, Search, RowsPerPage, RowCount, Pagination, } from '@vincjo/datatables'
+import { Datatable, Search, RowsPerPage, RowCount, Pagination } from '@vincjo/datatables'
 ```
 
 ```svelte
-<Search {table}>
-<RowsPerPage {table}/>
-
 <Datatable {table}>
+    {#snippet header()}
+        <Search {table}>
+        <RowsPerPage {table}/>
+    {/snippet}
     <table>
         [...]
     </table>
+    {#snippet footer()}
+        <RowCount {table}>
+        <Pagination {table}/>
+    {/snippet}
 </Datatable>
-
-<RowCount {table}>
-<Pagination {table}/>
 ```
 
 The pre-built components bring specific design choices, and may not respond to your customization requirements. They are not intended to be a fully customizable solution, but rather a starting point.

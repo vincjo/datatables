@@ -3,9 +3,8 @@
     import { data } from './data_cars'
 
     const table = new TableHandler(data)
-    const search = table.createSearch()
 
-    const distinct = table.createCalculation('make').distinct({ sort: ['value', 'asc']})
+    const distinct = table.createCalculation('make').distinct({ field: 'value', direction: 'asc' })
 
     const filter = table.createRecordFilter(distinct)
 </script>
@@ -68,9 +67,6 @@
         height: 32px;
         padding: 0 8px;
     }
-    input.search {
-        width: 280px;
-    }
     aside {
         height: 400px;
         width: 200px;
@@ -81,12 +77,6 @@
         background: var(--grey-lighten-2);
         margin-right: 24px;
     }
-    aside p {
-        margin: 0;
-        font-size: 13px;
-        color: var(--primary);
-        text-transform: uppercase;
-    }
     aside code {
         color: var(--secondary);
         font-size: 24px;
@@ -96,7 +86,6 @@
         position: relative;
         height: 320px;
     }
-
     thead {
         background: var(--bg);
     }

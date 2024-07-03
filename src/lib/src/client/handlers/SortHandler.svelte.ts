@@ -54,18 +54,13 @@ export default class SortHandler<Row>
         this.save({ id, callback, direction: 'desc' })
     }
 
-    public apply() 
-    {
-        this.restore()
-    }
-
     public clear()
     {
         this.backup = []
         this.table['sort'] = {}
     }
 
-    private restore()
+    public restore()
     {
         for (const sort of this.backup) {
             const { key, callback, direction, id } = sort

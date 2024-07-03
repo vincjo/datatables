@@ -6,7 +6,7 @@ export default class RecordFilterHelper
     public  value       = $state<string>('')
     public  records     = $derived<readonly Row[]>(this.createRecords())
     private rawRecords  = $state.frozen<Row[]>([])
-    private search      = $state<string>('')
+    private filter      = $state<string>('')
 
     constructor(records: Row[])
     {
@@ -15,13 +15,13 @@ export default class RecordFilterHelper
 
     public set()
     {
-        this.search = this.value
+        this.filter = this.value
     }
 
     private createRecords(): readonly Row[]
     {
-        if (isNotNull(this.value)) {
-            return this.rawRecords.filter(record => match(record, this.search))
+        if (isNotNull(this.filter)) {
+            return this.rawRecords.filter(record => match(record, this.filter))
         }
         return this.rawRecords
     }

@@ -46,7 +46,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.rawRows = data
         untrack(() => {
             this.event.dispatch('change')
-            this.sortHandler.apply()
+            this.sortHandler.restore()
         })
     }
 
