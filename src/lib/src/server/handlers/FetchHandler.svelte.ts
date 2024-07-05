@@ -24,7 +24,7 @@ export default class FetchHandler<Row>
         const data = await this.reload(state)
         this.table.isLoading = false
         if (data) {
-            this.table.rows = data as Row[]
+            this.table.rows = data
         }
     }
 }

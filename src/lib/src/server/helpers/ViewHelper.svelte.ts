@@ -5,7 +5,7 @@ export default class ViewHelper
 {
     public  columns = $state<ViewColumn[]>([])
     private table   : TableHandler
-    private interval: any
+    private interval: NodeJS.Timeout
     private mutation: MutationObserver
 
     constructor(table: TableHandler, columns: ViewColumn[])
@@ -82,6 +82,5 @@ export default class ViewHelper
         })
         return width
     }
-
 }
 

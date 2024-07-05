@@ -32,7 +32,7 @@ export type SearchType<Row> = {
 }
 
 export type Sort<Row> = {
-    callback?: (row: Row) => Row[keyof Row]
+    callback?: (row: Row) => unknown
     id?: UUID
     direction?: 'asc' | 'desc'
     key?: string,

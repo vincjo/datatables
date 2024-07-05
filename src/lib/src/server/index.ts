@@ -25,7 +25,7 @@ export type State = {
 
 export type Filter = {
     field: string
-    value?: any
+    value?: unknown
 }
 
 export type Sort = {
