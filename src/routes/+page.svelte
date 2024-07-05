@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { site } from '$site'
-    import Description from './Description.svelte'
+    import { site }     from '$site'
+    import Description  from './Description.svelte'
 </script>
 
 

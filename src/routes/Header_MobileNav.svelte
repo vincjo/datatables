@@ -15,7 +15,7 @@
     <nav transition:slide={{ duration: 120 }} class="thin-scrollbar">
         <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
         <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}" onclick={close}>Examples&#8599;</a>
-        <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/${site.mode}/api`)}" onclick={close}>API&#8599;</a>
+        <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/api/${site.mode}`)}" onclick={close}>API&#8599;</a>
         <!-- <a class="menu" class:active={$page.url.pathname.indexOf('/components') > -1} href="{site.getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
 
         <div class="divider"></div>

@@ -17,7 +17,7 @@
     {#if active}
         <ul transition:slide={{ duration: 200 }}>
             {#each data as item}
-                <a href="{site.getPath(`/${site.mode}/api/${key}~${item}`)}" onclick={close}>
+                <a href="{site.getPath(`/api/${site.mode}/${key}~${item}`)}" onclick={close}>
                     <li class:active={item === $page.params.slug?.split('~')[1]}>
                         <span>{item}</span>
                     </li>

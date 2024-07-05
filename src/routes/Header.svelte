@@ -21,11 +21,11 @@
         <aside class="flex">
             <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}">Docs</a>
             <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}">Examples</a>
-            <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/${site.mode}/api`)}">API</a>
+            <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/api/${site.mode}`)}">API</a>
             <!-- <a class="menu" class:active={$page.url.pathname.indexOf('/components') > -1} href="{site.getPath(`/components`)}">Components</a> -->
             {#if dev}
-                <a class="menu dev" class:active={$page.url.pathname.indexOf('/gen') > -1}   href="{site.getPath(`/${site.mode}/gen`)}">[gen]</a>
-                <a class="menu dev" class:active={$page.url.pathname.indexOf('/md') > -1}   href="{site.getPath(`/${site.mode}/md`)}">[md]</a>
+                <a class="menu dev" class:active={$page.url.pathname.indexOf('/gen') > -1}   href="{site.getPath(`/export/${site.mode}/gen`)}">[gen]</a>
+                <a class="menu dev" class:active={$page.url.pathname.indexOf('/md') > -1}   href="{site.getPath(`/export/${site.mode}/md`)}">[md]</a>
             {/if}
         </aside>
         <aside class="flex">
