@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { TableHandler } from '$lib'
-    type Props = { table: TableHandler }
-    let { table }: Props = $props()
+    let { table }: { table: TableHandler } = $props()
     const { selected, total } = $derived(table.rowCount)
 </script>
 

@@ -1,5 +1,5 @@
 import type { Field, TableHandler } from '$lib/src/client'
-import { parseField, sort } from '$lib/src/client/utils'
+import { parseField, sort }         from '$lib/src/client/utils'
 
 export default class CalcultationHelper<Row>
 {

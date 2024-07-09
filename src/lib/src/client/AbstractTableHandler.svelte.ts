@@ -31,7 +31,7 @@ export default abstract class AbstractTableHandler<Row>
     constructor(data: Row[], params: TableParams)
     {
         this.rawRows        = data
-        this.rowsPerPage    = params.rowsPerPage
+        this.rowsPerPage    = params.rowsPerPage ?? null
         this.highlight      = params.highlight ?? false
         this.selectBy       = params.selectBy
     }
@@ -111,19 +111,19 @@ export default abstract class AbstractTableHandler<Row>
 
     private createPagesWithEllipsis()
     {
-        if (this.pages.length <= 7) {
+        if (this.pageCount <= 7) {
             return this.pages
         }
         const ellipse = null
         const firstPage = 1
-        const lastPage = this.pages.length
+        const lastPage = this.pageCount
         if (this.currentPage <= 4) {
             return [
                 ...this.pages.slice(0, 5),
                 ellipse,
                 lastPage
             ]
-        } else if (this.currentPage < this.pages.length - 3) {
+        } else if (this.currentPage < lastPage - 3) {
             return [
                 firstPage,
                 ellipse,
@@ -135,7 +135,7 @@ export default abstract class AbstractTableHandler<Row>
             return [
                 firstPage,
                 ellipse,
-                ...this.pages.slice(this.pages.length - 5, this.pages.length)
+                ...this.pages.slice(lastPage - 5, lastPage)
             ]
         }
     }

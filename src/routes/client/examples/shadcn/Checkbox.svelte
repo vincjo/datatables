@@ -1,7 +1,14 @@
 <script lang="ts">
     import type { Snippet } from 'svelte'
     import { scale } from 'svelte/transition'
-    type Props = { checked: boolean, onclick?: Function, size: number, margin: number[], children?: Snippet, before?: Snippet }
+    type Props = { 
+        checked: boolean, 
+        onclick?: Function, 
+        size: number, 
+        margin: number[], 
+        children?: Snippet, 
+        before?: Snippet 
+    }
     let { checked, onclick = () => {return}, size, margin, children, before }: Props = $props()
 
     const handleClick = () => {

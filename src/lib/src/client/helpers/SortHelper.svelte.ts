@@ -1,5 +1,5 @@
 import type { Field, SortParams }   from '$lib/src/client'
-import type SortHandler from '../handlers/SortHandler.svelte'
+import type SortHandler             from '../handlers/SortHandler.svelte'
 
 
 export default class SortHelper<Row>

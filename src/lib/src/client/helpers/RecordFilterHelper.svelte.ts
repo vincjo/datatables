@@ -1,5 +1,5 @@
 import { match, isNotNull } from '$lib/src/client/utils'
-import type { Row } from '$lib/src/client'
+import type { Row }         from '$lib/src/client'
 
 export default class RecordFilterHelper
 {

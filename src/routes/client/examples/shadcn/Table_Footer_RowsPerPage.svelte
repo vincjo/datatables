@@ -2,8 +2,7 @@
     import { glyph } from './utils'
     import { Dropdown } from 'gros/dropdown'
     import type { TableHandler } from '$lib'
-    type Props = { table: TableHandler }
-    let { table }: Props = $props()
+    let { table }: { table: TableHandler } = $props()
     const options = [10, 20, 30, 40, 50]
 </script>
 

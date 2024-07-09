@@ -3,8 +3,7 @@
     import RowsPerPage from './Table_Footer_RowsPerPage.svelte'
     import Pagination from './Table_Footer_Pagination.svelte'
     import RowSelection from './Table_Footer_RowSelection.svelte'
-    type Props = { table: TableHandler }
-    let { table }: Props = $props()
+    let { table }: { table: TableHandler } = $props()
 </script>
 
     <div style:margin-left="8px">

@@ -1,6 +1,6 @@
 import type { Field, Check, Criterion } from '$lib/src/client'
-import type FilterHandler from '$lib/src/client/handlers/FilterHandler.svelte'
-import { check as comparator } from '$lib/src/client/Comparator'
+import type FilterHandler               from '$lib/src/client/handlers/FilterHandler.svelte'
+import { check as comparator }          from '$lib/src/client/Comparator'
 
 export default class AdvancedFilterHelper<Row>
 {

@@ -19,7 +19,6 @@ import CSVHelper                from './helpers/CSVHelper.svelte'
 import RecordFilterHelper       from './helpers/RecordFilterHelper.svelte'
 
 
-
 export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T>
 {
     public  i18n            : Internationalization

@@ -50,12 +50,6 @@
         section h1, p {
             text-align: center;
         }
-        img {
-            width: 120px;
-        }
-        div {
-            text-align: center;
-        }
     }
     /* h2{font-size:24px;color:#676778;font-weight:400;margin:24px 0 8px 0;} */
     /* 40b3ff     ff3e00    676778*/
