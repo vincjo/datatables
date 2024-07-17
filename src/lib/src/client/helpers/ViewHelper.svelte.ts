@@ -31,7 +31,7 @@ export default class ViewHelper<Row>
         }
         clearInterval(this.interval)
 
-        this.columns = columns.map(({name, index, isVisible, isFrozen}) => {
+        this.columns = columns.map(({ name, index, isVisible, isFrozen }) => {
             return {
                 name,
                 index,
