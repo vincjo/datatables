@@ -1,14 +1,14 @@
-import type { TableHandler, ViewColumn } from '$lib/src/client'
+import type { TableHandler, ColumnView } from '$lib/src/client'
 
 
 export default class ViewHelper<Row>
 {
-    public  columns     = $state<ViewColumn[]>([])
+    public  columns     = $state<ColumnView[]>([])
     private table       : TableHandler<Row>
     private interval    : NodeJS.Timeout
     private mutation    : MutationObserver
 
-    constructor(table: TableHandler<Row>, columns: ViewColumn[])
+    constructor(table: TableHandler<Row>, columns: ColumnView[])
     {
         this.table      = table
         this.columns    = []
@@ -24,7 +24,7 @@ export default class ViewHelper<Row>
         column.toggle()
     }
 
-    private createColumns(columns: ViewColumn[])
+    private createColumns(columns: ColumnView[])
     {
         if (!this.table?.element) {
             return

@@ -1,7 +1,13 @@
-# 2.0.0-runes.30 - 2024-07-01
+# 2.0.0-runes.31 - 2024-07-XX
 
 <!-- ### Added -->
-<!-- ### Changed -->
+### Changed
+- rename type `ViewColumn` to `ColumnView`
+### Fixed
+- improve types
+
+# 2.0.0-runes.30 - 2024-07-01
+
 ### Fixed
 - client-side: refactor / improve types
 

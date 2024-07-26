@@ -20,5 +20,5 @@ export {
     type Check,
     type Internationalization,
     type Row,
-    type TableHandlerParams,
+    type TableParams,
 } from '$lib/src/client'

@@ -7,7 +7,7 @@ import SelectHandler            from './handlers/SelectHandler.svelte'
 import PageHandler              from './handlers/PageHandler.svelte'
 import SearchHandler            from './handlers/SearchHandler.svelte'
 
-import type { Internationalization, Row, Field, Check, TableParams, ViewColumn } from '$lib/src/client'
+import type { Internationalization, Row, Field, Check, TableParams, ColumnView } from '$lib/src/client'
 
 import ViewHelper               from './helpers/ViewHelper.svelte'
 import SearchHelper             from './helpers/SearchHelper.svelte'
@@ -142,7 +142,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new CSVHelper(this)
     }
 
-    public createView(columns: ViewColumn[]): ViewHelper<T>
+    public createView(columns: ColumnView[]): ViewHelper<T>
     {
         this.view = new ViewHelper(this, columns)
         return this.view

@@ -12,7 +12,7 @@ import SearchHelper         from './helpers/SearchHelper.svelte'
 import SortHelper           from './helpers/SortHelper.svelte'
 import FilterHelper         from './helpers/FilterHelper.svelte'
 
-import type { Internationalization, Row, State, ViewColumn } from '$lib/src/server'
+import type { Internationalization, Row, State, ColumnView } from '$lib/src/server'
 
 export type Params = {
     rowsPerPage     ?: number,
@@ -122,7 +122,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.event.add(event, callback)
     }
 
-    public createView(columns: ViewColumn[]): ViewHelper
+    public createView(columns: ColumnView[]): ViewHelper
     {
         this.view = new ViewHelper(this, columns)
         return this.view

@@ -68,7 +68,7 @@ export type Internationalization = {
     next    ?: string
 }
 
-export type ViewColumn = {
+export type ColumnView = {
     index: number,
     name?: string,
     isVisible?: boolean,
