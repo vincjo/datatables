@@ -23,7 +23,7 @@ export default class CSVHelper<Row>
         document.body.removeChild(element)
     }
 
-    public get()
+    public get(): string
     {
         const rows = this.getRows()
         rows.unshift(this.getHeader().join(','))

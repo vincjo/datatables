@@ -53,7 +53,7 @@ export type TableParams = {
 }
 
 export type Criterion = {
-    value: string | number | number[],
+    value: unknown,
     check: Check
 }
 

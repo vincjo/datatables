@@ -4,7 +4,7 @@ import { check as comparator }          from '$lib/src/client/Comparator'
 
 export default class AdvancedFilterHelper<Row>
 {
-    public  criteria        = $state<(string | number | number[])[]>([])
+    public  criteria        = $state<unknown[]>([])
     private uid             = crypto.randomUUID()
     private filterHandler   : FilterHandler<Row>
     private collection      : Criterion[]
