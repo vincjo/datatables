@@ -5,6 +5,7 @@
 - rename type `ViewColumn` to `ColumnView`
 ### Fixed
 - improve types
+- fix criterion value type
 
 # 2.0.0-runes.30 - 2024-07-01
 

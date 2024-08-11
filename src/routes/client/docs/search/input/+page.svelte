@@ -1,9 +1,13 @@
 <script>
-    import Content from './content.svx'
-    import Main from '../Main.svelte'
+    import Content  from './content.svx'
+    import Example  from './Example.svelte'
+    import Demo     from '$site/components/Demo.svelte'
+    let { data } = $props()
 </script>
 
 
 <Content/>
 
-<Main/>
+<Demo {data}>
+    <Example/>
+</Demo>

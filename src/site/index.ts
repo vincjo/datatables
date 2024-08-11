@@ -20,3 +20,16 @@ export const deprcated = {
 export const internalFilter = (records: string[], key: string) => {
     return records.filter((record) => internal[key].includes(record) === false).sort()
 }
+
+export type Code = {
+    name: string, 
+    code: string,
+    language?: 'typescript' | 'svelte' 
+    components?: Code[],
+}
+
+export const parseCode = (code: string) => {
+    return code
+        .replace(/\$lib\/src\/client/g, '@vincjo/datatables')
+        .replace(/\$lib\/src\/server/g, '@vincjo/datatables/server')
+}
