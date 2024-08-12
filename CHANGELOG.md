@@ -1,4 +1,12 @@
-# 2.0.0-runes.31 - 2024-07-XX
+# 2.0.0-runes.32 - 2024-08-XX
+
+<!-- ### Added -->
+<!-- ### Changed -->
+### Fixed
+- lib export
+
+
+# 2.0.0-runes.31 - 2024-07-25
 
 <!-- ### Added -->
 ### Changed

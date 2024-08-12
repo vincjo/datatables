@@ -14,11 +14,11 @@ export {
     // utils:
     check,
     // types:
-    type Field,
-    type Sort,
+    type Row,
     type Filter,
+    type Sort,
+    type Field,
     type Check,
     type Internationalization,
-    type Row,
     type TableParams,
 } from '$lib/src/client'

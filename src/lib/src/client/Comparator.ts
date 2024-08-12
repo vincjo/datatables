@@ -16,7 +16,7 @@ export const check = {
     isStrictlyBetween:      (entry: number, [min, max]: number[])   => isNull(entry) ? false : (entry > min && entry < max),
     isTrue:                 (entry: boolean, _: unknown)            => entry === true,
     isFalse:                (entry: boolean, _: unknown)            => entry === false,
-    isNull:                 (entry: null, _: unknown)               => isNull(entry),
+    isNull:                 (entry: unknown, _: unknown)            => isNull(entry),
     isNotNull:              (entry: unknown, _: unknown)            => isNotNull(entry),
 
     whereIn: (entry: unknown, values: Criterion[] = []) => {

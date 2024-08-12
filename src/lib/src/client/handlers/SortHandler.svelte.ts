@@ -62,8 +62,7 @@ export default class SortHandler<Row>
 
     public restore()
     {
-        for (const sort of this.backup) {
-            const { key, callback, direction, id } = sort
+        for (const { key, callback, direction, id } of this.backup) {
             const field = key as Field<Row> ?? callback
             this[direction](field, id)
         }

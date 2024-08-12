@@ -15,7 +15,6 @@ export {
     type State,
     type Filter,
     type Sort,
-    type ViewColumn,
     type Internationalization,
 }  from '$lib/src/server'
 
