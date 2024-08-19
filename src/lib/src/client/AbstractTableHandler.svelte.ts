@@ -8,7 +8,7 @@ export default abstract class AbstractTableHandler<Row>
     protected selectBy          : string
     protected highlight         : boolean
     protected event             = new EventDispatcher()
-    protected rawRows           = $state.frozen<Row[]>([])
+    protected rawRows           = $state.raw<Row[]>([])
     protected search            = $state<(SearchType<Row>)>({ value: null, scope: undefined })
     protected selectScope       = $state<'all' | 'currentPage'>('currentPage')
     protected sort              = $state<(Sort<Row>)>({})
