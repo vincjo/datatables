@@ -4,11 +4,12 @@
 <!-- ### Changed -->
 ### Fixed
 - lib export
+- $state.raw()
+- docs: Check type
 
 
 # 2.0.0-runes.31 - 2024-07-25
 
-<!-- ### Added -->
 ### Changed
 - rename type `ViewColumn` to `ColumnView`
 ### Fixed

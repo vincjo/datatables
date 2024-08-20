@@ -5,7 +5,7 @@ export default class RecordFilterHelper
 {
     public  value       = $state<string>('')
     public  records     = $derived<readonly Row[]>(this.createRecords())
-    private rawRecords  = $state.frozen<Row[]>([])
+    private rawRecords  = $state.raw<Row[]>([])
     private filter      = $state<string>('')
 
     constructor(records: Row[])
