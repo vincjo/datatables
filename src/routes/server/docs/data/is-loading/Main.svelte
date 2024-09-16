@@ -1,7 +1,7 @@
 <script lang="ts">
     import { TableHandler, Datatable, Th, RowCount, Pagination, type State } from '$lib/src/server'
     import { reload, initial } from './api'
-    import { RingLoader } from 'svelte-loading-spinners'
+    import { RingLoader } from 'gros/loading'
 
     const table = new TableHandler(initial, { rowsPerPage: 5 })
 
