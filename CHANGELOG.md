@@ -1,8 +1,8 @@
-# 2.0.0-runes.32 - 2024-08-xx
+# 2.0.0-runes.32 - 2024-09-16
 
 <!-- ### Added -->
 ### Changed
-- update dependencies: svelte-next.238
+- update dependencies: svelte-next.246
 <!-- ### Fixed -->
 
 
