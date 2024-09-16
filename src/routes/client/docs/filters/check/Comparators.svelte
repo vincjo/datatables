@@ -18,7 +18,7 @@
         { name: 'isNull', type: 'boolean' },
         { name: 'isNotNull', type: 'boolean' }
     ]
-    let current = $state(comparators[0])
+    let current = $state.raw(comparators[0])
 </script>
 
 <section class="flex">
@@ -26,7 +26,7 @@
         {#each comparators as comparator}
             <li>
                 <button
-                    class:active={$state.is(current, comparator)}
+                    class:active={current === comparator}
                     onclick={() => (current = comparator)}
                 >
                     check.{comparator.name}
