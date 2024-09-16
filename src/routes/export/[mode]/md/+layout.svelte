@@ -1,8 +1,9 @@
 <script lang="ts">
     import Nav from './Nav.svelte'
-    import { url } from 'gros/page'
+    import { createURL } from 'gros/page'
     import { dev } from '$app/environment'
 
+    const url = createURL()
     let { data, children } = $props()
     let element: HTMLElement = $state(undefined)
     $effect(() => {

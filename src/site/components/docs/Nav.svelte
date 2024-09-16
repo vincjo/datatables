@@ -1,7 +1,8 @@
 <script lang="ts">
     import { TableHandler } from '$lib/src/client'
-    import { getPath, url } from 'gros/page'
+    import { getPath, createURL } from 'gros/page'
     import Search from '../Nav_Search.svelte'
+    const url = createURL()
     let { nav }: { nav: any } = $props()
     const table = new TableHandler(nav)
 </script>

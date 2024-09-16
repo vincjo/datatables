@@ -1,10 +1,10 @@
 <script lang="ts">
     import Nav from './Nav.svelte'
     import MobibleNav from './Nav_Mobile.svelte'
-    import type { Snippet } from 'svelte'
-    import { url } from 'gros/page'
+    import { createURL } from 'gros/page'
     let { data, children } = $props()
 
+    const url = createURL()
 
     let element: HTMLElement
     $effect(() => {

@@ -1,8 +1,9 @@
 <script lang="ts">
-    import { getPath, url } from 'gros/page'
+    import { getPath, createURL } from 'gros/page'
     import { clickOutside } from 'gros/action'
     import { fly, fade }    from 'svelte/transition'
     import { site } from '$site'
+    const url = createURL()
     let { nav }: { nav: any } = $props()
     let show = $state(false)
     const close = () => show = false

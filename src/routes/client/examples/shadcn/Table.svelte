@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { TableHandler, Datatable } from '$lib/src/client'
-    import Checkbox from './Checkbox.svelte'
-    import Header from './Table_Header.svelte'
-    import Footer from './Table_Footer.svelte'
-    import Th from './Table_Th.svelte'
-    import { data, poemize, glyph, ellipse } from './utils'
+    import { TableHandler, Datatable }  from '$lib/src/client'
+    import { Checkbox }                 from 'gros/form'
+    import Header                       from './Table_Header.svelte'
+    import Footer                       from './Table_Footer.svelte'
+    import Th                           from './Table_Th.svelte'
+    import { data, capitalize, glyph, ellipse } from './utils'
     const table = new TableHandler(data, { rowsPerPage: 10, selectBy: 'id' })
 </script>
 
@@ -51,10 +51,10 @@
                         </div>
                     </td>
                     <td>
-                        <div class="flex">{@html glyph[row.status]} {poemize(row.status)}</div>
+                        <div class="flex">{@html glyph[row.status]} {capitalize(row.status)}</div>
                     </td>
                     <td>
-                        <div class="flex">{@html glyph[row.priority]} {poemize(row.priority)}</div>
+                        <div class="flex">{@html glyph[row.priority]} {capitalize(row.priority)}</div>
                     </td>
                 </tr>
             {/each}

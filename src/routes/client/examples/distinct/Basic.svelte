@@ -2,7 +2,7 @@
     import { TableHandler, Datatable, ThSort } from '$lib/src/client'
     import { cars } from './data'
 
-    const table = new TableHandler(cars)
+    const table = new TableHandler(cars, { rowsPerPage: 20 })
     const distinct = table.createCalculation('make').distinct({ field: 'count', direction: 'desc' })
 </script>
 

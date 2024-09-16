@@ -1,7 +1,7 @@
-import type { Criterion } from '$lib/src/client'
+import type { Criterion, Check } from '$lib/src/client'
 import { isNull, isNotNull, stringify } from './utils'
 
-export const check = {
+export const check: { [name: string]: Check } = {
     isLike:                 (entry: unknown, value: unknown)        => stringify(entry).indexOf(stringify(value)) > -1,
     isNotLike:              (entry: unknown, value: unknown)        => stringify(entry).indexOf(stringify(value)) === -1,
     startsWith:             (entry: unknown, value: unknown)        => stringify(entry).startsWith(stringify(value)),
@@ -14,8 +14,8 @@ export const check = {
     isLessThanOrEqualTo:    (entry: number, value: number)          => isNull(entry) ? false : (entry <= value),
     isBetween:              (entry: number, [min, max]: number[])   => isNull(entry) ? false : (entry >= min && entry <= max),
     isStrictlyBetween:      (entry: number, [min, max]: number[])   => isNull(entry) ? false : (entry > min && entry < max),
-    isTrue:                 (entry: boolean, _: unknown)            => entry === true,
-    isFalse:                (entry: boolean, _: unknown)            => entry === false,
+    isTrue:                 (entry: unknown, _: unknown)            => entry === true,
+    isFalse:                (entry: unknown, _: unknown)            => entry === false,
     isNull:                 (entry: unknown, _: unknown)            => isNull(entry),
     isNotNull:              (entry: unknown, _: unknown)            => isNotNull(entry),
 

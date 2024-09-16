@@ -1,6 +1,6 @@
 <svelte:options runes={true}/>
 <script lang="ts">
-    import { fadeScale }    from 'gros/transition'
+    import { fadescale }    from 'gros/transition'
     import { modal }        from 'gros/modal'
     import { fade }         from 'svelte/transition'
     import { cubicInOut }   from 'svelte/easing'
@@ -17,7 +17,7 @@
         <article 
             use:draggable={{ handle: '.modal.handle' }} 
             use:clickOutside={close}
-            transition:fadeScale|global={{ duration: 150, easing: cubicInOut, baseScale: 0.5 }}
+            transition:fadescale|global={{ duration: 150, easing: cubicInOut, baseScale: 0.5 }}
         >
            <svelte:component this={modal.component} props={modal.props} {close}/>
         </article>

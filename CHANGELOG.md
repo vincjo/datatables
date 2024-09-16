@@ -1,11 +1,11 @@
-# 2.0.0-runes.32 - 2024-08-XX
+# 2.0.0-runes.32 - 2024-08-xx
 
 <!-- ### Added -->
-<!-- ### Changed -->
-### Fixed
-- lib export
-- $state.raw()
-- docs: Check type
+### Changed
+- update dependencies: svelte-next.238
+<!-- ### Fixed -->
+
+
 
 
 # 2.0.0-runes.31 - 2024-07-25

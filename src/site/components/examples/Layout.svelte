@@ -2,8 +2,9 @@
     import Nav from './Nav.svelte'
     import type { Snippet } from 'svelte'
     import MobileNav from './Nav_Mobile.svelte'
-    import { url } from 'gros/page'
+    import { createURL } from 'gros/page'
 
+    const url = createURL()
     type Props = { nav: { title: string, page: string, description: string, tag: string[] }[], children: Snippet }
     let { nav, children }: Props = $props()
 

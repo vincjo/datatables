@@ -1,8 +1,10 @@
 <script lang="ts">
     import Nav from './Nav.svelte'
     import MobileNav from './Nav_Mobile.svelte'
-    import { url } from 'gros/page'
+    import { createURL } from 'gros/page'
     import type { Snippet } from 'svelte'
+
+    const url = createURL()
 
     let { nav, children }: { nav: any, children: Snippet } = $props()
     let element: HTMLElement

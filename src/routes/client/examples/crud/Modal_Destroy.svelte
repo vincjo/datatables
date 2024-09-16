@@ -1,5 +1,5 @@
 <script>
-    import Modal from './Modal.svelte'
+    import { Modal } from 'gros/modal'
     import { api } from './api.svelte'
     let { close, props } = $props()
 </script>
@@ -28,6 +28,5 @@
         width: 360px;
         color: #e57373;
         font-size: 14px;
-        background: var(--bg);
     }
 </style>
