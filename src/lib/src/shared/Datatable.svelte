@@ -15,7 +15,7 @@
     table.on('change', () => table.element ? table.element.scrollTop = 0 : '')
 </script>
 
-<section bind:clientWidth={table.clientWidth} class="svelte-simple-datatable" class:theme={!headless}>
+<section bind:clientWidth={table.clientWidth} class:svelte-simple-datatable={!headless}>
 
     <header>
         {#if header}
@@ -42,6 +42,7 @@
 </section>
 
 <style>
+    @import '$lib/src/shared/style.css';
     section {
         height: 100%;
         display: flex;
@@ -57,73 +58,13 @@
         align-items: center;
         width: 100%;
     }
-    /* footer.container {
-        border-top: 1px solid var(--grey, #e0e0e0);
-    } */
     article {
         position: relative;
         height: 100%;
         overflow: auto;
         background: inherit;
-        border-bottom: 1px solid var(--grey, #e0e0e0);
     }
-    .theme article::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-    }
-
-    .theme :global(table) {
-        border-collapse: separate;
-        border-spacing: 0;
-        width: 100%;
-        background: inherit;
-    }
-    .theme :global(table thead) {
-        position: sticky;
-        inset-block-start: 0;
-        background: inherit;
-        z-index: 1;
-    }
-    .theme :global(thead tr) {
-        background: inherit;
-    }
-    .theme :global(thead tr th) {
-        background: inherit;
-    }
-    .theme :global(thead tr:first-child th) {
-        padding: 8px 20px;
-        background: inherit;
-    }
-    .theme :global(tbody) {
-        background: inherit;
-    }
-    .theme :global(tbody tr) {
-        transition: background, 0.2s;
-        background: inherit;
-    }
-    .theme :global(tbody tr:hover) {
-        background: var(--grey-lighten-3, #fafafa);
-    }
-    .theme :global(tbody td) {
-        padding: 4px 20px;
-        border-right: 1px solid var(--grey-lighten, #eee);
-        border-bottom: 1px solid var(--grey-lighten, #eee);
-        background: inherit;
-    }
-    /* article :global(tbody td:first-child) {
-        border-left: 1px solid var(--grey-lighten, #eee);
-    } */
-
-    .theme :global(tbody td:last-child) {
-        border-right: none;
-    }
-
-    .theme :global(.hidden) {
+    article :global(.hidden) {
         display: none;
-    }
-    .theme :global(u.highlight) {
-        text-decoration: none;
-        background: rgba(251, 192, 45, 0.6);
-        border-radius: 2px;
     }
 </style>

@@ -1,0 +1,50 @@
+.svelte-simple-datatable article::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.svelte-simple-datatable table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    background: inherit;
+}
+.svelte-simple-datatable table thead {
+    position: sticky;
+    inset-block-start: 0;
+    background: inherit;
+    z-index: 1;
+}
+.svelte-simple-datatable thead tr {
+    background: inherit;
+}
+.svelte-simple-datatable thead tr th {
+    background: inherit;
+}
+.svelte-simple-datatable thead tr:first-child th {
+    padding: 8px 20px;
+    background: inherit;
+}
+.svelte-simple-datatable tbody {
+    background: inherit;
+}
+.svelte-simple-datatable tbody tr {
+    transition: background, 0.2s;
+    background: inherit;
+}
+.svelte-simple-datatable tbody tr:hover {
+    background: var(--grey-lighten-3, #fafafa);
+}
+.svelte-simple-datatable tbody td {
+    padding: 4px 20px;
+    border-right: 1px solid var(--grey-lighten, #eee);
+    border-bottom: 1px solid var(--grey-lighten, #eee);
+    background: inherit;
+}
+.svelte-simple-datatable tbody td:last-child {
+    border-right: none;
+}
+.svelte-simple-datatable u.highlight {
+    text-decoration: none;
+    background: rgba(251, 192, 45, 0.6);
+    border-radius: 2px;
+}
