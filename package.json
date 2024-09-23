@@ -29,8 +29,8 @@
     },
     "devDependencies": {
         "@rollup/plugin-replace": "^5.0.7",
-        "@sveltejs/adapter-node": "^5.2.2",
-        "@sveltejs/kit": "^2.5.27",
+        "@sveltejs/adapter-node": "^5.2.4",
+        "@sveltejs/kit": "^2.5.28",
         "@sveltejs/package": "^2.3.5",
         "@sveltejs/vite-plugin-svelte": "^4.0.0-next.7",
         "@types/node": "^22.5.5",
@@ -39,12 +39,12 @@
         "mdsvex": "^0.12.3",
         "prism-svelte": "^0.5.0",
         "prismjs": "^1.29.0",
-        "svelte": "5.0.0-next.246",
+        "svelte": "5.0.0-next.257",
         "svelte-check": "^4.0.2",
         "svelte-preprocess": "^6.0.2",
         "tslib": "^2.7.0",
         "typescript": "^5.6.2",
-        "vite": "^5.4.5"
+        "vite": "^5.4.7"
     },
     "peerDependencies": {
         "svelte": "^5.0.0-next.230"

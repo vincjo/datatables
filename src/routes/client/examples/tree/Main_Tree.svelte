@@ -1,4 +1,5 @@
 <script>
+    import Self from './Main_Tree.svelte'
     let { folders, level = 0 } = $props()
     const factor = 24
     const size = 18
@@ -23,7 +24,7 @@
     </section>
 
         {#if folder.folders}
-            <svelte:self folders={folder.folders} level={level + 1}/>
+            <Self folders={folder.folders} level={level + 1}/>
         {/if}
 
 
