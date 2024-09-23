@@ -1,3 +1,13 @@
+# 2.0.0-runes.35 - 2024-09-16
+
+### Added
+- feat: add headless option for Datatable component
+- feat: use @import instead of :global() in Datatable component
+### Changed
+- update dependencies: svelte-next.257
+<!-- ### Changed -->
+<!-- ### Fixed -->
+
 # 2.0.0-runes.32 - 2024-09-16
 
 <!-- ### Added -->
