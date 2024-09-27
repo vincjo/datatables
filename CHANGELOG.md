@@ -1,3 +1,13 @@
+# 2.0.0-runes.35 - 2024-09-27
+
+### Added
+- [Migration guide](https://github.com/vincjo/datatables/blob/runes/MIGRATION.md)
+### Changed
+- update dependencies: svelte-next.260
+<!-- ### Changed -->
+### Fixed
+- added type="button" in `<Pagination>` and `<RowCount/>` components
+
 # 2.0.0-runes.35 - 2024-09-16
 
 ### Added
@@ -5,8 +15,6 @@
 - feat: use @import instead of :global() in Datatable component
 ### Changed
 - update dependencies: svelte-next.257
-<!-- ### Changed -->
-<!-- ### Fixed -->
 
 # 2.0.0-runes.32 - 2024-09-16
 

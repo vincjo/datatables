@@ -26,7 +26,7 @@
     {/if}
     row(s) selected.
     {#if selected > 0}
-        <button onclick={() => table.clearSelection()}>❌ Clear</button>
+        <button type="button" onclick={() => table.clearSelection()}>❌ Clear</button>
     {/if}
 {/snippet}
 

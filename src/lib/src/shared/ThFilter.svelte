@@ -6,7 +6,7 @@
     type Props = {
         table  : TableHandlerLike<T>,
         field  : FieldLike<T>,
-        check ?: Check<T>
+        check ?: Check
     }
     let { table, field, check = undefined }: Props = $props()
 

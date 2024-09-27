@@ -20,7 +20,7 @@
     <button type="button" class="small" class:disabled={table.currentPage === 1} onclick={() => table.setPage('previous')}>
         &#10094;
     </button>
-    <button class="page">Page <b>{table.currentPage}</b></button>
+    <button type="button" class="page">Page <b>{table.currentPage}</b></button>
     <button type="button" class="small" onclick={() => table.setPage('next')}>
         &#10095;
     </button>
@@ -35,10 +35,10 @@
     <button type="button" class:disabled={table.currentPage === 1} onclick={() => table.setPage('previous')}>
         &#10094;
     </button>
-    <button class:disabled={table.currentPage === table.pageCount} onclick={() => table.setPage('next')}>
+    <button type="button" class:disabled={table.currentPage === table.pageCount} onclick={() => table.setPage('next')}>
         &#10095;
     </button>
-    <button class="small" class:disabled={table.currentPage === table.pageCount} onclick={() => table.setPage('last')}>
+    <button type="button" class="small" class:disabled={table.currentPage === table.pageCount} onclick={() => table.setPage('last')}>
         &#10093;&#10093;
     </button>
 {/snippet}
@@ -50,8 +50,7 @@
         {@html table.i18n.previous}
     </button>
     {#each table.pagesWithEllipsis as page}
-        <button
-            type="button"
+        <button type="button"
             class="bg-darken-active"
             class:active={table.currentPage === page}
             class:ellipse={page === null}
