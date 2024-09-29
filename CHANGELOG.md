@@ -1,4 +1,4 @@
-# 2.0.0-runes.36 - 2024-09-29
+# 2.0.0-runes.37 - 2024-09-29
 
 ### Added
 - feat: make selectBy parameter type of `Field<Row>` so it can combine multiple fields or use a nested property as identifier
@@ -9,7 +9,7 @@
 ### Fixed
 - added type="button" in `<Pagination>` and `<RowCount/>` components, including the legacy part.
 
-# 2.0.0-runes.35 - 2024-09-16
+# 2.0.0-runes.36 - 2024-09-16
 
 ### Added
 - feat: add headless option for Datatable component
