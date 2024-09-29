@@ -1,6 +1,6 @@
 import type { TableHandler } from '$lib/src/client'
 
-export default class CSVHelper<Row>
+export default class CSVBuilder<Row>
 {
     private table: TableHandler<Row>
 

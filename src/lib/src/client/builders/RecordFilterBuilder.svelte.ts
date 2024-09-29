@@ -1,7 +1,7 @@
 import { match, isNotNull } from '$lib/src/client/utils'
 import type { Row }         from '$lib/src/client'
 
-export default class RecordFilterHelper
+export default class RecordFilterBuilder
 {
     public  value       = $state<string>('')
     public  records     = $derived<readonly Row[]>(this.createRecords())

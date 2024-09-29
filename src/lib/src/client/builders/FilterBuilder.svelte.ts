@@ -2,7 +2,7 @@ import type { Field, Check }    from '$lib/src/client'
 import type FilterHandler       from '../handlers/FilterHandler.svelte'
 import { check as comparator }  from '$lib/src/client/Comparator'
 
-export default class FilterHelper<Row>
+export default class FilterBuilder<Row>
 {
     public  value           = $state<unknown>('')
     private id              = crypto.randomUUID()

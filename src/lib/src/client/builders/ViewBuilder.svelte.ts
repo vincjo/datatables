@@ -1,18 +1,18 @@
-import type { TableHandler, ColumnView } from '$lib/src/server'
+import type { TableHandler, ColumnView } from '$lib/src/client'
 
 
-export default class ViewHelper
+export default class ViewBuilder<Row>
 {
-    public  columns = $state<ColumnView[]>([])
-    private table   : TableHandler
-    private interval: NodeJS.Timeout
-    private mutation: MutationObserver
+    public  columns     = $state<ColumnView[]>([])
+    private table       : TableHandler<Row>
+    private interval    : NodeJS.Timeout
+    private mutation    : MutationObserver
 
-    constructor(table: TableHandler, columns: ColumnView[])
+    constructor(table: TableHandler<Row>, columns: ColumnView[])
     {
-        this.table   = table
-        this.columns = []
-        this.interval = setInterval(() => this.createColumns(columns), 500)
+        this.table      = table
+        this.columns    = []
+        this.interval   = setInterval(() => this.createColumns(columns), 200)
     }
 
     public toggle(name: string)
@@ -31,10 +31,10 @@ export default class ViewHelper
         }
         clearInterval(this.interval)
 
-        this.columns = columns.map(({name, index, isVisible, isFrozen}) => {
-            return { 
-                name, 
-                index, 
+        this.columns = columns.map(({ name, index, isVisible, isFrozen }) => {
+            return {
+                name,
+                index,
                 isVisible: isVisible === false ? false : true,
                 isFrozen: isFrozen === true ? true : false,
                 element: this.table.element,
@@ -70,7 +70,7 @@ export default class ViewHelper
         }
     }
 
-    private freeze(index: number, left = 0) 
+    private freeze(index: number, left = 0)
     {
         const column = this.table.element.querySelector(`thead th:nth-child(${index + 1})`) as HTMLElement
         const { width } = column.getBoundingClientRect()
@@ -82,5 +82,6 @@ export default class ViewHelper
         })
         return width
     }
+
 }
 

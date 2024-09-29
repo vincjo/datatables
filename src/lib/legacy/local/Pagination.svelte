@@ -13,28 +13,26 @@
 
 <section class={$$props.class ?? ''}>
     {#if small}
-        <button
-            type="button"
+        <button type="button"
             class="small"
             class:disabled={$pageNumber === 1}
             on:click={() => handler.setPage(1)}
         >
             &#10092;&#10092;
         </button>
-        <button
-            type="button"
+        <button type="button"
             class:disabled={$pageNumber === 1}
             on:click={() => handler.setPage('previous')}
         >
             &#10094;
         </button>
-        <button
+        <button type="button"
             class:disabled={$pageNumber === $pageCount}
             on:click={() => handler.setPage('next')}
         >
             &#10095;
         </button>
-        <button
+        <button type="button"
             class="small"
             class:disabled={$pageNumber === $pageCount}
             on:click={() => handler.setPage($pageCount)}
@@ -42,16 +40,14 @@
             &#10093;&#10093;
         </button>
     {:else}
-        <button
-            type="button"
+        <button type="button"
             class:disabled={$pageNumber === 1}
             on:click={() => handler.setPage('previous')}
         >
             {@html handler.i18n.previous}
         </button>
         {#each $pages as page}
-            <button
-                type="button"
+            <button type="button"
                 class:active={$pageNumber === page}
                 class:ellipse={page === null}
                 on:click={() => handler.setPage(page)}
@@ -59,8 +55,7 @@
                 {page ?? '...'}
             </button>
         {/each}
-        <button
-            type="button"
+        <button type="button"
             class:disabled={$pageNumber === $pageCount}
             on:click={() => handler.setPage('next')}
         >

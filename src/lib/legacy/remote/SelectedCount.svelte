@@ -16,7 +16,7 @@
     {/if}
     row(s) selected.
     {#if $selectedCount.count > 0}
-        <button on:click={() => handler.clearSelection()}>❌ Clear</button>
+        <button type="button" on:click={() => handler.clearSelection()}>❌ Clear</button>
     {/if}
 </aside>
 

@@ -1,7 +1,7 @@
 import type { Field, TableHandler } from '$lib/src/client'
 import { parseField, sort }         from '$lib/src/client/utils'
 
-export default class CalcultationHelper<Row>
+export default class CalcultationBuilder<Row>
 {
     private callback    : (row: Row) => string | number
     private precision   : number

@@ -1,7 +1,7 @@
 import { type Field }       from '$lib/src/client'
 import type SearchHandler   from '../handlers/SearchHandler.svelte'
 
-export default class SearchHelper<Row>
+export default class SearchBuilder<Row>
 {
     public  value           = $state<string>('')
     private scope           : Field<Row>[]

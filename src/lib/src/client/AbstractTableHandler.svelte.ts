@@ -5,7 +5,7 @@ import { EventDispatcher } from '$lib/src/shared'
 
 export default abstract class AbstractTableHandler<Row>
 {
-    protected selectBy          : string
+    protected selectBy          : Field<any>
     protected highlight         : boolean
     protected event             = new EventDispatcher()
     protected rawRows           = $state.raw<Row[]>([])
@@ -25,7 +25,7 @@ export default abstract class AbstractTableHandler<Row>
     public pages                = $derived<readonly number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
     public pagesWithEllipsis    = $derived<readonly number[]>(this.createPagesWithEllipsis())
-    public selected             = $state<(Row | Row[keyof Row])[]>([])
+    public selected             = $state<Row[keyof Row][]>([])
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
 
     constructor(data: Row[], params: TableParams)
@@ -33,7 +33,7 @@ export default abstract class AbstractTableHandler<Row>
         this.rawRows        = data
         this.rowsPerPage    = params.rowsPerPage ?? null
         this.highlight      = params.highlight ?? false
-        this.selectBy       = params.selectBy
+        this.selectBy       = params.selectBy ?? ''
     }
 
     private createAllRows()
@@ -142,13 +142,11 @@ export default abstract class AbstractTableHandler<Row>
 
     private createIsAllSelected()
     {
-        if (this.rows.length === 0) {
+        if (this.rows.length === 0 || !this.selectBy) {
             return false
         }
-        if (this.selectBy) {
-            const identifiers = this.rows.map(row => row[this.selectBy])
-            return identifiers.every(id => this.selected.includes(id))
-        }
-        return this.rows.every(row => this.selected.includes(row))
+        const { callback } = parseField(this.selectBy)
+        const identifiers = this.rows.map(callback)
+        return identifiers.every(id => this.selected.includes(id))
     }
 }

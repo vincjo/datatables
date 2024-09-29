@@ -15,7 +15,7 @@ export {
 
 export type Row = { [key: string]: any  }
 
-export type Field<Row> = keyof Row | ((row: Row) => unknown)
+export type Field<Row> = keyof Row | ((row: Row) => unknown) | string
 
 export type Filter<Row> = {
     callback: (row: Row) => unknown
@@ -47,7 +47,7 @@ export type Check = (entry: unknown, value: unknown) => boolean
 
 export type TableParams = {
     rowsPerPage?: number,
-    selectBy?: string,
+    selectBy?: Field<Row>,
     highlight?: boolean,
     i18n?: Internationalization,
 }

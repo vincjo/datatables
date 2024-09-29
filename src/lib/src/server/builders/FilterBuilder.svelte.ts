@@ -1,6 +1,6 @@
 import type FilterHandler from '../handlers/FilterHandler.svelte'
 
-export default class FilterHelper<Row>
+export default class FilterBuilder<Row>
 {
     public  value           = $state<string>('')
     private timeout         = undefined

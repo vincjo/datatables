@@ -7,10 +7,10 @@ import PageHandler          from './handlers/PageHandler.svelte'
 import SearchHandler        from './handlers/SearchHandler.svelte'
 import FilterHandler        from './handlers/FilterHandler.svelte'
 
-import ViewHelper           from './helpers/ViewHelper.svelte'
-import SearchHelper         from './helpers/SearchHelper.svelte'
-import SortHelper           from './helpers/SortHelper.svelte'
-import FilterHelper         from './helpers/FilterHelper.svelte'
+import ViewBuilder          from './builders/ViewBuilder.svelte'
+import SearchBuilder        from './builders/SearchBuilder.svelte'
+import SortBuilder          from './builders/SortBuilder.svelte'
+import FilterBuilder        from './builders/FilterBuilder.svelte'
 
 import type { Internationalization, Row, State, ColumnView } from '$lib/src/server'
 
@@ -30,7 +30,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     private searchHandler   : SearchHandler<T>
     private filterHandler   : FilterHandler<T>
     public  i18n            : Internationalization
-    private view            : ViewHelper
+    private view            : ViewBuilder
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: 5 })
     {
@@ -75,14 +75,14 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.searchHandler.clear()
     }
 
-    public createSearch(): SearchHelper<T>
+    public createSearch(): SearchBuilder<T>
     {
-        return new SearchHelper(this)
+        return new SearchBuilder(this)
     }
 
-    public createSort(field: string): SortHelper<T>
+    public createSort(field: string): SortBuilder<T>
     {
-        return new SortHelper(this.sortHandler, field)
+        return new SortBuilder(this.sortHandler, field)
     }
 
     // public filter(value: string | number, field: string): void
@@ -97,9 +97,9 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.invalidate()
     }
 
-    public createFilter(field: string, _ = undefined): FilterHelper<T>
+    public createFilter(field: string, _ = undefined): FilterBuilder<T>
     {
-        return new FilterHelper(this.filterHandler, field)
+        return new FilterBuilder(this.filterHandler, field)
     }
 
     public select(value: T[keyof T] | T)
@@ -122,13 +122,13 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.event.add(event, callback)
     }
 
-    public createView(columns: ColumnView[]): ViewHelper
+    public createView(columns: ColumnView[]): ViewBuilder
     {
-        this.view = new ViewHelper(this, columns)
+        this.view = new ViewBuilder(this, columns)
         return this.view
     }
 
-    public getView(): ViewHelper
+    public getView(): ViewBuilder
     {
         return this.view
     }

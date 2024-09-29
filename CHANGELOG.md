@@ -1,12 +1,13 @@
-# 2.0.0-runes.35 - 2024-09-27
+# 2.0.0-runes.36 - 2024-09-29
 
 ### Added
-- [Migration guide](https://github.com/vincjo/datatables/blob/runes/MIGRATION.md)
+- feat: make selectBy parameter type of `Field<Row>` so it can combine multiple fields or use a nested property as identifier
+- docs: added a [migration guide](https://github.com/vincjo/datatables/blob/runes/MIGRATION.md)
 ### Changed
 - update dependencies: svelte-next.260
 <!-- ### Changed -->
 ### Fixed
-- added type="button" in `<Pagination>` and `<RowCount/>` components
+- added type="button" in `<Pagination>` and `<RowCount/>` components, including the legacy part.
 
 # 2.0.0-runes.35 - 2024-09-16
 

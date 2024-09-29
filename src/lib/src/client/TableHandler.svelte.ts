@@ -9,20 +9,20 @@ import SearchHandler            from './handlers/SearchHandler.svelte'
 
 import type { Internationalization, Row, Field, Check, TableParams, ColumnView } from '$lib/src/client'
 
-import ViewHelper               from './helpers/ViewHelper.svelte'
-import SearchHelper             from './helpers/SearchHelper.svelte'
-import FilterHelper             from './helpers/FilterHelper.svelte'
-import AdvancedFilterHelper     from './helpers/AdvancedFilterHelper.svelte'
-import CalculationHelper        from './helpers/CalculationHelper.svelte'
-import SortHelper               from './helpers/SortHelper.svelte'
-import CSVHelper                from './helpers/CSVHelper.svelte'
-import RecordFilterHelper       from './helpers/RecordFilterHelper.svelte'
+import ViewBuilder              from './builders/ViewBuilder.svelte'
+import SearchBuilder            from './builders/SearchBuilder.svelte'
+import FilterBuilder            from './builders/FilterBuilder.svelte'
+import AdvancedFilterBuilder    from './builders/AdvancedFilterBuilder.svelte'
+import CalculationBuilder       from './builders/CalculationBuilder.svelte'
+import SortBuilder              from './builders/SortBuilder.svelte'
+import CSVBuilder               from './builders/CSVBuilder.svelte'
+import RecordFilterBuilder      from './builders/RecordFilterBuilder.svelte'
 
 
 export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T>
 {
     public  i18n            : Internationalization
-    private view            : ViewHelper<T>
+    private view            : ViewBuilder<T>
     private sortHandler     : SortHandler<T>
     private filterHandler   : FilterHandler<T>
     private selectHandler   : SelectHandler<T>
@@ -73,19 +73,19 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.setPage(1)
     }
 
-    public createSearch(scope?: Field<T>[]): SearchHelper<T>
+    public createSearch(scope?: Field<T>[]): SearchBuilder<T>
     {
-        return new SearchHelper(this.searchHandler, scope)
+        return new SearchBuilder(this.searchHandler, scope)
     }
 
-    public createRecordFilter(records?: Row[]): RecordFilterHelper
+    public createRecordFilter(records?: Row[]): RecordFilterBuilder
     {
-        return new RecordFilterHelper(records)
+        return new RecordFilterBuilder(records)
     }
 
-    public createSort(field: Field<T>, params?: { locales: Intl.LocalesArgument, options: Intl.CollatorOptions}): SortHelper<T>
+    public createSort(field: Field<T>, params?: { locales: Intl.LocalesArgument, options: Intl.CollatorOptions}): SortBuilder<T>
     {
-        return new SortHelper(this.sortHandler, field, params)
+        return new SortBuilder(this.sortHandler, field, params)
     }
 
     public clearFilters(): void
@@ -96,14 +96,14 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.setPage(1)
     }
 
-    public createAdvancedFilter(field: Field<T>, check?: Check): AdvancedFilterHelper<T>
+    public createAdvancedFilter(field: Field<T>, check?: Check): AdvancedFilterBuilder<T>
     {
-        return new AdvancedFilterHelper(this.filterHandler, field, check)
+        return new AdvancedFilterBuilder(this.filterHandler, field, check)
     }
 
-    public createFilter(field: Field<T>, check?: Check): FilterHelper<T>
+    public createFilter(field: Field<T>, check?: Check): FilterBuilder<T>
     {
-        return new FilterHelper(this.filterHandler, field, check)
+        return new FilterBuilder(this.filterHandler, field, check)
     }
 
     public select(value: T[keyof T]): void
@@ -132,23 +132,23 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.event.add(event, callback)
     }
 
-    public createCalculation(field: Field<T>): CalculationHelper<T>
+    public createCalculation(field: Field<T>): CalculationBuilder<T>
     {
-        return new CalculationHelper(this, field)
+        return new CalculationBuilder(this, field)
     }
 
-    public createCSV(): CSVHelper<T>
+    public createCSV(): CSVBuilder<T>
     {
-        return new CSVHelper(this)
+        return new CSVBuilder(this)
     }
 
-    public createView(columns: ColumnView[]): ViewHelper<T>
+    public createView(columns: ColumnView[]): ViewBuilder<T>
     {
-        this.view = new ViewHelper(this, columns)
+        this.view = new ViewBuilder(this, columns)
         return this.view
     }
 
-    public getView(): ViewHelper<T>
+    public getView(): ViewBuilder<T>
     {
         return this.view
     }

@@ -1,6 +1,6 @@
 import type SortHandler from '../handlers/SortHandler.svelte'
 
-export default class SortHelper<Row>
+export default class SortBuilder<Row>
 {
     private sortHandler : SortHandler<Row>
     private field       : string

@@ -1,6 +1,6 @@
 import type TableHandler from '../TableHandler.svelte'
 
-export default class SearchHelper<Row>
+export default class SearchBuilder<Row>
 {
     public  value           = $state<string>('')
     private timeout         = undefined

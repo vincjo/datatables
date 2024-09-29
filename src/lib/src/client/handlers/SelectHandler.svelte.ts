@@ -1,4 +1,5 @@
 import type { TableHandler } from '$lib/src/client'
+import { parseField } from '../utils'
 
 export default class SelectHandler<Row>
 {
@@ -21,8 +22,8 @@ export default class SelectHandler<Row>
     public all()
     {
         const rows = this.table['selectScope'] === 'currentPage' ? this.table.rows : this.table.allRows
-        // const selection = this.table['selectBy'] ? rows.map((row) => row[this.table['selectBy']]) : rows
-        const selection = rows.map((row) => row[this.table['selectBy']])
+        const { callback } = parseField(this.table['selectBy'])
+        const selection = rows.map(callback)
         if (this.table['selectScope'] === 'currentPage') {
             if (this.table.isAllSelected) {
                 this.table.selected = this.table.selected.filter(item => selection.includes(item) === false)
@@ -43,8 +44,9 @@ export default class SelectHandler<Row>
 
     public getRows()
     {
+        const { callback } = parseField(this.table['selectBy'])
         return this.table['rawRows'].filter(row => {
-            return this.table.selected.includes(row[this.table['selectBy']])
+            return this.table.selected.includes(callback(row))
         })
     }
 }
