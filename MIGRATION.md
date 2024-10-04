@@ -20,11 +20,11 @@ In order to make the migration process a little easier, v1 is embed in “legacy
 
 ### Svelte 4
 ```ts
-import { DataHandler } from '@vincjo/datatables'
+import { DataHandler } from '@vincjo/datatables/legacy'
 
 const handler = new DataHandler(data)
 const rows = handler.getRows()
-const pageNumber = handler.getPageNumber()
+const currentPage = handler.getPageNumber()
 // $rows, $currentPage
 ```
 

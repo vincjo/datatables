@@ -1,3 +1,10 @@
+# 2.0.0-runes.38 - 2024-10-04
+<!-- ### Added -->
+<!-- ### Changed -->
+<!-- ### Changed -->
+### Fixed
+- CSS import in `<Datatable>` component.
+
 # 2.0.0-runes.37 - 2024-09-29
 
 ### Added
@@ -5,7 +12,6 @@
 - docs: added a [migration guide](https://github.com/vincjo/datatables/blob/runes/MIGRATION.md)
 ### Changed
 - update dependencies: svelte-next.260
-<!-- ### Changed -->
 ### Fixed
 - added type="button" in `<Pagination>` and `<RowCount/>` components, including the legacy part.
 
