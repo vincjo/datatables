@@ -29,7 +29,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     private pageHandler     : PageHandler<T>
     private searchHandler   : SearchHandler<T>
 
-    constructor(data: T[] = [], params: TableParams = { rowsPerPage: null })
+    constructor(data: T[] = [], params: TableParams<T> = { rowsPerPage: null })
     {
         super(data, params)
         this.translate(params.i18n)
@@ -113,8 +113,8 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 
     public selectAll(params: { scope?: 'all' | 'currentPage' } = {}): void
     {
-        this.selectScope = (params.scope === 'all') ? 'all' : 'currentPage'
-        this.selectHandler.all()
+        const scope = (params.scope === 'all') ? 'all' : 'currentPage'
+        this.selectHandler.all(scope)
     }
 
     public getSelectedRows(): T[]

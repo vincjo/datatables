@@ -4,7 +4,7 @@
 
     const table = new TableHandler(data)
 
-    const distinct = table.createCalculation('make').distinct({ field: 'value', direction: 'asc' })
+    const distinct = table.createCalculation('make').distinct({ sort: ['value', 'asc'] })
 
     const filter = table.createRecordFilter(distinct)
 </script>

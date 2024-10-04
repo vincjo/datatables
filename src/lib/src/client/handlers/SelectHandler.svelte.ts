@@ -19,12 +19,12 @@ export default class SelectHandler<Row>
         }
     }
 
-    public all()
+    public all(scope: 'all' | 'currentPage')
     {
-        const rows = this.table['selectScope'] === 'currentPage' ? this.table.rows : this.table.allRows
+        const rows = (scope === 'currentPage') ? this.table.rows : this.table.allRows
         const { callback } = parseField(this.table['selectBy'])
         const selection = rows.map(callback)
-        if (this.table['selectScope'] === 'currentPage') {
+        if (scope === 'currentPage') {
             if (this.table.isAllSelected) {
                 this.table.selected = this.table.selected.filter(item => selection.includes(item) === false)
             }

@@ -19,10 +19,10 @@ export const check: { [name: string]: Check } = {
     isNull:                 (entry: unknown, _: unknown)            => isNull(entry),
     isNotNull:              (entry: unknown, _: unknown)            => isNotNull(entry),
 
-    whereIn: (entry: unknown, values: Criterion[] = []) => {
+    whereIn: (entry: unknown, criteria: Criterion[] = []) => {
         if (isNull(entry)) return false
-        if (values.length === 0) return false
-        for(const { value, check } of values) {
+        if (criteria.length === 0) return false
+        for(const { value, check } of criteria) {
             if (check(entry, value)) {
                 return true
             }

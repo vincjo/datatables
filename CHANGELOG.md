@@ -3,10 +3,14 @@
 - added `TableHandlerInterface` to improve shared components type.
 ### Changed
 - update dependencies: svelte-next.262
+- breaking: `table.createCalcultaion().distinct()` parameter is now: `distinct({ sort: [field, direction] })` 
+- remove `selectScope` state - not breaking the api
 ### Fixed
 - remove dupplicate builder: `ColumnViewBuilders`
 - remove dupplicate type definition: `Row`, `ColumnView`, `Internationalization`
-- use generic `T` type in `AbstractTableHandler` instead of `Row` (server).
+- use generic `T` type in `AbstractTableHandler` instead of `Row` (server-side pagination).
+- distinct values has a default order in addition to sort param
+
 
 
 

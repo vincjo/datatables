@@ -5,7 +5,7 @@ import { check as comparator }          from '$lib/src/client/Comparator'
 export default class AdvancedFilterBuilder<Row>
 {
     public  criteria        = $state<unknown[]>([])
-    private uid             = crypto.randomUUID()
+    private uuid            = crypto.randomUUID()
     private filterHandler   : FilterHandler<Row>
     private collection      : Criterion[]
     private field           : Field<Row>
@@ -31,7 +31,7 @@ export default class AdvancedFilterBuilder<Row>
         if (this.collection.length === 0) {
             return this.clear()
         }
-        this.filterHandler.set(this.collection, this.field, comparator.whereIn, this.uid)
+        this.filterHandler.set(this.collection, this.field, comparator.whereIn, this.uuid)
         this.criteria = this.collection.map(criterion => criterion.value)
     }
 
@@ -39,7 +39,7 @@ export default class AdvancedFilterBuilder<Row>
     {
         this.collection = []
         this.criteria = []
-        this.filterHandler.unset(this.uid)
+        this.filterHandler.unset(this.uuid)
     }
 
     private cleanup()

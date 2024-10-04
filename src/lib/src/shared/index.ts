@@ -7,14 +7,10 @@ export { default as ThSort          }   from './ThSort.svelte'
 export { default as ThFilter        }   from './ThFilter.svelte'
 export { default as RowsPerPage     }   from './RowsPerPage.svelte'
 export { default as EventDispatcher }   from './EventDispatcher'
-import type { Check, Field as ClientField  }   from '$lib/src/client'
-import type ClientTableHandler          from '$lib/src/client/TableHandler.svelte'
-import type ServerTableHandler          from '$lib/src/server/TableHandler.svelte'
+import type { Check }                   from '$lib/src/client'
 
-export type TableHandlerLike<Row> = ClientTableHandler<Row> | ServerTableHandler<Row>
-export type FieldLike<Row> = ClientField<Row>
 
-export type Row = { [key: string]: any }
+export type Row = { [key: string | number | symbol]: any }
 
 export interface TableHandlerInterface<Row> {
     clientWidth: number,

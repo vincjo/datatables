@@ -14,7 +14,7 @@ export const stringify = (value: unknown = null) => {
         .replace(/[\u0300-\u036f]/g, '')
 }
 
-export const parseField = (field: Field<any>, uuid?: UUID) => {
+export const parseField = (field: Field<Row>, uuid?: UUID) => {
     if (typeof field === 'string') {
         return {
             callback: (row: Row) => row[field],
@@ -102,9 +102,9 @@ const deepSet = (object: Row, path: string, value: string) => {
             if (next !== undefined) {
                 object[current] = object[current] ? object[current] : (isNaN(Number(next)) ? {} : [])
             } else {
-                object[current] = emphasize(object[current], value)
+                object[current] = emphasize(object[current] as string | number, value)
             }
-            object = object[current]
+            object = object[current] as Row
         }
         return initial
     } catch(_) {

@@ -3,7 +3,7 @@
     type Props = { table: TableHandler }
     let { table }: Props = $props()
 
-    const types = table.createCalculation(({ type }) => type.split(' / ')).distinct({ field: 'value', direction: 'asc' })
+    const types = table.createCalculation(({ type }) => type.split(' / ')).distinct({ sort: ['value', 'asc'] })
     const filter = table.createAdvancedFilter('type', check.isLike)
 </script>
 

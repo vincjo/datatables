@@ -6,7 +6,7 @@
 
 ```ts
 const distinct = $derived.by(() => {
-    return table.createCalculation('make').distinct({ field: 'count', direction: 'desc' })
+    return table.createCalculation('make').distinct({ sort: ['count', 'desc'] })
 })
 ```
 ```svelte

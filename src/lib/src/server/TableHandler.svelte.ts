@@ -13,7 +13,7 @@ import SortBuilder          from './builders/SortBuilder.svelte'
 import FilterBuilder        from './builders/FilterBuilder.svelte'
 
 import type { Internationalization, Row, State, ColumnView } from '$lib/src/server'
-import type { TableHandlerInterface } from '../shared'
+import type { TableHandlerInterface } from '$lib/src/shared'
 
 export type Params = {
     rowsPerPage     ?: number,

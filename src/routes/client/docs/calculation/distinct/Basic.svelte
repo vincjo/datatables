@@ -6,7 +6,7 @@
     const search = table.createSearch()
 
     const distinct = $derived.by(() => {
-        return table.createCalculation('make').distinct({ field: 'count', direction: 'desc' })
+        return table.createCalculation('make').distinct({ sort: ['count', 'desc'] })
     })
 </script>
 
@@ -14,8 +14,7 @@
     <aside class="z-depth-2">
         <p>Distinct make</p>
         <div class="thin-scrollbar">
-            {#each distinct as item}
-                {@const { value, count } = item }
+            {#each distinct as { value, count } (value)}
                 <code>{count}</code> {value} <br>
             {/each}
         </div>

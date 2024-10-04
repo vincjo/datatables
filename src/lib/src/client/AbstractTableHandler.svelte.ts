@@ -1,16 +1,15 @@
-import type { Filter, Sort, Field, SearchType, TableParams } from '$lib/src/client'
+import type { Filter, Sort, Field, Check, TableParams } from '$lib/src/client'
 import { parseField, match, nestedFilter, deepEmphasize } from './utils'
 import { EventDispatcher } from '$lib/src/shared'
 
 
 export default abstract class AbstractTableHandler<Row>
 {
-    protected selectBy          : Field<any>
+    protected selectBy         ?: Field<Row>
     protected highlight         : boolean
     protected event             = new EventDispatcher()
     protected rawRows           = $state.raw<Row[]>([])
-    protected search            = $state<(SearchType<Row>)>({ value: null, scope: undefined })
-    protected selectScope       = $state<'all' | 'currentPage'>('currentPage')
+    protected search            = $state<{ value: string, scope?: Field<Row>[], check?: Check }>({ value: null, scope: undefined })
     protected sort              = $state<(Sort<Row>)>({})
 
     public filters              = $state<(Filter<Row>)[]>([])
@@ -28,12 +27,12 @@ export default abstract class AbstractTableHandler<Row>
     public selected             = $state<Row[keyof Row][]>([])
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
 
-    constructor(data: Row[], params: TableParams)
+    constructor(data: Row[], params: TableParams<Row>)
     {
         this.rawRows        = data
         this.rowsPerPage    = params.rowsPerPage ?? null
         this.highlight      = params.highlight ?? false
-        this.selectBy       = params.selectBy ?? ''
+        this.selectBy       = params.selectBy
     }
 
     private createAllRows()

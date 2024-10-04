@@ -13,7 +13,7 @@ export default class CalcultationBuilder<Row>
         this.callback   = parseField(field).callback
     }
 
-    public distinct(sortBy?: { field: 'value' | 'count', direction: 'asc' | 'desc' }): { value: string, count: number }[]
+    public distinct(param?: { sort: [key: 'value' | 'count', direction: 'asc' | 'desc'] }): { value: string, count: number }[]
     {
         const values = this.table.allRows.map(row => this.callback(row))
 
@@ -28,12 +28,12 @@ export default class CalcultationBuilder<Row>
             return acc
         }, {})
         const result = Object.entries(aggregate).map(([value, count]) => ({ value, count }))
-        if (sortBy) {
-            const { field, direction } = sortBy
-            return result.sort((x, y) => {
-                const [a, b] = [x[field], y[field]]
-                return sort[direction](a, b)
-            })
+        if (param?.sort) {
+            const [field, direction] = param.sort
+            if (field === 'count') {
+                result.sort((x, y) => sort.asc(x.value, y.value))
+            }
+            result.sort((a, b) => sort[direction](a[field], b[field]))
         }
         return result
     }
