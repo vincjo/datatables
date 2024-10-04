@@ -1,14 +1,14 @@
-import type { TableHandler, ColumnView } from '$lib/src/client'
+import type { TableHandlerInterface, ColumnView } from '$lib/src/shared'
 
 
 export default class ViewBuilder<Row>
 {
     public  columns     = $state<ColumnView[]>([])
-    private table       : TableHandler<Row>
+    private table       : TableHandlerInterface<Row>
     private interval    : NodeJS.Timeout
     private mutation    : MutationObserver
 
-    constructor(table: TableHandler<Row>, columns: ColumnView[])
+    constructor(table: TableHandlerInterface<Row>, columns: ColumnView[])
     {
         this.table      = table
         this.columns    = []

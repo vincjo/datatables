@@ -9,9 +9,12 @@ export {
     ThFilter,
     Pagination,
     RowCount,
+    type Row,
+    type ColumnView,
+    type Internationalization,
+    type TableHandlerInterface
 } from '$lib/src/shared'
 
-export type Row = { [key: string]: any  }
 
 export type State = {
     currentPage: number,
@@ -31,23 +34,4 @@ export type Filter = {
 export type Sort = {
     field?: string
     direction?: 'asc' | 'desc'
-}
-
-export type ColumnView = {
-    index: number,
-    name?: string,
-    isVisible?: boolean,
-    isFrozen?: boolean,
-    toggle?: () => void
-}
-
-export type Internationalization = {
-    search  ?: string,
-    show    ?: string,
-    entries ?: string,
-    filter  ?: string,
-    rowCount?: string,
-    noRows  ?: string,
-    previous?: string,
-    next    ?: string
 }

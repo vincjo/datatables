@@ -7,12 +7,13 @@ import PageHandler          from './handlers/PageHandler.svelte'
 import SearchHandler        from './handlers/SearchHandler.svelte'
 import FilterHandler        from './handlers/FilterHandler.svelte'
 
-import ViewBuilder          from './builders/ViewBuilder.svelte'
+import ViewBuilder          from '../shared/builders/ViewBuilder.svelte'
 import SearchBuilder        from './builders/SearchBuilder.svelte'
 import SortBuilder          from './builders/SortBuilder.svelte'
 import FilterBuilder        from './builders/FilterBuilder.svelte'
 
 import type { Internationalization, Row, State, ColumnView } from '$lib/src/server'
+import type { TableHandlerInterface } from '../shared'
 
 export type Params = {
     rowsPerPage     ?: number,
@@ -21,7 +22,7 @@ export type Params = {
     i18n            ?: Internationalization
 }
 
-export default class TableHandler<T extends Row = any> extends AbstractTableHandler<Row>
+export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T> implements TableHandlerInterface<T>
 {
     private fetchHandler    : FetchHandler<T>
     private sortHandler     : SortHandler<T>
@@ -29,8 +30,8 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     private pageHandler     : PageHandler<T>
     private searchHandler   : SearchHandler<T>
     private filterHandler   : FilterHandler<T>
+    private view            : ViewBuilder<T>
     public  i18n            : Internationalization
-    private view            : ViewBuilder
 
     constructor(data: T[] = [], params: Params = { rowsPerPage: 5 })
     {
@@ -122,13 +123,13 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.event.add(event, callback)
     }
 
-    public createView(columns: ColumnView[]): ViewBuilder
+    public createView(columns: ColumnView[]): ViewBuilder<T>
     {
         this.view = new ViewBuilder(this, columns)
         return this.view
     }
 
-    public getView(): ViewBuilder
+    public getView(): ViewBuilder<T>
     {
         return this.view
     }

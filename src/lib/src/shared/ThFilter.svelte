@@ -1,17 +1,16 @@
 <script lang="ts">
-    import type { TableHandlerLike, FieldLike } from '$lib/src/shared'
+    import type { TableHandlerInterface, FieldLike } from '$lib/src/shared'
     import type { Check } from '$lib/src/client'
 
     type T = $$Generic<Row>
     type Props = {
-        table  : TableHandlerLike<T>,
+        table  : TableHandlerInterface<T>,
         field  : FieldLike<T>,
         check ?: Check
     }
     let { table, field, check = undefined }: Props = $props()
 
-    // "field as any" for compatibility between client and server
-    const filter = table.createFilter(field as any, check)
+    const filter = table.createFilter(field, check)
 </script>
 
 <th>

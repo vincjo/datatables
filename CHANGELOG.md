@@ -1,7 +1,17 @@
+# 2.0.0-runes.39 - 2024-10-XX
+### Added
+- added `TableHandlerInterface` to improve shared components type.
+### Changed
+- update dependencies: svelte-next.262
+### Fixed
+- remove dupplicate builder: `ColumnViewBuilders`
+- remove dupplicate type definition: `Row`, `ColumnView`, `Internationalization`
+- use generic `T` type in `AbstractTableHandler` instead of `Row` (server).
+
+
+
+
 # 2.0.0-runes.38 - 2024-10-04
-<!-- ### Added -->
-<!-- ### Changed -->
-<!-- ### Changed -->
 ### Fixed
 - CSS import in `<Datatable>` component.
 
@@ -25,12 +35,8 @@
 
 # 2.0.0-runes.32 - 2024-09-16
 
-<!-- ### Added -->
 ### Changed
 - update dependencies: svelte-next.246
-<!-- ### Fixed -->
-
-
 
 
 # 2.0.0-runes.31 - 2024-07-25
@@ -54,13 +60,10 @@
 
 # 2.0.0-runes.28 - 2024-06-30
 
-<!-- ### Added -->
-
 ### Changed
 - client-side *(breaking)*:  sort params for distinct values is now an object `{ field: 'value' | 'count', direction: 'asc' | 'desc' }` instead of an array
 - client-side: use crypto UUID instead of js random string
 - client-side: improve types
-<!-- ### Fixed -->
 
 # 2.0.0-runes.27 - 2024-06-29
 

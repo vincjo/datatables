@@ -1,4 +1,4 @@
-import type { Field, Check, Criterion, TableHandler } from '$lib/src/client'
+import type { Field, Check, TableHandler } from '$lib/src/client'
 import { isNotNull, parseField } from '../utils'
 import type { UUID } from 'crypto'
 
@@ -12,7 +12,7 @@ export default class FilterHandler<Row>
         this.table = table
     }
 
-    public set(value: unknown | Criterion[], field: Field<Row>, check: Check = null, uuid: UUID)
+    public set(value: unknown, field: Field<Row>, check: Check = null, uuid: UUID)
     {
         const { callback, id, key } = parseField(field, uuid)
         const filter = { value, id, callback, check, key }

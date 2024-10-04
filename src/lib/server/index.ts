@@ -16,6 +16,7 @@ export {
     type Filter,
     type Sort,
     type Internationalization,
+    type TableHandlerInterface
 }  from '$lib/src/server'
 
 

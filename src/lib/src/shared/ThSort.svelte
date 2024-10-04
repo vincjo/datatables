@@ -1,17 +1,16 @@
 <script lang="ts">
-    import type { TableHandlerLike, FieldLike, Row } from '$lib/src/shared'
+    import type { TableHandlerInterface } from '$lib/src/shared'
     import type { Snippet } from 'svelte'
 
     type T = $$Generic<Row>
     type Props = {
-        table   : TableHandlerLike<T>,
-        field   : FieldLike<T>,
+        table   : TableHandlerInterface<T>,
+        field   : string | ((row: T) => unknown),
         children: Snippet
     }
     let { table, field, children }: Props = $props()
 
-    // "field as any" for compatibility between client and server
-    const sort = table.createSort(field as any)
+    const sort = table.createSort(field)
 </script>
 
 <th onclick={() => sort.set()} class="sortable" class:active={sort.isActive}>

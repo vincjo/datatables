@@ -7,9 +7,9 @@ import SelectHandler            from './handlers/SelectHandler.svelte'
 import PageHandler              from './handlers/PageHandler.svelte'
 import SearchHandler            from './handlers/SearchHandler.svelte'
 
-import type { Internationalization, Row, Field, Check, TableParams, ColumnView } from '$lib/src/client'
+import type { Internationalization, Row, Field, Check, TableParams, ColumnView, TableHandlerInterface } from '$lib/src/client'
 
-import ViewBuilder              from './builders/ViewBuilder.svelte'
+import ViewBuilder              from '../shared/builders/ViewBuilder.svelte'
 import SearchBuilder            from './builders/SearchBuilder.svelte'
 import FilterBuilder            from './builders/FilterBuilder.svelte'
 import AdvancedFilterBuilder    from './builders/AdvancedFilterBuilder.svelte'
@@ -19,7 +19,7 @@ import CSVBuilder               from './builders/CSVBuilder.svelte'
 import RecordFilterBuilder      from './builders/RecordFilterBuilder.svelte'
 
 
-export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T>
+export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T> implements TableHandlerInterface<T>
 {
     public  i18n            : Internationalization
     private view            : ViewBuilder<T>

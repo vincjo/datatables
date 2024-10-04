@@ -1,10 +1,10 @@
 <script lang="ts">
     import './svelte-simple-datatable.css'
     import type { Snippet } from 'svelte'
-    import { type TableHandlerLike, Search, RowsPerPage, RowCount, Pagination } from '$lib/src/shared'
+    import { type TableHandlerInterface, Search, RowsPerPage, RowCount, Pagination } from '$lib/src/shared'
     type T = $$Generic<Row>
     type Props = {
-        table: TableHandlerLike<T>,
+        table: TableHandlerInterface<T>,
         basic?: boolean,
         headless?: boolean,
         header?: Snippet,
