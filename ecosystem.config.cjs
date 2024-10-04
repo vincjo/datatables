@@ -15,7 +15,7 @@ module.exports = {
         production: {
             user: 'vincjo',
             host: ['vincjo.fr -p 625'],
-            ref: 'origin/master',
+            ref: 'origin/main',
             repo: 'git@github.com:vincjo/datatables.git',
             path: '/home/vincjo/www/datatables',
             'post-deploy':
