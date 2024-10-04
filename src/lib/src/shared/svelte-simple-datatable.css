@@ -48,3 +48,6 @@
     background: rgba(251, 192, 45, 0.6);
     border-radius: 2px;
 }
+.svelte-simple-datatable footer.divider {
+    border-top: 1px solid var(--grey, #e0e0e0);
+}

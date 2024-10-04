@@ -1,4 +1,5 @@
 <script lang="ts">
+    import './svelte-simple-datatable.css'
     import type { Snippet } from 'svelte'
     import { type TableHandlerLike, Search, RowsPerPage, RowCount, Pagination } from '$lib/src/shared'
     type T = $$Generic<Row>
@@ -30,7 +31,7 @@
         {@render children()}
     </article>
 
-    <footer>
+    <footer class:divider={basic}>
         {#if footer}
             {@render footer()}
         {:else if basic === true}
@@ -42,7 +43,6 @@
 </section>
 
 <style>
-    @import '$lib/src/shared/style.css';
     section {
         height: 100%;
         display: flex;

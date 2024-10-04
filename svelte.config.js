@@ -17,7 +17,7 @@ const config = {
         },
         alias: {
 			$site: 'src/site',
-			$site: 'src/site/*',
+			$site: 'src/site/*'
 		}
     },
 	vitePlugin: {
