@@ -1,7 +1,7 @@
 export { default as TableHandler } from './TableHandler.svelte'
 export { check } from './Comparator'
 import type { UUID } from 'crypto'
-import type { Internationalization } from '$lib/src/shared'
+import type { Internationalization, Field } from '$lib/src/shared'
 export {
     Datatable,
     Search,
@@ -12,12 +12,12 @@ export {
     Pagination,
     RowCount,
     type Row,
+    type Field,
     type Internationalization,
     type ColumnView,
     type TableHandlerInterface
 } from '$lib/src/shared'
 
-export type Field<Row> = keyof Row | ((row: Row) => unknown)
 
 export type Filter<Row> = {
     callback: (row: Row) => unknown

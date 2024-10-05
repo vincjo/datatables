@@ -86,12 +86,6 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new SortBuilder(this.sortHandler, field)
     }
 
-    // public filter(value: string | number, field: string): void
-    // {
-    //     this.filterHandler.set(value, field)
-    //     this.setPage(1)
-    // }
-
     public clearFilters(): void
     {
         this.filterHandler.clear()
@@ -103,7 +97,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new FilterBuilder(this.filterHandler, field)
     }
 
-    public select(value: T[keyof T] | T)
+    public select(value: T[keyof T])
     {
         this.selectHandler.set(value)
     }

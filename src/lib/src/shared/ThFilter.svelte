@@ -1,11 +1,11 @@
 <script lang="ts">
-    import type { TableHandlerInterface } from '$lib/src/shared'
+    import type { TableHandlerInterface, Field } from '$lib/src/shared'
     import type { Check } from '$lib/src/client'
 
     type T = $$Generic<Row>
     type Props = {
         table  : TableHandlerInterface<T>,
-        field  : string | ((row: T) => unknown),
+        field  : Field<T>,
         check ?: Check
     }
     let { table, field, check = undefined }: Props = $props()

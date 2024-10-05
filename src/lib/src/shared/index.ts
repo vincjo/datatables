@@ -12,49 +12,41 @@ import type { Check }                   from '$lib/src/client'
 
 export type Row = { [key: string | number | symbol]: any }
 
+export type Field<Row> = keyof Row | ((row: Row) => unknown)
+
 export interface TableHandlerInterface<Row> {
-    clientWidth: number,
-    element: HTMLElement,
-    pages: readonly number[],
-    pagesWithEllipsis: readonly number[],
-    currentPage: number,
+    clientWidth         : number,
+    element             : HTMLElement,
+    pages               : readonly number[],
+    pagesWithEllipsis   : readonly number[],
+    currentPage         : number,
+    pageCount           : number,
+    i18n                : Internationalization,
+    rowCount            : { selected: number, start: number, end: number, total: number }
+    rowsPerPage         : number,
+    clearSelection()    : void,
+    createSearch()      : { value: unknown, set(): void }
     setPage(value?: number | 'previous' | 'next' | 'last'): void,
-    pageCount: number,
-    i18n: Internationalization,
-    rowCount: { selected: number, start: number, end: number, total: number }
-    clearSelection(): void,
-    rowsPerPage: number,
-    createSearch(): {
-        value: unknown,
-        set(): void
-    }
-    createFilter(field: keyof Row | ((row: Row) => unknown), check?: Check): {
-        value: unknown,
-        set(): void
-    },
-    createSort(field: keyof Row | ((row: Row) => unknown)): {
-        isActive: boolean,
-        direction: 'asc' | 'desc',
-        set(): void
-    }
+    createFilter(field: Field<Row>, check?: Check): { value: unknown, set(): void },
+    createSort(field: Field<Row>): { isActive: boolean, direction: 'asc' | 'desc', set(): void }
     on(event: string, callback: () => void): void 
 }
 
 export type Internationalization = {
-    search  ?: string,
-    show    ?: string,
-    entries ?: string,
-    filter  ?: string,
-    rowCount?: string,
-    noRows  ?: string,
-    previous?: string,
-    next    ?: string
+    search     ?: string,
+    show       ?: string,
+    entries    ?: string,
+    filter     ?: string,
+    rowCount   ?: string,
+    noRows     ?: string,
+    previous   ?: string,
+    next       ?: string
 }
 
 export type ColumnView = {
-    index: number,
-    name?: string,
-    isVisible?: boolean,
-    isFrozen?: boolean,
-    toggle?: () => void
+    index       : number,
+    name       ?: string,
+    isVisible  ?: boolean,
+    isFrozen   ?: boolean,
+    toggle     ?: () => void
 }

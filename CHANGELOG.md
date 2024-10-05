@@ -7,7 +7,7 @@
 - remove `selectScope` state - not breaking the api
 ### Fixed
 - remove dupplicate builder: `ColumnViewBuilders`
-- remove dupplicate type definition: `Row`, `ColumnView`, `Internationalization`
+- remove dupplicate type definition: `Row`, `ColumnView`, `Internationalization`, `Field`
 - use generic `T` type in `AbstractTableHandler` instead of `Row` (server-side pagination).
 - distinct values has a default order in addition to sort param
 

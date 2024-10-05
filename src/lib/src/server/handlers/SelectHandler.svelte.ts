@@ -9,7 +9,7 @@ export default class SelectHandler<Row>
         this.table = table
     }
 
-    public set(value: Row | Row[keyof Row])
+    public set(value: Row[keyof Row])
     {
         if (this.table.selected.includes(value)) {
             this.table.selected = this.table.selected.filter((item) => item !== value)

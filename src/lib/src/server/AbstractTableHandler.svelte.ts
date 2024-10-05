@@ -4,7 +4,7 @@ import { EventDispatcher } from '$lib/src/shared'
 
 export default class AbstractTableHandler<Row>
 {
-    protected selectBy          : keyof Row | undefined
+    protected selectBy         ?: keyof Row
     protected event             = new EventDispatcher()
     protected search            = $state<string>('')
     protected sort              = $state<Sort>({})
@@ -20,7 +20,7 @@ export default class AbstractTableHandler<Row>
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.createPageCount())
     public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())
-    public selected             = $state<(Row | Row[keyof Row])[]>([])
+    public selected             = $state<(Row[keyof Row])[]>([])
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
     public element              = $state<HTMLElement>(undefined)
     public clientWidth          = $state<number>(1000)
@@ -118,10 +118,7 @@ export default class AbstractTableHandler<Row>
         if (this.rows.length === 0) {
             return false
         }
-        if (this.selectBy) {
-            const ids = this.rows.map(row => row[this.selectBy])
-            return ids.every(id => this.selected.includes(id))
-        }
-        return this.rows.every(row => this.selected.includes(row as Row))
+        const ids = this.rows.map(row => row[this.selectBy])
+        return ids.every(id => this.selected.includes(id))
     }
 }
