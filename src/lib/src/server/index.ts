@@ -1,5 +1,5 @@
 export { default as TableHandler }  from './TableHandler.svelte'
-
+import type { Row, Internationalization } from '$lib/src/shared'
 export {
     Datatable,
     Search,
@@ -10,28 +10,35 @@ export {
     Pagination,
     RowCount,
     type Row,
+    type Field,
     type ColumnView,
     type Internationalization,
     type TableHandlerInterface
 } from '$lib/src/shared'
 
-
-export type State = {
-    currentPage: number,
-    rowsPerPage: number,
-    offset: number,
-    search: string | undefined,
-    sort: Sort | undefined
-    filters: Filter[] | undefined
+export type State<T extends Row = any> = {
+    currentPage : number,
+    rowsPerPage : number,
+    offset      : number,
+    search     ?: string,
+    sort       ?: Sort<T>
+    filters    ?: Filter<T>[]
     setTotalRows: (value: number) => void
 }
 
-export type Filter = {
-    field: string
+export type TableParams<Row> = {
+    rowsPerPage     ?: number,
+    totalRows       ?: number,
+    selectBy        ?: keyof Row,
+    i18n            ?: Internationalization
+}
+
+export type Filter<Row> = {
+    field: keyof Row
     value?: unknown
 }
 
-export type Sort = {
-    field?: string
+export type Sort<Row> = {
+    field?: keyof Row
     direction?: 'asc' | 'desc'
 }

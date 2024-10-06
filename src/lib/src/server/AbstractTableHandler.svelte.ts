@@ -1,5 +1,4 @@
-import type { State, Sort, Filter } from '$lib/src/server'
-import type { Params } from './TableHandler.svelte'
+import type { State, Sort, Filter, TableParams } from '$lib/src/server'
 import { EventDispatcher } from '$lib/src/shared'
 
 export default class AbstractTableHandler<Row>
@@ -7,13 +6,13 @@ export default class AbstractTableHandler<Row>
     protected selectBy         ?: keyof Row
     protected event             = new EventDispatcher()
     protected search            = $state<string>('')
-    protected sort              = $state<Sort>({})
+    protected sort              = $state<(Sort<Row>)>({})
 
     public totalRows            = $state<number>(undefined)
     public isLoading            = $state<boolean>(false)
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
-    public filters              = $state<Filter[]>([])
+    public filters              = $state<(Filter<Row>)[]>([])
     public filterCount          = $derived<number>(this.filters.length)
     public rows                 = $state<Row[]>([])
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
@@ -25,7 +24,7 @@ export default class AbstractTableHandler<Row>
     public element              = $state<HTMLElement>(undefined)
     public clientWidth          = $state<number>(1000)
 
-    constructor(data: Row[], params: Params)
+    constructor(data: Row[], params: TableParams<Row>)
     {
         this.rows               = data
         this.selectBy           = params.selectBy as keyof Row ?? undefined
@@ -33,7 +32,7 @@ export default class AbstractTableHandler<Row>
         this.rowsPerPage        = params.rowsPerPage ?? 10
     }
 
-    public getState(): State
+    public getState(): State<Row>
     {
         return {
             currentPage: this.currentPage,

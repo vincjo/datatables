@@ -5,9 +5,9 @@ export default class FilterBuilder<Row>
     public  value           = $state<string>('')
     private timeout         = undefined
     private filterHandler   : FilterHandler<Row>
-    private field           : string
+    private field           : keyof Row
 
-    constructor(filterHandler: FilterHandler<Row>, field: string)
+    constructor(filterHandler: FilterHandler<Row>, field: keyof Row)
     {
         this.filterHandler  = filterHandler
         this.field          = field

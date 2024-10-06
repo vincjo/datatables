@@ -13,7 +13,6 @@ export const load = async (url) => {
                     {
                         name: 'Datatable.svelte',
                         code: fs.readFileSync(`${lib}/Datatable.svelte`).toString('utf-8'),
-                     
                     },
                     {
                         name: 'Th.svelte',

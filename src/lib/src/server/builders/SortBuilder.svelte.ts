@@ -3,11 +3,11 @@ import type SortHandler from '../handlers/SortHandler.svelte'
 export default class SortBuilder<Row>
 {
     private sortHandler : SortHandler<Row>
-    private field       : string
+    private field       : keyof Row
     public  isActive    = $derived<boolean>(this.createIsActive())
     public  direction   = $derived<'asc' | 'desc'>(this.createDirection())
 
-    constructor(sortHandler: SortHandler<Row>, field: string)
+    constructor(sortHandler: SortHandler<Row>, field: keyof Row)
     {
         this.sortHandler = sortHandler
         this.field       = field

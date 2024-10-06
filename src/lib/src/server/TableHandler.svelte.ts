@@ -12,15 +12,10 @@ import SearchBuilder        from './builders/SearchBuilder.svelte'
 import SortBuilder          from './builders/SortBuilder.svelte'
 import FilterBuilder        from './builders/FilterBuilder.svelte'
 
-import type { Internationalization, Row, State, ColumnView } from '$lib/src/server'
+import type { Internationalization, Row, Field, State, ColumnView, TableParams } from '$lib/src/server'
 import type { TableHandlerInterface } from '$lib/src/shared'
 
-export type Params = {
-    rowsPerPage     ?: number,
-    totalRows       ?: number,
-    selectBy        ?: keyof Row,
-    i18n            ?: Internationalization
-}
+
 
 export default class TableHandler<T extends Row = any> extends AbstractTableHandler<T> implements TableHandlerInterface<T>
 {
@@ -33,7 +28,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     private view            : ViewBuilder<T>
     public  i18n            : Internationalization
 
-    constructor(data: T[] = [], params: Params = { rowsPerPage: 5 })
+    constructor(data: T[] = [], params: TableParams<T> = { rowsPerPage: 5 })
     {
         super(data, params)
         this.i18n           = this.translate(params.i18n)
@@ -45,7 +40,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.filterHandler  = new FilterHandler(this)
     }
 
-    public load(callback: (state: State) => Promise<T[]>): void
+    public load(callback: (state: State<T>) => Promise<T[]>): void
     {
         this.fetchHandler.set(callback)
     }
@@ -81,7 +76,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new SearchBuilder(this)
     }
 
-    public createSort(field: string): SortBuilder<T>
+    public createSort(field: keyof T): SortBuilder<T>
     {
         return new SortBuilder(this.sortHandler, field)
     }
@@ -92,8 +87,11 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.invalidate()
     }
 
-    public createFilter(field: string, _ = undefined): FilterBuilder<T>
+    public createFilter(field: Field<T>): FilterBuilder<T>
     {
+        if (typeof field === 'function') {
+            throw new Error(`Invalid field argument: ${String(field)}`)
+        }
         return new FilterBuilder(this.filterHandler, field)
     }
 

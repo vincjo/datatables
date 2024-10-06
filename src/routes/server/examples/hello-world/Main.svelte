@@ -1,12 +1,9 @@
 <script lang="ts">
     import { TableHandler, Datatable, ThSort, RowCount, RowsPerPage, Pagination, type State } from '$lib/src/server'
     import { reload } from './api'
-    let { data }: { data: {
-        id: string,
-        name: string,
-        email: string,
-        body: string
-    }[] } = $props()
+    type Row = { id: string, name: string, email: string, body: string }
+    let { data }: { data: Row[] } = $props()
+
 
     const table = new TableHandler(data, { rowsPerPage: 5, totalRows: 500 })
 

@@ -9,7 +9,7 @@ export default class SortHandler<Row>
         this.table = table
     }
 
-    public set(field: string)
+    public set(field: keyof Row)
     {
         const sort = this.table['sort']
 
@@ -24,14 +24,14 @@ export default class SortHandler<Row>
         }
     }
 
-    public asc(field: string)
+    public asc(field: keyof Row)
     {
         this.table['sort'] = { field, direction: 'asc' }
         this.table.setPage(1)
         this.table['event'].dispatch('change')
     }
 
-    public desc(field: string)
+    public desc(field: keyof Row)
     {
         this.table['sort'] = { field, direction: 'desc' }
         this.table.setPage(1)

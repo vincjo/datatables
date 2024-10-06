@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
     // import Demo from '$site/components/Demo.svelte'
     import Main from './Main.svelte'
     import Features from '../Features.svelte'
-    let { data } = $props()
+    let { data }: { data: {
+        dataset: { id: string, name: string, email: string, body: string }[]
+    }} = $props()
 </script>
 
 <h1>

@@ -9,7 +9,7 @@ export default class FilterHandler<Row>
         this.table = table
     }
 
-    public set(value: string | number, field: string )
+    public set(value: string | number, field: keyof Row)
     {
         this.table.filters = this.table.filters.filter(filter =>  filter.field !== field && filter.value)
         if (value) {
@@ -17,7 +17,7 @@ export default class FilterHandler<Row>
         }
     }
 
-    public unset(field: string )
+    public unset(field: keyof Row)
     {
         this.table.filters = this.table.filters.filter(filter => filter.field !== field)
     }
