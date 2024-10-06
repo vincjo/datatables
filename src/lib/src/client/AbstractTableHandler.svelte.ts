@@ -6,6 +6,7 @@ import { EventDispatcher } from '$lib/src/shared'
 export default abstract class AbstractTableHandler<Row>
 {
     protected selectBy         ?: Field<Row>
+    protected selectScope       = $state<'all' | 'currentPage'>('currentPage')
     protected highlight         : boolean
     protected event             = new EventDispatcher()
     protected rawRows           = $state.raw<Row[]>([])
@@ -141,10 +142,15 @@ export default abstract class AbstractTableHandler<Row>
 
     private createIsAllSelected()
     {
-        if (this.rows.length === 0 || !this.selectBy) {
+
+        if (this.rowCount.total === 0 || !this.selectBy) {
             return false
         }
         const { callback } = parseField(this.selectBy)
+        if (this.selectScope === 'all') {
+            const identifiers = this.allRows.map(callback)
+            return identifiers.every(id => this.selected.includes(id))
+        }
         const identifiers = this.rows.map(callback)
         return identifiers.every(id => this.selected.includes(id))
     }

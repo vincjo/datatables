@@ -113,8 +113,8 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 
     public selectAll(params: { scope?: 'all' | 'currentPage' } = {}): void
     {
-        const scope = (params.scope === 'all') ? 'all' : 'currentPage'
-        this.selectHandler.all(scope)
+        this.selectScope = (params.scope === 'all') ? 'all' : 'currentPage'
+        this.selectHandler.all(this.selectScope)
     }
 
     public getSelectedRows(): T[]
