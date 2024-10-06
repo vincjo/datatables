@@ -90,7 +90,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public createFilter(field: Field<T>): FilterBuilder<T>
     {
         if (typeof field === 'function') {
-            throw new Error(`Invalid field argument: ${String(field)}`)
+            throw new Error(`Invalid field argument: ${String(field)}. Function type arguments are not allowed in server-side pagination`)
         }
         return new FilterBuilder(this.filterHandler, field)
     }

@@ -19,7 +19,7 @@
         <!-- <a class="menu" class:active={$page.url.pathname.indexOf('/components') > -1} href="{site.getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
 
         <div class="divider"></div>
-        <span>Data processing</span>
+        <span>Pagination</span>
         <Mode isMobile/>
         <div class="divider-16"></div>
         <span>Theme</span>

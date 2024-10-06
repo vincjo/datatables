@@ -10,6 +10,7 @@
 - remove dupplicate type definition: `Row`, `ColumnView`, `Internationalization`, `Field`
 - use generic `T` type in `AbstractTableHandler` instead of `Row` (server-side pagination).
 - distinct values has a default order in addition to sort param
+- $$Generic type for server-side pagination
 
 
 

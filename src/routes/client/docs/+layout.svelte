@@ -110,7 +110,7 @@
 
 <svelte:head>
     <title>svelte simple datatables - docs</title>
-    <meta name="description" content="Documentation for client-side data processing">
+    <meta name="description" content="Documentation for client-side pagination">
 </svelte:head>
 
 <Layout {nav}>

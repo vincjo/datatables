@@ -6,7 +6,7 @@
     <Logo height="80px"/>
     <aside>
         <h1>svelte simple datatables</h1>
-        <p>For <b>{site.mode}-side</b> data processing</p>
+        <p>For <b>{site.mode}-side</b> pagination</p>
     </aside>
 </section>
 

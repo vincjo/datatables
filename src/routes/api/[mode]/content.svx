@@ -4,9 +4,9 @@
 
 
 {#if site.mode === 'client'}
-    <span style:color="var(--font)">Client-side data processing</span>
+    <span style:color="var(--font)">Client-side pagination</span>
 {:else}
-    <span style:color="var(--font)">Server-side data processing</span>
+    <span style:color="var(--font)">Server-side pagination</span>
 {/if}
 
 # Welcome to the TableHandler API
