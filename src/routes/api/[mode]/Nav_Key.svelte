@@ -16,7 +16,7 @@
     </button>
     {#if active}
         <ul transition:slide={{ duration: 200 }}>
-            {#each data as item}
+            {#each data.filter(Boolean) as item}
                 <a href="{site.getPath(`/api/${site.mode}/${key}~${item}`)}" onclick={close}>
                     <li class:active={item === $page.params.slug?.split('~')[1]}>
                         <span>{item}</span>

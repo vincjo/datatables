@@ -1,6 +1,8 @@
 import type { Field, TableHandler } from '$lib/src/client'
 import { parseField, sort }         from '$lib/src/client/utils'
 
+type Sort = [key: 'value' | 'count', direction: 'asc' | 'desc']
+
 export default class CalcultationBuilder<Row>
 {
     private callback    : (row: Row) => string | number
@@ -13,7 +15,7 @@ export default class CalcultationBuilder<Row>
         this.callback   = parseField(field).callback
     }
 
-    public distinct(param?: { sort: [key: 'value' | 'count', direction: 'asc' | 'desc'] }): { value: string, count: number }[]
+    public distinct(param?: { sort: Sort }): { value: string, count: number }[]
     {
         const values = this.table.allRows.map(row => this.callback(row))
 

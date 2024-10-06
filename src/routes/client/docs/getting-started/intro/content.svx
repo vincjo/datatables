@@ -5,7 +5,7 @@
 
 <Banner/>
 
-This part focuses on handling pagination on the client-side (i.e., in the browser).
+This part focuses on handling data processing on the client-side (i.e., in the browser).
 
 It includes features such as:
 - Pagination: dividing a large dataset into smaller chunks and displaying only a portion of it at a time.

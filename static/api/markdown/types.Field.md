@@ -2,6 +2,8 @@
 
 Either an object key (column name) or a function that takes a row as input and returns a value.
 
+Note that if you run `TableHandler` in *server-side pagination* mode, the type `Field` can only be an object key.
+
 ## Example
 
 ```ts

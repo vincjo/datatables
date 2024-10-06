@@ -17,8 +17,16 @@ export const deprcated = {
     methods     : [],
 }
 
+export const shared = {
+    properties  : [],
+    types       : ['Internationalization', 'Field', 'ColumnView'],
+    methodes    : []
+}
+
 export const internalFilter = (records: string[], key: string) => {
-    return records.filter((record) => internal[key].includes(record) === false).sort()
+    return records.filter((record) => internal[key].includes(record) === false)
+        .concat(shared[key])
+        .sort()
 }
 
 export type Code = {

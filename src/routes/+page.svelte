@@ -23,7 +23,7 @@
                     <div class="flex">
                         <a href="{site.getPath('/client/docs/getting-started/intro')}">Docs</a>
                         <a href="{site.getPath('/client/examples/hello-world')}">Examples</a>
-                        <a href="{site.getPath('/client/api')}">API</a>
+                        <a href="{site.getPath('/api/client')}">API</a>
                     </div>
                 </aside>
                 <aside onmouseenter={() => site.setMode('server')} class="flex" class:active={site.mode === 'server'}>
@@ -33,7 +33,7 @@
                     <div class="flex">
                         <a href="{site.getPath('/server/docs/getting-started/intro')}">Docs</a>
                         <a href="{site.getPath('/server/examples/hello-world')}">Examples</a>
-                        <a href="{site.getPath('/server/api')}">API</a>
+                        <a href="{site.getPath('/api/server')}">API</a>
                     </div>
                 </aside>
             </article>

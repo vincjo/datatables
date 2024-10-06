@@ -76,8 +76,11 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new SearchBuilder(this)
     }
 
-    public createSort(field: keyof T): SortBuilder<T>
+    public createSort(field: Field<T>): SortBuilder<T>
     {
+        if (typeof field === 'function') {
+            throw new Error(`Invalid field argument: ${String(field)}. Function type arguments are not allowed in server-side mode`)
+        }
         return new SortBuilder(this.sortHandler, field)
     }
 
@@ -90,7 +93,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public createFilter(field: Field<T>): FilterBuilder<T>
     {
         if (typeof field === 'function') {
-            throw new Error(`Invalid field argument: ${String(field)}. Function type arguments are not allowed in server-side pagination`)
+            throw new Error(`Invalid field argument: ${String(field)}. Function type arguments are not allowed in server-side mode`)
         }
         return new FilterBuilder(this.filterHandler, field)
     }
