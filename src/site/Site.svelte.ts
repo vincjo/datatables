@@ -1,4 +1,5 @@
-import { page } from '$app/stores'
+
+import { path }     from 'gros/page'
 import { base } from '$app/paths'
 import { get }  from 'svelte/store'
 
@@ -18,10 +19,10 @@ export default class Site
     public getMode()
     {
         let mode = 'client'
-        if (get(page).url.pathname.indexOf(`/client/`) > -1) {
+        if (path.current.indexOf(`/client/`) > -1) {
             mode = 'client'
         }
-        else if (get(page).url.pathname.indexOf(`/server/`) > -1) {
+        else if (path.current.indexOf(`/server/`) > -1) {
             mode = 'server'
         }
         else {
@@ -52,16 +53,5 @@ export default class Site
             return 'dark'
         }
         return 'light'
-    }
-
-    public getPath(url: string)
-    {
-        const root = '/datatables.runes'
-        return `${root}${url}`.replace('//', '/').replace(/\/$/, '')
-        if (base) {
-            return `${base}${url}`.replace('//', '/').replace(/\/$/, '')
-        }
-        return url
-
     }
 }

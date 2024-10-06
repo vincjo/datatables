@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { getPath, createURL } from 'gros/page'
+    import { getPath, path } from 'gros/page'
     import { clickOutside } from 'gros/action'
     import { fly, fade }    from 'svelte/transition'
     import { site } from '$site'
-    const url = createURL()
     let { nav }: { nav: any } = $props()
     let show = $state(false)
     const close = () => show = false
@@ -29,7 +28,7 @@
         use:clickOutside={close}
     >
         {#each nav as item}
-            <a href="{getPath(`/${site.mode}/examples/${item.page}`)}" class:active={$url.indexOf(item.page) > -1} onclick={close}>
+            <a href="{getPath(`/${site.mode}/examples/${item.page}`)}" class:active={path.current.indexOf(item.page) > -1} onclick={close}>
                 <b>{item.title}</b>
                 <span>{item.description}</span>
             </a>

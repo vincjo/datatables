@@ -1,9 +1,8 @@
 <script lang="ts">
     import { TableHandler } from '$lib/src/client'
-    import { getPath, createURL } from 'gros/page'
+    import { getPath, path } from 'gros/page'
     import Search from '../Nav_Search.svelte'
     import { site } from '$site'
-    const url = createURL()
     type Props = { nav: { title: string, page: string, description: string, tag: string[] }[] }
     let { nav }: Props = $props()
     const table = new TableHandler(nav)
@@ -14,7 +13,7 @@
     <Search {table}/>
     <section class="thin-scrollbar">
         {#each table.rows as row}
-            <a href="{getPath(`/${site.mode}/examples/${row.page}`)}" class:active={$url.indexOf(row.page) > -1}>
+            <a href="{getPath(`/${site.mode}/examples/${row.page}`)}" class:active={path.current.indexOf(row.page) > -1}>
                 <b>{row.title}</b>
                 <span>{row.description}</span>
             </a>

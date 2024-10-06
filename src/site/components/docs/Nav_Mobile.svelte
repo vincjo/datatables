@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { getPath, createURL } from 'gros/page'
+    import { getPath, path } from 'gros/page'
     import { clickOutside } from 'gros/action'
     import { fly, fade }    from 'svelte/transition'
     import { site }         from '$site'
-    const url = createURL()
     let { nav }: { nav: any } = $props()
     let show = $state(false)
     const close = () => show = false
@@ -34,7 +33,7 @@
                 {item.title}
             </h1>
             {#each item.links as link}
-                <a class:active={$url.indexOf(link.path) > -1} href="{getPath(link.path)}" onclick={close}>
+                <a class:active={path.current.indexOf(link.path) > -1} href="{getPath(link.path)}" onclick={close}>
                     {link.name}
                 </a>
                 <div class="divider"></div>

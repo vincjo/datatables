@@ -1,5 +1,6 @@
 <script lang="ts">
     import { site }     from '$site'
+    import { getPath }  from 'gros/page'
     import Description  from './Description.svelte'
 </script>
 
@@ -21,9 +22,9 @@
 
                     <h3>Client-side pagination</h3>
                     <div class="flex">
-                        <a href="{site.getPath('/client/docs/getting-started/intro')}">Docs</a>
-                        <a href="{site.getPath('/client/examples/hello-world')}">Examples</a>
-                        <a href="{site.getPath('/api/client')}">API</a>
+                        <a href="{getPath('/client/docs/getting-started/intro')}">Docs</a>
+                        <a href="{getPath('/client/examples/hello-world')}">Examples</a>
+                        <a href="{getPath('/api/client')}">API</a>
                     </div>
                 </aside>
                 <aside onmouseenter={() => site.setMode('server')} class="flex" class:active={site.mode === 'server'}>
@@ -31,9 +32,9 @@
 
                     <h3>Server-side pagination</h3>
                     <div class="flex">
-                        <a href="{site.getPath('/server/docs/getting-started/intro')}">Docs</a>
-                        <a href="{site.getPath('/server/examples/hello-world')}">Examples</a>
-                        <a href="{site.getPath('/api/server')}">API</a>
+                        <a href="{getPath('/server/docs/getting-started/intro')}">Docs</a>
+                        <a href="{getPath('/server/examples/hello-world')}">Examples</a>
+                        <a href="{getPath('/api/server')}">API</a>
                     </div>
                 </aside>
             </article>

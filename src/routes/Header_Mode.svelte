@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { Tooltip } from 'gros/tooltip'
-    import { site } from '$site'
+    import { Tooltip }  from 'gros/tooltip'
+    import { site }     from '$site'
+    import { getPath }  from 'gros/page'
     let { isMobile = false } = $props()
 </script>
 
@@ -8,7 +9,7 @@
     <aside class="flex mobile">
         <a
             onclick={() => site.setMode('client')}
-            href="{site.getPath('/')}"
+            href="{getPath('/')}"
             class="btn tooltip"
             class:active={site.mode === 'client'}
         >
@@ -17,7 +18,7 @@
         </a>
         <a
             onclick={() => site.setMode('server')}
-            href="{site.getPath('/')}"
+            href="{getPath('/')}"
             class="btn tooltip"
             class:active={site.mode === 'server'}
         >
@@ -29,7 +30,7 @@
     <aside class="flex">
         <a
             onclick={() => site.setMode('client')}
-            href="{site.getPath('/')}"
+            href="{getPath('/')}"
             class="btn tooltip"
             class:active={site.mode === 'client'}
         >
@@ -38,7 +39,7 @@
         </a>
         <a
             onclick={() => site.setMode('server')}
-            href="{site.getPath('/')}"
+            href="{getPath('/')}"
             class="btn tooltip"
             class:active={site.mode === 'server'}
         >

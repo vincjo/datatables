@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { slide }    from 'svelte/transition'
-    import { page }     from '$app/stores'
-    import { site }     from '$site'
-    import Theme        from './Header_Theme.svelte'
-    import Mode         from './Header_Mode.svelte'
-    import Github       from './Header_Github.svelte'
+    import { slide }            from 'svelte/transition'
+    import { path, getPath }    from 'gros/page'
+    import { site }             from '$site'
+    import Theme                from './Header_Theme.svelte'
+    import Mode                 from './Header_Mode.svelte'
+    import Github               from './Header_Github.svelte'
 
     let { show = $bindable() }: { show: boolean } = $props()
 
@@ -13,10 +13,10 @@
 
 {#if show}
     <nav transition:slide={{ duration: 120 }} class="thin-scrollbar">
-        <a class="menu" class:active={$page.url.pathname.indexOf('/docs') > -1}       href="{site.getPath(`/${site.mode}/docs/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
-        <a class="menu" class:active={$page.url.pathname.indexOf('/examples') > -1}   href="{site.getPath(`/${site.mode}/examples/hello-world`)}" onclick={close}>Examples&#8599;</a>
-        <a class="menu" class:active={$page.url.pathname.indexOf('/api') > -1}        href="{site.getPath(`/api/${site.mode}`)}" onclick={close}>API&#8599;</a>
-        <!-- <a class="menu" class:active={$page.url.pathname.indexOf('/components') > -1} href="{site.getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
+        <a class="menu" class:active={path.current.indexOf('/docs') > -1}       href="{getPath(`/${site.mode}/docs/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
+        <a class="menu" class:active={path.current.indexOf('/examples') > -1}   href="{getPath(`/${site.mode}/examples/hello-world`)}" onclick={close}>Examples&#8599;</a>
+        <a class="menu" class:active={path.current.indexOf('/api') > -1}        href="{getPath(`/api/${site.mode}`)}" onclick={close}>API&#8599;</a>
+        <!-- <a class="menu" class:active={path.current.indexOf('/components') > -1} href="{getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
 
         <div class="divider"></div>
         <span>Pagination</span>

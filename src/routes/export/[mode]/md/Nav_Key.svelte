@@ -1,5 +1,6 @@
 <script lang="ts">
     import { site } from '$site'
+    import { getPath } from 'gros/page'
     import { page } from '$app/stores'
     import { slide } from 'svelte/transition'
 
@@ -17,7 +18,7 @@
     {#if active}
         <ul transition:slide={{ duration: 200 }}>
             {#each data as item}
-                <a href="{site.getPath(`/${site.mode}/md/${key}~${item}`)}">
+                <a href="{getPath(`/${site.mode}/md/${key}~${item}`)}">
                     <li class:active={item === $page.params.slug?.split('~')[1]}>
                         <span>{item}</span>
                     </li>

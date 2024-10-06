@@ -1,15 +1,13 @@
 <script lang="ts">
     import Nav from './Nav.svelte'
     import MobileNav from './Nav_Mobile.svelte'
-    import { createURL } from 'gros/page'
+    import { path } from 'gros/page'
     import type { Snippet } from 'svelte'
-
-    const url = createURL()
 
     let { nav, children }: { nav: any, children: Snippet } = $props()
     let element: HTMLElement
     $effect(() => {
-        $url
+        path.current
         if (element) element.scrollTop = 0
     })
 </script>
