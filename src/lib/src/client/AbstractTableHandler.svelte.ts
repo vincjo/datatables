@@ -19,8 +19,8 @@ export default abstract class AbstractTableHandler<Row>
     public element              = $state<HTMLElement>(undefined)
     public clientWidth          = $state<number>(1000)
     public filterCount          = $derived<number>(this.filters.length)
-    public allRows              = $derived<readonly Row[]>(this.createAllRows())
-    public rows                 = $derived<readonly Row[]>(this.createRows())
+    public allRows              = $derived<readonly $state.Snapshot<Row>[]>(this.createAllRows())
+    public rows                 = $derived<readonly $state.Snapshot<Row>[]>(this.createRows())
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
     public pages                = $derived<readonly number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
@@ -38,7 +38,7 @@ export default abstract class AbstractTableHandler<Row>
 
     private createAllRows()
     {
-        let allRows = structuredClone(this.rawRows)
+        let allRows = $state.snapshot(this.rawRows)
         if (this.search.value) {
             allRows = allRows.filter((row) => {
                 const fields = this.search.scope ?? Object.keys(row) as Field<Row>[]
@@ -48,7 +48,7 @@ export default abstract class AbstractTableHandler<Row>
                         row[key] = nestedFilter(row[key], this.search.value, this.highlight)
                     }
                     else if (this.highlight) {
-                        row = deepEmphasize(row, callback, this.search.value) as Row
+                        row = deepEmphasize(row, callback, this.search.value) as $state.Snapshot<Row>
                     }
                 }
                 return scope.some(({ callback }) => {
@@ -66,7 +66,7 @@ export default abstract class AbstractTableHandler<Row>
                         row[key] = nestedFilter(row[key], value, this.highlight, check)
                     }
                     else if (this.highlight && checked && value && typeof value === 'string') {
-                        row = deepEmphasize(row, callback, value) as Row
+                        row = deepEmphasize(row, callback, value) as $state.Snapshot<Row>
                     }
                     return checked
                 })

@@ -42,10 +42,14 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 
     public setRows(data: T[]): void
     {
+        const scrollTop = this.element?.scrollTop
         this.rawRows = data
         untrack(() => {
             this.event.dispatch('change')
             this.sortHandler.restore()
+            if (this.element) {
+                setTimeout(() => this.element.scrollTop = scrollTop, 2)
+            }
         })
     }
 

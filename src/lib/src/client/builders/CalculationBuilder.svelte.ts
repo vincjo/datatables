@@ -5,7 +5,7 @@ type Sort = [key: 'value' | 'count', direction: 'asc' | 'desc']
 
 export default class CalcultationBuilder<Row>
 {
-    private callback    : (row: Row) => string | number
+    private callback    : (row: $state.Snapshot<Row>) => string | number
     private precision   : number
     private table       : TableHandler<Row>
 

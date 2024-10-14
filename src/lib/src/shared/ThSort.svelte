@@ -13,7 +13,7 @@
     const sort = table.createSort(field)
 </script>
 
-<th onclick={() => sort.set()} class="sortable" class:active={sort.isActive}>
+<th onclick={() => sort.set()} class:active={sort.isActive}>
     <div class="flex">
         <strong>
             {@render children()}
@@ -33,8 +33,6 @@
         font-size: 13px;
         user-select: none;
         border-bottom: 1px solid var(--grey, #e0e0e0);
-    }
-    th.sortable {
         cursor: pointer;
     }
     th strong {
@@ -43,44 +41,36 @@
         line-height: 16px;
         text-align: left;
     }
-    th.sortable div.flex {
+    div.flex {
         padding: 0;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         height: 100%;
     }
-    th.sortable span {
+    span {
         padding-left: 8px;
     }
-    th.sortable span:before,
-    th.sortable span:after {
+    span:before,
+    span:after {
         border: 4px solid transparent;
         content: '';
         display: block;
         height: 0;
         width: 0;
     }
-    th.sortable span:before {
+    span:before {
         border-bottom-color: var(--grey, #e0e0e0);
         margin-top: 2px;
     }
-    th.sortable span:after {
+    span:after {
         border-top-color: var(--grey, #e0e0e0);
         margin-top: 2px;
     }
-    th.active.sortable span.asc:before {
+    th.active span.asc:before {
         border-bottom-color: var(--font-grey, #9e9e9e);
     }
-    th.active.sortable span.desc:after {
+    th.active span.desc:after {
         border-top-color: var(--font-grey, #9e9e9e);
-    }
-    th:not(.sortable) span {
-        visibility: hidden;
-    }
-    div.flex {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
     }
 </style>

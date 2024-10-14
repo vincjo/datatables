@@ -1,12 +1,12 @@
 <script lang="ts">
     import type { Snippet } from 'svelte'
 
-    let { children }: { children: Snippet } = $props()
+    let { children }: { children?: Snippet } = $props()
 </script>
 
 <th>
     <strong>
-        {@render children()}
+        {@render children?.()}
     </strong>
 </th>
 

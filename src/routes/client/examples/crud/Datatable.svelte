@@ -1,25 +1,15 @@
 <script lang="ts">
     import { TableHandler, Datatable, ThSort, Th } from '$lib'
-    import { api } from './api.svelte'
-    import { modal } from 'gros/modal'
-    import Update from './Modal_Update.svelte'
-    import Destroy from './Modal_Destroy.svelte'
-    import Create from './Modal_Create.svelte'
+    import { api }      from './api.svelte'
+    import { modal }    from 'gros/modal'
+    import Update       from './Modal_Update.svelte'
+    import Destroy      from './Modal_Destroy.svelte'
+    import Create       from './Modal_Create.svelte'
     import type { Component } from 'svelte'
-    const table = new TableHandler($state.snapshot(api.users), { rowsPerPage: 10 })
 
+    const table = new TableHandler(api.users, { rowsPerPage: 10 })
 
-    let element: any
-
-    $effect(() => {
-        api.users;
-        if (element) {
-            const scrollTop = element.parentNode.scrollTop
-            table.setRows($state.snapshot(api.users))
-            setTimeout(() => element.parentNode.scrollTop = scrollTop, 2)
-        }
-    })
-
+    $effect(() => { api.users; table.setRows(api.users) })
 </script>
 
 <div class="fieldset bg-darken">
@@ -31,10 +21,10 @@
     </aside>
     <section class="bg-darken">
         <Datatable {table} basic>
-            <table bind:this={element}>
+            <table>
                 <thead>
                     <tr>
-                        <Th>{''}</Th>
+                        <Th/>
                         <ThSort {table} field="id">ID</ThSort>
                         <ThSort {table} field="first_name">First name</ThSort>
                         <ThSort {table} field="last_name">Last name</ThSort>

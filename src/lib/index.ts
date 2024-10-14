@@ -2,6 +2,7 @@
 export {
     // class:
     TableHandler,
+    RecordFilter,
     // components:
     Datatable,
     Search,
@@ -21,5 +22,13 @@ export {
     type Internationalization,
     type Row,
     type TableParams,
-    type TableHandlerInterface
+    type TableHandlerInterface,
+
+    type SearchBuilder,
+    type FilterBuilder,
+    type CalculationBuilder,
+    type CSVBuilder,
+    type RecordFilterBuilder,
+    type SortBuilder,
+
 } from '$lib/src/client'

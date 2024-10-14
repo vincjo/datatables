@@ -1,5 +1,4 @@
 <script lang="ts">
-    import './svelte-simple-datatable.css'
     import type { Snippet } from 'svelte'
     import { type TableHandlerInterface, Search, RowsPerPage, RowCount, Pagination } from '$lib/src/shared'
     type T = $$Generic<Row>
@@ -66,5 +65,59 @@
     }
     article :global(.hidden) {
         display: none;
+    }
+    article::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    article :global(table) {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        background: inherit;
+    }
+    article :global(table thead) {
+        position: sticky;
+        inset-block-start: 0;
+        background: inherit;
+        z-index: 1;
+    }
+    article :global(thead tr) {
+        background: inherit;
+    }
+    article :global(thead tr th) {
+        background: inherit;
+    }
+    /* optional global style */
+    .svelte-simple-datatable :global(thead tr:first-child th) {
+        padding: 8px 20px;
+        background: inherit;
+    }
+    .svelte-simple-datatable :global(tbody) {
+        background: inherit;
+    }
+    .svelte-simple-datatable :global(tbody tr) {
+        transition: background, 0.2s;
+        background: inherit;
+    }
+    .svelte-simple-datatable :global(tbody tr:hover) {
+        background: var(--grey-lighten-3, #fafafa);
+    }
+    .svelte-simple-datatable :global(tbody td) {
+        padding: 4px 20px;
+        border-right: 1px solid var(--grey-lighten, #eee);
+        border-bottom: 1px solid var(--grey-lighten, #eee);
+        background: inherit;
+    }
+    .svelte-simple-datatable :global(tbody td:last-child) {
+        border-right: none;
+    }
+    .svelte-simple-datatable :global(u.highlight) {
+        text-decoration: none;
+        background: rgba(251, 192, 45, 0.6);
+        border-radius: 2px;
+    }
+    .svelte-simple-datatable :global(footer.divider) {
+        border-top: 1px solid var(--grey, #e0e0e0);
     }
 </style>

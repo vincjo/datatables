@@ -1,3 +1,18 @@
+# 2.0.0-runes.44
+### Added
+- export type SearchBuilder, CSVBuilder, FilterBuilder, CalculationBuilder...
+- added RecordFilter class
+### Changed
+- feat: handle scrollTop status in setRows method
+- fix: replace structureCloned with $state.snapshot()
+<!-- ### Fixed -->
+
+# 2.0.0-runes.{40,41,42,43} - 2024-10-06
+<!-- ### Added -->
+<!-- ### Changed -->
+### Fixed
+- back to `:global()` style: css import is not working as expected after packaging.
+
 # 2.0.0-runes.39 - 2024-10-06
 ### Added
 - added `TableHandlerInterface` to improve shared components type.
@@ -14,15 +29,11 @@
 - fix `isAllSelected` when `selectScope` = 'all'
 
 
-
-
-
 # 2.0.0-runes.38 - 2024-10-04
 ### Fixed
 - CSS import in `<Datatable>` component.
 
 # 2.0.0-runes.37 - 2024-09-29
-
 ### Added
 - feat: make selectBy parameter type of `Field<Row>` so it can combine multiple fields or use a nested property as identifier
 - docs: added a [migration guide](https://github.com/vincjo/datatables/blob/runes/MIGRATION.md)
@@ -31,7 +42,7 @@
 ### Fixed
 - added type="button" in `<Pagination>` and `<RowCount/>` components, including the legacy part.
 
-# 2.0.0-runes.36 - 2024-09-16
+# 2.0.0-runes.{33,34,35,36} - 2024-09-16
 
 ### Added
 - feat: add headless option for Datatable component
