@@ -1,4 +1,5 @@
 import { type TableHandler, type Field, check } from '$lib/src/client'
+import { untrack } from 'svelte'
 
 export default class SearchHandler<Row>
 {
@@ -23,6 +24,6 @@ export default class SearchHandler<Row>
     {
         this.table['search'] = { value: '' }
         this.table['event'].dispatch('change')
-        this.table['event'].dispatch('clearSearch')
+        // this.table['event'].dispatch('clearSearch')
     }
 }

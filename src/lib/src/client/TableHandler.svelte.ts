@@ -73,7 +73,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     {
         this.search.value = ''
         this.event.dispatch('change')
-        this.event.dispatch('clearSearch')
+        // this.event.dispatch('clearSearch')
         this.setPage(1)
     }
 
