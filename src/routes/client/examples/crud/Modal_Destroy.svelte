@@ -1,7 +1,7 @@
-<script>
-    import { Modal } from 'gros/modal'
+<script lang="ts">
+    import { Modal, type ModalProps } from 'gros/modal'
     import { api } from './api.svelte'
-    let { close, props } = $props()
+    let { close, props }: ModalProps = $props()
 </script>
 
 <Modal title="Remove a user" icon="delete_forever">

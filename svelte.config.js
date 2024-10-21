@@ -13,7 +13,7 @@ const config = {
     kit: {
         adapter: adapter({ out: 'build' }),
         paths: {
-            base: '/datatables.runes'
+            base: '/datatables'
         },
         alias: {
 			$site: 'src/site',

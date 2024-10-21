@@ -30,6 +30,6 @@ export default class EventDispatcher
                 callback()
             }
         }
-        console.log(this.queue)
+        // console.log(this.queue)
     }
 }

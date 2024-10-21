@@ -1,8 +1,8 @@
-<script>
-    import { Modal } from 'gros/modal'
-    import Input from './Input.svelte'
+<script lang="ts">
+    import { Modal, type ModalProps } from 'gros/modal'
+    import { Input } from 'gros/form'
     import { api } from './api.svelte'
-    let { close, props } = $props()
+    let { close, props }: ModalProps = $props()
 </script>
 
 <Modal title="Update a user" icon="edit">

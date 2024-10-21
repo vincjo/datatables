@@ -1,9 +1,9 @@
 <script lang="ts">
     let current = $state('npm')
     const managers = {
-        npm: 'npm install -D @vincjo/datatables@runes',
-        yarn: 'yarn add -D @vincjo/datatables@runes',
-        pnpm: 'pnpm install -D @vincjo/datatables@runes'
+        npm: 'npm install -D @vincjo/datatables',
+        yarn: 'yarn add -D @vincjo/datatables',
+        pnpm: 'pnpm install -D @vincjo/datatables'
     }
 </script>
 

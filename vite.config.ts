@@ -1,6 +1,5 @@
 import { sveltekit }        from '@sveltejs/kit/vite'
 import replace              from '@rollup/plugin-replace'
-import path                 from 'path'
 import { config as dotenv } from 'dotenv'
 import type { UserConfig }  from 'vite'
 
@@ -18,8 +17,8 @@ const config: UserConfig = {
         replace({
             preventAssignment: true,
             values: {
-                'BASE_URL': process.env.BASE_URL + `${port}/datatables.runes/api`,
-                'STATIC_PATH': '/datatables.runes',
+                'BASE_URL': process.env.BASE_URL + `${port}/datatables/api`,
+                'STATIC_PATH': '/datatables',
             }
         }),
     ]

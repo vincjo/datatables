@@ -1,9 +1,9 @@
-<script>
-    import { Modal } from 'gros/modal'
-    import Input from './Input.svelte'
+<script lang="ts">
+    import { Modal, type ModalProps } from 'gros/modal'
+    import { Input } from 'gros/form'
     import { api } from './api.svelte'
     const form = { first_name: null, last_name: null, email: null }
-    let { close } = $props()
+    let { close }: ModalProps = $props()
 </script>
 
 <Modal title="Create a user" icon="person_add">

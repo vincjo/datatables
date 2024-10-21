@@ -1,13 +1,13 @@
 module.exports = {
     apps: [
         {
-            name: 'datatables-v2',
+            name: 'datatables',
             script: './build/index.js',
             watch: false,
             max_restarts: 10,
             env: {
                 NODE_ENV: 'production',
-                PORT: 3011
+                PORT: 3010
             }
         }
     ],

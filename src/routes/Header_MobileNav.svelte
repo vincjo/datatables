@@ -13,9 +13,9 @@
 
 {#if show}
     <nav transition:slide={{ duration: 120 }} class="thin-scrollbar">
-        <a class="menu" class:active={path.current.indexOf('/docs') > -1}       href="{getPath(`/${site.mode}/docs/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
-        <a class="menu" class:active={path.current.indexOf('/examples') > -1}   href="{getPath(`/${site.mode}/examples/hello-world`)}" onclick={close}>Examples&#8599;</a>
-        <a class="menu" class:active={path.current.indexOf('/api') > -1}        href="{getPath(`/api/${site.mode}`)}" onclick={close}>API&#8599;</a>
+        <a class="menu" class:active={path.current.includes('/docs')}       href="{getPath(`/${site.mode}/docs/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
+        <a class="menu" class:active={path.current.includes('/examples')}   href="{getPath(`/${site.mode}/examples/hello-world`)}" onclick={close}>Examples&#8599;</a>
+        <a class="menu" class:active={path.current.includes('/api')}        href="{getPath(`/api/${site.mode}`)}" onclick={close}>API&#8599;</a>
         <!-- <a class="menu" class:active={path.current.indexOf('/components') > -1} href="{getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
 
         <div class="divider"></div>
@@ -30,8 +30,8 @@
         <div class="divider-16"></div>
         <span>Older doc sites</span>
         <aside class="flex">
-            <a href="https://vincjo.fr/datatables.v1">V1</a>
-            <a href="https://vincjo.fr/datatables.deprecated">V0 (deprecated)</a>
+            <a href="https://vincjo.fr/v1datatables">V1</a>
+            <a href="https://vincjo.fr/v0datatables">V0 (deprecated)</a>
         </aside>
     </nav>
 {/if}
