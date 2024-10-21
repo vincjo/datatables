@@ -26,6 +26,12 @@
             description: `A Pokemon list. Source: Poke API`,
             tag: ['rows per page', 'pagination', 'row count']
         },
+        {
+            title: `SSR User API`,
+            page: 'ssr-user',
+            description: `SSR example with pagination and row count`,
+            tag: ['rows per page', 'pagination', 'row count']
+        },
         // {
         //     title: `Beer API`,
         //     page: 'beer-api',
