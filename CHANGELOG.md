@@ -1,3 +1,16 @@
+
+# 2.0.0-runes.{45,46}
+<!-- ### Added -->
+<!-- ### Changed -->
+### Fixed
+- fix: `EventDispatcher`
+
+# 2.0.0-runes.45
+<!-- ### Added -->
+<!-- ### Changed -->
+### Fixed
+- fix: `clearSearch` maximum call stack exceeded
+
 # 2.0.0-runes.44
 ### Added
 - export type SearchBuilder, CSVBuilder, FilterBuilder, CalculationBuilder...

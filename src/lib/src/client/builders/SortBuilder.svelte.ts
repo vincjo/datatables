@@ -21,19 +21,16 @@ export default class SortBuilder<Row>
     public set()
     {
         this.sortHandler.set(this.field, this.id, this.params)
-        this.sortHandler.dispatch()
     }
 
     public asc()
     {
         this.sortHandler.asc(this.field, this.id, this.params)
-        this.sortHandler.dispatch()
     }
 
     public desc()
     {
         this.sortHandler.desc(this.field, this.id, this.params)
-        this.sortHandler.dispatch()
     }
 
     public clear()

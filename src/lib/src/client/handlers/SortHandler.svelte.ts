@@ -39,7 +39,6 @@ export default class SortHandler<Row>
         })
         this.save({ id, callback, direction: 'asc' })
         this.table.setPage(1)
-        this.table['event'].dispatch('change')
     }
 
     public desc(field: Field<Row>, uuid: UUID, { locales, options }: SortParams = {})
@@ -52,6 +51,7 @@ export default class SortHandler<Row>
             return sort.desc(a, b, locales, options)
         })
         this.save({ id, callback, direction: 'desc' })
+        this.table.setPage(1)
     }
 
     public clear()
@@ -78,11 +78,5 @@ export default class SortHandler<Row>
         else {
             this.backup = [...this.backup, sort]
         }
-    }
-
-    public dispatch()
-    {
-        this.table.setPage(1)
-        this.table['event'].dispatch('change')
     }
 }

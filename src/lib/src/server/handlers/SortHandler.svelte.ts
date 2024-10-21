@@ -28,13 +28,11 @@ export default class SortHandler<Row>
     {
         this.table['sort'] = { field, direction: 'asc' }
         this.table.setPage(1)
-        this.table['event'].dispatch('change')
     }
 
     public desc(field: keyof Row)
     {
         this.table['sort'] = { field, direction: 'desc' }
         this.table.setPage(1)
-        this.table['event'].dispatch('change')
     }
 }

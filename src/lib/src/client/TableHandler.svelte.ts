@@ -71,9 +71,8 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 
     public clearSearch(): void
     {
-        this.search.value = ''
-        this.event.dispatch('change')
-        // this.event.dispatch('clearSearch')
+        this.searchHandler.clear()
+        this.event.dispatch('clearSearch')
         this.setPage(1)
     }
 
@@ -95,7 +94,6 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public clearFilters(): void
     {
         this.filters = []
-        this.event.dispatch('change')
         this.event.dispatch('clearFilters')
         this.setPage(1)
     }
