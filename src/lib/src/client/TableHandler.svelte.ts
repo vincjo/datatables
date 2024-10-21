@@ -42,7 +42,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
 
     public setRows(data: T[]): void
     {
-        const scrollTop = this.element?.scrollTop
+        const scrollTop = this.element?.scrollTop ?? 0
         this.rawRows = data
         untrack(() => {
             this.event.dispatch('change')
@@ -108,7 +108,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new FilterBuilder(this.filterHandler, field, check)
     }
 
-    public select(value: T[keyof T]): void
+    public select(value: unknown): void
     {
         this.selectHandler.set(value)
     }

@@ -25,7 +25,7 @@ export default abstract class AbstractTableHandler<Row>
     public pages                = $derived<readonly number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
     public pagesWithEllipsis    = $derived<readonly number[]>(this.createPagesWithEllipsis())
-    public selected             = $state<Row[keyof Row][]>([])
+    public selected             = $state<unknown[]>([])
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
 
     constructor(data: Row[], params: TableParams<Row>)

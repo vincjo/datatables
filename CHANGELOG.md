@@ -1,28 +1,30 @@
-
-# 2.0.0-runes.{45,46}
+# 2.0.1 - 2024-10-21
 <!-- ### Added -->
 <!-- ### Changed -->
+### Fixed
+- fix: `table.select(value: unknown)` select arg type is *unknown* instead of `T[keyof T]`
+
+
+# 2.0.0 - 2024-10-21
+- published major release
+
+# 2.0.0-runes.46 - 2024-10-21
 ### Fixed
 - fix: `EventDispatcher`
 
-# 2.0.0-runes.45
-<!-- ### Added -->
-<!-- ### Changed -->
+# 2.0.0-runes.45 - 2024-10-16
 ### Fixed
 - fix: `clearSearch` maximum call stack exceeded
 
-# 2.0.0-runes.44
+# 2.0.0-runes.44 - 2024-10-14
 ### Added
 - export type SearchBuilder, CSVBuilder, FilterBuilder, CalculationBuilder...
 - added RecordFilter class
 ### Changed
 - feat: handle scrollTop status in setRows method
 - fix: replace structureCloned with $state.snapshot()
-<!-- ### Fixed -->
 
 # 2.0.0-runes.{40,41,42,43} - 2024-10-06
-<!-- ### Added -->
-<!-- ### Changed -->
 ### Fixed
 - back to `:global()` style: css import is not working as expected after packaging.
 
