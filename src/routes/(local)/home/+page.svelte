@@ -4,7 +4,7 @@
 
 <section>
     <aside>
-        <img src="/datatables/logo.svg" alt="logo" />
+        <img src="/v1datatables/logo.svg" alt="logo" />
         <div>
             <h1>svelte simple datatables</h1>
             <p>A toolkit for creating datatable components with Svelte</p>

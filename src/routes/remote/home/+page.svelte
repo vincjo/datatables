@@ -4,7 +4,7 @@
 
 <section>
     <aside>
-        <img src="/datatables/logo-remote.svg" alt="logo" />
+        <img src="/V1datatables/logo-remote.svg" alt="logo" />
         <div>
             <h1>svelte simple datatables</h1>
             <p>For server-side data processing</p>

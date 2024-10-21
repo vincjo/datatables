@@ -5,7 +5,7 @@
 </script>
 
 <a class="flex" href="{href}">
-    <img src="/datatables/skeleton.svg" alt="skeleton + svg"/> <div>+</div> <img src="/datatables/{ssdLogo}.svg" alt="SSD logo"/> 
+    <img src="/v1datatables/skeleton.svg" alt="skeleton + svg"/> <div>+</div> <img src="/v1datatables/{ssdLogo}.svg" alt="SSD logo"/> 
 </a>
 <i>By @kmalloy24</i>
 

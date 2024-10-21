@@ -5,10 +5,10 @@
 </script>
 
 <nav class="thin-scrollbar" transition:fly|global={{ duration: 200, x: -200 }}>
-    <a href="/datatables/home">
+    <a href="/v1datatables/home">
         <article>
             <aside transition:fade|global={{ duration: 100 }}>
-                <img src="/datatables/logo.svg" alt="logo" />
+                <img src="/v1datatables/logo.svg" alt="logo" />
                 <div>
                     <h1>svelte<br />simple<br />datatables</h1>
                 </div>
