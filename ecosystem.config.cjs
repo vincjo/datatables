@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: 'v1-datatables',
+            name: 'v1datatables',
             script: './build/index.js',
             watch: false,
             max_restarts: 10,
