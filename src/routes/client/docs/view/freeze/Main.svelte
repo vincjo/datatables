@@ -68,6 +68,6 @@
         white-space: nowrap;
     }
     .frozen {
-        background: var(--grey-lighten-2);
+        background: var(--grey-lighten-2) !important;
     }
 </style>

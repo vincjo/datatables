@@ -55,10 +55,10 @@
         border: 1px solid var(--grey);
     }
     tr.active {
-        background: var(--primary-lighten-1);
+        background: var(--primary-lighten-1) !important;
     }
     tr.active:hover {
-        background: var(--primary-lighten-2);
+        background: var(--primary-lighten-2) !important;
     }
     button {
         padding: 0;
