@@ -2,6 +2,12 @@
 <!-- ### Added -->
 <!-- ### Changed -->
 ### Fixed
+- fix: remove runes tag from npm publication
+
+
+
+# 2.0.1 - 2024-10-21
+### Fixed
 - fix: `table.select(value: unknown)` select arg type is *unknown* instead of `T[keyof T]`
 
 
