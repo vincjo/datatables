@@ -83,5 +83,9 @@
     span {
       padding-left: 8px;
     }
+    img {
+      width: 24px;
+      height: 24px;
+    }
   </style>
   
