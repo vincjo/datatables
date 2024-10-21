@@ -9,8 +9,8 @@
     </aside>
     {#snippet content()}
         <article class="flex z-depth-2">
-            <a href="https://vincjo.fr/datatables.v1">v1</a>
-            <a href="https://vincjo.fr/datatables.deprecated">v0</a>
+            <a href="https://vincjo.fr/v1datatables">v1</a>
+            <a href="https://vincjo.fr/v0datatables">v0</a>
         </article>
     {/snippet}
 </Dropdown>

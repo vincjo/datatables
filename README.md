@@ -2,27 +2,25 @@
     <img align="center" src="./static/logo.svg" alt="logo" width="172"/>
     <p align="center">
         <h1 align="center" style="font-size:32px;margin:0;border:none;">svelte simple datatables</h1>
-        <p style="color:#eee">A toolkit for creating datatable components with Svelte</p>
-        <img src="https://img.shields.io/badge/v2-runes-v2?color=%23c2185b" alt="any text"/>
+        <p style="color:#eee">A powerful toolkit for building datatable components.</p>
+        <img src="https://img.shields.io/badge/svelte-runes-v2?color=%23c2185b" alt="any text"/>
         <img src="https://img.shields.io/github/license/vincjo/datatables?color=c2185b" alt="last commit"/>
     </p>
 </div>
 
-# Preview
-
-:globe_with_meridians: **[vincjo.fr/datatables.runes](https://vincjo.fr/datatables.runes)**
 
 
-<br>
+# Docs
+Streamline your data workflow with a robust API providing advanced features while reducing code complexity.
+
+:globe_with_meridians: **[vincjo.fr/datatables](https://vincjo.fr/datatables)**
+
+
 
 # Install
 
-> [!CAUTION]
-> v2 is currently under active development
-
-
 ```apache
-npm i -D @vincjo/datatables@runes
+npm i -D @vincjo/datatables
 ```
 
 
