@@ -1,5 +1,12 @@
 # 2.0.3 - 2024-10-22
 <!-- ### Added -->
+<!-- ### Changed -->
+### Fixed
+- fix: (legacy) remove self closing tags
+
+
+# 2.0.3 - 2024-10-22
+<!-- ### Added -->
 ### Changed
 - docs: stay on the same page after switch between client-side and server-side navigation
 ### Fixed

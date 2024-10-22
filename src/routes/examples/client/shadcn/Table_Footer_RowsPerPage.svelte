@@ -52,14 +52,6 @@
         padding: 4px;
         width: 96px;
     }
-    button:not(.trigger) {
-        border-radius: 4px;
-        padding: 6px 8px;
-        width: 100%;
-    }
-    button:not(.trigger):hover {
-        background: var(--grey);
-    }
     i.micon {
         font-size: 18px;
     }

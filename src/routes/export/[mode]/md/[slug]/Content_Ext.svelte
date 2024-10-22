@@ -1,10 +1,9 @@
 <script lang="ts">
-    import type { Method, Property } from '$site/api'
     import Prism from 'prismjs'
     import 'prism-svelte'
     import 'prismjs/components/prism-typescript.js'
 
-    let { methods, properties }: { methods: Method[], properties: Property[] } = $props()
+    let { methods, properties }: { methods: any[], properties: any[] } = $props()
 
 </script>
 

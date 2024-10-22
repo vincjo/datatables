@@ -16,7 +16,7 @@ const getParams = ({ currentPage, rowsPerPage, sort }: State) => {
         params += `&_limit=${rowsPerPage}`
     }
     if (sort) {
-        params += `&_sort=${sort.field}&_order=${sort.direction}`
+        params += `&_sort=${String(sort.field)}&_order=${sort.direction}`
     }
 
     return params

@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "keywords": [
         "svelte sveltejs table tables datatable datatables filter headless sort selection lazy-loading"
     ],

@@ -14,10 +14,10 @@ const getParams = ({ currentPage, rowsPerPage, sort, filters, search }: State) =
         params += `&_limit=${rowsPerPage}`
     }
     if (sort) {
-        params += `&_sort=${sort.field}&_order=${sort.direction}`
+        params += `&_sort=${String(sort.field)}&_order=${sort.direction}`
     }
     if (filters) {
-        params += filters.map(({ field, value }) => `&${field}=${value}`).join('')
+        params += filters.map(({ field, value }) => `&${String(field)}=${value}`).join('')
     }
     if (search) {
         params += `&q=${search}`

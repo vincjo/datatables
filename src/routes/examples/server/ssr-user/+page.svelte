@@ -74,15 +74,6 @@
   </Datatable>
   
   <style>
-    b {
-      color: var(--r-primary);
-      font-weight: normal;
-      line-height: 16px;
-      white-space: break-spaces;
-    }
-    span {
-      padding-left: 8px;
-    }
     img {
       width: 24px;
       height: 24px;

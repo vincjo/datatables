@@ -29,7 +29,7 @@
         <strong>
             <slot />
         </strong>
-        <span class:asc={$sort?.direction === 'asc'} class:desc={$sort?.direction === 'desc'} />
+        <span class:asc={$sort?.direction === 'asc'} class:desc={$sort?.direction === 'desc'}></span>
     </div>
 </th>
 

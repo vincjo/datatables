@@ -9,7 +9,7 @@
 </script>
 
 {#if $rowCount === undefined}
-    <div/>
+    <div></div>
 {:else}
     <aside class={$$props.class ?? ''}>
         {#if small}
