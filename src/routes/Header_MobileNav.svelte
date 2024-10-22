@@ -19,7 +19,7 @@
         <!-- <a class="menu" class:active={path.current.includes('/components')} href="{getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
 
         <div class="divider"></div>
-        <span>Pagination</span>
+        <span>Pagination - data processing</span>
         <Mode isMobile/>
         <div class="divider-16"></div>
         <span>Theme</span>

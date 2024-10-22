@@ -4,13 +4,12 @@
     import { Loading }          from 'gros/loading'
     import { onMount }          from 'svelte'
     import { site }             from '$site'
+    import { theme }            from 'gros/theme'
 
+    theme.init()
     let { children } = $props()
 
     onMount(() => {
-        const theme = site.getTheme()
-        site.setTheme(theme)
-
         const mode = site.getMode()
         site.setMode(mode)
     })
