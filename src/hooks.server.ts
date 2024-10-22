@@ -13,10 +13,10 @@ export const handle = async ({ event, resolve }) => {
 }
 
 const getMode = (event: RequestEvent) => {
-    if (event.url.pathname.includes('/server/')) {
+    if (event.url.pathname.includes('/server')) {
         return 'server'
     }
-    else if (event.url.pathname.includes('/client/')) {
+    else if (event.url.pathname.includes('/client')) {
         return 'client'
     }
     return event.cookies.get('siteMode') ?? 'client'

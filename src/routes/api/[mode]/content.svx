@@ -3,11 +3,7 @@
 </script>
 
 
-{#if site.mode === 'client'}
-    <span style:color="var(--font)">Client-side pagination</span>
-{:else}
-    <span style:color="var(--font)">Server-side pagination</span>
-{/if}
+<span class="index" style:color="var(--primary)">{site.mode === 'client' ? 'Client' : 'Server'}-side pagination</span>
 
 # Welcome to the TableHandler API
 
@@ -50,6 +46,15 @@ table.createSort()
 
 Most of `properties` are **runes** that update dynamically according to client-side interactions. 
 
-Most of `methods` are **setters** to handle data events with less boilerplate.
+Most of `methods` are **setters** to handle data events with minimum boilerplate.
 
 All `create` methods extend the API for more **advanced usage** such as aggregate calculations applied to columns, multiple-criteria filters, column visibility, column filters...
+
+
+<style>
+    span.index {
+        font-family: JetBrains;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
