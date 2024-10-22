@@ -1,6 +1,7 @@
-# svelte-simple-datatables + Runes
+# V2 migration guide
 
-- Basically, stores are replaced by runes, *getters()* by properties.
+Basically, 
+- *stores* are replaced by runes, *getters()* by properties.
 - `DataHandler` is named `TableHandler`
 
 
@@ -36,4 +37,49 @@ import { TableHandler } from '@vincjo/datatables'
 
 const table = new TableHandler(data)
 // table.rows, table.currentPage
+```
+
+## API changes (for consistancy and ease of use)
+
+### Filters
+```ts
+const search = table.createSearch()
+const filter = table.createFilter('first_name') // column filter
+```
+
+```svelte
+<!-- search -->
+<input type="text" bind:value={search.value} oninput={() => search.set()}>
+
+<!-- column filter -->
+ <input type="text" bind:value={filter.value} oninput={() => filter.set()}>
+```
+
+### Sorting
+```ts
+const sort = table.createSort('first_name')
+```
+```svelte
+<button onclick={() => sort.set()} class:active={sort.isActive} type="button">
+    first_name
+    <span class:active={sort.direction === 'asc'} >↑</span>
+    <span class:active={sort.direction === 'desc'}>↓</span>
+</button>
+```
+
+### Row selection
+```ts
+const table = new TableHandler(data, { selectBy: 'id' })
+// selectBy param is mandatory to enable row selection at the TableHandler instanciation level.
+```
+
+```svelte
+<tr class:active={table.selected.includes(row.id)}>
+    <td>
+        <input type="checkbox" 
+            checked={table.selected.includes(row.id)}
+            onclick={() => table.select(row.id)}
+        >
+    </td>
+</tr>
 ```
