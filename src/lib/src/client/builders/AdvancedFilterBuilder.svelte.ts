@@ -20,7 +20,7 @@ export default class AdvancedFilterBuilder<Row>
         this.cleanup()
     }
 
-    public set(value: string | number | number[], check?: Check): void
+    public set(value: unknown, check?: Check): void
     {
         if (this.collection.find(criterion => criterion.value === value)) {
             this.collection = this.collection.filter(criterion => criterion.value !== value)

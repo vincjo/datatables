@@ -13,10 +13,10 @@
 
 {#if show}
     <nav transition:slide={{ duration: 120 }} class="thin-scrollbar">
-        <a class="menu" class:active={path.current.includes('/docs')}       href="{getPath(`/${site.mode}/docs/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
-        <a class="menu" class:active={path.current.includes('/examples')}   href="{getPath(`/${site.mode}/examples/hello-world`)}" onclick={close}>Examples&#8599;</a>
+        <a class="menu" class:active={path.current.includes('/docs')}       href="{getPath(`/docs/${site.mode}/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
+        <a class="menu" class:active={path.current.includes('/examples')}   href="{getPath(`/examples/${site.mode}/hello-world`)}" onclick={close}>Examples&#8599;</a>
         <a class="menu" class:active={path.current.includes('/api')}        href="{getPath(`/api/${site.mode}`)}" onclick={close}>API&#8599;</a>
-        <!-- <a class="menu" class:active={path.current.indexOf('/components') > -1} href="{getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
+        <!-- <a class="menu" class:active={path.current.includes('/components')} href="{getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
 
         <div class="divider"></div>
         <span>Pagination</span>

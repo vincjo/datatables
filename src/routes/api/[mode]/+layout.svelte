@@ -2,7 +2,12 @@
     import Nav from './Nav.svelte'
     import MobibleNav from './Nav_Mobile.svelte'
     import { path } from 'gros/page'
-    let { data, children } = $props()
+
+    interface Props {
+        data: import('./$types.js').LayoutServerData,
+        children: import('svelte').Snippet
+    }
+    let { data, children }: Props = $props()
 
     let element: HTMLElement
     $effect(() => {
@@ -17,8 +22,11 @@
     <meta name="description" content="API documentation for svelte simple datatables">
 </svelte:head>
 
-<Nav nav={data.nav}/>
-<MobibleNav nav={data.nav}/>
+{#key data.nav}
+    <Nav nav={data.nav}/>
+    <MobibleNav nav={data.nav}/>
+{/key}
+
 <section class="thin-scrollbar" bind:this={element}>
     <div>
         {@render children()}

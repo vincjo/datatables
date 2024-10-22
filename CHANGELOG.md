@@ -1,10 +1,14 @@
-# 2.0.1 - 2024-10-21
+# 2.0.3 - 2024-10-22
 <!-- ### Added -->
-<!-- ### Changed -->
+### Changed
+- docs: stay on the same page after switch between client-side and server-side navigation
+### Fixed
+- fix: improve perf in the data filtering function
+- fix: prefer unknown type instead of enumerating primitives
+
+# 2.0.2 - 2024-10-21
 ### Fixed
 - fix: remove runes tag from npm publication
-
-
 
 # 2.0.1 - 2024-10-21
 ### Fixed

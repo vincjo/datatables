@@ -13,7 +13,7 @@
     <Search {table}/>
     <section class="thin-scrollbar">
         {#each table.rows as row}
-            <a href="{getPath(`/${site.mode}/examples/${row.page}`)}" class:active={path.current.indexOf(row.page) > -1}>
+            <a href="{getPath(`/examples/${site.mode}/${row.page}`)}" class:active={path.current.indexOf(row.page) > -1}>
                 <b>{row.title}</b>
                 <span>{row.description}</span>
             </a>

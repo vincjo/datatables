@@ -1,14 +1,13 @@
 
-import { path }     from 'gros/page'
-import { base } from '$app/paths'
-import { get }  from 'svelte/store'
+import { path } from 'gros/page'
+
 
 export default class Site
 {
     public mode     = $state('client')
     public theme    = $state('dark')
 
-    public setMode(value: 'client' | 'server' | string)
+    public async setMode(value: 'client' | 'server' | string)
     {
         document.documentElement.dataset.mode = value
         document.cookie = `siteMode=${value}; max-age=31536000; path="/"`
@@ -18,21 +17,20 @@ export default class Site
 
     public getMode()
     {
-        let mode = 'client'
-        if (path.current.indexOf(`/client/`) > -1) {
-            mode = 'client'
+        if (path.current.includes(`/client/`)) {
+            return 'client'
         }
-        else if (path.current.indexOf(`/server/`) > -1) {
-            mode = 'server'
+        else if (path.current.includes(`/server/`)) {
+            return 'server'
         }
         else {
             const regex = new RegExp(`(^| )siteMode=([^;]+)`)
             const match = document.cookie.match(regex)
             if (match) {
-                mode = match[2]
+                return match[2]
             }
         }
-        return mode
+        return 'client'
     }
 
     public setTheme = (theme: string) => {

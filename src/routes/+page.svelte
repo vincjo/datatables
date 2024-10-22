@@ -22,8 +22,8 @@
 
                     <h3>Client-side pagination</h3>
                     <div class="flex">
-                        <a href="{getPath('/client/docs/getting-started/intro')}">Docs</a>
-                        <a href="{getPath('/client/examples/hello-world')}">Examples</a>
+                        <a href="{getPath('/docs/client/getting-started/intro')}">Docs</a>
+                        <a href="{getPath('/examples/client/hello-world')}">Examples</a>
                         <a href="{getPath('/api/client')}">API</a>
                     </div>
                 </aside>
@@ -32,8 +32,8 @@
 
                     <h3>Server-side pagination</h3>
                     <div class="flex">
-                        <a href="{getPath('/server/docs/getting-started/intro')}">Docs</a>
-                        <a href="{getPath('/server/examples/hello-world')}">Examples</a>
+                        <a href="{getPath('/docs/server/getting-started/intro')}">Docs</a>
+                        <a href="{getPath('/examples/server/hello-world')}">Examples</a>
                         <a href="{getPath('/api/server')}">API</a>
                     </div>
                 </aside>

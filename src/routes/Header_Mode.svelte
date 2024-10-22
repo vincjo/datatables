@@ -1,8 +1,22 @@
 <script lang="ts">
     import { Tooltip }  from 'gros/tooltip'
     import { site }     from '$site'
-    import { getPath }  from 'gros/page'
+    import { getPath, path }  from 'gros/page'
+
     let { isMobile = false } = $props()
+
+    let link = $state(getPath('/'))
+
+    const setMode = (mode: string) => {
+        site.setMode(mode)
+        const [_, __, page] = path.current.split('/')
+        if (page) {
+            link = getPath(`/${page}/${mode}/`)
+        }
+        else {
+            link = getPath('/')
+        }
+    }
 </script>
 
 {#if isMobile}
@@ -29,8 +43,8 @@
 {:else}
     <aside class="flex">
         <a
-            onclick={() => site.setMode('client')}
-            href="{getPath('/')}"
+            onclick={() => setMode('client')}
+            href="{link}"
             class="btn tooltip"
             class:active={site.mode === 'client'}
         >
@@ -38,8 +52,8 @@
             <svg width="28px" height="28px" viewBox="0 0 24 24"><path fill="var(--font)" d="M1 18.77v-1h3.616V17q-.691 0-1.153-.462T3 15.385v-8.77q0-.69.463-1.152T4.615 5h14.77q.69 0 1.152.463T21 6.615v8.77q0 .69-.463 1.153T19.385 17v.77H23v1zM4.616 16h14.769q.269 0 .442-.173t.173-.442v-8.77q0-.269-.173-.442T19.385 6H4.615q-.269 0-.442.173T4 6.615v8.77q0 .269.173.442t.443.173M4 16V6z"/></svg>
         </a>
         <a
-            onclick={() => site.setMode('server')}
-            href="{getPath('/')}"
+            onclick={() => setMode('server')}
+            href="{link}"
             class="btn tooltip"
             class:active={site.mode === 'server'}
         >

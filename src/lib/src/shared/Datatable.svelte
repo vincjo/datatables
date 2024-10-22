@@ -2,7 +2,7 @@
     import type { Snippet } from 'svelte'
     import { type TableHandlerInterface, Search, RowsPerPage, RowCount, Pagination } from '$lib/src/shared'
     type T = $$Generic<Row>
-    type Props = {
+    interface Props {
         table: TableHandlerInterface<T>,
         basic?: boolean,
         headless?: boolean,

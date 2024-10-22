@@ -32,16 +32,14 @@ export const parseField = (field: Field<Row>, uuid?: UUID) => {
 }
 
 export const match = (entry: unknown, value: unknown | Criterion[], compare: Check = check.isLike) => {
-    if (isNull(value)) return true
-
-    if (!entry) return compare(entry, value)
-
-    else if (typeof entry === 'object') {
+    if (isNull(value)) {
+        return true
+    }
+    else if (entry !== null && typeof entry === 'object') {
         return Object.keys(entry).some((k) => {
             return match(entry[k], value, compare)
         })
     }
-    if (!compare) return check.isLike(entry, value)
     return compare(entry, value)
 }
 
