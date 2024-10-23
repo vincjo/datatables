@@ -5,8 +5,11 @@ export const load = async ({ params }) => {
     const mode = params.mode
     const [key, name] = params.slug.split('~')
 
-    const page = await fetch(`BASE_URL/${mode}/${key}.${name}.json`)
-    const text = await page.text()
+    const response = await fetch(`BASE_URL/${mode}/${key}.${name}.json`)
+    if (response.status !== 200) {
+        return { page: {} }
+    }
+    const text = await response.text()
     const patched = text
         .replace(/check\?: any/g, 'check?: Check')
         .replace('{ sort: Sort; } | undefined): any[]', `{ sort: [key: 'value' | 'count', direction: 'asc' | 'desc']}: { value: unknown, count: number}[]`)

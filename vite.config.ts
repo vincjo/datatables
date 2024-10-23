@@ -17,7 +17,7 @@ const config: UserConfig = {
         replace({
             preventAssignment: true,
             values: {
-                'BASE_URL': process.env.BASE_URL + `${port}/datatables/api`,
+                'BASE_URL': process.env.BASE_URL + `${port}/datatables/documents`,
                 'STATIC_PATH': '/datatables',
             }
         }),
