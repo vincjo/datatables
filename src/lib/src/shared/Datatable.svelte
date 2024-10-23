@@ -3,14 +3,14 @@
     import { type TableHandlerInterface, Search, RowsPerPage, RowCount, Pagination } from '$lib/src/shared'
     type T = $$Generic<Row>
     interface Props {
-        table: TableHandlerInterface<T>,
-        basic?: boolean,
-        headless?: boolean,
-        header?: Snippet,
-        footer?: Snippet,
-        children: Snippet
+        table    : TableHandlerInterface<T>
+        children : Snippet
+        basic   ?: boolean
+        headless?: boolean
+        header  ?: Snippet
+        footer  ?: Snippet
     }
-    let { table, basic = false, headless = false, header = undefined, footer = undefined, children }: Props = $props()
+    let { table, children, basic = false, headless = false, header = undefined, footer = undefined }: Props = $props()
 
     table.on('change', () => table.element ? table.element.scrollTop = 0 : '')
 </script>
@@ -88,6 +88,10 @@
     article :global(thead tr th) {
         background: inherit;
     }
+
+
+
+
     /* optional global style */
     .svelte-simple-datatable :global(thead tr:first-child th) {
         padding: 8px 20px;
