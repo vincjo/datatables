@@ -31,10 +31,3 @@ const table = new TableHandler(data, {
     <Main/>
 </div> -->
 
-
-<style>
-    div {
-        border: 1px solid var(--grey);
-        border-radius: 8px;
-    }
-</style>

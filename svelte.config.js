@@ -7,7 +7,7 @@ import { sveltePreprocess } from 'svelte-preprocess'
 const config = {
     extensions: ['.svelte', ...mdsvexConfig.extensions],
     preprocess: [mdsvex(mdsvexConfig), sveltePreprocess()],
-    compilerOptions: { runes: true },
+    // compilerOptions: { runes: true },
     kit: {
         adapter: adapter({ out: 'build' }),
         paths: {
