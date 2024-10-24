@@ -1,6 +1,12 @@
-# 2.0.3 - 2024-10-22
+# 2.0.4 - 2024-10-24
 <!-- ### Added -->
 <!-- ### Changed -->
+### Fixed
+- fix: state_unsafe_mutation error. currentPage is mutated in setters instead: filter.set() / search.set().
+
+
+
+# 2.0.3 - 2024-10-22
 ### Fixed
 - fix: (legacy) remove self closing tags
 

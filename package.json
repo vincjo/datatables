@@ -1,6 +1,6 @@
 {
     "name": "@vincjo/datatables",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "keywords": [
         "svelte sveltejs table tables datatable datatables filter headless sort selection lazy-loading"
     ],
@@ -39,7 +39,7 @@
         "mdsvex": "^0.12.3",
         "prism-svelte": "^0.5.0",
         "prismjs": "^1.29.0",
-        "svelte": "5.0.3",
+        "svelte": "5.1.0",
         "svelte-check": "^4.0.5",
         "svelte-preprocess": "^6.0.3",
         "tslib": "^2.8.0",

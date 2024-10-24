@@ -55,7 +55,6 @@ export default abstract class AbstractTableHandler<Row>
                     return match(callback(row), this.search.value, this.search.check)
                 })
             })
-            this.currentPage = 1
             this.event.dispatch('change')
         }
         if (this.filterCount > 0) {
@@ -71,7 +70,6 @@ export default abstract class AbstractTableHandler<Row>
                     return checked
                 })
             }
-            this.currentPage = 1
             this.event.dispatch('change')
         }
         return allRows

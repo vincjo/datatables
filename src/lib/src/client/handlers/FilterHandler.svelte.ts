@@ -14,6 +14,8 @@ export default class FilterHandler<Row>
 
     public set(value: unknown, field: Field<Row>, check: Check = null, uuid: UUID)
     {
+        this.table.setPage(1)
+
         const { callback, id, key } = parseField(field, uuid)
         const filter = { value, id, callback, check, key }
 
@@ -25,6 +27,7 @@ export default class FilterHandler<Row>
 
     public unset(id: UUID)
     {
+        this.table.setPage(1)
         this.table.filters = this.table.filters.filter(filter => filter.id !== id)
     }
 }
