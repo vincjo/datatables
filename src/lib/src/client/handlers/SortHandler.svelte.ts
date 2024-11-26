@@ -1,6 +1,5 @@
 import type { Sort, Field, TableHandler, SortParams } from '$lib/src/client'
 import { parseField, sort } from '$lib/src/client/utils'
-import type { UUID } from 'crypto'
 
 export default class SortHandler<Row> 
 {
@@ -13,7 +12,7 @@ export default class SortHandler<Row>
         this.backup = []
     }
 
-    public set(field: Field<Row>, uuid: UUID, params: SortParams = {})
+    public set(field: Field<Row>, uuid: string, params: SortParams = {})
     {
         const { id } = parseField(field, uuid)
 
@@ -28,7 +27,7 @@ export default class SortHandler<Row>
         }
     }
 
-    public asc(field: Field<Row>, uuid: UUID, { locales, options }: SortParams = {})
+    public asc(field: Field<Row>, uuid: string, { locales, options }: SortParams = {})
     {
         if (!field) return
         const { id, callback, key } = parseField(field, uuid)
@@ -41,7 +40,7 @@ export default class SortHandler<Row>
         this.table.setPage(1)
     }
 
-    public desc(field: Field<Row>, uuid: UUID, { locales, options }: SortParams = {})
+    public desc(field: Field<Row>, uuid: string, { locales, options }: SortParams = {})
     {
         if (!field) return
         const { id, callback, key } = parseField(field, uuid)
