@@ -5,7 +5,7 @@ import { check as comparator }  from '$lib/src/client/Comparator'
 export default class FilterBuilder<Row>
 {
     public  value           = $state<unknown>('')
-    private id              = crypto.randomUUID()
+    private id              = Math.random().toString(36).substring(2, 15)
     private filterHandler   : FilterHandler<Row>
     private field           : Field<Row>
     private check           : Check

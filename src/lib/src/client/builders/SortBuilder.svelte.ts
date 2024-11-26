@@ -6,7 +6,7 @@ export default class SortBuilder<Row>
 {
     public  direction       = $derived<'asc' | 'desc'>(this.createDirection())
     public  isActive        = $derived<boolean>(this.createIsActive())
-    private id              = crypto.randomUUID()
+    private id              = Math.random().toString(36).substring(2, 15)
     private sortHandler     : SortHandler<Row>
     private field           : Field<Row>
     private params          : SortParams
