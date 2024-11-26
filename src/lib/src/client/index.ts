@@ -1,6 +1,5 @@
 export { default as TableHandler } from './TableHandler.svelte'
 export { check } from './Comparator'
-import type { UUID } from 'crypto'
 import type { Internationalization, Field }     from '$lib/src/shared'
 export type { default as SearchBuilder }        from './builders/SearchBuilder.svelte'
 export type { default as CalculationBuilder }   from './builders/CalculationBuilder.svelte'
@@ -29,7 +28,7 @@ export {
 
 export type Filter<Row> = {
     callback: (row: $state.Snapshot<Row>) => unknown
-    id: UUID,
+    id: string,
     value?: unknown
     check?: Check
     key?: string,
@@ -37,7 +36,7 @@ export type Filter<Row> = {
 
 export type Sort<Row> = {
     callback?: (row: Row) => unknown
-    id?: UUID
+    id?: string
     direction?: 'asc' | 'desc'
     key?: string,
 }

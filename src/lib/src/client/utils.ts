@@ -1,5 +1,4 @@
 import { type Row, type Field, type Check, type Criterion, check } from '$lib/src/client'
-import type { UUID } from 'crypto'
 
 export const isNull = (value: unknown) => {
     if (value === null || value === undefined || value === '') return true
@@ -14,7 +13,7 @@ export const stringify = (value: unknown = null) => {
         .replace(/[\u0300-\u036f]/g, '')
 }
 
-export const parseField = (field: Field<Row>, uuid?: UUID) => {
+export const parseField = (field: Field<Row>, uuid?: string) => {
     if (typeof field === 'string') {
         return {
             callback: (row: Row) => row[field],

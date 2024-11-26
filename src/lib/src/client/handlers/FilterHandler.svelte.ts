@@ -1,6 +1,5 @@
 import type { Field, Check, TableHandler } from '$lib/src/client'
 import { isNotNull, parseField } from '../utils'
-import type { UUID } from 'crypto'
 
 
 export default class FilterHandler<Row>
@@ -12,7 +11,7 @@ export default class FilterHandler<Row>
         this.table = table
     }
 
-    public set(value: unknown, field: Field<Row>, check: Check = null, uuid: UUID)
+    public set(value: unknown, field: Field<Row>, check: Check = null, uuid: string)
     {
         this.table.setPage(1)
 
@@ -25,7 +24,7 @@ export default class FilterHandler<Row>
         }
     }
 
-    public unset(id: UUID)
+    public unset(id: string)
     {
         this.table.setPage(1)
         this.table.filters = this.table.filters.filter(filter => filter.id !== id)
