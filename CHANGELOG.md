@@ -1,8 +1,12 @@
+# 2.1.0 - 2024-11-26
+### Fixed
+- export type AdvancedFilterBuilder [#145](https://github.com/vincjo/datatables/issues/145)
+
 # 2.0.5 - 2024-10-24
 <!-- ### Added -->
 <!-- ### Changed -->
 ### Fixed
-- fix: state_unsafe_mutation error. currentPage is mutated in setters instead: filter.set() / search.set().
+- fix: `state_unsafe_mutation` error. currentPage is mutated in setters instead: filter.set() / search.set(). [#128](https://github.com/vincjo/datatables/issues/128) [#138](https://github.com/vincjo/datatables/issues/138)
 
 
 
