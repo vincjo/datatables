@@ -1,6 +1,7 @@
 # 2.1.0 - 2024-11-26
 ### Fixed
 - export type AdvancedFilterBuilder [#145](https://github.com/vincjo/datatables/issues/145)
+- use random string instead of `crypto.randomUUID()` [PR #147](https://github.com/vincjo/datatables/pull/147)
 
 # 2.0.5 - 2024-10-24
 <!-- ### Added -->

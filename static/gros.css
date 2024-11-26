@@ -4,7 +4,7 @@
     font-weight: 400;
     src: url('./fonts/icons.woff2') format('woff2');
 }
-@font-face{font-family:Roboto;src:url('./fonts/Roboto/Roboto-Regular.ttf')}
+@font-face{font-family:Roboto;src:url('./fonts/Roboto/Roboto-Regular.ttf');}
 button,
 input[type='button'],
 input[type='reset'],
