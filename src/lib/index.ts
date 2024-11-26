@@ -24,11 +24,12 @@ export {
     type TableParams,
     type TableHandlerInterface,
 
-    type SearchBuilder,
-    type FilterBuilder,
+    type AdvancedFilterBuilder,
     type CalculationBuilder,
     type CSVBuilder,
+    type FilterBuilder,
     type RecordFilterBuilder,
+    type SearchBuilder,
     type SortBuilder,
 
 } from '$lib/src/client'
