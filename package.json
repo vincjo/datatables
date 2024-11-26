@@ -10,7 +10,7 @@
         "url": "git+https://github.com/vincjo/datatables.git"
     },
     "author": "vincjo",
-    "contributors": ["bn-l"],
+    "contributors": ["bn-l", "jst-r"],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/vincjo/datatables/issues"
