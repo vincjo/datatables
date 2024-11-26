@@ -1,0 +1,23 @@
+{
+    "singleQuote": false,
+    "trailingComma": "all",
+    "semi": true,
+    "printWidth": 80,
+    "tabWidth": 4,
+    "useTabs": false,
+    "plugins": [
+        "prettier-plugin-svelte",
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-tailwindcss"
+    ],
+    "organizeImportsSkipDestructiveCodeActions": true,
+    "svelteSortOrder": "options-markup-styles-scripts",
+    "overrides": [
+        {
+            "files": "*.svelte",
+            "options": {
+                "parser": "svelte"
+            }
+        }
+    ]
+}
