@@ -1,11 +1,16 @@
+# 2.2.0 - 2024-12-05
+### Added
+feat: add `table.clearSort()` method [#150](https://github.com/vincjo/datatables/issues/150)
+<!-- ### Changed -->
+<!-- ### Fixed -->
+
+
 # 2.1.0 - 2024-11-26
 ### Fixed
 - export type AdvancedFilterBuilder [#145](https://github.com/vincjo/datatables/issues/145)
 - use random string instead of `crypto.randomUUID()` [PR #147](https://github.com/vincjo/datatables/pull/147)
 
 # 2.0.5 - 2024-10-24
-<!-- ### Added -->
-<!-- ### Changed -->
 ### Fixed
 - fix: `state_unsafe_mutation` error. currentPage is mutated in setters instead: filter.set() / search.set(). [#128](https://github.com/vincjo/datatables/issues/128) [#138](https://github.com/vincjo/datatables/issues/138)
 

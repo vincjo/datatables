@@ -91,6 +91,11 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new SortBuilder(this.sortHandler, field, params)
     }
 
+    public clearSort()
+    {
+        this.sortHandler.clear()
+    }
+
     public clearFilters(): void
     {
         this.filters = []
