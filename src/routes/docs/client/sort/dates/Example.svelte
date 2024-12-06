@@ -1,14 +1,14 @@
 <script>
     import { TableHandler, Datatable, ThSort } from '$lib/src/client'
     const data = [
-        { user: 'John Doe',             created_at: '12/01/2024 11:04:23' },
-        { user: 'Tobie Vint',           created_at: '09/30/2020 13:43:06' },
-        { user: 'Zacharias Cerman',     created_at: '04/26/2023 17:02:21' },
-        { user: 'Gérianna Bunn',        created_at: '03/13/2021 07:58:33' },
-        { user: 'Bee Saurin',           created_at: '11/08/2019 15:21:54' },
-        { user: 'Méyère Granulette',    created_at: '07/27/2022 20:12:16' },
-        { user: 'Jane Doe',             created_at: '01/18/2017 11:38:47' },
-        { user: 'Michel Trapu',         created_at: '04/02/2025 16:19:46' },
+        { user: 'John Doe',             created_at: '12/01/2024 11:04:23 AM' },
+        { user: 'Tobie Vint',           created_at: '09/30/2020 01:43:06 PM' },
+        { user: 'Zacharias Cerman',     created_at: '04/26/2023 05:02:21 PM' },
+        { user: 'Gérianna Bunn',        created_at: '03/13/2021 07:58:33 AM' },
+        { user: 'Bee Saurin',           created_at: '11/08/2019 03:21:54 PM' },
+        { user: 'Méyère Granulette',    created_at: '07/27/2022 08:12:16 PM' },
+        { user: 'Jane Doe',             created_at: '01/18/2017 11:38:47 AM' },
+        { user: 'Michel Trapu',         created_at: '04/02/2025 04:19:46 PM' },
     ]
 
     const table = new TableHandler(data, { rowsPerPage: 10 })
