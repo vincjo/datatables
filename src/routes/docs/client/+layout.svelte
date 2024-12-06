@@ -39,6 +39,7 @@
             links: [
                 { name: 'Sort button '          , path: `${root}/sort/button`                 },
                 { name: 'Nested prop'           , path: `${root}/sort/nested`                 },
+                { name: 'Sort dates'            , path: `${root}/sort/dates`                  },
             ]
         },
         {
