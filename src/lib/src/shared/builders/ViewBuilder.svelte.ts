@@ -1,6 +1,5 @@
 import type { TableHandlerInterface, ColumnView } from '$lib/src/shared'
 
-
 export default class ViewBuilder<Row>
 {
     public  columns     = $state<ColumnView[]>([])
@@ -83,5 +82,22 @@ export default class ViewBuilder<Row>
         return width
     }
 
+    public setPosition(current: number, destination: number)
+    {
+        this.table.element.querySelectorAll('tr').forEach(row => {
+            const cells = [].slice.call(row.querySelectorAll('th, td'))
+            if (current > destination) {
+                cells[destination].parentNode.insertBefore(
+                    cells[current],
+                    cells[destination]
+                )
+            }
+            else {
+                cells[destination].parentNode.insertBefore(
+                    cells[current],
+                    cells[destination].nextSibling
+                )
+            }
+        })
+    }
 }
-

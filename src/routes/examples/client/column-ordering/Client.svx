@@ -1,0 +1,134 @@
+<script>
+    import Main from './Main.svelte'
+</script>
+
+
+# Column ordering
+
+Drag and drop a header item to reorder columns.
+
+<Main/>
+
+
+This example uses [`svelte-dnd-action`](https://github.com/isaacHagoel/svelte-dnd-action) which you will need to install in your own project.
+
+```bash
+npm i -D svelte-dnd-action
+```
+
+The code below shows the minimal implementation and does not exactly reflect the result above. 
+
+-> [See complete code (github)](https://github.com/vincjo/datatables/tree/main/src/routes/examples/client/column-ordering)
+
+
+## Code
+
+```svelte
+<script>
+    import { dndzone, SHADOW_ITEM_MARKER_PROPERTY_NAME } from 'svelte-dnd-action'
+    import { TableHandler, Datatable, Search, RowCount, Pagination } from '@vincjo/datatables'
+    import myData from 'somewhere'
+    import { fade } from 'svelte/transition'
+    import { flip } from 'svelte/animate'
+    import { cubicIn } from 'svelte/easing'
+
+    const table = new TableHandler(myData, { rowsPerPage: 10 })
+    let columns = $state([
+        { id: 1, field: 'id',           name: 'ID' },
+        { id: 2, field: 'first_name',   name: 'First name' },
+        { id: 3, field: 'last_name',    name: 'Last name' },
+    ])
+
+    /* svelte-dnd-action part */
+    const flipDurationMs = 200
+    const consider = (e) => columns = e.detail.items
+    const finalize = (e) => columns = e.detail.items
+    const getClasses = (item) => item[SHADOW_ITEM_MARKER_PROPERTY_NAME] ? 'dragging' : ''
+</script>
+
+
+<Datatable {table}>
+    {#snippet header()}
+        <Search {table}/>
+    {/snippet}
+    <table>
+        <thead>
+            <tr
+                use:dndzone={{ items: columns, flipDurationMs, dropTargetStyle: {} }}
+                onconsider={consider}
+                onfinalize={finalize}
+            >
+                {#each columns as column (column.id)}
+                    <th animate:flip={{ duration: flipDurationMs }} class="{getClasses(column)}">
+                        <strong>{column.name}</strong>
+                        {#if column[SHADOW_ITEM_MARKER_PROPERTY_NAME]}
+                            <div in:fade={{ duration: 200, easing: cubicIn }} class="placeholder"></div>
+                        {/if}
+                    </th>
+                {/each}
+            </tr>
+        </thead>
+        <tbody>
+            {#each table.rows as row}
+                <tr class="{getClasses(row)}">
+                    {#each columns as column (column.id)}
+                        <td animate:flip={{ duration: flipDurationMs }}>
+                            {row[column.field]}
+                        </td>
+                    {/each}
+                </tr>
+            {/each}
+        </tbody>
+    </table>
+    {#snippet footer()}
+        <RowCount {table}/>
+        <Pagination {table}/>
+    {/snippet}
+</Datatable>
+
+<style>
+    th {
+        position: relative;
+        padding: 8px 20px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+        border-bottom: 1px solid var(--grey, #e0e0e0);
+    }
+    .dragging {
+        color: var(--primary, #c2185b);
+        border: none !important;
+        background: transparent !important;
+    }
+    .placeholder{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        visibility: visible;
+        border: 2px dashed var(--primary, #c2185b);
+        background: var(--primary-lighten-1, rgba(0, 105, 144, 0.1));
+        border-radius: 4px;
+        margin: 0;
+    }
+</style>
+```
+## Data
+
+-> [See complete dataset (github)](https://github.com/vincjo/datatables/blob/main/src/site/data/data.ts)
+
+```ts
+const data = [
+    { id: 1, first_name: 'Tobie', last_name: 'Vint', email: 'tvint0@fotki.com' },
+    { id: 2, first_name: 'Zacharias', last_name: 'Cerman', email: 'zcerman1@sciencedirect.com' },
+    { id: 3, first_name: 'Gérianna', last_name: 'Bunn', email: 'gbunn2@foxnews.com' },
+    { id: 4, first_name: 'Bee', last_name: 'Saurin', email: 'bsaurin3@live.com' },
+    ...
+]
+```
+
+
+<style>
+    a { color: var(--secondary) }
+</style>

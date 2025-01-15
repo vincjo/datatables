@@ -44,6 +44,12 @@
             description: `Calculate distinct values and their counts`,
             tag: ['calculation', 'aggregate', 'distinct values', 'car', 'make']
         },
+        {
+            title: `Column ordering`,
+            page: 'column-ordering',
+            description: `Drag and drop a header item to reorder columns.`,
+            tag: ['drag & drop', 'position', 'column', 'oredering']
+        },
     ]
 </script>
 
