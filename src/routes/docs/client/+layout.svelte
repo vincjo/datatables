@@ -21,6 +21,7 @@
                 { name: 'Search scope'          , path: `${root}/search/scope`                },
                 { name: 'Highlight results'     , path: `${root}/search/highlight`            },
                 { name: 'Regular expression'    , path: `${root}/search/regex`                },
+                { name: 'Recurive search'       , path: `${root}/search/recursive`            },
             ]
         },
         {

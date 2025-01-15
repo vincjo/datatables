@@ -1,8 +1,15 @@
+# 2.3.0 - 2024-01-15
+### Added
+feat: add `search.recursive()` to handle search in tree data structures ([DOC](https://vincjo.fr/datatables/docs/client/search/recursive)).
+### Changed
+- breaking: search is not recursive by default anymore [#152](https://github.com/vincjo/datatables/issues/152)
+- upgrade Svelte to the latest 5.18.0
+<!-- ### Fixed -->
+
+
 # 2.2.0 - 2024-12-05
 ### Added
 feat: add `table.clearSort()` method [#150](https://github.com/vincjo/datatables/issues/150)
-<!-- ### Changed -->
-<!-- ### Fixed -->
 
 
 # 2.1.0 - 2024-11-26

@@ -1,8 +1,9 @@
 <script>
+    import Content from './content.svx'
     import Main from './Main.svelte'
 </script>
 
 
-# Column filter handles nested array
+<Content/>
 
 <Main/>

@@ -19,6 +19,11 @@ export default class SearchBuilder<Row>
         this.searchHandler.set(this.value, this.scope)
     }
 
+    public recursive()
+    {
+        this.searchHandler.recursive(this.value, this.scope)
+    }
+
     public regex()
     {
         this.searchHandler.regex(this.value, this.scope)

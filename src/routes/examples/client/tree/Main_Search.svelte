@@ -8,7 +8,7 @@
 
 <aside>
     <div class="btn">SEARCH</div>
-    <input type="text" bind:value={search.value} spellcheck="false" oninput={() => search.set()}>
+    <input type="text" bind:value={search.value} spellcheck="false" oninput={() => search.recursive()}>
 </aside>
 
 <style>

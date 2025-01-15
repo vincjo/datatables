@@ -1,0 +1,15 @@
+
+
+# Recursive search
+
+You might need to search in a tree data structure.
+
+
+```ts
+const search = table.createSearch()
+```
+
+```svelte
+<input type="text" bind:value={search.value}>
+<button onclick={() => search.recursive()}>OK</button>
+``` 

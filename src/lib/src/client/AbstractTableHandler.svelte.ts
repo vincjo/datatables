@@ -10,7 +10,7 @@ export default abstract class AbstractTableHandler<Row>
     protected highlight         : boolean
     protected event             = new EventDispatcher()
     protected rawRows           = $state.raw<Row[]>([])
-    protected search            = $state<{ value: string, scope?: Field<Row>[], check?: Check }>({ value: null, scope: undefined })
+    protected search            = $state<{ value: string, scope?: Field<Row>[], isRecursive?: boolean, check?: Check }>({ value: null, scope: undefined })
     protected sort              = $state<(Sort<Row>)>({})
 
     public filters              = $state<(Filter<Row>)[]>([])
@@ -30,10 +30,10 @@ export default abstract class AbstractTableHandler<Row>
 
     constructor(data: Row[], params: TableParams<Row>)
     {
-        this.rawRows        = data
-        this.rowsPerPage    = params.rowsPerPage ?? null
-        this.highlight      = params.highlight ?? false
-        this.selectBy       = params.selectBy
+        this.rawRows            = data
+        this.rowsPerPage        = params.rowsPerPage ?? null
+        this.highlight          = params.highlight ?? false
+        this.selectBy           = params.selectBy
     }
 
     private createAllRows()
@@ -45,7 +45,10 @@ export default abstract class AbstractTableHandler<Row>
                 const scope = fields.map((field: Field<Row>) => parseField(field))
                 for(const { key, callback } of scope) {
                     if (key) {
-                        row[key] = nestedFilter(row[key], this.search.value, this.highlight)
+                        row[key] = nestedFilter(row[key], this.search.value, {
+                            highlight: this.highlight,
+                            isRecursive: this.search.isRecursive === true ? true : false
+                        })
                     }
                     else if (this.highlight) {
                         row = deepEmphasize(row, callback, this.search.value) as $state.Snapshot<Row>
@@ -62,7 +65,11 @@ export default abstract class AbstractTableHandler<Row>
                 allRows = allRows.filter((row) => {
                     const checked = match(callback(row), value, check)
                     if (key) {
-                        row[key] = nestedFilter(row[key], value, this.highlight, check)
+                        row[key] = nestedFilter(row[key], value, {
+                            highlight: this.highlight, 
+                            check: check,
+                            isRecursive: true
+                        })
                     }
                     else if (this.highlight && checked && value && typeof value === 'string') {
                         row = deepEmphasize(row, callback, value) as $state.Snapshot<Row>

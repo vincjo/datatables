@@ -23,8 +23,8 @@
         {
             title: `Recursive filters`,
             page: 'nested-array',
-            description: `Search and filters also apply recursively to nested arrays`,
-            tag: ['filters', 'search', 'nested', 'props', 'recursive']
+            description: `Filters also apply recursively to nested arrays`,
+            tag: ['filters', 'nested', 'props', 'recursive']
         },
         {
             title: `Tree view`,

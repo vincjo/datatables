@@ -69,16 +69,16 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         }
     }
 
+    public createSearch(scope?: Field<T>[]): SearchBuilder<T>
+    {
+        return new SearchBuilder(this.searchHandler, scope)
+    }
+
     public clearSearch(): void
     {
         this.searchHandler.clear()
         this.event.dispatch('clearSearch')
         this.setPage(1)
-    }
-
-    public createSearch(scope?: Field<T>[]): SearchBuilder<T>
-    {
-        return new SearchBuilder(this.searchHandler, scope)
     }
 
     public createRecordFilter(records?: Row[]): RecordFilterBuilder

@@ -30,7 +30,7 @@ export const parseField = (field: Field<Row>, uuid?: string) => {
     throw new Error(`Invalid field argument: ${String(field)}`)
 }
 
-export const match = (entry: unknown, value: unknown | Criterion[], compare: Check = check.isLike) => {
+export const match = (entry: unknown, value: unknown | Criterion[], compare: Check = check.isLike): boolean => {
     if (isNull(value)) {
         return true
     }
@@ -42,19 +42,25 @@ export const match = (entry: unknown, value: unknown | Criterion[], compare: Che
     return compare(entry, value)
 }
 
-export const nestedFilter = (entry: unknown, value: unknown, highlight = false, compare: Check = undefined) => {
+type NestedFilterParams = {
+    highlight?: boolean,
+    check?: Check
+    isRecursive?: boolean
+}
+export const nestedFilter = (entry: unknown, value: unknown, params: NestedFilterParams) => {
     if (Array.isArray(entry)) {
         entry = entry.filter((item: unknown) => {
-            const check = match(item, value, compare)
+            // to disable recursion, check worth true anyway
+            const check = params.isRecursive === true ? match(item, value, params.check) : true
             if (typeof item === 'object' && check === true) {
                 for (const k of Object.keys(item)) {
-                    item[k] = nestedFilter(item[k], value, highlight, compare)
+                    item[k] = nestedFilter(item[k], value, params)
                 }
             }
             return check
         })
     }
-    if (highlight && (typeof entry === 'string' || typeof entry === 'number') && typeof value === 'string' && match(entry, value, compare)) {
+    if (params.highlight && (typeof entry === 'string' || typeof entry === 'number') && typeof value === 'string' && match(entry, value, params.check)) {
         return emphasize(entry, value)
     }
     return entry

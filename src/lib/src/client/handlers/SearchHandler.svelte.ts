@@ -15,6 +15,12 @@ export default class SearchHandler<Row>
         this.table['search'] = { value: value, scope: scope }
     }
 
+    public recursive(value: string, scope?: Field<Row>[])
+    {
+        this.table.setPage(1)
+        this.table['search'] = { value: value, scope: scope, isRecursive: true }
+    }
+
     public regex(pattern: string, scope?: Field<Row>[])
     {
         this.table.setPage(1)
