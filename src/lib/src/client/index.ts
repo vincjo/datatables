@@ -55,8 +55,6 @@ export type TableParams<Row> = {
     selectBy?: Field<Row>,
     highlight?: boolean,
     i18n?: Internationalization,
-    recursiveFilter?: boolean,
-    recursiveSearch?: boolean,
 }
 
 export type Criterion = {

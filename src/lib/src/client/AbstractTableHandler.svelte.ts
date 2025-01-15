@@ -30,10 +30,10 @@ export default abstract class AbstractTableHandler<Row>
 
     constructor(data: Row[], params: TableParams<Row>)
     {
-        this.rawRows            = data
-        this.rowsPerPage        = params.rowsPerPage ?? null
-        this.highlight          = params.highlight ?? false
-        this.selectBy           = params.selectBy
+        this.rawRows        = data
+        this.rowsPerPage    = params.rowsPerPage ?? null
+        this.highlight      = params.highlight ?? false
+        this.selectBy       = params.selectBy
     }
 
     private createAllRows()
@@ -47,7 +47,7 @@ export default abstract class AbstractTableHandler<Row>
                     if (key) {
                         row[key] = nestedFilter(row[key], this.search.value, {
                             highlight: this.highlight,
-                            isRecursive: this.search.isRecursive === true ? true : false
+                            isRecursive: this.search.isRecursive === true
                         })
                     }
                     else if (this.highlight) {
