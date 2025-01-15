@@ -1,4 +1,4 @@
-# 2.3.0 - 2024-01-15
+# 2.3.0 - 2025-01-15
 ### Added
 feat: add `search.recursive()` to handle search in tree data structures ([DOC](https://vincjo.fr/datatables/docs/client/search/recursive)).
 ### Changed
