@@ -1,3 +1,4 @@
+
 # V2 migration guide
 
 Basically, 
@@ -39,7 +40,7 @@ const table = new TableHandler(data)
 // table.rows, table.currentPage
 ```
 
-## API changes (for consistancy and ease of use)
+## API changes - for consistancy and ease of use
 
 ### Filters
 ```ts

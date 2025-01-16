@@ -12,15 +12,6 @@ Server-side part focuses on fetching and manipulating data from a remote API. A 
 <Install/>
 
 
-
-## Migration from v1 to v2
-
-In order to make the migration process a little easier, v1 is embed in "legacy" namespace so you will have the opportunity to upgrade your components progressively by simply modifying imports.
-
-```diff
-- @vincjo/datatables/remote
-+ @vincjo/datatables/legacy/remote
-```
 <!-- 
 ## Sample code
 

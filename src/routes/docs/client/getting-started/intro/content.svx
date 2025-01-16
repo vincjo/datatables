@@ -18,22 +18,4 @@ It includes features such as:
 <Install/>
 
 
-<!-- - **Headless** by design
-- **Typescript** support
-- **SSR** friendly
-- no dependencies
-
-Also provides some demo components, which you can grab and customize in your own project. -->
-
-## Migration from v1 to v2
-
-In order to make the migration process a little easier, v1 is embed in "legacy" namespace so you will have the opportunity to upgrade your components progressively by simply modifying imports.
-
-```diff
-- @vincjo/datatables
-+ @vincjo/datatables/legacy
-
-- @vincjo/datatables/remote
-+ @vincjo/datatables/legacy/remote
-```
 

@@ -10,6 +10,7 @@
                 { name: 'Introduction'          , path: `${root}/getting-started/intro`       },
                 { name: 'Overview'              , path: `${root}/getting-started/overview`    },
                 { name: 'Hello World'           , path: `${root}/getting-started/hello-world` },
+                { name: 'Migration guide'       , path: `${root}/getting-started/migration`   },
             ]
         },
         {

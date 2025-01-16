@@ -1,0 +1,91 @@
+
+# V2 migration guide
+
+Basically, 
+- *stores* are replaced by runes, *getters()* by properties.
+- `DataHandler` is named `TableHandler`
+
+
+## Smooth transition from v1 to v2
+
+In order to make the migration process a little easier, v1 is embed in “legacy” namespace so you will have the opportunity to upgrade your components progressively by simply modifying imports.
+
+```diff
+- @vincjo/datatables/remote
++ @vincjo/datatables/legacy/remote
+```
+
+## Old vs new
+
+### Svelte 4
+```ts
+import { DataHandler } from '@vincjo/datatables/legacy/remote'
+
+const handler = new DataHandler([], { rowsPerPage: 5 })
+
+handler.onChange((state: State) => myLoadFunction(state): Promise<Row[]>)
+handler.invalidate()
+
+const rows = handler.getRows()
+const currentPage = handler.getPageNumber()
+// $rows, $currentPage
+```
+
+
+
+### Svelte 5
+```ts
+import { TableHandler } from '@vincjo/datatables/server'
+
+const table = new TableHandler([], { rowsPerPage: 5 })
+
+table.load((state: State) => myFunction(state): Promise<Row[]> )
+table.invalidate()
+
+// table.rows, table.currentPage
+```
+
+## API changes - for consistancy and ease of use
+
+### Filters
+```ts
+const search = table.createSearch()
+const filter = table.createFilter('first_name') // column filter
+```
+
+```svelte
+<!-- search -->
+<input type="text" bind:value={search.value} oninput={() => search.set()}>
+
+<!-- column filter -->
+ <input type="text" bind:value={filter.value} oninput={() => filter.set()}>
+```
+
+### Sorting
+```ts
+const sort = table.createSort('first_name')
+```
+```svelte
+<button onclick={() => sort.set()} class:active={sort.isActive} type="button">
+    first_name
+    <span class:active={sort.direction === 'asc'} >↑</span>
+    <span class:active={sort.direction === 'desc'}>↓</span>
+</button>
+```
+
+### Row selection
+```ts
+const table = new TableHandler(data, { selectBy: 'id' })
+// selectBy param is mandatory to enable row selection at the TableHandler instanciation level.
+```
+
+```svelte
+<tr class:active={table.selected.includes(row.id)}>
+    <td>
+        <input type="checkbox" 
+            checked={table.selected.includes(row.id)}
+            onclick={() => table.select(row.id)}
+        >
+    </td>
+</tr>
+```
