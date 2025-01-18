@@ -2,13 +2,18 @@
     import Nav from './Nav.svelte'
     import MobileNav from './Nav_Mobile.svelte'
     import type { Snippet } from 'svelte'
-
+    import { path } from 'gros/page'
     let { nav, children }: { nav: any, children: Snippet } = $props()
+    let element: HTMLElement
+    $effect(() => {
+        path.current
+        if (element) element.scrollTop = 0
+    })
 </script>
 
 <Nav {nav}/>
 <MobileNav {nav}/>
-<section  class="thin-scrollbar">
+<section  class="thin-scrollbar" bind:this={element}>
     <article class="md">
         {@render children()}
     </article>

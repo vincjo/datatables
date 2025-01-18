@@ -5,13 +5,18 @@
     import { path } from 'gros/page'
 
     type Props = { nav: { title: string, page: string, description: string, tag: string[] }[], children: Snippet }
-    let { nav, children }: Props = $props()
+    let { nav, children }: Props = $props()    
+    let element: HTMLElement
+    $effect(() => {
+        path.current
+        if (element) element.scrollTop = 0
+    })
 </script>
 
 
 <Nav {nav}/>
 <MobileNav {nav}/>
-<section class="thin-scrollbar">
+<section class="thin-scrollbar" bind:this={element}>
     <article class="md">
         {@render children()}
     </article>
