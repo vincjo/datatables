@@ -9,8 +9,11 @@
 
     const setMode = (mode: string) => {
         site.setMode(mode)
-        const [_, __, page] = path.current.split('/')
-        if (page) {
+        const [_, __, page, slug] = path.current.split('/')
+        if (page === 'about') {
+            link = getPath(`/${page}/${slug}`)
+        }
+        else if (page) {
             link = getPath(`/${page}/${mode}/`)
         }
         else {
