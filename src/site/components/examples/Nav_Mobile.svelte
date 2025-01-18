@@ -28,7 +28,7 @@
         use:clickOutside={close}
     >
         {#each nav as item}
-            <a href="{getPath(`/${site.mode}/examples/${item.page}`)}" class:active={path.current.indexOf(item.page) > -1} onclick={close}>
+            <a href="{getPath(`/examples/${site.mode}/${item.page}`)}" class:active={path.current.indexOf(item.page) > -1} onclick={close}>
                 <b>{item.title}</b>
                 <span>{item.description}</span>
             </a>

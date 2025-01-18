@@ -16,7 +16,7 @@
         <a class="menu" class:active={path.current.includes('/docs')}       href="{getPath(`/docs/${site.mode}/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
         <a class="menu" class:active={path.current.includes('/examples')}   href="{getPath(`/examples/${site.mode}/hello-world`)}" onclick={close}>Examples&#8599;</a>
         <a class="menu" class:active={path.current.includes('/api')}        href="{getPath(`/api/${site.mode}`)}" onclick={close}>API&#8599;</a>
-        <!-- <a class="menu" class:active={path.current.includes('/about')}      href="{getPath(`/about/CHANGELOG.md`)}" onclick={close}>About&#8599;</a> -->
+        <a class="menu" class:active={path.current.includes('/about')}      href="{getPath(`/about/CHANGELOG.md`)}" onclick={close}>About&#8599;</a>
         <!-- <a class="menu" class:active={path.current.includes('/components')} href="{getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
 
         <div class="divider"></div>

@@ -2,7 +2,6 @@
     import { getPath, path } from 'gros/page'
     import { clickOutside } from 'gros/action'
     import { fly, fade }    from 'svelte/transition'
-    import { site } from '$site'
     let { nav }: { nav: any } = $props()
     let show = $state(false)
     const close = () => show = false
@@ -28,7 +27,8 @@
         use:clickOutside={close}
     >
         {#each nav as item}
-            <a href="{getPath(`/about/${item.page}`)}" class:active={path.current.includes(item.page)} onclick={close}>
+            <a href="{getPath(`/about/${item.page}`)}" class:active={path.current.includes(item.page)} onclick={close} class="flex">
+                <i class="icon">{@html item.icon}</i>
                 <b>{item.title}</b>
             </a>
             <div class="divider"></div>
@@ -52,6 +52,14 @@
         color: var(--font-grey);
         font-weight: normal;
         font-family: Archivo;
+    }
+    i.icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+    }
+    a.active i.icon {
+        color: var(--primary);
     }
     button {
         color: var(--font-grey);
@@ -83,7 +91,6 @@
         z-index: 7;
     }
     a {
-        display: block;
         text-decoration: none;
         padding: 4px 12px;
         margin-right: 8px;
