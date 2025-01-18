@@ -67,6 +67,7 @@
             links: [
                 { name: 'Column visibility'     , path: `${root}/view/visible`              },
                 { name: 'Freeze columns'        , path: `${root}/view/freeze`               },
+                { name: 'Column ordering'       , path: `${root}/view/ordering`             },
             ]
         },
     ]

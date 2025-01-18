@@ -1,0 +1,13 @@
+
+# Column ordering
+
+Column re-ordering requires drag-and-drop events that don't need to rely on the `TableHandler` instance.
+
+[Here is an example implementing *svelte-dnd-action*.](/datatables/examples/client/column-ordering)
+
+
+<style>
+    a {
+        color: var(--ternary);
+    }
+</style>
