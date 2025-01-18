@@ -23,6 +23,7 @@
             <a class="menu" class:active={path.current.includes('/docs')}       href="{getPath(`/docs/${site.mode}/getting-started/intro`)}">Docs</a>
             <a class="menu" class:active={path.current.includes('/examples')}   href="{getPath(`/examples/${site.mode}/hello-world`)}">Examples</a>
             <a class="menu" class:active={path.current.includes('/api')}        href="{getPath(`/api/${site.mode}`)}">API</a>
+            <!-- <a class="menu" class:active={path.current.includes('/about')}        href="{getPath(`/about/CHANGELOG.md`)}">About</a> -->
             <!-- <a class="menu" class:active={path.current.includes('/components')} href="{getPath(`/components`)}">Components</a> -->
             {#if dev}
                 <a class="menu dev" class:active={path.current.includes('/gen')}   href="{getPath(`/export/${site.mode}/gen`)}">[gen]</a>
