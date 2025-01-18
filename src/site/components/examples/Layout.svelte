@@ -6,18 +6,12 @@
 
     type Props = { nav: { title: string, page: string, description: string, tag: string[] }[], children: Snippet }
     let { nav, children }: Props = $props()
-
-    let element: HTMLElement
-    $effect(() => {
-        path.current
-        if (element) element.scrollTop = 0
-    })
 </script>
 
 
 <Nav {nav}/>
 <MobileNav {nav}/>
-<section class="thin-scrollbar" bind:this={element}>
+<section class="thin-scrollbar">
     <article class="md">
         {@render children()}
     </article>
