@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getPath, path } from 'gros/page'
+    import { path } from 'gros/page'
     type Props = { nav: { title: string, page: string, icon: string }[] }
     let { nav }: Props = $props()
 </script>
@@ -8,7 +8,7 @@
 <nav>
     <section class="thin-scrollbar">
         {#each nav as item}
-            <a href="{getPath(`/about/${item.page}`)}" class:active={path.current.includes(item.page)} class="flex">
+            <a href="{path.get(`/about/${item.page}`)}" class={[ 'flex', { active: path.name.includes(item.page) }]}>
                 <i class="icon">{@html item.icon ?? ''}</i>
                 <b>{item.title}</b>
             </a>

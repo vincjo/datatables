@@ -15,13 +15,12 @@ export {
     // utils:
     check,
     // types:
-    type Filter,
-    type Sort,
     type Field,
     type Check,
     type Internationalization,
     type Row,
     type TableParams,
+    type SortParams,
     type TableHandlerInterface,
 
     type AdvancedFilterBuilder,

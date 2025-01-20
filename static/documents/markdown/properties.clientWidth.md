@@ -10,7 +10,7 @@ Represents the dynamic width of the table element.
 If you are using `<Datatable/>` component, you can access this prop without setting it.
 
 ```svelte
-<div class:small={table.clientWidth < 600}>
+<div class={{ small: table.clientWidth < 600 }}>
     [...]
 </div>
 ```

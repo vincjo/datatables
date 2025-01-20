@@ -19,7 +19,7 @@ table.setPage('last')       // Go to the last page
     <button onclick={() => table.setPage('previous')}>Previous</button>
 
     {#each table.pagesWithEllipsis as page}
-        <button class:active={page === table.currentPage} onclick={() => table.setPage(page)}>
+        <button class={{ active: page === table.currentPage }} onclick={() => table.setPage(page)}>
             {page ?? '...'}
         </button>
     {/each}

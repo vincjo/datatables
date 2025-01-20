@@ -26,7 +26,7 @@
         {#each comparators as comparator}
             <li>
                 <button
-                    class:active={current === comparator}
+                    class={{ active: current === comparator }}
                     onclick={() => (current = comparator)}
                 >
                     check.{comparator.name}

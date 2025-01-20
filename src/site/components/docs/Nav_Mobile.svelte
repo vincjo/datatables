@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getPath, path } from 'gros/page'
+    import { path } from 'gros/page'
     import { clickOutside } from 'gros/action'
     import { fly, fade }    from 'svelte/transition'
     import { site }         from '$site'
@@ -33,7 +33,7 @@
                 {item.title}
             </h1>
             {#each item.links as link}
-                <a class:active={path.current.indexOf(link.path) > -1} href="{getPath(link.path)}" onclick={close}>
+                <a class:active={path.name.indexOf(link.path) > -1} href="{path.get(link.path)}" onclick={close}>
                     {link.name}
                 </a>
                 <div class="divider"></div>

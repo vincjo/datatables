@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { slide }            from 'svelte/transition'
-    import { path, getPath }    from 'gros/page'
-    import { site }             from '$site'
-    import Theme                from './Header_Theme.svelte'
-    import Mode                 from './Header_Mode.svelte'
-    import Github               from './Header_Github.svelte'
+    import { slide }    from 'svelte/transition'
+    import { path }     from 'gros/page'
+    import { site }     from '$site'
+    import Theme        from './Header_Theme.svelte'
+    import Mode         from './Header_Mode.svelte'
+    import Github       from './Header_Github.svelte'
 
     let { show = $bindable() }: { show: boolean } = $props()
 
@@ -13,11 +13,10 @@
 
 {#if show}
     <nav transition:slide={{ duration: 120 }} class="thin-scrollbar">
-        <a class="menu" class:active={path.current.includes('/docs')}       href="{getPath(`/docs/${site.mode}/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
-        <a class="menu" class:active={path.current.includes('/examples')}   href="{getPath(`/examples/${site.mode}/hello-world`)}" onclick={close}>Examples&#8599;</a>
-        <a class="menu" class:active={path.current.includes('/api')}        href="{getPath(`/api/${site.mode}`)}" onclick={close}>API&#8599;</a>
-        <a class="menu" class:active={path.current.includes('/about')}      href="{getPath(`/about/CHANGELOG.md`)}" onclick={close}>About&#8599;</a>
-        <!-- <a class="menu" class:active={path.current.includes('/components')} href="{getPath(`/components`)}" onclick={close}>Components&#8599;</a> -->
+        <a class={[ 'menu', { active: path.name.includes('/docs') }]}       href="{path.get(`/docs/${site.mode}/getting-started/intro`)}" onclick={close}>Docs&#8599;</a>
+        <a class={[ 'menu', { active: path.name.includes('/examples') }]}   href="{path.get(`/examples/${site.mode}/hello-world`)}" onclick={close}>Examples&#8599;</a>
+        <a class={[ 'menu', { active: path.name.includes('/api') }]}        href="{path.get(`/api/${site.mode}`)}" onclick={close}>API&#8599;</a>
+        <a class={[ 'menu', { active: path.name.includes('/about') }]}      href="{path.get(`/about/CHANGELOG.md`)}" onclick={close}>About&#8599;</a>
 
         <div class="divider"></div>
         <span>Pagination - data processing</span>

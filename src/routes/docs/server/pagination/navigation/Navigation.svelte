@@ -10,7 +10,7 @@
     <button class="nav" onclick={() => table.setPage(1)}>&#8676; <span>First page</span></button>
     <button class="nav" onclick={() => table.setPage('previous')}>&larr; <span>Previous</span></button>
     {#each table.pagesWithEllipsis as page}
-        <button class:active={page === table.currentPage} onclick={() => table.setPage(page)}>
+        <button class={{ active: page === table.currentPage }} onclick={() => table.setPage(page)}>
             {page ?? '...'}
         </button>
     {/each}

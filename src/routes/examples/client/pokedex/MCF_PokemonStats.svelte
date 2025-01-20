@@ -6,19 +6,19 @@
     {#each stats as stat}
         {@const [name, value] = stat}
         <aside class="flex">
-            <span 
-                class="value" 
-                class:good={value >= 100} 
-                class:bad={value <= 65}
-            >
+            <span class={[
+                'value',
+                { good: value >= 100 },
+                { bad: value <= 65 }
+            ]}>
                 {value}
             </span>
 
-            <span 
-                class="name" 
-                class:good={value >= 100} 
-                class:bad={value <= 65}
-            >
+            <span class={[
+                'name',
+                { good: value >= 100 },
+                { bad: value <= 65 }
+            ]}>
                 {name}
             </span>
         </aside>

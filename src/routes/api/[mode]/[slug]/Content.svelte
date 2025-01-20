@@ -8,7 +8,7 @@
 
 
 <section>
-    <h1 class:deprecated={isDeprecated}>
+    <h1 class={{ deprecated: isDeprecated }}>
         {data.name}
     </h1>
     {#if isDeprecated}

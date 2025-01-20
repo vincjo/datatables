@@ -3,7 +3,7 @@ Get selected rows by identifier.
 ## Usage
 
 ```svelte
-<tr class:active={table.selected.includes(row.id)}>
+<tr class={{ active: table.selected.includes(row.id) }}>
     <td>
         <input type="checkbox" 
             checked={table.selected.includes(row.id)}

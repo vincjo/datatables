@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 {#each table.rows as row}
-                    <tr class:active={table.selected.includes(row.id)}>
+                    <tr class={{ active: table.selected.includes(row.id) }}>
                         <td>
                             <button class="btn" type="button" onclick={() => table.select(row.id)}>
                                 <i class="micon">{table.selected.includes(row.id) ? 'check_box' : 'check_box_outline_blank'}</i>

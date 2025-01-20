@@ -1,10 +1,27 @@
+# 2.4.0 - 2025-xx-xx (unreleased)
+### Added
+feat: (experimental) add `queries` to handle filtering inside nested array of objects. 
+```ts
+table.createQuery('login_count')
+    .from(['groups', 'users'])
+    .where(check.isGreaterThan)
+    .set(1000)
+
+// will check if "user.login_count" is greater than 1000 in users in groups
+```
+
+### Changed
+<!-- - breaking: replace class directive by objects and arrays using clsx. ⚠️ Requires `svelte 5.16.0` or higher -->
+- refactor: core functions has been organized into modules `/client/core/{value, entry, rows, check, field}`
+<!-- ### Fixed -->
+
+
 # 2.3.0 - 2025-01-15
 ### Added
 feat: add `search.recursive()` to handle search in tree data structures ([DOC](https://vincjo.fr/datatables/docs/client/search/recursive)).
 ### Changed
 - breaking: search is not recursive by default anymore [#152](https://github.com/vincjo/datatables/issues/152)
 - upgrade Svelte to the latest 5.18.0
-<!-- ### Fixed -->
 
 
 # 2.2.0 - 2024-12-05

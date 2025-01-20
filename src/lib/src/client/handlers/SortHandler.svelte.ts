@@ -1,5 +1,5 @@
-import type { Sort, Field, TableHandler, SortParams } from '$lib/src/client'
-import { parseField, sort } from '$lib/src/client/utils'
+import type { Field, TableHandler, SortParams } from '$lib/src/client'
+import { type Sort, parse, sort } from '$lib/src/client/core'
 
 export default class SortHandler<Row> 
 {
@@ -14,7 +14,7 @@ export default class SortHandler<Row>
 
     public set(field: Field<Row>, uuid: string, params: SortParams = {})
     {
-        const { id } = parseField(field, uuid)
+        const { id } = parse(field, uuid)
 
         if (this.table['sort'].id !== id) {
             this.table['sort'].direction = null
@@ -30,10 +30,10 @@ export default class SortHandler<Row>
     public asc(field: Field<Row>, uuid: string, { locales, options }: SortParams = {})
     {
         if (!field) return
-        const { id, callback, key } = parseField(field, uuid)
+        const { id, callback, key } = parse(field, uuid)
         this.table['sort'] = { id, callback, direction: 'asc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
-            const [a, b] = [callback(x), callback(y)]
+            const [a, b] = [callback(x as $state.Snapshot<Row>), callback(y as $state.Snapshot<Row>)]
             return sort.asc(a, b, locales, options)
         })
         this.save({ id, callback, direction: 'asc' })
@@ -43,10 +43,10 @@ export default class SortHandler<Row>
     public desc(field: Field<Row>, uuid: string, { locales, options }: SortParams = {})
     {
         if (!field) return
-        const { id, callback, key } = parseField(field, uuid)
+        const { id, callback, key } = parse(field, uuid)
         this.table['sort'] = { id, callback, direction: 'desc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
-            const [a, b] = [callback(x), callback(y)]
+            const [a, b] = [callback(x as $state.Snapshot<Row>), callback(y as $state.Snapshot<Row>)]
             return sort.desc(a, b, locales, options)
         })
         this.save({ id, callback, direction: 'desc' })
@@ -62,7 +62,7 @@ export default class SortHandler<Row>
     public restore()
     {
         for (const { key, callback, direction, id } of this.backup) {
-            const field = key as Field<Row> ?? callback
+            const field = (key ?? callback) as Field<Row>
             this[direction](field, id)
         }
     }

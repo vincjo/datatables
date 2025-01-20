@@ -7,7 +7,7 @@
 
 <aside class="bg-darken">
     {#each table.pagesWithEllipsis as page}
-        <button class:active={page === table.currentPage} onclick={() => table.setPage(page)}>
+        <button class={{ active: page === table.currentPage }} onclick={() => table.setPage(page)}>
             {page ?? '...'}
         </button>
     {/each}

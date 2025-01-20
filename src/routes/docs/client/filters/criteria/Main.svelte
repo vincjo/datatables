@@ -11,7 +11,7 @@
 {#snippet item(name, color)}
     <button 
         onclick={() => filter.set(name)}
-        class:active={filter.criteria.includes(name)} class="btn" style:color="{color}">
+        class={[ 'btn', { active: filter.criteria.includes(name) }]} style:color="{color}">
     <i class="micon">
         {filter.criteria.includes(name) ? 'check_box' : 'check_box_outline_blank'}
     </i>

@@ -1,4 +1,4 @@
-import { match, isNotNull } from '$lib/src/client/utils'
+import { match, isNotNull } from '$lib/src/client/core'
 import type { Row }         from '$lib/src/client'
 
 export default class RecordFilterBuilder

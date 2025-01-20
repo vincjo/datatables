@@ -1,5 +1,5 @@
 import type { Field, TableHandler } from '$lib/src/client'
-import { parseField, sort }         from '$lib/src/client/utils'
+import { sort, parse }              from '$lib/src/client/core'
 
 type Sort = [key: 'value' | 'count', direction: 'asc' | 'desc']
 
@@ -12,7 +12,7 @@ export default class CalcultationBuilder<Row>
     constructor(table: TableHandler<Row>, field: Field<Row>)
     {
         this.table      = table
-        this.callback   = parseField(field).callback
+        this.callback   = parse(field).callback as (row: $state.Snapshot<Row>) => string | number
     }
 
     public distinct(param?: { sort: Sort }): { value: string, count: number }[]

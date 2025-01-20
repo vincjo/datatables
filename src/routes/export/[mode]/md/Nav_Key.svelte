@@ -1,7 +1,7 @@
 <script lang="ts">
     import { site } from '$site'
-    import { getPath } from 'gros/page'
-    import { page } from '$app/stores'
+    import { path } from 'gros/page'
+    import { page } from '$app/state'
     import { slide } from 'svelte/transition'
 
     let { data = [], key }: { data?: string[], key: string } = $props()
@@ -18,8 +18,8 @@
     {#if active}
         <ul transition:slide={{ duration: 200 }}>
             {#each data as item}
-                <a href="{getPath(`/${site.mode}/md/${key}~${item}`)}">
-                    <li class:active={item === $page.params.slug?.split('~')[1]}>
+                <a href="{path.get(`/${site.mode}/md/${key}~${item}`)}">
+                    <li class:active={item === page.params.slug?.split('~')[1]}>
                         <span>{item}</span>
                     </li>
                 </a>

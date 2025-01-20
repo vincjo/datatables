@@ -3,6 +3,7 @@ import AbstractTableHandler     from './AbstractTableHandler.svelte'
 
 import SortHandler              from './handlers/SortHandler.svelte'
 import FilterHandler            from './handlers/FilterHandler.svelte'
+import QueryHandler             from './handlers/QueryHandler.svelte'
 import SelectHandler            from './handlers/SelectHandler.svelte'
 import PageHandler              from './handlers/PageHandler.svelte'
 import SearchHandler            from './handlers/SearchHandler.svelte'
@@ -12,6 +13,7 @@ import type { Internationalization, Row, Field, Check, TableParams, ColumnView, 
 import ViewBuilder              from '../shared/builders/ViewBuilder.svelte'
 import SearchBuilder            from './builders/SearchBuilder.svelte'
 import FilterBuilder            from './builders/FilterBuilder.svelte'
+import QueryBuilder             from './builders/QueryBuilder.svelte'
 import AdvancedFilterBuilder    from './builders/AdvancedFilterBuilder.svelte'
 import CalculationBuilder       from './builders/CalculationBuilder.svelte'
 import SortBuilder              from './builders/SortBuilder.svelte'
@@ -25,6 +27,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     private view            : ViewBuilder<T>
     private sortHandler     : SortHandler<T>
     private filterHandler   : FilterHandler<T>
+    private queryHandler    : QueryHandler<T>
     private selectHandler   : SelectHandler<T>
     private pageHandler     : PageHandler<T>
     private searchHandler   : SearchHandler<T>
@@ -35,6 +38,7 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.translate(params.i18n)
         this.sortHandler    = new SortHandler(this)
         this.filterHandler  = new FilterHandler(this)
+        this.queryHandler   = new QueryHandler(this)
         this.selectHandler  = new SelectHandler(this)
         this.pageHandler    = new PageHandler(this)
         this.searchHandler  = new SearchHandler(this)
@@ -111,6 +115,11 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
     public createFilter(field: Field<T>, check?: Check): FilterBuilder<T>
     {
         return new FilterBuilder(this.filterHandler, field, check)
+    }
+
+    public createQuery(key: string): QueryBuilder<T>
+    {
+        return new QueryBuilder(this.queryHandler, key)
     }
 
     public select(value: unknown): void

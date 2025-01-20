@@ -1,33 +1,31 @@
 <script lang="ts">
     import { site, Logo } from '$site'
-    import { getPath }  from 'gros/page'
+    import { path }     from 'gros/page'
     import Github       from './Header_Github.svelte'
     import Version      from './Header_Version.svelte'
     import Theme        from './Header_Theme.svelte'
     import Mode         from './Header_Mode.svelte'
     import MobileNav    from './Header_MobileNav.svelte'
-    import { path }     from 'gros/page'
     import { dev }      from '$app/environment'
 
     let show = $state(false)
 </script>
 
 <header class="flex">
-    <a class="flex logo" href="{getPath('/')}" onclick={() => show = false}>
+    <a class="flex logo" href="{path.get('/')}" onclick={() => show = false}>
         <Logo height="32px"/>
         <span class="desktop">svelte simple datatables</span>
         <span class="mobile">SSD</span>
     </a>
     <nav class="flex desktop">
         <aside class="flex">
-            <a class="menu" class:active={path.current.includes('/docs')}       href="{getPath(`/docs/${site.mode}/getting-started/intro`)}">Docs</a>
-            <a class="menu" class:active={path.current.includes('/examples')}   href="{getPath(`/examples/${site.mode}/hello-world`)}">Examples</a>
-            <a class="menu" class:active={path.current.includes('/api')}        href="{getPath(`/api/${site.mode}`)}">API</a>
-            <a class="menu" class:active={path.current.includes('/about')}        href="{getPath(`/about/CHANGELOG.md`)}">About</a>
-            <!-- <a class="menu" class:active={path.current.includes('/components')} href="{getPath(`/components`)}">Components</a> -->
+            <a class={[ 'menu', { active: path.name.includes('/docs') }]}       href="{path.get(`/docs/${site.mode}/getting-started/intro`)}">Docs</a>
+            <a class={[ 'menu', { active: path.name.includes('/examples') }]}   href="{path.get(`/examples/${site.mode}/hello-world`)}">Examples</a>
+            <a class={[ 'menu', { active: path.name.includes('/api') }]}        href="{path.get(`/api/${site.mode}`)}">API</a>
+            <a class={[ 'menu', { active: path.name.includes('/about') }]}      href="{path.get(`/about/CHANGELOG.md`)}">About</a>
             {#if dev}
-                <a class="menu dev" class:active={path.current.includes('/gen')}   href="{getPath(`/export/${site.mode}/gen`)}">[gen]</a>
-                <a class="menu dev" class:active={path.current.includes('/md')}   href="{getPath(`/export/${site.mode}/md`)}">[md]</a>
+                <a class={[ 'menu', 'dev', { active: path.name.includes('/gen') }]}  href="{path.get(`/export/${site.mode}/gen`)}">[gen]</a>
+                <a class={[ 'menu', 'dev', { active: path.name.includes('/md') }]}   href="{path.get(`/export/${site.mode}/md`)}">[md]</a>
             {/if}
         </aside>
         <aside class="flex">
@@ -39,7 +37,7 @@
     </nav>
     <nav class="mobile flex">
         <div></div>
-        <button onclick={() => show = !show} class:active={show} class="flex">
+        <button onclick={() => show = !show} class={[ 'flex', { active: show }]}>
             {#if show}
                 <svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275L12 13.4Z"/></svg>
             {:else}

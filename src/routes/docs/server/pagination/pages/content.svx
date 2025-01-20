@@ -53,7 +53,7 @@ table.load(async (state) => {
 ## Current page
 ```svelte
 <button type="button"
-    class:active={page === table.currentPage}
+    class={{ active: page === table.currentPage }}
     onclick={() => table.setPage(page)}
 >
     {page ?? '...'}

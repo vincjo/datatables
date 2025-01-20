@@ -1,7 +1,7 @@
 <script lang="ts">
     import { site } from '$site'
-    import { getPath } from 'gros/page'
-    import { page } from '$app/stores'
+    import { path } from 'gros/page'
+    import { page } from '$app/state'
     import { slide } from 'svelte/transition'
 
     let { data = [], key }: { data?: string[], key: string } = $props()
@@ -11,15 +11,15 @@
 
 
 <aside class={key}>
-    <button class="alt-font flex" onclick={() => active = !active} class:active={active}>
+    <button onclick={() => active = !active} class={[ 'alt-font', 'flex', { active }]}>
         <span>{key} <b>({data.length})</b></span>
         <i class="micon">{active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</i>
     </button>
     {#if active}
         <ul transition:slide={{ duration: 200 }}>
             {#each data as item}
-                <a href="{getPath(`/${site.mode}/md/${key}~${item}`)}">
-                    <li class:active={item === $page.params.slug?.split('~')[1]}>
+                <a href="{path.get(`/${site.mode}/md/${key}~${item}`)}">
+                    <li class={{ active: item === page.params.slug?.split('~')[1] }}>
                         <span>{item}</span>
                     </li>
                 </a>

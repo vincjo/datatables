@@ -25,9 +25,9 @@
             <tbody>
                 {#each table.rows as row}
                     <tr>
-                        <td class:scoped={scoped && !isHighlighted}>{@html row.id}</td>
+                        <td class={{ scoped: scoped && !isHighlighted }}>{@html row.id}</td>
                         <td>{@html row.first_name}</td>
-                        <td class:scoped={scoped && !isHighlighted}>{@html row.last_name}</td>
+                        <td class={{ scoped: scoped && !isHighlighted }}>{@html row.last_name}</td>
                     </tr>
                 {/each}
             </tbody>

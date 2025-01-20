@@ -1,6 +1,6 @@
 <script lang="ts">
     import { TableHandler } from '$lib/src/client'
-    import { getPath, path } from 'gros/page'
+    import { path } from 'gros/page'
     import Search from '../Nav_Search.svelte'
     let { nav }: { nav: any } = $props()
     const table = new TableHandler(nav)
@@ -15,7 +15,7 @@
                 {item.title}
             </h1>
             {#each item.links as link}
-                <a class:active={path.current.indexOf(link.path) > -1} href="{getPath(link.path)}">{link.name}</a>
+                <a class:active={path.name.indexOf(link.path) > -1} href="{path.get(link.path)}">{link.name}</a>
             {/each}
         {/each}
     </section>

@@ -1,5 +1,5 @@
-import type { TableHandler } from '$lib/src/client'
-import { parseField } from '../utils'
+import type { TableHandler }    from '$lib/src/client'
+import { parse }                from '$lib/src/client/core'
 
 export default class SelectHandler<Row>
 {
@@ -22,7 +22,7 @@ export default class SelectHandler<Row>
     public all(scope: 'all' | 'currentPage')
     {
         const rows = (scope === 'currentPage') ? this.table.rows : this.table.allRows
-        const { callback } = parseField(this.table['selectBy'])
+        const { callback } = parse(this.table['selectBy'])
         const selection = rows.map(callback)
         if (scope === 'currentPage') {
             if (this.table.isAllSelected) {
@@ -44,9 +44,9 @@ export default class SelectHandler<Row>
 
     public getRows()
     {
-        const { callback } = parseField(this.table['selectBy'])
+        const { callback } = parse(this.table['selectBy'])
         return this.table['rawRows'].filter(row => {
-            return this.table.selected.includes(callback(row))
+            return this.table.selected.includes(callback(row as $state.Snapshot<Row>))
         })
     }
 }

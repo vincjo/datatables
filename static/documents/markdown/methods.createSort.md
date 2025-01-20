@@ -6,12 +6,13 @@ Create a new sort for 1 column.
 const sort = table.createSort('last_name')
 ```
 ```svelte
-<th class:active={sort.isActive}>
+<th class={{ active: sort.isActive }}>
     <button onclick={() => sort.set()}>
         Last name
-        <span 
-            class:asc={sort.direction === 'asc'} 
-            class:desc={sort.direction === 'desc'}>
+        <span class={[
+            { asc: sort.direction === 'asc' }, 
+            { desc: sort.direction === 'desc' }
+        ]}>
         </span>
     </button>
 </th>

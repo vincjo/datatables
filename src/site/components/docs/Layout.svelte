@@ -6,7 +6,7 @@
     let { nav, children }: { nav: any, children: Snippet } = $props()
     let element: HTMLElement
     $effect(() => {
-        path.current
+        path.name
         if (element) element.scrollTop = 0
     })
 </script>

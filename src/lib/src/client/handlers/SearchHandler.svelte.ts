@@ -1,4 +1,4 @@
-import { type TableHandler, type Field, check } from '$lib/src/client'
+import { type TableHandler, type Field, type Criterion, check } from '$lib/src/client'
 
 export default class SearchHandler<Row>
 {

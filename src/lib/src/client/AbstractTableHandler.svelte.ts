@@ -1,6 +1,6 @@
-import type { Filter, Sort, Field, Check, TableParams } from '$lib/src/client'
-import { parseField, match, nestedFilter, deepEmphasize } from './utils'
-import { EventDispatcher } from '$lib/src/shared'
+import type { Field, TableParams } from '$lib/src/client'
+import { EventDispatcher }  from '$lib/src/shared'
+import { type Search, type Filter, type Query, type Sort, data, parse } from './core'
 
 
 export default abstract class AbstractTableHandler<Row>
@@ -10,10 +10,11 @@ export default abstract class AbstractTableHandler<Row>
     protected highlight         : boolean
     protected event             = new EventDispatcher()
     protected rawRows           = $state.raw<Row[]>([])
-    protected search            = $state<{ value: string, scope?: Field<Row>[], isRecursive?: boolean, check?: Check }>({ value: null, scope: undefined })
+    protected search            = $state<(Search<Row>)>({ value: null })
     protected sort              = $state<(Sort<Row>)>({})
 
     public filters              = $state<(Filter<Row>)[]>([])
+    public queries              = $state<(Query<Row>)[]>([])
     public rowsPerPage          = $state<number>(10)
     public currentPage          = $state<number>(1)
     public element              = $state<HTMLElement>(undefined)
@@ -40,42 +41,18 @@ export default abstract class AbstractTableHandler<Row>
     {
         let allRows = $state.snapshot(this.rawRows)
         if (this.search.value) {
-            allRows = allRows.filter((row) => {
-                const fields = this.search.scope ?? Object.keys(row) as Field<Row>[]
-                const scope = fields.map((field: Field<Row>) => parseField(field))
-                for(const { key, callback } of scope) {
-                    if (key) {
-                        row[key] = nestedFilter(row[key], this.search.value, {
-                            highlight: this.highlight,
-                            isRecursive: this.search.isRecursive === true
-                        })
-                    }
-                    else if (this.highlight) {
-                        row = deepEmphasize(row, callback, this.search.value) as $state.Snapshot<Row>
-                    }
-                }
-                return scope.some(({ callback }) => {
-                    return match(callback(row), this.search.value, this.search.check)
-                })
-            })
+            allRows = data.search(allRows, this.search, this.highlight)
             this.event.dispatch('change')
         }
-        if (this.filterCount > 0) {
-            for (const { callback, value, check, key } of this.filters) {
-                allRows = allRows.filter((row) => {
-                    const checked = match(callback(row), value, check)
-                    if (key) {
-                        row[key] = nestedFilter(row[key], value, {
-                            highlight: this.highlight, 
-                            check: check,
-                            isRecursive: true
-                        })
-                    }
-                    else if (this.highlight && checked && value && typeof value === 'string') {
-                        row = deepEmphasize(row, callback, value) as $state.Snapshot<Row>
-                    }
-                    return checked
-                })
+        else if (this.filters.length > 0) {
+            for (const filter of this.filters) {
+                allRows = data.filter(allRows, filter, this.highlight)
+            }
+            this.event.dispatch('change')
+        }
+        else if (this.queries.length > 0) {
+            for (const query of this.queries) {
+                allRows = data.query(allRows, query)
             }
             this.event.dispatch('change')
         }
@@ -147,11 +124,10 @@ export default abstract class AbstractTableHandler<Row>
 
     private createIsAllSelected()
     {
-
         if (this.rowCount.total === 0 || !this.selectBy) {
             return false
         }
-        const { callback } = parseField(this.selectBy)
+        const { callback } = parse(this.selectBy)
         if (this.selectScope === 'all') {
             const identifiers = this.allRows.map(callback)
             return identifiers.every(id => this.selected.includes(id))

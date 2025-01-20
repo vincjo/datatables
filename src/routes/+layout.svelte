@@ -5,6 +5,7 @@
     import { onMount }          from 'svelte'
     import { site }             from '$site'
     import { theme }            from 'gros/theme'
+    import { browser }          from '$app/environment'
 
     theme.init()
     let { children } = $props()
@@ -17,7 +18,9 @@
 
 
 <Loading process/>
-<ModalContainer/>
+<!-- {#if browser}
+    <ModalContainer/>
+{/if} -->
 
 <main>
     <Header/>

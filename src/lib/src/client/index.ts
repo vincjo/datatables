@@ -1,5 +1,5 @@
 export { default as TableHandler } from './TableHandler.svelte'
-export { check } from './Comparator'
+export { check } from './core'
 
 import type { Internationalization, Field }         from '$lib/src/shared'
 export type { default as AdvancedFilterBuilder }    from './builders/AdvancedFilterBuilder.svelte'
@@ -26,22 +26,6 @@ export {
     type ColumnView,
     type TableHandlerInterface,
 } from '$lib/src/shared'
-
-
-export type Filter<Row> = {
-    callback: (row: $state.Snapshot<Row>) => unknown
-    id: string,
-    value?: unknown
-    check?: Check
-    key?: string,
-}
-
-export type Sort<Row> = {
-    callback?: (row: Row) => unknown
-    id?: string
-    direction?: 'asc' | 'desc'
-    key?: string,
-}
 
 export type SortParams = {
     locales?: Intl.LocalesArgument,

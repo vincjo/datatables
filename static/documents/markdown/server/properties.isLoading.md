@@ -5,7 +5,7 @@
 
 ```svelte
 <Datatable {table}>
-    <div class="spinner" class:active={table.isLoading}></div>
+    <div class="spinner" class={{ active: table.isLoading }}></div>
     <table>
         [...]
     </table>

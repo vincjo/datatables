@@ -21,7 +21,7 @@ Under the hood, your data is reloaded at each page change.
     <button onclick={() => table.setPage('previous')}>Previous</button>
 
     {#each table.pagesWithEllipsis as page}
-        <button class:active={page === table.currentPage} onclick={() => table.setPage(page)}>
+        <button class={{ active: page === table.currentPage }} onclick={() => table.setPage(page)}>
             {page ?? '...'}
         </button>
     {/each}

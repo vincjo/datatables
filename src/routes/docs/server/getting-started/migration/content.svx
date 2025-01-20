@@ -66,10 +66,10 @@ const filter = table.createFilter('first_name') // column filter
 const sort = table.createSort('first_name')
 ```
 ```svelte
-<button onclick={() => sort.set()} class:active={sort.isActive} type="button">
+<button onclick={() => sort.set()} class={{ active: sort.isActive }} type="button">
     first_name
-    <span class:active={sort.direction === 'asc'} >↑</span>
-    <span class:active={sort.direction === 'desc'}>↓</span>
+    <span class={{ active: sort.direction === 'asc'  }}>↑</span>
+    <span class={{ active: sort.direction === 'desc' }}>↓</span>
 </button>
 ```
 
@@ -80,7 +80,7 @@ const table = new TableHandler(data, { selectBy: 'id' })
 ```
 
 ```svelte
-<tr class:active={table.selected.includes(row.id)}>
+<tr class={{ active: table.selected.includes(row.id) }}>
     <td>
         <input type="checkbox" 
             checked={table.selected.includes(row.id)}

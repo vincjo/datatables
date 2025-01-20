@@ -17,10 +17,10 @@ export default class Site
 
     public getMode()
     {
-        if (path.current.includes(`/client`)) {
+        if (path.name.includes(`/client`)) {
             return 'client'
         }
-        else if (path.current.includes(`/server`)) {
+        else if (path.name.includes(`/server`)) {
             return 'server'
         }
         else {

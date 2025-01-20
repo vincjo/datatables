@@ -15,7 +15,7 @@ const view = table.createView([
 ```svelte
 {#each view.columns as column}
     <button type="button" 
-        class:active={column.isVisible}
+        class={{ active: column.isVisible }}
         onclick={() => column.toggle()}
     >
         {column.name}

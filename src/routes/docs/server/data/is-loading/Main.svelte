@@ -14,7 +14,7 @@
     <h1>is loading: <span>{table.isLoading}</span></h1>
 
     <Datatable {table}>
-        <div class="spin flex" class:active={table.isLoading}><RingLoader size="96" color="var(--secondary)" unit="px" duration="0.8s"/></div>
+        <div class={[ 'spin', 'flex', { active: table.isLoading }]}><RingLoader size="96" color="var(--secondary)" unit="px" duration="0.8s"/></div>
         <table>
             <thead>
                 <tr>
@@ -23,7 +23,7 @@
                     <Th>Height / Weight</Th>
                 </tr>
             </thead>
-            <tbody class:loading={table.isLoading}>
+            <tbody class={{ loading: table.isLoading }}>
                 {#each table.rows as row}
                     <tr>
                         <td>{row.id}</td>

@@ -5,7 +5,7 @@ Table gives a `isLoading` state property to help with transitions.
 
 ```svelte
 <Datatable {table}>
-    <div class="spinner" class:active={table.isLoading}></div>
+    <div class="spinner" class={{ active: table.isLoading }}></div>
     <table>
         [...]
     </table>

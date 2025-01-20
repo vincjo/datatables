@@ -8,10 +8,10 @@ const sort = table.createSort('name')
 ```
 
 ```svelte
-<button onclick={() => sort.set()} class:active={sort.isActive} type="button">
+<button onclick={() => sort.set()} class={{ active: sort.isActive }} type="button">
     name
-    <span class:active={sort.direction === 'asc'} >↑</span>
-    <span class:active={sort.direction === 'desc'}>↓</span>
+    <span class={{ active: sort.direction === 'asc'  }}>↑</span>
+    <span class={{ active: sort.direction === 'desc' }}>↓</span>
 </button>
 ```
 

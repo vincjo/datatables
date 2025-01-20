@@ -15,7 +15,7 @@ const table = new TableHandler(data, { selectBy: 'id' })
 
 ```svelte
 {#each table.rows as row}
-    <tr class:active={table.selected.includes(row.id)}>
+    <tr class={{ active: table.selected.includes(row.id) }}>
         <td>
             <input type="checkbox" 
                 checked={table.selected.includes(row.id)}
