@@ -31,4 +31,4 @@ export {
     type SearchBuilder,
     type SortBuilder,
 
-} from '$lib/src/client'
+} from '$lib/src/client/index.js'

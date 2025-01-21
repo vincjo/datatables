@@ -1,5 +1,5 @@
 export { default as TableHandler }  from './TableHandler.svelte'
-import type { Row, Internationalization } from '$lib/src/shared'
+import type { Row, Internationalization } from '$lib/src/shared/index.js'
 export {
     Datatable,
     Search,

@@ -1,3 +1,4 @@
+<!-- 
 # 2.4.0 - 2025-xx-xx (unreleased)
 ### Added
 feat: (experimental) add `queries` to handle filtering inside nested array of objects. 
@@ -11,10 +12,16 @@ table.createQuery('login_count')
 ```
 
 ### Changed
-<!-- - breaking: replace class directive by objects and arrays using clsx. ⚠️ Requires `svelte 5.16.0` or higher -->
-- refactor: core functions has been organized into modules `/client/core/{value, entry, rows, check, field}`
-<!-- ### Fixed -->
+- breaking: replace class directive by objects and arrays using clsx. ⚠️ Requires `svelte 5.16.0` or higher
+-->
 
+
+# 2.3.1 - 2025-01-21
+<!-- ### Added -->
+### Changed
+- refactor: core functions has been organized into modules `/client/core/{value, entry, rows, check, field}`
+### Fixed
+- fix: add "index.js" to make type exports compatible with ES Module
 
 # 2.3.0 - 2025-01-15
 ### Added

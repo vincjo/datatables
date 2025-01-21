@@ -12,10 +12,8 @@ export default class SortHandler<Row>
         this.backup = []
     }
 
-    public set(field: Field<Row>, uuid: string, params: SortParams = {})
+    public set(field: Field<Row>, id: string, params: SortParams = {})
     {
-        const { id } = parse(field, uuid)
-
         if (this.table['sort'].id !== id) {
             this.table['sort'].direction = null
         }
@@ -27,10 +25,10 @@ export default class SortHandler<Row>
         }
     }
 
-    public asc(field: Field<Row>, uuid: string, { locales, options }: SortParams = {})
+    public asc(field: Field<Row>, id: string, { locales, options }: SortParams = {})
     {
         if (!field) return
-        const { id, callback, key } = parse(field, uuid)
+        const { callback, key } = parse(field, id)
         this.table['sort'] = { id, callback, direction: 'asc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x as $state.Snapshot<Row>), callback(y as $state.Snapshot<Row>)]
@@ -40,10 +38,10 @@ export default class SortHandler<Row>
         this.table.setPage(1)
     }
 
-    public desc(field: Field<Row>, uuid: string, { locales, options }: SortParams = {})
+    public desc(field: Field<Row>, id: string, { locales, options }: SortParams = {})
     {
         if (!field) return
-        const { id, callback, key } = parse(field, uuid)
+        const { callback, key } = parse(field, id)
         this.table['sort'] = { id, callback, direction: 'desc', key }
         this.table['rawRows'] = [...this.table['rawRows']].sort((x, y) => {
             const [a, b] = [callback(x as $state.Snapshot<Row>), callback(y as $state.Snapshot<Row>)]

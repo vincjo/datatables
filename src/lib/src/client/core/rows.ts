@@ -55,6 +55,9 @@ export const data = {
                     }
                     if (i < props.length) {
                         obj[prop] = data.query(obj[prop], { path, key, value, check } as Query<Row>)
+                        if (obj[prop].length === 0) {
+                            delete obj[prop]
+                        }
                     }
                     else {
                         obj[prop] = obj[prop].filter((item: any) => check(item[key], value))
