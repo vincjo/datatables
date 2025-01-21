@@ -17,6 +17,6 @@ export {
     type Sort,
     type Internationalization,
     type TableHandlerInterface
-}  from '$lib/src/server'
+}  from '$lib/src/server/index.js'
 
 
