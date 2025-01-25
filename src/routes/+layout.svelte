@@ -18,9 +18,9 @@
 
 
 <Loading process/>
-<!-- {#if browser}
+{#if browser}
     <ModalContainer/>
-{/if} -->
+{/if}
 
 <main>
     <Header/>

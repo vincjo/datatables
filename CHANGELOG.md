@@ -1,5 +1,7 @@
-<!-- 
-# 2.4.0 - 2025-xx-xx (unreleased)
+<!-- ### Changed -->
+<!-- - breaking: replace class directive by objects and arrays using clsx. ⚠️ Requires `svelte 5.16.0` or higher -->
+
+# 2.4.0 - 2025-01-25
 ### Added
 feat: (experimental) add `queries` to handle filtering inside nested array of objects. 
 ```ts
@@ -10,10 +12,9 @@ table.createQuery('login_count')
 
 // will check if "user.login_count" is greater than 1000 in users in groups
 ```
+### Fixed
+- `selectAll`: remove duplicate keys [#157](https://github.com/vincjo/datatables/issues/157)
 
-### Changed
-- breaking: replace class directive by objects and arrays using clsx. ⚠️ Requires `svelte 5.16.0` or higher
--->
 
 
 # 2.3.1 - 2025-01-21

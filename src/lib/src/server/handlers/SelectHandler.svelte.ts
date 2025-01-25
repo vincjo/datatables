@@ -26,7 +26,7 @@ export default class SelectHandler<Row>
             this.table.selected = this.table.selected.filter(item => selection.includes(item) === false)
         }
         else {
-            this.table.selected = [...selection, ...this.table.selected]
+            this.table.selected = [...new Set([...selection, ...this.table.selected])]
         }
     }
 

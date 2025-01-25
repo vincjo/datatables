@@ -48,16 +48,13 @@ export const data = {
             let obj = row
             const [root, ...props] = path
             let i = 1
-            for (const prop of props) {
+            for (const prop of path) {
                 if (obj[prop]) {
                     if (obj[root]) {
                         obj[root] = data.query(obj[root], { path, key, value, check } as Query<Row>) 
                     }
                     if (i < props.length) {
                         obj[prop] = data.query(obj[prop], { path, key, value, check } as Query<Row>)
-                        if (obj[prop].length === 0) {
-                            delete obj[prop]
-                        }
                     }
                     else {
                         obj[prop] = obj[prop].filter((item: any) => check(item[key], value))
@@ -66,7 +63,7 @@ export const data = {
                 i++
             }
             return row
-        })
+        }).filter(Boolean)
     }
 }
 
