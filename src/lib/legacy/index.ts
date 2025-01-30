@@ -12,6 +12,8 @@ import type { Internationalization, Row, Field, Comparator, Filter, Sort, Select
 
 export { DataHandler, check, Datatable, Th, ThFilter, Pagination, RowCount, RowsPerPage, Search }
 
+export { default as SvelteSet } from './Set'
+
 export type  {
     Internationalization,
     Row,

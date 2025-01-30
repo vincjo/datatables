@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
     import data from '$site/data/data'
     import { TableHandler, Datatable, ThSort, Th } from '$lib/src/client'
 
-    let { all = false, scope = 'currentPage' } = $props()
+    let { all = false, scope = 'currentPage' }: { all: boolean, scope: 'currentPage' | 'all' } = $props()
 
     const table = new TableHandler(data, { selectBy: 'id', rowsPerPage: 10 })
 </script>
@@ -28,10 +28,10 @@
             </thead>
             <tbody>
                 {#each table.rows as row}
-                    <tr class={{ active: table.selected.includes(row.id) }}>
+                    <tr class={{ active: table.selected.has(row.id) }}>
                         <td>
                             <button class="btn" type="button" onclick={() => table.select(row.id)}>
-                                <i class="micon">{table.selected.includes(row.id) ? 'check_box' : 'check_box_outline_blank'}</i>
+                                <i class="micon">{table.selected.has(row.id) ? 'check_box' : 'check_box_outline_blank'}</i>
                                 Select me
                             </button>
                         </td>

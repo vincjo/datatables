@@ -1,7 +1,7 @@
 import type { Field, TableParams } from '$lib/src/client'
 import { EventDispatcher }  from '$lib/src/shared'
 import { type Search, type Filter, type Query, type Sort, data, parse } from './core'
-
+import { SvelteSet } from '$lib/legacy'
 
 export default abstract class AbstractTableHandler<Row>
 {
@@ -26,7 +26,7 @@ export default abstract class AbstractTableHandler<Row>
     public pages                = $derived<readonly number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
     public pagesWithEllipsis    = $derived<readonly number[]>(this.createPagesWithEllipsis())
-    public selected             = $state<unknown[]>([])
+    public selected             = $state<(SvelteSet<unknown>)>(new SvelteSet())
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
 
     constructor(data: Row[], params: TableParams<Row>)
@@ -72,13 +72,13 @@ export default abstract class AbstractTableHandler<Row>
     {
         const total = this.allRows.length
         if (!this.rowsPerPage) {
-            return { total: total, start: 1, end: total, selected: this.selected.length }
+            return { total: total, start: 1, end: total, selected: this.selected.size }
         }
         return {
             total: total,
             start: this.currentPage * this.rowsPerPage - this.rowsPerPage + 1,
             end: Math.min(this.currentPage * this.rowsPerPage, total),
-            selected: this.selected.length
+            selected: this.selected.size
         }
     }
 
@@ -130,9 +130,9 @@ export default abstract class AbstractTableHandler<Row>
         const { callback } = parse(this.selectBy)
         if (this.selectScope === 'all') {
             const identifiers = this.allRows.map(callback)
-            return identifiers.every(id => this.selected.includes(id))
+            return identifiers.every(id => this.selected.has(id))
         }
         const identifiers = this.rows.map(callback)
-        return identifiers.every(id => this.selected.includes(id))
+        return identifiers.every(id => this.selected.has(id))
     }
 }

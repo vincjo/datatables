@@ -1,5 +1,6 @@
 import type { State, Sort, Filter, TableParams } from '$lib/src/server'
 import { EventDispatcher } from '$lib/src/shared'
+import { SvelteSet } from '$lib/legacy'
 
 export default class AbstractTableHandler<Row>
 {
@@ -19,7 +20,7 @@ export default class AbstractTableHandler<Row>
     public pages                = $derived<number[]>(this.createPages())
     public pageCount            = $derived<number>(this.createPageCount())
     public pagesWithEllipsis    = $derived<number[]>(this.createPagesWithEllipsis())
-    public selected             = $state<(Row[keyof Row])[]>([])
+    public selected             = $state<(SvelteSet<(Row[keyof Row])>)>()
     public isAllSelected        = $derived<boolean>(this.createIsAllSelected())
     public element              = $state<HTMLElement>(undefined)
     public clientWidth          = $state<number>(1000)
@@ -101,14 +102,14 @@ export default class AbstractTableHandler<Row>
                 total: undefined,
                 start: undefined,
                 end: undefined,
-                selected: this.selected.length
+                selected: this.selected.size
             }
         }
         return {
             total: this.totalRows,
             start: this.currentPage * this.rowsPerPage - this.rowsPerPage + 1,
             end: Math.min(this.currentPage * this.rowsPerPage, this.totalRows),
-            selected: this.selected.length
+            selected: this.selected.size
         }
     }
 
@@ -118,6 +119,6 @@ export default class AbstractTableHandler<Row>
             return false
         }
         const ids = this.rows.map(row => row[this.selectBy])
-        return ids.every(id => this.selected.includes(id))
+        return ids.every(id => this.selected.has(id))
     }
 }
