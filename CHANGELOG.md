@@ -1,6 +1,14 @@
 <!-- ### Changed -->
 <!-- - breaking: replace class directive by objects and arrays using clsx. ⚠️ Requires `svelte 5.16.0` or higher -->
 
+
+# 2.5.0 - 2025-02-06
+### Added
+feat: add the median calculation.
+```ts
+const median = table.createCalculation('field').median()
+```
+
 # 2.4.0 - 2025-01-25
 ### Added
 feat: (experimental) add `queries` to handle filtering inside nested array of objects. 

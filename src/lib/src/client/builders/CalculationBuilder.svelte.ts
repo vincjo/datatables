@@ -55,6 +55,20 @@ export default class CalcultationBuilder<Row>
         return this.round(values.reduce((acc, curr) => acc + curr, 0))
     }
 
+    public median(param?: { precision: number }): number
+    {
+        this.precision  = param?.precision ?? 2
+        const values = [...this.table.allRows.map(row => this.callback(row))]
+            .sort((a: number, b: number) => a - b)
+            .filter(Boolean) as number[]
+        if (values.length === 0) return null
+        const half = Math.floor(values.length / 2)
+        return (values.length % 2
+            ? values[half]
+            : this.round((values[half - 1] + values[half]) / 2)
+        )
+    }
+
     public bounds(): number[]
     {
         const values = this.table.allRows.map(row => this.callback(row))

@@ -1,0 +1,1 @@
+{"name":"queries","text":"type $state<(Query<Row>)[]>","type":"$state<(Query<Row>)[]>","ast":{"name":"queries","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":17,"default":"$state<(Query<Row>)[]>([])"},"markdown":"<p style=\"color:var(--ternary)\">Documentation not found</p>"}
