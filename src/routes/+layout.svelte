@@ -1,6 +1,6 @@
 <script>
     import Header               from './Header.svelte'
-    import { ModalContainer }   from 'gros/modal'
+    // import { ModalContainer }   from 'gros/modal'
     import { Loading }          from 'gros/loading'
     import { onMount }          from 'svelte'
     import { site }             from '$site'
@@ -18,9 +18,7 @@
 
 
 <Loading process/>
-{#if browser}
-    <ModalContainer/>
-{/if}
+<!-- <ModalContainer/> -->
 
 <main>
     <Header/>

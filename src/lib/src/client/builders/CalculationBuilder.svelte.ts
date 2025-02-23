@@ -83,6 +83,7 @@ export default class CalcultationBuilder<Row>
 
     private round(value: number)
     {
+        console.log(value, typeof(value))
         return Number(value.toFixed(this.precision))
     }
 }
