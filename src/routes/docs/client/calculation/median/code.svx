@@ -1,0 +1,38 @@
+<script>
+    import Basic from './Basic.svelte'
+    import Advanced from './Advanced.svelte'
+</script>
+
+### Basic usage
+
+```ts
+const median = $derived(table.createCalculation('price').median())
+```
+
+````svelte
+<h1>Median: {median}</h1>
+````
+
+<Basic/>
+
+
+### Avanced usage
+
+```ts
+// calc area from 'width' and 'length' row props and conversion to yd²
+const calc = table.createCalculation(({ width, length }) => width * length * 1.196)
+
+const median = $derived(calc.median({ precision: 3 }))
+```
+
+````svelte
+<h1>Median area: {median} yd²</h1>
+````
+
+<Advanced/>
+
+<style>
+    pre {
+        max-width: 800px;
+    }
+</style>    

@@ -79,6 +79,7 @@
             links: [
                 { name: 'Sum'                   , path: `${root}/calculation/sum`           },
                 { name: 'Average'               , path: `${root}/calculation/avg`           },
+                { name: 'Median'                , path: `${root}/calculation/median`        },
                 { name: 'Distinct values'       , path: `${root}/calculation/distinct`      },
                 { name: 'Bounds'                , path: `${root}/calculation/bounds`        },
             ]
