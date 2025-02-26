@@ -1,10 +1,9 @@
-import { page, navigating } from "$app/stores";
-import { get } from "svelte/store";
+import { page, navigating } from "$app/state";
 import { goto } from "$app/navigation";
 import type { State } from "$lib/server";
 
 export class SSRFilters {
-  Filters = $derived.by(() => get(page).url);
+  Filters = $derived(page.url)
 
   constructor() {
     console.log("Filters", this.Filters);
