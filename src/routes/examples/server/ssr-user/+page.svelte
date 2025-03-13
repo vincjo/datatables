@@ -55,7 +55,7 @@
       </tr>
     </thead>
     <tbody>
-      {#each table.rows as row}
+      {#each table.rows as row (row.id)}
         <tr>
           <td>{row.id}</td>
           <td>
