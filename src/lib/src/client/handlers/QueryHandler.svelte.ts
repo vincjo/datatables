@@ -11,13 +11,11 @@ export default class QueryHandler<Row>
         this.table = table
     }
 
-    public set(path: string[], key: string, value: unknown, check: Check, id: string)
+    public set(path: string[], value: unknown, check: Check, id: string)
     {
         this.table.setPage(1)
         this.table.queries = this.table.queries.filter(query => query.id !== id)
-        if (isNotNull(value)) {
-            this.table.queries.push({ path, key, value, check, id })
-        }
+        this.table.queries.push({ path, value, check, id })
     }
 
     public unset(id: string)

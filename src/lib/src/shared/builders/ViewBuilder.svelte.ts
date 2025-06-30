@@ -59,7 +59,7 @@ export default class ViewBuilder<Row>
         let left = 0
         for (const { isVisible, isFrozen, index } of this.columns) {
             if (isFrozen === true) {
-                left = this.freeze(index, left)
+                left += this.freeze(index, left)
             }
             if (isVisible === false) {
                 this.table.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
@@ -76,7 +76,7 @@ export default class ViewBuilder<Row>
 
         this.table.element.querySelectorAll(`tr > *:nth-child(${index + 1})`).forEach((element: HTMLElement) => {
             element.style.position = 'sticky'
-            element.style.left = (index * left) + 'px'
+            element.style.left = left + 'px'
             element.style.width = width + 'px'
         })
         return width

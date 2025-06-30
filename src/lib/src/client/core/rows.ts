@@ -43,27 +43,62 @@ export const data = {
             return checked
         })
     },
-    query: <Row>(allRows: $state.Snapshot<Row[]>, { path, key, value, check }: Query<Row>) => {
-        return allRows.map(row => {
+    query: <Row>(allRows: $state.Snapshot<Row[]>, { path, value, check }: Query<Row>) => {
+        return allRows.filter(row => {
+            if (path.length === 0) {
+                return check(row, value)
+            }
             let obj = row
-            const [root, ...props] = path
             let i = 1
+            let verify = false
+            function recursive(i) {
+
+            }
+            // ['groups', 'users']
+            // row[groups].map(group => group.users.map(user) => {
+
+            // })
+
+            // row.groups.filter(group => group.users.filter(user => ))
             for (const prop of path) {
-                if (obj[prop]) {
-                    if (obj[root]) {
-                        obj[root] = data.query(obj[root], { path, key, value, check } as Query<Row>) 
-                    }
-                    if (i < props.length) {
-                        obj[prop] = data.query(obj[prop], { path, key, value, check } as Query<Row>)
-                    }
-                    else {
-                        obj[prop] = obj[prop].filter((item: any) => check(item[key], value))
+                if (i === 1 && i < path.length) {
+                    obj = obj[prop]
+                    for (const subobj of obj[prop]) {
+
                     }
                 }
+                if (i === path.length) {
+                    console.log(prop, obj)
+                    obj[prop] = data.query(obj[prop], { path: [], value, check } as Query<Row>)
+                    if (obj[prop].length > 0) {
+                        verify = true
+                    }
+                }
+                obj = obj[prop]
                 i++
             }
-            return row
-        }).filter(Boolean)
+            return verify
+        })
+        // return allRows.map(row => {
+        //     let obj = row
+        //     const [root, ...props] = path
+        //     let i = 1
+        //     for (const prop of path) {
+        //         if (obj[prop]) {
+        //             if (obj[root]) {
+        //                 obj[root] = data.query(obj[root], { path, value, check } as Query<Row>) 
+        //             }
+        //             if (i < props.length) {
+        //                 obj[prop] = data.query(obj[prop], { path, value, check } as Query<Row>)
+        //             }
+        //             else {
+        //                 obj[prop] = obj[prop].filter((item: any) => check(item))
+        //             }
+        //         }
+        //         i++
+        //     }
+        //     return row
+        // }).filter(Boolean)
     }
 }
 

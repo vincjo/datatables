@@ -1,27 +1,18 @@
-import type { Field, Check }    from '$lib/src/client'
+import type { Check }    from '$lib/src/client'
 import type QueryHandler        from '../handlers/QueryHandler.svelte'
-import { check as comparator }  from '$lib/src/client/core'
 
 export default class QueryBuilder<Row>
 {
     public  value           = $state<unknown>('')
     private id              = Math.random().toString(36).substring(2, 15)
     private queryHandler    : QueryHandler<Row>
-    private path            : string[]
-    private key             : string
+    private path            : string[] = []
     private check           : Check
 
-    constructor(queryHandler: QueryHandler<Row>, key: string)
+    constructor(queryHandler: QueryHandler<Row>)
     {
         this.queryHandler   = queryHandler
-        this.key            = key
         this.cleanup()
-    }
-
-    public where(check: Check)
-    {
-        this.check = check
-        return this
     }
 
     public from(path: string[])
@@ -30,10 +21,18 @@ export default class QueryBuilder<Row>
         return this
     }
 
+    public where(filter: (row: any, value?: unknown) => boolean)
+    {
+        this.check = filter
+        return this
+    }
+
+ 
+
     public set(value?: unknown)
     {
         if (value) this.value = value
-        this.queryHandler.set(this.path, this.key, this.value, this.check ?? comparator.isLike, this.id)
+        this.queryHandler.set(this.path, this.value, this.check, this.id)
     }
 
     public clear()

@@ -117,9 +117,9 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new FilterBuilder(this.filterHandler, field, check)
     }
 
-    public createQuery(key: string): QueryBuilder<T>
+    public createQuery(): QueryBuilder<T>
     {
-        return new QueryBuilder(this.queryHandler, key)
+        return new QueryBuilder(this.queryHandler)
     }
 
     public select(value: unknown): void

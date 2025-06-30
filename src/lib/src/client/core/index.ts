@@ -25,7 +25,6 @@ export type Filter<Row> = {
 export type Query<Row> = {
     path: string[]
     id: string
-    key: string,
     value?: unknown
     check?: Check
 }
