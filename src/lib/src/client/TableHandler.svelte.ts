@@ -73,9 +73,9 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         }
     }
 
-    public createSearch(scope?: Field<T>[]): SearchBuilder<T>
+    public createSearch(scope?: Field<T>[], value?: string): SearchBuilder<T>
     {
-        return new SearchBuilder(this.searchHandler, scope)
+        return new SearchBuilder(this.searchHandler, scope, value)
     }
 
     public clearSearch(): void
@@ -90,9 +90,9 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new RecordFilterBuilder(records)
     }
 
-    public createSort(field: Field<T>, params?: { locales: Intl.LocalesArgument, options: Intl.CollatorOptions}): SortBuilder<T>
+    public createSort(field: Field<T>, init?: 'asc' | 'desc', params?: { locales: Intl.LocalesArgument, options: Intl.CollatorOptions}): SortBuilder<T>
     {
-        return new SortBuilder(this.sortHandler, field, params)
+        return new SortBuilder(this.sortHandler, field, params, init)
     }
 
     public clearSort()
@@ -112,9 +112,9 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         return new AdvancedFilterBuilder(this.filterHandler, field, check)
     }
 
-    public createFilter(field: Field<T>, check?: Check): FilterBuilder<T>
+    public createFilter(field: Field<T>, value?: string, check?: Check): FilterBuilder<T>
     {
-        return new FilterBuilder(this.filterHandler, field, check)
+        return new FilterBuilder(this.filterHandler, field, check, value)
     }
 
     public createQuery(): QueryBuilder<T>

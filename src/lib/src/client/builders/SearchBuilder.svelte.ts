@@ -7,10 +7,14 @@ export default class SearchBuilder<Row>
     private scope           : Field<Row>[]
     private searchHandler   : SearchHandler<Row>
 
-    constructor(searchHandler: SearchHandler<Row>, scope?: Field<Row>[])
+    constructor(searchHandler: SearchHandler<Row>, scope?: Field<Row>[], value?: string)
     {
         this.searchHandler  = searchHandler
         this.scope          = scope
+        if (value) {
+            this.value = value
+            this.searchHandler.set(this.value, this.scope)
+        }
         this.cleanup()
     }
 

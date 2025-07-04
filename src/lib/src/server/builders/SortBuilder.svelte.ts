@@ -7,10 +7,13 @@ export default class SortBuilder<Row>
     public  isActive    = $derived<boolean>(this.createIsActive())
     public  direction   = $derived<'asc' | 'desc'>(this.createDirection())
 
-    constructor(sortHandler: SortHandler<Row>, field: keyof Row)
+    constructor(sortHandler: SortHandler<Row>, field: keyof Row, init?: 'asc' | 'desc')
     {
         this.sortHandler = sortHandler
         this.field       = field
+        if (init) {
+            this.sortHandler.init(this.field, init)
+        }
     }
 
     public set()

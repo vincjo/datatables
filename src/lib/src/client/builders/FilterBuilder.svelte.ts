@@ -10,11 +10,15 @@ export default class FilterBuilder<Row>
     private field           : Field<Row>
     private check           : Check
 
-    constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check)
+    constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check, value?: string)
     {
         this.filterHandler  = filterHandler
         this.field          = field
         this.check          = check ?? comparator.isLike
+        if (value) {
+            this.value = value
+            this.filterHandler.set(this.value, this.field, this.check, this.id)
+        }
         this.cleanup()
     }
 

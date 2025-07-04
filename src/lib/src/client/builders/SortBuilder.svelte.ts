@@ -11,11 +11,14 @@ export default class SortBuilder<Row>
     private field           : Field<Row>
     private params          : SortParams
 
-    constructor(sortHandler: SortHandler<Row>, field: Field<Row>, params: SortParams)
+    constructor(sortHandler: SortHandler<Row>, field: Field<Row>, params: SortParams, init?: 'asc' | 'desc')
     {
         this.sortHandler    = sortHandler
         this.field          = field
         this.params         = params ?? {}
+        if (init) {
+            this.sortHandler.init(this.field, this.id, init)
+        }
     }
 
     public set()

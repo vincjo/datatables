@@ -25,10 +25,10 @@ export interface TableHandlerInterface<Row> {
     rowCount            : { selected: number, start: number, end: number, total: number }
     rowsPerPage         : number,
     clearSelection()    : void,
-    createSearch()      : { value: unknown, set(): void }
+    createSearch(): { value: unknown, set(): void }
     setPage(value?: number | 'previous' | 'next' | 'last'): void,
-    createFilter(field: Field<Row>, check?: Check): { value: unknown, set(): void },
-    createSort(field: Field<Row>): { isActive: boolean, direction: 'asc' | 'desc', set(): void }
+    createFilter(field: Field<Row>, value?: string, check?: Check): { value: unknown, set(): void },
+    createSort(field: Field<Row>, init?: 'asc' | 'desc'): { isActive: boolean, direction: 'asc' | 'desc', set(): void }
     on(event: string, callback: () => void): void 
 }
 
