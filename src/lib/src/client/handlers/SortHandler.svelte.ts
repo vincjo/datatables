@@ -12,12 +12,6 @@ export default class SortHandler<Row>
         this.backup = []
     }
 
-    public init(field: Field<Row>, id: string, direction: 'asc' | 'desc')
-    {
-        const { callback, key } = parse(field, id)
-        this.table['sort'] = { id, callback, direction, key }
-    }
-
     public set(field: Field<Row>, id: string, params: SortParams = {})
     {
         if (this.table['sort'].id !== id) {

@@ -25,10 +25,10 @@ export interface TableHandlerInterface<Row> {
     rowCount            : { selected: number, start: number, end: number, total: number }
     rowsPerPage         : number,
     clearSelection()    : void,
-    createSearch(): { value: unknown, set(): void }
+    createSearch(): SearchInterface,
+    createFilter(field: Field<Row>, check?: Check): FilterInterface,
+    createSort(field: Field<Row>): SortInterface,
     setPage(value?: number | 'previous' | 'next' | 'last'): void,
-    createFilter(field: Field<Row>, value?: string, check?: Check): { value: unknown, set(): void },
-    createSort(field: Field<Row>, init?: 'asc' | 'desc'): { isActive: boolean, direction: 'asc' | 'desc', set(): void }
     on(event: string, callback: () => void): void 
 }
 
@@ -49,4 +49,23 @@ export type ColumnView = {
     isVisible  ?: boolean,
     isFrozen   ?: boolean,
     toggle     ?: () => void
+}
+
+export interface SearchInterface {
+    value: string,
+    set: () => void,
+    init: (value: string) => SearchInterface
+}
+
+export interface FilterInterface {
+    value: unknown,
+    set: () => void,
+    init: (value: unknown) => FilterInterface
+}
+
+export interface SortInterface {
+    isActive: boolean,
+    direction: 'asc' | 'desc',
+    set: () => void,
+    init: (direction?: 'asc' | 'desc') => SortInterface
 }

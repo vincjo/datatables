@@ -6,12 +6,12 @@
     type Props = {
         table   : TableHandlerInterface<T>,
         field   : Field<T>,
-        init?: 'asc' | 'desc',
+        direction?: 'asc' | 'desc',
         children: Snippet
     }
-    let { table, field, init = undefined, children }: Props = $props()
+    let { table, field, direction, children }: Props = $props()
 
-    const sort = table.createSort(field, init)
+    const sort = table.createSort(field).init(direction)
 </script>
 
 <th onclick={() => sort.set()} class:active={sort.isActive}>

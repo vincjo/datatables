@@ -9,11 +9,6 @@ export default class SortHandler<Row>
         this.table = table
     }
 
-    public init(field: keyof Row, direction: 'asc' | 'desc')
-    {
-        this.table['sort'] = { field, direction }
-    }
-
     public set(field: keyof Row)
     {
         const sort = this.table['sort']

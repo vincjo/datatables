@@ -1,8 +1,8 @@
 <script lang="ts">
     import type { TableHandlerInterface } from '$lib/src/shared'
     type T = $$Generic<Row>
-    let { table }: { table: TableHandlerInterface<T> } = $props()
-    const search = table.createSearch()
+    let { table, value }: { table: TableHandlerInterface<T>, value?: string } = $props()
+    const search = table.createSearch().init(value)
 </script>
 
 <input

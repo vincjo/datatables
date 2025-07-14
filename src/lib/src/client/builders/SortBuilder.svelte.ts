@@ -1,8 +1,9 @@
 import type { Field, SortParams }   from '$lib/src/client'
 import type SortHandler             from '../handlers/SortHandler.svelte'
+import type { SortInterface }       from '$lib/src/shared'
 
 
-export default class SortBuilder<Row>
+export default class SortBuilder<Row> implements SortInterface
 {
     public  direction       = $derived<'asc' | 'desc'>(this.createDirection())
     public  isActive        = $derived<boolean>(this.createIsActive())
@@ -11,19 +12,23 @@ export default class SortBuilder<Row>
     private field           : Field<Row>
     private params          : SortParams
 
-    constructor(sortHandler: SortHandler<Row>, field: Field<Row>, params: SortParams, init?: 'asc' | 'desc')
+    constructor(sortHandler: SortHandler<Row>, field: Field<Row>, params: SortParams)
     {
         this.sortHandler    = sortHandler
         this.field          = field
         this.params         = params ?? {}
-        if (init) {
-            this.sortHandler.init(this.field, this.id, init)
-        }
     }
 
     public set()
     {
         this.sortHandler.set(this.field, this.id, this.params)
+    }
+
+    public init(direction?: 'asc' | 'desc')
+    {
+        if (!direction) return this
+        this[direction]()
+        return this
     }
 
     public asc()

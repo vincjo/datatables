@@ -7,25 +7,27 @@ export default class FilterBuilder<Row>
     private filterHandler   : FilterHandler<Row>
     private field           : keyof Row
 
-    constructor(filterHandler: FilterHandler<Row>, field: keyof Row, value?: string)
+    constructor(filterHandler: FilterHandler<Row>, field: keyof Row)
     {
         this.filterHandler  = filterHandler
         this.field          = field
-        if (value) {
-            this.value = value
-            this.filterHandler.set(this.value, this.field)
-        }
         this.cleanup()
     }
 
-    public set(invalidate: boolean = true)
+    public set()
     {
         this.filterHandler.set(this.value, this.field)
-        if (!invalidate) return
 		clearTimeout(this.timeout)
 		this.timeout = setTimeout( () => {
             this.filterHandler['table'].invalidate()
 		}, 400)
+    }
+
+    public init(value: string)
+    {
+        this.value = value
+        this.filterHandler.set(this.value, this.field)
+        return this
     }
 
     public clear()

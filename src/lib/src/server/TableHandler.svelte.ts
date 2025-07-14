@@ -71,17 +71,17 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.searchHandler.clear()
     }
 
-    public createSearch(value?: string): SearchBuilder<T>
+    public createSearch(): SearchBuilder<T>
     {
-        return new SearchBuilder(this, value)
+        return new SearchBuilder(this)
     }
 
-    public createSort(field: Field<T>, init?: 'asc' | 'desc'): SortBuilder<T>
+    public createSort(field: Field<T>): SortBuilder<T>
     {
         if (typeof field === 'function') {
             throw new Error(`Invalid field argument: ${String(field)}. Function type arguments are not allowed in server-side mode`)
         }
-        return new SortBuilder(this.sortHandler, field, init)
+        return new SortBuilder(this.sortHandler, field)
     }
 
     public clearFilters(): void
@@ -90,12 +90,12 @@ export default class TableHandler<T extends Row = any> extends AbstractTableHand
         this.invalidate()
     }
 
-    public createFilter(field: Field<T>, value?: string): FilterBuilder<T>
+    public createFilter(field: Field<T>): FilterBuilder<T>
     {
         if (typeof field === 'function') {
             throw new Error(`Invalid field argument: ${String(field)}. Function type arguments are not allowed in server-side mode`)
         }
-        return new FilterBuilder(this.filterHandler, field, value)
+        return new FilterBuilder(this.filterHandler, field)
     }
 
     public select(value: T[keyof T])

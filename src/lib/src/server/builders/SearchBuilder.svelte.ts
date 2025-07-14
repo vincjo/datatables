@@ -1,29 +1,32 @@
 import type TableHandler from '../TableHandler.svelte'
+import type { SearchInterface } from '$lib/src/shared'
 
-export default class SearchBuilder<Row>
+export default class SearchBuilder<Row> implements SearchInterface
 {
     public  value           = $state<string>('')
     private timeout         = undefined
     private table           : TableHandler<Row>
 
-    constructor(table: TableHandler<Row>, value?: string)
+    constructor(table: TableHandler<Row>)
     {
         this.table = table
-        if (value) {
-            this.value = value
-            this.table['search'] = value
-        }
         this.cleanup()
     }
 
-    public set(invalidate: boolean = true)
+    public set()
     {
         this.table['search'] = this.value
-        if (!invalidate) return
         clearTimeout(this.timeout)
         this.timeout = setTimeout( () => {
             this.table.setPage(1)
         }, 400)
+    }
+
+    public init(value: string)
+    {
+        this.value = value
+        this.table['search'] = value
+        return this
     }
 
     public clear()
