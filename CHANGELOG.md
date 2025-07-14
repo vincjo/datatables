@@ -2,6 +2,17 @@
 <!-- - breaking: replace class directive by objects and arrays using clsx. ⚠️ Requires `svelte 5.16.0` or higher -->
 
 
+# 2.6.1 - 2025-07-14
+### Fixed
+fix: make sure `init()` arg can be undefined in any case.
+### Changed
+- upgrade Svelte to the latest 5.36.0
+
+# 2.6.0 - 2025-07-14
+### Added
+feat: add `init()` method to initialize a value in "search", "filter" and "sort".
+
+
 # 2.5.0 - 2025-02-06
 ### Added
 feat: add the median calculation.
@@ -26,7 +37,6 @@ table.createQuery('login_count')
 
 
 # 2.3.1 - 2025-01-21
-<!-- ### Added -->
 ### Changed
 - refactor: core functions has been organized into modules `/client/core/{value, entry, rows, check, field}`
 ### Fixed
@@ -62,7 +72,6 @@ feat: add `table.clearSort()` method [#150](https://github.com/vincjo/datatables
 
 
 # 2.0.3 - 2024-10-22
-<!-- ### Added -->
 ### Changed
 - docs: stay on the same page after switch between client-side and server-side navigation
 ### Fixed

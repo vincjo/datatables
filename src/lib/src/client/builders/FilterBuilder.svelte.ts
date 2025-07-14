@@ -24,7 +24,7 @@ export default class FilterBuilder<Row> implements FilterInterface
         this.filterHandler.set(this.value, this.field, check ?? this.check, this.id)
     }
 
-    public init(value: unknown)
+    public init(value?: unknown)
     {
         this.value = value
         this.set()

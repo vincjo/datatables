@@ -22,8 +22,9 @@ export default class SearchBuilder<Row> implements SearchInterface
         }, 400)
     }
 
-    public init(value: string)
+    public init(value?: string)
     {
+        if (!value) return this
         this.value = value
         this.table['search'] = value
         return this

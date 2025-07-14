@@ -23,8 +23,9 @@ export default class FilterBuilder<Row>
 		}, 400)
     }
 
-    public init(value: string)
+    public init(value?: string)
     {
+        if (!value) return this
         this.value = value
         this.filterHandler.set(this.value, this.field)
         return this
