@@ -6,18 +6,23 @@ export default class SearchBuilder<Row>
     private timeout         = undefined
     private table           : TableHandler<Row>
 
-    constructor(table: TableHandler<Row>)
+    constructor(table: TableHandler<Row>, value?: string)
     {
         this.table = table
+        if (value) {
+            this.value = value
+            this.table['search'] = value
+        }
         this.cleanup()
     }
 
-    public set()
+    public set(invalidate: boolean = true)
     {
         this.table['search'] = this.value
+        if (!invalidate) return
         clearTimeout(this.timeout)
         this.timeout = setTimeout( () => {
-            this.table.invalidate()
+            this.table.setPage(1)
         }, 400)
     }
 

@@ -6,11 +6,12 @@
     type Props = {
         table  : TableHandlerInterface<T>,
         field  : Field<T>,
+        initValue ?: string,
         check ?: Check
     }
-    let { table, field, check = undefined }: Props = $props()
+    let { table, field, initValue = undefined, check = undefined }: Props = $props()
 
-    const filter = table.createFilter(field, check)
+    const filter = table.createFilter(field, initValue, check)
 </script>
 
 <th>
