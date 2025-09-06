@@ -5,7 +5,11 @@
     let { data } = $props()
 </script>
 
-<h1>User API <a href="https://dummyjson.com/docs/users" rel="external"> DOC &rarr;</a></h1>
+<h1>
+    User API
+    <a href="https://github.com/vincjo/datatables/tree/main/src/routes/examples/server/user-api" rel="external">SOURCE CODE</a> 
+    <a href="https://dummyjson.com/docs/users" rel="external"> | API DOC</a>
+</h1>
 <Features rowsPerPage={true} totalRows={true} search={true} pagination={true}/>
 <!-- <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={true}>
     <Main data={data.dataset}/>

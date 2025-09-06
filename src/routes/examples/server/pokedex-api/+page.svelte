@@ -5,7 +5,11 @@
     let { data } = $props()
 </script>
 
-<h1>Pokedex API <a href="https://pokeapi.co/docs/v2#pokemon-section" rel="external"> DOC &rarr;</a></h1>
+<h1>
+    Pokedex API 
+    <a href="https://github.com/vincjo/datatables/tree/main/src/routes/examples/server/pokedex-api" rel="external">SOURCE CODE</a>
+    <a href="https://pokeapi.co/docs/v2#pokemon-section" rel="external"> | API DOC</a>
+</h1>
 <Features rowsPerPage={true} totalRows={true} pagination/>
 <!-- <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={false}>
     <Main data={data.dataset}/>

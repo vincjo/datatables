@@ -7,8 +7,8 @@
 
 <h1>
     Todo API
-    <a href="https://jsonplaceholder.typicode.com/" rel="external"> DOC</a> 
-    <a href="https://github.com/typicode/json-server" rel="external"> | SOURCE &rarr;</a>
+    <a href="https://github.com/vincjo/datatables/tree/main/src/routes/examples/server/todo-api" rel="external">SOURCE CODE</a> 
+    <a href="https://jsonplaceholder.typicode.com/" rel="external"> | API DOC</a> 
 </h1>
 <Features search={true} rowsPerPage={true} filters={true} sort={true}/>
 <!-- <Demo components={data.components} dataset={JSON.stringify(data.dataset, null, 2)} scrollY={true}>
