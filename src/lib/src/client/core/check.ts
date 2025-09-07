@@ -22,7 +22,6 @@ export const check: { [name: string]: Check } = {
 
     // multiple criteria
     whereIn: (entry: unknown, criteria: Criterion[] = []) => {
-        if (isNull(entry)) return false
         if (criteria.length === 0) return false
         for(const { value, check } of criteria) {
             if (value?.['key']) {

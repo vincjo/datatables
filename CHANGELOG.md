@@ -1,6 +1,13 @@
 <!-- ### Changed -->
 <!-- - breaking: replace class directive by objects and arrays using clsx. ⚠️ Requires `svelte 5.16.0` or higher -->
+# 2.6.3 - 2025-09-07
+### Fixed
+fix: multiple criteria filter (AdvancedFilter) handles nullish values
 
+# 2.6.2 - 2025-07-16
+### Fixed 
+fix: Broken package with $lib import
+https://github.com/vincjo/datatables/issues/169
 
 # 2.6.1 - 2025-07-14
 ### Fixed
