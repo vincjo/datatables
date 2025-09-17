@@ -1,5 +1,7 @@
-<!-- ### Changed -->
-<!-- - breaking: replace class directive by objects and arrays using clsx. ⚠️ Requires `svelte 5.16.0` or higher -->
+# 2.6.4 - 2025-09-17
+### Fixed
+fix: remove console.log in `Calculation.round()`
+
 # 2.6.3 - 2025-09-07
 ### Fixed
 fix: multiple criteria filter (AdvancedFilter) handles nullish values
