@@ -11,6 +11,8 @@ export default class FilterHandler<Row>
 
     public set(value: string | number, field: keyof Row)
     {
+        this.table.setPage(1)
+
         this.table.filters = this.table.filters.filter(filter =>  filter.field !== field && filter.value)
         if (value) {
             this.table.filters.push({ value, field })
@@ -19,6 +21,7 @@ export default class FilterHandler<Row>
 
     public unset(field: keyof Row)
     {
+        this.table.setPage(1)
         this.table.filters = this.table.filters.filter(filter => filter.field !== field)
     }
 
