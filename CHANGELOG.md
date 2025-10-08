@@ -1,3 +1,8 @@
+# 2.6.6 - 2025-10-08
+### Fixed
+fix: `RecordFilter` search capabilities.
+
+
 # 2.6.5 - 2025-10-08
 ### Fixed
 fix: Server-Side pagination - Changing filters resets to page 1 [#179](https://github.com/vincjo/datatables/issues/179)

@@ -1,4 +1,4 @@
-import { match, isNotNull } from '$lib/src/client/core'
+import { match, check, isNotNull } from '$lib/src/client/core'
 import type { Row }         from '$lib/src/client'
 
 export default class RecordFilterBuilder
@@ -21,7 +21,7 @@ export default class RecordFilterBuilder
     private createRecords(): readonly Row[]
     {
         if (isNotNull(this.filter)) {
-            return this.rawRecords.filter(record => match(record, this.filter))
+            return this.rawRecords.filter(record => match(record, this.filter, { check: check.isLike }))
         }
         return this.rawRecords
     }
