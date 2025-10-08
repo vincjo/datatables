@@ -1,3 +1,8 @@
+# 2.6.5 - 2025-10-08
+### Fixed
+fix: Server-Side pagination - Changing filters resets to page 1 [#179](https://github.com/vincjo/datatables/issues/179)
+
+
 # 2.6.4 - 2025-09-17
 ### Fixed
 fix: remove console.log in `Calculation.round()`
