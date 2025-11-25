@@ -1,3 +1,11 @@
+# 2.7.0 - 2025-11-25
+### Fixed
+[server] optimize (reduce) the number of reloads by removing irrelevant triggering events
+
+### Changed
+Add an optional debounce parameter to the TableHandler. Default = 0
+This adds delays before an invalidation is triggered.
+
 # 2.6.6 - 2025-10-08
 ### Fixed
 fix: `RecordFilter` search capabilities.

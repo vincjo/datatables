@@ -34,7 +34,7 @@ export default class SearchBuilder<Row> implements SearchInterface
     {
         this.value = ''
         this.table['search'] = ''
-        this.table.invalidate()
+        // this.table.invalidate()
         this.table.setPage(1)
     }
 

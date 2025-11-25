@@ -15,13 +15,11 @@ export default class FilterHandler<Row>
         if (value) {
             this.table.filters.push({ value, field })
         }
-        this.table.setPage(1)
     }
 
     public unset(field: keyof Row)
     {
         this.table.filters = this.table.filters.filter(filter => filter.field !== field)
-        this.table.setPage(1)
     }
 
     public clear()

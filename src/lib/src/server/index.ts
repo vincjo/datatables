@@ -30,6 +30,7 @@ export type TableParams<Row> = {
     rowsPerPage     ?: number,
     totalRows       ?: number,
     selectBy        ?: keyof Row,
+    debounce        ?: number
     i18n            ?: Internationalization
 }
 

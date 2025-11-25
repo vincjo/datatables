@@ -5,6 +5,7 @@ export default class FetchHandler<Row>
 {
     private table: TableHandler<Row>
     private reload: (state: State) => Promise<Row[]>
+    private timeout: NodeJS.Timeout
 
     constructor(table: TableHandler<Row>)
     {
@@ -19,6 +20,12 @@ export default class FetchHandler<Row>
     public async invalidate()
     {
         if (!this.reload) return
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => this.trigger(), this.table.debounce)
+    }
+
+    private async trigger()
+    {
         this.table.isLoading = true
         const state = this.table.getState()
         const data = await this.reload(state)

@@ -19,7 +19,7 @@ export default class FilterBuilder<Row>
         this.filterHandler.set(this.value, this.field)
 		clearTimeout(this.timeout)
 		this.timeout = setTimeout( () => {
-            this.filterHandler['table'].invalidate()
+            this.filterHandler['table'].setPage(1)
 		}, 400)
     }
 

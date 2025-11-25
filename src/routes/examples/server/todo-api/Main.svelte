@@ -11,6 +11,7 @@
 <Datatable {table}>
     {#snippet header()}
         <Search {table}/>
+        <button onclick={() => table.clearFilters()}>CLICK</button>
         <RowsPerPage {table}/>
     {/snippet}
     <table>

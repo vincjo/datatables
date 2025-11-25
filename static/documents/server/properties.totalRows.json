@@ -1,1 +1,1 @@
-{"name":"totalRows","text":"type $state<number>","type":"$state<number>","ast":{"name":"totalRows","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":11,"default":"$state<number>(undefined)"},"markdown":"\n<p>The total number of rows your dataset contains.</p>\n"}
+{"name":"totalRows","text":"type $state<number>","type":"$state<number>","ast":{"name":"totalRows","kind":"Property","type":{"text":"any","kind":"Intrinsic"},"line":12,"default":"$state<number>(undefined)"},"markdown":"\n<p>The total number of rows your dataset contains.</p>\n"}

@@ -7,7 +7,8 @@ export default class AbstractTableHandler<Row>
     protected event             = new EventDispatcher()
     protected search            = $state<string>('')
     protected sort              = $state<(Sort<Row>)>({})
-
+    
+    public debounce             : number
     public totalRows            = $state<number>(undefined)
     public isLoading            = $state<boolean>(false)
     public rowsPerPage          = $state<number>(10)
@@ -30,6 +31,7 @@ export default class AbstractTableHandler<Row>
         this.selectBy           = params.selectBy as keyof Row ?? undefined
         this.totalRows          = params.totalRows
         this.rowsPerPage        = params.rowsPerPage ?? 10
+        this.debounce           = params.debounce ?? 0
     }
 
     public getState(): State<Row>
