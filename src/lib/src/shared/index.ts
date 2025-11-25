@@ -9,7 +9,6 @@ export { default as RowsPerPage     }   from './RowsPerPage.svelte'
 export { default as EventDispatcher }   from './EventDispatcher'
 import type { Check }                   from '$lib/src/client'
 
-
 export type Row = { [key: string | number | symbol]: any }
 
 export type Field<Row> = keyof Row | ((row: Row) => unknown)
