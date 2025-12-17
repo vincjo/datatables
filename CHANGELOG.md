@@ -1,3 +1,12 @@
+# 2.8.0 - 2025-12-17
+### Added
+[client] Disable filter recursion [#187](https://github.com/vincjo/datatables/issues/187)
+
+```ts
+const filter = table.createFilter(field).isNotRecursive()
+const advancedFilter = table.createAdvancedFilter(field).isNotRecursive()
+```
+
 # 2.7.0 - 2025-11-25
 ### Fixed
 [server] optimize (reduce) the number of reloads by removing irrelevant triggering events
