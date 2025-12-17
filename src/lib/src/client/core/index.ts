@@ -18,6 +18,7 @@ export type Filter<Row> = {
     callback: (row:  $state.Snapshot<Row>) => unknown
     id: string
     value?: unknown
+    isRecursive?: boolean
     check?: Check
     key?: string
 }

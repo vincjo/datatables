@@ -27,14 +27,14 @@ export const data = {
             })
         })
     },
-    filter: <Row>(allRows: $state.Snapshot<Row[]>, { callback, value, check, key }: Filter<Row>,  highlight: boolean = false) => {
+    filter: <Row>(allRows: $state.Snapshot<Row[]>, { callback, isRecursive, value, check, key }: Filter<Row>,  highlight: boolean = false) => {
         return allRows.filter((row) => {
             const checked = match(callback(row), value, { check })
             if (key) {
                 row[key] = sift(row[key], value, {
                     highlight: highlight, 
                     check: check,
-                    isRecursive: true
+                    isRecursive: isRecursive === false ? false : true
                 })
             }
             else if (highlight && checked && value && typeof value === 'string') {

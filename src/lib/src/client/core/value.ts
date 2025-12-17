@@ -23,5 +23,9 @@ export const isObject = (value: unknown) => {
 export const isObjectArray = (value: unknown) => {
     if (typeof value !== 'object')  return false
     else if (value === null)        return false
+    // test
+    else if (Array.isArray(value)) {
+        if (isNotNull(value[0]) && typeof value[0] !== 'object') return false
+    }
     return true
 }

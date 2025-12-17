@@ -1,30 +1,64 @@
 <script lang="ts">
-    import { TableHandler, type Row } from '$lib'
+    import { TableHandler, Datatable, Th, type Check } from '$lib'
     import { data } from './data2'
-    const table = new TableHandler(data, { rowsPerPage: 10 })
+    const table = new TableHandler(data)
 
-    // const queryBis = table.createQuery().where((row: Row) => row.ida !== row.idb)
-    const query = table.createQuery()
-                       .from(['groups', 'users'])
-                       .where((user, value: number) => user.count > value)
+    const filter = table.createAdvancedFilter('groups').isNotRecursive()
+    const groups = table.createCalculation('groups').distinct()
 
-    let isset = $state(false)
-
-    const set = () => {
-        if (!isset) {
-            isset = true
-            // queryBis.set()
-            return query.set(32)
-        }
-        isset = false
-        // queryBis.clear()
-        return query.clear()
-    }
+    const isIn: Check = (entry: string[], value: string) => entry.includes(value)
+    const isNotIn: Check = (entry: string[], value: string) => entry.includes(value) ? false : true
 </script>
 
-<button onclick={set}>Filter [{isset}]</button>
-{#each table.rows as row, i}
-    <div class="flex" style:font-family="JetBrains">
-        {i}. {JSON.stringify(row)} <br><br>
-    </div>
-{/each}
+<div class="flex">
+    <aside>
+        {#each groups as { value, count}}
+        <li class="flex"> 
+            {value} ({count})
+            <!-- <button onclick={() => filter.set(value, isIn)}>IN {filter.criteria.includes(value) ? '☑' : '☐'}</button> -->
+            <button onclick={() => filter.set(value, isNotIn)}>NOT IN {filter.criteria.includes(value) ? '☑' : '☐'}</button>
+        </li>
+        {/each}
+    </aside>
+    <article>
+        <Datatable {table} basic>
+            <table>
+                <thead>
+                    <tr>
+                        <Th>id</Th>
+                        <Th>name</Th>
+                        <Th>groups</Th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each table.rows as {id, name, groups}}
+                        <tr>
+                            <td>{id}</td>
+                            <td>{name}</td>
+                            <td>{groups.join(', ')}</td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+        </Datatable>
+    </article>
+</div>
+
+<style>
+    div {
+        border: 1px solid red;
+    }
+    aside {
+        width: 200px;
+        height: 200px;
+        border: 1px solid green;
+    }
+    button {
+        display: block;
+        color: var(--font);
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid var(--grey);
+        margin: 2px 0;
+    }
+</style>

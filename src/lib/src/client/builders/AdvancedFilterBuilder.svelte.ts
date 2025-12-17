@@ -10,6 +10,7 @@ export default class AdvancedFilterBuilder<Row>
     private collection      : Criterion[]
     private field           : Field<Row>
     private check           : Check
+    private isRecursive     = true
 
     constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check)
     {
@@ -31,8 +32,14 @@ export default class AdvancedFilterBuilder<Row>
         if (this.collection.length === 0) {
             return this.clear()
         }
-        this.filterHandler.set(this.collection, this.field, comparator.whereIn, this.id)
+        this.filterHandler.set(this.collection, this.field, comparator.whereIn, this.id, this.isRecursive)
         this.criteria = this.collection.map(criterion => criterion.value)
+    }
+
+    public isNotRecursive()
+    {
+        this.isRecursive = false
+        return this
     }
 
     public clear(): void

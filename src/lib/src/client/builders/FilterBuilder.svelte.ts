@@ -10,6 +10,7 @@ export default class FilterBuilder<Row> implements FilterInterface
     private filterHandler   : FilterHandler<Row>
     private field           : Field<Row>
     private check           : Check
+    private isRecursive     = true
 
     constructor(filterHandler: FilterHandler<Row>, field: Field<Row>, check?: Check)
     {
@@ -21,13 +22,19 @@ export default class FilterBuilder<Row> implements FilterInterface
 
     public set(check?: Check)
     {
-        this.filterHandler.set(this.value, this.field, check ?? this.check, this.id)
+        this.filterHandler.set(this.value, this.field, check ?? this.check, this.id, this.isRecursive)
     }
 
     public init(value?: unknown)
     {
         this.value = value
         this.set()
+        return this
+    }
+
+    public isNotRecursive()
+    {
+        this.isRecursive = false
         return this
     }
 

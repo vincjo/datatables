@@ -11,12 +11,12 @@ export default class FilterHandler<Row>
         this.table = table
     }
 
-    public set(value: unknown, field: Field<Row>, check: Check = null, id: string)
+    public set(value: unknown, field: Field<Row>, check: Check = null, id: string, isRecursive = true)
     {
         this.table.setPage(1)
 
         const { callback, key } = parse<Row>(field, id)
-        const filter = { value, id, callback, check, key }
+        const filter = { value, id, callback, check, key, isRecursive }
 
         this.table.filters = this.table.filters.filter(filter => filter.id !== id)
         if (isNotNull(value)) {
