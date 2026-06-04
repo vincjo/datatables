@@ -1,3 +1,9 @@
+# 2.8.1 - 2026-06-04
+
+### Fixed
+[client] Type inference [#189](https://github.com/vincjo/datatables/issues/189)
+
+
 # 2.8.0 - 2025-12-17
 ### Added
 [client] Disable filter recursion [#187](https://github.com/vincjo/datatables/issues/187)
