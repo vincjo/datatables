@@ -20,8 +20,8 @@ export default abstract class AbstractTableHandler<Row>
     public element              = $state<HTMLElement>(undefined)
     public clientWidth          = $state<number>(1000)
     public filterCount          = $derived<number>(this.filters.length)
-    public allRows              = $derived<readonly $state.Snapshot<Row>[]>(this.createAllRows())
-    public rows                 = $derived<readonly $state.Snapshot<Row>[]>(this.createRows())
+    public allRows              = $derived<readonly Row[]>(this.createAllRows())
+    public rows                 = $derived<readonly Row[]>(this.createRows())
     public rowCount             = $derived<{total: number, start: number, end: number, selected: number}>(this.createRowCount())
     public pages                = $derived<readonly number[]>(this.createPages())
     public pageCount            = $derived<number>(this.pages.length)
@@ -39,7 +39,7 @@ export default abstract class AbstractTableHandler<Row>
 
     private createAllRows()
     {
-        let allRows = $state.snapshot(this.rawRows)
+        let allRows: Row[] = $state.snapshot(this.rawRows) as unknown as Row[]
         if (this.search.value) {
             allRows = data.search(allRows, this.search, this.highlight)
             this.event.dispatch('change')
@@ -96,7 +96,7 @@ export default abstract class AbstractTableHandler<Row>
         if (this.pageCount <= 7) {
             return this.pages
         }
-        const ellipse = null
+        const ellipse: null = null
         const firstPage = 1
         const lastPage = this.pageCount
         if (this.currentPage <= 4) {

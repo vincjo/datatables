@@ -7,13 +7,13 @@ import { parse }                        from './field'
 
 
 export const data = {
-    search: <Row>(allRows: $state.Snapshot<Row[]>, { scope, isRecursive, value, check }: Search<Row>, highlight: boolean = false) => {
+    search: <Row>(allRows: Row[], { scope, isRecursive, value, check }: Search<Row>, highlight: boolean = false) => {
         return allRows.filter(row => {
             const keys = scope ?? Object.keys(row) as Field<Row>[]
             const fields = keys.map(field => parse(field))
             for(const { key, callback } of fields) {
                 if (key) {
-                    row[key] = sift(row[key], value, {
+                    (row as Record<string, unknown>)[key] = sift((row as Record<string, unknown>)[key], value, {
                         highlight: highlight,
                         isRecursive: isRecursive === true
                     })
@@ -27,12 +27,12 @@ export const data = {
             })
         })
     },
-    filter: <Row>(allRows: $state.Snapshot<Row[]>, { callback, isRecursive, value, check, key }: Filter<Row>,  highlight: boolean = false) => {
+    filter: <Row>(allRows: Row[], { callback, isRecursive, value, check, key }: Filter<Row>,  highlight: boolean = false) => {
         return allRows.filter((row) => {
             const checked = match(callback(row), value, { check })
             if (key) {
-                row[key] = sift(row[key], value, {
-                    highlight: highlight, 
+                (row as Record<string, unknown>)[key] = sift((row as Record<string, unknown>)[key], value, {
+                    highlight: highlight,
                     check: check,
                     isRecursive: isRecursive === false ? false : true
                 })
@@ -43,15 +43,15 @@ export const data = {
             return checked
         })
     },
-    query: <Row>(allRows: $state.Snapshot<Row[]>, { path, value, check }: Query<Row>) => {
+    query: <Row>(allRows: Row[], { path, value, check }: Query<Row>) => {
         return allRows.filter(row => {
             if (path.length === 0) {
                 return check(row, value)
             }
-            let obj = row
+            let obj: any = row
             let i = 1
             let verify = false
-            function recursive(i) {
+            function recursive(_i: number) {
 
             }
             // ['groups', 'users']

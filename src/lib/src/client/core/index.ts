@@ -15,7 +15,7 @@ export type Search<Row> = {
 }
 
 export type Filter<Row> = {
-    callback: (row:  $state.Snapshot<Row>) => unknown
+    callback: (row: Row) => unknown
     id: string
     value?: unknown
     isRecursive?: boolean
@@ -31,7 +31,7 @@ export type Query<Row> = {
 }
 
 export type Sort<Row> = {
-    callback?: (row:  $state.Snapshot<Row>) => unknown
+    callback?: (row: Row) => unknown
     id?: string
     direction?: 'asc' | 'desc'
     key?: string,
