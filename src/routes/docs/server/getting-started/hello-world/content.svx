@@ -6,7 +6,7 @@ import { TableHandler, type State } from '@vincjo/datatables/server'
 
 const table = new TableHandler([], { rowsPerPage: 5, totalRows: 500 })
 
-table.load((state: State) => {
+table.load(async (state: State) => {
     const { currentPage, rowsPerPage, sort } = state
     let params = `_page=${currentPage}`
     if (rowsPerPage)    params += `&_limit=${rowsPerPage}`
