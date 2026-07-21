@@ -1,7 +1,5 @@
 <script lang="ts">
-    import Prism from 'prismjs'
-    import 'prism-svelte'
-    import 'prismjs/components/prism-typescript.js'
+    import Prism from './prism'
     type Props = { code?: string, language?: string, fontSize?: string, padding?: string }
     let {
         code = '',
@@ -13,7 +11,7 @@
 
 {#if language === 'typescript'}
 <aside class="thin-scrollbar" style:font-size="{fontSize}">
-    <pre class="language-typescript" style:padding="{padding} 16px"><code>{@html Prism.highlight(code, Prism.languages.typescript)}</code></pre>
+    <pre class="language-typescript" style:padding="{padding} 16px"><code>{@html Prism.highlight(code, Prism.languages.typescript, 'typescript')}</code></pre>
 </aside>
 
 {:else}

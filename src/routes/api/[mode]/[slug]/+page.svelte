@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { page } from '$app/stores'
+    import { page } from '$app/state'
     import Content  from './Content.svelte'
 
     let { data } = $props()
 
-    const [key] = $derived($page.params.slug.split('~'))
+    const [key] = $derived(page.params.slug.split('~'))
 </script>
 
 <section class="api">

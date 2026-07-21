@@ -1,7 +1,5 @@
 <script lang="ts">
-    import Prism from 'prismjs'
-    import 'prism-svelte'
-    import 'prismjs/components/prism-typescript.js'
+    import Prism from '$site/components/prism'
 
     let { methods, properties }: { methods: any[], properties: any[] } = $props()
 </script>
@@ -10,13 +8,13 @@
     {#each properties as property}
     <article class="flex">
         <span class="key">prop</span>
-        <pre><code>{@html Prism.highlight(property.name + ': ' + property.type, Prism.languages.typescript)}</code></pre>
+        <pre><code>{@html Prism.highlight(property.name + ': ' + property.type, Prism.languages.typescript, 'typescript')}</code></pre>
     </article>
     {/each}
     {#each methods as method}
     <article class="flex">
         <span class="key">method</span>
-        <pre><code>{@html Prism.highlight(method.text, Prism.languages.typescript)}</code></pre>
+        <pre><code>{@html Prism.highlight(method.text, Prism.languages.typescript, 'typescript')}</code></pre>
     </article>
     {/each}
 </section>

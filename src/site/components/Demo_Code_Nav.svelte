@@ -1,5 +1,5 @@
-<script>
-    import 'prismjs/components/prism-typescript'
+<script lang="ts">
+    import './prism'
     import Icon from './Demo_Code_Icon.svelte'
     import { fade } from 'svelte/transition'
     export let components
@@ -7,7 +7,7 @@
     export let language
     let show = false
     let active = components[0].name
-    const setActive = (component) => {
+    const setActive = (component: any) => {
         active = component.name
         code = component.code
         language = component.language ? 'typescript' : 'svelte'
@@ -39,7 +39,7 @@
                             class:active={subComponent.name === active}
                             on:click={() => setActive(subComponent)}
                         >
-                            <Icon component={subComponent}/>
+                            <Icon component={subComponent} />
                             <span>{subComponent.name}</span>
                         </li>
                         {#if subComponent.components}

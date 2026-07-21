@@ -38,6 +38,7 @@
         "@sveltejs/package": "=2.3.7",
         "@sveltejs/vite-plugin-svelte": "^7.1.2",
         "@types/node": "^25.9.1",
+        "@types/prismjs": "^1.26.6",
         "dotenv": "^17.4.2",
         "gros": "^1.2.3",
         "mdsvex": "^0.12.7",

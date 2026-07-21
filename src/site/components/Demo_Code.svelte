@@ -1,7 +1,5 @@
 <script lang="ts">
-    import Prism from 'prismjs'
-    import 'prism-svelte'
-    import 'prismjs/components/prism-typescript'
+    import Prism from './prism'
     import CopyButton from './Demo_CopyButton.svelte'
     import Nav from './Demo_Code_Nav.svelte'
     import  { type Code, parseCode } from '$site'
@@ -9,12 +7,14 @@
         components: Code[],
         hasNav: boolean
     } = $props()
+    // svelte-ignore state_referenced_locally
     let code = $state(components[0].code)
+    // svelte-ignore state_referenced_locally
     let language = $state(components[0].language ? 'typescript' : 'svelte')
 
     const highlight = () => {
         if (language === 'typescript') {
-            return Prism.highlight(parseCode(code), Prism.languages.typescript)
+            return Prism.highlight(parseCode(code), Prism.languages.typescript, 'typescript')
         }
         return Prism.highlight(parseCode(code), Prism.languages.svelte, 'svelte')
     }

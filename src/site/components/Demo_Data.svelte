@@ -1,6 +1,5 @@
 <script lang="ts">
-    import Prism from 'prismjs'
-    import 'prismjs/components/prism-typescript'
+    import Prism from './prism'
     import CopyButton from './Demo_CopyButton.svelte'
     let { dataset }: { dataset: string } = $props()
 
